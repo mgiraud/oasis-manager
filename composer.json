@@ -26,11 +26,14 @@
         "symfony/serializer": "5.1.*",
         "symfony/twig-bundle": "5.1.*",
         "symfony/validator": "5.1.*",
-        "symfony/yaml": "5.1.*"
+        "symfony/yaml": "5.1.*",
+        "ext-json": "*"
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.3",
         "phpstan/phpstan": "^0.12.54",
-        "phpunit/phpunit": "^9.4"
+        "phpunit/phpunit": "^9.4",
+        "symfony/browser-kit": "5.1.*"
     },
     "config": {
         "optimize-autoloader": true,

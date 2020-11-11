@@ -61,7 +61,7 @@ class GenerateUserCommand extends Command
         $output->writeln('Nickname: ' . $input->getArgument('nickname'));
 
         $roles = ['ROLE_MEMBER'];
-        if ($input->hasOption('is-admin')) {
+        if ($input->hasOption('is-admin') && !empty($input->getOption('is-admin'))) {
             $roles[] = 'ROLE_ADMIN';
         }
         if ($input->hasOption('roles')) {

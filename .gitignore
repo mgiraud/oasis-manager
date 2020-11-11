@@ -12,6 +12,7 @@
 /node_modules
 /.nuxt
 /coverage
+/dist
 
 ###> phpunit/phpunit ###
 /phpunit.xml

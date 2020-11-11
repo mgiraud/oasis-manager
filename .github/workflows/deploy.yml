@@ -38,6 +38,7 @@ jobs:
           postgresql version: '11'
           postgresql db: db_oasis_manager_test
           postgresql user: postgres
+          postgresql password: password
         
       - name: Wait / Sleep
         uses: jakejarvis/wait-action@v0.1.0

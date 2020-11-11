@@ -7,6 +7,15 @@
          colors="true"
          bootstrap="tests/bootstrap.php"
 >
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+        <exclude>
+            <file>./src/.preload.php</file>
+            <file>./src/Kernel.php</file>
+        </exclude>
+    </coverage>
     <php>
         <ini name="error_reporting" value="-1" />
         <server name="APP_ENV" value="test" force="true" />
@@ -18,10 +27,4 @@
             <directory>tests</directory>
         </testsuite>
     </testsuites>
-
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">src</directory>
-        </whitelist>
-    </filter>
 </phpunit>

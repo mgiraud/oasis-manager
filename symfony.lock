@@ -110,8 +110,14 @@
     "doctrine/sql-formatter": {
         "version": "1.1.1"
     },
+    "facile-it/paraunit": {
+        "version": "1.2.0"
+    },
     "fig/link-util": {
         "version": "1.1.1"
+    },
+    "jean85/pretty-package-versions": {
+        "version": "1.5.1"
     },
     "lcobucci/jwt": {
         "version": "3.3.3"
@@ -383,6 +389,9 @@
     },
     "symfony/polyfill-php80": {
         "version": "v1.20.0"
+    },
+    "symfony/process": {
+        "version": "v5.1.8"
     },
     "symfony/property-access": {
         "version": "v5.1.8"

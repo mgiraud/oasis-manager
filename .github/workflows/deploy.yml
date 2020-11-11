@@ -36,8 +36,20 @@ jobs:
       - uses: harmon758/postgresql-action@v1
         with:
           postgresql version: '11'
-          postgresql db: db_oasis_manager_test 
+          postgresql db: db_oasis_manager_test
+          postgresql user: postgres
         
+      - name: Wait / Sleep
+        uses: jakejarvis/wait-action@v0.1.0
+        with:
+          time: '5s'
+   
+      - name: Collect Docker Logs
+        uses: jwalton/gh-docker-logs@v1.0.0
+   
+      - name: Check running containers
+        run: docker ps -a
+      
       - name: Get composer cache directory
         id: composercache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"

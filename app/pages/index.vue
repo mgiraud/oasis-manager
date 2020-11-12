@@ -1,15 +1,7 @@
 <template>
-    <div>
-        <div v-if="$store.state.member.auth">
-            <p>
-                You are authenticated. You can see the
-                <NuxtLink to="/secret">
-                    secret page
-                </NuxtLink>!
-            </p>
-            <button @click="logout">
-                Logout
-            </button>
+    <v-container>
+        <div v-if="isLoggedIn">
+            You are logged in
         </div>
         <p v-else>
             Please
@@ -17,10 +9,11 @@
                 login
             </NuxtLink>.
         </p>
-    </div>
+    </v-container>
 </template>
 
 <script>
+    import { mapState } from 'vuex'
 
     export default {
         methods: {
@@ -28,5 +21,10 @@
                 this.$store.dispatch('member/logout')
             }
         },
+        computed: {
+            ...mapState({
+                'isLoggedIn': state => state.member.auth,
+            })
+        }
     }
 </script>

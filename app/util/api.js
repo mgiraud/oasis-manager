@@ -1,6 +1,4 @@
-const Cookie = process.client ? require('js-cookie') : undefined
-
-export function call(url, options) {
+export function call(url, options = {}) {
     const jsonLdMimeType = 'application/ld+json';
 
     if (typeof options.headers === 'undefined') {
@@ -13,8 +11,6 @@ export function call(url, options) {
         options.headers.set('Content-Type', jsonLdMimeType);
     }
 
-    const token = Cookie.get('auth');
-    console.log(token)
     options.credentials= 'include';
 
     const link = url.includes(process.env.apiBasePath) ? (process.env.apiBaseUrl + url) : (process.env.apiBaseUrl + process.env.apiBasePath + url);

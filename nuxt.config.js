@@ -6,5 +6,8 @@ export default {
     env: {
         apiBaseUrl: process.env.API_BASE_URL || 'http://localhost:8000',
         apiBasePath: '/api'
-    }
+    },
+    plugins: [
+        { src: '~/plugins/onInitClient', mode: 'client' }
+    ]
 }

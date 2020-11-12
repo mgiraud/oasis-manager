@@ -3,7 +3,7 @@
 
 namespace App\Entity;
 
-
+use App\Controller\Member\GetMeAction;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -19,6 +19,17 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     "normalization_context"={"groups"={"read"}},
  *     "denormalization_context"={"groups"={"write"}},
  *     },
+ *     itemOperations={
+ *         "get_me"={
+ *             "method"="GET",
+ *             "path"="/me",
+ *             "controller"=GetMeAction::class,
+ *             "openapi_context"={
+ *                 "parameters"={}
+ *             },
+ *             "read"=false
+ *         }
+ *     }
  * )
  * @UniqueEntity("email", groups={"register"})
  */

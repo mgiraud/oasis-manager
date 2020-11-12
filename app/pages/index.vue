@@ -21,14 +21,12 @@
 </template>
 
 <script>
-    const Cookie = process.client ? require('js-cookie') : undefined
 
     export default {
         methods: {
             logout () {
-                Cookie.remove('BEARER')
-                this.$store.commit('member/setAuth', null)
+                this.$store.dispatch('member/logout')
             }
-        }
+        },
     }
 </script>

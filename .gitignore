@@ -12,6 +12,8 @@
 /node_modules
 /.nuxt
 /coverage
+/dist
+yarn-error.log
 
 ###> phpunit/phpunit ###
 /phpunit.xml

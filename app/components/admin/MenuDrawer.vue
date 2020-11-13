@@ -13,7 +13,7 @@
                     size="64"
             ></v-avatar>
 
-            <div>john@vuetifyjs.com</div>
+            <div>{{ user.email }}</div>
         </v-sheet>
 
         <v-divider></v-divider>
@@ -46,6 +46,8 @@
 </template>
 
 <script>
+    import { mapState } from 'vuex'
+
     export default {
         data: () => ({
             drawer: null,
@@ -53,6 +55,9 @@
                 ['mdi-home', 'Administration', 'admin'],
                 ['mdi-arrow-left', 'Retour au site', '/'],
             ]
+        }),
+        computed: mapState({
+            user: s => s.storage.user ?? {}
         }),
         methods: {
             logout() {

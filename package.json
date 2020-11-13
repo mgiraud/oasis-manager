@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@mdi/font": "^5.8.55",
+    "@nuxtjs/universal-storage": "^0.5.5",
     "cookieparser": "^0.1.0",
     "dotenv": "^8.2.0",
     "nuxt": "^2.14.7",

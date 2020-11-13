@@ -9,6 +9,9 @@ export default {
     plugins: [
         '@plugins/vuetify'
     ],
+    modules: [
+        '@nuxtjs/universal-storage',
+    ],
     components: {
         dirs: [
             '~/components',
@@ -22,4 +25,12 @@ export default {
             }
         ]
     },
+    storage: {
+        cookie: {
+            prefix: 'oasis-manager-',
+        },
+        localStorage: {
+            prefix: 'oasis-manager-'
+        },
+    }
 }

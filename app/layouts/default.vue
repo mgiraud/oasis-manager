@@ -14,6 +14,9 @@
 
                 <v-spacer></v-spacer>
 
+                <v-btn v-if="isAdmin" @click="redirectToAdmin" text>
+                    Admin
+                </v-btn>
                 <v-btn v-if="isLoggedIn" @click="logout" icon>
                     <v-icon>mdi-logout</v-icon>
                 </v-btn>
@@ -27,7 +30,7 @@
 </template>
 
 <script>
-    import { mapState } from 'vuex'
+    import { mapState, mapGetters } from 'vuex'
 
     export default {
         data: () => ({}),
@@ -35,10 +38,16 @@
             logout() {
                 this.$store.dispatch('member/logout');
             },
+            redirectToAdmin() {
+                this.$router.push({path: 'admin'})
+            }
         },
         computed: {
             ...mapState({
                 'isLoggedIn': state => state.member.auth,
+            }),
+            ...mapGetters({
+                isAdmin: 'member/isAdmin'
             })
         }
     };

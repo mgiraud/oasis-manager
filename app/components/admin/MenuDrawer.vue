@@ -51,6 +51,7 @@
             drawer: null,
             links: [
                 ['mdi-home', 'Administration', 'admin'],
+                ['mdi-arrow-left', 'Retour au site', '/'],
             ]
         }),
         methods: {

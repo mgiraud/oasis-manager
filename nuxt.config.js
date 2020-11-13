@@ -15,6 +15,10 @@ export default {
             {
                 path: '~/components/admin/',
                 prefix: 'Admin'
+            },
+            {
+                path: '~/components/admin/media',
+                prefix: 'AdminMedia'
             }
         ]
     },

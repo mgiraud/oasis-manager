@@ -36,7 +36,10 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *                                     "file"={
  *                                         "type"="string",
  *                                         "format"="binary"
- *                                     }
+ *                                     },
+ *                                      "mediaGalleryItemId"={
+ *                                          "type"="integer",
+ *                                      }
  *                                 }
  *                             }
  *                         }
@@ -51,7 +54,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *     }
  * )
  * @Vich\Uploadable
- * @ApiFilter(SearchFilter::class, properties={"mediaGallery.id": "exact"})
+ * @ApiFilter(SearchFilter::class, properties={"mediaGalleryItem.id": "exact"})
  */
 class MediaObject
 {
@@ -90,6 +93,7 @@ class MediaObject
     /**
      * @ORM\ManyToOne(targetEntity=MediaGalleryItem::class, inversedBy="mediaObjects")
      * @ORM\JoinColumn(nullable=false)
+     * @ApiProperty(readableLink=false, writableLink=false)
      */
     private $mediaGalleryItem;
 

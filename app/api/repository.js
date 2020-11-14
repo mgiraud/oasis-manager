@@ -31,7 +31,18 @@ export default context => ({
   },
 
   async $get (url, options = {}) {
+    options.method = 'GET'
     const responseBody = await this.validateAndDecodeResponse(url, options)
-    return responseBody['hydra:member']
+    return responseBody ? responseBody['hydra:member'] : null
+  },
+
+  async $getOne (url, options = {}) {
+    options.method = 'GET'
+    return await this.validateAndDecodeResponse(url, options)
+  },
+
+  async $post (url, options = {}) {
+    options.method = 'POST'
+    return await this.validateAndDecodeResponse(url, options)
   }
 })

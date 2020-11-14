@@ -3,14 +3,14 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Annotation\ApiSubresource;
 use App\Repository\MediaGalleryRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     normalizationContext={"groups"={"getGallery"}}
+ * )
  * @ORM\Entity(repositoryClass=MediaGalleryRepository::class)
  */
 class MediaGallery
@@ -19,23 +19,26 @@ class MediaGallery
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("getGallery")
      */
     private $id;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups("getGallery")
      */
     private $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups("getGallery")
      */
     private $description;
 
     /**
      * @ORM\OneToOne(targetEntity=MediaGalleryItem::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
-     * @ApiSubresource()
+     * @Groups("getGallery")
      */
     private $rootItem;
 

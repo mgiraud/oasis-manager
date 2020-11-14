@@ -12,6 +12,6 @@ export const actions = {
       }
     }
     commit('member/setAuth', auth)
-    this.$storage.syncUniversal('user', true)
+    this.$storage.syncUniversal('user', null)
   }
 }

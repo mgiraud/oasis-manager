@@ -7,6 +7,7 @@ use App\Repository\MediaGalleryItemRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\Ignore;
 
 /**
@@ -15,7 +16,8 @@ use Symfony\Component\Serializer\Annotation\Ignore;
  *         "get",
  *         "post"={"security"="is_granted('ROLE_ADMIN')"},
  *     },
- *     attributes={"pagination_enabled"=false}
+ *     attributes={"pagination_enabled"=false},
+ *     normalizationContext={"groups"={"getGalleryItem"}}
  * )
  * @ORM\Entity(repositoryClass=MediaGalleryItemRepository::class)
  */
@@ -25,16 +27,19 @@ class MediaGalleryItem
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"Default", "getGallery", "getGalleryItem"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"Default", "getGallery", "getGalleryItem"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"Default", "getGallery", "getGalleryItem"})
      */
     private $description;
 
@@ -46,6 +51,7 @@ class MediaGalleryItem
 
     /**
      * @ORM\OneToMany(targetEntity=MediaGalleryItem::class, mappedBy="parent")
+     * @Groups({"Default", "getGallery", "getGalleryItem"})
      */
     private $children;
 

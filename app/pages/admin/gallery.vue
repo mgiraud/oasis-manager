@@ -8,7 +8,7 @@
       </div>
     </v-row>
     <v-row>
-      <!--      <nuxt-child v-if="!!$route.params.id" />-->
+      <nuxt-child v-if="!!$route.params.id" />
     </v-row>
   </v-container>
 </template>
@@ -21,7 +21,7 @@ export default {
   middleware: 'authenticated',
   fetchOnServer: false,
   async fetch ({ store, $repository }) {
-    return await store.dispatch('gallery/getGalleries', { $repository })
+    await store.dispatch('gallery/getGalleries', { $repository })
   },
   computed: {
     ...mapState({

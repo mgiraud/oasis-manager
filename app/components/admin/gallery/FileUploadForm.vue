@@ -32,15 +32,15 @@ import { mapState } from 'vuex'
 export default {
   computed: {
     ...mapState({
-      fileUpload: state => state.media.fileUpload
+      fileUpload: state => state.gallery.fileUpload
     })
   },
   methods: {
     onFileChange (file) {
-      this.$store.dispatch('media/addFileUpload', file)
+      this.$store.dispatch('gallery/addFileUpload', file)
     },
     upload () {
-      this.$store.dispatch('media/uploadFile')
+      this.$store.dispatch('gallery/uploadFile')
     }
   }
 }

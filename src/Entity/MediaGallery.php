@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 use App\Repository\MediaGalleryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -32,13 +33,17 @@ class MediaGallery
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity=MediaGalleryItem::class, mappedBy="mediaGallery")
+     * @ORM\OneToOne(targetEntity=MediaGalleryItem::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     * @ApiSubresource()
      */
-    private $mediaGalleryItems;
+    private $rootItem;
 
     public function __construct()
     {
-        $this->mediaGalleryItems = new ArrayCollection();
+        $rootItem = new MediaGalleryItem();
+        $rootItem->setName('root');
+        $this->rootItem = $rootItem;
     }
 
     public function getId(): ?int
@@ -70,32 +75,14 @@ class MediaGallery
         return $this;
     }
 
-    /**
-     * @return Collection|MediaGalleryItem[]
-     */
-    public function getMediaGalleryItems(): Collection
+    public function getRootItem(): ?MediaGalleryItem
     {
-        return $this->mediaGalleryItems;
+        return $this->rootItem;
     }
 
-    public function addMediaGalleryItem(MediaGalleryItem $mediaGalleryItem): self
+    public function setRootItem(MediaGalleryItem $rootItem): self
     {
-        if (!$this->mediaGalleryItems->contains($mediaGalleryItem)) {
-            $this->mediaGalleryItems[] = $mediaGalleryItem;
-            $mediaGalleryItem->setMediaGallery($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMediaGalleryItem(MediaGalleryItem $mediaGalleryItem): self
-    {
-        if ($this->mediaGalleryItems->removeElement($mediaGalleryItem)) {
-            // set the owning side to null (unless already changed)
-            if ($mediaGalleryItem->getMediaGallery() === $this) {
-                $mediaGalleryItem->setMediaGallery(null);
-            }
-        }
+        $this->rootItem = $rootItem;
 
         return $this;
     }

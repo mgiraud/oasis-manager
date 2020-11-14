@@ -2,13 +2,12 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\MediaGalleryItemRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 /**
  * @ApiResource(
@@ -19,7 +18,6 @@ use Doctrine\ORM\Mapping as ORM;
  *     attributes={"pagination_enabled"=false}
  * )
  * @ORM\Entity(repositoryClass=MediaGalleryItemRepository::class)
- * @ApiFilter(SearchFilter::class, properties={"mediaGallery.id": "exact"})
  */
 class MediaGalleryItem
 {
@@ -41,12 +39,8 @@ class MediaGalleryItem
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity=MediaGallery::class, inversedBy="mediaGalleryItems")
-     */
-    private $mediaGallery;
-
-    /**
      * @ORM\ManyToOne(targetEntity=MediaGalleryItem::class, inversedBy="children")
+     * @Ignore()
      */
     private $parent;
 
@@ -91,18 +85,6 @@ class MediaGalleryItem
     public function setDescription(?string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getMediaGallery(): ?MediaGallery
-    {
-        return $this->mediaGallery;
-    }
-
-    public function setMediaGallery(?MediaGallery $mediaGallery): self
-    {
-        $this->mediaGallery = $mediaGallery;
 
         return $this;
     }

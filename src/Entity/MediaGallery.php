@@ -36,7 +36,7 @@ class MediaGallery
     private $description;
 
     /**
-     * @ORM\OneToOne(targetEntity=MediaGalleryItem::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=MediaGalleryItem::class, cascade={"persist", "remove"}, inversedBy="gallery")
      * @ORM\JoinColumn(nullable=false)
      * @Groups("getGallery")
      */

@@ -60,6 +60,16 @@ class MediaGalleryItem
      */
     private $mediaObjects;
 
+    /**
+     * @ORM\OneToOne(targetEntity=MediaGallery::class, mappedBy="rootItem")
+     */
+    private $gallery;
+
+    /**
+     * @Groups({"Default", "getGallery", "getGalleryItem"})
+     */
+    public array $breadcrumb = [];
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
@@ -165,5 +175,10 @@ class MediaGalleryItem
         }
 
         return $this;
+    }
+
+    public function getGallery(): ?MediaGallery
+    {
+        return $this->gallery;
     }
 }

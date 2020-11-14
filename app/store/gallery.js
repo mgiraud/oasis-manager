@@ -27,6 +27,7 @@ export const mutations = {
   },
   setSelectedGalleryItem (state, selected) {
     state.selectedGalleryItem = selected
+    console.log(selected)
   },
   setObjectsForGalleryItem (state, { itemId, objects }) {
     state.objectByGalleryItem = { ...state.objectByGalleryItem, ...{ [itemId]: objects } }

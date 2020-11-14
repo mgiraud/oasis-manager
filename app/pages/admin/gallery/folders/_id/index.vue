@@ -1,12 +1,20 @@
 <template>
-  <v-row>
+  <v-container>
+    <AdminGalleryItemBreadcrumb v-if="!!selectedGalleryItem" :breadcrumb="selectedGalleryItem.breadcrumb" />
     <v-row>
       <v-col v-for="mediaObject in getMediaObjectsForSelectedGalleryItem" :key="mediaObject['@id']">
         {{ mediaObject['@id'] }}
         <v-img :src="mediaObject.contentUrl" />
       </v-col>
     </v-row>
-  </v-row>
+    <v-row>
+      <v-col v-for="child in selectedGalleryItem.children" :key="child['@id']">
+        <nuxt-link :to="`/admin/gallery/folders/${child.id}`">
+          {{ child.name }}
+        </nuxt-link>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>

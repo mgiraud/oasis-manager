@@ -1,12 +1,12 @@
 <template>
-    <v-container>
-        <AdminMediaFileUploadForm />
-    </v-container>
+  <v-container>
+    <AdminMediaFileUploadForm />
+  </v-container>
 </template>
 
 <script>
-    export default {
-        layout: 'admin',
-        middleware: 'authenticated',
-    }
+export default {
+  layout: 'admin',
+  middleware: 'authenticated'
+}
 </script>

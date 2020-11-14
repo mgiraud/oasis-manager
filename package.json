@@ -4,7 +4,8 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "generate": "nuxt generate",
-    "start": "nuxt start"
+    "start": "nuxt start",
+    "lint": "eslint --ext .js,.vue ./app/"
   },
   "dependencies": {
     "@mdi/font": "^5.8.55",
@@ -13,5 +14,10 @@
     "dotenv": "^8.2.0",
     "nuxt": "^2.14.7",
     "vuetify": "^2.3.17"
+  },
+  "devDependencies": {
+    "@nuxtjs/eslint-config": "^4.0.0",
+    "@nuxtjs/eslint-module": "^3.0.1",
+    "eslint": "^7.13.0"
   }
 }

@@ -15,6 +15,7 @@
 /dist
 yarn-error.log
 /private
+.eslintcache
 
 ###> phpunit/phpunit ###
 /phpunit.xml

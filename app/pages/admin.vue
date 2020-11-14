@@ -1,12 +1,12 @@
 <template>
-    <div>
-        Administration
-    </div>
+  <div>
+    Administration
+  </div>
 </template>
 
 <script>
-    export default {
-        layout: 'admin',
-        middleware: ['authenticated', 'isAdmin'],
-    }
+export default {
+  layout: 'admin',
+  middleware: ['authenticated', 'isAdmin']
+}
 </script>

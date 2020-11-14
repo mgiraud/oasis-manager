@@ -10,7 +10,11 @@ export default {
         '@plugins/vuetify'
     ],
     modules: [
-        '@nuxtjs/universal-storage',
+        '@nuxtjs/universal-storage'
+    ],
+    buildModules: [
+        '@nuxt/typescript-build',
+        '@nuxtjs/eslint-module'
     ],
     components: {
         dirs: [
@@ -32,5 +36,12 @@ export default {
         localStorage: {
             prefix: 'oasis-manager-'
         },
+    },
+    typescript: {
+        typeCheck: {
+            eslint: {
+                files: './app/**/*.{ts,js,vue}'
+            }
+        }
     }
 }

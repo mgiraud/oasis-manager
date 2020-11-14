@@ -4,7 +4,8 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "generate": "nuxt generate",
-    "start": "nuxt start"
+    "start": "nuxt start",
+    "lint": "eslint --ext .ts,.js,.vue ./app/"
   },
   "dependencies": {
     "@mdi/font": "^5.8.55",
@@ -13,5 +14,14 @@
     "dotenv": "^8.2.0",
     "nuxt": "^2.14.7",
     "vuetify": "^2.3.17"
+  },
+  "devDependencies": {
+    "@nuxt/types": "^2.14.7",
+    "@nuxt/typescript-build": "^2.0.3",
+    "@nuxtjs/eslint-config-typescript": "^4.0.0",
+    "@nuxtjs/eslint-module": "^3.0.1",
+    "eslint": "^7.13.0",
+    "vue-property-decorator": "^9.0.2",
+    "vuex-class-component": "^2.3.5"
   }
 }

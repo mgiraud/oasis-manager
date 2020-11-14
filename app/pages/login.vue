@@ -9,8 +9,11 @@
                     <v-card-title>Connectez-vous !</v-card-title>
                     <v-card-text>
                         <v-form>
-                            <v-text-field prepend-inner-icon="mdi-account" label="email" type="email" v-model="credentials.email"></v-text-field>
-                            <v-text-field prepend-inner-icon="mdi-lock" label="password" type="password" v-model="credentials.password"></v-text-field>
+                            <v-text-field prepend-inner-icon="mdi-account" label="email"
+                                          type="email" v-model="credentials.email"></v-text-field>
+                            <v-text-field prepend-inner-icon="mdi-lock" label="password"
+                                          type="password"
+                                          v-model="credentials.password"></v-text-field>
                         </v-form>
                     </v-card-text>
                     <v-card-actions>
@@ -29,18 +32,18 @@
         data: () => {
             return {
                 credentials: {
-                  email: '',
-                  password: ''
-                }
-            }
+                    email: '',
+                    password: '',
+                },
+            };
         },
         middleware: 'notAuthenticated',
         methods: {
-            postLogin () {
+            postLogin() {
                 this.$store.dispatch('member/login', this.credentials).then(() => {
-                    this.$router.push('/')
+                    this.$router.push('/');
                 });
-            }
-        }
-    }
+            },
+        },
+    };
 </script>

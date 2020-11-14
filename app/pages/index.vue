@@ -1,30 +1,30 @@
 <template>
-    <v-container>
-        <div v-if="isLoggedIn">
-            You are logged in
-        </div>
-        <p v-else>
-            Please
-            <NuxtLink to="/login">
-                login
-            </NuxtLink>.
-        </p>
-    </v-container>
+  <v-container>
+    <div v-if="isLoggedIn">
+      You are logged in
+    </div>
+    <p v-else>
+      Please
+      <NuxtLink to="/login">
+        login
+      </NuxtLink>
+    </p>
+  </v-container>
 </template>
 
-<script>
-    import { mapState } from 'vuex'
+<script lang="ts">
+import { Vue, Component, Prop } from 'vue-property-decorator'
+import { mapState } from 'vuex'
 
-    export default {
-        methods: {
-            logout () {
-                this.$store.dispatch('member/logout')
-            }
-        },
-        computed: {
-            ...mapState({
-                'isLoggedIn': state => state.member.auth,
-            })
-        }
+@Component
+export default class Index extends Vue {
+    logout () {
+      this.$store.dispatch('member/logout')
     }
+  computed: {
+    ...mapState({
+      isLoggedIn: state => state.member.auth
+    })
+  }
+}
 </script>

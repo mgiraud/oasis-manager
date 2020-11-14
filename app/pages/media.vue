@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <AdminMediaFileUploadForm />
+        <AdminMediaFileUploadForm/>
     </v-container>
 </template>
 
@@ -8,5 +8,5 @@
     export default {
         layout: 'admin',
         middleware: 'authenticated',
-    }
+    };
 </script>

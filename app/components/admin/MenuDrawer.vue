@@ -29,7 +29,9 @@
                 </v-list-item-icon>
 
                 <v-list-item-content>
-                    <v-list-item-title><NuxtLink :to="path">{{ text }}</NuxtLink></v-list-item-title>
+                    <v-list-item-title>
+                        <NuxtLink :to="path">{{ text }}</NuxtLink>
+                    </v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
             <v-list-item link @click="logout">
@@ -46,7 +48,7 @@
 </template>
 
 <script>
-    import { mapState } from 'vuex'
+    import { mapState } from 'vuex';
 
     export default {
         data: () => ({
@@ -54,15 +56,15 @@
             links: [
                 ['mdi-home', 'Administration', 'admin'],
                 ['mdi-arrow-left', 'Retour au site', '/'],
-            ]
+            ],
         }),
         computed: mapState({
-            user: s => s.storage.user ?? {}
+            user: s => s.storage.user ?? {},
         }),
         methods: {
             logout() {
-                this.$store.dispatch('member/logout')
-            }
+                this.$store.dispatch('member/logout');
+            },
         },
-    }
+    };
 </script>

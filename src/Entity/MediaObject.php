@@ -84,8 +84,26 @@ class MediaObject
      */
     public $filePath;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=MediaGalleryItem::class, inversedBy="mediaObjects")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $mediaGalleryItem;
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getMediaGalleryItem(): ?MediaGalleryItem
+    {
+        return $this->mediaGalleryItem;
+    }
+
+    public function setMediaGalleryItem(?MediaGalleryItem $mediaGalleryItem): self
+    {
+        $this->mediaGalleryItem = $mediaGalleryItem;
+
+        return $this;
     }
 }

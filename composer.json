@@ -37,6 +37,7 @@
         "phpunit/phpunit": "^9.4",
         "symfony/browser-kit": "5.1.*",
         "symfony/debug-bundle": "^5.1",
+        "symfony/maker-bundle": "^1.23",
         "symfony/monolog-bundle": "^3.0",
         "symfony/stopwatch": "^5.1",
         "symfony/var-dumper": "5.1.*",

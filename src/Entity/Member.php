@@ -3,8 +3,10 @@
 
 namespace App\Entity;
 
+use App\Controller\Member\CloseAction;
 use App\Controller\Member\GetMeAction;
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Security\Permissions;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -30,6 +32,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  *                 "parameters"={}
  *             },
  *             "read"=false
+ *         },
+ *         "close"={
+ *              "method"="PATCH",
+ *              "controller"=CloseAction::class,
+ *              "path"="/members/{id}/close",
  *         }
  *     }
  * )
@@ -85,12 +92,12 @@ class Member implements UserInterface
      * @param array $roles
      *
      * @ORM\Column(name="roles", type="json")
-     * @Groups({"read", "write"})
      */
     public $roles = [];
 
     /**
      * @ORM\Column(type="json")
+     * @Groups({"read", "write"})
      */
     private $permissions = [];
 
@@ -104,10 +111,16 @@ class Member implements UserInterface
      */
     private $groups;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $status;
+
     public function __construct()
     {
         $this->groups = new ArrayCollection();
         $this->groupPermissionsOverrideType = self::GROUP_PERMISSION_OVERRIDE_MERGE;
+        $this->status = self::STATUS_PENDING;
     }
 
     public function getRoles()
@@ -137,6 +150,22 @@ class Member implements UserInterface
 
     public function getPermissions(): ?array
     {
+        if (in_array('ROLE_ADMIN', $this->getRoles())) {
+            return Permissions::getPermissions();
+        }
+        if ($this->getGroups()->count() === 0) {
+            return $this->permissions;
+        }
+        $groupPermissions = [];
+        /** @var MemberGroup $group */
+        foreach ($this->getGroups() as $group) {
+            $groupPermissions = array_merge($groupPermissions, $group->getPermissions());
+        }
+        if ($this->getGroupPermissionsOverrideType() === Member::GROUP_PERMISSION_OVERRIDE_MERGE) {
+           return array_unique(array_merge($this->permissions, $groupPermissions));
+        } else if ($this->getGroupPermissionsOverrideType() === Member::GROUP_PERMISSION_OVERRIDE_GROUPS_ONLY) {
+            return array_unique($groupPermissions);
+        }
         return $this->permissions;
     }
 
@@ -145,6 +174,11 @@ class Member implements UserInterface
         $this->permissions = $permissions;
 
         return $this;
+    }
+
+    public function hasPermission(string $permission): bool
+    {
+        return in_array($permission, $this->getPermissions());
     }
 
     public function getGroupPermissionsOverrideType(): ?int
@@ -179,6 +213,18 @@ class Member implements UserInterface
     public function removeGroup(MemberGroup $group): self
     {
         $this->groups->removeElement($group);
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

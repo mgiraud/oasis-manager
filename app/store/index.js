@@ -13,6 +13,6 @@ export const actions = {
     }
     commit('member/setAuth', auth)
     this.$storage.syncUniversal('user', null)
-    dispatch('permissions/loadPermissions')
+    dispatch('permission/loadPermissions')
   }
 }

@@ -1,6 +1,9 @@
 {
     "USER_CAN_ACCESS_GALLERIES": "user.galleries",
     "USER_CAN_EDIT_GALLERIES": "user.can_edit_galleries",
-    "USER_CAN_ACCESS_USERS": "user.users",
-    "USER_CAN_EDIT_USERS": "user.can_edit_users"
+    "USER_CAN_DELETE_FILES": "user.can_delete_files",
+    "USER_CAN_DELETE_FILE_RECURSIVELY": "user.can_delete_files_recursively",
+    "USER_CAN_ACCESS_MEMBERS": "user.members",
+    "USER_CAN_EDIT_MEMBERS": "user.can_edit_members",
+    "USER_CAN_DELETE_MEMBERS": "user.can_delete_members"
 }

@@ -38,6 +38,7 @@ class MemberFactory
         foreach ($groups as $group) {
             $user->addGroup($group);
         }
+        $user->setStatus(Member::STATUS_OPEN);
 
         return $user;
     }

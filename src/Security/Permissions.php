@@ -17,14 +17,29 @@ class Permissions
     const USER_CAN_EDIT_GALLERIES = 'user.can_edit_galleries';
 
     /**
-     * The user can access the list of users and their details
+     * The user can delete media object and empty gallery items
      */
-    const USER_CAN_ACCESS_USERS = 'user.users';
+    const USER_CAN_DELETE_FILES = 'user.can_delete_files';
 
     /**
-     * The user can edit users
+     * The user can delete media object and non empty gallery items
      */
-    const USER_CAN_EDIT_USERS = 'user.can_edit_users';
+    const USER_CAN_DELETE_FILE_RECURSIVELY = 'user.can_delete_files_recursively';
+
+    /**
+     * The user can access the list of members and their details
+     */
+    const USER_CAN_ACCESS_MEMBERS = 'user.members';
+
+    /**
+     * The user can edit members
+     */
+    const USER_CAN_EDIT_MEMBERS = 'user.can_edit_members';
+
+    /**
+     * The user can delete members
+     */
+    const USER_CAN_DELETE_MEMBERS = 'user.can_delete_members';
 
     public static function getPermissions(): array
     {

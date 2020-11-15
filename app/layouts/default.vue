@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     logout () {
-      this.$store.dispatch('member/logout')
+      this.$store.dispatch('member/logout', { $repository: this.$repository })
     },
     redirectToAdmin () {
       this.$router.push({ path: 'admin' })

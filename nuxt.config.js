@@ -31,7 +31,8 @@ export default {
   },
   storage: {
     cookie: {
-      prefix: 'oasis-manager-'
+      prefix: 'oasis-manager-',
+      path: '/'
     },
     localStorage: {
       prefix: 'oasis-manager-'

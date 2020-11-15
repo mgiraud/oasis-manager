@@ -19,3 +19,11 @@ export const actions = {
     })
   }
 }
+
+export const getters = {
+  hasPermission: (state, getters, rootState) => (permission) => {
+    if (permission === null) { return false }
+    const user = rootState.storage.user
+    return !!(user && user.permissions && user.permissions[permission])
+  }
+}

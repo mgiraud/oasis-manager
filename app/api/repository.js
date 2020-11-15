@@ -27,7 +27,7 @@ export default context => ({
       // TODO deal with forbidden and the refresh token in the future
       return null
     }
-    return await response.json()
+    return await response.status === 204 ? 'ok' : response.json()
   },
 
   async $get (url, options = {}) {

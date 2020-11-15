@@ -30,7 +30,7 @@
 
         <v-list-item-content>
           <v-list-item-title>
-            <NuxtLink :to="path">
+            <NuxtLink :to="{name: path}">
               {{ text }}
             </NuxtLink>
           </v-list-item-title>
@@ -57,8 +57,9 @@ export default {
     drawer: null,
     links: [
       ['mdi-home', 'Administration', 'admin'],
-      ['mdi-paint', 'Media', '/admin/gallery'],
-      ['mdi-arrow-left', 'Retour au site', '/']
+      ['mdi-folder-multiple-image', 'Media', 'admin-gallery'],
+      ['mdi-account', 'Membres', 'admin-member'],
+      ['mdi-arrow-left', 'Retour au site', 'index']
     ]
   }),
   computed: mapState({
@@ -66,7 +67,7 @@ export default {
   }),
   methods: {
     logout () {
-      this.$store.dispatch('member/logout')
+      this.$store.dispatch('member/logout', { $repository: this.$repository })
     }
   }
 }

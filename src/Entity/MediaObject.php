@@ -3,8 +3,10 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Controller\Media\CreateMediaObjectAction;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
@@ -34,7 +36,10 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *                                     "file"={
  *                                         "type"="string",
  *                                         "format"="binary"
- *                                     }
+ *                                     },
+ *                                      "mediaGalleryItemId"={
+ *                                          "type"="integer",
+ *                                      }
  *                                 }
  *                             }
  *                         }
@@ -49,6 +54,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *     }
  * )
  * @Vich\Uploadable
+ * @ApiFilter(SearchFilter::class, properties={"mediaGalleryItem.id": "exact"})
  */
 class MediaObject
 {
@@ -84,8 +90,27 @@ class MediaObject
      */
     public $filePath;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=MediaGalleryItem::class, inversedBy="mediaObjects")
+     * @ORM\JoinColumn(nullable=false)
+     * @ApiProperty(readableLink=false, writableLink=false)
+     */
+    private $mediaGalleryItem;
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getMediaGalleryItem(): ?MediaGalleryItem
+    {
+        return $this->mediaGalleryItem;
+    }
+
+    public function setMediaGalleryItem(?MediaGalleryItem $mediaGalleryItem): self
+    {
+        $this->mediaGalleryItem = $mediaGalleryItem;
+
+        return $this;
     }
 }

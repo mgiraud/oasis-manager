@@ -1,4 +1,4 @@
-export function call (url, options = {}) {
+export async function call (url, options = {}) {
   const jsonLdMimeType = 'application/ld+json'
 
   if (typeof options.headers === 'undefined') {
@@ -14,7 +14,7 @@ export function call (url, options = {}) {
   options.credentials = 'include'
 
   const link = url.includes(process.env.apiBasePath) ? (process.env.apiBaseUrl + url) : (process.env.apiBaseUrl + process.env.apiBasePath + url)
-  return fetch(link, options)
+  return await fetch(link, options)
 }
 
 export default call

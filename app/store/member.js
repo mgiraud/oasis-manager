@@ -46,6 +46,6 @@ export const getters = {
   },
   isAdmin: (state, getters, rootState) => {
     const user = rootState.storage.user
-    return user ? user.roles.includes('ROLE_ADMIN') : false
+    return user && user.roles ? user.roles.includes('ROLE_ADMIN') : false
   }
 }

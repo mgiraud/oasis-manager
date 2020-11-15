@@ -7,7 +7,8 @@ export default {
     apiBasePath: '/api'
   },
   plugins: [
-    '@plugins/vuetify'
+    '~/plugins/vuetify',
+    '~/plugins/repository'
   ],
   modules: [
     '@nuxtjs/universal-storage'
@@ -23,8 +24,8 @@ export default {
         prefix: 'Admin'
       },
       {
-        path: '~/components/admin/media',
-        prefix: 'AdminMedia'
+        path: '~/components/admin/gallery',
+        prefix: 'AdminGallery'
       }
     ]
   },

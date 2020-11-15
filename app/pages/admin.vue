@@ -1,6 +1,7 @@
 <template>
   <div>
     Administration
+    <Nuxt />
   </div>
 </template>
 

@@ -57,6 +57,7 @@ export default {
     drawer: null,
     links: [
       ['mdi-home', 'Administration', 'admin'],
+      ['mdi-paint', 'Media', '/admin/gallery'],
       ['mdi-arrow-left', 'Retour au site', '/']
     ]
   }),

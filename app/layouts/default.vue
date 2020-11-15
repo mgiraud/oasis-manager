@@ -39,7 +39,7 @@ export default {
       isLoggedIn: state => state.member.auth
     }),
     ...mapGetters({
-      isAdmin: 'member/isAdmin'
+      isAdmin: 'permission/isAdmin'
     })
   },
   methods: {

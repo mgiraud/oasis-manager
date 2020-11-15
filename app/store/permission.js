@@ -21,9 +21,18 @@ export const actions = {
 }
 
 export const getters = {
+  isAdmin: (state, getters, rootState) => {
+    const user = rootState.storage.user
+    return user && user.isAdmin
+  },
   hasPermission: (state, getters, rootState) => (permission) => {
     if (permission === null) { return false }
     const user = rootState.storage.user
     return !!(user && user.permissions && user.permissions[permission])
+  },
+  hasPermissions: (state, getters) => (permissions) => {
+    return !permissions.some((permission) => {
+      return !getters.hasPermission(permission)
+    })
   }
 }

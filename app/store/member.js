@@ -13,6 +13,7 @@ export const mutations = {
   },
   setMembers (state, members) {
     state.members = members
+    if (!members) { return }
     const membersById = {}
     members.forEach((member) => {
       membersById[member.id] = member
@@ -45,10 +46,6 @@ export const getters = {
   getRoles: (state, getters, rootState) => {
     const user = rootState.storage.user
     return user ? user.roles : null
-  },
-  isAdmin: (state, getters, rootState) => {
-    const user = rootState.storage.user
-    return user && user.roles ? user.roles.includes('ROLE_ADMIN') : false
   },
   getMember: state => id => state.memberByIds[id] ? state.memberByIds[id] : null
 }

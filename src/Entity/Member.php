@@ -116,6 +116,11 @@ class Member implements UserInterface
      */
     private $status;
 
+    /**
+     * @Groups({"read"})
+     */
+    private $isAdmin = [];
+
     public function __construct()
     {
         $this->groups = new ArrayCollection();
@@ -227,6 +232,11 @@ class Member implements UserInterface
         $this->status = $status;
 
         return $this;
+    }
+
+    public function getIsAdmin(): bool
+    {
+        return in_array('ROLE_ADMIN', $this->getRoles());
     }
 
 }

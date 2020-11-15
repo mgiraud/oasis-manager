@@ -1,7 +1,7 @@
 const cookieparser = process.server ? require('cookieparser') : undefined
 
 export const actions = {
-  nuxtServerInit ({ commit }, { req }) {
+  nuxtServerInit ({ commit, dispatch }, { req }) {
     let auth = null
     if (req.headers.cookie) {
       const parsed = cookieparser.parse(req.headers.cookie)
@@ -13,5 +13,6 @@ export const actions = {
     }
     commit('member/setAuth', auth)
     this.$storage.syncUniversal('user', null)
+    dispatch('permissions/loadPermissions')
   }
 }

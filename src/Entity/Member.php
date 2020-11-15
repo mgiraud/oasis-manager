@@ -5,6 +5,8 @@ namespace App\Entity;
 
 use App\Controller\Member\GetMeAction;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -32,6 +34,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     }
  * )
  * @UniqueEntity("email", groups={"register"})
+ * @UniqueEntity("nickname")
  */
 class Member implements UserInterface
 {
@@ -39,8 +42,12 @@ class Member implements UserInterface
     const STATUS_OPEN = 'O';
     const STATUS_PENDING = 'P';
 
+    const GROUP_PERMISSION_OVERRIDE_MERGE = 0;
+    const GROUP_PERMISSION_OVERRIDE_GROUPS_ONLY = 1;
+    const GROUP_PERMISSION_OVERRIDE_MEMBER_ONLY = 2;
+
     /**
-     * @ORM\Column(type="integer", name="id_member")
+     * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @Groups({"read"})
@@ -68,7 +75,7 @@ class Member implements UserInterface
     /**
      * @param string $nickname
      *
-     * @ORM\Column(name="nickname", type="text")
+     * @ORM\Column(name="nickname", type="text", unique=true)
      * @Assert\Length(min="3")
      * @Groups({"read", "write"})
      */
@@ -81,6 +88,27 @@ class Member implements UserInterface
      * @Groups({"read", "write"})
      */
     public $roles = [];
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $permissions = [];
+
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    private $groupPermissionsOverrideType;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=MemberGroup::class, inversedBy="members")
+     */
+    private $groups;
+
+    public function __construct()
+    {
+        $this->groups = new ArrayCollection();
+        $this->groupPermissionsOverrideType = self::GROUP_PERMISSION_OVERRIDE_MERGE;
+    }
 
     public function getRoles()
     {
@@ -105,6 +133,54 @@ class Member implements UserInterface
     public function eraseCredentials()
     {
 
+    }
+
+    public function getPermissions(): ?array
+    {
+        return $this->permissions;
+    }
+
+    public function setPermissions(array $permissions): self
+    {
+        $this->permissions = $permissions;
+
+        return $this;
+    }
+
+    public function getGroupPermissionsOverrideType(): ?int
+    {
+        return $this->groupPermissionsOverrideType;
+    }
+
+    public function setGroupPermissionsOverrideType(int $groupPermissionsOverrideType): self
+    {
+        $this->groupPermissionsOverrideType = $groupPermissionsOverrideType;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|MemberGroup[]
+     */
+    public function getGroups(): Collection
+    {
+        return $this->groups;
+    }
+
+    public function addGroup(MemberGroup $group): self
+    {
+        if (!$this->groups->contains($group)) {
+            $this->groups[] = $group;
+        }
+
+        return $this;
+    }
+
+    public function removeGroup(MemberGroup $group): self
+    {
+        $this->groups->removeElement($group);
+
+        return $this;
     }
 
 }

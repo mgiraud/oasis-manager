@@ -1,0 +1,6 @@
+{
+    "USER_CAN_ACCESS_GALLERIES": "user.galleries",
+    "USER_CAN_EDIT_GALLERIES": "user.can_edit_galleries",
+    "USER_CAN_ACCESS_USERS": "user.users",
+    "USER_CAN_EDIT_USERS": "user.can_edit_users"
+}

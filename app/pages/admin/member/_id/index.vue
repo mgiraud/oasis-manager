@@ -8,7 +8,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  layout: 'admin',
+  layout: 'Admin',
   middleware: 'authenticated',
   fetchOnServer: false,
   async validate ({ store, $repository }) {

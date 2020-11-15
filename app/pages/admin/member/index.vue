@@ -30,7 +30,7 @@
 import { mapState, mapGetters } from 'vuex'
 
 export default {
-  layout: 'admin',
+  layout: 'Admin',
   middleware: 'authenticated',
   fetchOnServer: false,
   async fetch ({ store, $repository }) {

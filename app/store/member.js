@@ -18,8 +18,8 @@ export const mutations = {
   }
 }
 export const actions = {
-  async getMembers ({ commit }, { $repository }) {
-    const members = await $repository.$get('/members')
+  async getMembers ({ commit }, { repository }) {
+    const members = await repository.$get('/members')
     commit('setMembers', members)
   }
 }

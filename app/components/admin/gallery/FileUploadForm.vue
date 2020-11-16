@@ -40,7 +40,7 @@ export default {
       this.$store.dispatch('gallery/addFileUpload', file)
     },
     upload () {
-      this.$store.dispatch('gallery/uploadFile', { $repository: this.$repository })
+      this.$store.dispatch('gallery/uploadFile', { repository: this.$repository.gallery })
     }
   }
 }

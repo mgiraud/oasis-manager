@@ -1,6 +1,9 @@
 import createRepository from '~/api/repository'
 
 export default (context, inject) => {
-  const repository = createRepository(context)
-  inject('repository', repository)
+  const repositories = {
+    member: createRepository(context, 'member'),
+    gallery: createRepository(context, 'gallery')
+  }
+  inject('repository', repositories)
 }

@@ -24,9 +24,9 @@ export default {
   middleware: 'authenticated',
   fetchOnServer: false,
   async fetch ({ store, params, $repository }) {
-    await store.dispatch('gallery/setSelectedItemId', { itemId: params.id, $repository })
+    await store.dispatch('gallery/setSelectedItemId', { itemId: params.id, repository: $repository.gallery })
     if (store.state.gallery.selectedGalleryItem) {
-      await store.dispatch('gallery/getMediaObjectForGalleryItemId', { itemId: store.state.gallery.selectedGalleryItem.id, $repository })
+      await store.dispatch('gallery/getMediaObjectForGalleryItemId', { itemId: store.state.gallery.selectedGalleryItem.id, repository: $repository.gallery })
     }
   },
   computed: {

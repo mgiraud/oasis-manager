@@ -34,7 +34,7 @@ export default {
   middleware: 'authenticated',
   fetchOnServer: false,
   async fetch ({ store, $repository }) {
-    await store.dispatch('member/getMembers', { $repository })
+    await store.dispatch('member/getMembers', { repository: $repository.member })
   },
   data: () => ({
     headers: [

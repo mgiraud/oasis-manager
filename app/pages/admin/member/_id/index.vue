@@ -14,7 +14,7 @@ export default {
   async validate ({ store, $repository }) {
     const hasMembers = store.state.member.members !== null
     if (hasMembers) { return true }
-    await store.dispatch('member/getMembers', { $repository })
+    await store.dispatch('member/getMembers', { repository: $repository.member })
     return true
   },
   computed: {

@@ -31,12 +31,12 @@ export default {
   async validate ({ store, $repository }) {
     const hasGalleries = store.state.gallery.galleries !== null
     if (hasGalleries) { return true }
-    await store.dispatch('gallery/getGalleries', { $repository })
+    await store.dispatch('gallery/getGalleries', { repository: $repository.gallery })
     return true
   },
   async fetch ({ store, params, $repository }) {
-    await store.dispatch('gallery/setSelectedItemFromGalleryId', { galleryId: params.id, $repository })
-    await store.dispatch('gallery/getMediaObjectForGalleryItemId', { itemId: store.state.gallery.selectedGalleryItem.id, $repository })
+    await store.dispatch('gallery/setSelectedItemFromGalleryId', { galleryId: params.id, repository: $repository.gallery })
+    await store.dispatch('gallery/getMediaObjectForGalleryItemId', { itemId: store.state.gallery.selectedGalleryItem.id, repository: $repository.gallery })
   },
   computed: {
     ...mapGetters('gallery', [

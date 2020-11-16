@@ -18,6 +18,8 @@ openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
 
 ```shell script
 # Lancement du serveur php
+symfony server:start
+# ou si vous l'executable symfony
 php -S 127.0.0.1:8000 -t public
 #lancement du serveur nuxt
 yarn dev

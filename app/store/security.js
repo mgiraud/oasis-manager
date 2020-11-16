@@ -22,8 +22,8 @@ export const actions = {
     await repository.$post('/login_check', {
       method: 'POST',
       body: JSON.stringify(credentials)
-    })
-    const user = await repository.$getOne('/me')
+    }, false)
+    const user = await repository.$getOne('/me', {}, false)
     this.$storage.setUniversal('user', user)
   },
   async logout ({ commit }, { repository }) {

@@ -24,7 +24,7 @@ export default {
     permissions: ['USER_CAN_ACCESS_GALLERIES']
   },
   async fetch ({ store, $repository }) {
-    await store.dispatch('gallery/getGalleries', { repository: repository.gallery })
+    await store.dispatch('gallery/getGalleries', { repository: $repository.gallery })
   },
   computed: {
     ...mapState({

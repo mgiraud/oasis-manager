@@ -1,4 +1,6 @@
-export default (context, name) => ({
+import SubmissionError from '~/error/SubmissionError'
+
+export default (context, { name, mutations }) => ({
   async call (url, options = {}) {
     const jsonLdMimeType = 'application/ld+json'
 
@@ -23,30 +25,87 @@ export default (context, name) => ({
 
   async validateAndDecodeResponse (url, options = {}) {
     const response = await this.call(url, options)
-    if (!response.ok) {
-      // TODO deal with form errors and the refresh token in the future
-      if (response.status === 401) {
-        await context.store.dispatch('security/logout', { repository: context.$repository.member })
-        return context.redirect({ name: 'login' })
-      }
-      return null
+    if (response.ok) {
+      return await response.status === 204 ? 'ok' : response.json()
     }
-    return await response.status === 204 ? 'ok' : response.json()
+    // TODO deal with refresh token in the future
+    if (response.status === 401) {
+      await context.store.dispatch('security/logout', { repository: context.$repository.member })
+      return context.redirect({ name: 'login' })
+    }
+    let json = null
+    try {
+      json = await response.json()
+    } catch (e) {
+      throw new Error(response.statusText || 'An error occurred.')
+    }
+
+    const error =
+          json['hydra:description'] ||
+          json['hydra:title'] ||
+          'An error occurred.'
+    if (!json.violations) { throw new Error(error) }
+
+    const errors = { _error: error }
+    json.violations.forEach(violation =>
+      errors[violation.propertyPath]
+        ? (errors[violation.propertyPath] +=
+              '\n' + errors[violation.propertyPath])
+        : (errors[violation.propertyPath] = violation.message)
+    )
+    throw new SubmissionError(errors)
   },
 
-  async $get (url, options = {}) {
+  handleErrors (error) {
+    if (this.autoDispatch) {
+      if (error instanceof SubmissionError) {
+        context.store.commit(`${name}/setError`, error.errors._error)
+        context.store.commit(`${name}/setViolations`, error.errors)
+      } else {
+        context.store.commit(`${name}/setError`, error.message)
+      }
+    } else {
+      throw error
+    }
+    return null
+  },
+
+  async $get (url, options = {}, autoDispatch = true) {
     options.method = 'GET'
-    const responseBody = await this.validateAndDecodeResponse(url, options)
-    return responseBody ? responseBody['hydra:member'] : null
+    const [err, responseBody] = await this.to(this.validateAndDecodeResponse(url, options))
+    if (err) { return this.handleErrors(err, autoDispatch) }
+    const body = responseBody ? responseBody['hydra:member'] : null
+    if (autoDispatch && mutations.$get) {
+      context.store.commit(`${name}/${mutations.$get}`, body)
+    }
+    return body
   },
 
-  async $getOne (url, options = {}) {
+  async $getOne (url, options = {}, autoDispatch = true) {
     options.method = 'GET'
-    return await this.validateAndDecodeResponse(url, options)
+    const [err, body] = await this.to(this.validateAndDecodeResponse(url, options))
+    if (err) { return this.handleErrors(err, autoDispatch) }
+    if (autoDispatch && mutations.$getOne) {
+      context.store.commit(`${name}/${mutations.$getOne}`, body)
+    }
+    console.log(body)
+    return body
   },
 
-  async $post (url, options = {}) {
+  async $post (url, options = {}, autoDispatch = true) {
     options.method = 'POST'
-    return await this.validateAndDecodeResponse(url, options)
+    const [err, body] = await this.to(this.validateAndDecodeResponse(url, options))
+    if (err) { return this.handleErrors(err, autoDispatch) }
+    if (autoDispatch && mutations.$post) {
+      context.store.commit(`${name}/${mutations.$post}`, body)
+    }
+    return body
+  },
+
+  to (promise) {
+    return promise.then((data) => {
+      return [null, data]
+    })
+      .catch(err => [err])
   }
 })

@@ -6,7 +6,8 @@ export const state = () => ({
   selectedGalleryItem: null,
   galleries: null,
   items: {},
-  objectByGalleryItem: {}
+  objectByGalleryItem: {},
+  error: ''
 })
 
 export const mutations = {
@@ -62,8 +63,7 @@ export const actions = {
     return mediaObject
   },
   async getGalleries ({ commit }, { repository }) {
-    const responseBody = await repository.$get('/api/media_galleries')
-    commit('setGalleries', responseBody)
+    return await repository.$get('/api/media_galleries')
   },
   async setSelectedItemFromGalleryId ({ commit, state }, { repository, galleryId }) {
     const gallery = state.galleries.find((gallery) => {

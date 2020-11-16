@@ -1,6 +1,7 @@
 export const state = () => ({
   members: null,
-  membersById: {}
+  membersById: {},
+  error: ''
 })
 
 export const mutations = {
@@ -19,8 +20,7 @@ export const mutations = {
 }
 export const actions = {
   async getMembers ({ commit }, { repository }) {
-    const members = await repository.$get('/members')
-    commit('setMembers', members)
+    return await repository.$get('/members')
   }
 }
 

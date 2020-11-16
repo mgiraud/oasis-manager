@@ -24,7 +24,11 @@ export default context => ({
   async validateAndDecodeResponse (url, options = {}) {
     const response = await this.call(url, options)
     if (!response.ok) {
-      // TODO deal with forbidden and the refresh token in the future
+      // TODO deal with form errors and the refresh token in the future
+      if (response.status === 401) {
+        await context.store.dispatch('member/logout', { $repository: context.$repository })
+        return context.redirect({ name: 'login' })
+      }
       return null
     }
     return await response.status === 204 ? 'ok' : response.json()

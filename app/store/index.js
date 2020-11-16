@@ -2,17 +2,17 @@ const cookieparser = process.server ? require('cookieparser') : undefined
 
 export const actions = {
   nuxtServerInit ({ commit, dispatch }, { req }) {
-    let auth = null
+    // Load permissions list from file
+    dispatch('permission/loadPermissions')
+    // check if the user exists
     if (req.headers.cookie) {
       const parsed = cookieparser.parse(req.headers.cookie)
       try {
-        auth = parsed.BEARER
+        const token = parsed.BEARER
+        this.$storage.syncUniversal('user', null)
       } catch (err) {
         // No valid cookie found
       }
     }
-    commit('member/setAuth', auth)
-    this.$storage.syncUniversal('user', null)
-    dispatch('permission/loadPermissions')
   }
 }

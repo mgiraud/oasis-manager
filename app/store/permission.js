@@ -23,7 +23,10 @@ export const actions = {
 export const getters = {
   isAdmin: (state, getters, rootState) => {
     const user = rootState.storage.user
-    return user && user.isAdmin
+    return user instanceof Object && user.isAdmin
+  },
+  isLoggedIn: (state, getters, rootState) => {
+    return rootState.storage.user instanceof Object
   },
   hasPermission: (state, getters, rootState) => (permission) => {
     if (permission === null) { return false }

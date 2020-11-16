@@ -30,17 +30,12 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   data: () => ({}),
   computed: {
-    ...mapState({
-      isLoggedIn: state => state.member.auth
-    }),
-    ...mapGetters({
-      isAdmin: 'permission/isAdmin'
-    })
+    ...mapGetters('permission', ['isAdmin', 'isLoggedIn'])
   },
   methods: {
     logout () {

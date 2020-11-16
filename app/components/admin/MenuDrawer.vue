@@ -67,6 +67,7 @@ export default {
   methods: {
     logout () {
       this.$store.dispatch('member/logout', { $repository: this.$repository })
+      this.$router.push({ name: 'index' })
     },
     redirectTo (name) {
       this.$router.push({ name })

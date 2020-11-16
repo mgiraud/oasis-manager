@@ -1,5 +1,5 @@
 export default function ({ store, route, redirect, from }) {
-  if (!store.getters['permission/isLoggedIn']) {
+  if (!store.getters['security/isLoggedIn']) {
     return redirect('/login')
   }
   if (!route.meta) {
@@ -14,7 +14,7 @@ export default function ({ store, route, redirect, from }) {
   if (!permissions) {
     return
   }
-  if (!store.getters['permission/hasPermissions'](permissions)) {
+  if (!store.getters['security/hasPermissions'](permissions)) {
     if (from) {
       redirect({ name: from.name, params: from.params })
     } else {

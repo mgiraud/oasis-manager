@@ -1,5 +1,5 @@
 export default function ({ store, redirect }) {
-  if (!store.getters['permission/isAdmin']) {
+  if (!store.getters['security/isAdmin']) {
     return redirect({ name: 'login' })
   }
 }

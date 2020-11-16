@@ -13,16 +13,14 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters('permission', ['isLoggedIn'])
+    ...mapGetters('security', ['isLoggedIn'])
   },
   methods: {
-    logout () {
-      this.$store.dispatch('member/logout', { $repository: this.$repository })
-    }
+    ...mapActions('security', ['logout'])
   }
 }
 </script>

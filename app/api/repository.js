@@ -26,7 +26,7 @@ export default context => ({
     if (!response.ok) {
       // TODO deal with form errors and the refresh token in the future
       if (response.status === 401) {
-        await context.store.dispatch('member/logout', { $repository: context.$repository })
+        await context.store.dispatch('security/logout', { $repository: context.$repository })
         return context.redirect({ name: 'login' })
       }
       return null

@@ -45,7 +45,7 @@ export default {
   }),
   computed: {
     ...mapState('member', ['members']),
-    ...mapGetters('permission', ['hasPermission']),
+    ...mapGetters('security', ['hasPermission']),
     canDeleteUser () {
       return this.hasPermission('USER_CAN_DELETE_MEMBERS')
     }

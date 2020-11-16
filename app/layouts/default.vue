@@ -30,17 +30,15 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data: () => ({}),
   computed: {
-    ...mapGetters('permission', ['isAdmin', 'isLoggedIn'])
+    ...mapGetters('security', ['isAdmin', 'isLoggedIn'])
   },
   methods: {
-    logout () {
-      this.$store.dispatch('member/logout', { $repository: this.$repository })
-    },
+    ...mapActions('security', ['logout']),
     redirectToAdmin () {
       this.$router.push({ path: 'admin' })
     }

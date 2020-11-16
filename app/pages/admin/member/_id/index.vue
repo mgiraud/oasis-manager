@@ -11,10 +11,10 @@ export default {
   layout: 'Admin',
   middleware: 'authenticated',
   fetchOnServer: false,
-  async validate ({ store, $repository }) {
+  async validate ({ store }) {
     const hasMembers = store.state.member.members !== null
     if (hasMembers) { return true }
-    await store.dispatch('member/getMembers', { $repository })
+    await store.dispatch('member/getMembers')
     return true
   },
   computed: {

@@ -1,5 +1,16 @@
 <template>
   <v-container fluid fill-height>
+    <v-row v-if="credentialError" align="center" justify="center">
+      <v-col lg="4">
+        <v-alert
+          color="red"
+          elevation="24"
+          type="error"
+        >
+          Bad credentials
+        </v-alert>
+      </v-col>
+    </v-row>
     <v-row align="center" justify="center">
       <v-col lg="4">
         <v-card
@@ -25,6 +36,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data: () => {
     return {
@@ -35,10 +47,14 @@ export default {
     }
   },
   middleware: 'notAuthenticated',
+  computed: {
+    ...mapState('security', ['credentialError'])
+  },
   methods: {
     async postLogin () {
-      await this.$store.dispatch('security/login', { credentials: this.credentials, $repository: this.$repository })
-      this.$router.push('/')
+      if (await this.$store.dispatch('security/login', this.credentials)) {
+        this.$router.push('/')
+      }
     }
   }
 }

@@ -9,10 +9,10 @@ export const actions = {
       const parsed = cookieparser.parse(req.headers.cookie)
       try {
         const token = parsed.BEARER
-        this.$storage.syncUniversal('user', null)
       } catch (err) {
         // No valid cookie found
       }
     }
+    this.$storage.syncUniversal('user', null)
   }
 }

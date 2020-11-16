@@ -6,7 +6,8 @@ export const state = () => ({
   selectedGalleryItem: null,
   galleries: null,
   items: {},
-  objectByGalleryItem: {}
+  objectByGalleryItem: {},
+  error: ''
 })
 
 export const mutations = {
@@ -42,7 +43,7 @@ export const actions = {
   addFileUpload ({ commit }, file) {
     commit('addFileToUpload', file)
   },
-  async uploadFile ({ commit, state }, { $repository }) {
+  async uploadFile ({ commit, state }) {
     if (!state.fileUpload.file) {
       return
     }
@@ -50,7 +51,7 @@ export const actions = {
     formData.append('file', state.fileUpload.file)
     formData.append('mediaGalleryItemId', state.selectedGalleryItem.id)
 
-    const mediaObject = await $repository.$post('/media_objects', {
+    const mediaObject = await this.$repository.gallery.$post('/media_objects', {
       'Content-Type': 'multipart/form-data',
       body: formData,
       onUploadProgress: (event) => {
@@ -61,11 +62,10 @@ export const actions = {
     commit('addObjectToGalleryItem', mediaObject)
     return mediaObject
   },
-  async getGalleries ({ commit }, { $repository }) {
-    const responseBody = await $repository.$get('/api/media_galleries')
-    commit('setGalleries', responseBody)
+  async getGalleries ({ commit }) {
+    return await this.$repository.gallery.$get('/api/media_galleries')
   },
-  async setSelectedItemFromGalleryId ({ commit, state }, { $repository, galleryId }) {
+  async setSelectedItemFromGalleryId ({ commit, state }, galleryId) {
     const gallery = state.galleries.find((gallery) => {
       return parseInt(gallery.id) === parseInt(galleryId)
     })
@@ -73,24 +73,24 @@ export const actions = {
     commit('setSelectedGalleryItem', gallery.rootItem)
     let objects = null
     if (state.objectByGalleryItem[gallery.rootItem.id] === {}) {
-      objects = await $repository.$get('/api/media_galleries')
+      objects = await this.$repository.gallery.$get('/api/media_galleries')
     } else {
       objects = await state.objectByGalleryItem[gallery.rootItem.id]
     }
     commit('setObjectsForGalleryItem', { itemId: gallery.rootItem.id, objects })
   },
-  async setSelectedItemId ({ commit, state }, { $repository, itemId }) {
+  async setSelectedItemId ({ commit, state }, itemId) {
     let galleryItem = null
     if (state.items[itemId] !== undefined) {
       galleryItem = state.items[itemId]
     } else {
-      galleryItem = await $repository.$getOne(`/api/media_gallery_items/${itemId}`)
+      galleryItem = await this.$repository.gallery.$getOne(`/api/media_gallery_items/${itemId}`)
       if (galleryItem) { commit('addGalleryItem', galleryItem) }
     }
     if (galleryItem) { commit('setSelectedGalleryItem', galleryItem) }
   },
-  async getMediaObjectForGalleryItemId ({ commit, state }, { $repository, itemId }) {
-    const responseBody = await $repository.$get(`/api/media_objects?mediaGalleryItem.id=${itemId}`)
+  async getMediaObjectForGalleryItemId ({ commit, state }, itemId) {
+    const responseBody = await this.$repository.gallery.$get(`/api/media_objects?mediaGalleryItem.id=${itemId}`)
     commit('setObjectsForGalleryItem', { objects: responseBody, itemId })
   }
 }

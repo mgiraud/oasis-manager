@@ -2,12 +2,16 @@ const fs = process.server ? require('fs') : null
 const path = process.server ? require('path') : null
 
 export const state = () => ({
-  permissions: []
+  permissions: [],
+  credentialError: false
 })
 
 export const mutations = {
   setPermissions (state, permissions) {
     state.permissions = permissions
+  },
+  setCredentialError (state, inError) {
+    state.credentialError = inError
   }
 }
 
@@ -18,17 +22,25 @@ export const actions = {
       commit('setPermissions', JSON.parse(data))
     })
   },
-  async login ({ commit }, { credentials, $repository }) {
-    await $repository.$post('/login_check', {
-      method: 'POST',
-      body: JSON.stringify(credentials)
-    })
-    const user = await $repository.$getOne('/me')
-    this.$storage.setUniversal('user', user)
+  async login ({ commit }, credentials) {
+    commit('setCredentialError', false)
+    try {
+      await this.$repository.member.$post('/login_check', {
+        method: 'POST',
+        body: JSON.stringify(credentials)
+      }, false)
+      const user = await this.$repository.member.$getOne('/me', {}, false)
+      this.$storage.setUniversal('user', user)
+      return true
+    } catch (e) {
+      commit('setCredentialError', true)
+      this.$storage.setUniversal('user', null)
+      return false
+    }
   },
-  async logout ({ commit }, { $repository }) {
+  async logout ({ commit }) {
     this.$storage.setUniversal('user', null)
-    await $repository.call('/logout')
+    await this.$repository.member.call('/logout')
   }
 }
 

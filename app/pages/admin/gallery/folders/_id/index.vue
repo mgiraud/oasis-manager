@@ -23,10 +23,10 @@ export default {
   layout: 'Admin',
   middleware: 'authenticated',
   fetchOnServer: false,
-  async fetch ({ store, params, $repository }) {
-    await store.dispatch('gallery/setSelectedItemId', { itemId: params.id, $repository })
+  async fetch ({ store, params }) {
+    await store.dispatch('gallery/setSelectedItemId', params.id)
     if (store.state.gallery.selectedGalleryItem) {
-      await store.dispatch('gallery/getMediaObjectForGalleryItemId', { itemId: store.state.gallery.selectedGalleryItem.id, $repository })
+      await store.dispatch('gallery/getMediaObjectForGalleryItemId', store.state.gallery.selectedGalleryItem.id)
     }
   },
   computed: {

@@ -17,7 +17,7 @@
         <v-btn v-if="isAdmin" text @click="redirectToAdmin">
           Admin
         </v-btn>
-        <v-btn v-if="isLoggedIn" icon @click="clickLogout">
+        <v-btn v-if="isLoggedIn" icon @click="logout">
           <v-icon>mdi-logout</v-icon>
         </v-btn>
       </v-container>
@@ -39,9 +39,6 @@ export default {
   },
   methods: {
     ...mapActions('security', ['logout']),
-    clickLogout () {
-      this.logout({ repository: this.$repository.member })
-    },
     redirectToAdmin () {
       this.$router.push({ path: 'admin' })
     }

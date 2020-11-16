@@ -28,15 +28,15 @@ export default {
   layout: 'Admin',
   middleware: 'authenticated',
   fetchOnServer: false,
-  async validate ({ store, $repository }) {
+  async validate ({ store }) {
     const hasGalleries = store.state.gallery.galleries !== null
     if (hasGalleries) { return true }
-    await store.dispatch('gallery/getGalleries', { repository: $repository.gallery })
+    await store.dispatch('gallery/getGalleries')
     return true
   },
-  async fetch ({ store, params, $repository }) {
-    await store.dispatch('gallery/setSelectedItemFromGalleryId', { galleryId: params.id, repository: $repository.gallery })
-    await store.dispatch('gallery/getMediaObjectForGalleryItemId', { itemId: store.state.gallery.selectedGalleryItem.id, repository: $repository.gallery })
+  async fetch ({ store, params }) {
+    await store.dispatch('gallery/setSelectedItemFromGalleryId', params.id)
+    await store.dispatch('gallery/getMediaObjectForGalleryItemId', store.state.gallery.selectedGalleryItem.id)
   },
   computed: {
     ...mapGetters('gallery', [

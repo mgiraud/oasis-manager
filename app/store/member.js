@@ -19,8 +19,8 @@ export const mutations = {
   }
 }
 export const actions = {
-  async getMembers ({ commit }, { repository }) {
-    return await repository.$get('/members')
+  async getMembers ({ commit }) {
+    return await this.$repository.member.$get('/members')
   }
 }
 

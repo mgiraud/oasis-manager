@@ -33,8 +33,8 @@ export default {
   layout: 'Admin',
   middleware: 'authenticated',
   fetchOnServer: false,
-  async fetch ({ store, $repository }) {
-    await store.dispatch('member/getMembers', { repository: $repository.member })
+  async fetch ({ store }) {
+    await store.dispatch('member/getMembers')
   },
   data: () => ({
     headers: [

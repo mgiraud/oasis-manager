@@ -18,17 +18,17 @@ export const actions = {
       commit('setPermissions', JSON.parse(data))
     })
   },
-  async login ({ commit }, { credentials, repository }) {
-    await repository.$post('/login_check', {
+  async login ({ commit }, credentials) {
+    await this.$repository.member.$post('/login_check', {
       method: 'POST',
       body: JSON.stringify(credentials)
     }, false)
-    const user = await repository.$getOne('/me', {}, false)
+    const user = await this.$repository.member.$getOne('/me', {}, false)
     this.$storage.setUniversal('user', user)
   },
-  async logout ({ commit }, { repository }) {
+  async logout ({ commit }) {
     this.$storage.setUniversal('user', null)
-    await repository.call('/logout')
+    await this.$repository.member.call('/logout')
   }
 }
 

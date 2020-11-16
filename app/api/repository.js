@@ -30,7 +30,7 @@ export default (context, { name, mutations }) => ({
     }
     // TODO deal with refresh token in the future
     if (response.status === 401) {
-      await context.store.dispatch('security/logout', { repository: context.$repository.member })
+      await context.store.dispatch('security/logout')
       return context.redirect({ name: 'login' })
     }
     let json = null
@@ -88,7 +88,6 @@ export default (context, { name, mutations }) => ({
     if (autoDispatch && mutations.$getOne) {
       context.store.commit(`${name}/${mutations.$getOne}`, body)
     }
-    console.log(body)
     return body
   },
 

@@ -2,12 +2,16 @@ const fs = process.server ? require('fs') : null
 const path = process.server ? require('path') : null
 
 export const state = () => ({
-  permissions: []
+  permissions: [],
+  credentialError: false
 })
 
 export const mutations = {
   setPermissions (state, permissions) {
     state.permissions = permissions
+  },
+  setCredentialError (state, inError) {
+    state.credentialError = inError
   }
 }
 
@@ -19,12 +23,20 @@ export const actions = {
     })
   },
   async login ({ commit }, credentials) {
-    await this.$repository.member.$post('/login_check', {
-      method: 'POST',
-      body: JSON.stringify(credentials)
-    }, false)
-    const user = await this.$repository.member.$getOne('/me', {}, false)
-    this.$storage.setUniversal('user', user)
+    commit('setCredentialError', false)
+    try {
+      await this.$repository.member.$post('/login_check', {
+        method: 'POST',
+        body: JSON.stringify(credentials)
+      }, false)
+      const user = await this.$repository.member.$getOne('/me', {}, false)
+      this.$storage.setUniversal('user', user)
+      return true
+    } catch (e) {
+      commit('setCredentialError', true)
+      this.$storage.setUniversal('user', null)
+      return false
+    }
   },
   async logout ({ commit }) {
     this.$storage.setUniversal('user', null)

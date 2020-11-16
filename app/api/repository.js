@@ -29,7 +29,7 @@ export default (context, { name, mutations }) => ({
       return await response.status === 204 ? 'ok' : response.json()
     }
     // TODO deal with refresh token in the future
-    if (response.status === 401) {
+    if (response.status === 401 && context.route.name !== 'login') {
       await context.store.dispatch('security/logout')
       return context.redirect({ name: 'login' })
     }
@@ -56,8 +56,8 @@ export default (context, { name, mutations }) => ({
     throw new SubmissionError(errors)
   },
 
-  handleErrors (error) {
-    if (this.autoDispatch) {
+  handleErrors (error, autoDispatch) {
+    if (autoDispatch) {
       if (error instanceof SubmissionError) {
         context.store.commit(`${name}/setError`, error.errors._error)
         context.store.commit(`${name}/setViolations`, error.errors)
@@ -67,7 +67,6 @@ export default (context, { name, mutations }) => ({
     } else {
       throw error
     }
-    return null
   },
 
   async $get (url, options = {}, autoDispatch = true) {

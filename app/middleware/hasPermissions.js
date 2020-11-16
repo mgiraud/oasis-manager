@@ -1,6 +1,6 @@
 export default function ({ store, route, redirect, from }) {
   if (!store.getters['security/isLoggedIn']) {
-    return redirect('/login')
+    return redirect({ name: 'login' })
   }
   if (!route.meta) {
     return

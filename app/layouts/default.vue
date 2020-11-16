@@ -39,12 +39,12 @@ export default {
       isLoggedIn: state => state.member.auth
     }),
     ...mapGetters({
-      isAdmin: 'member/isAdmin'
+      isAdmin: 'permission/isAdmin'
     })
   },
   methods: {
     logout () {
-      this.$store.dispatch('member/logout')
+      this.$store.dispatch('member/logout', { $repository: this.$repository })
     },
     redirectToAdmin () {
       this.$router.push({ path: 'admin' })

@@ -23,6 +23,7 @@
         v-for="[icon, text, path] in links"
         :key="icon"
         link
+        @click="redirectTo(path)"
       >
         <v-list-item-icon>
           <v-icon>{{ icon }}</v-icon>
@@ -30,9 +31,7 @@
 
         <v-list-item-content>
           <v-list-item-title>
-            <NuxtLink :to="path">
-              {{ text }}
-            </NuxtLink>
+            {{ text }}
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
@@ -56,9 +55,10 @@ export default {
   data: () => ({
     drawer: null,
     links: [
-      ['mdi-home', 'Administration', 'admin'],
-      ['mdi-paint', 'Media', '/admin/gallery'],
-      ['mdi-arrow-left', 'Retour au site', '/']
+      ['mdi-home', 'Accueil', 'admin'],
+      ['mdi-folder-multiple-image', 'Media', 'admin-gallery'],
+      ['mdi-account', 'Membres', 'admin-member'],
+      ['mdi-arrow-left', 'Retour au site', 'index']
     ]
   }),
   computed: mapState({
@@ -66,7 +66,10 @@ export default {
   }),
   methods: {
     logout () {
-      this.$store.dispatch('member/logout')
+      this.$store.dispatch('member/logout', { $repository: this.$repository })
+    },
+    redirectTo (name) {
+      this.$router.push({ name })
     }
   }
 }

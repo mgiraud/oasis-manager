@@ -1,41 +1,44 @@
-import { call } from '../util/api'
+export const state = () => ({
+  auth: false,
+  members: null,
+  membersById: {}
+})
 
-export const state = () => {
-  return {
-    auth: false
-  }
-}
 export const mutations = {
   setAuth (state, auth) {
     state.auth = auth
   },
   setUser (state, user) {
     state.user = user
+  },
+  setMembers (state, members) {
+    state.members = members
+    if (!members) { return }
+    const membersById = {}
+    members.forEach((member) => {
+      membersById[member.id] = member
+    })
+    state.memberByIds = membersById
   }
 }
 export const actions = {
-  login ({ commit }, credentials) {
-    return call('/login_check', {
+  async login ({ commit }, { credentials, $repository }) {
+    const response = await $repository.$post('/login_check', {
       method: 'POST',
       body: JSON.stringify(credentials)
-    }).then((response) => {
-      commit('setAuth', response.ok)
-      if (!response.ok) {
-        return
-      }
-      call('/me').then((response) => {
-        response.json().then((user) => {
-          this.$storage.setUniversal('user', user)
-        })
-      })
     })
+    commit('setAuth', response === 'ok')
+    const user = await $repository.$getOne('/me')
+    this.$storage.setUniversal('user', user)
   },
-  logout ({ commit }) {
-    return call('/logout', {
-      method: 'GET'
-    }).then(() => {
-      commit('setAuth', null)
-    })
+  async logout ({ commit }, { $repository }) {
+    await $repository.call('/logout')
+    commit('setAuth', false)
+    this.$storage.setUniversal('user', null)
+  },
+  async getMembers ({ commit }, { $repository }) {
+    const members = await $repository.$get('/members')
+    commit('setMembers', members)
   }
 }
 
@@ -44,8 +47,5 @@ export const getters = {
     const user = rootState.storage.user
     return user ? user.roles : null
   },
-  isAdmin: (state, getters, rootState) => {
-    const user = rootState.storage.user
-    return user && user.roles ? user.roles.includes('ROLE_ADMIN') : false
-  }
+  getMember: state => id => state.memberByIds[id] ? state.memberByIds[id] : null
 }

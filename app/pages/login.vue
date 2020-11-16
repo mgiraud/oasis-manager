@@ -36,10 +36,9 @@ export default {
   },
   middleware: 'notAuthenticated',
   methods: {
-    postLogin () {
-      this.$store.dispatch('member/login', this.credentials).then(() => {
-        this.$router.push('/')
-      })
+    async postLogin () {
+      await this.$store.dispatch('member/login', { credentials: this.credentials, $repository: this.$repository })
+      this.$router.push('/')
     }
   }
 }

@@ -17,9 +17,12 @@
 import { mapState } from 'vuex'
 
 export default {
-  layout: 'admin',
-  middleware: 'authenticated',
+  layout: 'Admin',
+  middleware: 'hasPermissions',
   fetchOnServer: false,
+  meta: {
+    permissions: ['USER_CAN_ACCESS_GALLERIES']
+  },
   async fetch ({ store, $repository }) {
     await store.dispatch('gallery/getGalleries', { $repository })
   },

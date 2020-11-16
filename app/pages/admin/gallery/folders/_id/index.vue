@@ -20,7 +20,7 @@
 <script>
 import { mapGetters, mapState } from 'vuex'
 export default {
-  layout: 'admin',
+  layout: 'Admin',
   middleware: 'authenticated',
   fetchOnServer: false,
   async fetch ({ store, params, $repository }) {

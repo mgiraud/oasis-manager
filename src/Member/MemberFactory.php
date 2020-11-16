@@ -5,6 +5,7 @@ namespace App\Member;
 
 
 use App\Entity\Member;
+use App\Entity\MemberGroup;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class MemberFactory
@@ -20,7 +21,9 @@ class MemberFactory
         string $email,
         string $password,
         string $nickname,
-        array $roles = []
+        array $permissions,
+        array $roles,
+        array $groups
     ): Member {
         $user = new Member();
         $user->email = $email;
@@ -29,7 +32,13 @@ class MemberFactory
             $password,
             null
         );
-        $user->roles = array_merge($roles, ['ROLE_READER']);
+        $user->setPermissions($permissions);
+        $user->roles = array_merge($roles);
+        /** @var MemberGroup $group */
+        foreach ($groups as $group) {
+            $user->addGroup($group);
+        }
+        $user->setStatus(Member::STATUS_OPEN);
 
         return $user;
     }

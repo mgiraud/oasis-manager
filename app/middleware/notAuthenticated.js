@@ -1,5 +1,5 @@
 export default function ({ store, redirect }) {
-  if (store.state.member.auth) {
+  if (store.getters['permission/isLoggedIn']) {
     return redirect('/')
   }
 }

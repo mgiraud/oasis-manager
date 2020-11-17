@@ -34,6 +34,10 @@ export default {
       {
         path: '~/components/error',
         prefix: 'Error'
+      },
+      {
+        path: '~/components/form',
+        prefix: 'Form'
       }
     ]
   },

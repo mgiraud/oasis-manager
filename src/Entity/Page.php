@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Controller\Page\PublishAction;
 use App\Controller\Page\UnpublishAction;
@@ -91,12 +90,6 @@ class Page
      */
     private $isPublished;
 
-    /**
-     * @ORM\Column(type="text", unique=true)
-     * @ApiProperty(writable=false)
-     */
-    private $slug;
-
     public function __construct()
     {
         $this->protectionGroups = new ArrayCollection();
@@ -114,7 +107,8 @@ class Page
 
     public function setUrl(string $url): self
     {
-        $this->url = $url;
+        $slugger = new AsciiSlugger();
+        $this->url = $slugger->slug($url);
 
         return $this;
     }
@@ -127,8 +121,6 @@ class Page
     public function setTitle(string $title): self
     {
         $this->title = $title;
-        $slugger = new AsciiSlugger();
-        $this->slug = $slugger->slug($title);
 
         return $this;
     }
@@ -203,10 +195,5 @@ class Page
         $this->isPublished = $isPublished;
 
         return $this;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
     }
 }

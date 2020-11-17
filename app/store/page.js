@@ -1,6 +1,6 @@
 export const state = () => ({
   pages: [],
-  pagesBySlug: {},
+  pagesByUrl: {},
   error: null
 })
 
@@ -8,11 +8,11 @@ export const mutations = {
   setPages (state, pages) {
     state.pages = pages
     if (!pages) { return }
-    const pagesBySlug = {}
+    const pagesByUrl = {}
     pages.forEach((page) => {
-      pagesBySlug[page.slug] = page
+      pagesByUrl[page.url] = page
     })
-    state.pagesBySlug = pagesBySlug
+    state.pagesByUrl = pagesByUrl
   },
   setError (state, error) {
     state.error = error
@@ -26,5 +26,5 @@ export const actions = {
 }
 
 export const getters = {
-  getPageBySlug: state => slug => state.pagesBySlug[slug] ? state.pagesBySlug[slug] : null
+  getPageByUrl: state => url => state.pagesByUrl[url] ? state.pagesByUrl[url] : null
 }

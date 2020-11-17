@@ -12,11 +12,11 @@ export default {
     await store.dispatch('page/getPages')
   },
   computed: {
-    ...mapGetters('page', ['getPageBySlug']),
+    ...mapGetters('page', ['getPageByUrl']),
     page () {
-      return this.getPageBySlug(this.slug)
+      return this.getPageByUrl(this.url)
     },
-    slug () {
+    url () {
       return this.$route.params ? this.$route.params.pathMatch : null
     }
   }

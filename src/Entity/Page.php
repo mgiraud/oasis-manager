@@ -3,13 +3,42 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Controller\Page\PublishAction;
+use App\Controller\Page\UnpublishAction;
 use App\Repository\PageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     attributes={"pagination_enabled"=false},
+ *     collectionOperations={
+ *         "get"={"security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_ACCESS_PAGES'))"},
+ *         "post"={"security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_EDIT_PAGES'))"},
+ *     },
+ *     itemOperations={
+ *         "get"={"method"="GET"},
+ *         "delete"={"security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_DELETE_PAGES'))"},
+ *         "put"={"security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_EDIT_PAGES'))"},
+ *         "publish"={
+ *             "method"="POST",
+ *             "path"="/pages/{id}/publish",
+ *             "controller"=PublishAction::class,
+ *             "openapi_context"={
+ *                  "summary": "Publish a page"
+ *              }
+ *         },
+ *         "unpublish"={
+ *             "method"="POST",
+ *             "path"="/pages/{id}/unpublish",
+ *             "controller"=UnpublishAction::class,
+ *              "openapi_context"={
+ *                  "summary": "Unpublish a page"
+ *              }
+ *         }
+ *     }
+ * )
  * @ORM\Entity(repositoryClass=PageRepository::class)
  */
 class Page
@@ -51,6 +80,11 @@ class Page
      * @ORM\ManyToMany(targetEntity=MemberGroup::class)
      */
     private $protectionGroups;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isPublished;
 
     public function __construct()
     {
@@ -142,6 +176,18 @@ class Page
     public function removeProtectionGroup(MemberGroup $protectionGroup): self
     {
         $this->protectionGroups->removeElement($protectionGroup);
+
+        return $this;
+    }
+
+    public function getIsPublished(): ?bool
+    {
+        return $this->isPublished;
+    }
+
+    public function setIsPublished(bool $isPublished): self
+    {
+        $this->isPublished = $isPublished;
 
         return $this;
     }

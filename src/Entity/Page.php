@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Controller\Page\PublishAction;
 use App\Controller\Page\UnpublishAction;
@@ -9,6 +10,8 @@ use App\Repository\PageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 
 /**
  * @ApiResource(
@@ -40,6 +43,8 @@ use Doctrine\ORM\Mapping as ORM;
  *     }
  * )
  * @ORM\Entity(repositoryClass=PageRepository::class)
+ * @UniqueEntity(fields={"slug"})
+ * @UniqueEntity(fields={"url"})
  */
 class Page
 {
@@ -51,7 +56,7 @@ class Page
     private $id;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", unique=true)
      */
     private $url;
 
@@ -86,6 +91,12 @@ class Page
      */
     private $isPublished;
 
+    /**
+     * @ORM\Column(type="text", unique=true)
+     * @ApiProperty(writable=false)
+     */
+    private $slug;
+
     public function __construct()
     {
         $this->protectionGroups = new ArrayCollection();
@@ -116,6 +127,8 @@ class Page
     public function setTitle(string $title): self
     {
         $this->title = $title;
+        $slugger = new AsciiSlugger();
+        $this->slug = $slugger->slug($title);
 
         return $this;
     }
@@ -190,5 +203,10 @@ class Page
         $this->isPublished = $isPublished;
 
         return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
     }
 }

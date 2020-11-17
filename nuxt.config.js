@@ -26,6 +26,14 @@ export default {
       {
         path: '~/components/admin/gallery',
         prefix: 'AdminGallery'
+      },
+      {
+        path: '~/components/page',
+        prefix: 'Page'
+      },
+      {
+        path: '~/components/error',
+        prefix: 'Error'
       }
     ]
   },

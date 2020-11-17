@@ -13,6 +13,12 @@ export default (context, inject) => {
       mutations: {
         $get: 'setGalleries'
       }
+    }),
+    page: createRepository(context, {
+      name: 'page',
+      mutations: {
+        $get: 'setPages'
+      }
     })
   }
   inject('repository', repositories)

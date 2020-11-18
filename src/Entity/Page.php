@@ -43,7 +43,6 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
  *     }
  * )
  * @ORM\Entity(repositoryClass=PageRepository::class)
- * @UniqueEntity(fields={"slug"})
  * @UniqueEntity(fields={"url"})
  */
 class Page

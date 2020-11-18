@@ -7,8 +7,9 @@ export default {
 
   methods: {
     cleanState () {
+      const that = this
       setTimeout(() => {
-        this.show = false
+        that.show = false
       }, this.timeout)
     },
 

@@ -41,8 +41,8 @@ export default (context, { resource }) => ({
       options.body = JSON.stringify(normalize(payload))
     }
 
-    const link = query.includes(process.env.apiBasePath) ? `${process.env.apiBaseUrl}/${query}` : `${process.env.apiBaseUrl}/${process.env.apiBasePath}/${query}`
-    return await fetch(link, options)
+    const entryPoint = process.env.apiBaseUrl + (process.env.apiBaseUrl.endsWith('/') ? '' : '/')
+    return await fetch(new URL(query, entryPoint), options)
   },
 
   async validateAndDecodeResponse (url, options = {}) {

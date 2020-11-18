@@ -28,7 +28,6 @@ const handleError = (commit, e) => {
 
     return Promise.reject(e)
   }
-
   // eslint-disable-next-line
     commit(ACTIONS.SET_ERROR, e.message);
 
@@ -136,7 +135,7 @@ export default function makeCrudModule ({
           await handleError(commit, e)
         }
       },
-      load: async ({ commit }, id) => {
+      async load ({ commit }, id) {
         if (!this.$getRepository(resource)) {
           throw new Error(this.errorMessage)
         }
@@ -163,7 +162,7 @@ export default function makeCrudModule ({
       resetUpdate: ({ commit }) => {
         commit(ACTIONS.RESET_UPDATE)
       },
-      update: async ({ commit }, item) => {
+      async update ({ commit }, item) {
         commit(ACTIONS.SET_ERROR, '')
         commit(ACTIONS.TOGGLE_LOADING)
 

@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     editItem (item) {
-      this.$router.push({ name: 'admin-page-slug-edit', params: { slug: item.url } })
+      this.$router.push({ name: 'admin-page-id', params: { id: item['@id'] } })
     }
   }
 }

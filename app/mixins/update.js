@@ -1,8 +1,7 @@
-import { validationMixin } from 'vuelidate'
 import notification from './notification'
 
 export default {
-  mixins: [notification, validationMixin],
+  mixins: [notification],
   data () {
     return {
       item: {}

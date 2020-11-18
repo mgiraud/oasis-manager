@@ -24,6 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     "denormalization_context"={"groups"={"write"}},
  *     },
  *     itemOperations={
+ *         "get"= {},
  *         "get_me"={
  *             "method"="GET",
  *             "path"="/me",

@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   layout: 'Admin',
@@ -38,7 +38,7 @@ export default {
     permissions: ['USER_CAN_ACCESS_PAGES']
   },
   async fetch ({ store }) {
-    await store.dispatch('page/getPages')
+    return await store.dispatch('page/fetchAll')
   },
   data: () => ({
     headers: [
@@ -48,7 +48,7 @@ export default {
     ]
   }),
   computed: {
-    ...mapState('page', ['pages']),
+    ...mapGetters('page', { pages: 'list' }),
     ...mapGetters('security', ['hasPermission']),
     canDeletePage () {
       return this.hasPermission('USER_CAN_DELETE_PAGES')

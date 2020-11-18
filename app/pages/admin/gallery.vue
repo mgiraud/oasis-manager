@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   layout: 'Admin',
@@ -24,11 +24,11 @@ export default {
     permissions: ['USER_CAN_ACCESS_GALLERIES']
   },
   async fetch ({ store }) {
-    await store.dispatch('gallery/getGalleries')
+    await store.dispatch('gallery/fetchAll')
   },
   computed: {
-    ...mapState({
-      galleries: state => state.gallery.galleries
+    ...mapGetters('gallery', {
+      galleries: 'list'
     })
   }
 }

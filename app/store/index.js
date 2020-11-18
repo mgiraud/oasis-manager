@@ -7,12 +7,13 @@ export const actions = {
     // check if the user exists
     if (req.headers.cookie) {
       const parsed = cookieparser.parse(req.headers.cookie)
-      try {
-        const token = parsed.BEARER
-      } catch (err) {
-        // No valid cookie found
+      if (!parsed || !parsed.BEARER) {
+        dispatch('security/logout')
+      } else {
+        this.$storage.syncUniversal('user', null)
       }
+    } else {
+      dispatch('security/logout')
     }
-    this.$storage.syncUniversal('user', null)
   }
 }

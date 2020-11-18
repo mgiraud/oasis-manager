@@ -1,7 +1,12 @@
+import isObject from 'lodash/isObject'
+import { normalize } from './hydra'
 import SubmissionError from '~/error/SubmissionError'
 
-export default (context, { name, mutations }) => ({
-  async call (url, options = {}) {
+const makeParamArray = (key, arr) =>
+  arr.map(val => `${key}[]=${val}`).join('&')
+
+export default (context, { resource }) => ({
+  async call (query, options = {}) {
     const jsonLdMimeType = 'application/ld+json'
 
     if (typeof options.headers === 'undefined') {
@@ -19,7 +24,24 @@ export default (context, { name, mutations }) => ({
 
     options.credentials = 'include'
 
-    const link = url.includes(process.env.apiBasePath) ? (process.env.apiBaseUrl + url) : (process.env.apiBaseUrl + process.env.apiBasePath + url)
+    if (options.params) {
+      const params = normalize(options.params)
+      const queryString = Object.keys(params)
+        .map(key =>
+          Array.isArray(params[key])
+            ? makeParamArray(key, params[key])
+            : `${key}=${params[key]}`
+        )
+        .join('&')
+      query = `${query}?${queryString}`
+    }
+
+    const payload = options.body && JSON.parse(options.body)
+    if (isObject(payload) && payload['@id']) {
+      options.body = JSON.stringify(normalize(payload))
+    }
+
+    const link = query.includes(process.env.apiBasePath) ? `${process.env.apiBaseUrl}/${query}` : `${process.env.apiBaseUrl}/${process.env.apiBasePath}/${query}`
     return await fetch(link, options)
   },
 
@@ -56,54 +78,31 @@ export default (context, { name, mutations }) => ({
     throw new SubmissionError(errors)
   },
 
-  handleErrors (error, autoDispatch) {
-    if (autoDispatch) {
-      if (error instanceof SubmissionError) {
-        context.store.commit(`${name}/setError`, error.errors._error)
-        context.store.commit(`${name}/setViolations`, error.errors)
-      } else {
-        context.store.commit(`${name}/setError`, error.message)
-      }
-    } else {
-      throw error
-    }
+  async $findAll (params = {}) {
+    params.method = 'GET'
+    return await this.validateAndDecodeResponse(resource, params)
   },
 
-  async $get (url, options = {}, autoDispatch = true) {
-    options.method = 'GET'
-    const [err, responseBody] = await this.to(this.validateAndDecodeResponse(url, options))
-    if (err) { return this.handleErrors(err, autoDispatch) }
-    const body = responseBody ? responseBody['hydra:member'] : null
-    if (autoDispatch && mutations.$get) {
-      context.store.commit(`${name}/${mutations.$get}`, body)
-    }
-    return body
+  async $find (id) {
+    const params = { method: 'GET' }
+    return await this.validateAndDecodeResponse(id, params)
   },
 
-  async $getOne (url, options = {}, autoDispatch = true) {
-    options.method = 'GET'
-    const [err, body] = await this.to(this.validateAndDecodeResponse(url, options))
-    if (err) { return this.handleErrors(err, autoDispatch) }
-    if (autoDispatch && mutations.$getOne) {
-      context.store.commit(`${name}/${mutations.$getOne}`, body)
-    }
-    return body
-  },
-
-  async $post (url, options = {}, autoDispatch = true) {
-    options.method = 'POST'
-    const [err, body] = await this.to(this.validateAndDecodeResponse(url, options))
-    if (err) { return this.handleErrors(err, autoDispatch) }
-    if (autoDispatch && mutations.$post) {
-      context.store.commit(`${name}/${mutations.$post}`, body)
-    }
-    return body
-  },
-
-  to (promise) {
-    return promise.then((data) => {
-      return [null, data]
+  async $create (payload) {
+    return await this.validateAndDecodeResponse(resource, {
+      method: 'POST',
+      body: JSON.stringify(payload)
     })
-      .catch(err => [err])
+  },
+
+  async $remove (item) {
+    return await this.validateAndDecodeResponse(item['@id'], { method: 'DELETE' })
+  },
+
+  async $update (payload) {
+    return await this.validateAndDecodeResponse(payload['@id'], {
+      method: 'PUT',
+      body: JSON.stringify(payload)
+    })
   }
 })

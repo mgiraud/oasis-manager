@@ -12,8 +12,10 @@
     "@nuxtjs/universal-storage": "^0.5.5",
     "cookieparser": "^0.1.0",
     "dotenv": "^8.2.0",
+    "lodash": "^4.17.20",
     "nuxt": "^2.14.7",
-    "vuetify": "^2.3.17"
+    "vuetify": "^2.3.17",
+    "vuex-map-fields": "^1.4.1"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^4.0.0",

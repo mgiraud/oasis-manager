@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Controller\Page\PublishAction;
 use App\Controller\Page\UnpublishAction;
@@ -51,11 +52,13 @@ class Page
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @ApiProperty(identifier=false)
      */
     private $id;
 
     /**
      * @ORM\Column(type="text", unique=true)
+     * @ApiProperty(identifier=true)
      */
     private $url;
 

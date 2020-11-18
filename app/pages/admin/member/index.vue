@@ -27,14 +27,14 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   layout: 'Admin',
   middleware: 'authenticated',
   fetchOnServer: false,
   async fetch ({ store }) {
-    await store.dispatch('member/getMembers')
+    await store.dispatch('member/fetchAll')
   },
   data: () => ({
     headers: [
@@ -44,7 +44,7 @@ export default {
     ]
   }),
   computed: {
-    ...mapState('member', ['members']),
+    ...mapGetters('member', { members: 'list' }),
     ...mapGetters('security', ['hasPermission']),
     canDeleteUser () {
       return this.hasPermission('USER_CAN_DELETE_MEMBERS')

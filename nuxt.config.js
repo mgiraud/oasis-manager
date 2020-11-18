@@ -4,7 +4,7 @@ export default {
   srcDir: 'app/',
   env: {
     apiBaseUrl: process.env.API_BASE_URL || 'http://localhost:8000',
-    apiBasePath: '/api'
+    apiBasePath: 'api'
   },
   plugins: [
     '~/plugins/vuetify',
@@ -30,6 +30,10 @@ export default {
       {
         path: '~/components/page',
         prefix: 'Page'
+      },
+      {
+        path: '~/components/admin/page',
+        prefix: 'AdminPage'
       },
       {
         path: '~/components/error',

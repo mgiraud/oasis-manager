@@ -6,14 +6,18 @@ export default {
     apiBaseUrl: process.env.API_BASE_URL || 'http://localhost:8000/api'
   },
   plugins: [
-    '~/plugins/vuetify',
     '~/plugins/repository'
   ],
   modules: [
     '@nuxtjs/universal-storage'
   ],
   buildModules: [
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
+    ['@nuxtjs/vuetify', {
+      icons: {
+        iconfont: 'mdiSvg'
+      }
+    }]
   ],
   components: {
     dirs: [

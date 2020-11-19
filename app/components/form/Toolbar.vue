@@ -4,6 +4,14 @@
     <v-spacer />
     <div>
       <v-btn
+        v-if="handleBack"
+        :loading="isLoading"
+        color="primary"
+        @click="goBack"
+      >
+        Retour
+      </v-btn>
+      <v-btn
         v-if="handleEdit"
         :loading="isLoading"
         color="primary"
@@ -39,7 +47,7 @@
         <v-icon>mdi-plus-circle</v-icon>
       </v-btn>
     </div>
-    <FormConfirmDelete
+    <UtilConfirmDelete
       v-if="handleDelete"
       :visible="confirmDelete"
       :handle-delete="handleDelete"
@@ -52,6 +60,11 @@
 export default {
   name: 'Toolbar',
   props: {
+    handleBack: {
+      type: Function,
+      required: false,
+      default: null
+    },
     handleEdit: {
       type: Function,
       required: false,
@@ -92,6 +105,11 @@ export default {
     confirmDelete: false
   }),
   methods: {
+    goBack () {
+      if (this.handleBack) {
+        this.handleBack()
+      }
+    },
     addItem () {
       if (this.handleAdd) {
         this.handleAdd()

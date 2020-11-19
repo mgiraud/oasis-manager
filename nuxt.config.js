@@ -41,6 +41,14 @@ export default {
       {
         path: '~/components/form',
         prefix: 'Form'
+      },
+      {
+        path: '~/components/util',
+        prefix: 'Util'
+      },
+      {
+        path: '~/components/table',
+        prefix: 'Table'
       }
     ]
   },

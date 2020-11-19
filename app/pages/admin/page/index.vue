@@ -7,33 +7,27 @@
       sort-by="calories"
       class="elevation-1"
     >
-      <template v-slot:item.actions="{ item }">
-        <v-icon
-          small
-          class="mr-2"
-          @click="editItem(item)"
-        >
-          mdi-pencil
-        </v-icon>
-        <v-icon
-          v-if="canDeletePage"
-          small
-          @click="deleteItem(item)"
-        >
-          mdi-delete
-        </v-icon>
-      </template>
+      <TableActionCell
+        slot="item.actions"
+        slot-scope="props"
+        :handle-edit="() => editHandler(props.item)"
+        :handle-delete="() => deleteHandler(props.item)"
+      />
     </v-data-table>
   </v-container>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import ListMixin from '~/mixins/list'
 
 export default {
+  servicePrefix: 'admin-page',
+  resourcePrefix: '/api/pages/',
   layout: 'Admin',
   middleware: 'hasPermissions',
   fetchOnServer: false,
+  mixins: [ListMixin],
   meta: {
     permissions: ['USER_CAN_ACCESS_PAGES']
   },
@@ -56,7 +50,7 @@ export default {
   },
   methods: {
     editItem (item) {
-      this.$router.push({ name: 'admin-page-id', params: { id: item['@id'] } })
+      this.$router.push({ name: 'admin-page-id', params: { id: item.url } })
     }
   }
 }

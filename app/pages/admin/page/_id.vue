@@ -21,10 +21,11 @@
           :handle-submit="onSendForm"
           :handle-reset="resetForm"
           :handle-delete="del"
+          :handle-back="back"
         >
           <template #left>
             <h1 v-if="item">
-              Edit {{ item['@id'] }}
+              Edit {{ item['url'] }}
             </h1>
           </template>
         </FormToolbar>
@@ -40,6 +41,8 @@ import update from '~/mixins/update'
 
 export default {
   mixins: [update],
+  servicePrefix: 'admin-page',
+  resourcePrefix: '/api/pages/',
   computed: {
     ...mapFields('page', {
       deleteLoading: 'isLoading',

@@ -8,23 +8,23 @@ export default {
     }
   },
   created () {
-    this.retrieve(decodeURIComponent(this.$route.params.id))
+    const id = this.$options.resourcePrefix ? this.$options.resourcePrefix + this.$route.params.id : this.$route.params.id
+    this.retrieve(decodeURIComponent(id))
   },
   beforeDestroy () {
     this.reset()
   },
   computed: {
     retrieved () {
-      return this.find(decodeURIComponent(this.$route.params.id))
+      const id = this.$options.resourcePrefix ? this.$options.resourcePrefix + this.$route.params.id : this.$route.params.id
+      return this.find(decodeURIComponent(id))
     }
   },
   methods: {
     del () {
       this.deleteItem(this.retrieved).then(() => {
         this.showMessage(`${this.item['@id']} deleted.`)
-        this.$router
-          .push({ name: `${this.$options.servicePrefix}` })
-          .catch(() => {})
+        this.back()
       })
     },
     reset () {
@@ -32,6 +32,10 @@ export default {
       this.updateReset()
       this.delReset()
       this.createReset()
+    },
+    back () {
+      this.$router
+        .push({ name: `${this.$options.servicePrefix}` })
     },
 
     onSendForm () {

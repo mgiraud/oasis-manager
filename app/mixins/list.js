@@ -81,9 +81,10 @@ export default {
     },
 
     editHandler (item) {
+      const id = this.$options.resourcePrefix ? item['@id'].replace(this.$options.resourcePrefix, '') : item['@id']
       this.$router.push({
         name: `${this.$options.servicePrefix}-id`,
-        params: { id: item['@id'] }
+        params: { id }
       })
     },
 

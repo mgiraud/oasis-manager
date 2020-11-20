@@ -3,7 +3,7 @@
     outlined
     tile
   >
-    <v-card-title class="justify-center">
+    <v-card-title>
       {{ page.title }}
     </v-card-title>
     <v-card-text v-html="page.content" />

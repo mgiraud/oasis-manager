@@ -1,5 +1,6 @@
 import makeCrudModule from './crud'
 
 export default makeCrudModule({
-  resource: 'members'
+  resource: 'pages',
+  index: 'url'
 })

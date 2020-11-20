@@ -31,7 +31,7 @@ export default {
   async validate ({ store }) {
     const hasGalleries = store.state.gallery.galleries !== null
     if (hasGalleries) { return true }
-    await store.dispatch('gallery/getGalleries')
+    await store.dispatch('gallery/fetchAll')
     return true
   },
   async fetch ({ store, params }) {

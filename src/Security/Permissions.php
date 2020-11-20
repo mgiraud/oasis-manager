@@ -41,6 +41,26 @@ class Permissions
      */
     const USER_CAN_DELETE_MEMBERS = 'user.can_delete_members';
 
+    /**
+     * The user can access the page list
+     */
+    const USER_CAN_ACCESS_PAGES = 'user.pages';
+
+    /**
+     * The user can create and edit pages
+     */
+    const USER_CAN_EDIT_PAGES = 'user.can_edit_pages';
+
+    /**
+     * The user can delete unpublished pages
+     */
+    const USER_CAN_DELETE_PAGES = 'user.can_delete_pages';
+
+    /**
+     * The user can publish/unpublish pages
+     */
+    const USER_CAN_EDIT_PAGES_VISIBILITY = 'user.can_edit_pages.visibility';
+
     public static function getPermissions(): array
     {
         $c = new \ReflectionClass(Permissions::class);

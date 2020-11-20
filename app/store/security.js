@@ -25,11 +25,11 @@ export const actions = {
   async login ({ commit }, credentials) {
     commit('setCredentialError', false)
     try {
-      await this.$repository.member.$post('/login_check', {
+      await this.$getRepository('members').call('login_check', {
         method: 'POST',
         body: JSON.stringify(credentials)
-      }, false)
-      const user = await this.$repository.member.$getOne('/me', {}, false)
+      })
+      const user = await this.$getRepository('members').$find('me')
       this.$storage.setUniversal('user', user)
       return true
     } catch (e) {
@@ -40,7 +40,7 @@ export const actions = {
   },
   async logout ({ commit }) {
     this.$storage.setUniversal('user', null)
-    await this.$repository.member.call('/logout')
+    await this.$getRepository('members').call('logout')
   }
 }
 

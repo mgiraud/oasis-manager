@@ -56,6 +56,7 @@ export default {
     drawer: null,
     links: [
       ['mdi-home', 'Accueil', 'admin'],
+      ['mdi-newspaper', 'Pages', 'admin-page'],
       ['mdi-folder-multiple-image', 'Media', 'admin-gallery'],
       ['mdi-account', 'Membres', 'admin-member'],
       ['mdi-arrow-left', 'Retour au site', 'index']

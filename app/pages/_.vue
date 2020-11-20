@@ -1,7 +1,16 @@
 <template>
-  <v-container fluid fill-height>
-    <PageTemplate v-if="page !== null" :page="page" />
-    <Error404 v-else />
+  <v-container fluid>
+    <v-row>
+      <v-col
+        offset-md="1"
+        offset-lg="2"
+        lg="8"
+        md="10"
+      >
+        <PageTemplate v-if="page" :page="page" />
+        <Error404 v-else />
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -9,12 +18,12 @@
 import { mapGetters } from 'vuex'
 export default {
   async asyncData ({ store }) {
-    await store.dispatch('page/getPages')
+    await store.dispatch('page/fetchAll')
   },
   computed: {
-    ...mapGetters('page', ['getPageByUrl']),
+    ...mapGetters('page', ['find']),
     page () {
-      return this.getPageByUrl(this.url)
+      return this.find('/api/pages/' + decodeURIComponent(this.url))
     },
     url () {
       return this.$route.params ? this.$route.params.pathMatch : null

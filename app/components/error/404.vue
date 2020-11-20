@@ -1,5 +1,5 @@
 <template>
-  <v-content>
+  <v-main>
     404
-  </v-content>
+  </v-main>
 </template>

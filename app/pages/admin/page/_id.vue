@@ -1,22 +1,26 @@
 <template>
   <v-container>
     <v-row v-if="error">
-      <v-alert
-        type="error"
-      >
-        {{ error }}
-      </v-alert>
+      <v-col cols="12">
+        <v-alert
+          type="error"
+        >
+          {{ error }}
+        </v-alert>
+      </v-col>
     </v-row>
     <v-row>
-      <AdminPageForm
-        v-if="item"
-        ref="updateForm"
-        :values="item"
-        :errors="violations"
-      />
+      <v-col cols="12">
+        <AdminPageForm
+          v-if="item"
+          ref="updateForm"
+          :values="item"
+          :errors="violations"
+        />
+      </v-col>
     </v-row>
     <v-row>
-      <v-col>
+      <v-col cols="12">
         <FormToolbar
           :handle-submit="onSendForm"
           :handle-reset="resetForm"

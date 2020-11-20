@@ -17,7 +17,7 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
  * @ApiResource(
  *     attributes={"pagination_enabled"=false},
  *     collectionOperations={
- *         "get"={"security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_ACCESS_PAGES'))"},
+ *         "get"={},
  *         "post"={"security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_EDIT_PAGES'))"},
  *     },
  *     itemOperations={

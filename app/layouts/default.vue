@@ -21,6 +21,9 @@
           <v-icon>mdi-logout</v-icon>
         </v-btn>
       </v-container>
+      <template v-slot:extension>
+        <PageMenu />
+      </template>
     </v-app-bar>
 
     <v-main class="grey lighten-3">

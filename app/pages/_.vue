@@ -17,9 +17,6 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-  async asyncData ({ store }) {
-    await store.dispatch('page/fetchAll')
-  },
   computed: {
     ...mapGetters('page', ['find']),
     page () {

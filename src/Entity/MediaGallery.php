@@ -9,7 +9,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
- *     normalizationContext={"groups"={"getGallery"}}
+ *     normalizationContext={"groups"={"media_gallery:read"}}
  * )
  * @ORM\Entity(repositoryClass=MediaGalleryRepository::class)
  */
@@ -19,26 +19,26 @@ class MediaGallery
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups("getGallery")
+     * @Groups("media_gallery:read")
      */
     private $id;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups("getGallery")
+     * @Groups("media_gallery:read")
      */
     private $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups("getGallery")
+     * @Groups("media_gallery:read")
      */
     private $description;
 
     /**
      * @ORM\OneToOne(targetEntity=MediaGalleryItem::class, cascade={"persist", "remove"}, inversedBy="gallery")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups("getGallery")
+     * @Groups("media_gallery:read")
      */
     private $rootItem;
 

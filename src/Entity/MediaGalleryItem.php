@@ -17,7 +17,7 @@ use Symfony\Component\Serializer\Annotation\Ignore;
  *         "post"={"security"="is_granted('ROLE_ADMIN')"},
  *     },
  *     attributes={"pagination_enabled"=false},
- *     normalizationContext={"groups"={"getGalleryItem"}}
+ *     normalizationContext={"groups"={"media_gallery_item:read"}}
  * )
  * @ORM\Entity(repositoryClass=MediaGalleryItemRepository::class)
  */
@@ -27,19 +27,19 @@ class MediaGalleryItem
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"Default", "getGallery", "getGalleryItem"})
+     * @Groups({"media_gallery:read", "media_gallery_item:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"Default", "getGallery", "getGalleryItem"})
+     * @Groups({"media_gallery:read", "media_gallery_item:read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"Default", "getGallery", "getGalleryItem"})
+     * @Groups({"media_gallery:read", "media_gallery_item:read"})
      */
     private $description;
 
@@ -51,7 +51,7 @@ class MediaGalleryItem
 
     /**
      * @ORM\OneToMany(targetEntity=MediaGalleryItem::class, mappedBy="parent")
-     * @Groups({"Default", "getGallery", "getGalleryItem"})
+     * @Groups({"media_gallery:read", "media_gallery_item:read"})
      */
     private $children;
 
@@ -66,7 +66,7 @@ class MediaGalleryItem
     private $gallery;
 
     /**
-     * @Groups({"Default", "getGallery", "getGalleryItem"})
+     * @Groups({"media_gallery:read", "media_gallery_item:read"})
      */
     public array $breadcrumb = [];
 

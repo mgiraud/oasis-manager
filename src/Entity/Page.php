@@ -11,11 +11,15 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 
 /**
  * @ApiResource(
- *     attributes={"pagination_enabled"=false},
+ *     attributes={
+ *          "pagination_enabled"=false,
+ *          "normalization_context"={"groups"={"page:read"}},
+ *     },
  *     collectionOperations={
  *         "get"={},
  *         "post"={"security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_EDIT_PAGES'))"},
@@ -58,27 +62,32 @@ class Page
     /**
      * @ORM\Column(type="text", unique=true)
      * @ApiProperty(identifier=true)
+     * @Groups({"page:read", "page_category:read"})
      */
     private $url;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"page:read", "page_category:read"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"page:read"})
      */
     private $content;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"page:read"})
      */
     private $createdAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Member::class)
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"page:read"})
      */
     private $createdBy;
 
@@ -89,11 +98,25 @@ class Page
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"page:read"})
      */
     private $isPublished;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=PageCategory::class, inversedBy="pages")
+     * @Groups({"page:read"})
+     */
+    private $category;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default":true})
+     * @Groups({"page:read", "page_category:read"})
+     */
+    private $showInMenu;
+
     public function __construct()
     {
+        $this->showInMenu = true;
         $this->protectionGroups = new ArrayCollection();
     }
 
@@ -195,6 +218,30 @@ class Page
     public function setIsPublished(bool $isPublished): self
     {
         $this->isPublished = $isPublished;
+
+        return $this;
+    }
+
+    public function getCategory(): ?PageCategory
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?PageCategory $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getShowInMenu(): ?bool
+    {
+        return $this->showInMenu;
+    }
+
+    public function setShowInMenu(bool $showInMenu): self
+    {
+        $this->showInMenu = $showInMenu;
 
         return $this;
     }

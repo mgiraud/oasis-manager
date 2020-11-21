@@ -27,17 +27,22 @@
     </v-app-bar>
 
     <v-main class="grey lighten-3">
+      <PageSubMenu v-if="activeSlug !== null" />
       <Nuxt />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapState } from 'vuex'
 
 export default {
   data: () => ({}),
   computed: {
+    test () {
+      return this.$store.state.page.activeSlug
+    },
+    ...mapState('page', ['activeSlug']),
     ...mapGetters('security', ['isAdmin', 'isLoggedIn'])
   },
   methods: {

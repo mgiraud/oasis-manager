@@ -35,10 +35,6 @@ export default {
         prefix: 'Page'
       },
       {
-        path: '~/components/page/menu',
-        prefix: 'PageMenu'
-      },
-      {
         path: '~/components/admin/page',
         prefix: 'AdminPage'
       },

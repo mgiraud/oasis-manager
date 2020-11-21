@@ -1,40 +1,55 @@
 <template>
-  <v-toolbar-items class="hidden-sm-and-down">
-    {{ menuItems }}
-    <component :is="item.items ? 'PageMenuNestedMenu' : 'PageMenuTab'" v-for="item in menuItems" :key="item.name" :item="item" />
-  </v-toolbar-items>
+  <v-tabs v-model="tab" fixed-tabs optional>
+    <v-tab v-for="item in menuItems" :key="item.name">
+      {{ item.name }}
+      <v-icon v-if="!item.url && activeSlug !== item.slug">
+        mdi-menu-down
+      </v-icon>
+      <v-icon v-if="!item.url && activeSlug === item.slug">
+        mdi-menu-up
+      </v-icon>
+    </v-tab>
+  </v-tabs>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import { has } from 'lodash'
+import { mapGetters, mapMutations, mapState } from 'vuex'
+import { findIndex } from 'lodash'
 
 export default {
   resourcePrefix: '/api/pages/',
+  data: () => ({
+    tab: null
+  }),
   computed: {
-    ...mapGetters('page', { pages: 'list' }),
-    menuItems () {
-      const menu = []
-      this.pages.forEach(function (page) {
-        const item = {
-          name: page.title,
-          url: page.url,
-          items: null
-        }
-        if (page.category) {
-          if (!has(menu, page.category.slug)) {
-            menu[page.category.slug] = {
-              name: page.category.slug,
-              items: []
-            }
-          }
-          menu[page.category.slug].items.push(item)
-        } else {
-          menu.push(item)
-        }
-      })
-      console.log(menu)
-      return menu
+    ...mapState('page', ['activeSlug']),
+    ...mapGetters('page', ['menuItems'])
+  },
+  mounted () {
+    if (this.$route.params.pathMatch) {
+      this.tab = findIndex(this.menuItems, { url: this.$route.params.pathMatch })
+    }
+  },
+  methods: {
+    ...mapMutations('page', ['setActiveSlug']),
+    redirectOrToggleSubMenu (item) {
+      if (item.url) {
+        this.$router.push(item.url)
+        this.setActiveSlug(null)
+      } else if (this.activeSlug !== item.slug) {
+        this.setActiveSlug(item.slug)
+      } else {
+        this.setActiveSlug(null)
+      }
+    }
+  },
+  watch: {
+    tab (tabIndex) {
+      if (tabIndex === undefined || !this.menuItems[tabIndex]) {
+        this.setActiveSlug(null)
+      } else {
+        this.redirectOrToggleSubMenu(this.menuItems[tabIndex])
+      }
     }
   }
 }

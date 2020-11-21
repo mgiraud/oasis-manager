@@ -22,7 +22,7 @@
       <v-row>
         <v-col cols="12">
           <ClientOnly>
-            <UtilEditor v-if="item" v-model="item.content" />
+            <UtilEditor v-if="item && item.content" v-model="item.content" />
           </ClientOnly>
         </v-col>
       </v-row>
@@ -63,7 +63,7 @@ export default {
       const errors = []
       if (!this.$v.item.title.$dirty) { return errors }
       has(this.violations, 'title') && errors.push(this.violations.title)
-      !this.$v.item.title.minLength && errors.push('Le titre doit faire au moins 10 caractères')
+      !this.$v.item.title.minLength && errors.push('Le titre doit faire au moins 4 caractères')
       return errors
     },
     urlErrors () {
@@ -89,7 +89,7 @@ export default {
     item: {
       title: {
         required,
-        minLength: minLength(10)
+        minLength: minLength(4)
       },
       url: {
         required,

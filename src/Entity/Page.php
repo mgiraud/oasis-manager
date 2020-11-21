@@ -34,15 +34,17 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
  *             "controller"=PublishAction::class,
  *             "openapi_context"={
  *                  "summary": "Publish a page"
- *              }
+ *              },
+ *              "security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_EDIT_PAGES'))"
  *         },
  *         "unpublish"={
  *             "method"="POST",
  *             "path"="/pages/{id}/unpublish",
  *             "controller"=UnpublishAction::class,
- *              "openapi_context"={
- *                  "summary": "Unpublish a page"
- *              }
+ *             "openapi_context"={
+ *                 "summary": "Unpublish a page"
+ *             },
+ *             "security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_EDIT_PAGES'))"
  *         }
  *     }
  * )

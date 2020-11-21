@@ -78,7 +78,7 @@ export default {
   props: {
     value: {
       type: String,
-      default: null
+      required: true
     }
   },
   data: () => ({
@@ -138,11 +138,15 @@ export default {
     })
     this.editor.setContent(this.value)
   },
+  beforeDestroy () {
+    this.editor.destroy()
+  },
   methods: {
     clearContent () {
       this.editor.clearContent(true)
       this.editor.focus()
     }
   }
+
 }
 </script>

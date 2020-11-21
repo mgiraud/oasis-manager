@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Controller\Page\PublishCategoryAction;
+use App\Controller\Page\UnpublishCategoryAction;
 use App\Repository\PageCategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -24,6 +26,24 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
  *         "get"={},
  *         "delete"={"security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_DELETE_PAGE_CATEGORIES'))"},
  *         "put"={"security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_EDIT_PAGE_CATEGORIES'))"},
+ *          "publish"={
+ *             "method"="POST",
+ *             "path"="/page_categories/{id}/publish",
+ *             "controller"=PublishCategoryAction::class,
+ *             "openapi_context"={
+ *                 "summary": "Publish a page"
+ *             },
+ *             "security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_EDIT_PAGE_CATEGORIES'))"
+ *         },
+ *         "unpublish"={
+ *             "method"="POST",
+ *             "path"="/page_categories/{id}/unpublish",
+ *             "controller"=UnpublishCategoryAction::class,
+ *             "openapi_context"={
+ *                 "summary": "Unpublish a page"
+ *             },
+ *             "security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_EDIT_PAGE_CATEGORIES'))"
+ *         }
  *     }
  * )
  * @ORM\Entity(repositoryClass=PageCategoryRepository::class)
@@ -60,6 +80,11 @@ class PageCategory
      * @Groups({"page_category:read", "page:read"})
      */
     private $slug;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default": true})
+     */
+    private $isPublished;
 
     public function __construct()
     {
@@ -136,6 +161,18 @@ class PageCategory
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getIsPublished(): ?bool
+    {
+        return $this->isPublished;
+    }
+
+    public function setIsPublished(bool $isPublished): self
+    {
+        $this->isPublished = $isPublished;
 
         return $this;
     }

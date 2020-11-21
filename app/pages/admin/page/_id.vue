@@ -35,7 +35,7 @@
         </FormToolbar>
       </v-col>
     </v-row>
-    <Loading :visible="deleteLoading" />
+    <UtilLoading :visible="deleteLoading" />
   </v-container>
 </template>
 <script>

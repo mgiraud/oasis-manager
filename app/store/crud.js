@@ -62,7 +62,7 @@ export default function makeCrudModule ({
   return {
     errorMessage: `Repository ${resource} does not exist`,
     actions: {
-      create: async ({ commit }, values) => {
+      async create ({ commit }, values) {
         commit(ACTIONS.SET_ERROR, '')
         commit(ACTIONS.TOGGLE_LOADING)
 
@@ -116,10 +116,10 @@ export default function makeCrudModule ({
           await handleError(commit, e)
         }
       },
-      fetchSelectItems: async (
+      async fetchSelectItems (
         { commit },
         { params = { properties: ['@id', 'name'] } } = {}
-      ) => {
+      ) {
         commit(ACTIONS.TOGGLE_LOADING)
 
         if (!this.$getRepository(resource)) {

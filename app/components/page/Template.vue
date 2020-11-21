@@ -1,13 +1,10 @@
 <template>
-  <v-card
-    outlined
-    tile
-  >
-    <v-card-title>
-      {{ page.title }}
+  <div>
+    <v-card-title class="primary--text text--darken-4">
+      {{ page.title | capitalize }}
     </v-card-title>
     <v-card-text v-html="page.content" />
-  </v-card>
+  </div>
 </template>
 
 <script>

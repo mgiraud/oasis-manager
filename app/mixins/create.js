@@ -5,11 +5,12 @@ export default {
   mixins: [notification, validationMixin],
   methods: {
     onCreated (item) {
-      this.showMessage(`${item['@id']} created`)
+      const id = this.$options.resourcePrefix ? item['@id'].replace(this.$options.resourcePrefix, '') : this.$options.resourcePrefix
+      this.showMessage(`${id} created`)
 
       this.$router.push({
         name: `${this.$options.servicePrefix}-id`,
-        params: { id: item['@id'] }
+        params: { id }
       })
     },
     onSendForm () {

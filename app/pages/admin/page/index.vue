@@ -1,5 +1,13 @@
 <template>
   <v-container>
+    <v-btn
+      color="primary"
+      dark
+      class="ml-2"
+      @click="addHandler"
+    >
+      New Item
+    </v-btn>
     <v-data-table
       v-if="pages"
       :headers="headers"

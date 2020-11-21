@@ -99,7 +99,7 @@ class Page
     private $protectionGroups;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default": false})
      * @Groups({"page:read"})
      */
     private $isPublished;
@@ -120,6 +120,8 @@ class Page
     {
         $this->showInMenu = true;
         $this->protectionGroups = new ArrayCollection();
+        $this->createdAt = new \DateTime();
+        $this->isPublished = false;
     }
 
     public function getId(): ?int

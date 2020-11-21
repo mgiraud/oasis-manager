@@ -23,7 +23,8 @@ export default {
   methods: {
     del () {
       this.deleteItem(this.retrieved).then(() => {
-        this.showMessage(`${this.item['@id']} deleted.`)
+        const id = this.$options.resourcePrefix ? this.item['@id'].replace(this.$options.resourcePrefix, '') : this.$options.resourcePrefix
+        this.showMessage(`${id} deleted.`)
         this.back()
       })
     },
@@ -71,7 +72,8 @@ export default {
     },
 
     updated (val) {
-      this.showMessage(`${val['@id']} updated.`)
+      const id = this.$options.resourcePrefix ? val['@id'].replace(this.$options.resourcePrefix, '') : this.$options.resourcePrefix
+      this.showMessage(`${id} updated.`)
     },
 
     retrieved (val) {

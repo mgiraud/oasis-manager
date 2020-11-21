@@ -9,11 +9,11 @@
             icon
             fab
             :color="isActive[button.context] && isActive[button.context](button.options) ? 'grey' : undefined"
+            @click="commands[button.context] && commands[button.context](button.options)"
           >
             <component
               :is="button.isIcon ? 'v-icon' : 'b'"
               :class="{ 'is-active': isActive[button.context] && isActive[button.context](button.options) }"
-              @click="commands[button.context] && commands[button.context](button.options)"
             >
               {{ button.icon }}
             </component>
@@ -77,8 +77,8 @@ export default {
   },
   props: {
     value: {
-      type: String,
-      required: true
+      type: [String, null],
+      required: false
     }
   },
   data: () => ({

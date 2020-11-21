@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid fill-height>
+  <v-container fluid fill-height mb-md-3 mb-lg-5>
     <v-row v-if="credentialError" align="center" justify="center">
       <v-col lg="4">
         <v-alert

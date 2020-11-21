@@ -1,6 +1,13 @@
 <template>
-  <v-tabs v-model="tab" fixed-tabs optional>
-    <v-tab v-for="item in menuItems" :key="item.name">
+  <v-tabs
+    v-model="tab"
+    fixed-tabs
+    optional
+    light
+    background-color="info"
+    slider-color="primary darken-4"
+  >
+    <v-tab v-for="item in menuItems" :key="item.name" class="primary--text text--darken-4">
       {{ item.name }}
       <v-icon v-if="!item.url && activeSlug !== item.slug">
         mdi-menu-down
@@ -25,6 +32,15 @@ export default {
     ...mapState('page', ['activeSlug']),
     ...mapGetters('page', ['menuItems'])
   },
+  watch: {
+    tab (tabIndex) {
+      if (tabIndex === undefined || !this.menuItems[tabIndex]) {
+        this.setActiveSlug(null)
+      } else {
+        this.redirectOrToggleSubMenu(this.menuItems[tabIndex])
+      }
+    }
+  },
   mounted () {
     if (this.$route.params.pathMatch) {
       this.tab = findIndex(this.menuItems, { url: this.$route.params.pathMatch })
@@ -40,15 +56,6 @@ export default {
         this.setActiveSlug(item.slug)
       } else {
         this.setActiveSlug(null)
-      }
-    }
-  },
-  watch: {
-    tab (tabIndex) {
-      if (tabIndex === undefined || !this.menuItems[tabIndex]) {
-        this.setActiveSlug(null)
-      } else {
-        this.redirectOrToggleSubMenu(this.menuItems[tabIndex])
       }
     }
   }

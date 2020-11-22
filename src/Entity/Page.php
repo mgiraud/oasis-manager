@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Controller\Page\PublishAction;
 use App\Controller\Page\UnpublishAction;
 use App\Repository\PageRepository;
@@ -48,6 +51,8 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
  *         }
  *     }
  * )
+ * @ApiFilter(SearchFilter::class, properties={"url": "partial", "title": "partial", "createdBy.nickname": "exact", "showInMenu": "exact", "isPublished": "exact", "category": "exact"})
+ * @ApiFilter(DateFilter::class, properties={"createdAt": DateFilter::EXCLUDE_NULL})
  * @ORM\Entity(repositoryClass=PageRepository::class)
  * @UniqueEntity(fields={"url"})
  */

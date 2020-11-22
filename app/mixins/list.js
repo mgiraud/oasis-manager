@@ -4,10 +4,6 @@ import notification from './notification'
 export default {
   mixins: [notification],
 
-  async fetch ({ store }) {
-    await store.dispatch('{{{lc}}}/fetchAll')
-  },
-
   data () {
     return {
       options: {

@@ -11,6 +11,6 @@
 <script>
 export default {
   layout: 'Admin',
-  middleware: ['authenticated', 'isAdmin']
+  middleware: ['isAdmin']
 }
 </script>

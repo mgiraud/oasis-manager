@@ -1,7 +1,8 @@
+import jwtDecode from 'jwt-decode'
 const cookieparser = process.server ? require('cookieparser') : undefined
 
 export const actions = {
-  async nuxtServerInit ({ commit, dispatch }, { req }) {
+  async nuxtServerInit ({ commit, dispatch }, { req, app }) {
     // Load permissions list from file
     dispatch('security/loadPermissions')
     // Load page categories for menu rendering
@@ -10,12 +11,17 @@ export const actions = {
     if (req.headers.cookie) {
       const parsed = cookieparser.parse(req.headers.cookie)
       if (!parsed || !parsed.BEARER) {
-        dispatch('security/logout')
+        return await dispatch('security/logout')
       } else {
-        this.$storage.syncUniversal('user', null)
+        const decodedToken = jwtDecode(parsed.BEARER)
+        if (!decodedToken || decodedToken.exp < (Date.now() / 1000)) {
+          return await dispatch('security/logout')
+        } else {
+          this.$storage.syncUniversal('user', null)
+        }
       }
     } else {
-      await dispatch('security/logout')
+      return await dispatch('security/logout')
     }
   }
 }

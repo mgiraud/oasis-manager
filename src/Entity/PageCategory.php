@@ -12,6 +12,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\String\Slugger\AsciiSlugger;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
@@ -61,12 +62,14 @@ class PageCategory
     /**
      * @ORM\Column(type="text")
      * @Groups({"page_category:read", "page:read"})
+     * @Assert\NotBlank()
      */
     private $name;
 
     /**
      * @ORM\Column(type="boolean", options={"default":true})
      * @Groups({"page_category:read", "page:read"})
+     * @Assert\NotNull()
      */
     private $showInMenu;
 
@@ -84,6 +87,7 @@ class PageCategory
 
     /**
      * @ORM\Column(type="boolean", options={"default": true})
+     * @Assert\NotNull()
      */
     private $isPublished;
 

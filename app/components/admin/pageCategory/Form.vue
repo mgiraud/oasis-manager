@@ -20,6 +20,15 @@
           />
         </v-col>
       </v-row>
+      <v-row>
+        <v-col cols="12" md="6">
+          <v-switch
+            v-model="item.isPublished"
+            label="Publier"
+            input-value="true"
+          />
+        </v-col>
+      </v-row>
     </v-container>
   </v-form>
 </template>

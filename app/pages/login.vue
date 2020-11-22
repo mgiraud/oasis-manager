@@ -16,6 +16,8 @@
         <v-card
           elevation="2"
           shaped
+          color="primary"
+          dark
         >
           <v-card-title>Connectez-vous !</v-card-title>
           <v-card-text>

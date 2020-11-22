@@ -40,7 +40,7 @@ export const actions = {
   },
   async logout ({ commit }) {
     this.$storage.setUniversal('user', null)
-    await this.$getRepository('members').call('logout')
+    return await this.$getRepository('members').call('logout')
   }
 }
 

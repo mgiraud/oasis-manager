@@ -2,6 +2,7 @@
   <v-navigation-drawer
     v-model="drawer"
     app
+    width="auto"
   >
     <v-sheet
       class="pa-4"

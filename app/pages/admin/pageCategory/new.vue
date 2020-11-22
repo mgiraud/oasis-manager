@@ -21,10 +21,10 @@ export default {
     }
   }),
   computed: {
-    ...mapFields('page', ['error', 'isLoading', 'created', 'violations'])
+    ...mapFields('page_category', ['error', 'isLoading', 'created', 'violations'])
   },
   methods: {
-    ...mapActions('page', ['create', 'reset'])
+    ...mapActions('page_category', ['create', 'reset'])
   }
 }
 </script>

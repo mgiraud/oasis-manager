@@ -40,7 +40,7 @@
       </template>
     </v-app-bar>
 
-    <v-main class="secondary lighten-2">
+    <v-main class="secondary lighten-3">
       <LayoutSubMenu v-if="activeSlug !== null" />
       <Nuxt />
     </v-main>

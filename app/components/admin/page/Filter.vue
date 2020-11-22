@@ -54,6 +54,7 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 export default {
+  name: 'AdminPageFilter',
   props: {
     values: {
       type: Object,
@@ -64,7 +65,7 @@ export default {
     return await this.categoryGetSelectItems()
   },
   computed: {
-    ...mapState('page_categories', {
+    ...mapState('page_category', {
       categorySelectItems: 'selectItems'
     }),
     item () {
@@ -73,7 +74,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      categoryGetSelectItems: 'page_categories/fetchSelectItems'
+      categoryGetSelectItems: 'page_category/fetchSelectItems'
     })
   }
 }

@@ -4,7 +4,6 @@
     app
   >
     <v-sheet
-      color="grey lighten-4"
       class="pa-4"
     >
       <v-avatar
@@ -19,27 +18,71 @@
     <v-divider />
 
     <v-list>
-      <v-list-item
-        v-for="[icon, text, path] in links"
-        :key="icon"
-        link
-        @click="redirectTo(path)"
-      >
+      <v-list-item link :to="{name: 'admin'}">
         <v-list-item-icon>
-          <v-icon>{{ icon }}</v-icon>
+          <v-icon>mdi-home</v-icon>
         </v-list-item-icon>
-
         <v-list-item-content>
           <v-list-item-title>
-            {{ text }}
+            Accueil
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
+
+      <v-list-group
+        :value="true"
+        no-action
+        sub-group
+      >
+        <template v-slot:activator>
+          <v-list-item-content>
+            <v-list-item-title>Pages</v-list-item-title>
+          </v-list-item-content>
+        </template>
+
+        <v-list-item
+          v-for="([icon, title, path], i) in pages"
+          :key="i"
+          link
+          :to="{name: path}"
+        >
+          <v-list-item-title v-text="title" />
+
+          <v-list-item-icon>
+            <v-icon v-text="icon" />
+          </v-list-item-icon>
+        </v-list-item>
+      </v-list-group>
+
+      <v-list-group
+        :value="true"
+        no-action
+        sub-group
+      >
+        <template v-slot:activator>
+          <v-list-item-content>
+            <v-list-item-title>Membres</v-list-item-title>
+          </v-list-item-content>
+        </template>
+
+        <v-list-item
+          v-for="([icon, title, path], i) in members"
+          :key="i"
+          link
+          :to="{name: path}"
+        >
+          <v-list-item-title v-text="title" />
+
+          <v-list-item-icon>
+            <v-icon v-text="icon" />
+          </v-list-item-icon>
+        </v-list-item>
+      </v-list-group>
+
       <v-list-item link @click="logout">
         <v-list-item-icon>
           <v-icon>mdi-logout</v-icon>
         </v-list-item-icon>
-
         <v-list-item-content>
           <v-list-item-title>Logout</v-list-item-title>
         </v-list-item-content>
@@ -56,10 +99,15 @@ export default {
     drawer: null,
     links: [
       ['mdi-home', 'Accueil', 'admin'],
-      ['mdi-newspaper', 'Pages', 'admin-page'],
       ['mdi-folder-multiple-image', 'Media', 'admin-gallery'],
-      ['mdi-account', 'Membres', 'admin-member'],
       ['mdi-arrow-left', 'Retour au site', 'index']
+    ],
+    pages: [
+      ['mdi-newspaper', 'Pages', 'admin-page'],
+      ['mdi-newspaper', 'Categories', 'admin-pageCategory']
+    ],
+    members: [
+      ['mdi-account', 'Gérer les membres', 'admin-member']
     ]
   }),
   computed: mapState({

@@ -56,6 +56,10 @@ export default {
         prefix: 'Layout'
       },
       {
+        path: '~/components/admin/pageCategory',
+        prefix: 'AdminPageCategory'
+      },
+      {
         path: '~/components/admin/page',
         prefix: 'AdminPage'
       },

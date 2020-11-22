@@ -83,7 +83,7 @@ import { validationMixin } from 'vuelidate'
 const slug = helpers.regex('slug', /^[a-zA-Z0-9-]*$/)
 
 export default {
-  name: 'ConfirmDelete',
+  name: 'AdminPageForm',
   mixins: [validationMixin],
   props: {
     values: {
@@ -101,7 +101,7 @@ export default {
     }
   },
   computed: {
-    ...mapFields('page_categories', {
+    ...mapFields('page_category', {
       categorySelectItems: 'selectItems'
     }),
     item () {
@@ -137,7 +137,7 @@ export default {
     this.categoryGetSelectItems()
   },
   methods: {
-    ...mapActions('page_categories', {
+    ...mapActions('page_category', {
       categoryGetSelectItems: 'fetchSelectItems'
     })
   },

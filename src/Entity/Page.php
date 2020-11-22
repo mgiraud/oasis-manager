@@ -105,7 +105,7 @@ class Page
 
     /**
      * @ORM\Column(type="boolean", options={"default": false})
-     * @Groups({"page:read"})
+     * @Groups({"page:read", "page_category:read"})
      */
     private $isPublished;
 

@@ -20,8 +20,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(columns={"email"})})
  * @ApiResource(
  *     attributes={
- *     "normalization_context"={"groups"={"read"}},
- *     "denormalization_context"={"groups"={"write"}},
+ *     "normalization_context"={"groups"={"member:read"}},
+ *     "denormalization_context"={"groups"={"member:write"}},
  *     },
  *     itemOperations={
  *         "get"= {},
@@ -58,7 +58,7 @@ class Member implements UserInterface
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @Groups({"read"})
+     * @Groups({"member:read"})
      */
     public $id;
 
@@ -68,7 +68,7 @@ class Member implements UserInterface
      * @ORM\Column(name="email", unique=true, type="text")
      * @Assert\NotBlank
      * @Assert\Email()
-     * @Groups({"read", "register", "reset"})
+     * @Groups({"member:read", "member:reset"})
      *
      */
     public $email;
@@ -85,7 +85,7 @@ class Member implements UserInterface
      *
      * @ORM\Column(name="nickname", type="text", unique=true)
      * @Assert\Length(min="3")
-     * @Groups({"read", "write"})
+     * @Groups({"member:read", "member:write"})
      */
     public $nickname;
 
@@ -98,7 +98,7 @@ class Member implements UserInterface
 
     /**
      * @ORM\Column(type="json")
-     * @Groups({"read", "write"})
+     * @Groups({"member:read", "member:write"})
      */
     private $permissions = [];
 
@@ -118,7 +118,7 @@ class Member implements UserInterface
     private $status;
 
     /**
-     * @Groups({"read"})
+     * @Groups({"member:read"})
      */
     private $isAdmin = [];
 

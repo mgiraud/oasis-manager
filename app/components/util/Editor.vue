@@ -9,11 +9,11 @@
             icon
             fab
             :color="isActive[button.context] && isActive[button.context](button.options) ? 'grey' : undefined"
+            @click="commands[button.context] && commands[button.context](button.options)"
           >
             <component
               :is="button.isIcon ? 'v-icon' : 'b'"
               :class="{ 'is-active': isActive[button.context] && isActive[button.context](button.options) }"
-              @click="commands[button.context] && commands[button.context](button.options)"
             >
               {{ button.icon }}
             </component>
@@ -77,8 +77,8 @@ export default {
   },
   props: {
     value: {
-      type: String,
-      default: null
+      type: [String, null],
+      required: false
     }
   },
   data: () => ({
@@ -138,11 +138,15 @@ export default {
     })
     this.editor.setContent(this.value)
   },
+  beforeDestroy () {
+    this.editor.destroy()
+  },
   methods: {
     clearContent () {
       this.editor.clearContent(true)
       this.editor.focus()
     }
   }
+
 }
 </script>

@@ -3,7 +3,7 @@ import { getField, updateField } from 'vuex-map-fields'
 import remove from 'lodash/remove'
 import SubmissionError from '../error/SubmissionError'
 
-const initialState = () => ({
+const initialState = {
   allIds: [],
   byId: {},
   created: null,
@@ -15,8 +15,9 @@ const initialState = () => ({
   totalItems: 0,
   updated: null,
   view: null,
-  violations: null
-})
+  violations: null,
+  activeSlug: null
+}
 
 const handleError = (commit, e) => {
   commit(ACTIONS.TOGGLE_LOADING)
@@ -55,12 +56,13 @@ export const ACTIONS = {
 export default function makeCrudModule ({
   normalizeRelations = x => x,
   resolveRelations = x => x,
+  additionalState = {},
   resource
 } = {}) {
   return {
     errorMessage: `Repository ${resource} does not exist`,
     actions: {
-      create: async ({ commit }, values) => {
+      async create ({ commit }, values) {
         commit(ACTIONS.SET_ERROR, '')
         commit(ACTIONS.TOGGLE_LOADING)
 
@@ -114,10 +116,10 @@ export default function makeCrudModule ({
           await handleError(commit, e)
         }
       },
-      fetchSelectItems: async (
+      async fetchSelectItems (
         { commit },
         { params = { properties: ['@id', 'name'] } } = {}
-      ) => {
+      ) {
         commit(ACTIONS.TOGGLE_LOADING)
 
         if (!this.$getRepository(resource)) {
@@ -277,6 +279,6 @@ export default function makeCrudModule ({
       }
     },
     namespaced: true,
-    state: initialState
+    state: () => ({ ...initialState, ...additionalState })
   }
 }

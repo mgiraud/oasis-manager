@@ -21,7 +21,7 @@
           <v-spacer />
 
           <FormFilter :handle-filter="onSendFilter" :handle-reset="resetFilter">
-            <AdminPageFilter
+            <AdminPageCategoryFilter
               ref="filterForm"
               slot="filter"
               :values="filters"
@@ -39,9 +39,7 @@
         </v-toolbar>
       </template>
       <template v-if="item.category" slot="item.category" slot-scope="{ item }">
-        <nuxt-link :to="{name: 'admin-pageCategory-id', params: {id: item.category.name }}">
-          {{ item.category.name }}
-        </nuxt-link>
+        {{ item.category.name }}
       </template>
       <TableActionCell
         slot="item.actions"
@@ -59,8 +57,8 @@ import { mapFields } from 'vuex-map-fields'
 import list from '~/mixins/list'
 
 export default {
-  servicePrefix: 'admin-page',
-  resourcePrefix: '/api/pages/',
+  servicePrefix: 'admin-pageCategory',
+  resourcePrefix: '/api/page_categories/',
   layout: 'Admin',
   middleware: 'hasPermissions',
   fetchOnServer: false,
@@ -74,19 +72,16 @@ export default {
   data: () => ({
     selected: [],
     headers: [
-      { text: 'Title', value: 'title' },
-      { text: 'Url', value: 'url' },
-      { text: 'Catégorie', value: 'category' },
-      { text: 'est publié', value: 'isPublished' },
+      { text: 'Name', value: 'name' },
       { text: 'est visible dans le menu', value: 'showInMenu' },
       { text: 'Actions', value: 'actions', sortable: false }
     ]
   }),
   computed: {
-    ...mapGetters('page', {
+    ...mapGetters('page_category', {
       items: 'list'
     }),
-    ...mapFields('page', {
+    ...mapFields('page_category', {
       deletedItem: 'deleted',
       error: 'error',
       isLoading: 'isLoading',
@@ -99,7 +94,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('page', {
+    ...mapActions('page_category', {
       fetchAll: 'fetchAll',
       deleteItem: 'del'
     }),

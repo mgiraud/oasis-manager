@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid fill-height>
+  <v-container fluid fill-height mb-md-3 mb-lg-5>
     <v-row v-if="credentialError" align="center" justify="center">
       <v-col lg="4">
         <v-alert
@@ -16,6 +16,8 @@
         <v-card
           elevation="2"
           shaped
+          color="primary"
+          dark
         >
           <v-card-title>Connectez-vous !</v-card-title>
           <v-card-text>

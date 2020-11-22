@@ -6,7 +6,8 @@ export default {
     apiBaseUrl: process.env.API_BASE_URL || 'http://localhost:8000/api'
   },
   plugins: [
-    '~/plugins/repository'
+    '~/plugins/repository',
+    '~/plugins/filters/capitalize'
   ],
   modules: [
     '@nuxtjs/universal-storage'
@@ -16,6 +17,22 @@ export default {
     ['@nuxtjs/vuetify', {
       icons: {
         iconfont: 'mdiSvg'
+      },
+      theme: {
+        themes: {
+          light: {
+            primary: '#84DCC6',
+            secondary: '#FFA69E',
+            accent: '#FF686B',
+            info: '#A5FFD6'
+            // success: '#4CAF50',
+            // warning: '#FFC107'
+          },
+          dark: {
+            primary: '#4CAF50',
+            secondary: '#FFFFFF'
+          }
+        }
       }
     }]
   ],
@@ -33,6 +50,14 @@ export default {
       {
         path: '~/components/page',
         prefix: 'Page'
+      },
+      {
+        path: '~/components/layout',
+        prefix: 'Layout'
+      },
+      {
+        path: '~/components/admin/pageCategory',
+        prefix: 'AdminPageCategory'
       },
       {
         path: '~/components/admin/page',

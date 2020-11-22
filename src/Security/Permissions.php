@@ -57,9 +57,14 @@ class Permissions
     const USER_CAN_DELETE_PAGES = 'user.can_delete_pages';
 
     /**
-     * The user can publish/unpublish pages
+     * The user can create and edit page categories
      */
-    const USER_CAN_EDIT_PAGES_VISIBILITY = 'user.can_edit_pages.visibility';
+    const USER_CAN_EDIT_PAGE_CATEGORIES = 'user.can_edit_page_categories';
+
+    /**
+     * The user can create and edit page categories
+     */
+    const USER_CAN_DELETE_PAGE_CATEGORIES = 'user.can_delete_page_categories';
 
     public static function getPermissions(): array
     {

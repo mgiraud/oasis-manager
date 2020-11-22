@@ -11,7 +11,7 @@
     </v-row>
     <v-row>
       <v-col cols="12">
-        <AdminPageForm
+        <AdminPageCategoryForm
           v-if="item"
           ref="updateForm"
           :values="item"
@@ -29,7 +29,7 @@
         >
           <template #left>
             <h1 v-if="item">
-              Edit {{ item['url'] }}
+              Edit {{ item.name }}
             </h1>
           </template>
         </FormToolbar>
@@ -45,20 +45,20 @@ import update from '~/mixins/update'
 
 export default {
   mixins: [update],
-  servicePrefix: 'admin-page',
-  resourcePrefix: '/api/pages/',
+  servicePrefix: 'admin-pageCategory',
+  resourcePrefix: '/api/page_categories/',
   computed: {
-    ...mapFields('page', {
+    ...mapFields('page_category', {
       deleteLoading: 'isLoading',
       isLoading: 'isLoading',
       error: 'error',
       updated: 'updated',
       violations: 'violations'
     }),
-    ...mapGetters('page', ['find'])
+    ...mapGetters('page_category', ['find'])
   },
   methods: {
-    ...mapActions('page', {
+    ...mapActions('page_category', {
       createReset: 'resetCreate',
       deleteItem: 'del',
       delReset: 'resetDelete',

@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Controller\Page\PublishAction;
 use App\Controller\Page\UnpublishAction;
 use App\Repository\PageRepository;
@@ -11,11 +14,15 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 
 /**
  * @ApiResource(
- *     attributes={"pagination_enabled"=false},
+ *     attributes={
+ *          "pagination_enabled"=false,
+ *          "normalization_context"={"groups"={"page:read"}},
+ *     },
  *     collectionOperations={
  *         "get"={},
  *         "post"={"security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_EDIT_PAGES'))"},
@@ -30,18 +37,22 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
  *             "controller"=PublishAction::class,
  *             "openapi_context"={
  *                  "summary": "Publish a page"
- *              }
+ *              },
+ *              "security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_EDIT_PAGES'))"
  *         },
  *         "unpublish"={
  *             "method"="POST",
  *             "path"="/pages/{id}/unpublish",
  *             "controller"=UnpublishAction::class,
- *              "openapi_context"={
- *                  "summary": "Unpublish a page"
- *              }
+ *             "openapi_context"={
+ *                 "summary": "Unpublish a page"
+ *             },
+ *             "security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_EDIT_PAGES'))"
  *         }
  *     }
  * )
+ * @ApiFilter(SearchFilter::class, properties={"url": "partial", "title": "partial", "createdBy.nickname": "exact", "showInMenu": "exact", "isPublished": "exact", "category": "exact"})
+ * @ApiFilter(DateFilter::class, properties={"createdAt": DateFilter::EXCLUDE_NULL})
  * @ORM\Entity(repositoryClass=PageRepository::class)
  * @UniqueEntity(fields={"url"})
  */
@@ -58,27 +69,32 @@ class Page
     /**
      * @ORM\Column(type="text", unique=true)
      * @ApiProperty(identifier=true)
+     * @Groups({"page:read", "page_category:read"})
      */
     private $url;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"page:read", "page_category:read"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"page:read"})
      */
     private $content;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"page:read"})
      */
     private $createdAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Member::class)
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"page:read"})
      */
     private $createdBy;
 
@@ -88,13 +104,29 @@ class Page
     private $protectionGroups;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default": false})
+     * @Groups({"page:read", "page_category:read"})
      */
     private $isPublished;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=PageCategory::class, inversedBy="pages")
+     * @Groups({"page:read"})
+     */
+    private $category;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default":true})
+     * @Groups({"page:read", "page_category:read"})
+     */
+    private $showInMenu;
+
     public function __construct()
     {
+        $this->showInMenu = true;
         $this->protectionGroups = new ArrayCollection();
+        $this->createdAt = new \DateTime();
+        $this->isPublished = false;
     }
 
     public function getId(): ?int
@@ -195,6 +227,30 @@ class Page
     public function setIsPublished(bool $isPublished): self
     {
         $this->isPublished = $isPublished;
+
+        return $this;
+    }
+
+    public function getCategory(): ?PageCategory
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?PageCategory $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getShowInMenu(): ?bool
+    {
+        return $this->showInMenu;
+    }
+
+    public function setShowInMenu(bool $showInMenu): self
+    {
+        $this->showInMenu = $showInMenu;
 
         return $this;
     }

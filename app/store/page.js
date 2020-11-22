@@ -19,7 +19,7 @@ pageModule.getters.menuItems = (state, getters, rootState) => {
       if (!page.category.showInMenu) {
         return
       }
-      if (!find(menu, { name: page.category.slug })) {
+      if (!find(menu, { slug: page.category.slug })) {
         menu.push({
           name: page.category.name,
           slug: page.category.slug,

@@ -8,12 +8,9 @@
 
 <script>
 import { mapActions } from 'vuex'
-import { createHelpers } from 'vuex-map-fields'
+import { mapFields } from 'vuex-map-fields'
 import create from '~/mixins/create'
-const { mapFields } = createHelpers({
-  getterType: 'page/getField',
-  mutationType: 'page/updateField'
-})
+
 export default {
   servicePrefix: 'admin-page',
   resourcePrefix: '/api/pages/',
@@ -24,7 +21,7 @@ export default {
     }
   }),
   computed: {
-    ...mapFields(['error', 'isLoading', 'created', 'violations'])
+    ...mapFields('page', ['error', 'isLoading', 'created', 'violations'])
   },
   methods: {
     ...mapActions('page', ['create', 'reset'])

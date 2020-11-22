@@ -38,6 +38,9 @@
           </v-btn>
         </v-toolbar>
       </template>
+      <template v-if="item.category" slot="item.category" slot-scope="{ item }">
+        {{ item.category.name }}
+      </template>
       <TableActionCell
         slot="item.actions"
         slot-scope="props"
@@ -71,6 +74,9 @@ export default {
     headers: [
       { text: 'Title', value: 'title' },
       { text: 'Url', value: 'url' },
+      { text: 'Catégorie', value: 'category' },
+      { text: 'est publié', value: 'isPublished' },
+      { text: 'est visible dans le menu', value: 'showInMenu' },
       { text: 'Actions', value: 'actions', sortable: false }
     ]
   }),

@@ -7,6 +7,7 @@
       shrink-on-scroll
       fade-img-on-scroll
       app
+      dark
     >
       <template v-slot:img="{ props }">
         <v-img
@@ -19,7 +20,7 @@
         size="32"
       />
 
-      <v-toolbar-title class="primary--text text--darken-4">
+      <v-toolbar-title>
         Les transalpins
       </v-toolbar-title>
       <v-spacer />

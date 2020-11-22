@@ -27,6 +27,10 @@ export default {
             info: '#A5FFD6'
             // success: '#4CAF50',
             // warning: '#FFC107'
+          },
+          dark: {
+            primary: '#4CAF50',
+            secondary: '#FFFFFF'
           }
         }
       }

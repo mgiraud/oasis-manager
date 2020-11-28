@@ -112,7 +112,7 @@ export default {
     ]
   }),
   computed: mapState({
-    user: s => s.storage.user ? s.storage.user : {}
+    user: s => s.storage && s.storage.user ? s.storage.user : {}
   }),
   methods: {
     logout () {

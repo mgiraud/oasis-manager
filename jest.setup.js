@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import { Nuxt, Builder } from 'nuxt'
 import nuxtConfig from './nuxt.config'
 
@@ -34,7 +33,12 @@ const resetConfig = {
 const config = Object.assign({}, nuxtConfig, resetConfig, {
   ssr: false,
   srcDir: nuxtConfig.srcDir,
-  ignore: ['**/components/**/*', '**/layouts/**/*', '**/pages/**/*']
+  ignore: ['**/components/**/*', '**/layouts/**/*', '**/pages/**/*'],
+  resolve: {
+    alias: {
+      vue$: 'vue/dist/vue.runtime.esm.js'
+    }
+  }
 })
 
 const buildNuxt = async () => {

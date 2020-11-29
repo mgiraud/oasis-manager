@@ -13,16 +13,28 @@ let NuxtStore
 let wrapper
 let store
 
-describe('Index', () => {
-  const storage = {
-    data : {},
-    setUniversal(key, value) {
-      this.data[key] = value
-    },
-    getUniversal(key) {
-      return this.data[key]
-    }
+const storage = {
+  data : {},
+  setUniversal(key, value) {
+    this.data[key] = value
+  },
+  getUniversal(key) {
+    return this.data[key]
   }
+}
+
+const factory = () => {
+  return shallowMount(Index, {
+    store,
+    stubs: {
+      NuxtLink: true,
+    },
+    localVue,
+    vuetify: new Vuetify()
+  })
+}
+
+describe('Index', () => {
 
   const memberRepository = {
     call() {
@@ -42,14 +54,6 @@ describe('Index', () => {
     Vuex.Store.prototype.$storage = storage
     Vuex.Store.prototype.$getRepository = jest.fn().mockReturnValue(memberRepository)
     store = await NuxtStore.createStore()
-    wrapper = shallowMount(Index, {
-      store,
-      stubs: {
-        NuxtLink: true,
-      },
-      localVue,
-      vuetify: new Vuetify()
-    })
   })
 
   afterEach(() => {
@@ -57,15 +61,21 @@ describe('Index', () => {
   })
 
   test('mounts properly', () => {
+    wrapper = factory()
     expect(wrapper.vm).toBeTruthy()
   })
 
   test('displays Login message', () => {
+    wrapper = factory()
     expect(wrapper.text()).toContain('login')
   })
 
-  test('displays Admin message when admin', () => {
-    store.dispatch('security/login', {email: 'test@email.com', password: '123456'})
-    // expect(storage.getUniversal('user')['@id']).toContain('/api/members/4')
+  test('displays You are logged in message', async () => {
+    await store.dispatch('security/login', {email: 'test@email.com', password: '123456'})
+    store.state.storage = {
+      user: MeData
+    }
+    wrapper = factory()
+    expect(wrapper.text()).toContain('You are logged in')
   })
 })

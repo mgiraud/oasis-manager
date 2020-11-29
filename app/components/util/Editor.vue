@@ -78,7 +78,8 @@ export default {
   props: {
     value: {
       type: [String, null],
-      required: false
+      required: false,
+      default: null
     }
   },
   data: () => ({

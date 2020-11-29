@@ -7,10 +7,10 @@ export const state = () => ({
 })
 
 export const mutations = {
-  setPermissions (state, permissions) {
+  SET_PERMISSIONS (state, permissions) {
     state.permissions = permissions
   },
-  setCredentialError (state, inError) {
+  SET_CREDENTIAL_ERROR (state, inError) {
     state.credentialError = inError
   }
 }
@@ -19,11 +19,11 @@ export const actions = {
   loadPermissions ({ commit }) {
     fs.readFile(path.resolve('app/security/permissions.json'), 'utf8', (err, data) => {
       if (err) { throw err }
-      commit('setPermissions', JSON.parse(data))
+      commit('SET_PERMISSIONS', JSON.parse(data))
     })
   },
   async login ({ commit }, credentials) {
-    commit('setCredentialError', false)
+    commit('SET_CREDENTIAL_ERROR', false)
     try {
       await this.$getRepository('members').call('login_check', {
         method: 'POST',
@@ -33,7 +33,7 @@ export const actions = {
       this.$storage.setUniversal('user', user)
       return true
     } catch (e) {
-      commit('setCredentialError', true)
+      commit('SET_CREDENTIAL_ERROR', true)
       this.$storage.setUniversal('user', null)
       return false
     }

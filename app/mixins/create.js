@@ -1,8 +1,14 @@
 import { validationMixin } from 'vuelidate'
+import { mapGetters } from 'vuex'
 import notification from './notification'
 
 export default {
   mixins: [notification, validationMixin],
+
+  computed: {
+    ...mapGetters('security', ['hasPermission'])
+  },
+
   methods: {
     onCreated (item) {
       const id = this.$options.resourcePrefix ? item['@id'].replace(this.$options.resourcePrefix, '') : this.$options.resourcePrefix
@@ -25,6 +31,7 @@ export default {
       this.item = {}
     }
   },
+
   watch: {
     created (created) {
       if (!created) {

@@ -11,7 +11,7 @@
     </v-row>
     <v-row>
       <v-col cols="12">
-        <AdminPageForm
+        <AdminMemberGroupForm
           v-if="item"
           ref="updateForm"
           :values="item"
@@ -24,7 +24,7 @@
         <FormToolbar
           :handle-submit="onSendForm"
           :handle-reset="resetForm"
-          :handle-delete="canDeletePage ? del : null"
+          :handle-delete="canDeleteGroup ? del : null"
           :handle-back="back"
         >
           <template #left>
@@ -45,27 +45,27 @@ import update from '~/mixins/update'
 
 export default {
   mixins: [update],
-  servicePrefix: 'admin-page',
-  resourcePrefix: '/api/pages/',
+  servicePrefix: 'admin-memberGroup',
+  resourcePrefix: '/api/member_groups/',
   middleware: 'hasPermissions',
   meta: {
-    permissions: ['USER_CAN_EDIT_PAGES']
+    permissions: ['USER_CAN_EDIT_MEMBER_GROUPS']
   },
   computed: {
-    ...mapFields('page', {
+    ...mapFields('member_group', {
       deleteLoading: 'isLoading',
       isLoading: 'isLoading',
       error: 'error',
       updated: 'updated',
       violations: 'violations'
     }),
-    ...mapGetters('page', ['find']),
-    canDeletePage () {
-      return this.hasPermission('USER_CAN_DELETE_PAGES')
+    ...mapGetters('member_group', ['find']),
+    canDeleteGroup () {
+      return this.hasPermission('USER_CAN_DELETE_MEMBER_GROUPS')
     }
   },
   methods: {
-    ...mapActions('page', {
+    ...mapActions('member_group', {
       createReset: 'resetCreate',
       deleteItem: 'del',
       delReset: 'resetDelete',

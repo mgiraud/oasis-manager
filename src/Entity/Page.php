@@ -22,6 +22,7 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
  *     attributes={
  *          "pagination_enabled"=false,
  *          "normalization_context"={"groups"={"page:read"}},
+ *          "denormalization_context"={"groups"={"page:write"}},
  *     },
  *     collectionOperations={
  *         "get"={},
@@ -69,19 +70,19 @@ class Page
     /**
      * @ORM\Column(type="text", unique=true)
      * @ApiProperty(identifier=true)
-     * @Groups({"page:read", "page_category:read"})
+     * @Groups({"page:read", "page_category:read", "page:write"})
      */
     private $url;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"page:read", "page_category:read"})
+     * @Groups({"page:read", "page_category:read", "page:write"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"page:read"})
+     * @Groups({"page:read", "page:write"})
      */
     private $content;
 
@@ -105,19 +106,19 @@ class Page
 
     /**
      * @ORM\Column(type="boolean", options={"default": false})
-     * @Groups({"page:read", "page_category:read"})
+     * @Groups({"page:read", "page_category:read", "page:write"})
      */
     private $isPublished;
 
     /**
      * @ORM\ManyToOne(targetEntity=PageCategory::class, inversedBy="pages")
-     * @Groups({"page:read"})
+     * @Groups({"page:read", "page:write"})
      */
     private $category;
 
     /**
      * @ORM\Column(type="boolean", options={"default":true})
-     * @Groups({"page:read", "page_category:read"})
+     * @Groups({"page:read", "page_category:read", "page:write"})
      */
     private $showInMenu;
 

@@ -42,6 +42,21 @@ class Permissions
     const USER_CAN_DELETE_MEMBERS = 'user.can_delete_members';
 
     /**
+     * The user can access the list of members groups and their details
+     */
+    const USER_CAN_ACCESS_MEMBER_GROUPS = 'user.member_groups';
+
+    /**
+     * The user can edit member groups
+     */
+    const USER_CAN_EDIT_MEMBER_GROUPS = 'user.can_edit_member_groups';
+
+    /**
+     * The user can delete member groups
+     */
+    const USER_CAN_DELETE_MEMBER_GROUPS = 'user.can_delete_member_groups';
+
+    /**
      * The user can access the page list
      */
     const USER_CAN_ACCESS_PAGES = 'user.pages';
@@ -55,6 +70,11 @@ class Permissions
      * The user can delete unpublished pages
      */
     const USER_CAN_DELETE_PAGES = 'user.can_delete_pages';
+
+    /**
+     * The user can access page categories
+     */
+    const USER_CAN_ACCESS_PAGE_CATEGORIES = 'user.can_edit_access_categories';
 
     /**
      * The user can create and edit page categories

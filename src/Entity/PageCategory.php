@@ -19,6 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     attributes={
  *     "pagination_enabled"=false,
  *     "normalization_context"={"groups"={"page_category:read"}},
+ *     "denormalizationContext"={"groups"={"page_category:write"}}
  *     },
  *     collectionOperations={
  *         "get"={},
@@ -55,20 +56,21 @@ class PageCategory
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
+     * @Groups({"page_category:read", "page:read"})
      * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"page_category:read", "page:read"})
+     * @Groups({"page_category:read", "page:read", "page_category:write"})
      * @Assert\NotBlank()
      */
     private $name;
 
     /**
      * @ORM\Column(type="boolean", options={"default":true})
-     * @Groups({"page_category:read", "page:read"})
+     * @Groups({"page_category:read", "page:read", "page_category:write"})
      * @Assert\NotNull()
      */
     private $showInMenu;
@@ -81,12 +83,13 @@ class PageCategory
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"page_category:read", "page:read"})
+     * @Groups({"page_category:read", "page:read", "page_category:write"})
      */
     private $slug;
 
     /**
      * @ORM\Column(type="boolean", options={"default": true})
+     * @Groups({"page_category:read", "page:read", "page_category:write"})
      * @Assert\NotNull()
      */
     private $isPublished;

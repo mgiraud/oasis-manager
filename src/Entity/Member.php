@@ -3,9 +3,11 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Controller\Member\CloseAction;
 use App\Controller\Member\GetMeAction;
-use ApiPlatform\Core\Annotation\ApiResource;
 use App\Security\Permissions;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -42,6 +44,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     }
  * )
  * @UniqueEntity("email", groups={"register"})
+ * @ApiFilter(SearchFilter::class, properties={"email": "partial", "nickname": "partial", "groups.name": "exact"})
  * @UniqueEntity("nickname")
  */
 class Member implements UserInterface
@@ -109,6 +112,7 @@ class Member implements UserInterface
 
     /**
      * @ORM\ManyToMany(targetEntity=MemberGroup::class, inversedBy="members")
+     * @Groups({"member:read", "member:write"})
      */
     private $groups;
 

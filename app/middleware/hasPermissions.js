@@ -15,6 +15,7 @@ export default function ({ store, route, redirect, from }) {
     return
   }
   if (!store.getters['security/hasPermissions'](permissions)) {
+    console.log('nnONO')
     if (from) {
       redirect({ name: from.name, params: from.params })
     } else {

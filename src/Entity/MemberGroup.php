@@ -2,16 +2,26 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\MemberGroupRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     attributes={
+ *          "pagination_enabled"=false,
+ *          "normalization_context"={"groups"={"member_category:read"}},
+ *          "denormalization_context"={"groups"={"member_category:write"}},
+ *     },
+ * )
  * @ORM\Entity(repositoryClass=MemberGroupRepository::class)
+ * @ApiFilter(SearchFilter::class, properties={"name": "exact"})
  * @UniqueEntity("name")
  */
 class MemberGroup
@@ -25,23 +35,32 @@ class MemberGroup
 
     /**
      * @ORM\Column(type="text", unique=true)
+     * @Groups({"member_category:read", "member_category:write"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"member_category:read", "member_category:write"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="json")
+     * @Groups({"member_category:read", "member_category:write"})
      */
     private $permissions = [];
 
     /**
      * @ORM\ManyToMany(targetEntity=Member::class, mappedBy="groups")
+     * @Groups({"member_category:read_members"})
      */
     private $members;
+
+    /**
+     * @Groups({"member_category:read"})
+     */
+    private $memberCount;
 
     public function __construct()
     {
@@ -119,5 +138,10 @@ class MemberGroup
     public function __toString()
     {
         return $this->getName() ?? '';
+    }
+
+    public function getMemberCount(): int
+    {
+        return $this->members->count();
     }
 }

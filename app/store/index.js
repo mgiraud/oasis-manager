@@ -1,6 +1,8 @@
 import jwtDecode from 'jwt-decode'
 const cookieparser = process.server ? require('cookieparser') : undefined
 
+export const strict = process.env.NODE_ENV === 'prod'
+
 export const actions = {
   async nuxtServerInit ({ commit, dispatch }, { req, app }) {
     // Load permissions list from file

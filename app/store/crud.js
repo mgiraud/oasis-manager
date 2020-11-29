@@ -76,7 +76,7 @@ export default function makeCrudModule ({
           await handleError(commit, e)
         }
       },
-      del: async ({ commit }, item) => {
+      async del ({ commit }, item) {
         commit(ACTIONS.TOGGLE_LOADING)
 
         try {

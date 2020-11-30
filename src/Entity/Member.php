@@ -26,7 +26,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     "denormalization_context"={"groups"={"member:write"}},
  *     },
  *     itemOperations={
- *         "get"= {},
+ *         "get"={"security"="is_granted('USER_CAN_ACCESS_MEMBERS')"},
  *         "get_me"={
  *             "method"="GET",
  *             "path"="/me",
@@ -34,17 +34,24 @@ use Symfony\Component\Validator\Constraints as Assert;
  *             "openapi_context"={
  *                 "parameters"={}
  *             },
- *             "read"=false
+ *             "read"=false,
+ *             "security"="is_granted('USER_CAN_ACCESS_MEMBERS') or user === object"
  *         },
  *         "close"={
  *              "method"="PATCH",
  *              "controller"=CloseAction::class,
  *              "path"="/members/{id}/close",
- *         }
- *     }
+ *              "security"="is_granted('USER_CAN_EDIT_MEMBERS')"
+ *         },
+ *         "put"={"security"="is_granted('USER_CAN_EDIT_MEMBERS') and is_granted('MEMBER_EDIT', object)"}
+ *     },
+ *     collectionOperations={
+ *         "get"={"security"="is_granted('USER_CAN_ACCESS_MEMBERS')"},
+ *         "post"={"security"="is_granted('USER_CAN_EDIT_MEMBERS') and is_granted('MEMBER_EDIT', object)"},
+ *     },
  * )
  * @UniqueEntity("email", groups={"register"})
- * @ApiFilter(SearchFilter::class, properties={"email": "partial", "nickname": "partial", "groups.name": "exact"})
+ * @ApiFilter(SearchFilter::class, properties={"email": "partial", "nickname": "partial", "groups.name": "ipartial"})
  * @UniqueEntity("nickname")
  */
 class Member implements UserInterface
@@ -107,6 +114,7 @@ class Member implements UserInterface
 
     /**
      * @ORM\Column(type="smallint")
+     * @Groups({"member:read", "member:write"})
      */
     private $groupPermissionsOverrideType;
 

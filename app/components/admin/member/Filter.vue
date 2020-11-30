@@ -18,7 +18,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12" sm="6" md="6">
+      <v-col cols="12" md="6">
         <v-combobox
           v-if="groupsSelectItems"
           v-model="item.groups"
@@ -45,7 +45,6 @@ export default {
     }
   },
   computed: {
-    ...mapState('security', ['permissions']),
     ...mapState('member_group', {
       groupsSelectItems: 'selectItems'
     }),

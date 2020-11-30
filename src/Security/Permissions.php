@@ -89,7 +89,7 @@ class Permissions
     public static function getPermissions(): array
     {
         $c = new \ReflectionClass(Permissions::class);
-        return $c->getConstants();
+        return array_keys($c->getConstants());
     }
 
     public static function serializePermissions(): string

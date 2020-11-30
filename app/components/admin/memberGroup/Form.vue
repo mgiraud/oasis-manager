@@ -23,7 +23,7 @@
         <v-col cols="12" md="6">
           <v-combobox
             v-model="item.permissions"
-            :items="Object.keys(permissions)"
+            :items="permissions"
             label="Permissions"
             :return-object="false"
             multiple

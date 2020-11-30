@@ -5,14 +5,16 @@ namespace App\Security\Voter;
 
 
 use App\Entity\Member;
+use App\Security\Permissions;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
-class BackendAccesVoter extends Voter
+class BackendAccessVoter extends Voter
 {
     protected function supports(string $attribute, $subject)
     {
-        return \is_string($attribute) && 0 === strncmp($attribute, 'user.', 4);
+        $permissions = Permissions::getPermissions();
+        return in_array($attribute, $permissions);
     }
 
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token)

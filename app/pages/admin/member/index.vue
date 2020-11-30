@@ -3,7 +3,7 @@
     <v-data-table
       v-model="selected"
       :headers="headers"
-      :items="items"
+      :items="filteredItems"
       :items-per-page.sync="options.itemsPerPage"
       :loading="isLoading"
       loading-text="Loading..."
@@ -28,14 +28,14 @@
             />
           </FormFilter>
 
-          <v-btn
-            color="primary"
-            dark
-            class="ml-2"
-            @click="addHandler"
-          >
-            New Item
-          </v-btn>
+          <!--          <v-btn-->
+          <!--            color="primary"-->
+          <!--            dark-->
+          <!--            class="ml-2"-->
+          <!--            @click="addHandler"-->
+          <!--          >-->
+          <!--            New Item-->
+          <!--          </v-btn>-->
         </v-toolbar>
       </template>
       <TableActionCell
@@ -51,6 +51,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import { mapFields } from 'vuex-map-fields'
+import isAdmin from '../../../middleware/isAdmin'
 import list from '~/mixins/list'
 
 export default {
@@ -78,6 +79,7 @@ export default {
     ...mapGetters('member', {
       items: 'list'
     }),
+    ...mapGetters('security', ['isAdmin']),
     ...mapFields('member', {
       deletedItem: 'deleted',
       error: 'error',
@@ -86,6 +88,10 @@ export default {
       totalItems: 'totalItems',
       view: 'view'
     }),
+    filteredItems () {
+      if (isAdmin) { return this.items }
+      return this.items.filter(item => !item.isAdmin)
+    },
     canDeleteMember () {
       return this.hasPermission('USER_CAN_DELETE_MEMBERS')
     },

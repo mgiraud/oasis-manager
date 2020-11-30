@@ -26,12 +26,12 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
  *     },
  *     collectionOperations={
  *         "get"={},
- *         "post"={"security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_EDIT_PAGES'))"},
+ *         "post"={"security"="is_granted('USER_CAN_EDIT_PAGES')"},
  *     },
  *     itemOperations={
  *         "get"={"method"="GET"},
- *         "delete"={"security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_DELETE_PAGES'))"},
- *         "put"={"security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_EDIT_PAGES'))"},
+ *         "delete"={"security"="is_granted('USER_CAN_DELETE_PAGES')"},
+ *         "put"={"security"="is_granted('USER_CAN_EDIT_PAGES')"},
  *         "publish"={
  *             "method"="POST",
  *             "path"="/pages/{id}/publish",
@@ -39,7 +39,7 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
  *             "openapi_context"={
  *                  "summary": "Publish a page"
  *              },
- *              "security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_EDIT_PAGES'))"
+ *              "security"="is_granted('USER_CAN_EDIT_PAGES')"
  *         },
  *         "unpublish"={
  *             "method"="POST",
@@ -48,7 +48,7 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
  *             "openapi_context"={
  *                 "summary": "Unpublish a page"
  *             },
- *             "security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_EDIT_PAGES'))"
+ *             "security"="is_granted('USER_CAN_EDIT_PAGES')"
  *         }
  *     }
  * )

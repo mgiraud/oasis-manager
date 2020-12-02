@@ -55,7 +55,7 @@ export const getters = {
   hasPermission: (state, getters, rootState) => (permission) => {
     if (permission === null) { return false }
     const user = rootState.storage ? rootState.storage.user : null
-    return !!(user && user.permissions && user.permissions[permission])
+    return !!(user && user.permissions && user.permissions.includes(permission))
   },
   hasPermissions: (state, getters) => (permissions) => {
     return !permissions.some((permission) => {

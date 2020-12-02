@@ -1,4 +1,5 @@
 import isEmpty from 'lodash/isEmpty'
+import { mapGetters } from 'vuex'
 import notification from './notification'
 
 export default {
@@ -14,6 +15,10 @@ export default {
       },
       filters: {}
     }
+  },
+
+  computed: {
+    ...mapGetters('security', ['hasPermission'])
   },
 
   watch: {

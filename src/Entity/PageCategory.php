@@ -19,15 +19,16 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     attributes={
  *     "pagination_enabled"=false,
  *     "normalization_context"={"groups"={"page_category:read"}},
+ *     "denormalizationContext"={"groups"={"page_category:write"}}
  *     },
  *     collectionOperations={
  *         "get"={},
- *         "post"={"security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_EDIT_PAGE_CATEGORIES'))"},
+ *         "post"={"security"="is_granted('USER_CAN_EDIT_PAGE_CATEGORIES')"},
  *     },
  *     itemOperations={
  *         "get"={},
- *         "delete"={"security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_DELETE_PAGE_CATEGORIES'))"},
- *         "put"={"security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_EDIT_PAGE_CATEGORIES'))"},
+ *         "delete"={"security"="is_granted('USER_CAN_DELETE_PAGE_CATEGORIES')"},
+ *         "put"={"security"="is_granted('USER_CAN_EDIT_PAGE_CATEGORIES')"},
  *          "publish"={
  *             "method"="POST",
  *             "path"="/page_categories/{id}/publish",
@@ -35,7 +36,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *             "openapi_context"={
  *                 "summary": "Publish a page"
  *             },
- *             "security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_EDIT_PAGE_CATEGORIES'))"
+ *             "security"="is_granted('USER_CAN_EDIT_PAGE_CATEGORIES')"
  *         },
  *         "unpublish"={
  *             "method"="POST",
@@ -44,7 +45,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *             "openapi_context"={
  *                 "summary": "Unpublish a page"
  *             },
- *             "security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_EDIT_PAGE_CATEGORIES'))"
+ *             "security"="is_granted('USER_CAN_EDIT_PAGE_CATEGORIES')"
  *         }
  *     }
  * )
@@ -55,20 +56,21 @@ class PageCategory
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
+     * @Groups({"page_category:read", "page:read"})
      * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"page_category:read", "page:read"})
+     * @Groups({"page_category:read", "page:read", "page_category:write"})
      * @Assert\NotBlank()
      */
     private $name;
 
     /**
      * @ORM\Column(type="boolean", options={"default":true})
-     * @Groups({"page_category:read", "page:read"})
+     * @Groups({"page_category:read", "page:read", "page_category:write"})
      * @Assert\NotNull()
      */
     private $showInMenu;
@@ -81,12 +83,13 @@ class PageCategory
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"page_category:read", "page:read"})
+     * @Groups({"page_category:read", "page:read", "page_category:write"})
      */
     private $slug;
 
     /**
      * @ORM\Column(type="boolean", options={"default": true})
+     * @Groups({"page_category:read", "page:read", "page_category:write"})
      * @Assert\NotNull()
      */
     private $isPublished;

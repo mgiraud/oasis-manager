@@ -1,3 +1,4 @@
+import { mapGetters } from 'vuex'
 import notification from './notification'
 
 export default {
@@ -18,7 +19,8 @@ export default {
     retrieved () {
       const id = this.$options.resourcePrefix ? this.$options.resourcePrefix + this.$route.params.id : this.$route.params.id
       return this.find(decodeURIComponent(id))
-    }
+    },
+    ...mapGetters('security', ['hasPermission'])
   },
   methods: {
     del () {

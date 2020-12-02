@@ -31,6 +31,7 @@
       </v-list-item>
 
       <v-list-group
+        v-if="filteredPageItems.length > 0"
         :value="true"
         no-action
         sub-group
@@ -42,7 +43,7 @@
         </template>
 
         <v-list-item
-          v-for="([icon, title, path], i) in pages"
+          v-for="([icon, title, path], i) in filteredPageItems"
           :key="i"
           link
           :to="{name: path}"
@@ -56,6 +57,7 @@
       </v-list-group>
 
       <v-list-group
+        v-if="filteredMemberItems.length > 0"
         :value="true"
         no-action
         sub-group
@@ -67,7 +69,7 @@
         </template>
 
         <v-list-item
-          v-for="([icon, title, path], i) in members"
+          v-for="([icon, title, path, permission], i) in filteredMemberItems"
           :key="i"
           link
           :to="{name: path}"
@@ -79,6 +81,15 @@
           </v-list-item-icon>
         </v-list-item>
       </v-list-group>
+
+      <v-list-item link :to="{name: 'index'}">
+        <v-list-item-icon>
+          <v-icon>mdi-arrow-left-bold</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title>Retour au site</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
 
       <v-list-item link @click="logout">
         <v-list-item-icon>
@@ -93,7 +104,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   data: () => ({
@@ -103,17 +114,27 @@ export default {
       ['mdi-folder-multiple-image', 'Media', 'admin-gallery'],
       ['mdi-arrow-left', 'Retour au site', 'index']
     ],
-    pages: [
-      ['mdi-newspaper', 'Pages', 'admin-page'],
-      ['mdi-newspaper', 'Categories', 'admin-pageCategory']
+    pageItems: [
+      ['mdi-newspaper-variant-outline', 'Pages', 'admin-page', 'USER_CAN_ACCESS_PAGES'],
+      ['mdi-newspaper-variant-multiple', 'Categories', 'admin-pageCategory', 'USER_CAN_ACCESS_PAGE_CATEGORIES']
     ],
-    members: [
-      ['mdi-account', 'Gérer les membres', 'admin-member']
+    memberItems: [
+      ['mdi-account', 'Gérer les membres', 'admin-member', 'USER_CAN_ACCESS_MEMBERS'],
+      ['mdi-account-multiple', 'Gérer les groupes', 'admin-memberGroup', 'USER_CAN_ACCESS_MEMBER_GROUPS']
     ]
   }),
-  computed: mapState({
-    user: s => s.storage && s.storage.user ? s.storage.user : {}
-  }),
+  computed: {
+    ...mapState({
+      user: s => s.storage && s.storage.user ? s.storage.user : {}
+    }),
+    ...mapGetters('security', ['hasPermission']),
+    filteredMemberItems () {
+      return this.memberItems.filter(([icon, title, path, permission]) => this.hasPermission(permission))
+    },
+    filteredPageItems () {
+      return this.pageItems.filter(([icon, title, path, permission]) => this.hasPermission(permission))
+    }
+  },
   methods: {
     logout () {
       this.$store.dispatch('security/logout')

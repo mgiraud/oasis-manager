@@ -24,7 +24,7 @@
         <FormToolbar
           :handle-submit="onSendForm"
           :handle-reset="resetForm"
-          :handle-delete="del"
+          :handle-delete="canDeletePage ? del : null"
           :handle-back="back"
         >
           <template #left>
@@ -47,6 +47,10 @@ export default {
   mixins: [update],
   servicePrefix: 'admin-page',
   resourcePrefix: '/api/pages/',
+  middleware: 'hasPermissions',
+  meta: {
+    permissions: ['USER_CAN_EDIT_PAGES']
+  },
   computed: {
     ...mapFields('page', {
       deleteLoading: 'isLoading',
@@ -55,7 +59,10 @@ export default {
       updated: 'updated',
       violations: 'violations'
     }),
-    ...mapGetters('page', ['find'])
+    ...mapGetters('page', ['find']),
+    canDeletePage () {
+      return this.hasPermission('USER_CAN_DELETE_PAGES')
+    }
   },
   methods: {
     ...mapActions('page', {

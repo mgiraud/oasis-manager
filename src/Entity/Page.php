@@ -22,15 +22,16 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
  *     attributes={
  *          "pagination_enabled"=false,
  *          "normalization_context"={"groups"={"page:read"}},
+ *          "denormalization_context"={"groups"={"page:write"}},
  *     },
  *     collectionOperations={
  *         "get"={},
- *         "post"={"security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_EDIT_PAGES'))"},
+ *         "post"={"security"="is_granted('USER_CAN_EDIT_PAGES')"},
  *     },
  *     itemOperations={
  *         "get"={"method"="GET"},
- *         "delete"={"security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_DELETE_PAGES'))"},
- *         "put"={"security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_EDIT_PAGES'))"},
+ *         "delete"={"security"="is_granted('USER_CAN_DELETE_PAGES')"},
+ *         "put"={"security"="is_granted('USER_CAN_EDIT_PAGES')"},
  *         "publish"={
  *             "method"="POST",
  *             "path"="/pages/{id}/publish",
@@ -38,7 +39,7 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
  *             "openapi_context"={
  *                  "summary": "Publish a page"
  *              },
- *              "security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_EDIT_PAGES'))"
+ *              "security"="is_granted('USER_CAN_EDIT_PAGES')"
  *         },
  *         "unpublish"={
  *             "method"="POST",
@@ -47,7 +48,7 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
  *             "openapi_context"={
  *                 "summary": "Unpublish a page"
  *             },
- *             "security"="is_granted(constant('App\\Security\\Permissions::USER_CAN_EDIT_PAGES'))"
+ *             "security"="is_granted('USER_CAN_EDIT_PAGES')"
  *         }
  *     }
  * )
@@ -69,19 +70,19 @@ class Page
     /**
      * @ORM\Column(type="text", unique=true)
      * @ApiProperty(identifier=true)
-     * @Groups({"page:read", "page_category:read"})
+     * @Groups({"page:read", "page_category:read", "page:write"})
      */
     private $url;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"page:read", "page_category:read"})
+     * @Groups({"page:read", "page_category:read", "page:write"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"page:read"})
+     * @Groups({"page:read", "page:write"})
      */
     private $content;
 
@@ -105,19 +106,19 @@ class Page
 
     /**
      * @ORM\Column(type="boolean", options={"default": false})
-     * @Groups({"page:read", "page_category:read"})
+     * @Groups({"page:read", "page_category:read", "page:write"})
      */
     private $isPublished;
 
     /**
      * @ORM\ManyToOne(targetEntity=PageCategory::class, inversedBy="pages")
-     * @Groups({"page:read"})
+     * @Groups({"page:read", "page:write"})
      */
     private $category;
 
     /**
      * @ORM\Column(type="boolean", options={"default":true})
-     * @Groups({"page:read", "page_category:read"})
+     * @Groups({"page:read", "page_category:read", "page:write"})
      */
     private $showInMenu;
 

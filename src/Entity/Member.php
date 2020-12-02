@@ -3,9 +3,11 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Controller\Member\CloseAction;
 use App\Controller\Member\GetMeAction;
-use ApiPlatform\Core\Annotation\ApiResource;
 use App\Security\Permissions;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -24,7 +26,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     "denormalization_context"={"groups"={"member:write"}},
  *     },
  *     itemOperations={
- *         "get"= {},
+ *         "get"={"security"="is_granted('USER_CAN_ACCESS_MEMBERS')"},
  *         "get_me"={
  *             "method"="GET",
  *             "path"="/me",
@@ -32,16 +34,24 @@ use Symfony\Component\Validator\Constraints as Assert;
  *             "openapi_context"={
  *                 "parameters"={}
  *             },
- *             "read"=false
+ *             "read"=false,
+ *             "security"="is_granted('USER_CAN_ACCESS_MEMBERS') or user === object"
  *         },
  *         "close"={
  *              "method"="PATCH",
  *              "controller"=CloseAction::class,
  *              "path"="/members/{id}/close",
- *         }
- *     }
+ *              "security"="is_granted('USER_CAN_EDIT_MEMBERS')"
+ *         },
+ *         "put"={"security"="is_granted('USER_CAN_EDIT_MEMBERS') and is_granted('MEMBER_EDIT', object)"}
+ *     },
+ *     collectionOperations={
+ *         "get"={"security"="is_granted('USER_CAN_ACCESS_MEMBERS')"},
+ *         "post"={"security"="is_granted('USER_CAN_EDIT_MEMBERS') and is_granted('MEMBER_EDIT', object)"},
+ *     },
  * )
  * @UniqueEntity("email", groups={"register"})
+ * @ApiFilter(SearchFilter::class, properties={"email": "partial", "nickname": "partial", "groups.name": "ipartial"})
  * @UniqueEntity("nickname")
  */
 class Member implements UserInterface
@@ -98,17 +108,24 @@ class Member implements UserInterface
 
     /**
      * @ORM\Column(type="json")
-     * @Groups({"member:read", "member:write"})
+     * @Groups({"member:read"})
      */
     private $permissions = [];
 
     /**
+     * @Groups({"member:read", "member:write"})
+     */
+    private $memberPermissions;
+
+    /**
      * @ORM\Column(type="smallint")
+     * @Groups({"member:read", "member:write"})
      */
     private $groupPermissionsOverrideType;
 
     /**
      * @ORM\ManyToMany(targetEntity=MemberGroup::class, inversedBy="members")
+     * @Groups({"member:read", "member:write"})
      */
     private $groups;
 
@@ -121,6 +138,7 @@ class Member implements UserInterface
      * @Groups({"member:read"})
      */
     private $isAdmin = [];
+
 
     public function __construct()
     {
@@ -168,14 +186,29 @@ class Member implements UserInterface
             $groupPermissions = array_merge($groupPermissions, $group->getPermissions());
         }
         if ($this->getGroupPermissionsOverrideType() === Member::GROUP_PERMISSION_OVERRIDE_MERGE) {
-           return array_unique(array_merge($this->permissions, $groupPermissions));
+           return array_values(array_unique(array_merge($this->permissions, $groupPermissions)));
         } else if ($this->getGroupPermissionsOverrideType() === Member::GROUP_PERMISSION_OVERRIDE_GROUPS_ONLY) {
-            return array_unique($groupPermissions);
+            return array_values(array_unique($groupPermissions));
+        }
+        return array_values($this->permissions);
+    }
+
+    public function setPermissions(array $permissions): self
+    {
+        $this->permissions = $permissions;
+
+        return $this;
+    }
+
+    public function getMemberPermissions(): ?array
+    {
+        if (in_array('ROLE_ADMIN', $this->getRoles())) {
+            return Permissions::getPermissions();
         }
         return $this->permissions;
     }
 
-    public function setPermissions(array $permissions): self
+    public function setMemberPermissions(array $permissions): self
     {
         $this->permissions = $permissions;
 

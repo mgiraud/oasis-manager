@@ -11,7 +11,7 @@
     </v-row>
     <v-row>
       <v-col cols="12">
-        <AdminPageCategoryForm
+        <AdminMemberForm
           v-if="item"
           ref="updateForm"
           :values="item"
@@ -24,12 +24,12 @@
         <FormToolbar
           :handle-submit="onSendForm"
           :handle-reset="resetForm"
-          :handle-delete="del"
+          :handle-delete="canDeleteGroup ? del : null"
           :handle-back="back"
         >
           <template #left>
             <h1 v-if="item">
-              Edit {{ item.name }}
+              Edit {{ item['url'] }}
             </h1>
           </template>
         </FormToolbar>
@@ -45,24 +45,27 @@ import update from '~/mixins/update'
 
 export default {
   mixins: [update],
-  servicePrefix: 'admin-pageCategory',
-  resourcePrefix: '/api/page_categories/',
+  servicePrefix: 'admin-member',
+  resourcePrefix: '/api/members/',
   middleware: 'hasPermissions',
   meta: {
-    permissions: ['USER_CAN_EDIT_PAGE_CATEGORIES']
+    permissions: ['USER_CAN_EDIT_MEMBERS']
   },
   computed: {
-    ...mapFields('page_category', {
+    ...mapFields('member', {
       deleteLoading: 'isLoading',
       isLoading: 'isLoading',
       error: 'error',
       updated: 'updated',
       violations: 'violations'
     }),
-    ...mapGetters('page_category', ['find'])
+    ...mapGetters('member', ['find']),
+    canDeleteGroup () {
+      return this.hasPermission('USER_CAN_DELETE_MEMBERS')
+    }
   },
   methods: {
-    ...mapActions('page_category', {
+    ...mapActions('member', {
       createReset: 'resetCreate',
       deleteItem: 'del',
       delReset: 'resetDelete',

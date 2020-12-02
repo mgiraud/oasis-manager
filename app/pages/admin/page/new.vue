@@ -15,6 +15,10 @@ export default {
   servicePrefix: 'admin-page',
   resourcePrefix: '/api/pages/',
   mixins: [create],
+  middleware: 'hasPermissions',
+  meta: {
+    permissions: ['USER_CAN_EDIT_PAGES']
+  },
   data: () => ({
     item: {
       content: null

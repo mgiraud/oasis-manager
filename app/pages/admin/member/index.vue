@@ -1,42 +1,65 @@
 <template>
   <v-container>
     <v-data-table
+      v-model="selected"
       :headers="headers"
-      :items="members"
-      sort-by="calories"
+      :items="filteredItems"
+      :items-per-page.sync="options.itemsPerPage"
+      :loading="isLoading"
+      loading-text="Loading..."
+      :options.sync="options"
+      :server-items-length="totalItems"
       class="elevation-1"
+      item-key="@id"
+      show-select
+      @update:options="onUpdateOptions"
     >
-      <template v-slot:item.actions="{ item }">
-        <v-icon
-          small
-          class="mr-2"
-          @click="editItem(item)"
-        >
-          mdi-pencil
-        </v-icon>
-        <v-icon
-          v-if="canDeleteUser"
-          small
-          @click="deleteItem(item)"
-        >
-          mdi-delete
-        </v-icon>
+      <template v-slot:top>
+        <v-toolbar flat color="white">
+          <v-toolbar-title>Liste de membres</v-toolbar-title>
+
+          <v-spacer />
+
+          <FormFilter :handle-filter="onSendFilter" :handle-reset="resetFilter">
+            <AdminMemberFilter
+              ref="filterForm"
+              slot="filter"
+              :values="filters"
+            />
+          </FormFilter>
+        </v-toolbar>
       </template>
+      <TableActionCell
+        slot="item.actions"
+        slot-scope="props"
+        :handle-edit="canEditMember ? () => editHandler(props.item) : null"
+        :handle-delete="canDeleteMember ? () => deleteHandler(props.item) : null"
+      />
     </v-data-table>
   </v-container>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
+import { mapFields } from 'vuex-map-fields'
+import isAdmin from '../../../middleware/isAdmin'
+import list from '~/mixins/list'
 
 export default {
+  servicePrefix: 'admin-member',
+  resourcePrefix: '/api/members/',
   layout: 'Admin',
-  middleware: 'authenticated',
+  middleware: 'hasPermissions',
   fetchOnServer: false,
+  meta: {
+    permissions: ['USER_CAN_ACCESS_MEMBERS']
+  },
+  mixins: [list],
   async fetch ({ store }) {
     await store.dispatch('member/fetchAll')
   },
   data: () => ({
+    selected: [],
     headers: [
       { text: 'Email', value: 'email' },
       { text: 'Pseudo', value: 'nickname' },
@@ -44,13 +67,34 @@ export default {
     ]
   }),
   computed: {
-    ...mapGetters('member', { members: 'list' }),
-    ...mapGetters('security', ['hasPermission']),
-    canDeleteUser () {
+    ...mapGetters('member', {
+      items: 'list'
+    }),
+    ...mapGetters('security', ['isAdmin']),
+    ...mapFields('member', {
+      deletedItem: 'deleted',
+      error: 'error',
+      isLoading: 'isLoading',
+      resetList: 'resetList',
+      totalItems: 'totalItems',
+      view: 'view'
+    }),
+    filteredItems () {
+      if (isAdmin) { return this.items }
+      return this.items.filter(item => !item.isAdmin)
+    },
+    canDeleteMember () {
       return this.hasPermission('USER_CAN_DELETE_MEMBERS')
+    },
+    canEditMember () {
+      return this.hasPermission('USER_CAN_EDIT_MEMBERS')
     }
   },
   methods: {
+    ...mapActions('member', {
+      fetchAll: 'fetchAll',
+      deleteItem: 'del'
+    }),
     editItem (item) {
       this.$router.push({ name: 'admin-member-id', params: { id: item.id } })
     }

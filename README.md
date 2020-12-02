@@ -7,15 +7,15 @@ Outil d'aide à la création et gestion d'habitats partagés. Le projet sous lic
 
 Voici la liste, sans doute non exhaustive, des fonctionnalités prévues à terme.
 
-| Fonctionnalité      |     TODO    |   En cours de developpement | Fonctionnel/Fonctionnalité incomplète | Achevé |
-| ------------- |: -------------: | ---------: | ---------: | ---------: |
+| Fonctionnalité | TODO | En cours de développement | Fonctionnel/Fonctionnalité incomplète | Achevé |
+| ------------- | ------------- | --------- | --------- | --------- |
 | Création/Edition de page | | ✓ | ✓ | |
-| Blog/Actualités | ✓ ||||
-| Gestion de fichiers | ✓ ||||
-| Gestion de membres | ✓ ||||
-| Sécurité (login/logout/permissions) | ✓ || ✓ ||
-| Calendrier et aide aux réunions | ✓ ||||
-| Mails automatiques | ✓ ||||
+| Blog/Actualités | ✓ | | | |
+| Gestion de fichiers | ✓ | | | |
+| Gestion de membres | ✓ | ✓ | | |
+| Sécurité (login/logout/permissions) | ✓ | | ✓ | |
+| Calendrier et aide aux réunions | ✓ | | | |
+| Mails automatiques | ✓ | | | |
 
 ## Contributions
 
@@ -24,13 +24,16 @@ je vous demande de passer par la **création d'une issue** pour pouvoir planifie
 
 ### Intégration
 
-Cette partie est encore en développement mais voici les étapes de validation pour qu'un code soit validé
+Cette partie est encore en développement mais voici ce que doit respecter un code pour être validé
 * PHP
     * Tests PhpUnit validés, coverage > 80%
     * Phpstan niveau 5
     * PHP CS fixer ne renvoie pas d'erreur
 * JS
-    * Tests (techno à déterminer) validé, coverage > 80%
+    * Tests jest validé, coverage > 80%
+
+Une action gitlab est déclenchée à chaque push pour effectuer ces validations.
+TODO: Lors d'un merge sur main, le code est déployé en production.
 
 ## Développement
 

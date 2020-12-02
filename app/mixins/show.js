@@ -1,3 +1,4 @@
+import { mapGetters } from 'vuex'
 import notification from './notification'
 
 export default {
@@ -8,7 +9,8 @@ export default {
   computed: {
     item () {
       return this.find(decodeURIComponent(this.$route.params.id))
-    }
+    },
+    ...mapGetters('security', ['hasPermission'])
   },
   methods: {
     del () {

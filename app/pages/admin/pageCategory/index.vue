@@ -44,8 +44,8 @@
       <TableActionCell
         slot="item.actions"
         slot-scope="props"
-        :handle-edit="() => editHandler(props.item)"
-        :handle-delete="() => deleteHandler(props.item)"
+        :handle-edit="() => canEditPageCategories ? editHandler(props.item) : null"
+        :handle-delete="() => canDeletePageCategories ? deleteHandler(props.item) : null"
       />
     </v-data-table>
   </v-container>
@@ -64,7 +64,7 @@ export default {
   fetchOnServer: false,
   mixins: [list],
   meta: {
-    permissions: ['USER_CAN_ACCESS_PAGES']
+    permissions: ['USER_CAN_ACCESS_PAGE_CATEGORIES']
   },
   async fetch ({ store }) {
     return await store.dispatch('page/fetchAll')
@@ -89,8 +89,11 @@ export default {
       totalItems: 'totalItems',
       view: 'view'
     }),
-    canDeletePage () {
-      return this.hasPermission('USER_CAN_DELETE_PAGES')
+    canEditPageCategories () {
+      return this.hasPermission('USER_CAN_EDIT_PAGE_CATEGORIES')
+    },
+    canDeletePageCategories () {
+      return this.hasPermission('USER_CAN_DELETE_PAGE_CATEGORIES')
     }
   },
   methods: {

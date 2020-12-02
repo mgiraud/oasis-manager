@@ -16,12 +16,12 @@
     >
       <template v-slot:top>
         <v-toolbar flat color="white">
-          <v-toolbar-title>Page</v-toolbar-title>
+          <v-toolbar-title>Groupe de membres</v-toolbar-title>
 
           <v-spacer />
 
           <FormFilter :handle-filter="onSendFilter" :handle-reset="resetFilter">
-            <AdminPageFilter
+            <AdminMemberGroupFilter
               ref="filterForm"
               slot="filter"
               :values="filters"
@@ -39,15 +39,15 @@
         </v-toolbar>
       </template>
       <template v-if="item.category" slot="item.category" slot-scope="{ item }">
-        <nuxt-link :to="{name: 'admin-pageCategory-id', params: {id: item.category.id }}">
+        <nuxt-link :to="{name: 'admin-memberGroup-id', params: {id: item.category.id }}">
           {{ item.category.name }}
         </nuxt-link>
       </template>
       <TableActionCell
         slot="item.actions"
         slot-scope="props"
-        :handle-edit="canEditPage ? () => editHandler(props.item) : null"
-        :handle-delete="canDeletePage ? () => deleteHandler(props.item) : null"
+        :handle-edit="canEditGroup ? () => editHandler(props.item) : null"
+        :handle-delete="canDeleteGroup ? () => deleteHandler(props.item) : null"
       />
     </v-data-table>
   </v-container>
@@ -59,34 +59,31 @@ import { mapFields } from 'vuex-map-fields'
 import list from '~/mixins/list'
 
 export default {
-  servicePrefix: 'admin-page',
-  resourcePrefix: '/api/pages/',
+  servicePrefix: 'admin-memberGroup',
+  resourcePrefix: '/api/member_groups/',
   layout: 'Admin',
   middleware: 'hasPermissions',
+  meta: {
+    permissions: ['USER_CAN_ACCESS_MEMBER_GROUPS']
+  },
   fetchOnServer: false,
   mixins: [list],
-  meta: {
-    permissions: ['USER_CAN_ACCESS_PAGES']
-  },
   async fetch ({ store }) {
-    return await store.dispatch('page/fetchAll')
+    return await store.dispatch('member_group/fetchAll')
   },
   data: () => ({
     selected: [],
     headers: [
-      { text: 'Title', value: 'title' },
-      { text: 'Url', value: 'url' },
-      { text: 'Catégorie', value: 'category' },
-      { text: 'est publié', value: 'isPublished' },
-      { text: 'est visible dans le menu', value: 'showInMenu' },
+      { text: 'Nom', value: 'name' },
+      { text: 'Nombre de membres', value: 'memberCount' },
       { text: 'Actions', value: 'actions', sortable: false }
     ]
   }),
   computed: {
-    ...mapGetters('page', {
+    ...mapGetters('member_group', {
       items: 'list'
     }),
-    ...mapFields('page', {
+    ...mapFields('member_group', {
       deletedItem: 'deleted',
       error: 'error',
       isLoading: 'isLoading',
@@ -94,20 +91,20 @@ export default {
       totalItems: 'totalItems',
       view: 'view'
     }),
-    canEditPage () {
-      return this.hasPermission('USER_CAN_EDIT_PAGES')
+    canEditGroup () {
+      return this.hasPermission('USER_CAN_EDIT_MEMBER_GROUPS')
     },
-    canDeletePage () {
-      return this.hasPermission('USER_CAN_DELETE_PAGES')
+    canDeleteGroup () {
+      return this.hasPermission('USER_CAN_DELETE_MEMBER_GROUPS')
     }
   },
   methods: {
-    ...mapActions('page', {
+    ...mapActions('member_group', {
       fetchAll: 'fetchAll',
       deleteItem: 'del'
     }),
     editItem (item) {
-      this.$router.push({ name: 'admin-page-id', params: { id: item.url } })
+      this.$router.push({ name: 'admin-memberGroup-id', params: { id: item.url } })
     }
   }
 }

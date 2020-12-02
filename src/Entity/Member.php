@@ -108,9 +108,14 @@ class Member implements UserInterface
 
     /**
      * @ORM\Column(type="json")
-     * @Groups({"member:read", "member:write"})
+     * @Groups({"member:read"})
      */
     private $permissions = [];
+
+    /**
+     * @Groups({"member:read", "member:write"})
+     */
+    private $memberPermissions;
 
     /**
      * @ORM\Column(type="smallint")
@@ -133,6 +138,7 @@ class Member implements UserInterface
      * @Groups({"member:read"})
      */
     private $isAdmin = [];
+
 
     public function __construct()
     {
@@ -180,14 +186,29 @@ class Member implements UserInterface
             $groupPermissions = array_merge($groupPermissions, $group->getPermissions());
         }
         if ($this->getGroupPermissionsOverrideType() === Member::GROUP_PERMISSION_OVERRIDE_MERGE) {
-           return array_unique(array_merge($this->permissions, $groupPermissions));
+           return array_values(array_unique(array_merge($this->permissions, $groupPermissions)));
         } else if ($this->getGroupPermissionsOverrideType() === Member::GROUP_PERMISSION_OVERRIDE_GROUPS_ONLY) {
-            return array_unique($groupPermissions);
+            return array_values(array_unique($groupPermissions));
+        }
+        return array_values($this->permissions);
+    }
+
+    public function setPermissions(array $permissions): self
+    {
+        $this->permissions = $permissions;
+
+        return $this;
+    }
+
+    public function getMemberPermissions(): ?array
+    {
+        if (in_array('ROLE_ADMIN', $this->getRoles())) {
+            return Permissions::getPermissions();
         }
         return $this->permissions;
     }
 
-    public function setPermissions(array $permissions): self
+    public function setMemberPermissions(array $permissions): self
     {
         $this->permissions = $permissions;
 

@@ -15,6 +15,10 @@ export default {
   servicePrefix: 'admin-pageCategory',
   resourcePrefix: '/api/page_categories/',
   mixins: [create],
+  middleware: 'hasPermissions',
+  meta: {
+    permissions: ['USER_CAN_EDIT_PAGE_CATEGORIES']
+  },
   data: () => ({
     item: {
       content: null

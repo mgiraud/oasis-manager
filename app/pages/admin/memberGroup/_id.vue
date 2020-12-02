@@ -29,7 +29,7 @@
         >
           <template #left>
             <h1 v-if="item">
-              Edit {{ item['url'] }}
+              Edition du groupe "{{ item['name'] }}"
             </h1>
           </template>
         </FormToolbar>

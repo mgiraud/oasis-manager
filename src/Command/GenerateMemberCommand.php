@@ -71,7 +71,7 @@ class GenerateMemberCommand extends Command
     {
         $question = new ChoiceQuestion(
             'Please select permissions',
-            ['None'] + array_keys(Permissions::getPermissions()),
+            ['None'] + Permissions::getPermissions(),
             '0'
         );
         $question->setMultiselect(true);

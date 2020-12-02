@@ -35,7 +35,7 @@ class MemberGroup
 
     /**
      * @ORM\Column(type="text", unique=true)
-     * @Groups({"member_category:read", "member_category:write"})
+     * @Groups({"member:read", "member_category:read", "member_category:write"})
      */
     private $name;
 

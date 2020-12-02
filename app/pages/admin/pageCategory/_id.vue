@@ -47,6 +47,10 @@ export default {
   mixins: [update],
   servicePrefix: 'admin-pageCategory',
   resourcePrefix: '/api/page_categories/',
+  middleware: 'hasPermissions',
+  meta: {
+    permissions: ['USER_CAN_EDIT_PAGE_CATEGORIES']
+  },
   computed: {
     ...mapFields('page_category', {
       deleteLoading: 'isLoading',

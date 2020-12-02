@@ -29,7 +29,7 @@
         <v-col cols="12" md="6">
           <v-combobox
             v-if="permissions"
-            v-model="item.permissions"
+            v-model="item.memberPermissions"
             hide-selected
             :items="permissions"
             label="Permissions"

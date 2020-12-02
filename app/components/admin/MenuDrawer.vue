@@ -82,6 +82,15 @@
         </v-list-item>
       </v-list-group>
 
+      <v-list-item link :to="{name: 'index'}">
+        <v-list-item-icon>
+          <v-icon>mdi-arrow-left-bold</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title>Retour au site</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+
       <v-list-item link @click="logout">
         <v-list-item-icon>
           <v-icon>mdi-logout</v-icon>

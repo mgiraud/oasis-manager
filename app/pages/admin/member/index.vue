@@ -27,15 +27,6 @@
               :values="filters"
             />
           </FormFilter>
-
-          <!--          <v-btn-->
-          <!--            color="primary"-->
-          <!--            dark-->
-          <!--            class="ml-2"-->
-          <!--            @click="addHandler"-->
-          <!--          >-->
-          <!--            New Item-->
-          <!--          </v-btn>-->
         </v-toolbar>
       </template>
       <TableActionCell

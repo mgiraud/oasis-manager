@@ -26,3 +26,6 @@ services:
     App\Doctrine\PageExtension:
         tags:
             - { name: api_platform.doctrine.orm.query_extension.collection }
+
+    App\DataPersister\ContactPersister:
+        decorates: 'api_platform.doctrine.orm.data_persister'

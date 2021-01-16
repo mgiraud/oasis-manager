@@ -1,0 +1,14 @@
+<h1>Nouveau contact</h1>
+
+<ul>
+    <li>Email: {{ contact.email }}</li>
+    <li>Prénom: {{ contact.firstName or 'inconnu' }}</li>
+    <li>Nom: {{ contact.lastName or 'inconnu' }}</li>
+    <li>Prénom: {{ contact.phoneNumber or 'inconnu' }}</li>
+</ul>
+
+<p>{{ contact.subject }}</p>
+
+<p>
+    {{ contact.content }}
+</p>

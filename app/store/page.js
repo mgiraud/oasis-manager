@@ -33,6 +33,11 @@ pageModule.getters.menuItems = (state, getters, rootState) => {
       })
     }
   })
+
+  menu.push({
+    name: 'Contact',
+    url: 'contact'
+  })
   return menu
 }
 

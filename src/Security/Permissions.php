@@ -86,6 +86,16 @@ class Permissions
      */
     const USER_CAN_DELETE_PAGE_CATEGORIES = 'user.can_delete_page_categories';
 
+    /**
+     * The user can view contacts
+     */
+    const USER_CAN_VIEW_CONTACT = 'user.can_view_contacts';
+
+    /**
+     * The user can delete contacts
+     */
+    const USER_CAN_DELETE_CONTACT = 'user.can_delete_contacts';
+
     public static function getPermissions(): array
     {
         $c = new \ReflectionClass(Permissions::class);

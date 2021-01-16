@@ -7,4 +7,5 @@ lexik_jwt_authentication:
             enabled: true
             name:    BEARER
     set_cookies:
-        BEARER: ~
+        BEARER:
+            path: /

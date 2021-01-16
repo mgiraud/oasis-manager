@@ -19,7 +19,7 @@ class AuthController extends AbstractController
     {
         $response = new Response();
         $response->headers->setCookie(
-            (new Cookie('BEARER', null))
+            (new Cookie('BEARER', null, 0, '/'))
                 ->withSecure($this->getParameter('kernel.environment') !== 'dev')
         );
 

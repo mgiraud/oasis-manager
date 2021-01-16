@@ -47,7 +47,7 @@
         <v-icon>mdi-plus-circle</v-icon>
       </v-btn>
     </div>
-    <UtilConfirmDelete
+    <ConfirmDelete
       v-if="handleDelete"
       :visible="confirmDelete"
       :handle-delete="handleDelete"
@@ -57,8 +57,13 @@
 </template>
 
 <script>
+import ConfirmDelete from '../util/ConfirmDelete'
+
 export default {
   name: 'Toolbar',
+  components: {
+    ConfirmDelete
+  },
   props: {
     handleBack: {
       type: Function,

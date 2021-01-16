@@ -7,8 +7,8 @@
           <v-card-title>Contactez-nous !</v-card-title>
           <v-card-text>
             <contact-form ref="createForm" :values="item" :errors="violations" />
-            <FormToolbar :handle-submit="onSendForm" :handle-reset="resetForm" />
-            <UtilLoading :visible="isLoading" />
+            <toolbar :handle-submit="onSendForm" :handle-reset="resetForm" />
+            <Loading :visible="isLoading" />
           </v-card-text>
         </v-card>
       </v-col>
@@ -22,6 +22,8 @@ import { mapActions } from 'vuex'
 import ContactForm from '../components/contact/Form'
 import Alert from '../components/util/Alert'
 import notification from '../mixins/notification'
+import Toolbar from '../components/form/Toolbar'
+import Loading from '../components/util/Loading'
 import create from '~/mixins/create'
 
 export default {
@@ -29,7 +31,9 @@ export default {
   resourcePrefix: '/api/contacts/',
   components: {
     ContactForm,
-    Alert
+    Alert,
+    Toolbar,
+    Loading
   },
   mixins: [create, notification],
   data: () => ({

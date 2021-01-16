@@ -37,7 +37,7 @@
 
 <script>
 export default {
-  name: 'DataFilter',
+  name: 'FormFilter',
   props: {
     handleReset: {
       type: Function,

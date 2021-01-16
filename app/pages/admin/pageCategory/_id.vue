@@ -11,7 +11,7 @@
     </v-row>
     <v-row>
       <v-col cols="12">
-        <AdminPageCategoryForm
+        <Form
           v-if="item"
           ref="updateForm"
           :values="item"
@@ -21,7 +21,7 @@
     </v-row>
     <v-row>
       <v-col cols="12">
-        <FormToolbar
+        <Toolbar
           :handle-submit="onSendForm"
           :handle-reset="resetForm"
           :handle-delete="del"
@@ -32,18 +32,24 @@
               Edit {{ item.name }}
             </h1>
           </template>
-        </FormToolbar>
+        </Toolbar>
       </v-col>
     </v-row>
-    <UtilLoading :visible="deleteLoading" />
+    <Loading :visible="deleteLoading" />
   </v-container>
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import { mapFields } from 'vuex-map-fields'
+import Loading from '../../../components/util/Loading'
+import Toolbar from '../../../components/form/Toolbar'
+import Form from '../../../components/admin/pageCategory/Form'
 import update from '~/mixins/update'
 
 export default {
+  components: {
+    Loading, Toolbar, Form
+  },
   mixins: [update],
   servicePrefix: 'admin-pageCategory',
   resourcePrefix: '/api/page_categories/',

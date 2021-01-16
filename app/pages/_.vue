@@ -3,7 +3,7 @@
     <v-container fluid>
       <v-row>
         <v-col>
-          <PageTemplate v-if="page" :page="page" />
+          <Template v-if="page" :page="page" />
           <Error404 v-else />
         </v-col>
       </v-row>
@@ -13,7 +13,13 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import Template from '../components/page/Template'
+import Error404 from '../components/error/404'
 export default {
+  components: {
+    Template,
+    Error404
+  },
   computed: {
     ...mapGetters('page', ['find']),
     page () {

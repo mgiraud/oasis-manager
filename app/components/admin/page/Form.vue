@@ -60,7 +60,7 @@
       <v-row>
         <v-col cols="12">
           <ClientOnly>
-            <UtilEditor
+            <Editor
               v-if="item.content !== undefined"
               v-model="item.content"
               @input="$v.item.title.$touch()"
@@ -79,11 +79,15 @@ import has from 'lodash/has'
 import { mapFields } from 'vuex-map-fields'
 import { mapActions } from 'vuex'
 import { validationMixin } from 'vuelidate'
+import Editor from '../../util/Editor'
 
 const slug = helpers.regex('slug', /^[a-zA-Z0-9-]*$/)
 
 export default {
   name: 'AdminPageForm',
+  components: {
+    Editor
+  },
   mixins: [validationMixin],
   props: {
     values: {

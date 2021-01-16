@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <AdminGalleryItemBreadcrumb v-if="!!selectedGalleryItem" :breadcrumb="selectedGalleryItem.breadcrumb" />
+    <ItemBreadcrumb v-if="!!selectedGalleryItem" :breadcrumb="selectedGalleryItem.breadcrumb" />
     <v-row>
       <v-col v-for="mediaObject in getMediaObjectsForSelectedGalleryItem" :key="mediaObject['@id']">
         {{ mediaObject['@id'] }}
@@ -19,7 +19,11 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex'
+import ItemBreadcrumb from '../../../../../components/admin/gallery/ItemBreadcrumb'
 export default {
+  components: {
+    ItemBreadcrumb
+  },
   layout: 'Admin',
   middleware: 'authenticated',
   fetchOnServer: false,

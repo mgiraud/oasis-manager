@@ -21,7 +21,7 @@
           <v-spacer />
 
           <FormFilter :handle-filter="onSendFilter" :handle-reset="resetFilter">
-            <AdminPageCategoryFilter
+            <PageCategoryFilter
               ref="filterForm"
               slot="filter"
               :values="filters"
@@ -41,7 +41,7 @@
       <template v-if="item.category" slot="item.category" slot-scope="{ item }">
         {{ item.category.name }}
       </template>
-      <TableActionCell
+      <ActionCell
         slot="item.actions"
         slot-scope="props"
         :handle-edit="() => canEditPageCategories ? editHandler(props.item) : null"
@@ -54,9 +54,15 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import { mapFields } from 'vuex-map-fields'
+import ActionCell from '../../../components/table/ActionCell'
+import PageCategoryFilter from '../../../components/admin/pageCategory/PageCategoryFilter'
+import FormFilter from '../../../components/form/FormFilter'
 import list from '~/mixins/list'
 
 export default {
+  components: {
+    ActionCell, PageCategoryFilter, FormFilter
+  },
   servicePrefix: 'admin-pageCategory',
   resourcePrefix: '/api/page_categories/',
   layout: 'Admin',

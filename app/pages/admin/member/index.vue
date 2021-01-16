@@ -21,7 +21,7 @@
           <v-spacer />
 
           <FormFilter :handle-filter="onSendFilter" :handle-reset="resetFilter">
-            <AdminMemberFilter
+            <MemberFilter
               ref="filterForm"
               slot="filter"
               :values="filters"
@@ -29,7 +29,7 @@
           </FormFilter>
         </v-toolbar>
       </template>
-      <TableActionCell
+      <ActionCell
         slot="item.actions"
         slot-scope="props"
         :handle-edit="canEditMember ? () => editHandler(props.item) : null"
@@ -43,9 +43,15 @@
 import { mapGetters, mapActions } from 'vuex'
 import { mapFields } from 'vuex-map-fields'
 import isAdmin from '../../../middleware/isAdmin'
+import ActionCell from '../../../components/table/ActionCell'
+import FormFilter from '../../../components/form/FormFilter'
+import MemberFilter from '../../../components/admin/member/MemberFilter'
 import list from '~/mixins/list'
 
 export default {
+  components: {
+    ActionCell, FormFilter, MemberFilter
+  },
   servicePrefix: 'admin-member',
   resourcePrefix: '/api/members/',
   layout: 'Admin',

@@ -36,59 +36,6 @@ export default {
       }
     }]
   ],
-  components: {
-    dirs: [
-      '~/components',
-      {
-        path: '~/components/admin/',
-        prefix: 'Admin'
-      },
-      {
-        path: '~/components/admin/gallery',
-        prefix: 'AdminGallery'
-      },
-      {
-        path: '~/components/page',
-        prefix: 'Page'
-      },
-      {
-        path: '~/components/layout',
-        prefix: 'Layout'
-      },
-      {
-        path: '~/components/admin/memberGroup',
-        prefix: 'AdminMemberGroup'
-      },
-      {
-        path: '~/components/admin/member',
-        prefix: 'AdminMember'
-      },
-      {
-        path: '~/components/admin/pageCategory',
-        prefix: 'AdminPageCategory'
-      },
-      {
-        path: '~/components/admin/page',
-        prefix: 'AdminPage'
-      },
-      {
-        path: '~/components/error',
-        prefix: 'Error'
-      },
-      {
-        path: '~/components/form',
-        prefix: 'Form'
-      },
-      {
-        path: '~/components/util',
-        prefix: 'Util'
-      },
-      {
-        path: '~/components/table',
-        prefix: 'Table'
-      }
-    ]
-  },
   storage: {
     cookie: {
       prefix: 'oasis-manager-',

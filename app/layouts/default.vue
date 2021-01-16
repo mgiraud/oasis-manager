@@ -36,12 +36,12 @@
         </v-icon>
       </v-btn>
       <template v-slot:extension>
-        <LayoutMenu />
+        <Menu />
       </template>
     </v-app-bar>
 
     <v-main class="secondary lighten-3">
-      <LayoutSubMenu v-if="activeSlug !== null" />
+      <SubMenu v-if="activeSlug !== null" />
       <Nuxt />
     </v-main>
     <v-footer color="primary" padless app>
@@ -76,8 +76,13 @@
 
 <script>
 import { mapGetters, mapActions, mapState } from 'vuex'
+import Menu from '../components/layout/Menu'
+import SubMenu from '../components/layout/SubMenu'
 
 export default {
+  components: {
+    Menu, SubMenu
+  },
   data: () => ({}),
   computed: {
     test () {

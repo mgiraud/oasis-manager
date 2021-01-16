@@ -21,7 +21,7 @@
           <v-spacer />
 
           <FormFilter :handle-filter="onSendFilter" :handle-reset="resetFilter">
-            <AdminPageFilter
+            <PageFilter
               ref="filterForm"
               slot="filter"
               :values="filters"
@@ -43,7 +43,7 @@
           {{ item.category.name }}
         </nuxt-link>
       </template>
-      <TableActionCell
+      <ActionCell
         slot="item.actions"
         slot-scope="props"
         :handle-edit="canEditPage ? () => editHandler(props.item) : null"
@@ -56,9 +56,15 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import { mapFields } from 'vuex-map-fields'
+import ActionCell from '../../../components/table/ActionCell'
+import PageFilter from '../../../components/admin/page/PageFilter'
+import FormFilter from '../../../components/form/FormFilter'
 import list from '~/mixins/list'
 
 export default {
+  components: {
+    ActionCell, PageFilter, FormFilter
+  },
   servicePrefix: 'admin-page',
   resourcePrefix: '/api/pages/',
   layout: 'Admin',

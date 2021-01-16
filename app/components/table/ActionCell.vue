@@ -35,7 +35,7 @@
         </v-icon>
       </v-btn>
     </v-row>
-    <UtilConfirmDelete
+    <ConfirmDelete
       v-if="handleDelete"
       :visible="confirmDelete"
       :handle-delete="handleDelete"
@@ -45,8 +45,13 @@
 </template>
 
 <script>
+import ConfirmDelete from '../util/ConfirmDelete'
+
 export default {
   name: 'ActionCell',
+  components: {
+    ConfirmDelete
+  },
   props: {
     handleShow: {
       type: Function,

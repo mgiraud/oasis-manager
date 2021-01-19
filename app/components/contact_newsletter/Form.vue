@@ -1,33 +1,26 @@
 <template>
   <v-form @submit.prevent="sendForm">
-    <v-container>
-      <v-row>
-        <v-col cols="12">
-          <v-text-field
-            v-model="item.email"
-            label="Inscrivez-vous à la newsletter !"
-            :error-messages="emailErrors"
-            required
-            @input="$v.item.email.$touch()"
-            @blur="$v.item.email.$touch()"
-          />
-        </v-col>
-      </v-row>
-    </v-container>
+    <v-text-field
+      v-model="item.email"
+      label="Inscrivez-vous à la newsletter !"
+      :error-messages="emailErrors"
+      @input="$v.item.email.$touch()"
+      @blur="$v.item.email.$touch()"
+    />
   </v-form>
 </template>
 
 <script>
-import { required, email } from 'vuelidate/lib/validators'
+import { email } from 'vuelidate/lib/validators'
 import has from 'lodash/has'
 import { mapActions } from 'vuex'
 import { validationMixin } from 'vuelidate'
 import { mapFields } from 'vuex-map-fields'
-import create from '../../mixins/create'
+import notification from '../../mixins/notification'
 
 export default {
   name: 'ContactNewsletterForm',
-  mixins: [validationMixin, create],
+  mixins: [validationMixin, notification],
   data: () => ({
     item: {
       email: null
@@ -41,16 +34,28 @@ export default {
         return errors
       }
       has(this.violations, 'email') && errors.push(this.violations.email)
-      !this.$v.item.email.required && errors.push('l\'email est obligatoire')
       !this.$v.item.email.email && errors.push('Cet email n\'est pas valide')
       return errors
     },
-    violations () {
-      return this.errors || {}
+    ...mapFields('contact_newsletter', ['error', 'isLoading', 'created', 'violations'])
+  },
+  watch: {
+    created (created) {
+      if (!created) {
+        return
+      }
+
+      this.item.email = null
+      this.timeout = 10000
+      this.showMessage('Vous être maintenant inscrit à la newsletter !')
+    },
+
+    error (message) {
+      message && this.showError(message)
     }
   },
   methods: {
-    ...mapActions('contact_newsletter', ['create', 'reset']),
+    ...mapActions('contact_newsletter', ['create']),
     sendForm () {
       this.$v.$touch()
       if (!this.$v.$invalid) {
@@ -61,7 +66,6 @@ export default {
   validations: {
     item: {
       email: {
-        required,
         email
       }
     }

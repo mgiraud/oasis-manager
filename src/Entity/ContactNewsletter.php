@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ContactNewsletterRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -29,6 +28,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(columns={"email"})})
  * @ORM\Entity(repositoryClass=ContactNewsletterRepository::class)
  * @UniqueEntity(fields={"email"})
+ * @\App\Validation\ContactNewsletter()
  */
 class ContactNewsletter
 {
@@ -51,6 +51,12 @@ class ContactNewsletter
      * @Groups({"contact_newsletter:read"})
      */
     private $createdAt;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $ip;
+
 
     public function __construct()
     {
@@ -82,6 +88,18 @@ class ContactNewsletter
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getIp(): ?string
+    {
+        return $this->ip;
+    }
+
+    public function setIp(string $ip): self
+    {
+        $this->ip = $ip;
 
         return $this;
     }

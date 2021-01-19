@@ -6,6 +6,7 @@ namespace App\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 use App\Entity\Contact;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
@@ -14,18 +15,18 @@ use Twig\Environment;
 
 class ContactPersister implements ContextAwareDataPersisterInterface
 {
-    private ContextAwareDataPersisterInterface $decorated;
+    private EntityManagerInterface $em;
     private MailerInterface $mailer;
     private RequestStack $requestStack;
     private Environment $twig;
 
     public function __construct(
+        EntityManagerInterface $em,
         RequestStack $requestStack,
-        ContextAwareDataPersisterInterface $decorated,
         MailerInterface $mailer,
         Environment $twig
     ) {
-        $this->decorated = $decorated;
+        $this->em = $em;
         $this->mailer = $mailer;
         $this->requestStack = $requestStack;
         $this->twig = $twig;
@@ -57,12 +58,14 @@ class ContactPersister implements ContextAwareDataPersisterInterface
 
         }
 
-        $this->decorated->persist($data, $context);
+        $this->em->persist($data);
+        $this->em->flush();
     }
 
     public function remove($data, array $context = [])
     {
-        $this->decorated->remove($data, $context);
+        $this->em->remove($data);
+        $this->em->flush();
     }
 
 }

@@ -24,7 +24,7 @@
         Les transalpins
       </v-toolbar-title>
       <v-spacer />
-      <newsletter-form :values="newsletterItem" />
+      <newsletter-form />
       <v-btn v-if="isAdmin" icon color="primary darken-4" @click="redirectToAdmin">
         Admin
       </v-btn>
@@ -85,11 +85,6 @@ export default {
   components: {
     Menu, SubMenu, NewsletterForm
   },
-  data: () => ({
-    newsletterItem: {
-      item: null
-    }
-  }),
   computed: {
     test () {
       return this.$store.state.page.activeSlug

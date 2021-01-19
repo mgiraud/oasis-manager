@@ -24,6 +24,7 @@
         Les transalpins
       </v-toolbar-title>
       <v-spacer />
+      <newsletter-form :values="newsletterItem" />
       <v-btn v-if="isAdmin" icon color="primary darken-4" @click="redirectToAdmin">
         Admin
       </v-btn>
@@ -78,12 +79,17 @@
 import { mapGetters, mapActions, mapState } from 'vuex'
 import Menu from '../components/layout/Menu'
 import SubMenu from '../components/layout/SubMenu'
+import NewsletterForm from '../components/contact_newsletter/Form'
 
 export default {
   components: {
-    Menu, SubMenu
+    Menu, SubMenu, NewsletterForm
   },
-  data: () => ({}),
+  data: () => ({
+    newsletterItem: {
+      item: null
+    }
+  }),
   computed: {
     test () {
       return this.$store.state.page.activeSlug

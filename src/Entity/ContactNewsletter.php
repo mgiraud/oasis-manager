@@ -2,10 +2,13 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ContactNewsletterRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
@@ -23,7 +26,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *         "delete"={"security"="is_granted('USER_CAN_DELETE_CONTACT_NEWSLETTER')"},
  *     }
  * )
+ * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(columns={"email"})})
  * @ORM\Entity(repositoryClass=ContactNewsletterRepository::class)
+ * @UniqueEntity(fields={"email"})
  */
 class ContactNewsletter
 {
@@ -36,6 +41,7 @@ class ContactNewsletter
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank()
      * @Groups({"contact_newsletter:read", "contact_newsletter:write"})
      */
     private $email;

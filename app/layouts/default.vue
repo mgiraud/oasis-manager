@@ -14,11 +14,6 @@
           v-bind="props"
         />
       </template>
-      <v-avatar
-        class="mr-10"
-        color="primary"
-        size="32"
-      />
       <newsletter-form />
 
       <v-toolbar-title>

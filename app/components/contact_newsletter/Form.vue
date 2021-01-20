@@ -77,4 +77,9 @@ export default {
 .newsletter-input {
   width: 250px
 }
+
+form {
+  margin-right: 20px;
+  padding-top:10px;
+}
 </style>

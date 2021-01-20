@@ -5,7 +5,8 @@
         <v-col cols="12" md="6">
           <v-text-field
             v-model="item.email"
-            label="Email"
+            prepend-inner-icon="mdi-email"
+            label="Email *"
             :error-messages="emailErrors"
             required
             @input="$v.item.email.$touch()"
@@ -15,6 +16,7 @@
         <v-col cols="12" sm="6" md="6">
           <v-text-field
             v-model="item.phoneNumber"
+            prepend-inner-icon="mdi-phone"
             label="Numéro de téléphone"
             :error-messages="phoneNumberErrors"
             @input="$v.item.phoneNumber.$touch()"
@@ -46,7 +48,7 @@
         <v-col cols="12">
           <v-text-field
             v-model="item.subject"
-            label="Sujet"
+            label="Sujet *"
             :error-messages="subjectErrors"
             required
             @input="$v.item.subject.$touch()"
@@ -56,9 +58,10 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-          <v-text-field
+          <v-textarea
             v-model="item.content"
-            label="Contenu du message"
+            rows="10"
+            label="Contenu du message *"
             :error-messages="contentErrors"
             required
             @input="$v.item.content.$touch()"

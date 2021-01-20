@@ -96,6 +96,16 @@ class Permissions
      */
     const USER_CAN_DELETE_CONTACT = 'user.can_delete_contacts';
 
+    /**
+     * The user can view newsletter contacts
+     */
+    const USER_CAN_VIEW_CONTACT_NEWSLETTER = 'user.can_view_contacts_newsletter';
+
+    /**
+     * The user can delete newsletter contacts
+     */
+    const USER_CAN_DELETE_CONTACT_NEWSLETTER = 'user.can_delete_contacts_newsletter';
+
     public static function getPermissions(): array
     {
         $c = new \ReflectionClass(Permissions::class);

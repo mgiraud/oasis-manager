@@ -5,7 +5,7 @@ export const state = () => ({
   color: 'error',
   text: 'An error occurred',
   subText: '',
-  timeout: -1
+  timeout: 10000
 })
 
 export const getters = {

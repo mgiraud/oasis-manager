@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    <alert />
     <v-row>
       <v-col cols="12">
         <v-card>
@@ -20,7 +19,6 @@
 import { mapFields } from 'vuex-map-fields'
 import { mapActions } from 'vuex'
 import ContactForm from '../components/contact/Form'
-import Alert from '../components/util/Alert'
 import notification from '../mixins/notification'
 import Toolbar from '../components/form/Toolbar'
 import Loading from '../components/util/Loading'
@@ -31,7 +29,6 @@ export default {
   resourcePrefix: '/api/contacts/',
   components: {
     ContactForm,
-    Alert,
     Toolbar,
     Loading
   },

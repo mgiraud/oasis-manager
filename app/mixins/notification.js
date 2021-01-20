@@ -14,7 +14,7 @@ export default {
     },
 
     showError (error) {
-      this.showMessage(error, 'danger')
+      this.showMessage(error, 'accent')
     },
 
     showMessage (message, color = 'success') {

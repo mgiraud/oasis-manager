@@ -19,6 +19,7 @@
         color="primary"
         size="32"
       />
+      <newsletter-form />
 
       <v-toolbar-title>
         Les transalpins
@@ -43,6 +44,7 @@
     <v-main class="secondary lighten-3">
       <SubMenu v-if="activeSlug !== null" />
       <Nuxt />
+      <alert />
     </v-main>
     <v-footer color="primary" padless app>
       <v-card
@@ -78,12 +80,13 @@
 import { mapGetters, mapActions, mapState } from 'vuex'
 import Menu from '../components/layout/Menu'
 import SubMenu from '../components/layout/SubMenu'
+import NewsletterForm from '../components/contact_newsletter/Form'
+import Alert from '../components/util/Alert'
 
 export default {
   components: {
-    Menu, SubMenu
+    Menu, SubMenu, NewsletterForm, Alert
   },
-  data: () => ({}),
   computed: {
     test () {
       return this.$store.state.page.activeSlug

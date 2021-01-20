@@ -17,7 +17,7 @@
         color="primary"
         @click="editItem"
       >
-        Edit
+        Editer
       </v-btn>
       <v-btn
         v-if="handleSubmit"
@@ -25,14 +25,14 @@
         color="primary"
         @click="submitItem"
       >
-        Submit
+        Envoyer
       </v-btn>
       <v-btn
         v-if="handleReset"
         class="ml-sm-2"
         @click="resetItem"
       >
-        Reset
+        Reinitialiser
       </v-btn>
       <v-btn
         v-if="handleDelete"
@@ -40,7 +40,7 @@
         class="ml-sm-2"
         @click="confirmDelete = true"
       >
-        Delete
+        Supprimer
       </v-btn>
 
       <v-btn v-if="handleAdd" color="primary" rounded @click="addItem">

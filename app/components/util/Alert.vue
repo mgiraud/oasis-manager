@@ -4,8 +4,7 @@
     :color="color"
     :multi-line="true"
     :timeout="timeout"
-    right
-    top
+    bottom
   >
     {{ text }}
     <template v-if="subText">

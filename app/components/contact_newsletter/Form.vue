@@ -4,6 +4,7 @@
       v-model="item.email"
       label="Inscrivez-vous à la newsletter !"
       :error-messages="emailErrors"
+      class="newsletter-input"
       @input="$v.item.email.$touch()"
       @blur="$v.item.email.$touch()"
     />
@@ -46,7 +47,6 @@ export default {
       }
 
       this.item.email = null
-      this.timeout = 10000
       this.showMessage('Vous être maintenant inscrit à la newsletter !')
     },
 
@@ -72,3 +72,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.newsletter-input {
+  width: 250px
+}
+</style>

@@ -51,15 +51,16 @@
       >
         <v-card-text class="my-0 py-0">
           <v-btn
-            v-for="link in ['Link1', 'Link2', 'Link3', 'Link4', 'Link5']"
-            :key="link"
+            v-for="link in [{label: 'Mentions légales', url: 'mentions_legales'}]"
+            :key="link.label"
+            :to="link.url"
             color="white"
             text
             rounded
             class="my-2"
             small
           >
-            {{ link }}
+            {{ link.label }}
           </v-btn>
         </v-card-text>
         <v-divider />

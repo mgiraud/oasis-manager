@@ -5,8 +5,11 @@
       label="Inscrivez-vous à la newsletter !"
       :error-messages="emailErrors"
       class="newsletter-input"
+      prepend-icon="mdi-email-outline"
+      append-outer-icon="mdi-close"
       @input="$v.item.email.$touch()"
       @blur="$v.item.email.$touch()"
+      @click:append-outer="onClickClose"
     />
   </v-form>
 </template>
@@ -22,6 +25,12 @@ import notification from '../../mixins/notification'
 export default {
   name: 'ContactNewsletterForm',
   mixins: [validationMixin, notification],
+  props: {
+    onClickClose: {
+      type: Function,
+      required: true
+    }
+  },
   data: () => ({
     item: {
       email: null
@@ -48,6 +57,7 @@ export default {
 
       this.item.email = null
       this.showMessage('Vous être maintenant inscrit à la newsletter !')
+      this.onClickClose()
     },
 
     error (message) {
@@ -74,10 +84,6 @@ export default {
 </script>
 
 <style scoped>
-.newsletter-input {
-  width: 250px
-}
-
 form {
   margin-right: 20px;
   padding-top:10px;

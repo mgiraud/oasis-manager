@@ -6,6 +6,7 @@
     light
     background-color="info"
     slider-color="primary darken-4"
+    show-arrows
   >
     <v-tab v-for="item in menuItems" :key="item.name" class="primary--text text--darken-4">
       {{ item.name }}

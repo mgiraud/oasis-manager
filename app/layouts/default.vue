@@ -14,7 +14,6 @@
           v-bind="props"
         />
       </template>
-      <newsletter-form />
 
       <v-toolbar-title>
         Les transalpins
@@ -38,6 +37,11 @@
 
     <v-main class="secondary lighten-3">
       <SubMenu v-if="activeSlug !== null" />
+      <v-card v-show="showNewsletter" class="card-newsletter">
+        <v-card-text>
+          <newsletter-form :on-click-close="onNewsletterClose" />
+        </v-card-text>
+      </v-card>
       <Nuxt />
       <alert />
     </v-main>
@@ -83,6 +87,9 @@ export default {
   components: {
     Menu, SubMenu, NewsletterForm, Alert
   },
+  data: () => ({
+    showNewsletter: true
+  }),
   computed: {
     test () {
       return this.$store.state.page.activeSlug
@@ -94,7 +101,26 @@ export default {
     ...mapActions('security', ['logout']),
     redirectToAdmin () {
       this.$router.push({ path: 'admin' })
+    },
+    onNewsletterClose () {
+      console.log('pouet')
+      this.showNewsletter = false
     }
   }
 }
 </script>
+
+<style>
+  .card-newsletter > .v-card__text {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+
+  .card-newsletter > .v-card__text > .v-form {
+    padding-top: 0px;
+  }
+
+  .card-newsletter > .v-card__text > .v-form > .v-text-field {
+    margin-top: 0px;
+  }
+</style>

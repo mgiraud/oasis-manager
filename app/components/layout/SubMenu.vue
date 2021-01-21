@@ -1,5 +1,5 @@
 <template>
-  <v-tabs v-model="tab" fixed-tabs optional>
+  <v-tabs v-model="tab" fixed-tabs optional show-arrows>
     <v-tab v-for="page in findByActiveSlug" :key="page['@id']" show-arrows>
       {{ page.title }}
     </v-tab>

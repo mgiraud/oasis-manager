@@ -2,6 +2,19 @@
   <v-form>
     <v-container>
       <v-row>
+        <v-col cols="12">
+          Avant de remplir le question, merci de prendre connaissance des éléments suivants :
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="6">
+          <v-img :src="require(`~/assets/img/join_process_1.png`)" contain />
+        </v-col>
+        <v-col cols="6">
+          <v-img :src="require(`~/assets/img/join_process_2.png`)" contain />
+        </v-col>
+      </v-row>
+      <v-row>
         <v-col cols="12" md="6">
           <h2>J'en dis un peu sur moi :</h2>
         </v-col>
@@ -157,28 +170,190 @@
           </v-row>
         </v-col>
       </v-row>
-      <v-divider />
+      <v-divider class="mb-5 mt-4" />
       <v-row>
         <v-col cols="12">
           <h2>Quelle est ma raison d'être ? Quelles sont mes motivations pour rejoindre ce projet ?</h2>
         </v-col>
       </v-row>
-      <v-divider />
+      <v-row>
+        <v-col cols="12">
+          <p class="v-label">
+            Dans les termes ci-dessous, quels sont ceux, quelques-uns qui définiraient le mieux ta motivation initiale à créer une oasis ? Les classer par ordre d’importance.
+          </p>
+          <vuetify-draggable-treeview v-model="item.motivationsRaw" />
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12">
+          <v-textarea
+            v-model="item.motivationsFreeThinking"
+            label="Qu'est-ce qui te motive à créer ou à t'engager dans un projet d'Oasis ?"
+            hint="Tu peux développer à loisir ta réponse."
+          />
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12">
+          <p class="v-label">
+            Quelles sont les valeurs essentielles que tu aimerais vivre : les valeurs non négociables, c-a-d dont l'absence ferait pour toi perdre son sens au projet et ta motivation à y participer ?
+          </p>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="6">
+          <v-textarea
+            v-model="item.coreValuesHuman"
+            label="Valeurs humaines"
+          />
+        </v-col>
+        <v-col cols="6">
+          <v-textarea
+            v-model="item.coreValuesOther"
+            label="Valeurs autres"
+          />
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="6">
+          <v-textarea
+            v-model="item.affinity"
+            label="Qu’est-ce qui t'attire dans le projet des transalpins ?"
+          />
+        </v-col>
+        <v-col cols="6">
+          <v-textarea
+            v-model="item.questioning"
+            label="Qu’est-ce qui te questionne dans ce projet ?"
+          />
+        </v-col>
+      </v-row>
+      <v-divider class="mb-5 mt-4" />
       <v-row>
         <v-col cols="12">
           <h2>Suis-je prêt.e à m'investir dans ce projet ?</h2>
         </v-col>
       </v-row>
-      <v-divider />
+      <v-row>
+        <v-col cols="12">
+          <v-textarea
+            v-model="item.investment"
+            label="Qu'est tu prêt.e à lui apporter ?"
+            hint="(En plus de ce que tu peux apporter dans la vie quotidienne, développez ici des projets professionnels/rémunérateurs ou autre que tu souhaiterais mettre en place en marge de l'oasis et un exemple de fonctionnement)."
+          />
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="6">
+          <v-textarea
+            v-model="item.bring"
+            label="En tant qu’habitant, es-tu prêt à investir ?"
+          />
+        </v-col>
+        <v-col cols="6">
+          <v-textarea
+            v-model="item.rent"
+            label="Es-tu prêt à payer un loyer ?"
+          />
+        </v-col>
+      </v-row>
+      <v-divider class="mb-5 mt-4" />
       <v-row>
         <v-col cols="12">
           <h2>Ma vie au quotidien </h2>
         </v-col>
       </v-row>
-      <v-divider />
+      <v-row>
+        <v-col cols="12">
+          <p class="v-label">
+            Et des questions encore plus concrètes : A quoi ressemblera ma vie quand je vivrai là ?
+          </p>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="6">
+          <v-textarea
+            v-model="item.typicalDay"
+            label="Décris une journée type"
+          />
+        </v-col>
+        <v-col cols="6">
+          <v-textarea
+            v-model="item.dwelling"
+            label="Décris ton habitation"
+          />
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="6">
+          <v-textarea
+            v-model="item.commonAreas"
+            label="Décrire les espaces communs"
+            hint="(Dans le cahier des charges nous avons déjà déterminé des espaces communs indispensables page 3, libre à toi d'en proposer d'autres)"
+          />
+        </v-col>
+        <v-col cols="6">
+          <v-textarea
+            v-model="item.relationship"
+            label="Décrire les relations au sein de l'oasis"
+            hint="(Nous souhaitons baser notre modèle de gouvernance sur la sociocratie avec des ajustements que nous ferons au fil des expérience)"
+          />
+        </v-col>
+      </v-row>
+      <v-divider class="mb-5 mt-4" />
       <v-row>
         <v-col cols="12">
           <h2>Mes savoir-faire et savoir-être</h2>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="6">
+          <v-textarea
+            v-model="item.cnvExperience"
+            label="Connais-tu la CNV ? Si oui quelle est ton expérience ?"
+          />
+        </v-col>
+        <v-col cols="6">
+          <v-textarea
+            v-model="item.sharedGovernance"
+            label="Connais-tu la gouvernance partagée si oui quelle est ton expérience ?"
+          />
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="6">
+          <v-textarea
+            v-model="item.skills"
+            label="Quels sont tes savoir-faire/être que tu peux amener au projet"
+          />
+        </v-col>
+        <v-col cols="6">
+          <v-textarea
+            v-model="item.limits"
+            label="Quelles sont test limites ?"
+          />
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12">
+          <v-textarea
+            v-model="item.availability"
+            label="Quelles sont test disponibilités durant la période de montage du projet ? Et tes disponibilités en semaine ?"
+          />
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="6">
+          <v-textarea
+            v-model="item.meet"
+            label="Serais-tu disposé.e à rencontrer des élus locaux, des banquiers, architectes… ?"
+          />
+        </v-col>
+        <v-col cols="6">
+          <v-textarea
+            v-model="item.skillUp"
+            label="Dans quel domaine utile au projet serais-tu prêt.e à te former ?"
+          />
         </v-col>
       </v-row>
     </v-container>
@@ -189,9 +364,13 @@
 import { required, email, maxLength } from 'vuelidate/lib/validators'
 import has from 'lodash/has'
 import { validationMixin } from 'vuelidate'
+import VuetifyDraggableTreeview from 'vuetify-draggable-treeview'
 
 export default {
   name: 'ContactForm',
+  components: {
+    VuetifyDraggableTreeview
+  },
   mixins: [validationMixin],
   props: {
     values: {

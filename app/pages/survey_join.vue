@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="12">
         <v-card>
-          <v-card-title>Vous souhaitez nous rejoindre ?</v-card-title>
+          <v-card-title>Tu souhaites nous rejoindre ?</v-card-title>
           <v-card-text>
             <survey-join-form ref="createForm" :values="item" :errors="violations" />
             <toolbar :handle-submit="onSendForm" :handle-reset="resetForm" />
@@ -35,7 +35,19 @@ export default {
   mixins: [create, notification],
   data: () => ({
     item: {
-      family: [{ firstName: null, age: null }, { firstName: null, age: null }, { firstName: null, age: null }, { firstName: null, age: null }]
+      family: [{ firstName: null, age: null }, { firstName: null, age: null }, { firstName: null, age: null }, { firstName: null, age: null }],
+      motivationsRaw: [
+        { name: 'Activité artistique', id: 'arts' },
+        { name: 'Amour de la nature', id: 'nature' },
+        { name: 'Autonomie', id: 'autonomy' },
+        { name: 'Collapsologie', id: 'collapsology' },
+        { name: 'Écologie', id: 'ecology' },
+        { name: 'Rêve d’enfant', id: 'child_dream' },
+        { name: 'Solidarité', id: 'solidarity' },
+        { name: 'Intergénérationnel', id: 'intergenerational' },
+        { name: 'Transmission', id: 'legacy' },
+        { name: 'Vivre ensemble', id: 'live_together' }
+      ]
     }
   }),
   computed: {
@@ -50,7 +62,18 @@ export default {
     }
   },
   methods: {
-    ...mapActions('survey_join', ['create', 'reset'])
+    ...mapActions('survey_join', { createSurvey: 'create' }),
+    ...mapActions('survey_join', ['reset']),
+    create (data) {
+      data.motivations = data.motivationsRaw.map(motivation => motivation.id)
+      data.acceptance = !!data.acceptance
+      this.createSurvey(data)
+    },
+    onCreated (item) {
+      this.showMessage('Le questionnaire a correctement été enregistré, nous prendrons contact avec toi le plus rapidement possible')
+
+      this.$router.push({ name: 'index' })
+    }
   }
 }
 </script>

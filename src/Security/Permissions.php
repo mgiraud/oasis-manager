@@ -106,6 +106,16 @@ class Permissions
      */
     const USER_CAN_DELETE_CONTACT_NEWSLETTER = 'user.can_delete_contacts_newsletter';
 
+    /**
+     * The user can view le the join survey
+     */
+    const USER_CAN_VIEW_SURVEY_JOIN = 'user.can_view_survey_joins';
+
+    /**
+     * The user can delete a join survey entry
+     */
+    const USER_CAN_DELETE_SURVEY_JOIN = 'user.can_delete_survey_joins';
+
     public static function getPermissions(): array
     {
         $c = new \ReflectionClass(Permissions::class);

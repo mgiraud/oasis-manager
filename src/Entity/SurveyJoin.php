@@ -5,10 +5,25 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\SurveyJoinRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     attributes={
+ *          "pagination_enabled"=false,
+ *          "normalization_context"={"groups"={"survey_join:read"}},
+ *          "denormalization_context"={"groups"={"survey_join:write"}},
+ *     },
+ *     collectionOperations={
+ *         "get"={"security"="is_granted('USER_CAN_VIEW_SURVEY_JOIN')"},
+ *         "post"={}
+ *     },
+ *     itemOperations={
+ *         "get"={"security"="is_granted('USER_CAN_VIEW_SURVEY_JOIN')"},
+ *         "delete"={"security"="is_granted('USER_CAN_DELETE_SURVEY_JOIN')"},
+ *     }
+ * )
  * @ORM\Entity(repositoryClass=SurveyJoinRepository::class)
  */
 class SurveyJoin
@@ -41,145 +56,173 @@ class SurveyJoin
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank()
+     * @Groups({"survey_join:read", "survey_join:write"})
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank()
+     * @Groups({"survey_join:read", "survey_join:write"})
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank()
+     * @Groups({"survey_join:read", "survey_join:write"})
      */
     private $city;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"survey_join:read", "survey_join:write"})
      */
     private $phoneNumber;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      * @Assert\Email()
+     * @Groups({"survey_join:read", "survey_join:write"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"survey_join:read", "survey_join:write"})
      */
     private $acceptance;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"survey_join:read", "survey_join:write"})
      */
     private $origin;
 
     /**
      * @ORM\Column(type="json", nullable=true)
-     * @Assert\Choice(choices=SurveyJoin::MOTIVATIONS)
+     * @Assert\Choice(choices=SurveyJoin::MOTIVATIONS, multiple=true)
+     * @Groups({"survey_join:read", "survey_join:write"})
      */
     private $motivations = [];
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"survey_join:read", "survey_join:write"})
      */
     private $motivationsFreeThinking;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"survey_join:read", "survey_join:write"})
      */
     private $coreValuesHuman;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"survey_join:read", "survey_join:write"})
      */
     private $coreValuesOther;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"survey_join:read", "survey_join:write"})
      */
     private $affinity;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"survey_join:read", "survey_join:write"})
      */
     private $questioning;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"survey_join:read", "survey_join:write"})
      */
     private $investment;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="text", nullable=true)
+     * @Groups({"survey_join:read", "survey_join:write"})
      */
     private $rent;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"survey_join:read", "survey_join:write"})
      */
     private $bring;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"survey_join:read", "survey_join:write"})
      */
     private $typicalDay;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"survey_join:read", "survey_join:write"})
      */
     private $dwelling;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"survey_join:read", "survey_join:write"})
      */
     private $commonAreas;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"survey_join:read", "survey_join:write"})
      */
     private $relationship;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"survey_join:read", "survey_join:write"})
      */
     private $cnvExperience;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"survey_join:read", "survey_join:write"})
      */
     private $sharedGovernance;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"survey_join:read", "survey_join:write"})
      */
     private $skills;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"survey_join:read", "survey_join:write"})
      */
     private $limits;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"survey_join:read", "survey_join:write"})
      */
     private $availability;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     */
-    private $weekAvailability;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
+     * @Groups({"survey_join:read", "survey_join:write"})
      */
     private $meet;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     * @Groups({"survey_join:read", "survey_join:write"})
+     */
+    private $skillUp;
+
+    /**
      * @ORM\Column(type="json", nullable=true)
+     * @Groups({"survey_join:read", "survey_join:write"})
      */
     private $family = [];
 
@@ -356,12 +399,12 @@ class SurveyJoin
         return $this;
     }
 
-    public function getRent(): ?bool
+    public function getRent(): ?string
     {
         return $this->rent;
     }
 
-    public function setRent(bool $rent): self
+    public function setRent(string $rent): self
     {
         $this->rent = $rent;
 
@@ -488,18 +531,6 @@ class SurveyJoin
         return $this;
     }
 
-    public function getWeekAvailability(): ?string
-    {
-        return $this->weekAvailability;
-    }
-
-    public function setWeekAvailability(?string $weekAvailability): self
-    {
-        $this->weekAvailability = $weekAvailability;
-
-        return $this;
-    }
-
     public function getMeet(): ?string
     {
         return $this->meet;
@@ -508,6 +539,18 @@ class SurveyJoin
     public function setMeet(?string $meet): self
     {
         $this->meet = $meet;
+
+        return $this;
+    }
+
+    public function getSkillUp(): ?string
+    {
+        return $this->skillUp;
+    }
+
+    public function setSkillUp(?string $skillUp): self
+    {
+        $this->skillUp = $skillUp;
 
         return $this;
     }

@@ -178,6 +178,11 @@ class SurveyJoin
      */
     private $meet;
 
+    /**
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $family = [];
+
     public function getId(): ?int
     {
         return $this->id;
@@ -503,6 +508,18 @@ class SurveyJoin
     public function setMeet(?string $meet): self
     {
         $this->meet = $meet;
+
+        return $this;
+    }
+
+    public function getFamily(): ?array
+    {
+        return $this->family;
+    }
+
+    public function setFamily(?array $family): self
+    {
+        $this->family = $family;
 
         return $this;
     }

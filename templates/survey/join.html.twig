@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        * {
+            font-family: "helvetica neue";
+        }
+    </style>
+</head>
+<body>
+<h1 class="font-bold text-center">Questionnaire pour rejoindre les transalpins</h1>
+
+<p>
+    Avant de remplir le question, merci de prendre connaissance des éléments suivants :
+</p>
+<div class="grid grid-cols-2 gap-4 ml-4 mr-4">
+    <div><img src="{{ url('api_doc') }}/../../app-assets/img/join_process_1.png" alt="p1"/></div>
+    <div><img src="{{ url('api_doc') }}/../../app-assets/img/join_process_2.png" alt="p2"/></div>
+</div>
+
+
+<h2>J'en dis un peu sur moi :</h2>
+
+<div class="grid grid-cols-8 gap-3 align-middle">
+    <div class="col-span-1">Email</div>
+    <div class="col-span-3"><input name="email" type="text" class="w-full p-1 border-gray-300 rounded-md border"></div>
+    <div class="col-span-1">Numéro de téléphone</div>
+    <div class="col-span-3"><input name="phone" type="text" class="w-full p-1 border-gray-300 rounded-md border"></div>
+    <div class="col-span-1">Prénom</div>
+    <div class="col-span-3"><input name="firstName" type="text" class="w-full p-1 border-gray-300 rounded-md border"></div>
+    <div class="col-span-1">Nom</div>
+    <div class="col-span-3"><input name="lastName" type="text" class="w-full p-1 border-gray-300 rounded-md border"></div>
+    <div class="col-span-1">Comment nous as tu connus ?</div>
+    <div class="col-span-3"><input name="lastName" type="text" class="w-full p-1 border-gray-300 rounded-md border"></div>
+    <div class="col-span-1">Acceptes-tu que cette adresse soit visible par les autres membres du groupe « les Transalpins » ?</div>
+    <div class="col-span-3"><input name="lastName" type="checkbox" class="w-full p-1 border-gray-300 rounded-md border"></div>
+</div>
+
+<p>De combien de personnes est composé ton foyer, prénom et âge des membres du foyer ?</p>
+<table class="table-fixed w-full">
+    <thead>
+    <tr>
+        <th class="w-3/4">Prénom</th>
+        <th class="w-1/4">Age</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="border border-light-blue-500 text-light-blue-600 font-medium"><input type="text" class="w-full"/></td>
+        <td class="border border-light-blue-500 text-light-blue-600 font-medium"><input type="text" class="w-full"/></td>
+    </tr>
+    <tr>
+        <td class="border border-light-blue-500 text-light-blue-600 font-medium"><input type="text" class="w-full"/></td>
+        <td class="border border-light-blue-500 text-light-blue-600 font-medium"><input type="text" class="w-full"/></td>
+    </tr>
+    <tr>
+        <td class="border border-light-blue-500 text-light-blue-600 font-medium"><input type="text" class="w-full"/></td>
+        <td class="border border-light-blue-500 text-light-blue-600 font-medium"><input type="text" class="w-full"/></td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Quelle est ma raison d'être ? Quelles sont mes motivations pour rejoindre ce projet ?</h2>
+
+<p>Dans les termes ci-dessous, quels sont ceux, quelques-uns qui définiraient le mieux ta motivation initiale à créer une oasis ? Les classer par ordre d’importance.</p>
+
+<table class="table-fixed w-full">
+    <thead>
+    <tr>
+        <th class="w-1/4">Rang</th>
+        <th class="w-3/4">Terme</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><input class="w-full" /></td>
+        <td>Activité artistique</td>
+    </tr>
+    <tr>
+        <td><input class="w-full" /></td>
+        <td>Amour de la nature</td>
+    </tr>
+    <tr>
+        <td><input class="w-full" /></td>
+        <td>Autonomie</td>
+    </tr>
+    <tr>
+        <td><input class="w-full" /></td>
+        <td>Collapsologie</td>
+    </tr>
+    <tr>
+        <td><input class="w-full" /></td>
+        <td>Écologie</td>
+    </tr>
+    <tr>
+        <td><input class="w-full" /></td>
+        <td>Rêve d’enfant</td>
+    </tr>
+    <tr>
+        <td><input class="w-full" /></td>
+        <td>Solidarité</td>
+    </tr>
+    <tr>
+        <td><input class="w-full" /></td>
+        <td>Intergénérationnel</td>
+    </tr>
+    <tr>
+        <td><input class="w-full" /></td>
+        <td>Transmission</td>
+    </tr>
+    <tr>
+        <td><input class="w-full" /></td>
+        <td>Vivre ensemble</td>
+    </tr>
+    </tbody>
+</table>
+<p>Qu'est-ce qui te motive à créer ou à t'engager dans un projet d'Oasis ?</p>
+<textarea></textarea>
+
+<p>Quelles sont les valeurs essentielles que tu aimerais vivre : les valeurs non négociables, c-a-d dont l'absence ferait pour toi perdre son sens au projet et ta motivation à y participer ?</p>
+<div class="grid">
+
+
+</div>
+<textarea></textarea>
+
+</body>
+</html>

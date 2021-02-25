@@ -17,7 +17,7 @@ class JoinController extends AbstractController
     public function joinSurveyPdf(Pdf $knpSnappyPdf)
     {
         $html = $this->renderView('survey/join.html.twig');
-        return new Response($html);
+//        return new Response($html);
         return new PdfResponse(
             $knpSnappyPdf->getOutputFromHtml($html),
             'file.pdf'

@@ -15,6 +15,11 @@
         </v-col>
       </v-row>
       <v-row>
+        <v-col cols="12">
+          Tu peux remplir ce questionnaire en ligne ou bien <a :href="downloadPdfUrl">Télécharger le PDF</a> pour le remplir numériquement ou manuellement et nous l'envoyer à l'addresse suivante : @AJOUTER
+        </v-col>
+      </v-row>
+      <v-row>
         <v-col cols="12" md="6">
           <h2>J'en dis un peu sur moi :</h2>
         </v-col>
@@ -80,7 +85,7 @@
         <v-col cols="12" sm="6" md="6">
           <v-checkbox
             v-model="item.acceptance"
-            label="Acceptes-tu que cette adresse soit visible par les autres membres du groupe « les Transalpins » ?"
+            label="En cochant cette case tu acceptes que ces informations soient visibles par les membres de l'association « les Transalpins » ne faisant pas partie du bureau"
             hide-details
           />
         </v-col>
@@ -247,26 +252,26 @@
         <v-col cols="6">
           <v-textarea
             v-model="item.bring"
-            label="En tant qu’habitant, es-tu prêt à investir ?"
+            label="En tant qu’habitant.e, es-tu prêt.e à investir financièrement ?"
           />
         </v-col>
         <v-col cols="6">
           <v-textarea
             v-model="item.rent"
-            label="Es-tu prêt à payer un loyer ?"
+            label="Es-tu prêt.e à payer un loyer ?"
           />
         </v-col>
       </v-row>
       <v-divider class="mb-5 mt-4" />
       <v-row>
         <v-col cols="12">
-          <h2>Ma vie au quotidien </h2>
+          <h2>Ma vie au quotidien</h2>
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="12">
           <p class="v-label">
-            Et des questions encore plus concrètes : A quoi ressemblera ma vie quand je vivrai là ?
+            Des questions encore plus concrètes : A quoi ressemblera ma vie quand je vivrai là ?
           </p>
         </v-col>
       </v-row>
@@ -390,6 +395,9 @@ export default {
       }
     }
   },
+  data: () => ({
+    downloadPdfUrl: process.env.apiBaseUrl + (process.env.apiBaseUrl.endsWith('/') ? '' : '/') + '../survey/join.pdf'
+  }),
   computed: {
     item () {
       return this.initialValues || this.values

@@ -73,6 +73,24 @@ export default {
       this.showMessage('Le questionnaire a correctement été enregistré, nous prendrons contact avec toi le plus rapidement possible')
 
       this.$router.push({ name: 'index' })
+    },
+    resetForm () {
+      this.$refs.createForm.$v.$reset()
+      this.item = {
+        family: [{ firstName: null, age: null }, { firstName: null, age: null }, { firstName: null, age: null }, { firstName: null, age: null }],
+        motivationsRaw: [
+          { name: 'Activité artistique', id: 'arts' },
+          { name: 'Amour de la nature', id: 'nature' },
+          { name: 'Autonomie', id: 'autonomy' },
+          { name: 'Collapsologie', id: 'collapsology' },
+          { name: 'Écologie', id: 'ecology' },
+          { name: 'Rêve d’enfant', id: 'child_dream' },
+          { name: 'Solidarité', id: 'solidarity' },
+          { name: 'Intergénérationnel', id: 'intergenerational' },
+          { name: 'Transmission', id: 'legacy' },
+          { name: 'Vivre ensemble', id: 'live_together' }
+        ]
+      }
     }
   }
 }

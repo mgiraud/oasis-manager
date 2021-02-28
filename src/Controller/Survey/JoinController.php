@@ -6,7 +6,6 @@ namespace App\Controller\Survey;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use Knp\Snappy\Pdf;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class JoinController extends AbstractController
@@ -17,10 +16,9 @@ class JoinController extends AbstractController
     public function joinSurveyPdf(Pdf $knpSnappyPdf)
     {
         $html = $this->renderView('survey/join.html.twig');
-//        return new Response($html);
         return new PdfResponse(
             $knpSnappyPdf->getOutputFromHtml($html),
-            'file.pdf'
+            'questionnaire_transalpins_v1.pdf'
         );
     }
 }

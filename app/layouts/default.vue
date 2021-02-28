@@ -103,7 +103,6 @@ export default {
       this.$router.push({ path: 'admin' })
     },
     onNewsletterClose () {
-      console.log('pouet')
       this.showNewsletter = false
     }
   }

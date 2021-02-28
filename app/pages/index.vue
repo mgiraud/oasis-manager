@@ -1,14 +1,15 @@
 <template>
   <v-container>
-    <div v-if="isLoggedIn">
-      You are logged in
-    </div>
-    <p v-else>
-      Please
-      <NuxtLink to="/login">
-        login
-      </NuxtLink>.
-    </p>
+    <v-row>
+      <v-col cols="12">
+        <v-card>
+          <v-card-title>Bienvenue chez les transalpins !</v-card-title>
+          <v-card-text>
+            Vous retrouverez sur ce site toutes les informations relatives au projet de création d'un habitat partagé
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

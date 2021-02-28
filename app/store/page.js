@@ -38,6 +38,11 @@ pageModule.getters.menuItems = (state, getters, rootState) => {
     name: 'Contact',
     url: 'contact'
   })
+
+  menu.push({
+    name: 'Rejoindre le groupe fondateur',
+    url: 'survey_join'
+  })
   return menu
 }
 

@@ -1,26 +1,51 @@
 <template>
   <div>
     <div class="editor">
-      <editor-menu-bar v-slot="{ commands, isActive }" :editor="editor">
-        <v-toolbar flat dark short>
-          <v-btn
-            v-for="button in buttons"
-            :key="button.icon + button.context"
-            icon
-            fab
-            :color="isActive[button.context] && isActive[button.context](button.options) ? 'grey' : undefined"
-            @click="commands[button.context] && commands[button.context](button.options)"
-          >
-            <component
-              :is="button.isIcon ? 'v-icon' : 'b'"
-              :class="{ 'is-active': isActive[button.context] && isActive[button.context](button.options) }"
-            >
-              {{ button.icon }}
-            </component>
-          </v-btn>
-        </v-toolbar>
-      </editor-menu-bar>
-
+      <v-toolbar v-if="editor" flat dark short>
+        <button :class="{ 'is-active': editor.isActive('bold') }" @click="editor.chain().focus().toggleBold().run()">
+          bold
+        </button>
+        <button :class="{ 'is-active': editor.isActive('italic') }" @click="editor.chain().focus().toggleBold().run()">
+          italic
+        </button>
+        <button :class="{ 'is-active': editor.isActive('italic') }" @click="editor.chain().focus().toggleBold().run()">
+          italic
+        </button>
+        <v-btn
+          small
+          :class="{ 'is-active': editor.isActive({ textAlign: 'left' }) }"
+          @click="editor.chain().focus().setTextAlign('left').run()"
+        >
+          <v-icon>mdi-format-align-left</v-icon>
+        </v-btn>
+        <v-btn
+          small
+          :class="{ 'is-active': editor.isActive({ textAlign: 'center' }) }"
+          @click="editor.chain().focus().setTextAlign('center').run()"
+        >
+          <v-icon>mdi-format-align-center</v-icon>
+        </v-btn>
+        <v-btn
+          small
+          :class="{ 'is-active': editor.isActive({ textAlign: 'right' }) }"
+          @click="editor.chain().focus().setTextAlign('right').run()"
+        >
+          <v-icon>mdi-format-align-right</v-icon>
+        </v-btn>
+        <v-btn
+          small
+          :class="{ 'is-active': editor.isActive({ textAlign: 'justify' }) }"
+          @click="editor.chain().focus().setTextAlign('justify').run()"
+        >
+          <v-icon>mdi-format-align-justify</v-icon>
+        </v-btn>
+        <v-btn
+          small
+          @click="editor.chain().focus().unsetTextAlign().run()"
+        >
+          Default
+        </v-btn>
+      </v-toolbar>
       <editor-content class="editor__content" :editor="editor" />
     </div>
 
@@ -39,6 +64,7 @@
       min-height: 100px;
       border: 1px solid #212121;
       padding: 10px;
+
       p {
         margin-bottom: 0;
       }
@@ -49,31 +75,13 @@
 
 <script>
 // import the component and the necessary extensions
-import { Editor, EditorContent, EditorMenuBar } from 'tiptap'
-import {
-  Blockquote,
-  CodeBlock,
-  HardBreak,
-  Heading,
-  HorizontalRule,
-  OrderedList,
-  BulletList,
-  ListItem,
-  TodoItem,
-  TodoList,
-  Bold,
-  Code,
-  Italic,
-  Link,
-  Strike,
-  Underline,
-  History
-} from 'tiptap-extensions'
+import { Editor, EditorContent } from '@tiptap/vue-2'
+import { defaultExtensions } from '@tiptap/starter-kit'
+import TextAlign from '@tiptap/extension-text-align'
 
 export default {
   components: {
-    EditorContent,
-    EditorMenuBar
+    EditorContent
   },
   props: {
     value: {
@@ -83,69 +91,35 @@ export default {
     }
   },
   data: () => ({
-    editor: null,
-    buttons: [
-      { context: 'bold', icon: 'mdi-format-bold', isIcon: true, options: {} },
-      { context: 'italic', icon: 'mdi-format-italic', isIcon: true, options: {} },
-      { context: 'strike', icon: 'mdi-format-strikethrough', isIcon: true, options: {} },
-      { context: 'underline', icon: 'mdi-format-underline', isIcon: true, options: {} },
-      { context: 'code', icon: 'mdi-code-tags', isIcon: true, options: {} },
-      { context: 'paragraph', icon: 'mdi-format-paragraph', isIcon: true, options: {} },
-      { context: 'heading', icon: 'H1', isIcon: false, options: { level: 1 } },
-      { context: 'heading', icon: 'H2', isIcon: false, options: { level: 2 } },
-      { context: 'heading', icon: 'H3', isIcon: false, options: { level: 3 } },
-      { context: 'bullet_list', icon: 'mdi-format-list-bulleted', isIcon: true, options: {} },
-      { context: 'ordered_list', icon: 'mdi-format-list-numbered', isIcon: true, options: {} },
-      { context: 'blockquote', icon: 'mdi-format-quote-close', isIcon: true, options: {} },
-      { context: 'code_block', icon: 'mdi-code-tags', isIcon: true, options: {} },
-      { context: 'horizontal_rule', icon: 'mdi-minus', isIcon: true, options: {} },
-      { context: 'undo', icon: 'mdi-undo', isIcon: true, options: {} },
-      { context: 'redo', icon: 'mdi-redo', isIcon: true, options: {} }
-    ]
+    editor: null
   }),
   watch: {
-    value (val) {
-      // so cursor doesn't jump to start on typing
-      if (this.editor && val !== this.value) {
-        this.editor.setContent(this.value, true)
+    value (value) {
+      const isSame = this.editor.getHTML() === value
+
+      if (isSame) {
+        return
       }
+
+      this.editor.commands.setContent(this.value, false)
     }
   },
   mounted () {
     this.editor = new Editor({
-      extensions: [
-        new Blockquote(),
-        new BulletList(),
-        new CodeBlock(),
-        new HardBreak(),
-        new Heading({ levels: [1, 2, 3] }),
-        new HorizontalRule(),
-        new ListItem(),
-        new OrderedList(),
-        new TodoItem(),
-        new TodoList(),
-        new Link(),
-        new Bold(),
-        new Code(),
-        new Italic(),
-        new Strike(),
-        new Underline(),
-        new History()
-      ],
-      // content: this.value,
-      onUpdate: ({ getHTML }) => {
-        this.$emit('input', getHTML())
-      }
+      content: this.value,
+      extensions: [...defaultExtensions(), TextAlign]
     })
-    this.editor.setContent(this.value)
+
+    this.editor.on('update', () => {
+      this.$emit('input', this.editor.getHTML())
+    })
   },
   beforeDestroy () {
     this.editor.destroy()
   },
   methods: {
     clearContent () {
-      this.editor.clearContent(true)
-      this.editor.focus()
+      this.editor.commands.setContent(null, false)
     }
   }
 

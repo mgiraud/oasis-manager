@@ -1623,6 +1623,13 @@
   resolved "https://registry.yarnpkg.com/@tiptap/extension-text/-/extension-text-2.0.0-beta.1.tgz#30777ae89690ddebdcf49dee620e05e547f1307e"
   integrity sha512-RS6n0qiQu/lXTeOtGX8nwCAoboyfi/UGC2/5Rz29NygPaPCW+Hli7/QvycC6R1efnCw5kUY1uNR0If5niswSfw==
 
+"@tiptap/extension-typography@^2.0.0-beta.1":
+  version "2.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-typography/-/extension-typography-2.0.0-beta.1.tgz#e1a605d7f675802590ddc1ea9b0ecc984ff4b0de"
+  integrity sha512-6W68LyswXe2+c9F0Py48W9F6DiBlDlhAUi3m3tGjUdb7F+79JHqlASoD5tSFSzr4tOUNiKad1MZpEDg5nK8Ypw==
+  dependencies:
+    prosemirror-inputrules "^1.1.3"
+
 "@tiptap/starter-kit@^2.0.0-beta.1":
   version "2.0.0-beta.1"
   resolved "https://registry.yarnpkg.com/@tiptap/starter-kit/-/starter-kit-2.0.0-beta.1.tgz#9ad36bdc322df268a0f2c509f5bbaa1b22864184"

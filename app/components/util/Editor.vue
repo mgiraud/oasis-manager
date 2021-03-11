@@ -140,6 +140,12 @@
           :click-handler="() => editor.chain().focus().setTextAlign('justify').run()"
           icon="mdi-format-align-justify"
         />
+        <editor-btn
+          label="Ajouter une image"
+          :btn-class="null"
+          :click-handler="addImage"
+          icon="mdi-file-image"
+        />
       </v-toolbar>
       <editor-content class="editor__content" :editor="editor" />
     </div>
@@ -184,6 +190,11 @@ import TextAlign from '@tiptap/extension-text-align'
 import EditorBtn from '@/components/util/Editor/EditorBtn'
 import Gapcursor from '@tiptap/extension-gapcursor'
 import Typography from '@tiptap/extension-typography'
+import Table from '@tiptap/extension-table'
+import TableRow from '@tiptap/extension-table-row'
+import TableCell from '@tiptap/extension-table-cell'
+import TableHeader from '@tiptap/extension-table-header'
+import Image from '@tiptap/extension-image'
 
 export default {
   components: {
@@ -214,7 +225,12 @@ export default {
   mounted () {
     this.editor = new Editor({
       content: this.value,
-      extensions: [...defaultExtensions(), TextAlign, Gapcursor, Typography]
+      extensions: [
+        ...defaultExtensions(), TextAlign, Gapcursor, Typography, Table.configure({
+          resizable: true
+        }),
+        TableRow, TableHeader, TableCell, Image
+      ]
     })
 
     this.editor.on('update', () => {
@@ -227,6 +243,13 @@ export default {
   methods: {
     clearContent () {
       this.editor.commands.setContent(null, false)
+    },
+    addImage () {
+      const url = window.prompt('URL')
+
+      if (url) {
+        this.editor.chain().focus().setImage({ src: url, inline: true }).run()
+      }
     }
   }
 

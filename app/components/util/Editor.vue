@@ -146,6 +146,7 @@
           :click-handler="addImage"
           icon="mdi-file-image"
         />
+        <file-upload-btn :editor="editor" />
       </v-toolbar>
       <editor-content class="editor__content" :editor="editor" />
     </div>
@@ -195,9 +196,12 @@ import TableRow from '@tiptap/extension-table-row'
 import TableCell from '@tiptap/extension-table-cell'
 import TableHeader from '@tiptap/extension-table-header'
 import Image from '@tiptap/extension-image'
+import FileUploadBtn from '@/components/util/Editor/FileUpload/FileUploadBtn'
+import FileUploadComponent from './Editor/FileUpload'
 
 export default {
   components: {
+    FileUploadBtn,
     EditorContent,
     EditorBtn
   },
@@ -229,7 +233,7 @@ export default {
         ...defaultExtensions(), TextAlign, Gapcursor, Typography, Table.configure({
           resizable: true
         }),
-        TableRow, TableHeader, TableCell, Image
+        TableRow, TableHeader, TableCell, Image, FileUploadComponent
       ]
     })
 

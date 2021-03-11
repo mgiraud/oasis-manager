@@ -27,7 +27,7 @@ export default {
   },
   data: () => ({
     item: {
-      content: null
+      content: '<file-upload-component count="0"></file-upload-component>'
     }
   }),
   computed: {

@@ -66,7 +66,8 @@ export default {
   data () {
     return {
       dialog: false,
-      thumbnails: []
+      thumbnails: [],
+      links: []
     }
   },
   methods: {
@@ -96,22 +97,29 @@ export default {
           onUploadProgress: (event) => {
             // commit('setFileUploadProgress', Math.round((100 * event.loaded) / event.total))
           }
-        }).then((e) => {
+        }).then((res) => {
           const imageType = /^image\//
-          if (!imageType.test(file.type)) {
-            return
+          if (imageType.test(file.type)) {
+            this.thumbnails.push({
+              src: res.contentUrl
+            })
+          } else {
+            this.links.push({
+              src: res.contentUrl,
+              name: res.filePath
+            })
           }
-
-          this.thumbnails.push({
-            src: e.contentUrl
-          })
         })
       }
     },
     injectFilesAndCloseDialog () {
       this.dialog = false
       this.thumbnails.forEach((thumbnail) => {
-        this.editor.chain().focus().setImage({ src: thumbnail.src, inline: true }).run()
+        this.editor.chain().focus().setImage({ src: thumbnail.src }).run()
+      })
+      this.links.forEach((link) => {
+        const node = this.editor.schema.text(link.name, [this.editor.schema.marks.link.create({ href: link.src })])
+        this.editor.view.dispatch(this.editor.state.tr.replaceSelectionWith(node, false))
       })
     }
   }

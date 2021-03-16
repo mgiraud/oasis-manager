@@ -147,6 +147,18 @@
           icon="mdi-file-image"
         />
         <file-upload-btn :editor="editor" />
+        <editor-btn
+          label="Ajouter un lien"
+          :click-handler="setLink"
+          :btn-class="{ 'is-active': editor.isActive('link') }"
+          icon="mdi-link-variant"
+        />
+        <editor-btn
+          v-if="editor.isActive('link')"
+          label="Supprimer le lien"
+          icon="mdi-link-variant-minus"
+          :click-handler="() => editor.chain().focus().unsetLink().run()"
+        />
       </v-toolbar>
       <editor-content class="editor__content" :editor="editor" />
     </div>
@@ -169,6 +181,10 @@
 
       p {
         margin-bottom: 0;
+      }
+
+      a {
+        color: #68CEF8;
       }
     }
   }
@@ -197,6 +213,7 @@ import TableCell from '@tiptap/extension-table-cell'
 import TableHeader from '@tiptap/extension-table-header'
 import Image from '@tiptap/extension-image'
 import FileUploadBtn from '@/components/util/Editor/FileUpload/FileUploadBtn'
+import Link from '@tiptap/extension-link'
 import FileUploadComponent from './Editor/FileUpload'
 
 export default {
@@ -230,10 +247,19 @@ export default {
     this.editor = new Editor({
       content: this.value,
       extensions: [
-        ...defaultExtensions(), TextAlign, Gapcursor, Typography, Table.configure({
+        ...defaultExtensions(),
+        TextAlign,
+        Gapcursor,
+        Typography,
+        Table.configure({
           resizable: true
         }),
-        TableRow, TableHeader, TableCell, Image, FileUploadComponent
+        TableRow,
+        TableHeader,
+        TableCell,
+        Image.configure({ inline: true }),
+        FileUploadComponent,
+        Link.configure({ openOnClick: true })
       ]
     })
 
@@ -254,6 +280,10 @@ export default {
       if (url) {
         this.editor.chain().focus().setImage({ src: url, inline: true }).run()
       }
+    },
+    setLink () {
+      const url = window.prompt('URL')
+      this.editor.chain().focus().setLink({ href: url }).run()
     }
   }
 

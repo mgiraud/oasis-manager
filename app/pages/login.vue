@@ -22,8 +22,8 @@
           <v-card-title>Connectez-vous !</v-card-title>
           <v-card-text>
             <v-form>
-              <v-text-field v-model="credentials.email" prepend-inner-icon="mdi-account" label="email" type="email" />
-              <v-text-field v-model="credentials.password" prepend-inner-icon="mdi-lock" label="password" type="password" />
+              <v-text-field v-model="credentials.email" prepend-inner-icon="ri-account-circle-line" label="email" type="email" />
+              <v-text-field v-model="credentials.password" prepend-inner-icon="ri-lock-2-line" label="password" type="password" />
             </v-form>
           </v-card-text>
           <v-card-actions>
@@ -40,6 +40,7 @@
 <script>
 import { mapState } from 'vuex'
 export default {
+  middleware: 'notAuthenticated',
   data: () => {
     return {
       credentials: {
@@ -48,7 +49,6 @@ export default {
       }
     }
   },
-  middleware: 'notAuthenticated',
   computed: {
     ...mapState('security', ['credentialError'])
   },

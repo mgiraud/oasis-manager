@@ -4,14 +4,14 @@
     :close-on-content-click="false"
     offset-y
   >
-    <template v-slot:activator="{ on, attrs }">
+    <template #activator="{ on, attrs }">
       <v-btn
         color="white"
         v-bind="attrs"
         v-on="on"
       >
         Filter <v-icon right>
-          mdi-filter-variant
+          ri-filter-line
         </v-icon>
       </v-btn>
     </template>

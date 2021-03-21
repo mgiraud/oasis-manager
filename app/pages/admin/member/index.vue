@@ -14,7 +14,7 @@
       show-select
       @update:options="onUpdateOptions"
     >
-      <template v-slot:top>
+      <template #top>
         <v-toolbar flat color="white">
           <v-toolbar-title>Liste de membres</v-toolbar-title>
 
@@ -54,15 +54,12 @@ export default {
   },
   servicePrefix: 'admin-member',
   resourcePrefix: '/api/members/',
+  mixins: [list],
   layout: 'Admin',
   middleware: 'hasPermissions',
   fetchOnServer: false,
   meta: {
     permissions: ['USER_CAN_ACCESS_MEMBERS']
-  },
-  mixins: [list],
-  async fetch ({ store }) {
-    await store.dispatch('member/fetchAll')
   },
   data: () => ({
     selected: [],
@@ -72,6 +69,9 @@ export default {
       { text: 'Actions', value: 'actions', sortable: false }
     ]
   }),
+  async fetch ({ store }) {
+    await store.dispatch('member/fetchAll')
+  },
   computed: {
     ...mapGetters('member', {
       items: 'list'

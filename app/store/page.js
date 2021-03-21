@@ -9,7 +9,7 @@ const pageModule = makeCrudModule({
   }
 })
 
-pageModule.getters.menuItems = (state, getters, rootState) => {
+pageModule.getters.menuItems = (_state, getters) => {
   const menu = []
   getters.list.forEach((page) => {
     if (!page || !page.showInMenu) {

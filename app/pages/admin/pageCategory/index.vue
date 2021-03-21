@@ -14,7 +14,7 @@
       show-select
       @update:options="onUpdateOptions"
     >
-      <template v-slot:top>
+      <template #top>
         <v-toolbar flat color="white">
           <v-toolbar-title>Page</v-toolbar-title>
 
@@ -65,15 +65,12 @@ export default {
   },
   servicePrefix: 'admin-pageCategory',
   resourcePrefix: '/api/page_categories/',
+  mixins: [list],
   layout: 'Admin',
   middleware: 'hasPermissions',
   fetchOnServer: false,
-  mixins: [list],
   meta: {
     permissions: ['USER_CAN_ACCESS_PAGE_CATEGORIES']
-  },
-  async fetch ({ store }) {
-    return await store.dispatch('page/fetchAll')
   },
   data: () => ({
     selected: [],
@@ -83,6 +80,9 @@ export default {
       { text: 'Actions', value: 'actions', sortable: false }
     ]
   }),
+  async fetch ({ store }) {
+    return await store.dispatch('page/fetchAll')
+  },
   computed: {
     ...mapGetters('page_category', {
       items: 'list'

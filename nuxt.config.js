@@ -13,7 +13,7 @@ export default {
     '@nuxtjs/universal-storage'
   ],
   buildModules: [
-    '@nuxtjs/eslint-module',
+    '@nuxt/typescript-build',
     ['@nuxtjs/vuetify', {
       icons: {
         iconfont: 'mdiSvg'
@@ -45,10 +45,14 @@ export default {
       prefix: 'oasis-manager-'
     }
   },
-  eslint: {
-    fix: true,
-    baseConfig: {
-      extends: ['@nuxtjs']
+  typescript: {
+    typeCheck: {
+      eslint: {
+        files: 'app/**/*.{ts,js,vue}'
+      }
     }
-  }
+  },
+  css: [
+    'remixicon/fonts/remixicon.css'
+  ]
 }

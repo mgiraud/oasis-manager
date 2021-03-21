@@ -9,7 +9,7 @@
         @click="handleShow"
       >
         <v-icon>
-          mdi-eye
+          ri-eye-line
         </v-icon>
       </v-btn>
       <v-btn
@@ -20,7 +20,7 @@
         @click="handleEdit"
       >
         <v-icon>
-          mdi-pencil
+          ri-edit-line
         </v-icon>
       </v-btn>
       <v-btn
@@ -31,7 +31,7 @@
         @click="confirmDelete = true"
       >
         <v-icon>
-          mdi-delete
+          ri-delete-bin-line
         </v-icon>
       </v-btn>
     </v-row>

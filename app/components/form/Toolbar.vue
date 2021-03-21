@@ -44,7 +44,7 @@
       </v-btn>
 
       <v-btn v-if="handleAdd" color="primary" rounded @click="addItem">
-        <v-icon>mdi-plus-circle</v-icon>
+        <v-icon>ri-add-line</v-icon>
       </v-btn>
     </div>
     <ConfirmDelete

@@ -38,26 +38,26 @@ export const actions = {
       return false
     }
   },
-  async logout ({ commit }) {
+  async logout () {
     this.$storage.setUniversal('user', null)
     return await this.$getRepository('members').call('logout')
   }
 }
 
 export const getters = {
-  isAdmin: (state, getters, rootState) => {
+  isAdmin: (_state, _getters, rootState) => {
     const user = rootState.storage ? rootState.storage.user : null
     return user instanceof Object && user.isAdmin
   },
-  isLoggedIn: (state, getters, rootState) => {
+  isLoggedIn: (_state, _getters, rootState) => {
     return rootState.storage && rootState.storage.user instanceof Object
   },
-  hasPermission: (state, getters, rootState) => (permission) => {
+  hasPermission: (_state, _getters, rootState) => (permission) => {
     if (permission === null) { return false }
     const user = rootState.storage ? rootState.storage.user : null
     return !!(user && user.permissions && user.permissions.includes(permission))
   },
-  hasPermissions: (state, getters) => (permissions) => {
+  hasPermissions: (_state, getters) => (permissions) => {
     return !permissions.some((permission) => {
       return !getters.hasPermission(permission)
     })

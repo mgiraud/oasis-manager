@@ -14,7 +14,7 @@
       show-select
       @update:options="onUpdateOptions"
     >
-      <template v-slot:top>
+      <template #top>
         <v-toolbar flat color="white">
           <v-toolbar-title>Page</v-toolbar-title>
 
@@ -67,15 +67,12 @@ export default {
   },
   servicePrefix: 'admin-page',
   resourcePrefix: '/api/pages/',
+  mixins: [list],
   layout: 'Admin',
   middleware: 'hasPermissions',
   fetchOnServer: false,
-  mixins: [list],
   meta: {
     permissions: ['USER_CAN_ACCESS_PAGES']
-  },
-  async fetch ({ store }) {
-    return await store.dispatch('page/fetchAll')
   },
   data: () => ({
     selected: [],
@@ -88,6 +85,9 @@ export default {
       { text: 'Actions', value: 'actions', sortable: false }
     ]
   }),
+  async fetch ({ store }) {
+    return await store.dispatch('page/fetchAll')
+  },
   computed: {
     ...mapGetters('page', {
       items: 'list'

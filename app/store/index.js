@@ -4,7 +4,7 @@ const cookieparser = process.server ? require('cookieparser') : undefined
 export const strict = process.env.NODE_ENV === 'prod'
 
 export const actions = {
-  async nuxtServerInit ({ commit, dispatch }, { req, app }) {
+  async nuxtServerInit ({ dispatch }, { req }) {
     // Load permissions list from file
     dispatch('security/loadPermissions')
     // Load page categories for menu rendering

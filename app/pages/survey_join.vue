@@ -69,7 +69,7 @@ export default {
       data.acceptance = !!data.acceptance
       this.createSurvey(data)
     },
-    onCreated (item) {
+    onCreated (_item) {
       this.showMessage('Le questionnaire a correctement été enregistré, nous prendrons contact avec toi le plus rapidement possible')
 
       this.$router.push({ name: 'index' })

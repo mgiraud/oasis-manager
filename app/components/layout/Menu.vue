@@ -11,10 +11,10 @@
     <v-tab v-for="item in menuItems" :key="item.name" class="primary--text text--darken-4">
       {{ item.name }}
       <v-icon v-if="!item.url && activeSlug !== item.slug">
-        mdi-menu-down
+        ri-arrow-drop-down-fill
       </v-icon>
       <v-icon v-if="!item.url && activeSlug === item.slug">
-        mdi-menu-up
+        ri-arrow-drop-up-fill
       </v-icon>
     </v-tab>
   </v-tabs>

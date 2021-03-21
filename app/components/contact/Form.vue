@@ -5,7 +5,7 @@
         <v-col cols="12" md="6">
           <v-text-field
             v-model="item.email"
-            prepend-inner-icon="mdi-email"
+            prepend-inner-icon="ri-mail-line"
             label="Email *"
             :error-messages="emailErrors"
             required
@@ -16,7 +16,7 @@
         <v-col cols="12" sm="6" md="6">
           <v-text-field
             v-model="item.phoneNumber"
-            prepend-inner-icon="mdi-phone"
+            prepend-inner-icon="ri-phone-line"
             label="Numéro de téléphone"
             :error-messages="phoneNumberErrors"
             @input="$v.item.phoneNumber.$touch()"

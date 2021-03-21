@@ -3,15 +3,15 @@
     v-model="dialog"
     width="500"
   >
-    <template v-slot:activator="{ on: onDropdown, attrs: attrsDropdown }">
+    <template #activator="{ on: onDropdown, attrs: attrsDropdown }">
       <v-tooltip top>
-        <template v-slot:activator="{ on: onTooltip, attrs: attrsTooltip }">
+        <template #activator="{ on: onTooltip, attrs: attrsTooltip }">
           <v-btn
             small
             v-bind="{...attrsDropdown, ...attrsTooltip}"
             v-on="{...onDropdown, ...onTooltip}"
           >
-            <v-icon>mdi-upload</v-icon>
+            <v-icon>ri-file-transfer-line</v-icon>
           </v-btn>
         </template>
         <span>Téléverser un fichier</span>
@@ -94,7 +94,7 @@ export default {
           method: 'POST',
           'Content-Type': 'multipart/form-data',
           body: formData,
-          onUploadProgress: (event) => {
+          onUploadProgress: (_event) => {
             // commit('setFileUploadProgress', Math.round((100 * event.loaded) / event.total))
           }
         }).then((res) => {

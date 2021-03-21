@@ -9,7 +9,7 @@
       app
       dark
     >
-      <template v-slot:img="{ props }">
+      <template #img="{ props }">
         <v-img
           v-bind="props"
         />
@@ -23,14 +23,14 @@
         Admin
       </v-btn>
       <v-btn v-if="isLoggedIn" icon color="primary darken-4" @click="logout">
-        <v-icon>mdi-logout</v-icon>
+        <v-icon>ri-logout-box-line</v-icon>
       </v-btn>
       <v-btn v-else icon to="/login">
         <v-icon color="primary darken-4">
-          mdi-login
+          ri-login-box-line
         </v-icon>
       </v-btn>
-      <template v-slot:extension>
+      <template #extension>
         <Menu />
       </template>
     </v-app-bar>

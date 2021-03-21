@@ -14,7 +14,7 @@
       show-select
       @update:options="onUpdateOptions"
     >
-      <template v-slot:top>
+      <template #top>
         <v-toolbar flat color="white">
           <v-toolbar-title>Groupe de membres</v-toolbar-title>
 
@@ -67,16 +67,13 @@ export default {
   },
   servicePrefix: 'admin-memberGroup',
   resourcePrefix: '/api/member_groups/',
+  mixins: [list],
   layout: 'Admin',
   middleware: 'hasPermissions',
   meta: {
     permissions: ['USER_CAN_ACCESS_MEMBER_GROUPS']
   },
   fetchOnServer: false,
-  mixins: [list],
-  async fetch ({ store }) {
-    return await store.dispatch('member_group/fetchAll')
-  },
   data: () => ({
     selected: [],
     headers: [
@@ -85,6 +82,9 @@ export default {
       { text: 'Actions', value: 'actions', sortable: false }
     ]
   }),
+  async fetch ({ store }) {
+    return await store.dispatch('member_group/fetchAll')
+  },
   computed: {
     ...mapGetters('member_group', {
       items: 'list'

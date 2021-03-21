@@ -28,7 +28,7 @@
         <v-col cols="12" md="6">
           <v-text-field
             v-model="item.email"
-            prepend-inner-icon="mdi-email"
+            prepend-inner-icon="ri-mail-line"
             label="Email"
             :error-messages="emailErrors"
             required
@@ -39,7 +39,7 @@
         <v-col cols="12" sm="6" md="6">
           <v-text-field
             v-model="item.phoneNumber"
-            prepend-inner-icon="mdi-phone"
+            prepend-inner-icon="ri-phone-line"
             label="Numéro de téléphone"
             :error-messages="phoneNumberErrors"
             @input="$v.item.phoneNumber.$touch()"
@@ -106,8 +106,8 @@
               <v-text-field
                 v-model.number="item.family[0].age"
                 label="Age"
-                append-outer-icon="mdi-numeric-positive-1"
-                prepend-icon="mdi-numeric-negative-1"
+                append-outer-icon="ri-add-line"
+                prepend-icon="ri-subtract-line"
                 @click:append-outer="increment(0)"
                 @click:prepend="decrement(0)"
               />
@@ -126,8 +126,8 @@
               <v-text-field
                 v-model.number="item.family[1].age"
                 label="Age"
-                append-outer-icon="mdi-numeric-positive-1"
-                prepend-icon="mdi-numeric-negative-1"
+                append-outer-icon="ri-add-line"
+                prepend-icon="ri-subtract-line"
                 @click:append-outer="increment(1)"
                 @click:prepend="decrement(1)"
               />
@@ -146,8 +146,8 @@
               <v-text-field
                 v-model.number="item.family[2].age"
                 label="Age"
-                append-outer-icon="mdi-numeric-positive-1"
-                prepend-icon="mdi-numeric-negative-1"
+                append-outer-icon="ri-add-line"
+                prepend-icon="ri-subtract-line"
                 @click:append-outer="increment(2)"
                 @click:prepend="decrement(2)"
               />
@@ -166,8 +166,8 @@
               <v-text-field
                 v-model.number="item.family[3].age"
                 label="Age"
-                append-outer-icon="mdi-numeric-positive-1"
-                prepend-icon="mdi-numeric-negative-1"
+                append-outer-icon="ri-add-line"
+                prepend-icon="ri-subtract-line"
                 @click:append-outer="increment(3)"
                 @click:prepend="decrement(3)"
               />

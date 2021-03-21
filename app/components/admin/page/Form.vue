@@ -63,8 +63,6 @@
             <Editor
               v-if="item.content !== undefined"
               v-model="item.content"
-              @input="$v.item.title.$touch()"
-              @blur="$v.item.title.$touch()"
             />
           </ClientOnly>
         </v-col>

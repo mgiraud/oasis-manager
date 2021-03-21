@@ -36,7 +36,7 @@ export default (context, { resource }) => ({
       query = `${query}?${queryString}`
     }
 
-    const payload = options.body && JSON.parse(options.body)
+    const payload = options['Content-Type'] !== 'multipart/form-data' && options.body && JSON.parse(options.body)
     if (isObject(payload) && payload['@id']) {
       options.body = JSON.stringify(normalize(payload))
     }
@@ -104,5 +104,9 @@ export default (context, { resource }) => ({
       method: 'PUT',
       body: JSON.stringify(payload)
     })
+  },
+
+  async $post (url, options) {
+    return await this.validateAndDecodeResponse(url, options)
   }
 })

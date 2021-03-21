@@ -27,7 +27,7 @@ export default {
   },
   data: () => ({
     item: {
-      content: null
+      content: ''
     }
   }),
   computed: {

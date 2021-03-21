@@ -15,30 +15,26 @@
   </v-dialog>
 </template>
 
-<script>
-export default {
-  name: 'ConfirmDelete',
-  props: {
-    visible: {
-      type: Boolean,
-      required: true,
-      default: () => false
-    },
-    handleDelete: {
-      type: Function,
-      required: true
-    }
-  },
-  computed: {
-    show: {
-      get () {
-        return this.visible
-      },
-      set (value) {
-        if (!value) {
-          this.$emit('close')
-        }
-      }
+<script lang="ts">
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
+
+@Component({
+  name: 'ConfirmDelete'
+})
+export default class ConfirmDelete extends Vue {
+   @Prop({ type: Function, default: () => {} })
+  handleDelete: any
+
+  @Prop({ type: Boolean, default: true, required: false })
+  visible!: any
+
+  get show () {
+    return this.visible
+  }
+
+  set show (value) {
+    if (!value) {
+      this.$emit('close')
     }
   }
 }

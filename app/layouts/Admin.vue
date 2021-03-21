@@ -10,13 +10,16 @@
   </v-app>
 </template>
 
-<script>
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator'
 import MenuDrawer from '../components/admin/MenuDrawer'
 import Alert from '../components/util/Alert'
 
-export default {
+@Component({
   components: {
     MenuDrawer, Alert
   }
+})
+export default class AdminLayout extends Vue {
 }
 </script>

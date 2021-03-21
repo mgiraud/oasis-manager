@@ -35,50 +35,45 @@
         </Toolbar>
       </v-col>
     </v-row>
-    <Loading :visible="deleteLoading" />
+    <Loading :visible="isLoading" />
   </v-container>
 </template>
-<script>
-import { mapGetters, mapActions } from 'vuex'
-import { mapFields } from 'vuex-map-fields'
-import Loading from '../../../components/util/Loading'
-import Toolbar from '../../../components/form/Toolbar'
-import Form from '../../../components/admin/page/Form'
+<script lang="ts">
+import { Component, mixins, namespace } from 'nuxt-property-decorator'
+import Loading from '~/components/util/Loading'
+import Toolbar from '~/components/form/Toolbar'
+import Form from '~/components/admin/page/Form'
 import update from '~/mixins/update'
+import { Page } from '~/store/page'
 
-export default {
+const pageModule = namespace('page')
+
+@Component({
   components: {
     Loading, Toolbar, Form
   },
-  mixins: [update],
   servicePrefix: 'admin-page',
   resourcePrefix: '/api/pages/',
   middleware: 'hasPermissions',
   meta: {
     permissions: ['USER_CAN_EDIT_PAGES']
-  },
-  computed: {
-    ...mapFields('page', {
-      deleteLoading: 'isLoading',
-      isLoading: 'isLoading',
-      error: 'error',
-      updated: 'updated',
-      violations: 'violations'
-    }),
-    ...mapGetters('page', ['find']),
-    canDeletePage () {
-      return this.hasPermission('USER_CAN_DELETE_PAGES')
-    }
-  },
-  methods: {
-    ...mapActions('page', {
-      createReset: 'resetCreate',
-      deleteItem: 'del',
-      delReset: 'resetDelete',
-      retrieve: 'load',
-      update: 'update',
-      updateReset: 'resetUpdate'
-    })
   }
+})
+export default class AdminPageEdit extends mixins(update) {
+  @pageModule.State('updated') updated!: Page | null
+  @pageModule.State('error') error!: string | null
+  @pageModule.State('isLoading') isLoading!: boolean
+  @pageModule.State('violations') violations!: string[]
+
+  @pageModule.Getter('find') find!: (id: string) => Page | null
+  get canDeletePage () {
+    return this.hasPermission('USER_CAN_DELETE_PAGES')
+  }
+
+  @pageModule.Action('resetCreate') createReset!: () => void
+  @pageModule.Action('resetDelete') delReset!: () => void
+  @pageModule.Action('load') retrieve!: (id: string) => void
+  @pageModule.Action('update') update!: (pageCateogry: Page) => Page
+  @pageModule.Action('resetUpdate') updateReset!: () => void
 }
 </script>

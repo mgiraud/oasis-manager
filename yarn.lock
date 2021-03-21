@@ -1688,6 +1688,11 @@
   resolved "https://registry.yarnpkg.com/@types/less/-/less-3.0.2.tgz#2761d477678c8374cb9897666871662eb1d1115e"
   integrity sha512-62vfe65cMSzYaWmpmhqCMMNl0khen89w57mByPi1OseGfcV/LV03fO8YVrNj7rFQsRWNJo650WWyh6m7p8vZmA==
 
+"@types/lodash@^4.14.168":
+  version "4.14.168"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.168.tgz#fe24632e79b7ade3f132891afff86caa5e5ce008"
+  integrity sha512-oVfRvqHV/V6D1yifJbVRU3TMp8OT6o6BG+U9MkwuJ3U8/CsDHvalRpsxBqivn71ztOFZBTfJMvETbqHiaNSj7Q==
+
 "@types/mime@^1":
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/@types/mime/-/mime-1.3.2.tgz#93e25bf9ee75fe0fd80b594bc4feb0e862111b5a"
@@ -1880,6 +1885,13 @@
   integrity sha512-EGkrJD5Uy+Pg0NUR8uA4bJ5WMfljyad0G+784vLCNUkD+QwOJXUbBYExXfVGf7YtyzdQp3L/XMYcliB987kL5Q==
   dependencies:
     source-map "^0.6.1"
+
+"@types/vuelidate@^0.7.14":
+  version "0.7.14"
+  resolved "https://registry.yarnpkg.com/@types/vuelidate/-/vuelidate-0.7.14.tgz#5c5e41884f61a7f37660112e98efdcdcb0e7aca2"
+  integrity sha512-6fKq/AYRCZValyTblW3frG9L5JELlHLAnXKg4y6j+OWznEzZroej+jzGv3bLyRnRJ42CImvP0/ylm0LvAmzpNg==
+  dependencies:
+    vue "^2.6.11"
 
 "@types/webpack-bundle-analyzer@^3.9.1":
   version "3.9.1"
@@ -6180,14 +6192,15 @@ num2fraction@^1.2.2:
   resolved "https://registry.yarnpkg.com/num2fraction/-/num2fraction-1.2.2.tgz#6f682b6a027a4e9ddfa4564cd2589d1d4e669ede"
   integrity sha1-b2gragJ6Tp3fpFZM0lidHU5mnt4=
 
-nuxt-typed-vuex@^0.1.22:
-  version "0.1.22"
-  resolved "https://registry.yarnpkg.com/nuxt-typed-vuex/-/nuxt-typed-vuex-0.1.22.tgz#aff07cc39985146a75e8b40678fe0f2011d1a561"
-  integrity sha512-2X7/BSbN/tlBfVi5BR3unHTpVOnxxfiltR+E8XLdhlK9KHgSOWyDbnqFtxB5VAXA9efgTFlCq9UwG1xby+ubXQ==
+nuxt-property-decorator@^2.9.1:
+  version "2.9.1"
+  resolved "https://registry.yarnpkg.com/nuxt-property-decorator/-/nuxt-property-decorator-2.9.1.tgz#60fd87b64d85519b091374c7ea4c0ce1979f6afa"
+  integrity sha512-dE2GrrGKZMhv0dHAr+Lmj+JOQfjIouINgF58QNRDFNOZXMJrXxKO5zGqvCRwmx3hxqqwht7TXHdz9w1AnvL2IA==
   dependencies:
-    consola "^2.15.0"
-    normalize-path "^3.0.0"
-    typed-vuex "0.1.22"
+    vue-class-component "^7.2.6"
+    vue-property-decorator "^9.0.0"
+    vuex-class "^0.3.2"
+    vuex-module-decorators "^1.0.1"
 
 nuxt@^2.14.7:
   version "2.15.3"
@@ -8815,11 +8828,6 @@ type-fest@^0.8.1:
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.8.1.tgz#09e249ebde851d3b1e48d27c105444667f17b83d"
   integrity sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
 
-typed-vuex@0.1.22:
-  version "0.1.22"
-  resolved "https://registry.yarnpkg.com/typed-vuex/-/typed-vuex-0.1.22.tgz#e35a896fa7d76b37904041d38c55037b70ccf240"
-  integrity sha512-WJkYbLX9DbnjVnSKS1LNrqEXB6gbRCfk2qExAA+wa1RGQAURZpdSQ/A33YkgfQbzNitJbgR0qzjE7jclSWC6Ag==
-
 typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
@@ -9119,7 +9127,7 @@ vue-no-ssr@^1.1.1:
   resolved "https://registry.yarnpkg.com/vue-no-ssr/-/vue-no-ssr-1.1.1.tgz#875f3be6fb0ae41568a837f3ac1a80eaa137b998"
   integrity sha512-ZMjqRpWabMPqPc7gIrG0Nw6vRf1+itwf0Itft7LbMXs2g3Zs/NFmevjZGN1x7K3Q95GmIjWbQZTVerxiBxI+0g==
 
-vue-property-decorator@^9.1.2:
+vue-property-decorator@^9.0.0:
   version "9.1.2"
   resolved "https://registry.yarnpkg.com/vue-property-decorator/-/vue-property-decorator-9.1.2.tgz#266a2eac61ba6527e2e68a6933cfb98fddab5457"
   integrity sha512-xYA8MkZynPBGd/w5QFJ2d/NM0z/YeegMqYTphy7NJQXbZcuU6FC6AOdUAcy4SXP+YnkerC6AfH+ldg7PDk9ESQ==
@@ -9164,7 +9172,7 @@ vue-template-es2015-compiler@^1.9.0:
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
 
-vue@^2.6.12:
+vue@^2.6.11, vue@^2.6.12:
   version "2.6.12"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.12.tgz#f5ebd4fa6bd2869403e29a896aed4904456c9123"
   integrity sha512-uhmLFETqPPNyuLLbsKz6ioJ4q7AZHzD8ZVFNATNyICSZouqP2Sz0rotWQC8UNBF6VGSCs5abnKJoStA6JbCbfg==
@@ -9200,10 +9208,20 @@ vuetify@^2.4.2:
   resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-2.4.6.tgz#127b37bd36c7a63f61615e0cd6f97e8b203e7a07"
   integrity sha512-oqAWKAin07ip/QuT/p4bL1LegE3MYPbfojrOcj80RATZDSnJyco2PZD8QuIzd0RhYfdAuSTkY8elvHsLu90RuQ==
 
+vuex-class@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/vuex-class/-/vuex-class-0.3.2.tgz#c7e96a076c1682137d4d23a8dcfdc63f220e17a8"
+  integrity sha512-m0w7/FMsNcwJgunJeM+wcNaHzK2KX1K1rw2WUQf7Q16ndXHo7pflRyOV/E8795JO/7fstyjH3EgqBI4h4n4qXQ==
+
 vuex-map-fields@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/vuex-map-fields/-/vuex-map-fields-1.4.1.tgz#3f22f0c3d39e25968d3a74fc2b43738c23c4ae4d"
   integrity sha512-jvIcpvoIPqwvJCOfRkPU9Rj0EbjWuk7GlNC5LXU9mCXVGZph6bWGHZssnoUzpLMxJtXQEHoVyZkKf7YQV+/bnQ==
+
+vuex-module-decorators@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/vuex-module-decorators/-/vuex-module-decorators-1.0.1.tgz#d34dafb5428a3636f1c26d3d014c15fc9659ccd0"
+  integrity sha512-FLWZsXV5XAtl/bcKUyQFpnSBtpc3wK/7zSdy9oKbyp71mZd4ut5y2zSd219wWW9OG7WUOlVwac4rXFFDVnq7ug==
 
 vuex@^3.6.2:
   version "3.6.2"

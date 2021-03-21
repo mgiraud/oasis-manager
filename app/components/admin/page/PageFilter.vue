@@ -15,14 +15,14 @@
       </v-col>
 
       <v-col cols="12" sm="6" md="6">
-        <FormDateType
+        <DateType
           v-model="item['createdAt[before]']"
           label="Créé avant le"
         />
       </v-col>
 
       <v-col cols="12" sm="6" md="6">
-        <FormDateType
+        <DateType
           v-model="item['createdAt[after]']"
           label="Créé après le"
         />
@@ -51,31 +51,30 @@
   </v-container>
 </template>
 
-<script>
-import { mapActions, mapState } from 'vuex'
-export default {
-  name: 'AdminPageFilter',
-  props: {
-    values: {
-      type: Object,
-      required: true
-    }
-  },
+<script lang="ts">
+import { Component, Vue, namespace, Prop } from 'nuxt-property-decorator'
+import DateType from '~/components/form/DateType'
+import { PageCategory } from '~/store/page_category'
+
+const pageCategoryModule = namespace('page_category')
+
+@Component({
+  components: {
+    DateType
+  }
+})
+export default class PageFilter extends Vue {
+  @Prop({ type: Object, required: true }) readonly values!: any
+
   async fetch () {
     return await this.categoryGetSelectItems()
-  },
-  computed: {
-    ...mapState('page_category', {
-      categorySelectItems: 'selectItems'
-    }),
-    item () {
-      return this.initialValues || this.values
-    }
-  },
-  methods: {
-    ...mapActions({
-      categoryGetSelectItems: 'page_category/fetchSelectItems'
-    })
+  }
+
+  @pageCategoryModule.State('selectItems') categorySelectItems !: PageCategory[]
+  @pageCategoryModule.Action('fetchSelectItems') categoryGetSelectItems !: () => PageCategory[]
+
+  get item () {
+    return this.values
   }
 }
 </script>

@@ -44,33 +44,20 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import ConfirmDelete from '../util/ConfirmDelete'
 
-export default {
-  name: 'ActionCell',
+@Component({
   components: {
     ConfirmDelete
-  },
-  props: {
-    handleShow: {
-      type: Function,
-      required: false,
-      default: null
-    },
-    handleEdit: {
-      type: Function,
-      required: false,
-      default: null
-    },
-    handleDelete: {
-      type: Function,
-      required: false,
-      default: null
-    }
-  },
-  data: () => ({
-    confirmDelete: false
-  })
+  }
+})
+export default class ActionCell extends Vue {
+  @Prop({ type: Function, required: false, default: null }) readonly handleShow!: (arg ?: any) => any
+  @Prop({ type: Function, required: false, default: null }) readonly handleEdit!: (arg ?: any) => any
+  @Prop({ type: Function, required: false, default: null }) readonly handleDelete!: (arg ?: any) => any
+
+  confirmDelete = false
 }
 </script>

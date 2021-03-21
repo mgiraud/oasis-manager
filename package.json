@@ -39,10 +39,11 @@
     "@nuxt/types": "^2.15.3",
     "@nuxt/typescript-build": "^2.1.0",
     "@nuxtjs/eslint-config-typescript": "^6.0.0",
+    "@types/lodash": "^4.14.168",
+    "@types/vuelidate": "^0.7.14",
     "eslint": "^7.22.0",
     "fork-ts-checker-webpack-plugin": "^6.2.0",
-    "nuxt-typed-vuex": "^0.1.22",
-    "vue-property-decorator": "^9.1.2"
+    "nuxt-property-decorator": "^2.9.1"
   },
   "resolutions": {
     "prosemirror-model": "1.9.1"

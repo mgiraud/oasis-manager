@@ -24,7 +24,7 @@
         <Toolbar
           :handle-submit="onSendForm"
           :handle-reset="resetForm"
-          :handle-delete="canDeleteGroup ? del : null"
+          :handle-delete="canDelete ? del : null"
           :handle-back="back"
         >
           <template #left>
@@ -35,50 +35,46 @@
         </Toolbar>
       </v-col>
     </v-row>
-    <Loading :visible="deleteLoading" />
+    <Loading :visible="isLoading" />
   </v-container>
 </template>
-<script>
-import { mapGetters, mapActions } from 'vuex'
-import { mapFields } from 'vuex-map-fields'
-import Loading from '../../../components/util/Loading'
-import Toolbar from '../../../components/form/Toolbar'
-import Form from '../../../components/admin/member/Form'
+<script lang="ts">
+import { Component, mixins, namespace } from 'nuxt-property-decorator'
+import Loading from '~/components/util/Loading'
+import Toolbar from '~/components/form/Toolbar'
+import Form from '~/components/admin/member/Form'
 import update from '~/mixins/update'
+import { Member } from '~/store/member'
 
-export default {
+const memberModule = namespace('member')
+
+@Component({
   components: {
     Loading, Toolbar, Form
   },
-  mixins: [update],
   servicePrefix: 'admin-member',
   resourcePrefix: '/api/members/',
   middleware: 'hasPermissions',
   meta: {
     permissions: ['USER_CAN_EDIT_MEMBERS']
-  },
-  computed: {
-    ...mapFields('member', {
-      deleteLoading: 'isLoading',
-      isLoading: 'isLoading',
-      error: 'error',
-      updated: 'updated',
-      violations: 'violations'
-    }),
-    ...mapGetters('member', ['find']),
-    canDeleteGroup () {
-      return this.hasPermission('USER_CAN_DELETE_MEMBERS')
-    }
-  },
-  methods: {
-    ...mapActions('member', {
-      createReset: 'resetCreate',
-      deleteItem: 'del',
-      delReset: 'resetDelete',
-      retrieve: 'load',
-      update: 'update',
-      updateReset: 'resetUpdate'
-    })
   }
+})
+export default class AdminMemberEdit extends mixins(update) {
+  @memberModule.State('updated') updated!: Member | null
+  @memberModule.State('error') error!: string | null
+  @memberModule.State('isLoading') isLoading!: boolean
+  @memberModule.State('violations') violations!: string[]
+
+  @memberModule.Getter('find') find!: (id: string) => Member | null
+
+  get canDelete () {
+    return this.hasPermission('USER_CAN_DELETE_MEMBERS')
+  }
+
+  @memberModule.Action('resetCreate') createReset!: () => void
+  @memberModule.Action('resetDelete') delReset!: () => void
+  @memberModule.Action('load') retrieve!: (id: string) => void
+  @memberModule.Action('update') update!: (member: Member) => Member
+  @memberModule.Action('resetUpdate') updateReset!: () => void
 }
 </script>

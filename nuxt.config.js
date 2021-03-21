@@ -1,5 +1,41 @@
 require('dotenv').config()
 
+const REMIX_ICONS = {
+  complete: 'ri-check-line',
+  cancel: 'ri-close-circle-line',
+  close: 'ri-close-line',
+  delete: 'ri-delete-bin-line', // delete (e.g. v-chip close)
+  clear: 'ri-close-line',
+  success: 'ri-checkbox-circle-line',
+  info: 'ri-information-line',
+  warning: 'ri-error-warning-line',
+  error: 'ri-alert-line',
+  prev: 'ri-arrow-drop-left-line',
+  next: 'ri-arrow-drop-right-line',
+  checkboxOn: 'ri-checkbox-line',
+  checkboxOff: 'ri-checkbox-blank-line',
+  checkboxIndeterminate: 'ri-checkbox-indeterminate-line',
+  delimiter: 'ri-checkbox-blank-circle-line', // for carousel
+  sort: 'ri-arrow-drop-up-fill',
+  expand: 'ri-arrow-drop-down-fill',
+  menu: 'ri-menu-line',
+  subgroup: 'ri-arrow-down-s-fill',
+  dropdown: 'ri-arrow-down-s-fill',
+  radioOn: 'ri-radio-button-line',
+  radioOff: 'ri-checkbox-blank-circle-line',
+  edit: 'ri-edit-line',
+  ratingEmpty: 'ri-star-line',
+  ratingFull: 'ri-star-fill',
+  ratingHalf: 'ri-star-half-line',
+  loading: 'ri-loader-2-line',
+  first: 'ri-arrow-left-line',
+  last: 'ri-arrow-right-line',
+  unfold: 'ri-menu-unfold-line',
+  file: 'ri-attachment-line',
+  plus: 'ri-add-line',
+  minus: 'ri-subtract-line'
+}
+
 export default {
   srcDir: 'app/',
   env: {
@@ -16,7 +52,7 @@ export default {
     '@nuxt/typescript-build',
     ['@nuxtjs/vuetify', {
       icons: {
-        iconfont: 'mdiSvg'
+        values: REMIX_ICONS
       },
       theme: {
         themes: {
@@ -48,7 +84,8 @@ export default {
   typescript: {
     typeCheck: {
       eslint: {
-        files: 'app/**/*.{ts,js,vue}'
+        files: 'app/**/*.{ts,js,vue}',
+        memoryLimit: 8192
       }
     }
   },

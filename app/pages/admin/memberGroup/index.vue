@@ -53,65 +53,62 @@
   </v-container>
 </template>
 
-<script>
-import { mapGetters, mapActions } from 'vuex'
-import { mapFields } from 'vuex-map-fields'
-import ActionCell from '../../../components/table/ActionCell'
-import FormFilter from '../../../components/form/FormFilter'
-import MemberGroupFilter from '../../../components/admin/memberGroup/MemberGroupFilter'
+<script lang="ts">
+import { Component, mixins, namespace } from 'nuxt-property-decorator'
+import ActionCell from '~/components/table/ActionCell'
+import FormFilter from '~/components/form/FormFilter'
+import MemberGroupFilter from '~/components/admin/memberGroup/MemberGroupFilter'
+import { MemberGroup } from '~/store/member_group'
 import list from '~/mixins/list'
+import { MUTATIONS } from '~/store/crud'
 
-export default {
+const memberGroupModule = namespace('member_group')
+
+@Component({
   components: {
     ActionCell, FormFilter, MemberGroupFilter
   },
   servicePrefix: 'admin-memberGroup',
   resourcePrefix: '/api/member_groups/',
-  mixins: [list],
   layout: 'Admin',
   middleware: 'hasPermissions',
   meta: {
     permissions: ['USER_CAN_ACCESS_MEMBER_GROUPS']
   },
-  fetchOnServer: false,
-  data: () => ({
-    selected: [],
-    headers: [
-      { text: 'Nom', value: 'name' },
-      { text: 'Nombre de membres', value: 'memberCount' },
-      { text: 'Actions', value: 'actions', sortable: false }
-    ]
-  }),
+  fetchOnServer: false
+})
+export default class AdminMemberGroupIndex extends mixins(list) {
+  selected = []
+  headers = [
+    { text: 'Nom', value: 'name' },
+    { text: 'Nombre de membres', value: 'memberCount' },
+    { text: 'Actions', value: 'actions', sortable: false }
+  ]
+
   async fetch ({ store }) {
     return await store.dispatch('member_group/fetchAll')
-  },
-  computed: {
-    ...mapGetters('member_group', {
-      items: 'list'
-    }),
-    ...mapFields('member_group', {
-      deletedItem: 'deleted',
-      error: 'error',
-      isLoading: 'isLoading',
-      resetList: 'resetList',
-      totalItems: 'totalItems',
-      view: 'view'
-    }),
-    canEditGroup () {
-      return this.hasPermission('USER_CAN_EDIT_MEMBER_GROUPS')
-    },
-    canDeleteGroup () {
-      return this.hasPermission('USER_CAN_DELETE_MEMBER_GROUPS')
-    }
-  },
-  methods: {
-    ...mapActions('member_group', {
-      fetchAll: 'fetchAll',
-      deleteItem: 'del'
-    }),
-    editItem (item) {
+  }
+
+  @memberGroupModule.Getter('list') items !: MemberGroup[]
+  @memberGroupModule.State('deleted') deletedItem!: MemberGroup | null
+  @memberGroupModule.State('error') error!: string | null
+  @memberGroupModule.State('isLoading') isLoading!: boolean
+  @memberGroupModule.State('totalItems') totalItems!: number
+  @memberGroupModule.Mutation(MUTATIONS.RESET_LIST) resetList!: (reset: boolean) => void
+
+  get canEditGroup () {
+    return this.hasPermission('USER_CAN_EDIT_MEMBER_GROUPS')
+  }
+
+  get canDeleteGroup () {
+    return this.hasPermission('USER_CAN_DELETE_MEMBER_GROUPS')
+  }
+
+    @memberGroupModule.Action('fetchAll') fetchAll!: () => MemberGroup[]
+    @memberGroupModule.Action('del') deleteItem!: (memberGroup: MemberGroup) => void
+
+    editItem (item: MemberGroup) {
       this.$router.push({ name: 'admin-memberGroup-id', params: { id: item.url } })
     }
-  }
 }
 </script>

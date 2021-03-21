@@ -69,7 +69,7 @@
         </template>
 
         <v-list-item
-          v-for="([icon, title, path, _permission], i) in filteredMemberItems"
+          v-for="([icon, title, path], i) in filteredMemberItems"
           :key="i"
           link
           :to="{name: path}"
@@ -103,41 +103,47 @@
   </v-navigation-drawer>
 </template>
 
-<script>
-import { mapState, mapGetters } from 'vuex'
+<script lang="ts">
+import { Vue, namespace, State, Component } from 'nuxt-property-decorator'
+import { User } from '~/store/security'
 
-export default {
-  data: () => ({
-    drawer: null,
-    pageItems: [
-      ['ri-article-line', 'Pages', 'admin-page', 'USER_CAN_ACCESS_PAGES'],
-      ['ri-folder-line', 'Categories', 'admin-pageCategory', 'USER_CAN_ACCESS_PAGE_CATEGORIES']
-    ],
-    memberItems: [
-      ['ri-user-line', 'Gérer les membres', 'admin-member', 'USER_CAN_ACCESS_MEMBERS'],
-      ['ri-group-line', 'Gérer les groupes', 'admin-memberGroup', 'USER_CAN_ACCESS_MEMBER_GROUPS']
-    ]
-  }),
-  computed: {
-    ...mapState({
-      user: s => s.storage && s.storage.user ? s.storage.user : {}
-    }),
-    ...mapGetters('security', ['hasPermission']),
-    filteredMemberItems () {
-      return this.memberItems.filter(([_icon, _title, _path, permission]) => this.hasPermission(permission))
-    },
-    filteredPageItems () {
-      return this.pageItems.filter(([_icon, _title, _path, permission]) => this.hasPermission(permission))
-    }
-  },
-  methods: {
-    logout () {
-      this.$store.dispatch('security/logout')
-      this.$router.push({ name: 'index' })
-    },
-    redirectTo (name) {
-      this.$router.push({ name })
-    }
+const securityModule = namespace('security')
+
+@Component
+export default class MenuDrawer extends Vue {
+  drawer = null
+  pageItems = [
+    ['ri-article-line', 'Pages', 'admin-page', 'USER_CAN_ACCESS_PAGES'],
+    ['ri-folder-line', 'Categories', 'admin-pageCategory', 'USER_CAN_ACCESS_PAGE_CATEGORIES']
+  ]
+
+  memberItems = [
+    ['ri-user-line', 'Gérer les membres', 'admin-member', 'USER_CAN_ACCESS_MEMBERS'],
+    ['ri-group-line', 'Gérer les groupes', 'admin-memberGroup', 'USER_CAN_ACCESS_MEMBER_GROUPS']
+  ]
+
+  @State('storage') storage!: {user?: User}
+  @securityModule.Getter('hasPermission') hasPermission!: (permission: string) => boolean
+
+  get user () {
+    return this.storage.user ? this.storage.user : {}
+  }
+
+  get filteredMemberItems () {
+    return this.memberItems.filter(([_icon, _title, _path, permission]) => this.hasPermission(permission))
+  }
+
+  get filteredPageItems () {
+    return this.pageItems.filter(([_icon, _title, _path, permission]) => this.hasPermission(permission))
+  }
+
+  logout () {
+    this.$store.dispatch('security/logout')
+    this.$router.push({ name: 'index' })
+  }
+
+  redirectTo (name: string) {
+    this.$router.push({ name })
   }
 }
 </script>

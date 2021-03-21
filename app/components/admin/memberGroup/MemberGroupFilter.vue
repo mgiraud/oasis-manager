@@ -21,22 +21,18 @@
   </v-container>
 </template>
 
-<script>
-import { mapState } from 'vuex'
+<script lang="ts">
+import { Component, Vue, namespace, Prop } from 'nuxt-property-decorator'
 
-export default {
-  name: 'AdminPageCategoryFilter',
-  props: {
-    values: {
-      type: Object,
-      required: true
-    }
-  },
-  computed: {
-    ...mapState('security', ['permissions']),
-    item () {
-      return this.initialValues || this.values
-    }
+const securityModule = namespace('security')
+
+@Component
+export default class MemberGroupFilter extends Vue {
+  @Prop({ type: Object, required: true }) readonly values!: any
+  @securityModule.Action('permissions') permissions !: () => string[]
+
+  get item () {
+    return this.values
   }
 }
 </script>

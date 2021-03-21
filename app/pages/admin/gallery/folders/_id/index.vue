@@ -19,7 +19,7 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex'
-import ItemBreadcrumb from '../../../../../components/admin/gallery/ItemBreadcrumb'
+import ItemBreadcrumb from '~/components/admin/gallery/ItemBreadcrumb'
 export default {
   components: {
     ItemBreadcrumb

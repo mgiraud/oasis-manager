@@ -1,17 +1,30 @@
 import { find, filter } from 'lodash'
 import makeCrudModule from './crud'
+import { PageCategory } from './page_category'
+import { HydraMemberObject } from '~/api/hydra'
 
 const pageModule = makeCrudModule({
-  resource: 'pages',
-  index: 'url',
-  additionalState: {
-    activeSlug: null
-  }
+  resource: 'pages'
 })
 
+export type Page = HydraMemberObject & {
+  'url': string;
+  'title': string;
+  'content': string;
+  'isPublished': boolean;
+  'category': PageCategory;
+  'showInMenu': boolean;
+}
+
+export type MenuItem = {
+  name: string;
+  slug: string | null;
+  url: string | null;
+}
+
 pageModule.getters.menuItems = (_state, getters) => {
-  const menu = []
-  getters.list.forEach((page) => {
+  const menu: MenuItem[] = []
+  getters.list.forEach((page: Page) => {
     if (!page || !page.showInMenu) {
       return
     }
@@ -29,19 +42,22 @@ pageModule.getters.menuItems = (_state, getters) => {
     } else {
       menu.push({
         name: page.title,
-        url: page.url
+        url: page.url,
+        slug: null
       })
     }
   })
 
   menu.push({
     name: 'Contact',
-    url: 'contact'
+    url: 'contact',
+    slug: null
   })
 
   menu.push({
     name: 'Rejoindre le groupe fondateur',
-    url: 'survey_join'
+    url: 'survey_join',
+    slug: null
   })
   return menu
 }

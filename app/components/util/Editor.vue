@@ -77,7 +77,6 @@
           :btn-class="{ 'grey darken-3': editor.isActive('bulletList') }"
           :click-handler="() => editor.chain().focus().toggleBulletList().run()"
           icon="ri-list-unordered"
-          "
         />
         <editor-btn
           label="Liste numérotée"
@@ -167,7 +166,8 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Prop, Vue, Watch } from 'nuxt-property-decorator'
 // import the component and the necessary extensions
 import { Editor, EditorContent } from '@tiptap/vue-2'
 import { defaultExtensions } from '@tiptap/starter-kit'
@@ -184,33 +184,30 @@ import FileUploadBtn from '@/components/util/Editor/FileUpload/FileUploadBtn'
 import Link from '@tiptap/extension-link'
 import FileUploadComponent from './Editor/FileUpload'
 
-export default {
+@Component({
   components: {
     FileUploadBtn,
     EditorContent,
     EditorBtn
-  },
-  props: {
-    value: {
-      type: [String, null],
-      required: false,
-      default: null
-    }
-  },
-  data: () => ({
-    editor: null
-  }),
-  watch: {
-    value (value) {
-      const isSame = this.editor.getHTML() === value
+  }
+})
+export default class AdminPageForm extends Vue {
+  @Prop({ type: String, required: false, default: null })
+  value!: string | null
 
-      if (isSame) {
-        return
-      }
+  editor: Editor | null = null
 
-      this.editor.commands.setContent(this.value, false)
+  @Watch('value')
+  onValueChange (value: string) {
+    const isSame = this.editor?.getHTML() === value
+
+    if (isSame) {
+      return
     }
-  },
+
+    this.editor?.commands.setContent(this.value || '', false)
+  }
+
   mounted () {
     this.editor = new Editor({
       content: this.value,
@@ -232,29 +229,32 @@ export default {
     })
 
     this.editor.on('update', () => {
-      this.$emit('input', this.editor.getHTML())
+      this.$emit('input', this.editor?.getHTML())
     })
-  },
-  beforeDestroy () {
-    this.editor.destroy()
-  },
-  methods: {
-    clearContent () {
-      this.editor.commands.setContent(null, false)
-    },
-    addImage () {
-      const url = window.prompt('URL')
+  }
 
-      if (url) {
-        this.editor.chain().focus().setImage({ src: url, inline: true }).run()
-      }
-    },
-    setLink () {
-      const url = window.prompt('URL')
-      this.editor.chain().focus().setLink({ href: url }).run()
+  beforeDestroy () {
+    this.editor?.destroy()
+  }
+
+  clearContent () {
+    this.editor?.commands.setContent('', false)
+  }
+
+  addImage () {
+    const url = window.prompt('URL')
+
+    if (url) {
+      this.editor?.chain().focus().setImage({ src: url }).run()
     }
   }
 
+  setLink () {
+    const url = window.prompt('URL')
+    if (url) {
+      this.editor?.chain().focus().setLink({ href: url }).run()
+    }
+  }
 }
 </script>
 

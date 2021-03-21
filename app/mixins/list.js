@@ -48,7 +48,7 @@ export default {
         params[`order[${sortBy[0]}]`] = sortDesc[0] ? 'desc' : 'asc'
       }
 
-      this.resetList = true
+      this.resetList(true)
 
       Object.assign(this.options, {
         sortBy,
@@ -61,7 +61,7 @@ export default {
     },
 
     onSendFilter () {
-      this.resetList = true
+      this.resetList(true)
       this.onUpdateOptions(this.options)
     },
 

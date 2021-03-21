@@ -53,68 +53,65 @@
   </v-container>
 </template>
 
-<script>
-import { mapGetters, mapActions } from 'vuex'
-import { mapFields } from 'vuex-map-fields'
-import ActionCell from '../../../components/table/ActionCell'
-import PageFilter from '../../../components/admin/page/PageFilter'
-import FormFilter from '../../../components/form/FormFilter'
+<script lang="ts">
+import { Component, mixins, namespace } from 'nuxt-property-decorator'
+import ActionCell from '~/components/table/ActionCell'
+import PageFilter from '~/components/admin/page/PageFilter'
+import FormFilter from '~/components/form/FormFilter'
 import list from '~/mixins/list'
+import { Page } from '~/store/page'
+import { MUTATIONS } from '~/store/crud'
 
-export default {
+const pageModule = namespace('page')
+
+@Component({
   components: {
     ActionCell, PageFilter, FormFilter
   },
   servicePrefix: 'admin-page',
   resourcePrefix: '/api/pages/',
-  mixins: [list],
   layout: 'Admin',
   middleware: 'hasPermissions',
   fetchOnServer: false,
   meta: {
     permissions: ['USER_CAN_ACCESS_PAGES']
-  },
-  data: () => ({
-    selected: [],
-    headers: [
-      { text: 'Title', value: 'title' },
-      { text: 'Url', value: 'url' },
-      { text: 'Catégorie', value: 'category' },
-      { text: 'est publié', value: 'isPublished' },
-      { text: 'est visible dans le menu', value: 'showInMenu' },
-      { text: 'Actions', value: 'actions', sortable: false }
-    ]
-  }),
+  }
+})
+export default class AdminPageIndex extends mixins(list) {
+  selected = []
+  headers = [
+    { text: 'Title', value: 'title' },
+    { text: 'Url', value: 'url' },
+    { text: 'Catégorie', value: 'category' },
+    { text: 'est publié', value: 'isPublished' },
+    { text: 'est visible dans le menu', value: 'showInMenu' },
+    { text: 'Actions', value: 'actions', sortable: false }
+  ]
+
   async fetch ({ store }) {
     return await store.dispatch('page/fetchAll')
-  },
-  computed: {
-    ...mapGetters('page', {
-      items: 'list'
-    }),
-    ...mapFields('page', {
-      deletedItem: 'deleted',
-      error: 'error',
-      isLoading: 'isLoading',
-      resetList: 'resetList',
-      totalItems: 'totalItems',
-      view: 'view'
-    }),
-    canEditPage () {
+  }
+
+    @pageModule.Getter('list') items !: () => Page
+    @pageModule.State('deleted') deletedItem!: Page | null
+    @pageModule.State('error') error!: string | null
+    @pageModule.State('isLoading') isLoading!: boolean
+    @pageModule.State('totalItems') totalItems!: number
+    @pageModule.Mutation(MUTATIONS.RESET_LIST) resetList!: (reset: boolean) => void
+
+    get canEditPage () {
       return this.hasPermission('USER_CAN_EDIT_PAGES')
-    },
-    canDeletePage () {
+    }
+
+    get canDeletePage () {
       return this.hasPermission('USER_CAN_DELETE_PAGES')
     }
-  },
-  methods: {
-    ...mapActions('page', {
-      fetchAll: 'fetchAll',
-      deleteItem: 'del'
-    }),
-    editItem (item) {
-      this.$router.push({ name: 'admin-page-id', params: { id: item.url } })
+
+    @pageModule.Action('fetchAll') fetchAll!: () => Page[]
+    @pageModule.Action('del') deleteItem!: (pageCateogry: Page) => void
+
+    editItem (item: Page) {
+      this.$router.push({ name: 'admin-page-id', params: { id: item['@id'] } })
     }
-  }
 }
 </script>

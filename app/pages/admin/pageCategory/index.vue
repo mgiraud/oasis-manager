@@ -51,65 +51,62 @@
   </v-container>
 </template>
 
-<script>
-import { mapGetters, mapActions } from 'vuex'
-import { mapFields } from 'vuex-map-fields'
-import ActionCell from '../../../components/table/ActionCell'
-import PageCategoryFilter from '../../../components/admin/pageCategory/PageCategoryFilter'
-import FormFilter from '../../../components/form/FormFilter'
+<script lang="ts">
+import { Component, mixins, namespace } from 'nuxt-property-decorator'
+import ActionCell from '~/components/table/ActionCell'
+import PageCategoryFilter from '~/components/admin/pageCategory/PageCategoryFilter'
+import FormFilter from '~/components/form/FormFilter'
+import { PageCategory } from '~/store/page_category'
 import list from '~/mixins/list'
+import { MUTATIONS } from '~/store/crud'
 
-export default {
+const pageCategoryModule = namespace('page_category')
+
+@Component({
   components: {
     ActionCell, PageCategoryFilter, FormFilter
   },
   servicePrefix: 'admin-pageCategory',
   resourcePrefix: '/api/page_categories/',
-  mixins: [list],
   layout: 'Admin',
   middleware: 'hasPermissions',
   fetchOnServer: false,
   meta: {
     permissions: ['USER_CAN_ACCESS_PAGE_CATEGORIES']
-  },
-  data: () => ({
-    selected: [],
-    headers: [
-      { text: 'Name', value: 'name' },
-      { text: 'est visible dans le menu', value: 'showInMenu' },
-      { text: 'Actions', value: 'actions', sortable: false }
-    ]
-  }),
+  }
+})
+export default class AdminPageCategoryIndex extends mixins(list) {
+  selected = []
+  headers = [
+    { text: 'Name', value: 'name' },
+    { text: 'est visible dans le menu', value: 'showInMenu' },
+    { text: 'Actions', value: 'actions', sortable: false }
+  ]
+
   async fetch ({ store }) {
     return await store.dispatch('page/fetchAll')
-  },
-  computed: {
-    ...mapGetters('page_category', {
-      items: 'list'
-    }),
-    ...mapFields('page_category', {
-      deletedItem: 'deleted',
-      error: 'error',
-      isLoading: 'isLoading',
-      resetList: 'resetList',
-      totalItems: 'totalItems',
-      view: 'view'
-    }),
-    canEditPageCategories () {
-      return this.hasPermission('USER_CAN_EDIT_PAGE_CATEGORIES')
-    },
-    canDeletePageCategories () {
-      return this.hasPermission('USER_CAN_DELETE_PAGE_CATEGORIES')
-    }
-  },
-  methods: {
-    ...mapActions('page_category', {
-      fetchAll: 'fetchAll',
-      deleteItem: 'del'
-    }),
-    editItem (item) {
-      this.$router.push({ name: 'admin-page-id', params: { id: item.url } })
-    }
+  }
+
+  @pageCategoryModule.Getter('list') items !: () => PageCategory
+  @pageCategoryModule.State('deleted') deletedItem!: PageCategory | null
+  @pageCategoryModule.State('error') error!: string | null
+  @pageCategoryModule.State('isLoading') isLoading!: boolean
+  @pageCategoryModule.State('totalItems') totalItems!: number
+  @pageCategoryModule.Mutation(MUTATIONS.RESET_LIST) resetList!: (reset: boolean) => void
+
+  get canEditPageCategories () {
+    return this.hasPermission('USER_CAN_EDIT_PAGE_CATEGORIES')
+  }
+
+  get canDeletePageCategories () {
+    return this.hasPermission('USER_CAN_DELETE_PAGE_CATEGORIES')
+  }
+
+  @pageCategoryModule.Action('fetchAll') fetchAll!: () => PageCategory[]
+  @pageCategoryModule.Action('del') deleteItem!: (pageCateogry: PageCategory) => void
+
+  editItem (item: PageCategory) {
+    this.$router.push({ name: 'admin-pageCategory-id', params: { id: item['@id'] } })
   }
 }
 </script>

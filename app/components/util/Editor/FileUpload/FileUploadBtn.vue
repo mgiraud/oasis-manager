@@ -55,73 +55,67 @@
   </v-dialog>
 </template>
 
-<script>
-export default {
-  props: {
-    editor: {
-      type: Object,
-      required: true
-    }
-  },
-  data () {
-    return {
-      dialog: false,
-      thumbnails: [],
-      links: []
-    }
-  },
-  methods: {
-    openFileSelection () {
-      this.$refs.fileSelection.click()
-    },
-    handleUpload () {
-      const files = this.$refs.fileSelection.files
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i]
+<script lang="ts">
+import { Editor } from '@tiptap/core'
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
-        // const reader = new FileReader()
-        // reader.onload = (e) => {
-        //   this.thumbnails.push({
-        //     src: e.target.result
-        //   })
-        // }
-        // reader.readAsDataURL(file)
+@Component
+export default class FileUploadBtn extends Vue {
+  @Prop({ type: Object, required: true }) readonly editor!: Editor
 
-        const formData = new FormData()
-        formData.append('file', file)
-        formData.append('mediaGalleryItemId', 1)
-        this.$getRepository('media_objects').$post('/api/media_objects', {
-          method: 'POST',
-          'Content-Type': 'multipart/form-data',
-          body: formData,
-          onUploadProgress: (_event) => {
-            // commit('setFileUploadProgress', Math.round((100 * event.loaded) / event.total))
-          }
-        }).then((res) => {
-          const imageType = /^image\//
-          if (imageType.test(file.type)) {
-            this.thumbnails.push({
-              src: res.contentUrl
-            })
-          } else {
-            this.links.push({
-              src: res.contentUrl,
-              name: res.filePath
-            })
-          }
-        })
-      }
-    },
-    injectFilesAndCloseDialog () {
-      this.dialog = false
-      this.thumbnails.forEach((thumbnail) => {
-        this.editor.chain().focus().setImage({ src: thumbnail.src }).run()
-      })
-      this.links.forEach((link) => {
-        const node = this.editor.schema.text(link.name, [this.editor.schema.marks.link.create({ href: link.src })])
-        this.editor.view.dispatch(this.editor.state.tr.replaceSelectionWith(node, false))
+  dialog = false
+  thumbnails = []
+  links = []
+
+  openFileSelection () {
+    this.$refs.fileSelection.click()
+  }
+
+  handleUpload () {
+    const files = this.$refs.fileSelection.files
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i]
+
+      // const reader = new FileReader()
+      // reader.onload = (e) => {
+      //   this.thumbnails.push({
+      //     src: e.target.result
+      //   })
+      // }
+      // reader.readAsDataURL(file)
+
+      const formData = new FormData()
+      formData.append('file', file)
+      formData.append('mediaGalleryItemId', 1)
+      this.$getRepository('media_objects').$post('/api/media_objects', {
+        method: 'POST',
+        headers: { 'Content-Type': 'multipart/form-data' },
+        body: formData
+      }).then((res) => {
+        const imageType = /^image\//
+        if (imageType.test(file.type)) {
+          this.thumbnails.push({
+            src: res.contentUrl
+          })
+        } else {
+          this.links.push({
+            src: res.contentUrl,
+            name: res.filePath
+          })
+        }
       })
     }
+  }
+
+  injectFilesAndCloseDialog () {
+    this.dialog = false
+    this.thumbnails.forEach((thumbnail) => {
+      this.editor.chain().focus().setImage({ src: thumbnail.src }).run()
+    })
+    this.links.forEach((link) => {
+      const node = this.editor.schema.text(link.name, [this.editor.schema.marks.link.create({ href: link.src })])
+      this.editor.view.dispatch(this.editor.state.tr.replaceSelectionWith(node, false))
+    })
   }
 }
 </script>

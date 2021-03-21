@@ -11,23 +11,32 @@
   </v-card>
 </template>
 
-<script>
-import { mapGetters } from 'vuex'
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator'
+import { namespace } from 'vuex-class'
 import Template from '../components/page/Template'
 import Error404 from '../components/error/404'
-export default {
+import { Page } from '~/store/page'
+
+const pageModule = namespace('page')
+
+@Component({
   components: {
     Template,
     Error404
-  },
-  computed: {
-    ...mapGetters('page', ['find']),
-    page () {
+  }
+})
+export default class BackUpVue extends Vue {
+  @pageModule.Getter('find') find!: (url: string) => Page | null
+
+  get page () {
+    if (this.url !== null) {
       return this.find('/api/pages/' + decodeURIComponent(this.url))
-    },
-    url () {
-      return this.$route.params ? this.$route.params.pathMatch : null
     }
+  };
+
+  get url () {
+    return this.$route.params ? this.$route.params.pathMatch : null
   }
 }
 </script>

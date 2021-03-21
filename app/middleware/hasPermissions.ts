@@ -1,4 +1,6 @@
-export default function ({ store, route, redirect, from }) {
+import { Middleware } from '@nuxt/types'
+
+const hasPermissionMiddleWare: Middleware = ({ store, redirect, route, from }) => {
   if (!store.getters['security/isLoggedIn']) {
     return redirect({ name: 'login' })
   }
@@ -15,10 +17,12 @@ export default function ({ store, route, redirect, from }) {
     return
   }
   if (!store.getters['security/hasPermissions'](permissions)) {
-    if (from) {
+    if (from && from.name) {
       redirect({ name: from.name, params: from.params })
     } else {
       redirect({ name: 'admin' })
     }
   }
 }
+
+export default hasPermissionMiddleWare

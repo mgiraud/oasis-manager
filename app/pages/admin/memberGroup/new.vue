@@ -6,35 +6,36 @@
   </div>
 </template>
 
-<script>
-import { mapActions } from 'vuex'
-import { mapFields } from 'vuex-map-fields'
-import Loading from '../../../components/util/Loading'
-import Toolbar from '../../../components/form/Toolbar'
-import Form from '../../../components/admin/memberGroup/Form'
+<script lang="ts">
+import { Component, mixins, namespace } from 'nuxt-property-decorator'
+import Loading from '~/components/util/Loading'
+import Toolbar from '~/components/form/Toolbar'
+import Form from '~/components/admin/memberGroup/Form'
 import create from '~/mixins/create'
+import { MemberGroup } from '~/store/member_group'
 
-export default {
+const memberGroupModule = namespace('member_group')
+
+@Component({
   components: {
     Loading, Toolbar, Form
   },
   servicePrefix: 'admin-memberGroup',
   resourcePrefix: '/api/member_groups/',
-  mixins: [create],
   middleware: 'hasPermissions',
   meta: {
     permissions: ['USER_CAN_EDIT_MEMBER_GROUPS']
-  },
-  data: () => ({
-    item: {
-      content: null
-    }
-  }),
-  computed: {
-    ...mapFields('member_group', ['error', 'isLoading', 'created', 'violations'])
-  },
-  methods: {
-    ...mapActions('member_group', ['create', 'reset'])
   }
+})
+export default class AdminMemberGroupNew extends mixins(create) {
+  item = {}
+
+  @memberGroupModule.State('created') created!: MemberGroup | null
+  @memberGroupModule.State('error') error!: string | null
+  @memberGroupModule.State('isLoading') isLoading!: boolean
+  @memberGroupModule.State('violations') violations!: string[]
+
+  @memberGroupModule.Action('create') create!: (memberGroup: MemberGroup) => MemberGroup
+  @memberGroupModule.Action('reset') reset!: () => void
 }
 </script>

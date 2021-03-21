@@ -29,7 +29,7 @@
           <v-text-field
             v-model="item.email"
             prepend-inner-icon="ri-mail-line"
-            label="Email"
+            label="Email *"
             :error-messages="emailErrors"
             required
             @input="$v.item.email.$touch()"
@@ -51,7 +51,7 @@
         <v-col cols="12" md="6">
           <v-text-field
             v-model="item.firstName"
-            label="Prénom"
+            label="Prénom *"
             :error-messages="firstNameErrors"
             @input="$v.item.firstName.$touch()"
             @blur="$v.item.firstName.$touch()"
@@ -60,7 +60,7 @@
         <v-col cols="12" sm="6" md="6">
           <v-text-field
             v-model="item.lastName"
-            label="Nom"
+            label="Nom *"
             :error-messages="lastNameErrors"
             @input="$v.item.lastName.$touch()"
             @blur="$v.item.lastName.$touch()"
@@ -71,7 +71,10 @@
         <v-col cols="12" md="6">
           <v-text-field
             v-model="item.city"
-            label="Ville actuelle"
+            label="Ville actuelle *"
+            :error-messages="cityErrors"
+            @input="$v.item.city.$touch()"
+            @blur="$v.item.city.$touch()"
           />
         </v-col>
       </v-row>
@@ -365,97 +368,16 @@
   </v-form>
 </template>
 
-<script>
+<script lang="ts">
 import { required, email, maxLength } from 'vuelidate/lib/validators'
 import has from 'lodash/has'
 import { validationMixin } from 'vuelidate'
 import VuetifyDraggableTreeview from 'vuetify-draggable-treeview'
+import { Component, mixins, Prop } from 'nuxt-property-decorator'
 
-export default {
-  name: 'ContactForm',
+@Component({
   components: {
     VuetifyDraggableTreeview
-  },
-  mixins: [validationMixin],
-  props: {
-    values: {
-      type: Object,
-      required: true,
-      default: () => {
-      }
-    },
-    errors: {
-      type: Object,
-      default: () => {
-      }
-    },
-    initialValues: {
-      type: Object,
-      default: () => {
-      }
-    }
-  },
-  data: () => ({
-    downloadPdfUrl: process.env.apiBaseUrl + (process.env.apiBaseUrl.endsWith('/') ? '' : '/') + '../survey/join.pdf'
-  }),
-  computed: {
-    item () {
-      return this.initialValues || this.values
-    },
-    emailErrors () {
-      const errors = []
-      if (!this.$v.item.email.$dirty) {
-        return errors
-      }
-      has(this.violations, 'email') && errors.push(this.violations.email)
-      !this.$v.item.email.required && errors.push('l\'email est obligatoire')
-      !this.$v.item.email.email && errors.push('Cet email n\'est pas valide')
-      return errors
-    },
-    firstNameErrors () {
-      const errors = []
-      if (!this.$v.item.firstName.$dirty) {
-        return errors
-      }
-      has(this.violations, 'firstName') && errors.push(this.violations.firstName)
-      !this.$v.item.firstName.maxLength && errors.push('Le prénom doit faire au maximum 60 caractères')
-      return errors
-    },
-    lastNameErrors () {
-      const errors = []
-      if (!this.$v.item.lastName.$dirty) {
-        return errors
-      }
-      has(this.violations, 'lastName') && errors.push(this.violations.lastName)
-      !this.$v.item.lastName.maxLength && errors.push('Le nom doit faire au maximum 60 caractères')
-      return errors
-    },
-    phoneNumberErrors () {
-      const errors = []
-      if (!this.$v.item.phoneNumber.$dirty) {
-        return errors
-      }
-      has(this.violations, 'phoneNumber') && errors.push(this.violations.phoneNumber)
-      !this.$v.item.phoneNumber.maxLength && errors.push('Le téléphone doit faire au maximum 12 caractères')
-      return errors
-    },
-    violations () {
-      return this.errors || {}
-    }
-  },
-  methods: {
-    increment (index) {
-      if (this.item.family[index].age === null) {
-        this.item.family[index].age = 0
-      }
-      this.item.family[index].age = parseInt(this.item.family[index].age, 10) + 1
-    },
-    decrement (index) {
-      if (this.item.family[index].age === null) {
-        this.item.family[index].age = 0
-      }
-      this.item.family[index].age = parseInt(this.item.family[index].age, 10) - 1
-    }
   },
   validations: {
     item: {
@@ -464,15 +386,107 @@ export default {
         email
       },
       firstName: {
-        maxLength: maxLength(60)
+        maxLength: maxLength(60),
+        required
       },
       lastName: {
-        maxLength: maxLength(60)
+        maxLength: maxLength(60),
+        required
       },
       phoneNumber: {
         maxLength: maxLength(12)
+      },
+      city: {
+        required
       }
     }
+  }
+})
+export default class SurveyJoinForm extends mixins(validationMixin) {
+  @Prop({ type: Object, required: true })
+  values!: any
+
+  @Prop({ type: Object, default: () => {} })
+  errors!: any
+
+  @Prop({ type: Object, default: () => {} })
+  initialValues!: any
+
+  downloadPdfUrl = process.env.apiBaseUrl + (process.env.apiBaseUrl?.endsWith('/') ? '' : '/') + '../survey/join.pdf'
+
+  get item () {
+    return this.initialValues || this.values
+  }
+
+  get emailErrors () {
+    const errors: string[] = []
+    if (!this.$v.item.email || !this.$v.item.email.$dirty) {
+      return errors
+    }
+    has(this.violations, 'email') && errors.push(this.violations.email)
+    !this.$v.item.email.required && errors.push('l\'email est obligatoire')
+    !this.$v.item.email.email && errors.push('Cet email n\'est pas valide')
+    return errors
+  }
+
+  get firstNameErrors () {
+    const errors: string[] = []
+    if (!this.$v.item.firstName || !this.$v.item.firstName.$dirty) {
+      return errors
+    }
+    has(this.violations, 'firstName') && errors.push(this.violations.firstName)
+    !this.$v.item.firstName.required && errors.push('Le prénom doit être renseignée')
+    !this.$v.item.firstName.maxLength && errors.push('Le prénom doit faire au maximum 60 caractères')
+    return errors
+  }
+
+  get lastNameErrors () {
+    const errors: string[] = []
+    if (!this.$v.item.lastName || !this.$v.item.lastName.$dirty) {
+      return errors
+    }
+    has(this.violations, 'lastName') && errors.push(this.violations.lastName)
+    !this.$v.item.lastName.required && errors.push('Le nom doit être renseignée')
+    !this.$v.item.lastName.maxLength && errors.push('Le nom doit faire au maximum 60 caractères')
+    return errors
+  }
+
+  get phoneNumberErrors () {
+    const errors: string[] = []
+    if (!this.$v.item.phoneNumber || !this.$v.item.phoneNumber.$dirty) {
+      return errors
+    }
+    has(this.violations, 'phoneNumber') && errors.push(this.violations.phoneNumber)
+    !this.$v.item.phoneNumber.maxLength && errors.push('Le téléphone doit faire au maximum 12 caractères')
+    return errors
+  }
+
+  get cityErrors () {
+    const errors: string[] = []
+    if (!this.$v.item.city || !this.$v.item.city.$dirty) {
+      return errors
+    }
+    has(this.violations, 'city') && errors.push(this.violations.city)
+    !this.$v.item.city.required && errors.push('La ville doit être renseignée')
+    return errors
+  }
+
+  get violations () {
+    return this.errors || {}
+  }
+
+  increment (index: number) {
+    if (this.item.family[index].age === null) {
+      this.item.family[index].age = 0
+    }
+    this.item.family[index].age = parseInt(this.item.family[index].age, 10) + 1
+  }
+
+  decrement (index: number) {
+    if (this.item.family[index].age === null) {
+      this.item.family[index].age = 0
+    }
+    this.item.family[index].age = parseInt(this.item.family[index].age, 10) - 1
   }
 }
 </script>

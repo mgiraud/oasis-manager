@@ -73,105 +73,13 @@
   </v-form>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, mixins, Prop } from 'nuxt-property-decorator'
 import { required, minLength, email, maxLength } from 'vuelidate/lib/validators'
 import has from 'lodash/has'
-import { mapActions } from 'vuex'
 import { validationMixin } from 'vuelidate'
 
-export default {
-  name: 'ContactForm',
-  mixins: [validationMixin],
-  props: {
-    values: {
-      type: Object,
-      required: true,
-      default: () => {
-      }
-    },
-    errors: {
-      type: Object,
-      default: () => {
-      }
-    },
-    initialValues: {
-      type: Object,
-      default: () => {
-      }
-    }
-  },
-  computed: {
-    item () {
-      return this.initialValues || this.values
-    },
-    emailErrors () {
-      const errors = []
-      if (!this.$v.item.email.$dirty) {
-        return errors
-      }
-      has(this.violations, 'email') && errors.push(this.violations.email)
-      !this.$v.item.email.required && errors.push('l\'email est obligatoire')
-      !this.$v.item.email.email && errors.push('Cet email n\'est pas valide')
-      return errors
-    },
-    subjectErrors () {
-      const errors = []
-      if (!this.$v.item.subject.$dirty) {
-        return errors
-      }
-      has(this.violations, 'subject') && errors.push(this.violations.subject)
-      !this.$v.item.subject.required && errors.push('Le sujet ne peut pas être vide')
-      !this.$v.item.subject.minLength && errors.push('Le sujet doit faire au moins 8 caractères')
-      !this.$v.item.subject.maxLength && errors.push('Le sujet doit faire au maximum 100 caractères')
-      return errors
-    },
-    contentErrors () {
-      const errors = []
-      if (!this.$v.item.content.$dirty) {
-        return errors
-      }
-      has(this.violations, 'content') && errors.push(this.violations.content)
-      !this.$v.item.content.required && errors.push('Le contenu du message ne peut pas être vide')
-      !this.$v.item.content.minLength && errors.push('Le contenu doit faire au moins 10 caractères')
-      !this.$v.item.content.maxLength && errors.push('Le contenu doit faire au maximum 1000 caractères')
-      return errors
-    },
-    firstNameErrors () {
-      const errors = []
-      if (!this.$v.item.firstName.$dirty) {
-        return errors
-      }
-      has(this.violations, 'firstName') && errors.push(this.violations.firstName)
-      !this.$v.item.firstName.maxLength && errors.push('Le prénom doit faire au maximum 60 caractères')
-      return errors
-    },
-    lastNameErrors () {
-      const errors = []
-      if (!this.$v.item.lastName.$dirty) {
-        return errors
-      }
-      has(this.violations, 'lastName') && errors.push(this.violations.lastName)
-      !this.$v.item.lastName.maxLength && errors.push('Le nom doit faire au maximum 60 caractères')
-      return errors
-    },
-    phoneNumberErrors () {
-      const errors = []
-      if (!this.$v.item.phoneNumber.$dirty) {
-        return errors
-      }
-      has(this.violations, 'phoneNumber') && errors.push(this.violations.phoneNumber)
-      !this.$v.item.phoneNumber.maxLength && errors.push('Le téléphone doit faire au maximum 12 caractères')
-      return errors
-    },
-    violations () {
-      return this.errors || {}
-    }
-  },
-  methods: {
-    ...mapActions('member_group', {
-      groupsGetSelectItems: 'fetchSelectItems'
-    })
-  },
+@Component({
   validations: {
     item: {
       email: {
@@ -198,6 +106,84 @@ export default {
         maxLength: maxLength(12)
       }
     }
+  }
+})
+export default class ContactForm extends mixins(validationMixin) {
+  @Prop({ type: Object, default: () => {} }) readonly values!: any
+  @Prop({ type: Object, default: () => {} }) readonly errors!: any
+  @Prop({ type: Object, default: () => {} }) readonly initialValues!: any
+
+  get item () {
+    return this.initialValues || this.values
+  }
+
+  get emailErrors () {
+    const errors: string[] = []
+    if (!this.$v.item.email || !this.$v.item.email.$dirty) {
+      return errors
+    }
+    has(this.violations, 'email') && errors.push(this.violations.email)
+    !this.$v.item.email.required && errors.push('l\'email est obligatoire')
+    !this.$v.item.email.email && errors.push('Cet email n\'est pas valide')
+    return errors
+  }
+
+  get subjectErrors () {
+    const errors: string[] = []
+    if (!this.$v.item.subject || !this.$v.item.subject.$dirty) {
+      return errors
+    }
+    has(this.violations, 'subject') && errors.push(this.violations.subject)
+    !this.$v.item.subject.required && errors.push('Le sujet ne peut pas être vide')
+    !this.$v.item.subject.minLength && errors.push('Le sujet doit faire au moins 8 caractères')
+    !this.$v.item.subject.maxLength && errors.push('Le sujet doit faire au maximum 100 caractères')
+    return errors
+  }
+
+  get contentErrors () {
+    const errors: string[] = []
+    if (!this.$v.item.content || !this.$v.item.content.$dirty) {
+      return errors
+    }
+    has(this.violations, 'content') && errors.push(this.violations.content)
+    !this.$v.item.content.required && errors.push('Le contenu du message ne peut pas être vide')
+    !this.$v.item.content.minLength && errors.push('Le contenu doit faire au moins 10 caractères')
+    !this.$v.item.content.maxLength && errors.push('Le contenu doit faire au maximum 1000 caractères')
+    return errors
+  }
+
+  get firstNameErrors () {
+    const errors: string[] = []
+    if (!this.$v.item.firstName || !this.$v.item.firstName.$dirty) {
+      return errors
+    }
+    has(this.violations, 'firstName') && errors.push(this.violations.firstName)
+    !this.$v.item.firstName.maxLength && errors.push('Le prénom doit faire au maximum 60 caractères')
+    return errors
+  }
+
+  get lastNameErrors () {
+    const errors: string[] = []
+    if (!this.$v.item.lastName || !this.$v.item.lastName.$dirty) {
+      return errors
+    }
+    has(this.violations, 'lastName') && errors.push(this.violations.lastName)
+    !this.$v.item.lastName.maxLength && errors.push('Le nom doit faire au maximum 60 caractères')
+    return errors
+  }
+
+  get phoneNumberErrors () {
+    const errors: string[] = []
+    if (!this.$v.item.phoneNumber || !this.$v.item.phoneNumber.$dirty) {
+      return errors
+    }
+    has(this.violations, 'phoneNumber') && errors.push(this.violations.phoneNumber)
+    !this.$v.item.phoneNumber.maxLength && errors.push('Le téléphone doit faire au maximum 12 caractères')
+    return errors
+  }
+
+  get violations () {
+    return this.errors || {}
   }
 }
 </script>

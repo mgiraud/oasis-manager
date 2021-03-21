@@ -37,26 +37,26 @@
   </v-container>
 </template>
 
-<script>
-import { mapState } from 'vuex'
-export default {
-  middleware: 'notAuthenticated',
-  data: () => {
-    return {
-      credentials: {
-        email: '',
-        password: ''
-      }
-    }
-  },
-  computed: {
-    ...mapState('security', ['credentialError'])
-  },
-  methods: {
-    async postLogin () {
-      if (await this.$store.dispatch('security/login', this.credentials)) {
-        this.$router.push('/')
-      }
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator'
+import { namespace } from 'vuex-class'
+
+const securityModule = namespace('security')
+
+@Component({
+  middleware: 'notAuthenticated'
+})
+export default class Login extends Vue {
+  credentials = {
+    email: '',
+    password: ''
+  }
+
+  @securityModule.State('credentialError') credentialError!: boolean;
+
+  async postLogin () {
+    if (await this.$store.dispatch('security/login', this.credentials)) {
+      this.$router.push('/')
     }
   }
 }

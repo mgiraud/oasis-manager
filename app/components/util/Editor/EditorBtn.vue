@@ -15,29 +15,14 @@
   </v-tooltip>
 </template>
 
-<script>
-export default {
-  props: {
-    btnClass: {
-      type: Object,
-      required: false,
-      default: null
-    },
-    clickHandler: {
-      type: Function,
-      required: true
-    },
-    icon: {
-      type: String,
-      required: true
-    },
-    label: {
-      type: String,
-      required: true
-    }
-  },
-  data: () => ({
-    editor: null
-  })
+<script lang="ts">
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
+
+@Component
+export default class EditorBtn extends Vue {
+  @Prop({ type: Object, required: false, default: null }) readonly btnClass!: any
+  @Prop({ type: Function, required: true }) readonly clickHandler!: any
+  @Prop({ type: String, required: true }) readonly icon!: string
+  @Prop({ type: String, required: true }) readonly label!: string
 }
 </script>

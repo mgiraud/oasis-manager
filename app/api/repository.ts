@@ -1,24 +1,51 @@
-import isObject from 'lodash/isObject'
-import { normalize } from './hydra'
+import { Context } from '@nuxt/types'
+import { HydraMemberObject, normalize } from './hydra'
 import SubmissionError from '~/error/SubmissionError'
 
-const makeParamArray = (key, arr) =>
+// eslint-disable-next-line no-undef
+export type FormOptions = RequestInit & {
+  params?: {[propertyPath: string]: string}
+}
+
+export interface Repository {
+  call: (query: string, options: FormOptions) => Promise<Response>
+  validateAndDecodeResponse : (url: string, options: object) => Promise<any>
+  $findAll: (params: object) => Promise<any>
+  $find: (id: string) => Promise<any>
+  $create: (payload: object) => Promise<any>
+  $remove: (item: HydraMemberObject) => Promise<any>
+  $update: (item: HydraMemberObject) => Promise<any>
+  $post: (url: string, options: FormOptions) => Promise<any>
+}
+
+export interface FormViolation {
+  message: string
+  propertyPath: string
+}
+
+export interface FormErrors {
+  _error: string
+  [propertyPath: string]: string
+}
+
+const makeParamArray = (key: string, arr: string[]) =>
   arr.map(val => `${key}[]=${val}`).join('&')
 
-export default (context, { resource }) => ({
+export default (context: Context, { resource }: { resource: string }): Repository => ({
   async call (query, options = {}) {
     const jsonLdMimeType = 'application/ld+json'
+    options.headers = options.headers as Record<string, string>
 
-    if (typeof options.headers === 'undefined') {
+    if (options.headers === undefined) {
       options.headers = {}
     }
     if (process.server) {
-      options.headers.cookie = context.req.headers.cookie
+      options.headers.cookie = context.req.headers.cookie || ''
     }
     if (options.headers.Accept === undefined) {
       options.headers.Accept = jsonLdMimeType
     }
-    if (process.client && options.body !== 'undefined' && !(options.body instanceof FormData) && options.headers['Content-Type'] === undefined) {
+    if (process.client && options.body !== null && !(options.body instanceof FormData) && options.headers['Content-Type'] === undefined) {
       options.headers['Content-Type'] = jsonLdMimeType
     }
 
@@ -36,13 +63,13 @@ export default (context, { resource }) => ({
       query = `${query}?${queryString}`
     }
 
-    const payload = options['Content-Type'] !== 'multipart/form-data' && options.body && JSON.parse(options.body)
-    if (isObject(payload) && payload['@id']) {
+    const payload = options.headers['Content-Type'] !== 'multipart/form-data' && options.body && JSON.parse(options.body.toString())
+    if (payload !== undefined && (payload as HydraMemberObject)['@id']) {
       options.body = JSON.stringify(normalize(payload))
     }
 
-    const entryPoint = process.env.apiBaseUrl + (process.env.apiBaseUrl.endsWith('/') ? '' : '/')
-    return await fetch(new URL(query, entryPoint), options)
+    const entryPoint = process.env.apiBaseUrl + (process.env.apiBaseUrl?.endsWith('/') ? '' : '/')
+    return await fetch(new URL(query, entryPoint).toString(), options)
   },
 
   async validateAndDecodeResponse (url, options = {}) {
@@ -68,8 +95,8 @@ export default (context, { resource }) => ({
           'An error occurred.'
     if (!json.violations) { throw new Error(error) }
 
-    const errors = { _error: error }
-    json.violations.forEach(violation =>
+    const errors: FormErrors = { _error: error }
+    json.violations.forEach((violation: FormViolation) =>
       errors[violation.propertyPath]
         ? (errors[violation.propertyPath] +=
               '\n' + errors[violation.propertyPath])
@@ -78,7 +105,7 @@ export default (context, { resource }) => ({
     throw new SubmissionError(errors)
   },
 
-  async $findAll (params = {}) {
+  async $findAll (params: FormOptions = {}) {
     params.method = 'GET'
     return await this.validateAndDecodeResponse(resource, params)
   },

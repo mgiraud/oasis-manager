@@ -20,31 +20,24 @@
   </v-menu>
 </template>
 
-<script>
-export default {
-  props: {
-    label: {
-      type: String,
-      required: false,
-      default: () => ''
-    },
-    value: {
-      type: String,
-      default: null
-    }
-  },
-  data: () => ({
-    date: new Date().toISOString().substr(0, 10),
-    showMenu: false
-  }),
+<script lang="ts">
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
+
+@Component
+export default class DateType extends Vue {
+  @Prop({ type: String, required: false, default: '' }) readonly label!: any
+  @Prop({ type: String, required: false, default: null }) readonly value!: any
+
+  date = new Date().toISOString().substr(0, 10)
+  showMenu = false
+
   created () {
     this.date = this.value || this.date
-  },
-  methods: {
-    handleInput () {
-      this.showMenu = false
-      this.$emit('input', this.date)
-    }
+  }
+
+  handleInput () {
+    this.showMenu = false
+    this.$emit('input', this.date)
   }
 }
 </script>

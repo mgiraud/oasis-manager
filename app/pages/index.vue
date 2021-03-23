@@ -13,15 +13,15 @@
   </v-container>
 </template>
 
-<script>
-import { mapGetters, mapActions } from 'vuex'
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator'
+import { namespace } from 'vuex-class'
 
-export default {
-  computed: {
-    ...mapGetters('security', ['isLoggedIn'])
-  },
-  methods: {
-    ...mapActions('security', ['logout'])
-  }
+const securityModule = namespace('security')
+
+@Component
+export default class IndexVue extends Vue {
+  @securityModule.Getter('isLoggedIn') isLoggedIn!: boolean;
+  @securityModule.Action('logout') logout!: () => void
 }
 </script>

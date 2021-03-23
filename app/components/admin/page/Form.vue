@@ -71,77 +71,21 @@
   </v-form>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, mixins, namespace, Prop } from 'nuxt-property-decorator'
 import { required, minLength, helpers } from 'vuelidate/lib/validators'
 import has from 'lodash/has'
-import { mapFields } from 'vuex-map-fields'
-import { mapActions } from 'vuex'
 import { validationMixin } from 'vuelidate'
 import Editor from '../../util/Editor'
+import { PageCategory } from '~/store/page_category'
 
 const slug = helpers.regex('slug', /^[a-zA-Z0-9-]*$/)
+const pageCategoryModule = namespace('page_category')
 
-export default {
+@Component({
   name: 'AdminPageForm',
   components: {
     Editor
-  },
-  mixins: [validationMixin],
-  props: {
-    values: {
-      type: Object,
-      required: true,
-      default: () => {}
-    },
-    errors: {
-      type: Object,
-      default: () => {}
-    },
-    initialValues: {
-      type: Object,
-      default: () => {}
-    }
-  },
-  computed: {
-    ...mapFields('page_category', {
-      categorySelectItems: 'selectItems'
-    }),
-    item () {
-      return this.initialValues || this.values
-    },
-    titleErrors () {
-      const errors = []
-      if (!this.$v.item.title.$dirty) { return errors }
-      has(this.violations, 'title') && errors.push(this.violations.title)
-      !this.$v.item.title.minLength && errors.push('Le titre doit faire au moins 4 caractères')
-      return errors
-    },
-    urlErrors () {
-      const errors = []
-      if (!this.$v.item.url.$dirty) { return errors }
-      has(this.violations, 'url') && errors.push(this.violations.url)
-      !this.$v.item.url.minLength && errors.push('Le titre doit faire au moins 2 caractères')
-      !this.$v.item.url.slug && errors.push('L\'url doit contenir seulement des chiffres, des lettres et le tiret du haut -')
-      return errors
-    },
-    contentErrors () {
-      const errors = []
-      if (!this.$v.item.content.$dirty) { return errors }
-      has(this.violations, 'url') && errors.push(this.violations.content)
-      !this.$v.item.content.slug && errors.push('Le titre doit faire au moins 2 caractères')
-      return errors
-    },
-    violations () {
-      return this.errors || {}
-    }
-  },
-  mounted () {
-    this.categoryGetSelectItems()
-  },
-  methods: {
-    ...mapActions('page_category', {
-      categoryGetSelectItems: 'fetchSelectItems'
-    })
   },
   validations: {
     item: {
@@ -157,6 +101,56 @@ export default {
       content: {
       }
     }
+  }
+})
+export default class AdminPageForm extends mixins(validationMixin) {
+  @Prop({ type: Object, required: true })
+  values!: any
+
+  @Prop({ type: Object, default: () => {} })
+  errors!: any
+
+  @Prop({ type: Object, default: () => {} })
+  initialValues!: any
+
+  @pageCategoryModule.State('selectItems') categorySelectItems!: PageCategory[] | null
+  @pageCategoryModule.Action('fetchSelectItems') categoryGetSelectItems!: () => PageCategory[]
+
+  get item () {
+    return this.initialValues || this.values
+  }
+
+  get titleErrors () {
+    const errors = []
+    if (!this.$v.item.title.$dirty) { return errors }
+    has(this.violations, 'title') && errors.push(this.violations.title)
+    !this.$v.item.title.minLength && errors.push('Le titre doit faire au moins 4 caractères')
+    return errors
+  }
+
+  get urlErrors () {
+    const errors = []
+    if (!this.$v.item.url.$dirty) { return errors }
+    has(this.violations, 'url') && errors.push(this.violations.url)
+    !this.$v.item.url.minLength && errors.push('Le titre doit faire au moins 2 caractères')
+    !this.$v.item.url.slug && errors.push('L\'url doit contenir seulement des chiffres, des lettres et le tiret du haut -')
+    return errors
+  }
+
+  get contentErrors () {
+    const errors = []
+    if (!this.$v.item.content.$dirty) { return errors }
+    has(this.violations, 'url') && errors.push(this.violations.content)
+    !this.$v.item.content.slug && errors.push('Le titre doit faire au moins 2 caractères')
+    return errors
+  }
+
+  get violations () {
+    return this.errors || {}
+  }
+
+  mounted () {
+    this.categoryGetSelectItems()
   }
 }
 </script>

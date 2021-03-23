@@ -11,7 +11,7 @@
     <v-file-input
       v-model="fileUpload.file"
       truncate-length="15"
-      prepend-icon="mdi-paperclip"
+      prepend-icon="ri-attachment-line"
       :show-size="1000"
       @change="onFileChange"
     />

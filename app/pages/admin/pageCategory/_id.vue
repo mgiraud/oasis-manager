@@ -35,18 +35,20 @@
         </Toolbar>
       </v-col>
     </v-row>
-    <Loading :visible="deleteLoading" />
+    <Loading :visible="isLoading" />
   </v-container>
 </template>
-<script>
-import { mapGetters, mapActions } from 'vuex'
-import { mapFields } from 'vuex-map-fields'
-import Loading from '../../../components/util/Loading'
-import Toolbar from '../../../components/form/Toolbar'
-import Form from '../../../components/admin/pageCategory/Form'
+<script lang="ts">
+import { Component, mixins, namespace } from 'nuxt-property-decorator'
+import Loading from '~/components/util/Loading'
+import Toolbar from '~/components/form/Toolbar'
+import Form from '~/components/admin/pageCategory/Form'
 import update from '~/mixins/update'
+import { PageCategory } from '~/store/page_category'
 
-export default {
+const pageCategoryModule = namespace('page_category')
+
+@Component({
   components: {
     Loading, Toolbar, Form
   },
@@ -56,26 +58,20 @@ export default {
   middleware: 'hasPermissions',
   meta: {
     permissions: ['USER_CAN_EDIT_PAGE_CATEGORIES']
-  },
-  computed: {
-    ...mapFields('page_category', {
-      deleteLoading: 'isLoading',
-      isLoading: 'isLoading',
-      error: 'error',
-      updated: 'updated',
-      violations: 'violations'
-    }),
-    ...mapGetters('page_category', ['find'])
-  },
-  methods: {
-    ...mapActions('page_category', {
-      createReset: 'resetCreate',
-      deleteItem: 'del',
-      delReset: 'resetDelete',
-      retrieve: 'load',
-      update: 'update',
-      updateReset: 'resetUpdate'
-    })
   }
+})
+export default class AdminPageCategoryEdit extends mixins(update) {
+  @pageCategoryModule.State('updated') updated!: PageCategory | null
+  @pageCategoryModule.State('error') error!: string | null
+  @pageCategoryModule.State('isLoading') isLoading!: boolean
+  @pageCategoryModule.State('violations') violations!: string[]
+
+  @pageCategoryModule.Getter('find') find!: (id: string) => PageCategory | null
+
+  @pageCategoryModule.Action('resetCreate') createReset!: () => void
+  @pageCategoryModule.Action('resetDelete') delReset!: () => void
+  @pageCategoryModule.Action('load') retrieve!: (id: string) => void
+  @pageCategoryModule.Action('update') update!: (pageCateogry: PageCategory) => PageCategory
+  @pageCategoryModule.Action('resetUpdate') updateReset!: () => void
 }
 </script>

@@ -44,7 +44,7 @@
       </v-btn>
 
       <v-btn v-if="handleAdd" color="primary" rounded @click="addItem">
-        <v-icon>mdi-plus-circle</v-icon>
+        <v-icon>ri-add-line</v-icon>
       </v-btn>
     </div>
     <ConfirmDelete
@@ -56,84 +56,70 @@
   </v-toolbar>
 </template>
 
-<script>
-import ConfirmDelete from '../util/ConfirmDelete'
+<script lang="ts">
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import ConfirmDelete from '~/components/util/ConfirmDelete'
 
-export default {
+@Component({
   name: 'Toolbar',
   components: {
     ConfirmDelete
-  },
-  props: {
-    handleBack: {
-      type: Function,
-      required: false,
-      default: null
-    },
-    handleEdit: {
-      type: Function,
-      required: false,
-      default: null
-    },
-    handleSubmit: {
-      type: Function,
-      required: false,
-      default: null
-    },
-    handleReset: {
-      type: Function,
-      required: false,
-      default: null
-    },
-    handleDelete: {
-      type: Function,
-      required: false,
-      default: null
-    },
-    handleAdd: {
-      type: Function,
-      required: false,
-      default: null
-    },
-    title: {
-      type: String,
-      required: false,
-      default: ''
-    },
-    isLoading: {
-      type: Boolean,
-      required: false,
-      default: () => false
+  }
+})
+export default class Toolbar extends Vue {
+  @Prop({ type: Function, default: null })
+  handleBack!: any
+
+  @Prop({ type: Function, default: null })
+  handleEdit!: any
+
+  @Prop({ type: Function, default: null })
+  handleSubmit!: any
+
+  @Prop({ type: Function, default: null })
+  handleReset!: any
+
+  @Prop({ type: Function, default: null })
+  handleDelete: any
+
+  @Prop({ type: Function, default: null })
+  handleAdd!: any
+
+  @Prop({ type: String, default: '', required: false })
+  title!: any
+
+  @Prop({ type: Boolean, default: false, required: false })
+  isLoading!: any
+
+  confirmDelete = false
+
+  goBack () {
+    if (this.handleBack) {
+      this.handleBack()
     }
-  },
-  data: () => ({
-    confirmDelete: false
-  }),
-  methods: {
-    goBack () {
-      if (this.handleBack) {
-        this.handleBack()
-      }
-    },
-    addItem () {
-      if (this.handleAdd) {
-        this.handleAdd()
-      }
-    },
-    editItem () {
-      if (this.handleEdit) {
-        this.handleEdit()
-      }
-    },
-    submitItem () {
-      if (this.handleSubmit) {
-        this.handleSubmit()
-      }
-    },
-    resetItem () {
-      if (this.handleReset) {
-        this.handleReset()
-      }
+  }
+
+  addItem () {
+    if (this.handleAdd) {
+      this.handleAdd()
+    }
+  }
+
+  editItem () {
+    if (this.handleEdit) {
+      this.handleEdit()
+    }
+  }
+
+  submitItem () {
+    if (this.handleSubmit) {
+      this.handleSubmit()
+    }
+  }
+
+  resetItem () {
+    if (this.handleReset) {
+      this.handleReset()
     }
   }
 }

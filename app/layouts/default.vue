@@ -9,7 +9,7 @@
       app
       dark
     >
-      <template v-slot:img="{ props }">
+      <template #img="{ props }">
         <v-img
           v-bind="props"
         />
@@ -23,14 +23,14 @@
         Admin
       </v-btn>
       <v-btn v-if="isLoggedIn" icon color="primary darken-4" @click="logout">
-        <v-icon>mdi-logout</v-icon>
+        <v-icon>ri-logout-box-line</v-icon>
       </v-btn>
       <v-btn v-else icon to="/login">
         <v-icon color="primary darken-4">
-          mdi-login
+          ri-login-box-line
         </v-icon>
       </v-btn>
-      <template v-slot:extension>
+      <template #extension>
         <Menu />
       </template>
     </v-app-bar>
@@ -76,36 +76,36 @@
   </v-app>
 </template>
 
-<script>
-import { mapGetters, mapActions, mapState } from 'vuex'
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator'
+import { namespace } from 'vuex-class'
 import Menu from '../components/layout/Menu'
 import SubMenu from '../components/layout/SubMenu'
 import NewsletterForm from '../components/contact_newsletter/Form'
 import Alert from '../components/util/Alert'
 
-export default {
+const securityModule = namespace('security')
+const pageModule = namespace('page')
+
+@Component({
   components: {
     Menu, SubMenu, NewsletterForm, Alert
-  },
-  data: () => ({
-    showNewsletter: true
-  }),
-  computed: {
-    test () {
-      return this.$store.state.page.activeSlug
-    },
-    ...mapState('page', ['activeSlug']),
-    ...mapGetters('security', ['isAdmin', 'isLoggedIn'])
-  },
-  methods: {
-    ...mapActions('security', ['logout']),
+  }
+})
+export default class DefaultLayout extends Vue {
+    showNewsletter = true
+    @pageModule.State('activeSlug') activeSlug!: string | null
+    @securityModule.Getter('isAdmin') isAdmin!: () => boolean
+    @securityModule.Getter('isLoggedIn') isLoggedIn!: () => boolean
+    @securityModule.Action('logout') logout!: () => void
+
     redirectToAdmin () {
       this.$router.push({ path: 'admin' })
-    },
+    }
+
     onNewsletterClose () {
       this.showNewsletter = false
     }
-  }
 }
 </script>
 

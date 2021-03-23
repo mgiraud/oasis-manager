@@ -6,35 +6,35 @@
   </v-tabs>
 </template>
 
-<script>
-import { mapGetters } from 'vuex'
+<script lang="ts">
+import { Component, namespace, Vue, Watch } from 'nuxt-property-decorator'
 import { findIndex } from 'lodash'
+import { MenuItem, Page } from '~/store/page'
 
-export default {
-  resourcePrefix: '/api/pages/',
-  data: () => ({
-    tab: null
-  }),
-  computed: {
-    ...mapGetters('page', ['menuItems', 'findByActiveSlug'])
-  },
-  watch: {
-    tab (tabIndex) {
-      if (tabIndex !== undefined || !this.findByActiveSlug[tabIndex]) {
-        this.redirect(this.findByActiveSlug[tabIndex])
-      }
+const pageModule = namespace('page')
+
+@Component
+export default class Toolbar extends Vue {
+  tab: number | null = null
+  @pageModule.Getter('menuItems') menuItems !: MenuItem[]
+  @pageModule.Getter('findByActiveSlug') findByActiveSlug !: Page[]
+
+  @Watch('tab')
+  onTabUpdated (tabIndex: number) {
+    if (tabIndex !== undefined || !this.findByActiveSlug[tabIndex]) {
+      this.redirect(this.findByActiveSlug[tabIndex])
     }
-  },
+  }
+
   mounted () {
     if (this.$route.params.pathMatch) {
       this.tab = findIndex(this.findByActiveSlug, { url: this.$route.params.pathMatch })
     }
-  },
-  methods: {
-    redirect (item) {
-      if (item) {
-        this.$router.push(item.url)
-      }
+  }
+
+  redirect (item: Page) {
+    if (item && item.url) {
+      this.$router.push(item.url)
     }
   }
 }

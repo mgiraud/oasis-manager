@@ -15,42 +15,88 @@
   </v-container>
 </template>
 
-<script>
-import { mapFields } from 'vuex-map-fields'
-import { mapActions } from 'vuex'
+<script lang="ts">
+
+import { Component, namespace, Watch, mixins } from 'nuxt-property-decorator'
 import ContactForm from '../components/contact/Form'
-import notification from '../mixins/notification'
 import Toolbar from '../components/form/Toolbar'
 import Loading from '../components/util/Loading'
-import create from '~/mixins/create'
+import { Contact } from '~/store/contact'
+import NotificationMixin from '~/mixins/notification'
+import { ElementWithValidation } from '~/types'
 
-export default {
+const contactModule = namespace('contact')
+const notificationModule = namespace('notifications')
+
+@Component({
+  // @ts-ignore
   servicePrefix: 'contact',
   resourcePrefix: '/api/contacts/',
   components: {
     ContactForm,
     Toolbar,
     Loading
-  },
-  mixins: [create, notification],
-  data: () => ({
-    item: {
+  }
+})
+export default class ContactVue extends mixins(NotificationMixin) {
+  item = {
+    content: null
+  }
+
+  @contactModule.State('error') error!: string | null;
+  @contactModule.State('isLoading') isLoading!: boolean;
+  @contactModule.State('created') created!: Contact;
+  @contactModule.State('violations') violations!: string[];
+
+  @contactModule.Action('create') create !: (contact: Contact) => Contact
+  @contactModule.Action('reset') reset !: () => void
+  @notificationModule.Action('setTimeout') setTimeoutDuration!: (show: number) => void
+
+  resetForm () {
+    (this.$refs.createForm as ElementWithValidation).$v.$reset()
+    this.item = {
       content: null
     }
-  }),
-  computed: {
-    ...mapFields('contact', ['error', 'isLoading', 'created', 'violations'])
-  },
-  watch: {
-    violations (violations) {
-      if (violations && violations['']) {
-        this.timeout = 10000
-        this.showError(violations[''])
-      }
+  }
+
+  onSendForm () {
+    const createForm = this.$refs.createForm as ElementWithValidation
+    createForm.$v.$touch()
+    if (!createForm.$v.$invalid) {
+      this.create(createForm.$v.item.$model)
     }
-  },
-  methods: {
-    ...mapActions('contact', ['create', 'reset'])
+  }
+
+  @Watch('violations')
+  onViolationsChanged (violations: string[] | null) {
+    // @ts-ignore
+    if (violations && violations['']) {
+      this.setTimeoutDuration(10000)
+      // @ts-ignore
+      this.showError(violations[''])
+    }
+  }
+
+  @Watch('created')
+  onCreated (created: Contact) {
+    if (!created) {
+      return
+    }
+
+    // @ts-ignore
+    const id = this.$options.resourcePrefix ? created['@id'].replace(this.$options.resourcePrefix, '') : this.$options.resourcePrefix
+    this.showMessage(`${id} created`)
+
+    this.$router.push({
+      // @ts-ignore
+      name: `${this.$options.servicePrefix}-id`,
+      params: { id }
+    })
+  }
+
+  @Watch('error')
+  onError (message: string) {
+    message && this.showError(message)
   }
 }
 </script>

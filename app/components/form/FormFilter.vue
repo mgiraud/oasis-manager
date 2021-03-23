@@ -4,14 +4,14 @@
     :close-on-content-click="false"
     offset-y
   >
-    <template v-slot:activator="{ on, attrs }">
+    <template #activator="{ on, attrs }">
       <v-btn
         color="white"
         v-bind="attrs"
         v-on="on"
       >
         Filter <v-icon right>
-          mdi-filter-variant
+          ri-filter-line
         </v-icon>
       </v-btn>
     </template>
@@ -35,26 +35,23 @@
   </v-menu>
 </template>
 
-<script>
-export default {
-  name: 'FormFilter',
-  props: {
-    handleReset: {
-      type: Function,
-      required: true
-    },
-    handleFilter: {
-      type: Function,
-      required: true
-    }
-  },
-  methods: {
-    onFilter () {
-      this.handleFilter()
-    },
-    onCancel () {
-      this.handleReset()
-    }
+<script lang="ts">
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
+
+@Component
+export default class FormFilter extends Vue {
+  @Prop({ type: Function, required: true })
+  handleReset!: any
+
+  @Prop({ type: Function, required: true })
+  handleFilter!: any
+
+  onFilter () {
+    this.handleFilter()
+  }
+
+  onCancel () {
+    this.handleReset()
   }
 }
 </script>

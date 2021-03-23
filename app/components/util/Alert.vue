@@ -11,12 +11,12 @@
       <p>{{ subText }}</p>
     </template>
 
-    <template v-slot:action="{ attrs }">
+    <template #action="{ attrs }">
       <v-btn
         dark
         text
         v-bind="attrs"
-        @click="show = false"
+        @click="close"
       >
         Fermer
       </v-btn>
@@ -24,16 +24,23 @@
   </v-snackbar>
 </template>
 
-<script>
-import { mapFields } from 'vuex-map-fields'
-export default {
-  computed: {
-    ...mapFields('notifications', ['color', 'show', 'subText', 'text', 'timeout'])
-  },
-  methods: {
-    close () {
-      this.show = false
-    }
+<script lang="ts">
+import { Component, namespace, Vue } from 'nuxt-property-decorator'
+
+const notificationModule = namespace('notifications')
+
+@Component
+export default class Alert extends Vue {
+  @notificationModule.State('color') color!: string;
+  @notificationModule.State('text') text!: string;
+  @notificationModule.State('subText') subText!: string;
+  @notificationModule.State('show') show!: boolean;
+  @notificationModule.State('timeout') timeout!: number;
+
+  @notificationModule.Action('setShow') setShow!: (show: boolean) => void
+
+  close () {
+    this.setShow(false)
   }
 }
 </script>

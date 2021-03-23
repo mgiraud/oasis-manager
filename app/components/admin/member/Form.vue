@@ -52,61 +52,18 @@
   </v-form>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, mixins, namespace, Prop } from 'nuxt-property-decorator'
 import { required, minLength } from 'vuelidate/lib/validators'
 import has from 'lodash/has'
-import { mapFields } from 'vuex-map-fields'
-import { mapActions, mapState } from 'vuex'
 import { validationMixin } from 'vuelidate'
+import { MemberGroup } from '~/store/member_group'
 
-export default {
-  name: 'AdminPageForm',
-  mixins: [validationMixin],
-  props: {
-    values: {
-      type: Object,
-      required: true,
-      default: () => {}
-    },
-    errors: {
-      type: Object,
-      default: () => {}
-    },
-    initialValues: {
-      type: Object,
-      default: () => {}
-    }
-  },
-  data: () => ({
-    permissionOverride: ['Fusionner les permissions', 'Permissions du groupe seulement', 'Permission du membre seulement']
-  }),
-  computed: {
-    ...mapState('security', ['permissions']),
-    ...mapFields('member_group', {
-      groupsSelectItems: 'selectItems'
-    }),
-    item () {
-      return this.initialValues || this.values
-    },
-    nicknameErrors () {
-      const errors = []
-      if (!this.$v.item.nickname.$dirty) { return errors }
-      has(this.violations, 'nickname') && errors.push(this.violations.nickname)
-      !this.$v.item.nickname.minLength && errors.push('Le pseudo doit faire au moins 4 caractères')
-      return errors
-    },
-    violations () {
-      return this.errors || {}
-    }
-  },
-  mounted () {
-    this.groupsGetSelectItems()
-  },
-  methods: {
-    ...mapActions('member_group', {
-      groupsGetSelectItems: 'fetchSelectItems'
-    })
-  },
+const memberGroupModule = namespace('member_group')
+const securityModule = namespace('security')
+
+@Component({
+  name: 'MemberForm',
   validations: {
     item: {
       nickname: {
@@ -115,5 +72,42 @@ export default {
       }
     }
   }
+})
+export default class MemberForm extends mixins(validationMixin) {
+  @Prop({ type: Object, default: () => {} })
+  values!: any
+
+  @Prop({ type: Object, default: () => {} })
+  errors!: any
+
+  @Prop({ type: Object, default: () => {} })
+  initialValues!: any
+
+  permissionOverride = ['Fusionner les permissions', 'Permissions du groupe seulement', 'Permission du membre seulement']
+
+  @securityModule.State('permissions') permissions !: string[]
+  @memberGroupModule.State('selectItems') groupsSelectItems !: string[]
+
+  get item () {
+    return this.initialValues || this.values
+  }
+
+  get nicknameErrors () {
+    const errors = []
+    if (!this.$v.item.nickname || !this.$v.item.nickname.$dirty) { return errors }
+    has(this.violations, 'nickname') && errors.push(this.violations.nickname)
+    !this.$v.item.nickname.minLength && errors.push('Le pseudo doit faire au moins 4 caractères')
+    return errors
+  }
+
+  get violations () {
+    return this.errors || {}
+  }
+
+  mounted () {
+    this.groupsGetSelectItems()
+  }
+
+  @memberGroupModule.Action('fetchSelectItems') groupsGetSelectItems !: () => MemberGroup[]
 }
 </script>

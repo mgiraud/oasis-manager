@@ -33,32 +33,24 @@
   </v-container>
 </template>
 
-<script>
-import { mapActions, mapState } from 'vuex'
+<script lang="ts">
+import { Component, Vue, namespace, Prop } from 'nuxt-property-decorator'
+import { MemberGroup } from '~/store/member_group'
 
-export default {
-  name: 'AdminPageFilter',
-  props: {
-    values: {
-      type: Object,
-      required: true
-    }
-  },
-  computed: {
-    ...mapState('member_group', {
-      groupsSelectItems: 'selectItems'
-    }),
-    item () {
-      return this.initialValues || this.values
-    }
-  },
+const memberGroupModule = namespace('member_group')
+
+@Component
+export default class MemberFilter extends Vue {
+  @Prop({ type: Object, required: true }) readonly values!: any
+  @memberGroupModule.State('selectItems') groupsSelectItems !: MemberGroup[]
+  @memberGroupModule.Action('fetchSelectItems') groupsGetSelectItems !: () => MemberGroup[]
+
+  get item () {
+    return this.values
+  }
+
   mounted () {
     this.groupsGetSelectItems()
-  },
-  methods: {
-    ...mapActions({
-      groupsGetSelectItems: 'member_group/fetchSelectItems'
-    })
   }
 }
 </script>

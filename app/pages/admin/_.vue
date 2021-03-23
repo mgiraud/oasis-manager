@@ -5,7 +5,11 @@
 </template>
 
 <script>
-export default {
+import { Vue, Component } from 'nuxt-property-decorator'
+
+@Component({
   layout: 'admin'
+})
+export default class BackUpAdmin extends Vue {
 }
 </script>

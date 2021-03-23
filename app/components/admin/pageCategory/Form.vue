@@ -33,44 +33,13 @@
   </v-form>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, mixins, Prop } from 'nuxt-property-decorator'
 import { required, minLength } from 'vuelidate/lib/validators'
 import has from 'lodash/has'
 import { validationMixin } from 'vuelidate'
 
-export default {
-  name: 'AdminPageCategoryForm',
-  mixins: [validationMixin],
-  props: {
-    values: {
-      type: Object,
-      required: true,
-      default: () => {}
-    },
-    errors: {
-      type: Object,
-      default: () => {}
-    },
-    initialValues: {
-      type: Object,
-      default: () => {}
-    }
-  },
-  computed: {
-    item () {
-      return this.initialValues || this.values
-    },
-    nameErrors () {
-      const errors = []
-      if (!this.$v.item.name.$dirty) { return errors }
-      has(this.violations, 'name') && errors.push(this.violations.name)
-      !this.$v.item.name.minLength && errors.push('Le titre doit faire au moins 4 caractères')
-      return errors
-    },
-    violations () {
-      return this.errors || {}
-    }
-  },
+@Component({
   validations: {
     item: {
       name: {
@@ -78,6 +47,27 @@ export default {
         minLength: minLength(4)
       }
     }
+  }
+})
+export default class PageCategoryForm extends mixins(validationMixin) {
+  @Prop({ type: Object, default: () => {} }) readonly values!: any
+  @Prop({ type: Object, default: () => {} }) readonly errors!: any
+  @Prop({ type: Object, default: () => {} }) readonly initialValues!: any
+
+  get item () {
+    return this.initialValues || this.values
+  }
+
+  get nameErrors () {
+    const errors: string[] = []
+    if (!this.$v.item.name || !this.$v.item.name.$dirty) { return errors }
+    has(this.violations, 'name') && errors.push(this.violations.name)
+    !this.$v.item.name.minLength && errors.push('Le titre doit faire au moins 4 caractères')
+    return errors
+  }
+
+  get violations () {
+    return this.errors || {}
   }
 }
 </script>

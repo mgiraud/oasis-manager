@@ -3,17 +3,17 @@
     <v-card-title class="primary--text text--darken-4">
       {{ page.title | capitalize }}
     </v-card-title>
+    <!-- // eslint-disable-next-line vue/no-v-html -->
     <v-card-text v-html="page.content" />
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    page: {
-      type: Object,
-      required: true
-    }
-  }
+<script lang="ts">
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { Page } from '~/store/page'
+
+@Component
+export default class Tempate extends Vue {
+  @Prop({ type: Object, required: true }) readonly page!: Page
 }
 </script>

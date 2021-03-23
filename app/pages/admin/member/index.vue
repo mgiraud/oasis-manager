@@ -14,7 +14,7 @@
       show-select
       @update:options="onUpdateOptions"
     >
-      <template v-slot:top>
+      <template #top>
         <v-toolbar flat color="white">
           <v-toolbar-title>Liste de membres</v-toolbar-title>
 
@@ -39,16 +39,19 @@
   </v-container>
 </template>
 
-<script>
-import { mapGetters, mapActions } from 'vuex'
-import { mapFields } from 'vuex-map-fields'
-import isAdmin from '../../../middleware/isAdmin'
-import ActionCell from '../../../components/table/ActionCell'
-import FormFilter from '../../../components/form/FormFilter'
-import MemberFilter from '../../../components/admin/member/MemberFilter'
+<script lang="ts">
+import { Component, mixins, namespace } from 'nuxt-property-decorator'
+import isAdmin from '~/middleware/isAdmin'
+import ActionCell from '~/components/table/ActionCell'
+import FormFilter from '~/components/form/FormFilter'
+import MemberFilter from '~/components/admin/member/MemberFilter'
 import list from '~/mixins/list'
+import { Member } from '~/store/member'
+import { MUTATIONS } from '~/store/crud'
 
-export default {
+const memberModule = namespace('member')
+
+@Component({
   components: {
     ActionCell, FormFilter, MemberFilter
   },
@@ -59,51 +62,45 @@ export default {
   fetchOnServer: false,
   meta: {
     permissions: ['USER_CAN_ACCESS_MEMBERS']
-  },
-  mixins: [list],
+  }
+})
+export default class AdminMemberIndex extends mixins(list) {
+  selected = []
+  headers = [
+    { text: 'Email', value: 'email' },
+    { text: 'Pseudo', value: 'nickname' },
+    { text: 'Actions', value: 'actions', sortable: false }
+  ]
+
   async fetch ({ store }) {
     await store.dispatch('member/fetchAll')
-  },
-  data: () => ({
-    selected: [],
-    headers: [
-      { text: 'Email', value: 'email' },
-      { text: 'Pseudo', value: 'nickname' },
-      { text: 'Actions', value: 'actions', sortable: false }
-    ]
-  }),
-  computed: {
-    ...mapGetters('member', {
-      items: 'list'
-    }),
-    ...mapGetters('security', ['isAdmin']),
-    ...mapFields('member', {
-      deletedItem: 'deleted',
-      error: 'error',
-      isLoading: 'isLoading',
-      resetList: 'resetList',
-      totalItems: 'totalItems',
-      view: 'view'
-    }),
-    filteredItems () {
-      if (isAdmin) { return this.items }
-      return this.items.filter(item => !item.isAdmin)
-    },
-    canDeleteMember () {
-      return this.hasPermission('USER_CAN_DELETE_MEMBERS')
-    },
-    canEditMember () {
-      return this.hasPermission('USER_CAN_EDIT_MEMBERS')
-    }
-  },
-  methods: {
-    ...mapActions('member', {
-      fetchAll: 'fetchAll',
-      deleteItem: 'del'
-    }),
-    editItem (item) {
+  }
+
+  @memberModule.Getter('list') items !: Member[]
+  @memberModule.State('deleted') deletedItem!: Member | null
+  @memberModule.State('error') error!: string | null
+  @memberModule.State('isLoading') isLoading!: boolean
+  @memberModule.State('totalItems') totalItems!: number
+  @memberModule.Mutation(MUTATIONS.RESET_LIST) resetList!: (reset: boolean) => void
+
+  get filteredItems () {
+    if (isAdmin) { return this.items }
+    return this.items.filter(item => !item.isAdmin)
+  }
+
+  get canDeleteMember () {
+    return this.hasPermission('USER_CAN_DELETE_MEMBERS')
+  }
+
+  get canEditMember () {
+    return this.hasPermission('USER_CAN_EDIT_MEMBERS')
+  }
+
+    @memberModule.Action('fetchAll') fetchAll!: () => Member[]
+    @memberModule.Action('del') deleteItem!: (member: Member) => void
+
+    editItem (item: Member) {
       this.$router.push({ name: 'admin-member-id', params: { id: item.id } })
     }
-  }
 }
 </script>

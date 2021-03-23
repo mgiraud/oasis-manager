@@ -19,19 +19,15 @@
   </v-container>
 </template>
 
-<script>
-export default {
-  name: 'AdminPageCategoryFilter',
-  props: {
-    values: {
-      type: Object,
-      required: true
-    }
-  },
-  computed: {
-    item () {
-      return this.initialValues || this.values
-    }
+<script lang="ts">
+import { Component, Vue, Prop } from 'nuxt-property-decorator'
+
+@Component
+export default class PageCategoryFilter extends Vue {
+  @Prop({ type: Object, required: true }) readonly values!: any
+
+  get item () {
+    return this.values
   }
 }
 </script>

@@ -22,8 +22,8 @@
           <v-card-title>Connectez-vous !</v-card-title>
           <v-card-text>
             <v-form>
-              <v-text-field v-model="credentials.email" prepend-inner-icon="mdi-account" label="email" type="email" />
-              <v-text-field v-model="credentials.password" prepend-inner-icon="mdi-lock" label="password" type="password" />
+              <v-text-field v-model="credentials.email" prepend-inner-icon="ri-account-circle-line" label="email" type="email" />
+              <v-text-field v-model="credentials.password" prepend-inner-icon="ri-lock-2-line" label="password" type="password" />
             </v-form>
           </v-card-text>
           <v-card-actions>
@@ -37,26 +37,26 @@
   </v-container>
 </template>
 
-<script>
-import { mapState } from 'vuex'
-export default {
-  data: () => {
-    return {
-      credentials: {
-        email: '',
-        password: ''
-      }
-    }
-  },
-  middleware: 'notAuthenticated',
-  computed: {
-    ...mapState('security', ['credentialError'])
-  },
-  methods: {
-    async postLogin () {
-      if (await this.$store.dispatch('security/login', this.credentials)) {
-        this.$router.push('/')
-      }
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator'
+import { namespace } from 'vuex-class'
+
+const securityModule = namespace('security')
+
+@Component({
+  middleware: 'notAuthenticated'
+})
+export default class Login extends Vue {
+  credentials = {
+    email: '',
+    password: ''
+  }
+
+  @securityModule.State('credentialError') credentialError!: boolean;
+
+  async postLogin () {
+    if (await this.$store.dispatch('security/login', this.credentials)) {
+      this.$router.push('/')
     }
   }
 }

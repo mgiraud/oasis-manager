@@ -1,5 +1,8 @@
+import { FormErrors } from '~/api/repository'
+
 export default class SubmissionError extends Error {
-  constructor (errors) {
+  errors : FormErrors
+  constructor (errors: FormErrors) {
     super('Submit Validation Failed')
     this.errors = errors
     if (Error.captureStackTrace !== undefined) {

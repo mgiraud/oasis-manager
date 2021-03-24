@@ -43,6 +43,7 @@ export default {
   },
   plugins: [
     '~/plugins/repository',
+    '~/plugins/auth',
     '~/plugins/filters/capitalize'
   ],
   modules: [

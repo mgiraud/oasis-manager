@@ -1,40 +1,48 @@
 import type { GetterTree, ActionTree, MutationTree } from 'vuex'
 import { RootState } from '.'
-import { HydraMemberObject } from '~/api/hydra'
 const fs = process.server ? require('fs') : null
 const path = process.server ? require('path') : null
 
-export type Groups = HydraMemberObject & {
-  name: string
-}
-
-export type User = HydraMemberObject & {
-  email: string;
-  groupPermissionsOverrideType: number;
-  groups: Groups[];
-  id: number;
-  isAdmin: boolean;
-  memberPermissions: string[];
-  nickname: string | null;
-  permissions: string[];
-}
-
 export interface SecurityState {
-  permissions: string[];
-  credentialError: boolean;
+  permissions: string[]
+  credentialError: boolean
+  loggedIn: boolean,
+  tokenExpiration: number
+  refreshTokenExpiration: number
+}
+
+export interface LoginCredentials {
+  email: string,
+  password: string
 }
 
 export const state = (): SecurityState => ({
   permissions: [],
-  credentialError: false
+  credentialError: false,
+  loggedIn: false,
+  tokenExpiration: 0,
+  refreshTokenExpiration: 0
 })
 
+const MUTATIONS = {
+  SET_PERMISSIONS: 'SET_PERMISSIONS',
+  SET_CREDENTIAL_ERROR: 'SET_CREDENTIAL_ERROR',
+  SET_TOKEN_EXPIRATION: 'SET_TOKEN_EXPIRATION',
+  SET_REFRESH_TOKEN_EXPIRATION: 'SET_REFRESH_TOKEN_EXPIRATION'
+}
+
 export const mutations: MutationTree<SecurityState> = {
-  SET_PERMISSIONS (state, permissions) {
+  [MUTATIONS.SET_PERMISSIONS] (state, permissions: string[]) {
     state.permissions = permissions
   },
-  SET_CREDENTIAL_ERROR (state, inError) {
+  [MUTATIONS.SET_CREDENTIAL_ERROR] (state, inError: boolean) {
     state.credentialError = inError
+  },
+  [MUTATIONS.SET_TOKEN_EXPIRATION] (state, expireAt: number) {
+    state.tokenExpiration = expireAt
+  },
+  [MUTATIONS.SET_REFRESH_TOKEN_EXPIRATION] (state, expireAt: number) {
+    state.refreshTokenExpiration = expireAt
   }
 }
 
@@ -45,7 +53,7 @@ export const actions: ActionTree<SecurityState, RootState> = {
       commit('SET_PERMISSIONS', JSON.parse(data))
     })
   },
-  async login ({ commit }, credentials) {
+  async login ({ commit }, credentials: LoginCredentials) {
     commit('SET_CREDENTIAL_ERROR', false)
     try {
       // @ts-ignore

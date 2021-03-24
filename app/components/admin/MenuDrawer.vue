@@ -105,7 +105,7 @@
 
 <script lang="ts">
 import { Vue, namespace, State, Component } from 'nuxt-property-decorator'
-import { User } from '~/store/security'
+import {Member} from "~/store/member";
 
 const securityModule = namespace('security')
 
@@ -122,7 +122,7 @@ export default class MenuDrawer extends Vue {
     ['ri-group-line', 'Gérer les groupes', 'admin-memberGroup', 'USER_CAN_ACCESS_MEMBER_GROUPS']
   ]
 
-  @State('storage') storage!: {user?: User}
+  @State('storage') storage!: {user?: Member}
   @securityModule.Getter('hasPermission') hasPermission!: (permission: string) => boolean
 
   get user () {

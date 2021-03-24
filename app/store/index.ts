@@ -1,11 +1,11 @@
 import type { ActionTree, Dispatch } from 'vuex'
 import jwtDecode from 'jwt-decode'
 import { Context } from '@nuxt/types'
-import { User } from './security'
+import { Member } from '~/store/member'
 const cookieparser = process.server ? require('cookieparser') : undefined
 
 export type Storage = {
-  user: User | null
+  user: Member | null
 }
 
 export interface RootState {
@@ -32,21 +32,21 @@ export const actions: ActionTree<RootState, RootState> = {
     dispatch('security/loadPermissions')
     // Load page categories for menu rendering
     await dispatch('page/fetchAll')
-    // check if the user exists
-    if (ctx.req.headers.cookie) {
-      const parsed = cookieparser.parse(ctx.req.headers.cookie)
-      if (!parsed || !parsed.BEARER) {
-        // @ts-ignore
-        return logout(this.$storage, dispatch)
-      } else {
-        const decodedToken = jwtDecode(parsed.BEARER) as SecurityToken
-        if (!decodedToken || decodedToken.exp < (Date.now() / 1000)) {
-          // @ts-ignore
-          return logout(this.$storage, dispatch)
-        }
-      }
-    }
-    // @ts-ignore
-    return logout(this.$storage, dispatch)
+    // // check if the user exists
+    // if (ctx.req.headers.cookie) {
+    //   const parsed = cookieparser.parse(ctx.req.headers.cookie)
+    //   if (!parsed || !parsed.BEARER) {
+    //     // @ts-ignore
+    //     return logout(this.$storage, dispatch)
+    //   } else {
+    //     const decodedToken = jwtDecode(parsed.BEARER) as SecurityToken
+    //     if (!decodedToken || decodedToken.exp < (Date.now() / 1000)) {
+    //       // @ts-ignore
+    //       return logout(this.$storage, dispatch)
+    //     }
+    //   }
+    // }
+    // // @ts-ignore
+    // return logout(this.$storage, dispatch)
   }
 }

@@ -9,6 +9,7 @@ use App\Manager\RefreshTokenManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Events;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -17,15 +18,18 @@ class AuthSubscriber implements EventSubscriberInterface
 {
     private EntityManagerInterface $em;
     private RefreshTokenManager $refreshTokenManager;
+    private JWTTokenManagerInterface $tokenManager;
     private string $env;
 
     public function __construct(
         EntityManagerInterface $em,
         RefreshTokenManager $refreshTokenManager,
+        JWTTokenManagerInterface $tokenManager,
         string $env
     ) {
         $this->em = $em;
         $this->refreshTokenManager = $refreshTokenManager;
+        $this->tokenManager = $tokenManager;
         $this->env = $env;
     }
 
@@ -53,6 +57,7 @@ class AuthSubscriber implements EventSubscriberInterface
 
         $valid = new \DateTime('+' . \App\Entity\RefreshToken::REFRESH_TOKEN_TTL .' seconds');
         $refreshToken = new RefreshToken($user->getUsername(), $valid);
+        $refreshToken->setRefreshToken($this->tokenManager->create($user));
         $this->em->persist($refreshToken);
         $this->em->flush();
 

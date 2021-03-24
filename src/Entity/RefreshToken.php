@@ -41,7 +41,6 @@ class RefreshToken
     {
         $this->email = $email;
         $this->valid = $valid;
-        $this->setRefreshToken();
     }
 
     public function getId(): ?int
@@ -54,11 +53,9 @@ class RefreshToken
         return $this->refreshToken;
     }
 
-    public function setRefreshToken(?string $refreshToken = null): self
+    public function setRefreshToken(string $refreshToken): self
     {
-        $this->refreshToken = null === $refreshToken
-            ? bin2hex(openssl_random_pseudo_bytes(64))
-            : $refreshToken;
+        $this->refreshToken = $refreshToken;
 
         return $this;
     }

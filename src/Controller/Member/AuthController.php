@@ -29,6 +29,10 @@ class AuthController extends AbstractController
             (new Cookie('BEARER', null, 0, '/'))
                 ->withSecure($this->getParameter('kernel.environment') !== 'dev')
         );
+        $response->headers->setCookie(
+            (new Cookie('REFRESH', null, 0, '/'))
+                ->withSecure($this->getParameter('kernel.environment') !== 'dev')
+        );
 
         return $response;
     }

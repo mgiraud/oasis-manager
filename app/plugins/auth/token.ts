@@ -1,4 +1,5 @@
 import jwtDecode, { JwtPayload } from 'jwt-decode'
+import { Cookie } from './cookie'
 
 export enum TokenStatusEnum {
     UNKNOWN = 'UNKNOWN',
@@ -7,36 +8,39 @@ export enum TokenStatusEnum {
   }
 
 export default class Token {
-    rawToken: string
+    rawToken?: string
+    name: string
     iat?: number
     exp?: number
     status: TokenStatusEnum
+    cookie: Cookie
 
-    constructor (rawToken: string, exp?: number, iat?: number) {
-      this.rawToken = rawToken
-      this.iat = iat ? iat * 1000 : iat
-      this.exp = exp ? exp * 1000 : exp
-      this.status = TokenStatusEnum.UNKNOWN
-      this._computeValidity()
+    constructor (cookie: Cookie, name: string) {
+      this.cookie = cookie
+      this.name = name
+      this._init()
+      this.status = this._computeValidity()
     }
 
-    static createFromRawToken (rawToken: string) {
-      console.log(rawToken)
-      const decodedToken = jwtDecode <JwtPayload>(rawToken)
-      return new Token(rawToken, decodedToken.exp, decodedToken.iat)
-    }
-
-    isValid (): boolean {
+    get isValid (): boolean {
       return this.status === TokenStatusEnum.VALID
+    }
+
+    private _init () {
+      this.rawToken = this.cookie.syncCookies(this.name) as string | undefined
+      if (this.rawToken === undefined) {
+        return
+      }
+      const decodedToken = jwtDecode <JwtPayload>(this.rawToken)
+      this.iat = decodedToken.iat ? decodedToken.iat * 1000 : undefined
+      this.exp = decodedToken.exp ? decodedToken.exp * 1000 : undefined
     }
 
     private _computeValidity () {
       if (!this.exp) {
-        return
+        return TokenStatusEnum.UNKNOWN
       }
       const now = Date.now()
-      console.log(now)
-      console.log(this.exp)
 
       const timeSlackMillis = 500
       this.exp -= timeSlackMillis

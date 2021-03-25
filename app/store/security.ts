@@ -1,4 +1,6 @@
 import type { GetterTree, ActionTree, MutationTree } from 'vuex'
+import Vue from 'vue'
+import { Member } from './member'
 import { RootState } from '.'
 const fs = process.server ? require('fs') : null
 const path = process.server ? require('path') : null
@@ -6,9 +8,10 @@ const path = process.server ? require('path') : null
 export interface SecurityState {
   permissions: string[]
   credentialError: boolean
-  loggedIn: boolean,
+  loggedIn: boolean
   tokenExpiration: number
   refreshTokenExpiration: number
+  member : Member | null
 }
 
 export interface LoginCredentials {
@@ -21,10 +24,13 @@ export const state = (): SecurityState => ({
   credentialError: false,
   loggedIn: false,
   tokenExpiration: 0,
-  refreshTokenExpiration: 0
+  refreshTokenExpiration: 0,
+  member: null
 })
 
 const MUTATIONS = {
+  SET_LOGGED_IN: 'SET_LOGGED_IN',
+  SET_MEMBER: 'SET_MEMBER',
   SET_PERMISSIONS: 'SET_PERMISSIONS',
   SET_CREDENTIAL_ERROR: 'SET_CREDENTIAL_ERROR',
   SET_TOKEN_EXPIRATION: 'SET_TOKEN_EXPIRATION',
@@ -43,6 +49,12 @@ export const mutations: MutationTree<SecurityState> = {
   },
   [MUTATIONS.SET_REFRESH_TOKEN_EXPIRATION] (state, expireAt: number) {
     state.refreshTokenExpiration = expireAt
+  },
+  [MUTATIONS.SET_MEMBER] (state, member: Member | null) {
+    Vue.set(state, 'member', member)
+  },
+  [MUTATIONS.SET_LOGGED_IN] (state, loggedIn: boolean) {
+    state.loggedIn = loggedIn
   }
 }
 
@@ -56,28 +68,32 @@ export const actions: ActionTree<SecurityState, RootState> = {
   async login ({ commit }, credentials: LoginCredentials) {
     commit('SET_CREDENTIAL_ERROR', false)
     try {
-      // @ts-ignore
       await this.$getRepository('members').call('login_check', {
         method: 'POST',
         body: JSON.stringify(credentials)
       })
-      // @ts-ignore
-      const user = await this.$getRepository('members').$find('me')
-      // @ts-ignore
-      this.$storage.setUniversal('user', user)
       return true
     } catch (e) {
       commit('SET_CREDENTIAL_ERROR', true)
-      // @ts-ignore
-      this.$storage.setUniversal('user', null)
       return false
     }
   },
-  async logout () {
-    // @ts-ignore
-    this.$storage.setUniversal('user', null)
-    // @ts-ignore
-    return await this.$getRepository('members').call('logout')
+  async logout ({ commit }) {
+    await this.$getRepository('members').call('logout', {})
+    commit('SET_LOGGED_IN', false)
+    commit('SET_MEMBER', null)
+  },
+  reset ({ commit }) {
+    commit('SET_LOGGED_IN', false)
+    commit('SET_MEMBER', null)
+  },
+  async fetchMember ({ commit }) {
+    try {
+      const member: Member = await this.$getRepository('members').$find('me')
+      commit('SET_MEMBER', member)
+    } catch (e) {
+      commit('SET_MEMBER', null)
+    }
   }
 }
 

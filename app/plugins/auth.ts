@@ -1,30 +1,30 @@
 import { Context, Plugin } from '@nuxt/types'
 import { Store } from 'vuex'
-import Token from './auth/token'
+import Token, { TokenStatusEnum } from './auth/token'
+import { Cookie } from './auth/cookie'
 import { Repository } from '~/api/repository'
 import { LoginCredentials, SecurityState } from '~/store/security'
-
-const cookieparser = process.server ? require('cookieparser') : undefined
+import { Member } from '~/store/member'
 
 declare module 'vue/types/vue' {
     interface Vue {
-        $auth(message: string): void
+        $auth: Auth
     }
 }
 
 declare module '@nuxt/types' {
     interface NuxtAppOptions {
-        $auth(message: string): void
+        $auth: Auth
     }
 
     interface Context {
-        $auth(message: string): void
+        $auth: Auth
     }
 }
 
 declare module 'vuex/types/index' {
     interface Store<S> {
-        $auth(message: string): void
+        $auth: Auth
     }
 }
 
@@ -38,6 +38,8 @@ class Auth {
     store: Store<any>
     state: SecurityState
     memberRepository: Repository
+    member: Member | null
+    cookie : Cookie
 
     token: Token | null = null
     refreshToken: Token | null = null
@@ -47,47 +49,68 @@ class Auth {
       this.store = ctx.store
       this.state = this.store.state.security
       this.memberRepository = ctx.$getRepository('members')
+      this.member = null
+      this.cookie = new Cookie(ctx)
     }
 
-    loggedIn (): boolean {
+    get loggedIn (): boolean {
       return this.state.loggedIn
     }
 
-    async logout (): Promise<Response> {
-      return await this.memberRepository.call('logout', {})
+    async logout () {
+      await this.store.dispatch('security/logout')
+    }
+
+    async login (credentials: LoginCredentials) {
+      const loggedIn = await this.store.dispatch('security/login', credentials)
+      if (loggedIn === true) {
+        await this._fetchMember()
+      }
+    }
+
+    get isAdmin (): boolean {
+      return this.store.state.security.member !== null && this.store.state.security.member.isAdmin
     }
 
     async loginRequest (credentials: LoginCredentials): Promise<boolean> {
       return await this.store.dispatch('security/login', credentials)
     }
 
-    fetchUser () {
-      try {
-        this.memberRepository.$find('me').then((me) => {
-        })
-      } catch (e: Error) {
+    private async _fetchMember () {
+      if (!this.token || !this.token.isValid) {
+        return Promise.resolve(null)
       }
+      return await this.store.dispatch('security/fetchMember')
     }
 
-    initTokens (parsedCookies: AuthCookie) {
+    private _initTokens () {
       try {
-        this.token = Token.createFromRawToken(parsedCookies.BEARER)
-        this.refreshToken = Token.createFromRawToken(parsedCookies.REFRESH)
+        this.token = new Token(this.cookie, 'BEARER')
+        this.refreshToken = new Token(this.cookie, 'REFRESH')
       } catch (e) {
         console.log(e)
       }
     }
 
-    init (): Promise<any> | void {
-      if (!process.server) {
-        return
+    private async _refreshTokens () {
+      await this.memberRepository.call('refresh', {})
+      this._initTokens()
+    }
+
+    async init (): Promise<any> {
+      this._initTokens()
+
+      if (!this.token?.isValid) {
+        if (!this.refreshToken?.isValid) {
+          return Promise.resolve(null)
+        } else {
+          await this._refreshTokens()
+        }
       }
-      const parsed = cookieparser.parse(this.ctx.req.headers.cookie) as AuthCookie | null
-      if (!parsed || !parsed.BEARER || !parsed.REFRESH) {
-        return this.logout()
-      }
-      this.initTokens(parsed)
-      this.fetchUser()
+
+      this.member = await this._fetchMember()
+      // console.log(this.member)
+      this.store.commit('security/SET_LOGGED_IN', true)
     }
 }
 
@@ -96,16 +119,16 @@ const authPlugin: Plugin = (context: Context, inject) => {
   inject('auth', $auth)
   context.$auth = $auth
 
-  return $auth.init()
-  //   .catch((error) => {
-  //     if (process.client) {
-  //       // if (error instanceof ExpiredAuthSessionError) {
-  //       //     return
-  //       // }
+  $auth.init()
+    .catch((error) => {
+      if (process.client) {
+        // if (error instanceof ExpiredAuthSessionError) {
+        //     return
+        // }
 
-//       console.error('[ERROR] [AUTH]', error)
-//     }
-//   })
+        console.error('[ERROR] [AUTH]', error)
+      }
+    })
 }
 
 export default authPlugin

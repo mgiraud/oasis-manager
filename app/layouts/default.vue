@@ -22,7 +22,7 @@
       <v-btn v-if="isAdmin" icon color="primary darken-4" @click="redirectToAdmin">
         Admin
       </v-btn>
-      <v-btn v-if="isLoggedIn" icon color="primary darken-4" @click="logout">
+      <v-btn v-if="loggedIn" icon color="primary darken-4" @click="logout">
         <v-icon>ri-logout-box-line</v-icon>
       </v-btn>
       <v-btn v-else icon to="/login">
@@ -95,9 +95,15 @@ const pageModule = namespace('page')
 export default class DefaultLayout extends Vue {
     showNewsletter = true
     @pageModule.State('activeSlug') activeSlug!: string | null
-    @securityModule.Getter('isAdmin') isAdmin!: () => boolean
-    @securityModule.Getter('isLoggedIn') isLoggedIn!: () => boolean
     @securityModule.Action('logout') logout!: () => void
+
+    get loggedIn () {
+      return this.$auth.loggedIn
+    }
+
+    get isAdmin () {
+      return this.$auth.isAdmin
+    }
 
     redirectToAdmin () {
       this.$router.push({ path: 'admin' })

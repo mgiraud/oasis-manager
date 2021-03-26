@@ -1,6 +1,6 @@
 import { Middleware } from '@nuxt/types'
 
-const isAdminMiddleWare: Middleware = ({ store, redirect, $auth }) => {
+const isAdminMiddleWare: Middleware = ({ redirect, $auth }) => {
   if (!$auth.isAdmin) {
     return redirect({ name: 'login' })
   }

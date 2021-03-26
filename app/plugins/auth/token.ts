@@ -26,6 +26,10 @@ export default class Token {
       return this.status === TokenStatusEnum.VALID
     }
 
+    public resetCookie () {
+      this.cookie.removeCookie(this.name)
+    }
+
     private _init () {
       this.rawToken = this.cookie.syncCookies(this.name) as string | undefined
       if (this.rawToken === undefined) {

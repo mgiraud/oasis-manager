@@ -9,6 +9,7 @@ interface CookieOption {
         maxAge?: number
         domain?: string
         secure?: boolean
+        sameSite?: string
     }
 }
 export class Cookie {
@@ -20,7 +21,9 @@ export class Cookie {
       this.options = {
         prefix: '',
         options: {
-          path: '/'
+          path: '/',
+          secure: true,
+          sameSite: 'Lax'
         }
       }
     }

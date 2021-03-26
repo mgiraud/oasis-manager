@@ -43,11 +43,8 @@ export default {
   },
   plugins: [
     '~/plugins/repository',
-    '~/plugins/auth',
-    '~/plugins/filters/capitalize'
-  ],
-  modules: [
-    '@nuxtjs/universal-storage'
+    '~/plugins/filters/capitalize',
+    '~/plugins/auth'
   ],
   buildModules: [
     '@nuxt/typescript-build',

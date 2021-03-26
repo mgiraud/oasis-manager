@@ -1,10 +1,9 @@
 import { Context, Plugin } from '@nuxt/types'
 import { Store } from 'vuex'
-import Token, { TokenStatusEnum } from './auth/token'
 import { Cookie } from './auth/cookie'
+import Token from './auth/token'
 import { Repository } from '~/api/repository'
 import { LoginCredentials, SecurityState } from '~/store/security'
-import { Member } from '~/store/member'
 
 declare module 'vue/types/vue' {
     interface Vue {
@@ -23,14 +22,10 @@ declare module '@nuxt/types' {
 }
 
 declare module 'vuex/types/index' {
+  // @ts-ignore
     interface Store<S> {
         $auth: Auth
     }
-}
-
-interface AuthCookie {
-    BEARER : string
-    REFRESH: string
 }
 
 class Auth {
@@ -38,7 +33,6 @@ class Auth {
     store: Store<any>
     state: SecurityState
     memberRepository: Repository
-    member: Member | null
     cookie : Cookie
 
     token: Token | null = null
@@ -49,7 +43,6 @@ class Auth {
       this.store = ctx.store
       this.state = this.store.state.security
       this.memberRepository = ctx.$getRepository('members')
-      this.member = null
       this.cookie = new Cookie(ctx)
     }
 
@@ -57,15 +50,14 @@ class Auth {
       return this.state.loggedIn
     }
 
-    async logout () {
-      await this.store.dispatch('security/logout')
+    get member () {
+      return this.store.state.security.member
     }
 
-    async login (credentials: LoginCredentials) {
-      const loggedIn = await this.store.dispatch('security/login', credentials)
-      if (loggedIn === true) {
-        await this._fetchMember()
-      }
+    async logout () {
+      await this.store.dispatch('security/logout')
+      this.token?.resetCookie()
+      this.refreshToken?.resetCookie()
     }
 
     get isAdmin (): boolean {
@@ -88,7 +80,7 @@ class Auth {
         this.token = new Token(this.cookie, 'BEARER')
         this.refreshToken = new Token(this.cookie, 'REFRESH')
       } catch (e) {
-        console.log(e)
+        // console.log(e)
       }
     }
 
@@ -108,8 +100,7 @@ class Auth {
         }
       }
 
-      this.member = await this._fetchMember()
-      // console.log(this.member)
+      await this._fetchMember()
       this.store.commit('security/SET_LOGGED_IN', true)
     }
 }

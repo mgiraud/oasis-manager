@@ -13,7 +13,7 @@
         size="64"
       />
 
-      <div>{{ user.email }}</div>
+      <div>{{ member.email }}</div>
     </v-sheet>
 
     <v-divider />
@@ -105,7 +105,7 @@
 
 <script lang="ts">
 import { Vue, namespace, State, Component } from 'nuxt-property-decorator'
-import {Member} from "~/store/member";
+import { Member } from '~/store/member'
 
 const securityModule = namespace('security')
 
@@ -125,8 +125,8 @@ export default class MenuDrawer extends Vue {
   @State('storage') storage!: {user?: Member}
   @securityModule.Getter('hasPermission') hasPermission!: (permission: string) => boolean
 
-  get user () {
-    return this.storage.user ? this.storage.user : {}
+  get member () {
+    return this.$auth.member ?? {}
   }
 
   get filteredMemberItems () {
@@ -138,7 +138,7 @@ export default class MenuDrawer extends Vue {
   }
 
   logout () {
-    this.$store.dispatch('security/logout')
+    this.$auth.logout()
     this.$router.push({ name: 'index' })
   }
 

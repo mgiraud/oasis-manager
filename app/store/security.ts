@@ -91,24 +91,24 @@ export const actions: ActionTree<SecurityState, RootState> = {
     try {
       const member: Member = await this.$getRepository('members').$find('me')
       commit('SET_MEMBER', member)
+      return member
     } catch (e) {
       commit('SET_MEMBER', null)
+      return null
     }
   }
 }
 
 export const getters: GetterTree<SecurityState, RootState> = {
-  isAdmin: (_state, _getters, rootState) => {
-    const user = rootState.storage ? rootState.storage.user : null
-    return user instanceof Object && user.isAdmin
+  isAdmin: (state, _getters) => {
+    return state.member && state.member.isAdmin
   },
   isLoggedIn: (_state, _getters, rootState) => {
     return rootState.storage && rootState.storage.user instanceof Object
   },
-  hasPermission: (_state, _getters, rootState) => (permission: string | null) => {
+  hasPermission: (state, _getters) => (permission: string | null) => {
     if (permission === null) { return false }
-    const user = rootState.storage ? rootState.storage.user : null
-    return !!(user && user.permissions && user.permissions.includes(permission))
+    return !!(state.member && state.member.permissions && state.member.permissions.includes(permission))
   },
   hasPermissions: (_state, getters) => (permissions: string[]) => {
     return !permissions.some((permission) => {

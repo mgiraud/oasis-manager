@@ -8,9 +8,9 @@ export type Member = HydraMemberObject & {
   nickname: string
   permissions: string[]
   memberPermissions: string[]
-  groupPermissionsOverrideType: 0
+  groupPermissionsOverrideType: number
   groups: MemberGroup[]
-  isAdmin: true
+  isAdmin: boolean
 }
 
 export default makeCrudModule({

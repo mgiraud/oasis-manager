@@ -55,8 +55,8 @@ export default class Login extends Vue {
   @securityModule.State('credentialError') credentialError!: boolean;
 
   async postLogin () {
-    if (await this.$store.dispatch('security/login', this.credentials)) {
-      this.$router.push('/')
+    if (await this.$auth.loginRequest(this.credentials)) {
+      window.location.replace('/')
     }
   }
 }

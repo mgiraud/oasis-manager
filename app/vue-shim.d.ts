@@ -1,15 +1,8 @@
 import Vue from 'vue'
 import { Validation } from 'vuelidate'
-import { Repository } from './api/repository'
 
 declare module '*.vue' {
     export default Vue
-}
-
-declare module 'vue/types/vue' {
-    interface Vue {
-      $getRepository: (repository: string) => Repository;
-    }
 }
 
 declare module 'vue/types/options' {

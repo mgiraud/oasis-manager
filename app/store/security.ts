@@ -1,40 +1,60 @@
 import type { GetterTree, ActionTree, MutationTree } from 'vuex'
+import Vue from 'vue'
+import { Member } from './member'
 import { RootState } from '.'
-import { HydraMemberObject } from '~/api/hydra'
 const fs = process.server ? require('fs') : null
 const path = process.server ? require('path') : null
 
-export type Groups = HydraMemberObject & {
-  name: string
-}
-
-export type User = HydraMemberObject & {
-  email: string;
-  groupPermissionsOverrideType: number;
-  groups: Groups[];
-  id: number;
-  isAdmin: boolean;
-  memberPermissions: string[];
-  nickname: string | null;
-  permissions: string[];
-}
-
 export interface SecurityState {
-  permissions: string[];
-  credentialError: boolean;
+  permissions: string[]
+  credentialError: boolean
+  loggedIn: boolean
+  tokenExpiration: number
+  refreshTokenExpiration: number
+  member : Member | null
+}
+
+export interface LoginCredentials {
+  email: string,
+  password: string
 }
 
 export const state = (): SecurityState => ({
   permissions: [],
-  credentialError: false
+  credentialError: false,
+  loggedIn: false,
+  tokenExpiration: 0,
+  refreshTokenExpiration: 0,
+  member: null
 })
 
+const MUTATIONS = {
+  SET_LOGGED_IN: 'SET_LOGGED_IN',
+  SET_MEMBER: 'SET_MEMBER',
+  SET_PERMISSIONS: 'SET_PERMISSIONS',
+  SET_CREDENTIAL_ERROR: 'SET_CREDENTIAL_ERROR',
+  SET_TOKEN_EXPIRATION: 'SET_TOKEN_EXPIRATION',
+  SET_REFRESH_TOKEN_EXPIRATION: 'SET_REFRESH_TOKEN_EXPIRATION'
+}
+
 export const mutations: MutationTree<SecurityState> = {
-  SET_PERMISSIONS (state, permissions) {
+  [MUTATIONS.SET_PERMISSIONS] (state, permissions: string[]) {
     state.permissions = permissions
   },
-  SET_CREDENTIAL_ERROR (state, inError) {
+  [MUTATIONS.SET_CREDENTIAL_ERROR] (state, inError: boolean) {
     state.credentialError = inError
+  },
+  [MUTATIONS.SET_TOKEN_EXPIRATION] (state, expireAt: number) {
+    state.tokenExpiration = expireAt
+  },
+  [MUTATIONS.SET_REFRESH_TOKEN_EXPIRATION] (state, expireAt: number) {
+    state.refreshTokenExpiration = expireAt
+  },
+  [MUTATIONS.SET_MEMBER] (state, member: Member | null) {
+    Vue.set(state, 'member', member)
+  },
+  [MUTATIONS.SET_LOGGED_IN] (state, loggedIn: boolean) {
+    state.loggedIn = loggedIn
   }
 }
 
@@ -45,46 +65,50 @@ export const actions: ActionTree<SecurityState, RootState> = {
       commit('SET_PERMISSIONS', JSON.parse(data))
     })
   },
-  async login ({ commit }, credentials) {
+  async login ({ commit }, credentials: LoginCredentials) {
     commit('SET_CREDENTIAL_ERROR', false)
     try {
-      // @ts-ignore
       await this.$getRepository('members').call('login_check', {
         method: 'POST',
         body: JSON.stringify(credentials)
       })
-      // @ts-ignore
-      const user = await this.$getRepository('members').$find('me')
-      // @ts-ignore
-      this.$storage.setUniversal('user', user)
       return true
     } catch (e) {
       commit('SET_CREDENTIAL_ERROR', true)
-      // @ts-ignore
-      this.$storage.setUniversal('user', null)
       return false
     }
   },
-  async logout () {
-    // @ts-ignore
-    this.$storage.setUniversal('user', null)
-    // @ts-ignore
-    return await this.$getRepository('members').call('logout')
+  async logout ({ commit }) {
+    await this.$getRepository('members').call('logout', {})
+    commit('SET_LOGGED_IN', false)
+    commit('SET_MEMBER', null)
+  },
+  reset ({ commit }) {
+    commit('SET_LOGGED_IN', false)
+    commit('SET_MEMBER', null)
+  },
+  async fetchMember ({ commit }) {
+    try {
+      const member: Member = await this.$getRepository('members').$find('me')
+      commit('SET_MEMBER', member)
+      return member
+    } catch (e) {
+      commit('SET_MEMBER', null)
+      return null
+    }
   }
 }
 
 export const getters: GetterTree<SecurityState, RootState> = {
-  isAdmin: (_state, _getters, rootState) => {
-    const user = rootState.storage ? rootState.storage.user : null
-    return user instanceof Object && user.isAdmin
+  isAdmin: (state, _getters) => {
+    return state.member && state.member.isAdmin
   },
   isLoggedIn: (_state, _getters, rootState) => {
     return rootState.storage && rootState.storage.user instanceof Object
   },
-  hasPermission: (_state, _getters, rootState) => (permission: string | null) => {
+  hasPermission: (state, _getters) => (permission: string | null) => {
     if (permission === null) { return false }
-    const user = rootState.storage ? rootState.storage.user : null
-    return !!(user && user.permissions && user.permissions.includes(permission))
+    return !!(state.member && state.member.permissions && state.member.permissions.includes(permission))
   },
   hasPermissions: (_state, getters) => (permissions: string[]) => {
     return !permissions.some((permission) => {

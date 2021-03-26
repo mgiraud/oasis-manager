@@ -11,6 +11,10 @@ security:
         App\Entity\Member:
             algorithm: auto
     firewalls:
+        refresh:
+            pattern: ^/api/refresh
+            stateless: true
+            anonymous: true
         login:
             provider: users
             pattern:  ^/api/login
@@ -46,6 +50,7 @@ security:
         - { path: ^/api/page_categories, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [GET] }
         - { path: ^/api/docs, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/logout, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/login_check, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/contact, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [POST] }
         - { path: ^/api/survey_joins, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [POST] }

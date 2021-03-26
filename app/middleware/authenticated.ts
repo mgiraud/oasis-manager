@@ -1,7 +1,7 @@
 import { Middleware } from '@nuxt/types'
 
-const authenticatedMiddleWare: Middleware = ({ store, redirect }) => {
-  if (!store.getters['security/isLoggedIn']) {
+const authenticatedMiddleWare: Middleware = ({ $auth, redirect }) => {
+  if (!$auth.loggedIn) {
     return redirect({ name: 'login' })
   }
 }

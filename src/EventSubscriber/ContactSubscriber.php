@@ -6,6 +6,7 @@ namespace App\EventSubscriber;
 
 use ApiPlatform\Core\EventListener\EventPriorities;
 use App\Entity\Contact;
+use App\Emails\EmailFactory;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -18,11 +19,13 @@ class ContactSubscriber implements EventSubscriberInterface
 {
     private Environment $twig;
     private MailerInterface $mailer;
+    private EmailFactory $emailFactory;
 
-    public function __construct(Environment $twig, MailerInterface $mailer)
+    public function __construct(Environment $twig, MailerInterface $mailer, EmailFactory $emailFactory)
     {
         $this->twig = $twig;
         $this->mailer = $mailer;
+        $this->emailFactory = $emailFactory;
     }
 
     public static function getSubscribedEvents()
@@ -60,16 +63,33 @@ class ContactSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $email = (new Email())
-            ->from('hello@example.com')
-            ->to('you@example.com')
+        /** @var Contact $contact */
+        $contact = $event->getControllerResult();
+
+        $emailToWarnAdmin = (new Email())
+            ->from($this->emailFactory->getAddress('no-reply'))
+            ->to($this->emailFactory->getAddress('admin'))
             ->subject('Nouvelle prise de contact')
             ->html($this->twig->render('mail/contact.html.twig', [
-                'contact' => $event->getControllerResult()
+                'contact' => $contact
             ]));
 
         try {
-            $this->mailer->send($email);
+            $this->mailer->send($emailToWarnAdmin);
+        } catch (TransportExceptionInterface $e) {
+
+        }
+
+        $emailToWarnUser = (new Email())
+            ->from($this->emailFactory->getAddress('no-reply'))
+            ->to($contact->getEmail())
+            ->subject('Confirmation de votre prise de contact')
+            ->html($this->twig->render('mail/contact_confirm.html.twig', [
+                'contact' => $contact
+            ]));
+
+        try {
+            $this->mailer->send($emailToWarnAdmin);
         } catch (TransportExceptionInterface $e) {
 
         }

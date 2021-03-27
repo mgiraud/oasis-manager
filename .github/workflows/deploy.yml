@@ -93,17 +93,16 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.REMOTE_TARGET }}
-          EXCLUDE: "/node_modules/, /app/"
+          EXCLUDE: "/app/"
 
       - name: 'Executing deploy app'
-          uses: appleboy/ssh-action@master
-          with:
-            host: ${{ secrets.REMOTE_HOST }}
-            username: ${{ secrets.REMOTE_USER }}
-            key: ${{ secrets.SSH_DEPLOY_KEY }}
-            script: |
-              cloudlinux-selector --interpreter nodejs --user ztvj7946 --restart-webapp testapp
-              cloudlinux-selector run-script --json --interpreter nodejs --user ztvj7946 --app-root ~/public_html/oasis-manager --script-name yarn -- run
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SSH_DEPLOY_KEY }}
+          script: |
+            cloudlinux-selector --interpreter nodejs --user ztvj7946 --restart-webapp testapp
 #      - name: Run a multi-line script
 #        run: |
 #          echo Add other actions to build,

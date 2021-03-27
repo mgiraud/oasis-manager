@@ -41,7 +41,7 @@ class ContactValidator extends ConstraintValidator
         }
 
         if ((new \DateTime())->diff($lastContact->getCreatedAt())->d < 7) {
-            $this->context->addViolation('Vous pouvez faire une demande de contact seulement une fois par semaine');
+            $this->context->addViolation('Tu peux faire une demande de contact seulement une fois par semaine');
         }
     }
 

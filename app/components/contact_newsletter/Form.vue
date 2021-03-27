@@ -2,7 +2,7 @@
   <v-form @submit.prevent="sendForm">
     <v-text-field
       v-model="item.email"
-      label="Inscrivez-vous à la newsletter !"
+      label="Inscris-toi à la newsletter !"
       :error-messages="emailErrors"
       class="newsletter-input"
       prepend-icon="ri-mail-line"
@@ -61,7 +61,7 @@ export default class ContactNewsletterForm extends mixins(validationMixin, notif
     }
 
     this.item.email = null
-    this.showMessage('Vous être maintenant inscrit à la newsletter !')
+    this.showMessage('Tu es maintenant inscrit à la newsletter !')
     this.onClickClose()
   }
 

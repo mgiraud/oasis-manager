@@ -89,7 +89,7 @@ class ContactSubscriber implements EventSubscriberInterface
             ]));
 
         try {
-            $this->mailer->send($emailToWarnAdmin);
+            $this->mailer->send($emailToWarnUser);
         } catch (TransportExceptionInterface $e) {
 
         }

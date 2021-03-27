@@ -2,7 +2,7 @@ parameters:
     emailConfigs:
         admin:
             name: 'Admin'
-            email: '%env(EMAIL_ADMIN)'
+            email: '%env(EMAIL_ADMIN)%'
         newsletter:
             name: 'Newsletter'
             email: '%env(EMAIL_NEWSLETTER)%'

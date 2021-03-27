@@ -23,7 +23,7 @@ class SurveyJoinCredentialsValidator extends ConstraintValidator
         }
 
         if (empty($value->getEmail()) && empty($value->getPhoneNumber())) {
-            $this->context->addViolation('Vous devez préciser au moins un email ou un numéro de téléphone pour que nous puissions vous recontacter');
+            $this->context->addViolation('Tu dois préciser au moins un email ou un numéro de téléphone pour que nous puissions te recontacter');
         }
     }
 }

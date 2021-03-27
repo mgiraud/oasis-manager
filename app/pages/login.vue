@@ -19,7 +19,7 @@
           color="primary"
           dark
         >
-          <v-card-title>Connectez-vous !</v-card-title>
+          <v-card-title>Connectes-toi !</v-card-title>
           <v-card-text>
             <v-form>
               <v-text-field v-model="credentials.email" prepend-inner-icon="ri-account-circle-line" label="email" type="email" />

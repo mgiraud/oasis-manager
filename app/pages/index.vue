@@ -5,7 +5,7 @@
         <v-card>
           <v-card-title>Bienvenue chez les transalpins !</v-card-title>
           <v-card-text>
-            Vous retrouverez sur ce site toutes les informations relatives au projet de création d'un habitat partagé
+            Tu peux retrouver sur ce site toutes les informations relatives au projet de création d'un habitat partagé
           </v-card-text>
         </v-card>
       </v-col>

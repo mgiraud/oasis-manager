@@ -82,16 +82,8 @@ export default class ContactVue extends mixins(NotificationMixin) {
     if (!created) {
       return
     }
-
-    // @ts-ignore
-    const id = this.$options.resourcePrefix ? created['@id'].replace(this.$options.resourcePrefix, '') : this.$options.resourcePrefix
-    this.showMessage(`${id} created`)
-
-    this.$router.push({
-      // @ts-ignore
-      name: `${this.$options.servicePrefix}-id`,
-      params: { id }
-    })
+    this.showMessage(`Votre prise de contact a bien été enregistrée, nous reviendrons vers toi aussi rapidement que possible`)
+    this.$router.push({path: '/'})
   }
 
   @Watch('error')

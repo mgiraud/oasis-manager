@@ -78,7 +78,7 @@ class ContactNewsletterSubscriber implements EventSubscriberInterface
         try {
             $this->mailer->send($emailToWarnAdmin);
         } catch (TransportExceptionInterface $e) {
-
+            dump($e);
         }
 
         $emailToWarnAdmin = (new Email())
@@ -92,7 +92,7 @@ class ContactNewsletterSubscriber implements EventSubscriberInterface
         try {
             $this->mailer->send($emailToWarnAdmin);
         } catch (TransportExceptionInterface $e) {
-
+            dump($e);
         }
     }
 

@@ -5,6 +5,7 @@ namespace App\Emails;
 
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Mime\Address as MimeAddress;
 
 class EmailFactory
 {
@@ -17,13 +18,13 @@ class EmailFactory
         }
     }
 
-    public function getAddress(string $identifier): ?Address
+    public function getAddress(string $identifier): ?MimeAddress
     {
         /** @var ?Address $address */
         $address = $this->emails->get($identifier);
         if (null === $address) {
             throw new AddressNotFoundException($identifier);
         }
-        return new Address($address->email, $address->name ?? '');
+        return new MimeAddress($address->email, $address->name ?? '');
     }
 }

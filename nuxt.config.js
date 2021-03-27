@@ -44,10 +44,10 @@ export default {
   plugins: [
     '~/plugins/repository',
     '~/plugins/filters/capitalize',
-    '~/plugins/auth'
+    '~/plugins/auth.ts'
   ],
   buildModules: [
-    '@nuxt/typescript-build',
+    ['@nuxt/typescript-build', {}],
     ['@nuxtjs/vuetify', {
       icons: {
         values: REMIX_ICONS
@@ -82,8 +82,7 @@ export default {
   typescript: {
     typeCheck: {
       eslint: {
-        files: 'app/**/*.{ts,js,vue}',
-        memoryLimit: 8192
+        files: 'app/**/*.{ts,js,vue}'
       }
     }
   },

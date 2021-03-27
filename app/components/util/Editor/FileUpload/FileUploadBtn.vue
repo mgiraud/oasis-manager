@@ -59,20 +59,32 @@
 import { Editor } from '@tiptap/core'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
+interface Thumbnail {
+  src: string
+}
+
+interface Link {
+  src: string
+  name: string
+}
+
 @Component
 export default class FileUploadBtn extends Vue {
   @Prop({ type: Object, required: true }) readonly editor!: Editor
 
   dialog = false
-  thumbnails = []
-  links = []
+  thumbnails: Thumbnail[] = []
+  links: Link[] = []
 
   openFileSelection () {
-    this.$refs.fileSelection.click()
+    (this.$refs.fileSelection as HTMLInputElement).click()
   }
 
   handleUpload () {
-    const files = this.$refs.fileSelection.files
+    const files = (this.$refs.fileSelection as HTMLInputElement).files
+    if (files === null) {
+      return
+    }
     for (let i = 0; i < files.length; i++) {
       const file = files[i]
 
@@ -86,7 +98,7 @@ export default class FileUploadBtn extends Vue {
 
       const formData = new FormData()
       formData.append('file', file)
-      formData.append('mediaGalleryItemId', 1)
+      formData.append('mediaGalleryItemId', '1')
       this.$getRepository('media_objects').$post('/api/media_objects', {
         method: 'POST',
         headers: { 'Content-Type': 'multipart/form-data' },

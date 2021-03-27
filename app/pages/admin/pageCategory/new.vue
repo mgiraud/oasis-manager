@@ -9,13 +9,13 @@
 <script lang="ts">
 import { Component, mixins, namespace, Watch } from 'nuxt-property-decorator'
 import { validationMixin } from 'vuelidate'
-import Form from '~/components/admin/pageCategory/Form'
-import Toolbar from '~/components/form/Toolbar'
-import Loading from '~/components/util/Loading'
+import Form from '~/components/admin/pageCategory/Form.vue'
+import Toolbar from '~/components/form/Toolbar.vue'
+import Loading from '~/components/util/Loading.vue'
 import create from '~/mixins/create'
 import { PageCategory } from '~/store/page_category'
 import NotificationMixin from '~/mixins/notification'
-import { ElementWithValidation } from '~/types'
+import { ElementWithValidation } from '~/vue-shim'
 
 const pageCategoryModule = namespace('page_category')
 

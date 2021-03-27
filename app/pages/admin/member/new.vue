@@ -8,9 +8,9 @@
 
 <script lang="ts">
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
-import Loading from '~/components/util/Loading'
-import Toolbar from '~/components/form/Toolbar'
-import Form from '~/components/admin/member/Form'
+import Loading from '~/components/util/Loading.vue'
+import Toolbar from '~/components/form/Toolbar.vue'
+import Form from '~/components/admin/member/Form.vue'
 import create from '~/mixins/create'
 import { Member } from '~/store/member'
 

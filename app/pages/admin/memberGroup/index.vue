@@ -55,9 +55,9 @@
 
 <script lang="ts">
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
-import ActionCell from '~/components/table/ActionCell'
-import FormFilter from '~/components/form/FormFilter'
-import MemberGroupFilter from '~/components/admin/memberGroup/MemberGroupFilter'
+import ActionCell from '~/components/table/ActionCell.vue'
+import FormFilter from '~/components/form/FormFilter.vue'
+import MemberGroupFilter from '~/components/admin/memberGroup/MemberGroupFilter.vue'
 import { MemberGroup } from '~/store/member_group'
 import list from '~/mixins/list'
 import { MUTATIONS } from '~/store/crud'

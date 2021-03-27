@@ -19,9 +19,9 @@ import { Component, mixins, namespace, Prop, Watch } from 'nuxt-property-decorat
 import { email } from 'vuelidate/lib/validators'
 import has from 'lodash/has'
 import { validationMixin } from 'vuelidate'
-import notification from '../../mixins/notification'
 import { ContactNewsletter } from '~/store/contact_newsletter'
 import { FormErrors } from '~/api/repository'
+import NotificationMixin from '~/mixins/notification';
 
 const contactNewsletterModule = namespace('contact_newsletter')
 
@@ -34,7 +34,7 @@ const contactNewsletterModule = namespace('contact_newsletter')
     }
   }
 })
-export default class ContactNewsletterForm extends mixins(validationMixin, notification) {
+export default class ContactNewsletterForm extends mixins(validationMixin, NotificationMixin) {
   @Prop({ type: Function, required: true }) readonly onClickClose!: () => void
 
   item = { email: null }

@@ -53,9 +53,9 @@
 
 <script lang="ts">
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
-import ActionCell from '~/components/table/ActionCell'
-import PageCategoryFilter from '~/components/admin/pageCategory/PageCategoryFilter'
-import FormFilter from '~/components/form/FormFilter'
+import ActionCell from '~/components/table/ActionCell.vue'
+import PageCategoryFilter from '~/components/admin/pageCategory/PageCategoryFilter.vue'
+import FormFilter from '~/components/form/FormFilter.vue'
 import { PageCategory } from '~/store/page_category'
 import list from '~/mixins/list'
 import { MUTATIONS } from '~/store/crud'

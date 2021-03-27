@@ -12,8 +12,8 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import MenuDrawer from '../components/admin/MenuDrawer'
-import Alert from '../components/util/Alert'
+import MenuDrawer from '~/components/admin/MenuDrawer.vue'
+import Alert from '~/components/util/Alert.vue'
 
 @Component({
   components: {

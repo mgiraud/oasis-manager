@@ -1,5 +1,5 @@
-import Vue from 'vue'
 import { Validation } from 'vuelidate'
+import Vue from 'vue'
 
 declare module '*.vue' {
     export default Vue

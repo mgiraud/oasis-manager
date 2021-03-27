@@ -18,12 +18,12 @@
 <script lang="ts">
 
 import { Component, namespace, Watch, mixins } from 'nuxt-property-decorator'
-import ContactForm from '../components/contact/Form'
-import Toolbar from '../components/form/Toolbar'
-import Loading from '../components/util/Loading'
+import ContactForm from '../components/contact/Form.vue'
+import Toolbar from '../components/form/Toolbar.vue'
+import Loading from '../components/util/Loading.vue'
 import { Contact } from '~/store/contact'
 import NotificationMixin from '~/mixins/notification'
-import { ElementWithValidation } from '~/types'
+import { ElementWithValidation } from '~/vue-shim'
 
 const contactModule = namespace('contact')
 const notificationModule = namespace('notifications')
@@ -82,8 +82,8 @@ export default class ContactVue extends mixins(NotificationMixin) {
     if (!created) {
       return
     }
-    this.showMessage(`Votre prise de contact a bien été enregistrée, nous reviendrons vers toi aussi rapidement que possible`)
-    this.$router.push({path: '/'})
+    this.showMessage('Votre prise de contact a bien été enregistrée, nous reviendrons vers toi aussi rapidement que possible')
+    this.$router.push({ path: '/' })
   }
 
   @Watch('error')

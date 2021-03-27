@@ -18,26 +18,34 @@ export interface HydraMapping {
 }
 
 export interface HydraSearch {
-  '@type': string;
-  'hydra:template': string;
-  'hydra:variableRepresentation': string;
+  '@type': string
+  'hydra:template': string
+  'hydra:variableRepresentation': string
   'hydra:mapping': HydraMapping[]
 }
 
 export interface HydraMemberObject {
-  '@id': 'string';
-  '@type': 'string';
+  '@id': 'string'
+  '@type': 'string'
 }
 
 export interface HydraObject extends HydraMemberObject {
-  '@context': string;
+  '@context': string
 }
 
 export interface HydraGetAllResponse extends HydraObject {
-  'hydra:member': HydraMemberObject[];
-  'hydra:totalItems': number;
-  'hydra:search': HydraSearch,
+  'hydra:member': HydraMemberObject[]
+  'hydra:totalItems': number
+  'hydra:search': HydraSearch
   'hydra:view': HydraView
+}
+
+export type HydraGetRequestFilter = {
+  page?: number
+  itemsPerPage?: number
+  sortBy?: string[]
+  sortDesc?: string[]
+  totalItems?: number
 }
 
 export function normalize (data: any) {

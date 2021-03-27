@@ -42,9 +42,9 @@
 <script lang="ts">
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
 import isAdmin from '~/middleware/isAdmin'
-import ActionCell from '~/components/table/ActionCell'
-import FormFilter from '~/components/form/FormFilter'
-import MemberFilter from '~/components/admin/member/MemberFilter'
+import ActionCell from '~/components/table/ActionCell.vue'
+import FormFilter from '~/components/form/FormFilter.vue'
+import MemberFilter from '~/components/admin/member/MemberFilter.vue'
 import list from '~/mixins/list'
 import { Member } from '~/store/member'
 import { MUTATIONS } from '~/store/crud'

@@ -10,7 +10,6 @@
 ###< symfony/framework-bundle ###
 
 /node_modules
-/.nuxt
 /coverage
 /dist
 yarn-error.log

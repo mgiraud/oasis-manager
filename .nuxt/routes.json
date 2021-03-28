@@ -1,0 +1,142 @@
+[
+  {
+    "name": "admin",
+    "path": "/admin",
+    "component": "/Users/m.giraudtelme/oasis-manager/app/pages/admin.vue",
+    "chunkName": "pages/admin",
+    "children": [
+      {
+        "name": "admin-gallery",
+        "path": "gallery",
+        "component": "/Users/m.giraudtelme/oasis-manager/app/pages/admin/gallery/index.vue",
+        "chunkName": "pages/admin/gallery/index"
+      },
+      {
+        "name": "admin-member",
+        "path": "member",
+        "component": "/Users/m.giraudtelme/oasis-manager/app/pages/admin/member/index.vue",
+        "chunkName": "pages/admin/member/index"
+      },
+      {
+        "name": "admin-memberGroup",
+        "path": "memberGroup",
+        "component": "/Users/m.giraudtelme/oasis-manager/app/pages/admin/memberGroup/index.vue",
+        "chunkName": "pages/admin/memberGroup/index"
+      },
+      {
+        "name": "admin-page",
+        "path": "page",
+        "component": "/Users/m.giraudtelme/oasis-manager/app/pages/admin/page/index.vue",
+        "chunkName": "pages/admin/page/index"
+      },
+      {
+        "name": "admin-pageCategory",
+        "path": "pageCategory",
+        "component": "/Users/m.giraudtelme/oasis-manager/app/pages/admin/pageCategory/index.vue",
+        "chunkName": "pages/admin/pageCategory/index"
+      },
+      {
+        "name": "admin-member-new",
+        "path": "member/new",
+        "component": "/Users/m.giraudtelme/oasis-manager/app/pages/admin/member/new.vue",
+        "chunkName": "pages/admin/member/new"
+      },
+      {
+        "name": "admin-memberGroup-new",
+        "path": "memberGroup/new",
+        "component": "/Users/m.giraudtelme/oasis-manager/app/pages/admin/memberGroup/new.vue",
+        "chunkName": "pages/admin/memberGroup/new"
+      },
+      {
+        "name": "admin-page-new",
+        "path": "page/new",
+        "component": "/Users/m.giraudtelme/oasis-manager/app/pages/admin/page/new.vue",
+        "chunkName": "pages/admin/page/new"
+      },
+      {
+        "name": "admin-pageCategory-new",
+        "path": "pageCategory/new",
+        "component": "/Users/m.giraudtelme/oasis-manager/app/pages/admin/pageCategory/new.vue",
+        "chunkName": "pages/admin/pageCategory/new"
+      },
+      {
+        "name": "admin-gallery-folders-id",
+        "path": "gallery/folders/:id",
+        "component": "/Users/m.giraudtelme/oasis-manager/app/pages/admin/gallery/folders/_id/index.vue",
+        "chunkName": "pages/admin/gallery/folders/_id/index"
+      },
+      {
+        "name": "admin-gallery-id",
+        "path": "gallery/:id",
+        "component": "/Users/m.giraudtelme/oasis-manager/app/pages/admin/gallery/_id/index.vue",
+        "chunkName": "pages/admin/gallery/_id/index"
+      },
+      {
+        "name": "admin-member-id",
+        "path": "member/:id",
+        "component": "/Users/m.giraudtelme/oasis-manager/app/pages/admin/member/_id.vue",
+        "chunkName": "pages/admin/member/_id"
+      },
+      {
+        "name": "admin-memberGroup-id",
+        "path": "memberGroup/:id",
+        "component": "/Users/m.giraudtelme/oasis-manager/app/pages/admin/memberGroup/_id.vue",
+        "chunkName": "pages/admin/memberGroup/_id"
+      },
+      {
+        "name": "admin-page-id",
+        "path": "page/:id",
+        "component": "/Users/m.giraudtelme/oasis-manager/app/pages/admin/page/_id.vue",
+        "chunkName": "pages/admin/page/_id"
+      },
+      {
+        "name": "admin-pageCategory-id",
+        "path": "pageCategory/:id",
+        "component": "/Users/m.giraudtelme/oasis-manager/app/pages/admin/pageCategory/_id.vue",
+        "chunkName": "pages/admin/pageCategory/_id"
+      },
+      {
+        "name": "admin-all",
+        "path": "*",
+        "component": "/Users/m.giraudtelme/oasis-manager/app/pages/admin/_.vue",
+        "chunkName": "pages/admin/_"
+      }
+    ]
+  },
+  {
+    "name": "contact",
+    "path": "/contact",
+    "component": "/Users/m.giraudtelme/oasis-manager/app/pages/contact.vue",
+    "chunkName": "pages/contact"
+  },
+  {
+    "name": "login",
+    "path": "/login",
+    "component": "/Users/m.giraudtelme/oasis-manager/app/pages/login.vue",
+    "chunkName": "pages/login"
+  },
+  {
+    "name": "mentions_legales",
+    "path": "/mentions_legales",
+    "component": "/Users/m.giraudtelme/oasis-manager/app/pages/mentions_legales.vue",
+    "chunkName": "pages/mentions_legales"
+  },
+  {
+    "name": "survey_join",
+    "path": "/survey_join",
+    "component": "/Users/m.giraudtelme/oasis-manager/app/pages/survey_join.vue",
+    "chunkName": "pages/survey_join"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/Users/m.giraudtelme/oasis-manager/app/pages/index.vue",
+    "chunkName": "pages/index"
+  },
+  {
+    "name": "all",
+    "path": "/*",
+    "component": "/Users/m.giraudtelme/oasis-manager/app/pages/_.vue",
+    "chunkName": "pages/_"
+  }
+]

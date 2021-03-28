@@ -2175,7 +2175,7 @@ let Formvue_type_script_lang_ts_SurveyJoinForm = class SurveyJoinForm extends Ob
     var _a;
 
     super(...arguments);
-    this.downloadPdfUrl = "http://localhost:8000/api" + (((_a = "http://localhost:8000/api") === null || _a === void 0 ? void 0 : _a.endsWith('/')) ? '' : '/') + '../survey/join.pdf';
+    this.downloadPdfUrl = "http://api.lestransalpins.org/api" + (((_a = "http://api.lestransalpins.org/api") === null || _a === void 0 ? void 0 : _a.endsWith('/')) ? '' : '/') + '../survey/join.pdf';
   }
 
   get item() {

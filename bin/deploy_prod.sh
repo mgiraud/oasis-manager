@@ -8,3 +8,5 @@ ln -s ${APP_CONGIG_PATH}/.env.local .env.local
 
 export APP_ENV=prod
 export APP_DEBUG=0
+
+composer install

@@ -1,5 +1,5 @@
-import Vue from 'vue'
 import { Validation } from 'vuelidate'
+import Vue from 'vue'
 
 declare module '*.vue' {
     export default Vue
@@ -14,3 +14,4 @@ declare module 'vue/types/options' {
 }
 
 declare type ElementWithValidation = (Vue | Element) & Validation
+declare module 'vuetify-draggable-treeview';

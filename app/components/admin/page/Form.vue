@@ -76,7 +76,7 @@ import { Component, mixins, namespace, Prop } from 'nuxt-property-decorator'
 import { required, minLength, helpers } from 'vuelidate/lib/validators'
 import has from 'lodash/has'
 import { validationMixin } from 'vuelidate'
-import Editor from '../../util/Editor'
+import Editor from '../../util/Editor.vue'
 import { PageCategory } from '~/store/page_category'
 
 const slug = helpers.regex('slug', /^[a-zA-Z0-9-]*$/)
@@ -121,16 +121,16 @@ export default class AdminPageForm extends mixins(validationMixin) {
   }
 
   get titleErrors () {
-    const errors = []
-    if (!this.$v.item.title.$dirty) { return errors }
+    const errors: string[] = []
+    if (!this.$v.item.title || !this.$v.item.title.$dirty) { return errors }
     has(this.violations, 'title') && errors.push(this.violations.title)
     !this.$v.item.title.minLength && errors.push('Le titre doit faire au moins 4 caractères')
     return errors
   }
 
   get urlErrors () {
-    const errors = []
-    if (!this.$v.item.url.$dirty) { return errors }
+    const errors: string[] = []
+    if (!this.$v.item.url || !this.$v.item.url.$dirty) { return errors }
     has(this.violations, 'url') && errors.push(this.violations.url)
     !this.$v.item.url.minLength && errors.push('Le titre doit faire au moins 2 caractères')
     !this.$v.item.url.slug && errors.push('L\'url doit contenir seulement des chiffres, des lettres et le tiret du haut -')
@@ -138,8 +138,8 @@ export default class AdminPageForm extends mixins(validationMixin) {
   }
 
   get contentErrors () {
-    const errors = []
-    if (!this.$v.item.content.$dirty) { return errors }
+    const errors: string[] = []
+    if (!this.$v.item.content || !this.$v.item.content.$dirty) { return errors }
     has(this.violations, 'url') && errors.push(this.violations.content)
     !this.$v.item.content.slug && errors.push('Le titre doit faire au moins 2 caractères')
     return errors

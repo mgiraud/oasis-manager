@@ -41,7 +41,7 @@ class ContactNewsletterValidator extends ConstraintValidator
         }
 
         if ((new \DateTime())->diff($lastContact->getCreatedAt())->d < 1) {
-            $this->context->addViolation('Vous pouvez faire une inscription à la newsletter seulement une fois par jour');
+            $this->context->addViolation('Tu peux faire une inscription à la newsletter seulement une fois par jour');
         }
     }
 

@@ -54,10 +54,11 @@
 </template>
 
 <script lang="ts">
+import { Store } from 'vuex'
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
-import ActionCell from '~/components/table/ActionCell'
-import PageFilter from '~/components/admin/page/PageFilter'
-import FormFilter from '~/components/form/FormFilter'
+import ActionCell from '~/components/table/ActionCell.vue'
+import PageFilter from '~/components/admin/page/PageFilter.vue'
+import FormFilter from '~/components/form/FormFilter.vue'
 import list from '~/mixins/list'
 import { Page } from '~/store/page'
 import { MUTATIONS } from '~/store/crud'
@@ -88,7 +89,7 @@ export default class AdminPageIndex extends mixins(list) {
     { text: 'Actions', value: 'actions', sortable: false }
   ]
 
-  async fetch ({ store }) {
+  async fetch ({ store }: { store: Store<any> }) {
     return await store.dispatch('page/fetchAll')
   }
 
@@ -108,7 +109,7 @@ export default class AdminPageIndex extends mixins(list) {
     }
 
     @pageModule.Action('fetchAll') fetchAll!: () => Page[]
-    @pageModule.Action('del') deleteItem!: (pageCateogry: Page) => void
+    @pageModule.Action('del') deleteItem!: (pageCateogry: Page) => Promise<void>
 
     editItem (item: Page) {
       this.$router.push({ name: 'admin-page-id', params: { id: item['@id'] } })

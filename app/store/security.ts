@@ -103,9 +103,6 @@ export const getters: GetterTree<SecurityState, RootState> = {
   isAdmin: (state, _getters) => {
     return state.member && state.member.isAdmin
   },
-  isLoggedIn: (_state, _getters, rootState) => {
-    return rootState.storage && rootState.storage.user instanceof Object
-  },
   hasPermission: (state, _getters) => (permission: string | null) => {
     if (permission === null) { return false }
     return !!(state.member && state.member.permissions && state.member.permissions.includes(permission))

@@ -6,6 +6,8 @@ namespace App\EventSubscriber;
 
 use ApiPlatform\Core\EventListener\EventPriorities;
 use App\Entity\ContactNewsletter;
+use App\Emails\EmailFactory;
+use App\Emails\Emails;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -18,11 +20,13 @@ class ContactNewsletterSubscriber implements EventSubscriberInterface
 {
     private Environment $twig;
     private MailerInterface $mailer;
+    private EmailFactory $emailFactory;
 
-    public function __construct(Environment $twig, MailerInterface $mailer)
+    public function __construct(Environment $twig, MailerInterface $mailer, EmailFactory $emailFactory)
     {
         $this->twig = $twig;
         $this->mailer = $mailer;
+        $this->emailFactory = $emailFactory;
     }
 
     public static function getSubscribedEvents()
@@ -60,18 +64,35 @@ class ContactNewsletterSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $email = (new Email())
-            ->from('hello@example.com')
-            ->to('you@example.com')
-            ->subject('Nouvelle prise de contact')
+        /** @var ContactNewsletter $contactNewsletter */
+        $contactNewsletter = $event->getControllerResult();
+
+        $emailToWarnAdmin = (new Email())
+            ->from($this->emailFactory->getAddress('no-reply'))
+            ->to($this->emailFactory->getAddress('admin'))
+            ->subject('Nouvelle inscription à la newsletter')
             ->html($this->twig->render('mail/contact_newsletter.html.twig', [
-                'contactNewsletter' => $event->getControllerResult()
+                'contactNewsletter' => $contactNewsletter
             ]));
 
         try {
-            $this->mailer->send($email);
+            $this->mailer->send($emailToWarnAdmin);
         } catch (TransportExceptionInterface $e) {
+            dump($e);
+        }
 
+        $emailToWarnAdmin = (new Email())
+            ->from($this->emailFactory->getAddress('no-reply'))
+            ->to($contactNewsletter->getEmail())
+            ->subject('Nouvelle inscription à la newsletter')
+            ->html($this->twig->render('mail/contact_newsletter_confirm.html.twig', [
+                'contactNewsletter' => $contactNewsletter
+            ]));
+
+        try {
+            $this->mailer->send($emailToWarnAdmin);
+        } catch (TransportExceptionInterface $e) {
+            dump($e);
         }
     }
 

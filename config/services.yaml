@@ -1,4 +1,15 @@
 parameters:
+    emailConfigs:
+        admin:
+            name: 'Admin'
+            email: '%env(EMAIL_ADMIN)%'
+        newsletter:
+            name: 'Newsletter'
+            email: '%env(EMAIL_NEWSLETTER)%'
+        no-reply:
+            name: 'Ne pas répondre'
+            email: '%env(EMAIL_NO_REPLY)%'
+    app_scheme: '%env(SCHEME)%'
 
 services:
 
@@ -30,3 +41,7 @@ services:
     App\EventSubscriber\AuthSubscriber:
         arguments:
             $env: '%kernel.environment%'
+
+    App\Emails\EmailFactory:
+        arguments:
+            $emailConfigs: '%emailConfigs%'

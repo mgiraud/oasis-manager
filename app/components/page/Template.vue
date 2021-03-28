@@ -3,7 +3,6 @@
     <v-card-title class="primary--text text--darken-4">
       {{ page.title | capitalize }}
     </v-card-title>
-    <!-- // eslint-disable-next-line vue/no-v-html -->
     <v-card-text v-html="page.content" />
   </div>
 </template>

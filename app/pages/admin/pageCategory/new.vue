@@ -9,13 +9,13 @@
 <script lang="ts">
 import { Component, mixins, namespace, Watch } from 'nuxt-property-decorator'
 import { validationMixin } from 'vuelidate'
-import Form from '~/components/admin/pageCategory/Form'
-import Toolbar from '~/components/form/Toolbar'
-import Loading from '~/components/util/Loading'
-import create from '~/mixins/create'
+import Form from '~/components/admin/pageCategory/Form.vue'
+import Toolbar from '~/components/form/Toolbar.vue'
+import Loading from '~/components/util/Loading.vue'
 import { PageCategory } from '~/store/page_category'
 import NotificationMixin from '~/mixins/notification'
-import { ElementWithValidation } from '~/types'
+import { ElementWithValidation } from '~/vue-shim'
+import CreateMixin from '~/mixins/create'
 
 const pageCategoryModule = namespace('page_category')
 
@@ -26,9 +26,10 @@ const pageCategoryModule = namespace('page_category')
   middleware: 'hasPermissions',
   meta: {
     permissions: ['USER_CAN_EDIT_PAGE_CATEGORIES']
-  }
+  },
+  mixins: [CreateMixin, validationMixin]
 })
-export default class AdminPageCategoryNew extends mixins(create, validationMixin, NotificationMixin) {
+export default class AdminPageCategoryNew extends mixins(NotificationMixin) {
   item = { content: null }
 
   @pageCategoryModule.State('created') created!: PageCategory | null
@@ -36,7 +37,7 @@ export default class AdminPageCategoryNew extends mixins(create, validationMixin
   @pageCategoryModule.State('isLoading') isLoading!: boolean
   @pageCategoryModule.State('violations') violations!: string[]
 
-  @pageCategoryModule.Action('create') create!: (pageCategory: PageCategory) => PageCategory
+  @pageCategoryModule.Action('create') create!: (pageCategory: PageCategory) => Promise<PageCategory>
   @pageCategoryModule.Action('reset') reset!: () => void
 
   onSendForm () {

@@ -46,7 +46,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import ConfirmDelete from '../util/ConfirmDelete'
+import ConfirmDelete from '../util/ConfirmDelete.vue'
 
 @Component({
   components: {

@@ -53,7 +53,7 @@
 
 <script lang="ts">
 import { Component, Vue, namespace, Prop } from 'nuxt-property-decorator'
-import DateType from '~/components/form/DateType'
+import DateType from '~/components/form/DateType.vue'
 import { PageCategory } from '~/store/page_category'
 
 const pageCategoryModule = namespace('page_category')

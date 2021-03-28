@@ -29,9 +29,9 @@ jobs:
           ini-values: pcov.directory=api #optional, see above for usage.
           coverage: pcov
     
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
-          node-version: '12'
+          node-version: '14'
     
       - uses: harmon758/postgresql-action@v1
         with:
@@ -77,6 +77,32 @@ jobs:
           name: coverage
           path: coverage/
           retention-days: 5
+
+      - name: 'Install app dependencies'
+        run: yarn install
+
+      - name: 'Build the app'
+        run: yarn build
+
+      - name: 'Deploy to server'
+        uses: easingthemes/ssh-deploy@v2.1.5
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+          ARGS: "-rltgoDzvO"
+          SOURCE: "./"
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: ${{ secrets.REMOTE_TARGET }}
+          EXCLUDE: "/app/"
+
+      - name: 'Executing deploy app'
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SSH_DEPLOY_KEY }}
+          script: |
+            cloudlinux-selector restart  --json --interpreter nodejs --app-root ${{ secrets.APP_ROOT }}
 #      - name: Run a multi-line script
 #        run: |
 #          echo Add other actions to build,

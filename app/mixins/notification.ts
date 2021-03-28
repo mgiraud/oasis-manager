@@ -26,7 +26,7 @@ export default class NotificationMixin extends Vue {
     this.showMessage(error, 'accent')
   }
 
-  showMessage (message: string, color = 'success') {
+  showMessage (message: string, color: string = 'success') {
     this.setShow(true)
     this.setColor(color)
     this.setText(message)

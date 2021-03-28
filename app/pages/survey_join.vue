@@ -17,12 +17,12 @@
 
 <script lang="ts">
 import { Component, namespace, Watch, mixins } from 'nuxt-property-decorator'
-import SurveyJoinForm from '../components/survey_join/Form'
-import Toolbar from '../components/form/Toolbar'
-import Loading from '../components/util/Loading'
+import SurveyJoinForm from '../components/survey_join/Form.vue'
+import Toolbar from '../components/form/Toolbar.vue'
+import Loading from '../components/util/Loading.vue'
 import NotificationMixin from '~/mixins/notification'
 import { SurveyJoin } from '~/store/survey_join'
-import { ElementWithValidation } from '~/types'
+import { ElementWithValidation } from '~/vue-shim'
 
 const surveyJoinModule = namespace('survey_join')
 const notificationModule = namespace('notifications')

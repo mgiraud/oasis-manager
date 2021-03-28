@@ -58,7 +58,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import ConfirmDelete from '~/components/util/ConfirmDelete'
+import ConfirmDelete from '~/components/util/ConfirmDelete.vue'
 
 @Component({
   name: 'Toolbar',

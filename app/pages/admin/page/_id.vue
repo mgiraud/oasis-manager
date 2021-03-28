@@ -40,9 +40,9 @@
 </template>
 <script lang="ts">
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
-import Loading from '~/components/util/Loading'
-import Toolbar from '~/components/form/Toolbar'
-import Form from '~/components/admin/page/Form'
+import Loading from '~/components/util/Loading.vue'
+import Toolbar from '~/components/form/Toolbar.vue'
+import Form from '~/components/admin/page/Form.vue'
 import update from '~/mixins/update'
 import { Page } from '~/store/page'
 
@@ -73,7 +73,7 @@ export default class AdminPageEdit extends mixins(update) {
   @pageModule.Action('resetCreate') createReset!: () => void
   @pageModule.Action('resetDelete') delReset!: () => void
   @pageModule.Action('load') retrieve!: (id: string) => void
-  @pageModule.Action('update') update!: (pageCateogry: Page) => Page
+  @pageModule.Action('update') update!: (pageCateogry: Page) => Promise<Page>
   @pageModule.Action('resetUpdate') updateReset!: () => void
 }
 </script>

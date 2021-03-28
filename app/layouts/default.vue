@@ -79,10 +79,10 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
-import Menu from '../components/layout/Menu'
-import SubMenu from '../components/layout/SubMenu'
-import NewsletterForm from '../components/contact_newsletter/Form'
-import Alert from '../components/util/Alert'
+import Menu from '~/components/layout/Menu.vue'
+import SubMenu from '~/components/layout/SubMenu.vue'
+import NewsletterForm from '~/components/contact_newsletter/Form.vue'
+import Alert from '~/components/util/Alert.vue'
 
 const securityModule = namespace('security')
 const pageModule = namespace('page')

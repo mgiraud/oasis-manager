@@ -54,10 +54,11 @@
 </template>
 
 <script lang="ts">
+import { Store } from 'vuex'
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
-import ActionCell from '~/components/table/ActionCell'
-import FormFilter from '~/components/form/FormFilter'
-import MemberGroupFilter from '~/components/admin/memberGroup/MemberGroupFilter'
+import ActionCell from '~/components/table/ActionCell.vue'
+import FormFilter from '~/components/form/FormFilter.vue'
+import MemberGroupFilter from '~/components/admin/memberGroup/MemberGroupFilter.vue'
 import { MemberGroup } from '~/store/member_group'
 import list from '~/mixins/list'
 import { MUTATIONS } from '~/store/crud'
@@ -85,7 +86,7 @@ export default class AdminMemberGroupIndex extends mixins(list) {
     { text: 'Actions', value: 'actions', sortable: false }
   ]
 
-  async fetch ({ store }) {
+  async fetch ({ store }: { store: Store<any> }) {
     return await store.dispatch('member_group/fetchAll')
   }
 
@@ -105,10 +106,10 @@ export default class AdminMemberGroupIndex extends mixins(list) {
   }
 
     @memberGroupModule.Action('fetchAll') fetchAll!: () => MemberGroup[]
-    @memberGroupModule.Action('del') deleteItem!: (memberGroup: MemberGroup) => void
+    @memberGroupModule.Action('del') deleteItem!: (memberGroup: MemberGroup) => Promise<void>
 
     editItem (item: MemberGroup) {
-      this.$router.push({ name: 'admin-memberGroup-id', params: { id: item.url } })
+      this.$router.push({ name: 'admin-memberGroup-id', params: { id: item['@id'] } })
     }
 }
 </script>

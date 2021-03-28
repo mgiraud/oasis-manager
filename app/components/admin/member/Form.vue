@@ -93,7 +93,7 @@ export default class MemberForm extends mixins(validationMixin) {
   }
 
   get nicknameErrors () {
-    const errors = []
+    const errors:string[] = []
     if (!this.$v.item.nickname || !this.$v.item.nickname.$dirty) { return errors }
     has(this.violations, 'nickname') && errors.push(this.violations.nickname)
     !this.$v.item.nickname.minLength && errors.push('Le pseudo doit faire au moins 4 caractères')

@@ -40,11 +40,12 @@
 </template>
 
 <script lang="ts">
+import { Store } from 'vuex'
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
 import isAdmin from '~/middleware/isAdmin'
-import ActionCell from '~/components/table/ActionCell'
-import FormFilter from '~/components/form/FormFilter'
-import MemberFilter from '~/components/admin/member/MemberFilter'
+import ActionCell from '~/components/table/ActionCell.vue'
+import FormFilter from '~/components/form/FormFilter.vue'
+import MemberFilter from '~/components/admin/member/MemberFilter.vue'
 import list from '~/mixins/list'
 import { Member } from '~/store/member'
 import { MUTATIONS } from '~/store/crud'
@@ -72,7 +73,7 @@ export default class AdminMemberIndex extends mixins(list) {
     { text: 'Actions', value: 'actions', sortable: false }
   ]
 
-  async fetch ({ store }) {
+  async fetch ({ store }: {store: Store<any>}) {
     await store.dispatch('member/fetchAll')
   }
 
@@ -97,10 +98,10 @@ export default class AdminMemberIndex extends mixins(list) {
   }
 
     @memberModule.Action('fetchAll') fetchAll!: () => Member[]
-    @memberModule.Action('del') deleteItem!: (member: Member) => void
+    @memberModule.Action('del') deleteItem!: (member: Member) => Promise<void>
 
     editItem (item: Member) {
-      this.$router.push({ name: 'admin-member-id', params: { id: item.id } })
+      this.$router.push({ name: 'admin-member-id', params: { id: item.id.toString() } })
     }
 }
 </script>

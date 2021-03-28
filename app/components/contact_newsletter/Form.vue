@@ -2,7 +2,7 @@
   <v-form @submit.prevent="sendForm">
     <v-text-field
       v-model="item.email"
-      label="Inscrivez-vous à la newsletter !"
+      label="Inscris-toi à la newsletter !"
       :error-messages="emailErrors"
       class="newsletter-input"
       prepend-icon="ri-mail-line"
@@ -19,9 +19,9 @@ import { Component, mixins, namespace, Prop, Watch } from 'nuxt-property-decorat
 import { email } from 'vuelidate/lib/validators'
 import has from 'lodash/has'
 import { validationMixin } from 'vuelidate'
-import notification from '../../mixins/notification'
 import { ContactNewsletter } from '~/store/contact_newsletter'
 import { FormErrors } from '~/api/repository'
+import NotificationMixin from '~/mixins/notification'
 
 const contactNewsletterModule = namespace('contact_newsletter')
 
@@ -32,9 +32,10 @@ const contactNewsletterModule = namespace('contact_newsletter')
         email
       }
     }
-  }
+  },
+  mixins: [validationMixin]
 })
-export default class ContactNewsletterForm extends mixins(validationMixin, notification) {
+export default class ContactNewsletterForm extends mixins(NotificationMixin) {
   @Prop({ type: Function, required: true }) readonly onClickClose!: () => void
 
   item = { email: null }
@@ -61,7 +62,7 @@ export default class ContactNewsletterForm extends mixins(validationMixin, notif
     }
 
     this.item.email = null
-    this.showMessage('Vous être maintenant inscrit à la newsletter !')
+    this.showMessage('Tu es maintenant inscrit à la newsletter !')
     this.onClickClose()
   }
 

@@ -14,8 +14,8 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
-import Template from '../components/page/Template'
-import Error404 from '../components/error/404'
+import Template from '~/components/page/Template.vue'
+import Error404 from '~/components/error/404.vue'
 import { Page } from '~/store/page'
 
 const pageModule = namespace('page')

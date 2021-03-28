@@ -4,6 +4,7 @@ import { Cookie } from './auth/cookie'
 import Token from './auth/token'
 import { Repository } from '~/api/repository'
 import { LoginCredentials, SecurityState } from '~/store/security'
+import { Member } from '~/store/member'
 
 declare module 'vue/types/vue' {
     interface Vue {
@@ -22,8 +23,7 @@ declare module '@nuxt/types' {
 }
 
 declare module 'vuex/types/index' {
-  // @ts-ignore
-    interface Store<S> {
+    interface Store<S> { // eslint-disable-line no-debugger
         $auth: Auth
     }
 }
@@ -50,7 +50,7 @@ class Auth {
       return this.state.loggedIn
     }
 
-    get member () {
+    get member (): Member | null {
       return this.store.state.security.member
     }
 
@@ -117,6 +117,7 @@ const authPlugin: Plugin = (context: Context, inject) => {
         //     return
         // }
 
+        // @ts-ignore
         console.error('[ERROR] [AUTH]', error)
       }
     })

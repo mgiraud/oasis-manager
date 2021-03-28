@@ -40,9 +40,9 @@
 </template>
 <script lang="ts">
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
-import Loading from '~/components/util/Loading'
-import Toolbar from '~/components/form/Toolbar'
-import Form from '~/components/admin/memberGroup/Form'
+import Loading from '~/components/util/Loading.vue'
+import Toolbar from '~/components/form/Toolbar.vue'
+import Form from '~/components/admin/memberGroup/Form.vue'
 import update from '~/mixins/update'
 import { MemberGroup } from '~/store/member_group'
 
@@ -74,7 +74,7 @@ export default class AdminMemberGroupEdit extends mixins(update) {
   @memberGroupModule.Action('resetCreate') createReset!: () => void
   @memberGroupModule.Action('resetDelete') delReset!: () => void
   @memberGroupModule.Action('load') retrieve!: (id: string) => void
-  @memberGroupModule.Action('update') update!: (memberGroup: MemberGroup) => MemberGroup
+  @memberGroupModule.Action('update') update!: (memberGroup: MemberGroup) => Promise<MemberGroup>
   @memberGroupModule.Action('resetUpdate') updateReset!: () => void
 }
 </script>

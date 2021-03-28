@@ -10,6 +10,7 @@ parameters:
             name: 'Ne pas répondre'
             email: '%env(EMAIL_NO_REPLY)%'
     app_scheme: '%env(SCHEME)%'
+    app_domain: '%env(DOMAIN)%'
 
 services:
 
@@ -41,6 +42,7 @@ services:
     App\EventSubscriber\AuthSubscriber:
         arguments:
             $env: '%kernel.environment%'
+            $domain: '%app_domain%'
 
     App\Emails\EmailFactory:
         arguments:

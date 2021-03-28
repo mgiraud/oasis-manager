@@ -6,13 +6,18 @@ import { ElementWithValidation } from '~/vue-shim'
 
 const securityModule = namespace('security')
 
-@Component
-export default class CreateMixin extends mixins(NotificationMixin, validationMixin) {
+@Component({
+  mixins: [validationMixin]
+})
+export default class CreateMixin extends mixins(NotificationMixin) {
   @securityModule.Getter('hasPermission') hasPermission!: (permission: string) => boolean
-  create !: (item: HydraMemberObject) => Promise<HydraMemberObject>
+  create !: (item: HydraMemberObject & any) => Promise<HydraMemberObject>
   item = {}
 
-  onCreated (item: HydraMemberObject) {
+  onCreated (item: HydraMemberObject | null) {
+    if (item === null) {
+      return
+    }
     const id = this.$options.resourcePrefix ? item['@id'].replace(this.$options.resourcePrefix, '') : this.$options.resourcePrefix
     this.showMessage(`${id} created`)
 

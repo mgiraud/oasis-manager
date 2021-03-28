@@ -52,6 +52,7 @@
 </template>
 
 <script lang="ts">
+import { Store } from 'vuex'
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
 import ActionCell from '~/components/table/ActionCell.vue'
 import PageCategoryFilter from '~/components/admin/pageCategory/PageCategoryFilter.vue'
@@ -83,7 +84,7 @@ export default class AdminPageCategoryIndex extends mixins(list) {
     { text: 'Actions', value: 'actions', sortable: false }
   ]
 
-  async fetch ({ store }) {
+  async fetch ({ store }: { store: Store<any> }) {
     return await store.dispatch('page/fetchAll')
   }
 
@@ -103,7 +104,7 @@ export default class AdminPageCategoryIndex extends mixins(list) {
   }
 
   @pageCategoryModule.Action('fetchAll') fetchAll!: () => PageCategory[]
-  @pageCategoryModule.Action('del') deleteItem!: (pageCateogry: PageCategory) => void
+  @pageCategoryModule.Action('del') deleteItem!: (pageCategory: PageCategory) => Promise<void>
 
   editItem (item: PageCategory) {
     this.$router.push({ name: 'admin-pageCategory-id', params: { id: item['@id'] } })

@@ -11,8 +11,8 @@ import { Component, mixins, namespace } from 'nuxt-property-decorator'
 import Loading from '~/components/util/Loading.vue'
 import Toolbar from '~/components/form/Toolbar.vue'
 import Form from '~/components/admin/page/Form.vue'
-import create from '~/mixins/create'
 import { Page } from '~/store/page'
+import CreateMixin from '~/mixins/create'
 
 const pageModule = namespace('page')
 
@@ -27,7 +27,7 @@ const pageModule = namespace('page')
     permissions: ['USER_CAN_EDIT_PAGES']
   }
 })
-export default class AdminPageCategoryNew extends mixins(create) {
+export default class AdminPageNew extends mixins(CreateMixin) {
   item = { content: '' }
 
   @pageModule.State('created') created!: Page | null
@@ -35,7 +35,7 @@ export default class AdminPageCategoryNew extends mixins(create) {
   @pageModule.State('isLoading') isLoading!: boolean
   @pageModule.State('violations') violations!: string[]
 
-  @pageModule.Action('create') create!: (page: Page) => Page
+  @pageModule.Action('create') create!: (page: Page) => Promise<Page>
   @pageModule.Action('reset') reset!: () => void
 }
 </script>

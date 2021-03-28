@@ -14,3 +14,4 @@ declare module 'vue/types/options' {
 }
 
 declare type ElementWithValidation = (Vue | Element) & Validation
+declare module 'vuetify-draggable-treeview';

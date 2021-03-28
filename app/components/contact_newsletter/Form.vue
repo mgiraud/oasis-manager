@@ -21,7 +21,7 @@ import has from 'lodash/has'
 import { validationMixin } from 'vuelidate'
 import { ContactNewsletter } from '~/store/contact_newsletter'
 import { FormErrors } from '~/api/repository'
-import NotificationMixin from '~/mixins/notification';
+import NotificationMixin from '~/mixins/notification'
 
 const contactNewsletterModule = namespace('contact_newsletter')
 
@@ -32,9 +32,10 @@ const contactNewsletterModule = namespace('contact_newsletter')
         email
       }
     }
-  }
+  },
+  mixins: [validationMixin]
 })
-export default class ContactNewsletterForm extends mixins(validationMixin, NotificationMixin) {
+export default class ContactNewsletterForm extends mixins(NotificationMixin) {
   @Prop({ type: Function, required: true }) readonly onClickClose!: () => void
 
   item = { email: null }

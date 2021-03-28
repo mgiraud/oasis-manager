@@ -2,7 +2,7 @@ import makeCrudModule from './crud'
 import { Page } from './page'
 import { HydraMemberObject } from '~/api/hydra'
 
-export type PageCategory = HydraMemberObject & {
+export interface PageCategory extends HydraMemberObject {
   'name': string;
   'showInMenu': boolean;
   'pages': Page[];

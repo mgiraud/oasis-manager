@@ -35,7 +35,7 @@ export default class AdminMemberGroupNew extends mixins(create) {
   @memberGroupModule.State('isLoading') isLoading!: boolean
   @memberGroupModule.State('violations') violations!: string[]
 
-  @memberGroupModule.Action('create') create!: (memberGroup: MemberGroup) => MemberGroup
+  @memberGroupModule.Action('create') create!: (memberGroup: MemberGroup) => Promise<MemberGroup>
   @memberGroupModule.Action('reset') reset!: () => void
 }
 </script>

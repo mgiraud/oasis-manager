@@ -9,7 +9,7 @@ interface CookieOption {
         maxAge?: number
         domain?: string
         secure?: boolean
-        sameSite?: string
+        sameSite?: boolean | 'lax' | 'strict' | 'none' | undefined
     }
 }
 export class Cookie {
@@ -23,7 +23,7 @@ export class Cookie {
         options: {
           path: '/',
           secure: true,
-          sameSite: 'Lax'
+          sameSite: 'lax'
         }
       }
     }

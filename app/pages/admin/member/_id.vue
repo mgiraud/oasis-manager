@@ -74,7 +74,7 @@ export default class AdminMemberEdit extends mixins(update) {
   @memberModule.Action('resetCreate') createReset!: () => void
   @memberModule.Action('resetDelete') delReset!: () => void
   @memberModule.Action('load') retrieve!: (id: string) => void
-  @memberModule.Action('update') update!: (member: Member) => Member
+  @memberModule.Action('update') update!: (member: Member) => Promise<Member>
   @memberModule.Action('resetUpdate') updateReset!: () => void
 }
 </script>

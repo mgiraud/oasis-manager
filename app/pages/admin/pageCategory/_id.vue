@@ -71,7 +71,7 @@ export default class AdminPageCategoryEdit extends mixins(update) {
   @pageCategoryModule.Action('resetCreate') createReset!: () => void
   @pageCategoryModule.Action('resetDelete') delReset!: () => void
   @pageCategoryModule.Action('load') retrieve!: (id: string) => void
-  @pageCategoryModule.Action('update') update!: (pageCateogry: PageCategory) => PageCategory
+  @pageCategoryModule.Action('update') update!: (pageCateogry: PageCategory) => Promise<PageCategory>
   @pageCategoryModule.Action('resetUpdate') updateReset!: () => void
 }
 </script>

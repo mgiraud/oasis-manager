@@ -35,7 +35,7 @@ export default class AdminMemberNew extends mixins(create) {
   @memberModule.State('isLoading') isLoading!: boolean
   @memberModule.State('violations') violations!: string[]
 
-  @memberModule.Action('create') create!: (member: Member) => Member
+  @memberModule.Action('create') create!: (member: Member) => Promise<Member>
   @memberModule.Action('reset') reset!: () => void
 }
 </script>

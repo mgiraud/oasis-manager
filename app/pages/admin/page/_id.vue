@@ -73,7 +73,7 @@ export default class AdminPageEdit extends mixins(update) {
   @pageModule.Action('resetCreate') createReset!: () => void
   @pageModule.Action('resetDelete') delReset!: () => void
   @pageModule.Action('load') retrieve!: (id: string) => void
-  @pageModule.Action('update') update!: (pageCateogry: Page) => Page
+  @pageModule.Action('update') update!: (pageCateogry: Page) => Promise<Page>
   @pageModule.Action('resetUpdate') updateReset!: () => void
 }
 </script>

@@ -23,8 +23,7 @@ declare module '@nuxt/types' {
 }
 
 declare module 'vuex/types/index' {
-    // @ts-ignore
-    interface Store<S> {
+    interface Store<S> { // eslint-disable-line no-debugger
         $auth: Auth
     }
 }

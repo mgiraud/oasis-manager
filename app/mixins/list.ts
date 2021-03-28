@@ -19,7 +19,7 @@ export default class ListMixin extends mixins(NotificationMixin) {
   totalItems!: number
   fetchAll!: (params: HydraGetRequestFilter) => any[]
   resetList !: (reset: boolean) => void
-  deleteItem !: (item: HydraMemberObject) => Promise<void>
+  deleteItem !: (item: HydraMemberObject & any) => Promise<void>
 
   @securityModule.Getter('hasPermission') hasPermission!: (permission: string) => boolean
 

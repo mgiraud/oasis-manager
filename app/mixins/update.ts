@@ -16,7 +16,7 @@ export default class UpdateMixin extends mixins(NotificationMixin) {
   createReset!: () => void
   delReset!: () => void
   updateReset!: () => void
-  update !: (item: HydraMemberObject) => Promise<HydraMemberObject>
+  update !: (item: HydraMemberObject & any) => Promise<HydraMemberObject>
 
   created () {
     const id = this.$options.resourcePrefix ? this.$options.resourcePrefix + this.$route.params.id : this.$route.params.id

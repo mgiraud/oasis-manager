@@ -1,1 +1,1 @@
-API_BASE_URL=http://api.lestransalpins.org/api yarn build
+API_BASE_URL=https://api.lestransalpins.org/api yarn build

@@ -102,7 +102,7 @@ jobs:
           username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.SSH_DEPLOY_KEY }}
           script: |
-            cloudlinux-selector --interpreter nodejs --user ztvj7946 --restart-webapp testapp
+            cloudlinux-selector restart  --json --interpreter nodejs --app-root ${{ secrets.APP_ROOT }}
 #      - name: Run a multi-line script
 #        run: |
 #          echo Add other actions to build,

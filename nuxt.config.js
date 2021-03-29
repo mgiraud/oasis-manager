@@ -1,3 +1,4 @@
+import redirectSSL from 'redirect-ssl'
 require('dotenv').config()
 
 const REMIX_ICONS = {
@@ -88,5 +89,10 @@ export default {
   },
   css: [
     'remixicon/fonts/remixicon.css'
+  ],
+  serverMiddleware: [
+    redirectSSL.create({
+      enabled: process.env.NODE_ENV === 'production'
+    })
   ]
 }

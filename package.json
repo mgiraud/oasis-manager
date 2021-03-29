@@ -28,6 +28,7 @@
     "jwt-decode": "^3.1.2",
     "lodash": "^4.17.20",
     "nuxt": "^2.14.7",
+    "redirect-ssl": "^2.0.0",
     "remixicon": "^2.5.0",
     "vue-class-component": "^7.2.6",
     "vuedraggable": "^2.24.3",

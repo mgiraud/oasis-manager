@@ -9192,7 +9192,7 @@ const makeParamArray = (key, arr) => arr.map(val => `${key}[]=${val}`).join('&')
       options.body = JSON.stringify(Object(_hydra__WEBPACK_IMPORTED_MODULE_0__[/* normalize */ "a"])(payload));
     }
 
-    const entryPoint = "https://api.lestransalpins.org/api" + (((_a = "https://api.lestransalpins.org/api") === null || _a === void 0 ? void 0 : _a.endsWith('/')) ? '' : '/');
+    const entryPoint = "http://localhost:8000/api" + (((_a = "http://localhost:8000/api") === null || _a === void 0 ? void 0 : _a.endsWith('/')) ? '' : '/');
     return await fetch(new URL(query, entryPoint).toString(), options);
   },
 
@@ -10511,11 +10511,17 @@ __webpack_require__.r(__webpack_exports__);
 const actions = {
   async nuxtServerInit({
     dispatch
+  }, {
+    $auth
   }) {
     // Load permissions list from file
     dispatch('security/loadPermissions'); // Load page categories for menu rendering
 
-    await dispatch('page/fetchAll');
+    try {
+      await dispatch('page/fetchAll');
+    } catch (e) {
+      $auth.reset();
+    }
   }
 
 };
@@ -11215,7 +11221,7 @@ async function setContext(app, context) {
       error: context.error,
       base: app.router.options.base,
       env: {
-        "apiBaseUrl": "https://api.lestransalpins.org/api"
+        "apiBaseUrl": "http://localhost:8000/api"
       }
     }; // Only set once
 
@@ -16249,12 +16255,16 @@ class auth_Auth {
     return this.store.state.security.member;
   }
 
-  async logout() {
+  reset() {
     var _a, _b;
 
-    await this.store.dispatch('security/logout');
     (_a = this.token) === null || _a === void 0 ? void 0 : _a.resetCookie();
     (_b = this.refreshToken) === null || _b === void 0 ? void 0 : _b.resetCookie();
+  }
+
+  async logout() {
+    await this.store.dispatch('security/logout');
+    this.reset();
   }
 
   get isAdmin() {

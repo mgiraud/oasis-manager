@@ -7,7 +7,6 @@ use App\Repository\RefreshTokenRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
  * @ORM\Entity(repositoryClass=RefreshTokenRepository::class)
  */
 class RefreshToken

@@ -10511,11 +10511,17 @@ __webpack_require__.r(__webpack_exports__);
 const actions = {
   async nuxtServerInit({
     dispatch
+  }, {
+    $auth
   }) {
     // Load permissions list from file
     dispatch('security/loadPermissions'); // Load page categories for menu rendering
 
-    await dispatch('page/fetchAll');
+    try {
+      await dispatch('page/fetchAll');
+    } catch (e) {
+      $auth.reset();
+    }
   }
 
 };
@@ -16249,12 +16255,16 @@ class auth_Auth {
     return this.store.state.security.member;
   }
 
-  async logout() {
+  reset() {
     var _a, _b;
 
-    await this.store.dispatch('security/logout');
     (_a = this.token) === null || _a === void 0 ? void 0 : _a.resetCookie();
     (_b = this.refreshToken) === null || _b === void 0 ? void 0 : _b.resetCookie();
+  }
+
+  async logout() {
+    await this.store.dispatch('security/logout');
+    this.reset();
   }
 
   get isAdmin() {

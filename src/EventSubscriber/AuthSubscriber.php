@@ -20,17 +20,20 @@ class AuthSubscriber implements EventSubscriberInterface
     private RefreshTokenManager $refreshTokenManager;
     private JWTTokenManagerInterface $tokenManager;
     private string $env;
+    private string $domain;
 
     public function __construct(
         EntityManagerInterface $em,
         RefreshTokenManager $refreshTokenManager,
         JWTTokenManagerInterface $tokenManager,
-        string $env
+        string $env,
+        string $domain
     ) {
         $this->em = $em;
         $this->refreshTokenManager = $refreshTokenManager;
         $this->tokenManager = $tokenManager;
         $this->env = $env;
+        $this->domain = $domain;
     }
 
     public static function getSubscribedEvents(): array
@@ -62,7 +65,7 @@ class AuthSubscriber implements EventSubscriberInterface
         $this->em->flush();
 
         $event->getResponse()->headers->setCookie(
-            (new Cookie(RefreshToken::REFRESH_TOKEN_PARAM_NAME, $refreshToken->getRefreshToken(), 0, '/'))
+            (new Cookie(RefreshToken::REFRESH_TOKEN_PARAM_NAME, $refreshToken->getRefreshToken(), 0, '/', $this->domain))
                 ->withSecure($this->env !== 'dev')
         );
     }

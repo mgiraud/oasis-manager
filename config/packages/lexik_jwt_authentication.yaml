@@ -9,3 +9,4 @@ lexik_jwt_authentication:
     set_cookies:
         BEARER:
             path: /
+            domain: '%app_domain%'

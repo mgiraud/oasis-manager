@@ -8,10 +8,14 @@ export type Storage = {
 export interface RootState {}
 
 export const actions: ActionTree<RootState, RootState> = {
-  async nuxtServerInit ({ dispatch }) {
+  async nuxtServerInit ({ dispatch }, { $auth }) {
     // Load permissions list from file
     dispatch('security/loadPermissions')
     // Load page categories for menu rendering
-    await dispatch('page/fetchAll')
+    try {
+      await dispatch('page/fetchAll')
+    } catch (e) {
+      $auth.reset()
+    }
   }
 }

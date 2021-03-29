@@ -54,10 +54,14 @@ class Auth {
       return this.store.state.security.member
     }
 
-    async logout () {
-      await this.store.dispatch('security/logout')
+    reset () {
       this.token?.resetCookie()
       this.refreshToken?.resetCookie()
+    }
+
+    async logout () {
+      await this.store.dispatch('security/logout')
+      this.reset()
     }
 
     get isAdmin (): boolean {

@@ -1,7 +1,9 @@
 # oasis-manager
 Outil d'aide à la création et gestion d'habitats partagés. Le projet sous license GNU GPL est en développement actif.
 > Ce projet n'a pour l'instant pas l'ambition de devenir un CMS. Afin de l'utiliser et le modifier selon vos besoins
-> il est nécessaire de connaitre les languages web PHP/JS
+> il est nécessaire de connaitre les languages web PHP et Typescript
+
+Le site est en ligne à l'adresse : https://www.lestransalpins.org 
 
 ## Fonctionnalités
 
@@ -22,29 +24,17 @@ Voici la liste, sans doute non exhaustive, des fonctionnalités prévues à term
 Les contributions sont bienvenues mais le projet étant sous développement actif,
 je vous demande de passer par la **création d'une issue** pour pouvoir planifier son développement
 
-### Intégration
-
-Cette partie est encore en développement mais voici ce que doit respecter un code pour être validé
-* PHP
-    * Tests PhpUnit validés, coverage > 80%
-    * Phpstan niveau 5
-    * PHP CS fixer ne renvoie pas d'erreur
-* JS
-    * Tests jest validé, coverage > 80%
-
-Une action gitlab est déclenchée à chaque push pour effectuer ces validations.
-TODO: Lors d'un merge sur main, le code est déployé en production.
-
 ## Développement
 
 ### Introduction
-* API : L'api fonctionne avec l'incroyable [Api-platform](https://api-platform.com/) basé sur le framework php Symfony
+* API : L'API fonctionne avec l'incroyable [Api-platform](https://api-platform.com/) basé sur le framework PHP Symfony
 * App : L'app tourne avec l'excellent [Nuxt](https://fr.nuxtjs.org/), framework JS basé sur VueJs
-* La librairie graphique [Vuetify](https://vuetifyjs.com/en/) est utilisée pour fournir des composants prets a l'emploi
+* La librairie graphique [Vuetify](https://vuetifyjs.com/en/) est utilisée pour fournir des composants prêts à l'emploi
+* Les icônes utilisées sont celles de la bibliothèque open source [Remixicons](https://remixicon.com/)
 
 ### Installation
 
-Vous devez bien sur installer Php et Node en préambule
+Vous devez bien sur installer PHP 7.4 avec une configuration suffisante, Node 14.x et yarn en préambule
 
 ```shell script
 composer install
@@ -64,11 +54,12 @@ symfony server:start
 yarn dev
 ```
 
-## FAQ
+### Intégration
 
-### Pourquoi JS et pas TS ?
-Pour ne pas bloquer les contribuants potentiels. Même si TS est vraiment agréable à utiliser,
-il est encore loin d'être autant utilisé que JS
+L'association a pris un hébergement chez [O2switch](https://www.o2switch.fr/). Il est impossible de `build` l'application sur le serveur
+car la génération de processus enfant est interdite. Du coup l'app doit être build avant le merge sur master (dossier .nuxt).
+
+De même le serveur utilise une protection par IP pour filtrer les connexions SSH, il est donc impossible d'utiliser [le workflow github](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#ip-addresses) 
 
 ## Crédits
 

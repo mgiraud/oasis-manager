@@ -16,7 +16,7 @@
       </template>
 
       <v-toolbar-title>
-        Les transalpins
+        <NuxtLink to="/" class="header-link">Les transalpins</NuxtLink>
       </v-toolbar-title>
       <v-spacer />
       <v-btn v-if="isAdmin" icon color="primary darken-4" @click="redirectToAdmin">
@@ -116,6 +116,12 @@ export default class DefaultLayout extends Vue {
 </script>
 
 <style>
+  .v-application a.header-link {
+    text-decoration: none;
+    text-transform: capitalize;
+    color: white;
+  }
+
   .card-newsletter > .v-card__text {
     padding-top: 0px;
     padding-bottom: 0px;

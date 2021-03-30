@@ -68,11 +68,15 @@ export const actions: ActionTree<SecurityState, RootState> = {
   async login ({ commit }, credentials: LoginCredentials) {
     commit('SET_CREDENTIAL_ERROR', false)
     try {
-      await this.$getRepository('members').call('login_check', {
+      const res = await this.$getRepository('members').call('login_check', {
         method: 'POST',
         body: JSON.stringify(credentials)
       })
-      return true
+      if (res.status !== 204) {
+        commit('SET_CREDENTIAL_ERROR', true)
+        return false
+      }
+      return true;
     } catch (e) {
       commit('SET_CREDENTIAL_ERROR', true)
       return false

@@ -49,7 +49,7 @@ pageModule.getters.menuItems = (_state, getters) => {
   })
 
   menu.push({
-    name: 'Contact',
+    name: 'Contacte-nous !',
     url: 'contact',
     slug: null
   })

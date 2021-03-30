@@ -7,7 +7,7 @@
           elevation="24"
           type="error"
         >
-          Bad credentials
+          Le compte ou le mot de passe ne sont pas valides
         </v-alert>
       </v-col>
     </v-row>

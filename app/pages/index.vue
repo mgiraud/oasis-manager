@@ -4,7 +4,8 @@
       <v-col cols="12">
         <v-card>
           <v-card-title>Bienvenue chez les transalpins !</v-card-title>
-          <v-card-text>
+          <Template v-if="page" :page="page" />
+          <v-card-text v-else>
             Tu peux retrouver sur ce site toutes les informations relatives au projet de création d'un habitat partagé
           </v-card-text>
         </v-card>
@@ -16,12 +17,24 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
+import Template from '~/components/page/Template.vue'
+import { Page } from '~/store/page'
 
 const securityModule = namespace('security')
+const pageModule = namespace('page')
 
-@Component
+@Component({
+  components: {
+    Template
+  }
+})
 export default class IndexVue extends Vue {
   @securityModule.Getter('isLoggedIn') isLoggedIn!: boolean;
   @securityModule.Action('logout') logout!: () => void
+  @pageModule.Getter('find') find!: (url: string) => Page | null
+
+  get page (): Page | null {
+    return this.find('/api/pages/home')
+  };
 }
 </script>

@@ -76,7 +76,7 @@ export const actions: ActionTree<SecurityState, RootState> = {
         commit('SET_CREDENTIAL_ERROR', true)
         return false
       }
-      return true;
+      return true
     } catch (e) {
       commit('SET_CREDENTIAL_ERROR', true)
       return false

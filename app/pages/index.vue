@@ -15,10 +15,10 @@
 </template>
 
 <script lang="ts">
-import Template from '~/components/page/Template.vue'
 import { Vue, Component } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
-import {Page} from "~/store/page";
+import Template from '~/components/page/Template.vue'
+import { Page } from '~/store/page'
 
 const securityModule = namespace('security')
 const pageModule = namespace('page')
@@ -34,7 +34,7 @@ export default class IndexVue extends Vue {
   @pageModule.Getter('find') find!: (url: string) => Page | null
 
   get page (): Page | null {
-      return this.find('/api/pages/home')
+    return this.find('/api/pages/home')
   };
 }
 </script>

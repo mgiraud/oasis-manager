@@ -16,7 +16,9 @@
       </template>
 
       <v-toolbar-title>
-        <NuxtLink to="/" class="header-link">Les transalpins</NuxtLink>
+        <NuxtLink to="/" class="header-link">
+          Les transalpins
+        </NuxtLink>
       </v-toolbar-title>
       <v-spacer />
       <v-btn v-if="isAdmin" icon color="primary darken-4" @click="redirectToAdmin">

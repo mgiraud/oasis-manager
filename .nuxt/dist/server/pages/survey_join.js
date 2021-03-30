@@ -641,7 +641,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "d3627b4a"
+  "4b80d673"
   
 )
 
@@ -1078,7 +1078,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "171d848c"
+  "5fd2eab8"
   
 )
 
@@ -1245,7 +1245,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "77a5010d"
+  "309e0725"
   
 )
 
@@ -2175,7 +2175,7 @@ let Formvue_type_script_lang_ts_SurveyJoinForm = class SurveyJoinForm extends Ob
     var _a;
 
     super(...arguments);
-    this.downloadPdfUrl = "http://localhost:8000/api" + (((_a = "http://localhost:8000/api") === null || _a === void 0 ? void 0 : _a.endsWith('/')) ? '' : '/') + '../survey/join.pdf';
+    this.downloadPdfUrl = "https://api.lestransalpins.org/api" + (((_a = "https://api.lestransalpins.org/api") === null || _a === void 0 ? void 0 : _a.endsWith('/')) ? '' : '/') + '../survey/join.pdf';
   }
 
   get item() {
@@ -2361,7 +2361,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "6b931b81"
+  "55eb5599"
   
 )
 
@@ -2592,7 +2592,7 @@ var survey_join_component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "80279370"
+  "5d6ca340"
   
 )
 

@@ -27,16 +27,18 @@ class PageExtension implements QueryCollectionExtensionInterface
         string $resourceClass,
         string $operationName = null
     ) {
-        if (Page::class !== $resourceClass
-            || $this->security->isGranted('ROLE_ADMIN')
-            || null === ($user = $this->security->getUser())
-            || !$user instanceof Member) {
+        if (Page::class !== $resourceClass || $this->security->isGranted('ROLE_ADMIN')) {
             return;
         }
 
-        if (!$user->hasPermission(Permissions::USER_CAN_EDIT_PAGES)){
+        if (null === ($user = $this->security->getUser())
+            || !$user instanceof Member
+            || !$user->hasPermission(Permissions::USER_CAN_EDIT_PAGES))
+        {
             $rootAlias = $queryBuilder->getRootAliases()[0];
-            $queryBuilder->andWhere(sprintf('%s.isPublished = FALSE', $rootAlias));
+            $queryBuilder->andWhere(sprintf('%s.isPublished = TRUE', $rootAlias));
+
+            return;
         }
     }
 

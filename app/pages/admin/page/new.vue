@@ -28,7 +28,7 @@ const pageModule = namespace('page')
   }
 })
 export default class AdminPageNew extends mixins(CreateMixin) {
-  item = { content: '' }
+  item = { content: '', showInMenu: false, isPublished: false }
 
   @pageModule.State('created') created!: Page | null
   @pageModule.State('error') error!: string | null

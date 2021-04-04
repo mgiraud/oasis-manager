@@ -620,7 +620,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "4b80d673"
+  "d3627b4a"
   
 )
 
@@ -1016,7 +1016,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "5fd2eab8"
+  "171d848c"
   
 )
 
@@ -1183,7 +1183,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "309e0725"
+  "77a5010d"
   
 )
 
@@ -1702,12 +1702,12 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_2__[/* default *
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/contact.vue?vue&type=template&id=44d0fd2c&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-container',[_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_c('v-card',[_c('v-card-title',[_vm._v("Contacte-nous !")]),_vm._v(" "),_c('v-card-text',[_c('p',[_vm._v("Pour nous contactez tu peux nous envoyez un email à "),_c('a',{attrs:{"href":"mailto:contact@lestransalapins.org","title":"Envoyer un email aux transalpins"}},[_vm._v("contact@lestransalapins.org")]),_vm._v(" ou bien remplir le formulaire suivant.")]),_vm._v(" "),_c('p',[_vm._v("Dans ce cas tu recevras un email de confirmation ou bien regarde dans tes spams si ce n'est pas le cas.")]),_vm._v(" "),_c('contact-form',{ref:"createForm",attrs:{"values":_vm.item,"errors":_vm.violations}}),_vm._v(" "),_c('toolbar',{attrs:{"handle-submit":_vm.onSendForm,"handle-reset":_vm.resetForm}}),_vm._v(" "),_c('Loading',{attrs:{"visible":_vm.isLoading}})],1)],1)],1)],1)],1)}
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/contact.vue?vue&type=template&id=40551ba8&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-container',[_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_c('v-card',[_c('v-card-title',[_vm._v("Contacte-nous !")]),_vm._v(" "),_c('v-card-text',[_c('p',[_vm._v("Pour nous contacter tu peux nous envoyer un email à "),_c('a',{attrs:{"href":"mailto:contact@lestransalapins.org","title":"Envoyer un email aux transalpins"}},[_vm._v("contact@lestransalapins.org")]),_vm._v(" ou bien remplir le formulaire suivant.")]),_vm._v(" "),_c('p',[_vm._v("Dans ce cas tu recevras un email de confirmation ou bien regarde dans tes spams si ce n'est pas le cas.")]),_vm._v(" "),_c('contact-form',{ref:"createForm",attrs:{"values":_vm.item,"errors":_vm.violations}}),_vm._v(" "),_c('toolbar',{attrs:{"handle-submit":_vm.onSendForm,"handle-reset":_vm.resetForm}}),_vm._v(" "),_c('Loading',{attrs:{"visible":_vm.isLoading}})],1)],1)],1)],1)],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./app/pages/contact.vue?vue&type=template&id=44d0fd2c&
+// CONCATENATED MODULE: ./app/pages/contact.vue?vue&type=template&id=40551ba8&
 
 // EXTERNAL MODULE: external "nuxt-property-decorator"
 var external_nuxt_property_decorator_ = __webpack_require__(8);
@@ -1917,7 +1917,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "4d1a13f0"
+  "2079eff0"
   
 )
 
@@ -2062,7 +2062,7 @@ var contact_component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "5c696f91"
+  "1c1c2b79"
   
 )
 

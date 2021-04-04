@@ -11810,51 +11810,51 @@ function shouldScrollToTop(route) {
 
 
 
-const _2fe0b625 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin */ 2).then(__webpack_require__.bind(null, 348)));
+const _6bbf6b4d = () => interopDefault(__webpack_require__.e(/* import() | pages/admin */ 2).then(__webpack_require__.bind(null, 348)));
 
-const _c7cea72a = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/gallery/index */ 6).then(__webpack_require__.bind(null, 349)));
+const _304188da = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/gallery/index */ 6).then(__webpack_require__.bind(null, 349)));
 
-const _10a524f7 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/member/index */ 8).then(__webpack_require__.bind(null, 342)));
+const _b087de62 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/member/index */ 8).then(__webpack_require__.bind(null, 342)));
 
-const _c3bc6344 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/memberGroup/index */ 11).then(__webpack_require__.bind(null, 343)));
+const _783c8986 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/memberGroup/index */ 11).then(__webpack_require__.bind(null, 343)));
 
-const _6fb1572c = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/page/index */ 14).then(__webpack_require__.bind(null, 341)));
+const _ea7d4df8 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/page/index */ 14).then(__webpack_require__.bind(null, 341)));
 
-const _154189ca = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/pageCategory/index */ 17).then(__webpack_require__.bind(null, 344)));
+const _7e7e33a2 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/pageCategory/index */ 17).then(__webpack_require__.bind(null, 344)));
 
-const _320bce05 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/member/new */ 9).then(__webpack_require__.bind(null, 350)));
+const _4d1bcfdd = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/member/new */ 9).then(__webpack_require__.bind(null, 350)));
 
-const _4da1a52c = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/memberGroup/new */ 12).then(__webpack_require__.bind(null, 351)));
+const _7bfdeb58 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/memberGroup/new */ 12).then(__webpack_require__.bind(null, 351)));
 
-const _3779097a = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/page/new */ 15).then(__webpack_require__.bind(null, 352)));
+const _e460bd5c = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/page/new */ 15).then(__webpack_require__.bind(null, 352)));
 
-const _22114b98 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/pageCategory/new */ 18).then(__webpack_require__.bind(null, 353)));
+const _399e8b70 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/pageCategory/new */ 18).then(__webpack_require__.bind(null, 353)));
 
-const _45affbe8 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/gallery/folders/_id/index */ 5).then(__webpack_require__.bind(null, 354)));
+const _25091534 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/gallery/folders/_id/index */ 5).then(__webpack_require__.bind(null, 354)));
 
-const _76c0cc54 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/gallery/_id/index */ 4).then(__webpack_require__.bind(null, 355)));
+const _c28b5604 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/gallery/_id/index */ 4).then(__webpack_require__.bind(null, 355)));
 
-const _1e55f91f = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/member/_id */ 7).then(__webpack_require__.bind(null, 356)));
+const _3965faf7 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/member/_id */ 7).then(__webpack_require__.bind(null, 356)));
 
-const _39ebd046 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/memberGroup/_id */ 10).then(__webpack_require__.bind(null, 357)));
+const _a3699524 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/memberGroup/_id */ 10).then(__webpack_require__.bind(null, 357)));
 
-const _23c33494 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/page/_id */ 13).then(__webpack_require__.bind(null, 358)));
+const _7a19cc6c = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/page/_id */ 13).then(__webpack_require__.bind(null, 358)));
 
-const _0e5b76b2 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/pageCategory/_id */ 16).then(__webpack_require__.bind(null, 359)));
+const _25e8b68a = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/pageCategory/_id */ 16).then(__webpack_require__.bind(null, 359)));
 
-const _8a46f616 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/_ */ 3).then(__webpack_require__.bind(null, 360)));
+const _79e2901d = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/_ */ 3).then(__webpack_require__.bind(null, 360)));
 
-const _18f20ef6 = () => interopDefault(__webpack_require__.e(/* import() | pages/contact */ 19).then(__webpack_require__.bind(null, 345)));
+const _500fcbc4 = () => interopDefault(__webpack_require__.e(/* import() | pages/contact */ 19).then(__webpack_require__.bind(null, 345)));
 
-const _6fcdf582 = () => interopDefault(__webpack_require__.e(/* import() | pages/login */ 21).then(__webpack_require__.bind(null, 361)));
+const _03f7ba67 = () => interopDefault(__webpack_require__.e(/* import() | pages/login */ 21).then(__webpack_require__.bind(null, 361)));
 
-const _0d1dbb6a = () => interopDefault(__webpack_require__.e(/* import() | pages/mentions_legales */ 22).then(__webpack_require__.bind(null, 363)));
+const _14812423 = () => interopDefault(__webpack_require__.e(/* import() | pages/mentions_legales */ 22).then(__webpack_require__.bind(null, 363)));
 
-const _600bd976 = () => interopDefault(__webpack_require__.e(/* import() | pages/survey_join */ 23).then(__webpack_require__.bind(null, 346)));
+const _39364a6d = () => interopDefault(__webpack_require__.e(/* import() | pages/survey_join */ 23).then(__webpack_require__.bind(null, 346)));
 
-const _031d3bb0 = () => interopDefault(__webpack_require__.e(/* import() | pages/index */ 20).then(__webpack_require__.bind(null, 362)));
+const _3a501750 = () => interopDefault(__webpack_require__.e(/* import() | pages/index */ 20).then(__webpack_require__.bind(null, 362)));
 
-const _3d173a35 = () => interopDefault(__webpack_require__.e(/* import() | pages/_ */ 1).then(__webpack_require__.bind(null, 347)));
+const _0faec35d = () => interopDefault(__webpack_require__.e(/* import() | pages/_ */ 1).then(__webpack_require__.bind(null, 347)));
 
 const emptyFn = () => {};
 
@@ -11867,96 +11867,96 @@ const routerOptions = {
   scrollBehavior: router_scrollBehavior,
   routes: [{
     path: "/admin",
-    component: _2fe0b625,
+    component: _6bbf6b4d,
     name: "admin",
     children: [{
       path: "gallery",
-      component: _c7cea72a,
+      component: _304188da,
       name: "admin-gallery"
     }, {
       path: "member",
-      component: _10a524f7,
+      component: _b087de62,
       name: "admin-member"
     }, {
       path: "memberGroup",
-      component: _c3bc6344,
+      component: _783c8986,
       name: "admin-memberGroup"
     }, {
       path: "page",
-      component: _6fb1572c,
+      component: _ea7d4df8,
       name: "admin-page"
     }, {
       path: "pageCategory",
-      component: _154189ca,
+      component: _7e7e33a2,
       name: "admin-pageCategory"
     }, {
       path: "member/new",
-      component: _320bce05,
+      component: _4d1bcfdd,
       name: "admin-member-new"
     }, {
       path: "memberGroup/new",
-      component: _4da1a52c,
+      component: _7bfdeb58,
       name: "admin-memberGroup-new"
     }, {
       path: "page/new",
-      component: _3779097a,
+      component: _e460bd5c,
       name: "admin-page-new"
     }, {
       path: "pageCategory/new",
-      component: _22114b98,
+      component: _399e8b70,
       name: "admin-pageCategory-new"
     }, {
       path: "gallery/folders/:id",
-      component: _45affbe8,
+      component: _25091534,
       name: "admin-gallery-folders-id"
     }, {
       path: "gallery/:id",
-      component: _76c0cc54,
+      component: _c28b5604,
       name: "admin-gallery-id"
     }, {
       path: "member/:id",
-      component: _1e55f91f,
+      component: _3965faf7,
       name: "admin-member-id"
     }, {
       path: "memberGroup/:id",
-      component: _39ebd046,
+      component: _a3699524,
       name: "admin-memberGroup-id"
     }, {
       path: "page/:id",
-      component: _23c33494,
+      component: _7a19cc6c,
       name: "admin-page-id"
     }, {
       path: "pageCategory/:id",
-      component: _0e5b76b2,
+      component: _25e8b68a,
       name: "admin-pageCategory-id"
     }, {
       path: "*",
-      component: _8a46f616,
+      component: _79e2901d,
       name: "admin-all"
     }]
   }, {
     path: "/contact",
-    component: _18f20ef6,
+    component: _500fcbc4,
     name: "contact"
   }, {
     path: "/login",
-    component: _6fcdf582,
+    component: _03f7ba67,
     name: "login"
   }, {
     path: "/mentions_legales",
-    component: _0d1dbb6a,
+    component: _14812423,
     name: "mentions_legales"
   }, {
     path: "/survey_join",
-    component: _600bd976,
+    component: _39364a6d,
     name: "survey_join"
   }, {
     path: "/",
-    component: _031d3bb0,
+    component: _3a501750,
     name: "index"
   }, {
     path: "/*",
-    component: _3d173a35,
+    component: _0faec35d,
     name: "all"
   }],
   fallback: false
@@ -12154,7 +12154,7 @@ var nuxt_error_component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   null,
-  "4a2e06a3"
+  "dd95feea"
   
 )
 
@@ -12458,7 +12458,7 @@ var nuxt_loading_component = Object(componentNormalizer["a" /* default */])(
   false,
   nuxt_loading_injectStyles,
   null,
-  "25c431d2"
+  "e363f202"
   
 )
 
@@ -13111,7 +13111,7 @@ var MenuDrawer_component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "123921a5"
+  "27e0e78d"
   
 )
 
@@ -13393,7 +13393,7 @@ var Alert_component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "3155d278"
+  "30216aac"
   
 )
 
@@ -13510,7 +13510,7 @@ var Admin_component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "6048d0e5"
+  "1ffb8ccd"
   
 )
 
@@ -14814,7 +14814,7 @@ var Menu_component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "a0003a82"
+  "fe83e852"
   
 )
 
@@ -14899,7 +14899,7 @@ var SubMenu_component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "25fb7b8f"
+  "71a8c912"
   
 )
 
@@ -15046,7 +15046,7 @@ var Form_component = Object(componentNormalizer["a" /* default */])(
   false,
   Form_injectStyles,
   "42bed3dd",
-  "05990bd6"
+  "01aa50ee"
   
 )
 
@@ -15622,7 +15622,7 @@ var default_component = Object(componentNormalizer["a" /* default */])(
   false,
   default_injectStyles,
   null,
-  "4fd98b77"
+  "24662542"
   
 )
 

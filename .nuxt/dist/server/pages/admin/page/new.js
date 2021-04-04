@@ -6386,12 +6386,12 @@ installComponents_default()(Form_component, {VCol: VCol["a" /* default */],VComb
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/admin/page/new.vue?vue&type=template&id=0d9517d8&
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/admin/page/new.vue?vue&type=template&id=fedc259e&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('Form',{ref:"createForm",attrs:{"values":_vm.item,"errors":_vm.violations}}),_vm._ssrNode(" "),_c('Toolbar',{attrs:{"handle-submit":_vm.onSendForm,"handle-reset":_vm.resetForm}}),_vm._ssrNode(" "),_c('Loading',{attrs:{"visible":_vm.isLoading}})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./app/pages/admin/page/new.vue?vue&type=template&id=0d9517d8&
+// CONCATENATED MODULE: ./app/pages/admin/page/new.vue?vue&type=template&id=fedc259e&
 
 // EXTERNAL MODULE: external "nuxt-property-decorator"
 var external_nuxt_property_decorator_ = __webpack_require__(8);
@@ -6427,7 +6427,9 @@ let newvue_type_script_lang_ts_AdminPageNew = class AdminPageNew extends Object(
   constructor() {
     super(...arguments);
     this.item = {
-      content: ''
+      content: '',
+      showInMenu: false,
+      isPublished: false
     };
   }
 

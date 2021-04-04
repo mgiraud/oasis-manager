@@ -30,6 +30,7 @@ import { Contact } from '~/store/contact'
 import NotificationMixin from '~/mixins/notification'
 import { ElementWithValidation } from '~/vue-shim'
 import { Page } from '~/store/page'
+import Template from '~/components/page/Template.vue'
 
 const contactModule = namespace('contact')
 const notificationModule = namespace('notifications')
@@ -40,6 +41,7 @@ const pageModule = namespace('page')
   servicePrefix: 'contact',
   resourcePrefix: '/api/contacts/',
   components: {
+    Template,
     ContactForm,
     Toolbar,
     Loading

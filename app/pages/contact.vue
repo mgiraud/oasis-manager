@@ -5,8 +5,11 @@
         <v-card>
           <v-card-title>Contacte-nous !</v-card-title>
           <v-card-text>
-            <p>Pour nous contacter tu peux nous envoyer un email à <a href="mailto:contact@lestransalapins.org" title="Envoyer un email aux transalpins">contact@lestransalapins.org</a> ou bien remplir le formulaire suivant.</p>
-            <p>Dans ce cas tu recevras un email de confirmation ou bien regarde dans tes spams si ce n'est pas le cas.</p>
+            <Template v-if="page" :page="page" />
+            <div v-else>
+              <p>Pour nous contacter tu peux nous envoyer un email à <a href="mailto:contact@lestransalapins.org" title="Envoyer un email aux transalpins">contact@lestransalapins.org</a> ou bien remplir le formulaire suivant.</p>
+              <p>Dans ce cas tu recevras un email de confirmation ou bien regarde dans tes spams si ce n'est pas le cas.</p>
+            </div>
             <contact-form ref="createForm" :values="item" :errors="violations" />
             <toolbar :handle-submit="onSendForm" :handle-reset="resetForm" />
             <Loading :visible="isLoading" />
@@ -26,9 +29,11 @@ import Loading from '../components/util/Loading.vue'
 import { Contact } from '~/store/contact'
 import NotificationMixin from '~/mixins/notification'
 import { ElementWithValidation } from '~/vue-shim'
+import { Page } from '~/store/page'
 
 const contactModule = namespace('contact')
 const notificationModule = namespace('notifications')
+const pageModule = namespace('page')
 
 @Component({
   // @ts-ignore
@@ -53,6 +58,12 @@ export default class ContactVue extends mixins(NotificationMixin) {
   @contactModule.Action('create') create !: (contact: Contact) => Contact
   @contactModule.Action('reset') reset !: () => void
   @notificationModule.Action('setTimeout') setTimeoutDuration!: (show: number) => void
+
+  @pageModule.Getter('find') find!: (url: string) => Page | null
+
+  get page (): Page | null {
+    return this.find('/api/pages/contact')
+  };
 
   resetForm () {
     (this.$refs.createForm as ElementWithValidation).$v.$reset()

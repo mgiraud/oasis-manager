@@ -4976,7 +4976,7 @@ const defaultMenuProps = { ...VSelect["b" /* defaultMenuProps */],
 
 /***/ }),
 
-/***/ 320:
+/***/ 321:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7364,7 +7364,7 @@ membervue_type_script_lang_ts_AdminMemberIndex = membervue_type_script_lang_ts_d
 // CONCATENATED MODULE: ./app/pages/admin/member/index.vue?vue&type=script&lang=ts&
  /* harmony default export */ var admin_membervue_type_script_lang_ts_ = (membervue_type_script_lang_ts_); 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDataTable/VDataTable.js + 13 modules
-var VDataTable = __webpack_require__(320);
+var VDataTable = __webpack_require__(321);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VSpacer.js
 var VSpacer = __webpack_require__(231);

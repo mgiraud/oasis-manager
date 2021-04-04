@@ -5,7 +5,7 @@
         <v-card>
           <v-card-title>Contacte-nous !</v-card-title>
           <v-card-text>
-            <p>Pour nous contactez tu peux nous envoyez un email à <a href="mailto:contact@lestransalapins.org" title="Envoyer un email aux transalpins">contact@lestransalapins.org</a> ou bien remplir le formulaire suivant.</p>
+            <p>Pour nous contacter tu peux nous envoyer un email à <a href="mailto:contact@lestransalapins.org" title="Envoyer un email aux transalpins">contact@lestransalapins.org</a> ou bien remplir le formulaire suivant.</p>
             <p>Dans ce cas tu recevras un email de confirmation ou bien regarde dans tes spams si ce n'est pas le cas.</p>
             <contact-form ref="createForm" :values="item" :errors="violations" />
             <toolbar :handle-submit="onSendForm" :handle-reset="resetForm" />

@@ -58,9 +58,11 @@ class AuthSubscriber implements EventSubscriberInterface
             $this->refreshTokenManager->removeOldRefreshToken($refreshTokenString);
         }
 
-        $valid = new \DateTime('+' . \App\Entity\RefreshToken::REFRESH_TOKEN_TTL .' seconds');
+        $valid = new \DateTimeImmutable('+' . \App\Entity\RefreshToken::REFRESH_TOKEN_TTL .' seconds');
         $refreshToken = new RefreshToken($user->getUsername(), $valid);
-        $refreshToken->setRefreshToken($this->tokenManager->create($user));
+        $refreshToken->setRefreshToken($this->tokenManager->createFromPayload($user, [
+            'exp' => $valid
+        ]));
         $this->em->persist($refreshToken);
         $this->em->flush();
 

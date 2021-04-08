@@ -6,10 +6,10 @@
       :error-messages="emailErrors"
       class="newsletter-input"
       prepend-icon="ri-mail-line"
-      append-outer-icon="ri-close-circle-line"
+      append-outer-icon="ri-send-plane-fill"
       @input="$v.item.email.$touch()"
       @blur="$v.item.email.$touch()"
-      @click:append-outer="onClickClose"
+      @click:append-outer="sendForm"
     />
   </v-form>
 </template>
@@ -36,8 +36,6 @@ const contactNewsletterModule = namespace('contact_newsletter')
   mixins: [validationMixin]
 })
 export default class ContactNewsletterForm extends mixins(NotificationMixin) {
-  @Prop({ type: Function, required: true }) readonly onClickClose!: () => void
-
   item = { email: null }
 
   @contactNewsletterModule.State('violations') violations !: FormErrors;
@@ -63,7 +61,6 @@ export default class ContactNewsletterForm extends mixins(NotificationMixin) {
 
     this.item.email = null
     this.showMessage('Tu es maintenant inscrit à la newsletter !')
-    this.onClickClose()
   }
 
   @Watch('error')

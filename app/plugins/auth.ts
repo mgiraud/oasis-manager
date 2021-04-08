@@ -73,8 +73,6 @@ class Auth {
     }
 
     async check (): Promise<boolean> {
-      console.log('TOKEN VALID ? ', this.token?.isValid)
-      console.log('REFRESH TOKEN VALID ? ', this.refreshToken?.isValid)
       if (!this.refreshToken || !this.refreshToken.isValid) {
         this.reset()
         return Promise.resolve(false)

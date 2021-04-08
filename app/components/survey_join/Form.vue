@@ -2,24 +2,6 @@
   <v-form>
     <v-container>
       <v-row>
-        <v-col cols="12">
-          Avant de remplir le question, merci de prendre connaissance des éléments suivants :
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="6">
-          <v-img :src="require(`~/assets/img/join_process_1.png`)" contain />
-        </v-col>
-        <v-col cols="6">
-          <v-img :src="require(`~/assets/img/join_process_2.png`)" contain />
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12">
-          Tu peux remplir ce questionnaire en ligne ou bien <a :href="downloadPdfUrl">Télécharger le PDF</a> pour le remplir numériquement ou manuellement et nous l'envoyer à l'addresse suivante : @AJOUTER
-        </v-col>
-      </v-row>
-      <v-row>
         <v-col cols="12" md="6">
           <h2>J'en dis un peu sur moi :</h2>
         </v-col>

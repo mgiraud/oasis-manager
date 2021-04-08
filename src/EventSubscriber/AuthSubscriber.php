@@ -55,12 +55,23 @@ class AuthSubscriber implements EventSubscriberInterface
 
         $refreshTokenString = $this->refreshTokenManager->getRefreshTokenString();
         if (null !== $refreshTokenString) {
-            $this->refreshTokenManager->removeOldRefreshToken($refreshTokenString);
+            $refreshToken = $this->refreshTokenManager->getRefreshTokenFromString($refreshTokenString);
+            if ($refreshToken->isValid()) {
+                $event->getResponse()->headers->setCookie(
+                    (new Cookie(RefreshToken::REFRESH_TOKEN_PARAM_NAME, $refreshTokenString, 0, '/', $this->domain))
+                        ->withSecure($this->env !== 'dev')
+                );
+                return;
+            } else {
+                $this->refreshTokenManager->removeOldRefreshToken($refreshTokenString);
+            }
         }
 
-        $valid = new \DateTime('+' . \App\Entity\RefreshToken::REFRESH_TOKEN_TTL .' seconds');
+        $valid = new \DateTimeImmutable('+' . RefreshToken::REFRESH_TOKEN_TTL .' seconds');
         $refreshToken = new RefreshToken($user->getUsername(), $valid);
-        $refreshToken->setRefreshToken($this->tokenManager->create($user));
+        $refreshToken->setRefreshToken($this->tokenManager->createFromPayload($user, [
+            'exp' => $valid
+        ]));
         $this->em->persist($refreshToken);
         $this->em->flush();
 

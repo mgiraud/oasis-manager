@@ -36,7 +36,7 @@ class RefreshToken
      */
     private $email;
 
-    public function __construct(string $email, \DateTime $valid)
+    public function __construct(string $email, \DateTimeInterface $valid)
     {
         $this->email = $email;
         $this->valid = $valid;

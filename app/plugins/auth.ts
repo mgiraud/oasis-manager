@@ -33,7 +33,7 @@ class Auth {
     store: Store<any>
     state: SecurityState
     memberRepository: Repository
-    cookie : Cookie
+    cookie: Cookie
 
     token: Token | null = null
     refreshToken: Token | null = null
@@ -72,6 +72,22 @@ class Auth {
       return await this.store.dispatch('security/login', credentials)
     }
 
+    async check (): Promise<boolean> {
+      console.log('TOKEN VALID ? ', this.token?.isValid)
+      console.log('REFRESH TOKEN VALID ? ', this.refreshToken?.isValid)
+      if (!this.refreshToken || !this.refreshToken.isValid) {
+        this.reset()
+        return Promise.resolve(false)
+      }
+
+      if (!this.token || !this.token.isValid) {
+        await this._refreshTokens()
+        return Promise.resolve(!!this.token && this.token.isValid)
+      }
+
+      return Promise.resolve(true)
+    }
+
     private async _fetchMember () {
       if (!this.token || !this.token.isValid) {
         return Promise.resolve(null)
@@ -96,16 +112,10 @@ class Auth {
     async init (): Promise<any> {
       this._initTokens()
 
-      if (!this.token?.isValid) {
-        if (!this.refreshToken?.isValid) {
-          return Promise.resolve(null)
-        } else {
-          await this._refreshTokens()
-        }
+      if (await this.check()) {
+        this.store.commit('security/SET_LOGGED_IN', true)
+        await this._fetchMember()
       }
-
-      await this._fetchMember()
-      this.store.commit('security/SET_LOGGED_IN', true)
     }
 }
 

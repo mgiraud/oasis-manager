@@ -23,6 +23,7 @@
 <script lang="ts">
 import { Component, namespace, Vue, Watch } from 'nuxt-property-decorator'
 import { findIndex } from 'lodash'
+import { Route } from 'vue-router'
 import { MenuItem } from '~/store/page'
 
 const pageModule = namespace('page')
@@ -41,6 +42,27 @@ export default class Toolbar extends Vue {
       this.setActiveSlug(null)
     } else {
       this.redirectOrToggleSubMenu(this.menuItems[tabIndex])
+    }
+  }
+
+  @Watch('$route')
+  onRouteChange (route: Route | null) {
+    if (route === null) {
+      return
+    }
+    // Check that static page is in menu
+    const staticPageInMenu = this.menuItems.find((menuItem: MenuItem) => {
+      return menuItem.url === route.name
+    })
+
+    // Check that dynamic page is in menu
+    const dynamicPageIsInMenu = this.menuItems.find((menuItem: MenuItem) => {
+      return menuItem.url === route.params.pathMatch
+    })
+
+    const isInMenu = staticPageInMenu || dynamicPageIsInMenu
+    if (!isInMenu) {
+      this.tab = null
     }
   }
 

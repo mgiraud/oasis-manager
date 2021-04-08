@@ -4,8 +4,8 @@
       <v-col cols="12">
         <v-card>
           <v-card-title>Tu souhaites nous rejoindre ?</v-card-title>
-          <v-card-text >
-            <div v-if="page" v-html=page.content />     
+          <v-card-text>
+            <div v-if="page" v-html="page.content" />
             <v-container v-else>
               <v-row>
                 <v-col cols="12">

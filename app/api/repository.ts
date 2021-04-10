@@ -45,7 +45,11 @@ export default (context: Context, { resource }: { resource: string }): Repositor
     if (options.headers.Accept === undefined) {
       options.headers.Accept = jsonLdMimeType
     }
-    if (process.client && options.body !== null && !(options.body instanceof FormData) && options.headers['Content-Type'] === undefined) {
+    let isFile = false
+    if (process.client) {
+      isFile = (options.body instanceof FormData)
+    }
+    if (process.client && options.body !== null && !isFile && options.headers['Content-Type'] === undefined) {
       options.headers['Content-Type'] = jsonLdMimeType
     }
 
@@ -63,7 +67,7 @@ export default (context: Context, { resource }: { resource: string }): Repositor
       query = `${query}?${queryString}`
     }
 
-    const payload = options.headers['Content-Type'] !== 'multipart/form-data' && options.body && JSON.parse(options.body.toString())
+    const payload = !isFile && options.body && JSON.parse(options.body.toString())
     if (payload !== undefined && (payload as HydraMemberObject)['@id']) {
       options.body = JSON.stringify(normalize(payload))
     }

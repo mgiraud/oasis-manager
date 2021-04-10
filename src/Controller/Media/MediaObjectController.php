@@ -23,9 +23,11 @@ class MediaObjectController extends AbstractController
         Request $request,
         EntityManagerInterface $manager,
         DownloadHandler $downloadHandler,
-        int $mediaId
+        string $mediaId
     ) {
-        $media = $manager->getRepository(MediaObject::class)->find($mediaId);
+        $media = $manager->getRepository(MediaObject::class)->findOneBy([
+            'uniqueId' => $mediaId
+        ]);
 
         if (!$media instanceof MediaObject) {
             return $this->createNotFoundException();

@@ -5459,18 +5459,18 @@ var extension_table_header_default = /*#__PURE__*/__webpack_require__.n(extensio
 var extension_image_ = __webpack_require__(218);
 var extension_image_default = /*#__PURE__*/__webpack_require__.n(extension_image_);
 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/components/util/Editor/FileUpload/FileUploadBtn.vue?vue&type=template&id=5e833f39&
-var FileUploadBtnvue_type_template_id_5e833f39_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-dialog',{attrs:{"width":"500"},scopedSlots:_vm._u([{key:"activator",fn:function(ref){
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/components/util/Editor/FileUpload/FileUploadBtn.vue?vue&type=template&id=644720ca&
+var FileUploadBtnvue_type_template_id_644720ca_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-dialog',{attrs:{"width":"500"},scopedSlots:_vm._u([{key:"activator",fn:function(ref){
 var onDropdown = ref.on;
 var attrsDropdown = ref.attrs;
 return [_c('v-tooltip',{attrs:{"top":""},scopedSlots:_vm._u([{key:"activator",fn:function(ref){
 var onTooltip = ref.on;
 var attrsTooltip = ref.attrs;
 return [_c('v-btn',_vm._g(_vm._b({attrs:{"small":""}},'v-btn',Object.assign({}, attrsDropdown, attrsTooltip),false),Object.assign({}, onDropdown, onTooltip)),[_c('v-icon',[_vm._v("ri-file-transfer-line")])],1)]}}],null,true)},[_vm._v(" "),_c('span',[_vm._v("Téléverser un fichier")])])]}}]),model:{value:(_vm.dialog),callback:function ($$v) {_vm.dialog=$$v},expression:"dialog"}},[_vm._v(" "),_c('v-card',[_c('v-card-title',{staticClass:"headline grey lighten-2"},[_vm._v("\n      Téléverser un fichier\n    ")]),_vm._v(" "),_c('v-card-text',[_c('div',{attrs:{"id":"dropDown"}}),_vm._v(" "),_c('input',{ref:"fileSelection",staticStyle:{"display":"none"},attrs:{"id":"fileElem","type":"file","multiple":"","accept":"image/*"},on:{"change":_vm.handleUpload}}),_c('v-btn',{on:{"click":_vm.openFileSelection}},[_vm._v("\n        Sélectionner des fichiers\n      ")]),_vm._v(" "),_vm._l((_vm.thumbnails),function(thumbnail,i){return _c('v-img',{key:i,attrs:{"src":thumbnail.src}})})],2),_vm._v(" "),_c('v-divider'),_vm._v(" "),_c('v-card-actions',[_c('v-spacer'),_vm._v(" "),_c('v-btn',{attrs:{"color":"primary","text":""},on:{"click":function($event){$event.preventDefault();return _vm.injectFilesAndCloseDialog($event)}}},[_vm._v("\n        Insérer\n      ")])],1)],1)],1)}
-var FileUploadBtnvue_type_template_id_5e833f39_staticRenderFns = []
+var FileUploadBtnvue_type_template_id_644720ca_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./app/components/util/Editor/FileUpload/FileUploadBtn.vue?vue&type=template&id=5e833f39&
+// CONCATENATED MODULE: ./app/components/util/Editor/FileUpload/FileUploadBtn.vue?vue&type=template&id=644720ca&
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--12-0!./node_modules/ts-loader??ref--12-1!./node_modules/vue-loader/lib??vue-loader-options!./app/components/util/Editor/FileUpload/FileUploadBtn.vue?vue&type=script&lang=ts&
 var FileUploadBtnvue_type_script_lang_ts_decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
@@ -5492,6 +5492,12 @@ let FileUploadBtnvue_type_script_lang_ts_FileUploadBtn = class FileUploadBtn ext
 
   openFileSelection() {
     this.$refs.fileSelection.click();
+    this.reset();
+  }
+
+  reset() {
+    this.thumbnails = [];
+    this.links = [];
   }
 
   handleUpload() {
@@ -5515,9 +5521,7 @@ let FileUploadBtnvue_type_script_lang_ts_FileUploadBtn = class FileUploadBtn ext
       formData.append('mediaGalleryItemId', '1');
       this.$getRepository('media_objects').$post('/api/media_objects', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
+        // headers: { 'Content-Type': 'multipart/form-data' },
         body: formData
       }).then(res => {
         const imageType = /^image\//;
@@ -5590,8 +5594,8 @@ var VSpacer = __webpack_require__(233);
 
 var FileUploadBtn_component = Object(componentNormalizer["a" /* default */])(
   FileUpload_FileUploadBtnvue_type_script_lang_ts_,
-  FileUploadBtnvue_type_template_id_5e833f39_render,
-  FileUploadBtnvue_type_template_id_5e833f39_staticRenderFns,
+  FileUploadBtnvue_type_template_id_644720ca_render,
+  FileUploadBtnvue_type_template_id_644720ca_staticRenderFns,
   false,
   null,
   null,

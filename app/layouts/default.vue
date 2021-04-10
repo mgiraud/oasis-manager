@@ -43,10 +43,10 @@
         <v-card-text>
           <v-container fluid ma-0 pa-0 fill-height>
             <v-row no-gutters align="center" justify="center">
-              <v-col cols="6">
+              <v-col lg="4" md="5" sm="6">
                 <newsletter-form />
               </v-col>
-              <v-col cols="4">
+              <v-col lg="2" md="3" sm="6">
                 ET&nbsp;&nbsp;
                 <v-btn
                   color="primary"

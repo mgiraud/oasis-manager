@@ -39,9 +39,24 @@
 
     <v-main class="secondary lighten-3">
       <SubMenu v-if="activeSlug !== null" />
-      <v-card v-show="showNewsletter" class="card-newsletter">
+      <v-card v-show="showSubHeader" class="card-newsletter">
         <v-card-text>
-          <newsletter-form :on-click-close="onNewsletterClose" />
+          <v-container fluid ma-0 pa-0 fill-height>
+            <v-row no-gutters align="center" justify="center">
+              <v-col lg="4" md="5" sm="6">
+                <newsletter-form />
+              </v-col>
+              <v-col lg="2" md="3" sm="6">
+                ET&nbsp;&nbsp;
+                <v-btn
+                  color="primary"
+                  @click="redirectToHelloAsso"
+                >
+                  Adhère à l'association !
+                </v-btn>
+              </v-col>
+            </v-row>
+          </v-container>
         </v-card-text>
       </v-card>
       <Nuxt />
@@ -95,7 +110,7 @@ const pageModule = namespace('page')
   }
 })
 export default class DefaultLayout extends Vue {
-    showNewsletter = true
+    showSubHeader = true
     @pageModule.State('activeSlug') activeSlug!: string | null
     @securityModule.Action('logout') logout!: () => void
 
@@ -111,8 +126,12 @@ export default class DefaultLayout extends Vue {
       this.$router.push({ path: 'admin' })
     }
 
-    onNewsletterClose () {
-      this.showNewsletter = false
+    onSubHeaderClose () {
+      this.showSubHeader = false
+    }
+
+    redirectToHelloAsso () {
+      window.open('https://www.helloasso.com/associations/les-transalpins/adhesions/adhesion-a-l-association-les-translapins', '_')
     }
 }
 </script>

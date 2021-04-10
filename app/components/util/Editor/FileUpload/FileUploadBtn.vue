@@ -78,6 +78,12 @@ export default class FileUploadBtn extends Vue {
 
   openFileSelection () {
     (this.$refs.fileSelection as HTMLInputElement).click()
+    this.reset()
+  }
+
+  reset (): void {
+    this.thumbnails = []
+    this.links = []
   }
 
   handleUpload () {
@@ -101,7 +107,7 @@ export default class FileUploadBtn extends Vue {
       formData.append('mediaGalleryItemId', '1')
       this.$getRepository('media_objects').$post('/api/media_objects', {
         method: 'POST',
-        headers: { 'Content-Type': 'multipart/form-data' },
+        // headers: { 'Content-Type': 'multipart/form-data' },
         body: formData
       }).then((res) => {
         const imageType = /^image\//

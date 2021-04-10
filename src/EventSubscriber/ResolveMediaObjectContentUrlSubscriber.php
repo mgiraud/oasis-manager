@@ -55,7 +55,7 @@ class ResolveMediaObjectContentUrlSubscriber implements EventSubscriberInterface
             }
 
             $mediaObject->contentUrl = $this->router->generate('app_media_mediaobject_download', [
-                'mediaId' => $mediaObject->getId(),
+                'mediaId' => $mediaObject->uniqueId,
                 'inline' => '1'
             ], UrlGeneratorInterface::ABSOLUTE_URL);
         }

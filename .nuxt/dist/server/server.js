@@ -9190,6 +9190,10 @@ const makeParamArray = (key, arr) => arr.map(val => `${key}[]=${val}`).join('&')
       options.headers.Accept = jsonLdMimeType;
     }
 
+    let isFile = false;
+
+    if (false) {}
+
     if (false) {}
 
     options.credentials = 'include';
@@ -9200,7 +9204,7 @@ const makeParamArray = (key, arr) => arr.map(val => `${key}[]=${val}`).join('&')
       query = `${query}?${queryString}`;
     }
 
-    const payload = options.headers['Content-Type'] !== 'multipart/form-data' && options.body && JSON.parse(options.body.toString());
+    const payload = !isFile && options.body && JSON.parse(options.body.toString());
 
     if (payload !== undefined && payload['@id']) {
       options.body = JSON.stringify(Object(_hydra__WEBPACK_IMPORTED_MODULE_0__[/* normalize */ "a"])(payload));

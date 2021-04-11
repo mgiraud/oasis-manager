@@ -9190,10 +9190,8 @@ const makeParamArray = (key, arr) => arr.map(val => `${key}[]=${val}`).join('&')
 
     if (false) {}
 
-    if (options.headers.Accept === undefined) {
+    if (options.headers.Accept === undefined && !isFile) {
       options.headers.Accept = jsonLdMimeType;
-
-      if (false) {}
     }
 
     if (false) {}

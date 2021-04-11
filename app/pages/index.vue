@@ -29,7 +29,6 @@ const pageModule = namespace('page')
   }
 })
 export default class IndexVue extends Vue {
-  @securityModule.Getter('isLoggedIn') isLoggedIn!: boolean;
   @securityModule.Action('logout') logout!: () => void
   @pageModule.Getter('find') find!: (url: string) => Page | null
 

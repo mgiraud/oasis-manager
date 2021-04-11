@@ -65,6 +65,7 @@ class MediaObject
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue
      * @ORM\Id
+     * @ApiProperty(identifier=false)
      */
     protected $id;
 
@@ -102,9 +103,17 @@ class MediaObject
     /**
      * @var string|null
      *
-     * @ORM\Column(nullable=false, type="text")
+     * @ORM\Column(nullable=false, type="text", unique=true)
+     * @Groups({"media_object:read"})
+     * @ApiProperty(identifier=true)
      */
     public $uniqueId;
+
+    /**
+     * @ApiProperty()
+     * @Groups({"media_object:read"})
+     */
+    public $isImage = false;
 
     public function getId(): ?int
     {

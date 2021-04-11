@@ -12,7 +12,6 @@ final class CreateMediaObjectAction
     public function __invoke(Request $request, EntityManagerInterface $manager): MediaObject
     {
         $uploadedFile = $request->files->get('file');
-        dump($request->files->all());
         if (!$uploadedFile) {
             throw new BadRequestHttpException('"file" is required');
         }

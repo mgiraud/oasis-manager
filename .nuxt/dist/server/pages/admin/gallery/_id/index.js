@@ -1,7 +1,7 @@
 exports.ids = [4];
 exports.modules = {
 
-/***/ 325:
+/***/ 326:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -37,14 +37,14 @@ var staticRenderFns = []
 // CONCATENATED MODULE: ./app/components/admin/gallery/ItemBreadcrumb.vue?vue&type=script&lang=js&
  /* harmony default export */ var gallery_ItemBreadcrumbvue_type_script_lang_js_ = (ItemBreadcrumbvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(9);
+var componentNormalizer = __webpack_require__(10);
 
 // EXTERNAL MODULE: ./node_modules/vuetify-loader/lib/runtime/installComponents.js
 var installComponents = __webpack_require__(12);
 var installComponents_default = /*#__PURE__*/__webpack_require__.n(installComponents);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
-var VRow = __webpack_require__(232);
+var VRow = __webpack_require__(233);
 
 // CONCATENATED MODULE: ./app/components/admin/gallery/ItemBreadcrumb.vue
 
@@ -75,7 +75,7 @@ installComponents_default()(component, {VRow: VRow["a" /* default */]})
 
 /***/ }),
 
-/***/ 355:
+/***/ 356:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -93,7 +93,7 @@ var staticRenderFns = []
 var external_vuex_ = __webpack_require__(41);
 
 // EXTERNAL MODULE: ./app/components/admin/gallery/ItemBreadcrumb.vue + 4 modules
-var ItemBreadcrumb = __webpack_require__(325);
+var ItemBreadcrumb = __webpack_require__(326);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/admin/gallery/_id/index.vue?vue&type=script&lang=js&
 //
@@ -159,23 +159,23 @@ var ItemBreadcrumb = __webpack_require__(325);
 // CONCATENATED MODULE: ./app/pages/admin/gallery/_id/index.vue?vue&type=script&lang=js&
  /* harmony default export */ var gallery_idvue_type_script_lang_js_ = (_idvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(9);
+var componentNormalizer = __webpack_require__(10);
 
 // EXTERNAL MODULE: ./node_modules/vuetify-loader/lib/runtime/installComponents.js
 var installComponents = __webpack_require__(12);
 var installComponents_default = /*#__PURE__*/__webpack_require__.n(installComponents);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VCol.js
-var VCol = __webpack_require__(231);
+var VCol = __webpack_require__(232);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VContainer.js + 1 modules
-var VContainer = __webpack_require__(234);
+var VContainer = __webpack_require__(235);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VImg/VImg.js + 2 modules
 var VImg = __webpack_require__(55);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
-var VRow = __webpack_require__(232);
+var VRow = __webpack_require__(233);
 
 // CONCATENATED MODULE: ./app/pages/admin/gallery/_id/index.vue
 

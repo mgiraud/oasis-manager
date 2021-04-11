@@ -28,7 +28,7 @@ const mediaObjectModule = namespace('media_object')
 
 @Component
 export default class FileNavigator extends Vue {
-    @Prop({ type: Function, required: true }) readonly selectImage!: (image: MediaFunction) => void
+    @Prop({ type: Function, required: true }) readonly selectImage!: (image: MediaObject) => void
     @Prop({ type: Function, required: true }) readonly selectLink!: (link: MediaObject) => void
     @mediaObjectModule.Getter('list') items !: () => MediaObject[]
     @mediaObjectModule.Action('fetchAll') fetchAll!: () => MediaObject[]

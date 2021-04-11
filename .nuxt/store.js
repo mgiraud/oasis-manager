@@ -19,6 +19,7 @@ let store = {};
   resolveStoreModules(require('../app/store/contact.ts'), 'contact.ts')
   resolveStoreModules(require('../app/store/crud.ts'), 'crud.ts')
   resolveStoreModules(require('../app/store/gallery.ts'), 'gallery.ts')
+  resolveStoreModules(require('../app/store/media_object.ts'), 'media_object.ts')
   resolveStoreModules(require('../app/store/member_group.ts'), 'member_group.ts')
   resolveStoreModules(require('../app/store/member.ts'), 'member.ts')
   resolveStoreModules(require('../app/store/notifications.ts'), 'notifications.ts')

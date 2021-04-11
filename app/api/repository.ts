@@ -46,11 +46,8 @@ export default (context: Context, { resource }: { resource: string }): Repositor
     if (process.client) {
       isFile = (options.body instanceof FormData)
     }
-    if (options.headers.Accept === undefined) {
+    if (options.headers.Accept === undefined && !isFile) {
       options.headers.Accept = jsonLdMimeType
-      if (process.client && isFile) {
-        options.headers.Accept += ', ' + 'multipart/form-data'
-      }
     }
     if (process.client && options.body !== null && !isFile && options.headers['Content-Type'] === undefined) {
       options.headers['Content-Type'] = jsonLdMimeType

@@ -42,12 +42,15 @@ export default (context: Context, { resource }: { resource: string }): Repositor
     if (process.server) {
       options.headers.cookie = context.req.headers.cookie || ''
     }
-    if (options.headers.Accept === undefined) {
-      options.headers.Accept = jsonLdMimeType
-    }
     let isFile = false
     if (process.client) {
       isFile = (options.body instanceof FormData)
+    }
+    if (options.headers.Accept === undefined) {
+      options.headers.Accept = jsonLdMimeType
+      if (process.client && isFile) {
+        options.headers.Accept += ', ' + 'multipart/form-data'
+      }
     }
     if (process.client && options.body !== null && !isFile && options.headers['Content-Type'] === undefined) {
       options.headers['Content-Type'] = jsonLdMimeType

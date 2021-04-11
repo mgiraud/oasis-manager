@@ -1,7 +1,7 @@
 <template>
   <v-dialog
     v-model="dialog"
-    width="500"
+    width="600"
   >
     <template #activator="{ on: onDropdown, attrs: attrsDropdown }">
       <v-tooltip top>
@@ -24,6 +24,24 @@
       </v-card-title>
 
       <v-card-text>
+        <h3>Fichiers sélectionnés</h3>
+        <v-container>
+          <v-row>
+            <v-col v-for="(thumbnail, i) in thumbnails" :key="i">
+              <v-img :src="thumbnail.src" max-height="200" max-width="200" />
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col v-for="(link, i) in links" :key="i">
+              <span>{{ link.name }}</span>
+            </v-col>
+          </v-row>
+        </v-container>
+
+        <p v-if="thumbnails.length + links.length === 0">
+          Tu peux téleverser un fichier ou utiliser le navigateur pour sélectionner les fichiers à insérer
+        </p>
+        <v-divider />
         <div id="dropDown" />
         <input
           id="fileElem"
@@ -34,13 +52,11 @@
           style="display:none"
           @change="handleUpload"
         ><v-btn @click="openFileSelection">
-          Sélectionner des fichiers
+          Sélectionner des fichiers à téléverser
         </v-btn>
-        <v-img v-for="(thumbnail, i) in thumbnails" :key="i" :src="thumbnail.src" />
+        <v-divider />
+        <file-navigator :select-image="selectImage" :select-link="selectLink" />
       </v-card-text>
-
-      <v-divider />
-
       <v-card-actions>
         <v-spacer />
         <v-btn
@@ -57,7 +73,9 @@
 
 <script lang="ts">
 import { Editor } from '@tiptap/core'
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { Component, Prop, Vue, Watch } from 'nuxt-property-decorator'
+import FileNavigator from './FileNavigator.vue'
+import { MediaObject } from '~/store/media_object'
 
 interface Thumbnail {
   src: string
@@ -68,7 +86,9 @@ interface Link {
   name: string
 }
 
-@Component
+@Component({
+  components: { FileNavigator }
+})
 export default class FileUploadBtn extends Vue {
   @Prop({ type: Object, required: true }) readonly editor!: Editor
 
@@ -78,12 +98,24 @@ export default class FileUploadBtn extends Vue {
 
   openFileSelection () {
     (this.$refs.fileSelection as HTMLInputElement).click()
-    this.reset()
   }
 
   reset (): void {
     this.thumbnails = []
     this.links = []
+  }
+
+  selectImage (res: MediaObject) {
+    this.thumbnails.push({
+      src: res.contentUrl
+    })
+  }
+
+  selectLink (res: MediaObject) {
+    this.links.push({
+      src: res.contentUrl,
+      name: res.filePath
+    })
   }
 
   handleUpload () {
@@ -112,14 +144,9 @@ export default class FileUploadBtn extends Vue {
       }).then((res) => {
         const imageType = /^image\//
         if (imageType.test(file.type)) {
-          this.thumbnails.push({
-            src: res.contentUrl
-          })
+          this.selectImage(res)
         } else {
-          this.links.push({
-            src: res.contentUrl,
-            name: res.filePath
-          })
+          this.selectLink(res)
         }
       })
     }
@@ -134,6 +161,11 @@ export default class FileUploadBtn extends Vue {
       const node = this.editor.schema.text(link.name, [this.editor.schema.marks.link.create({ href: link.src })])
       this.editor.view.dispatch(this.editor.state.tr.replaceSelectionWith(node, false))
     })
+  }
+
+  @Watch('dialog')
+  onDialogToggle () {
+    this.reset()
   }
 }
 </script>

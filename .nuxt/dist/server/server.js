@@ -3436,6 +3436,13 @@ function keyboardRippleHide(e) {
   rippleHide(e);
 }
 
+function focusRippleHide(e) {
+  if (keyboardRipple === true) {
+    keyboardRipple = false;
+    rippleHide(e);
+  }
+}
+
 function updateRipple(el, binding, wasEnabled) {
   const enabled = isRippleEnabled(binding.value);
 
@@ -3474,7 +3481,8 @@ function updateRipple(el, binding, wasEnabled) {
     el.addEventListener('mouseup', rippleHide);
     el.addEventListener('mouseleave', rippleHide);
     el.addEventListener('keydown', keyboardRippleShow);
-    el.addEventListener('keyup', keyboardRippleHide); // Anchor tags can be dragged, causes other hides to fail - #1537
+    el.addEventListener('keyup', keyboardRippleHide);
+    el.addEventListener('blur', focusRippleHide); // Anchor tags can be dragged, causes other hides to fail - #1537
 
     el.addEventListener('dragstart', rippleHide, {
       passive: true
@@ -3495,6 +3503,7 @@ function removeListeners(el) {
   el.removeEventListener('keydown', keyboardRippleShow);
   el.removeEventListener('keyup', keyboardRippleHide);
   el.removeEventListener('dragstart', rippleHide);
+  el.removeEventListener('blur', focusRippleHide);
 }
 
 function directive(el, binding, node) {
@@ -6403,7 +6412,7 @@ class framework_Vuetify {
 }
 framework_Vuetify.install = install;
 framework_Vuetify.installed = false;
-framework_Vuetify.version = "2.4.6";
+framework_Vuetify.version = "2.4.9";
 framework_Vuetify.config = {
   silent: false
 };
@@ -11207,7 +11216,25 @@ function resolveRouteComponents(route, fn) {
   return Promise.all(flatMapComponents(route, async (Component, instance, match, key) => {
     // If component is a function, resolve it
     if (typeof Component === 'function' && !Component.options) {
-      Component = await Component();
+      try {
+        Component = await Component();
+      } catch (error) {
+        // Handle webpack chunk loading errors
+        // This may be due to a new deployment or a network problem
+        if (error && error.name === 'ChunkLoadError' && typeof window !== 'undefined' && window.sessionStorage) {
+          const timeNow = Date.now();
+          const previousReloadTime = parseInt(window.sessionStorage.getItem('nuxt-reload')); // check for previous reload time not to reload infinitely
+
+          if (!previousReloadTime || previousReloadTime + 60000 < timeNow) {
+            window.sessionStorage.setItem('nuxt-reload', timeNow);
+            window.location.reload(true
+            /* skip cache */
+            );
+          }
+        }
+
+        throw error;
+      }
     }
 
     match.components[key] = Component = sanitizeComponent(Component);
@@ -11826,51 +11853,51 @@ function shouldScrollToTop(route) {
 
 
 
-const _2fe0b625 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin */ 2).then(__webpack_require__.bind(null, 349)));
+const _2fe0b625 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin */ 2).then(__webpack_require__.bind(null, 352)));
 
-const _c7cea72a = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/gallery/index */ 6).then(__webpack_require__.bind(null, 350)));
+const _c7cea72a = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/gallery/index */ 6).then(__webpack_require__.bind(null, 353)));
 
-const _10a524f7 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/member/index */ 8).then(__webpack_require__.bind(null, 343)));
+const _10a524f7 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/member/index */ 8).then(__webpack_require__.bind(null, 346)));
 
-const _c3bc6344 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/memberGroup/index */ 11).then(__webpack_require__.bind(null, 344)));
+const _c3bc6344 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/memberGroup/index */ 11).then(__webpack_require__.bind(null, 347)));
 
-const _6fb1572c = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/page/index */ 14).then(__webpack_require__.bind(null, 342)));
+const _6fb1572c = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/page/index */ 14).then(__webpack_require__.bind(null, 345)));
 
-const _154189ca = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/pageCategory/index */ 17).then(__webpack_require__.bind(null, 345)));
+const _154189ca = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/pageCategory/index */ 17).then(__webpack_require__.bind(null, 348)));
 
-const _320bce05 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/member/new */ 9).then(__webpack_require__.bind(null, 351)));
+const _320bce05 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/member/new */ 9).then(__webpack_require__.bind(null, 354)));
 
-const _4da1a52c = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/memberGroup/new */ 12).then(__webpack_require__.bind(null, 352)));
+const _4da1a52c = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/memberGroup/new */ 12).then(__webpack_require__.bind(null, 355)));
 
-const _3779097a = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/page/new */ 15).then(__webpack_require__.bind(null, 353)));
+const _3779097a = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/page/new */ 15).then(__webpack_require__.bind(null, 356)));
 
-const _22114b98 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/pageCategory/new */ 18).then(__webpack_require__.bind(null, 354)));
+const _22114b98 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/pageCategory/new */ 18).then(__webpack_require__.bind(null, 357)));
 
-const _45affbe8 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/gallery/folders/_id/index */ 5).then(__webpack_require__.bind(null, 355)));
+const _45affbe8 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/gallery/folders/_id/index */ 5).then(__webpack_require__.bind(null, 358)));
 
-const _76c0cc54 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/gallery/_id/index */ 4).then(__webpack_require__.bind(null, 356)));
+const _76c0cc54 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/gallery/_id/index */ 4).then(__webpack_require__.bind(null, 359)));
 
-const _1e55f91f = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/member/_id */ 7).then(__webpack_require__.bind(null, 357)));
+const _1e55f91f = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/member/_id */ 7).then(__webpack_require__.bind(null, 360)));
 
-const _39ebd046 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/memberGroup/_id */ 10).then(__webpack_require__.bind(null, 358)));
+const _39ebd046 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/memberGroup/_id */ 10).then(__webpack_require__.bind(null, 361)));
 
-const _23c33494 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/page/_id */ 13).then(__webpack_require__.bind(null, 359)));
+const _23c33494 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/page/_id */ 13).then(__webpack_require__.bind(null, 362)));
 
-const _0e5b76b2 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/pageCategory/_id */ 16).then(__webpack_require__.bind(null, 360)));
+const _0e5b76b2 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/pageCategory/_id */ 16).then(__webpack_require__.bind(null, 363)));
 
-const _8a46f616 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/_ */ 3).then(__webpack_require__.bind(null, 361)));
+const _8a46f616 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/_ */ 3).then(__webpack_require__.bind(null, 364)));
 
-const _18f20ef6 = () => interopDefault(__webpack_require__.e(/* import() | pages/contact */ 19).then(__webpack_require__.bind(null, 346)));
+const _18f20ef6 = () => interopDefault(__webpack_require__.e(/* import() | pages/contact */ 19).then(__webpack_require__.bind(null, 349)));
 
-const _6fcdf582 = () => interopDefault(__webpack_require__.e(/* import() | pages/login */ 21).then(__webpack_require__.bind(null, 362)));
+const _6fcdf582 = () => interopDefault(__webpack_require__.e(/* import() | pages/login */ 21).then(__webpack_require__.bind(null, 365)));
 
-const _0d1dbb6a = () => interopDefault(__webpack_require__.e(/* import() | pages/mentions_legales */ 22).then(__webpack_require__.bind(null, 364)));
+const _0d1dbb6a = () => interopDefault(__webpack_require__.e(/* import() | pages/mentions_legales */ 22).then(__webpack_require__.bind(null, 367)));
 
-const _600bd976 = () => interopDefault(__webpack_require__.e(/* import() | pages/survey_join */ 23).then(__webpack_require__.bind(null, 347)));
+const _600bd976 = () => interopDefault(__webpack_require__.e(/* import() | pages/survey_join */ 23).then(__webpack_require__.bind(null, 350)));
 
-const _031d3bb0 = () => interopDefault(__webpack_require__.e(/* import() | pages/index */ 20).then(__webpack_require__.bind(null, 363)));
+const _031d3bb0 = () => interopDefault(__webpack_require__.e(/* import() | pages/index */ 20).then(__webpack_require__.bind(null, 366)));
 
-const _3d173a35 = () => interopDefault(__webpack_require__.e(/* import() | pages/_ */ 1).then(__webpack_require__.bind(null, 348)));
+const _3d173a35 = () => interopDefault(__webpack_require__.e(/* import() | pages/_ */ 1).then(__webpack_require__.bind(null, 351)));
 
 const emptyFn = () => {};
 
@@ -11978,7 +12005,7 @@ const routerOptions = {
   fallback: false
 };
 function createRouter(ssrContext, config) {
-  const base = config.app && config.app.basePath || routerOptions.base;
+  const base = config._app && config._app.basePath || routerOptions.base;
   const router = new external_vue_router_default.a({ ...routerOptions,
     base
   }); // TODO: remove in Nuxt 3
@@ -13349,6 +13376,7 @@ var util_console = __webpack_require__(3);
       const data = setColor(this.color, {
         staticClass: 'v-snack__wrapper',
         class: VSheet["a" /* default */].options.computed.classes.call(this),
+        style: VSheet["a" /* default */].options.computed.styles.call(this),
         directives: [{
           name: 'show',
           value: this.isActive
@@ -14106,8 +14134,11 @@ const BaseSlideGroup = Object(mixins["a" /* default */])(VItemGroup["a" /* BaseI
         this.widths = {
           content: content ? content.clientWidth : 0,
           wrapper: wrapper ? wrapper.clientWidth : 0
-        };
-        this.isOverflowing = this.widths.wrapper < this.widths.content;
+        }; // https://github.com/vuetifyjs/vuetify/issues/13212
+        // We add +1 to the wrappers width to prevent an issue where the `clientWidth`
+        // gets calculated wrongly by the browser if using a different zoom-level.
+
+        this.isOverflowing = this.widths.wrapper + 1 < this.widths.content;
         this.scrollIntoView();
       });
     }
@@ -16427,7 +16458,11 @@ external_vue_default.a.component('NChild', nuxt_child); // Component NuxtLink is
 external_vue_default.a.component(components_nuxt.name, components_nuxt);
 Object.defineProperty(external_vue_default.a.prototype, '$nuxt', {
   get() {
-    return this.$root.$options.$nuxt;
+    const globalNuxt = this.$root.$options.$nuxt;
+
+    if (false) {}
+
+    return globalNuxt;
   },
 
   configurable: true
@@ -16627,30 +16662,30 @@ async function createApp(ssrContext, config = {}) {
   } // Lock enablePreview in context
 
 
-  if (false) {} // If server-side, wait for async component to be resolved first
+  if (false) {} // Wait for async component to be resolved first
 
 
-  if ( true && ssrContext && ssrContext.url) {
-    await new Promise((resolve, reject) => {
-      router.push(ssrContext.url, resolve, err => {
-        // https://github.com/vuejs/vue-router/blob/v3.4.3/src/util/errors.js
-        if (!err._isRouter) return reject(err);
-        if (err.type !== 2
-        /* NavigationFailureType.redirected */
-        ) return resolve(); // navigated to a different route in router guard
+  await new Promise((resolve, reject) => {
+    router.push(app.context.route.fullPath, resolve, err => {
+      // https://github.com/vuejs/vue-router/blob/v3.4.3/src/util/errors.js
+      if (!err._isRouter) return reject(err);
+      if (err.type !== 2
+      /* NavigationFailureType.redirected */
+      ) return resolve(); // navigated to a different route in router guard
 
-        const unregister = router.afterEach(async (to, from) => {
+      const unregister = router.afterEach(async (to, from) => {
+        if ( true && ssrContext && ssrContext.url) {
           ssrContext.url = to.fullPath;
-          app.context.route = await getRouteData(to);
-          app.context.params = to.params || {};
-          app.context.query = to.query || {};
-          unregister();
-          resolve();
-        });
+        }
+
+        app.context.route = await getRouteData(to);
+        app.context.params = to.params || {};
+        app.context.query = to.query || {};
+        unregister();
+        resolve();
       });
     });
-  }
-
+  });
   return {
     store,
     app,
@@ -16720,7 +16755,7 @@ const createNext = ssrContext => opts => {
 
   let fullPath = Object(external_ufo_["withQuery"])(opts.path, opts.query);
   const $config = ssrContext.runtimeConfig || {};
-  const routerBase = $config.app && $config.app.basePath || '/';
+  const routerBase = $config._app && $config._app.basePath || '/';
 
   if (!fullPath.startsWith('http') && routerBase !== '/' && !fullPath.startsWith(routerBase)) {
     fullPath = Object(external_ufo_["joinURL"])(routerBase, fullPath);
@@ -16764,8 +16799,8 @@ const createNext = ssrContext => opts => {
 
   ssrContext.nuxt.config = ssrContext.runtimeConfig.public;
 
-  if (ssrContext.nuxt.config.app) {
-    __webpack_require__.p = Object(external_ufo_["joinURL"])(ssrContext.nuxt.config.app.cdnURL, ssrContext.nuxt.config.app.assetsPath);
+  if (ssrContext.nuxt.config._app) {
+    __webpack_require__.p = Object(external_ufo_["joinURL"])(ssrContext.nuxt.config._app.cdnURL, ssrContext.nuxt.config._app.assetsPath);
   } // Create the app definition and the instance (created for each request)
 
 
@@ -16825,7 +16860,7 @@ const createNext = ssrContext => opts => {
   }; // Components are already resolved by setContext -> getRouteData (app/utils.js)
 
 
-  const Components = getMatchedComponents(router.match(ssrContext.url));
+  const Components = getMatchedComponents(app.context.route);
   /*
   ** Dispatch store nuxtServerInit
   */
@@ -17738,13 +17773,13 @@ const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', '
 /***/ }),
 /* 206 */,
 /* 207 */,
-/* 208 */,
-/* 209 */
+/* 208 */
 /***/ (function(module, exports) {
 
 module.exports = require("@tiptap/vue-2");
 
 /***/ }),
+/* 209 */,
 /* 210 */
 /***/ (function(module, exports) {
 
@@ -17802,13 +17837,13 @@ module.exports = require("@tiptap/extension-table-header");
 /* 219 */
 /***/ (function(module, exports) {
 
-module.exports = require("@tiptap/extension-image");
+module.exports = require("@tiptap/extension-link");
 
 /***/ }),
 /* 220 */
 /***/ (function(module, exports) {
 
-module.exports = require("@tiptap/extension-link");
+module.exports = require("@tiptap/extension-image");
 
 /***/ }),
 /* 221 */

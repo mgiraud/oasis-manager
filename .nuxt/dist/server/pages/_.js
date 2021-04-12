@@ -1,7 +1,7 @@
 exports.ids = [1];
 exports.modules = {
 
-/***/ 300:
+/***/ 301:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -77,7 +77,7 @@ installComponents_default()(component, {VCardText: VCard["b" /* VCardText */],VC
 
 /***/ }),
 
-/***/ 348:
+/***/ 351:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -98,7 +98,7 @@ var external_vue_property_decorator_ = __webpack_require__(35);
 var external_vuex_class_ = __webpack_require__(59);
 
 // EXTERNAL MODULE: ./app/components/page/Template.vue + 4 modules
-var Template = __webpack_require__(300);
+var Template = __webpack_require__(301);
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/components/error/404.vue?vue&type=template&id=25d59706&
 var _404vue_type_template_id_25d59706_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-main',[_vm._v("\n  404\n")])}

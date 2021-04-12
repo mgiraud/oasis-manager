@@ -179,9 +179,9 @@ import Table from '@tiptap/extension-table'
 import TableRow from '@tiptap/extension-table-row'
 import TableCell from '@tiptap/extension-table-cell'
 import TableHeader from '@tiptap/extension-table-header'
-import Image from '@tiptap/extension-image'
 import FileUploadBtn from '@/components/util/Editor/FileUpload/FileUploadBtn.vue'
 import Link from '@tiptap/extension-link'
+import ResizableImage from './Editor/resizable-image/resizableImage'
 import FileUploadComponent from './Editor/FileUpload'
 
 @Component({
@@ -222,7 +222,7 @@ export default class AdminPageForm extends Vue {
         TableRow,
         TableHeader,
         TableCell,
-        Image.configure({ inline: true }),
+        ResizableImage.configure({ inline: true }),
         FileUploadComponent,
         Link.configure({ openOnClick: true })
       ]

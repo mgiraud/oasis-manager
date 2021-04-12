@@ -1629,7 +1629,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 320:
+/***/ 323:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1763,7 +1763,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 325:
+/***/ 328:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1872,7 +1872,7 @@ var VForm = __webpack_require__(231);
 var VRow = __webpack_require__(233);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VSwitch/VSwitch.js
-var VSwitch = __webpack_require__(320);
+var VSwitch = __webpack_require__(323);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 4 modules
 var VTextField = __webpack_require__(204);
@@ -1911,7 +1911,7 @@ installComponents_default()(component, {VCol: VCol["a" /* default */],VContainer
 
 /***/ }),
 
-/***/ 354:
+/***/ 357:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1932,7 +1932,7 @@ var external_nuxt_property_decorator_ = __webpack_require__(8);
 var external_vuelidate_ = __webpack_require__(78);
 
 // EXTERNAL MODULE: ./app/components/admin/pageCategory/Form.vue + 4 modules
-var Form = __webpack_require__(325);
+var Form = __webpack_require__(328);
 
 // EXTERNAL MODULE: ./app/components/form/Toolbar.vue + 4 modules
 var Toolbar = __webpack_require__(265);

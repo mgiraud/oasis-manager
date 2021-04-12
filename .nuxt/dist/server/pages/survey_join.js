@@ -1569,7 +1569,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 313:
+/***/ 314:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1675,7 +1675,7 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_2__[/* default *
 
 /***/ }),
 
-/***/ 328:
+/***/ 331:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1791,21 +1791,21 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_2__[/* default *
 
 /***/ }),
 
-/***/ 339:
+/***/ 342:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "img/join_process_1.29bba9b.png";
 
 /***/ }),
 
-/***/ 340:
+/***/ 343:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "img/join_process_2.8a6bdd2.png";
 
 /***/ }),
 
-/***/ 347:
+/***/ 350:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1813,7 +1813,7 @@ module.exports = __webpack_require__.p + "img/join_process_2.8a6bdd2.png";
 __webpack_require__.r(__webpack_exports__);
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/survey_join.vue?vue&type=template&id=9f745c9e&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-container',[_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_c('v-card',[_c('v-card-title',[_vm._v("Tu souhaites nous rejoindre ?")]),_vm._v(" "),_c('v-card-text',[(_vm.page)?_c('div',{domProps:{"innerHTML":_vm._s(_vm.page.content)}}):_c('v-container',[_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_vm._v("\n                Avant de remplir le question, merci de prendre connaissance des éléments suivants :\n              ")])],1),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"6"}},[_c('v-img',{attrs:{"src":__webpack_require__(339),"contain":""}})],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"6"}},[_c('v-img',{attrs:{"src":__webpack_require__(340),"contain":""}})],1)],1),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_vm._v("\n                Tu peux remplir ce questionnaire en ligne ou bien "),_c('a',{attrs:{"href":_vm.downloadPdfUrl}},[_vm._v("Télécharger le PDF")]),_vm._v(" pour le remplir numériquement ou manuellement et nous l'envoyer à l'addresse suivante : @AJOUTER\n              ")])],1)],1),_vm._v(" "),_c('survey-join-form',{ref:"createForm",attrs:{"values":_vm.item,"errors":_vm.violations}}),_vm._v(" "),_c('toolbar',{attrs:{"handle-submit":_vm.onSendForm,"handle-reset":_vm.resetForm}}),_vm._v(" "),_c('Loading',{attrs:{"visible":_vm.isLoading}})],1)],1)],1)],1)],1)}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-container',[_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_c('v-card',[_c('v-card-title',[_vm._v("Tu souhaites nous rejoindre ?")]),_vm._v(" "),_c('v-card-text',[(_vm.page)?_c('div',{domProps:{"innerHTML":_vm._s(_vm.page.content)}}):_c('v-container',[_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_vm._v("\n                Avant de remplir le question, merci de prendre connaissance des éléments suivants :\n              ")])],1),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"6"}},[_c('v-img',{attrs:{"src":__webpack_require__(342),"contain":""}})],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"6"}},[_c('v-img',{attrs:{"src":__webpack_require__(343),"contain":""}})],1)],1),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_vm._v("\n                Tu peux remplir ce questionnaire en ligne ou bien "),_c('a',{attrs:{"href":_vm.downloadPdfUrl}},[_vm._v("Télécharger le PDF")]),_vm._v(" pour le remplir numériquement ou manuellement et nous l'envoyer à l'addresse suivante : @AJOUTER\n              ")])],1)],1),_vm._v(" "),_c('survey-join-form',{ref:"createForm",attrs:{"values":_vm.item,"errors":_vm.violations}}),_vm._v(" "),_c('toolbar',{attrs:{"handle-submit":_vm.onSendForm,"handle-reset":_vm.resetForm}}),_vm._v(" "),_c('Loading',{attrs:{"visible":_vm.isLoading}})],1)],1)],1)],1)],1)}
 var staticRenderFns = []
 
 
@@ -2007,7 +2007,7 @@ var installComponents = __webpack_require__(12);
 var installComponents_default = /*#__PURE__*/__webpack_require__.n(installComponents);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCheckbox/VCheckbox.js
-var VCheckbox = __webpack_require__(328);
+var VCheckbox = __webpack_require__(331);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VCol.js
 var VCol = __webpack_require__(232);
@@ -2028,7 +2028,7 @@ var VRow = __webpack_require__(233);
 var VTextField = __webpack_require__(204);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextarea/VTextarea.js
-var VTextarea = __webpack_require__(313);
+var VTextarea = __webpack_require__(314);
 
 // CONCATENATED MODULE: ./app/components/survey_join/Form.vue
 

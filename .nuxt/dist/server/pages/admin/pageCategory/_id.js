@@ -1695,7 +1695,7 @@ UpdateMixin = __decorate([nuxt_property_decorator__WEBPACK_IMPORTED_MODULE_0__["
 
 /***/ }),
 
-/***/ 302:
+/***/ 303:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1969,7 +1969,7 @@ var console = __webpack_require__(3);
 
 /***/ }),
 
-/***/ 320:
+/***/ 323:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2103,7 +2103,7 @@ var console = __webpack_require__(3);
 
 /***/ }),
 
-/***/ 325:
+/***/ 328:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2212,7 +2212,7 @@ var VForm = __webpack_require__(231);
 var VRow = __webpack_require__(233);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VSwitch/VSwitch.js
-var VSwitch = __webpack_require__(320);
+var VSwitch = __webpack_require__(323);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 4 modules
 var VTextField = __webpack_require__(204);
@@ -2251,7 +2251,7 @@ installComponents_default()(component, {VCol: VCol["a" /* default */],VContainer
 
 /***/ }),
 
-/***/ 360:
+/***/ 363:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2275,7 +2275,7 @@ var Loading = __webpack_require__(264);
 var Toolbar = __webpack_require__(265);
 
 // EXTERNAL MODULE: ./app/components/admin/pageCategory/Form.vue + 4 modules
-var Form = __webpack_require__(325);
+var Form = __webpack_require__(328);
 
 // EXTERNAL MODULE: ./app/mixins/update.ts
 var update = __webpack_require__(291);
@@ -2342,7 +2342,7 @@ var installComponents = __webpack_require__(12);
 var installComponents_default = /*#__PURE__*/__webpack_require__.n(installComponents);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VAlert/VAlert.js + 1 modules
-var VAlert = __webpack_require__(302);
+var VAlert = __webpack_require__(303);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VCol.js
 var VCol = __webpack_require__(232);

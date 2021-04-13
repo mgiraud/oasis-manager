@@ -22,7 +22,7 @@
               </v-row>
               <v-row>
                 <v-col cols="12">
-                  Tu peux remplir ce questionnaire en ligne ou bien <a :href="downloadPdfUrl">Télécharger le PDF</a> pour le remplir numériquement ou manuellement et nous l'envoyer à l'addresse suivante : @AJOUTER
+                  Tu peux remplir ce questionnaire en ligne ou bien <a :href="downloadPdfUrl" title="Télécharger le formulaire" target="_blank">Télécharger le PDF</a> pour le remplir numériquement ou manuellement et nous l'envoyer à l'addresse suivante : @AJOUTER
                 </v-col>
               </v-row>
             </v-container>
@@ -77,6 +77,8 @@ export default class SurveyJoinPage extends mixins(NotificationMixin) {
       { name: 'Vivre ensemble', id: 'live_together' }
     ]
   }
+
+  downloadPdfUrl = process.env.apiBaseUrl + (process.env.apiBaseUrl?.endsWith('/') ? '' : '/') + '../app-assets/files/questionnaire_transalpins_v1.pdf'
 
   @surveyJoinModule.State('error') error!: string | null;
   @surveyJoinModule.State('isLoading') isLoading!: boolean;

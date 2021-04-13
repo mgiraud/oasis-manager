@@ -394,8 +394,6 @@ export default class SurveyJoinForm extends mixins(validationMixin) {
   @Prop({ type: Object, default: () => {} })
   initialValues!: any
 
-  downloadPdfUrl = process.env.apiBaseUrl + (process.env.apiBaseUrl?.endsWith('/') ? '' : '/') + '../survey/join.pdf'
-
   get item () {
     return this.initialValues || this.values
   }

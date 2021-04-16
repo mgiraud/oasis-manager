@@ -33,7 +33,6 @@
         slot="item.actions"
         slot-scope="props"
         :handle-edit="canEditMember ? () => editHandler(props.item) : null"
-        :handle-delete="canDeleteMember ? () => deleteHandler(props.item) : null"
       />
     </v-data-table>
   </v-container>
@@ -87,10 +86,6 @@ export default class AdminMemberIndex extends mixins(list) {
   get filteredItems () {
     if (isAdmin) { return this.items }
     return this.items.filter(item => !item.isAdmin)
-  }
-
-  get canDeleteMember () {
-    return this.hasPermission('USER_CAN_DELETE_MEMBERS')
   }
 
   get canEditMember () {

@@ -190,7 +190,7 @@ export default function makeCrudModule ({
 
       try {
         // @ts-ignore
-        await this.$getRepository(resource).$delete(item)
+        await this.$getRepository(resource).$remove(item)
         commit(MUTATIONS.TOGGLE_LOADING)
         commit(MUTATIONS.SET_DELETED, item)
       } catch (e) {

@@ -24,7 +24,7 @@
         <Toolbar
           :handle-submit="onSendForm"
           :handle-reset="resetForm"
-          :handle-delete="canDelete ? del : null"
+          :handle-delete="null"
           :handle-back="back"
         >
           <template #left>

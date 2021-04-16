@@ -6835,12 +6835,12 @@ function searchTableItems(items, search, headersWithCustomFilters, headersWithou
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/admin/member/index.vue?vue&type=template&id=5bd06a20&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-container',[_c('v-data-table',{staticClass:"elevation-1",attrs:{"headers":_vm.headers,"items":_vm.filteredItems,"items-per-page":_vm.options.itemsPerPage,"loading":_vm.isLoading,"loading-text":"Loading...","options":_vm.options,"server-items-length":_vm.totalItems,"item-key":"@id","show-select":""},on:{"update:itemsPerPage":function($event){return _vm.$set(_vm.options, "itemsPerPage", $event)},"update:items-per-page":function($event){return _vm.$set(_vm.options, "itemsPerPage", $event)},"update:options":[function($event){_vm.options=$event},_vm.onUpdateOptions]},scopedSlots:_vm._u([{key:"top",fn:function(){return [_c('v-toolbar',{attrs:{"flat":"","color":"white"}},[_c('v-toolbar-title',[_vm._v("Liste de membres")]),_vm._v(" "),_c('v-spacer'),_vm._v(" "),_c('FormFilter',{attrs:{"handle-filter":_vm.onSendFilter,"handle-reset":_vm.resetFilter}},[_c('MemberFilter',{ref:"filterForm",attrs:{"slot":"filter","values":_vm.filters},slot:"filter"})],1)],1)]},proxy:true},{key:"item.actions",fn:function(props){return _c('ActionCell',{attrs:{"handle-edit":_vm.canEditMember ? function () { return _vm.editHandler(props.item); } : null,"handle-delete":_vm.canDeleteMember ? function () { return _vm.deleteHandler(props.item); } : null}})}}]),model:{value:(_vm.selected),callback:function ($$v) {_vm.selected=$$v},expression:"selected"}})],1)}
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/admin/member/index.vue?vue&type=template&id=28af2e01&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-container',[_c('v-data-table',{staticClass:"elevation-1",attrs:{"headers":_vm.headers,"items":_vm.filteredItems,"items-per-page":_vm.options.itemsPerPage,"loading":_vm.isLoading,"loading-text":"Loading...","options":_vm.options,"server-items-length":_vm.totalItems,"item-key":"@id","show-select":""},on:{"update:itemsPerPage":function($event){return _vm.$set(_vm.options, "itemsPerPage", $event)},"update:items-per-page":function($event){return _vm.$set(_vm.options, "itemsPerPage", $event)},"update:options":[function($event){_vm.options=$event},_vm.onUpdateOptions]},scopedSlots:_vm._u([{key:"top",fn:function(){return [_c('v-toolbar',{attrs:{"flat":"","color":"white"}},[_c('v-toolbar-title',[_vm._v("Liste de membres")]),_vm._v(" "),_c('v-spacer'),_vm._v(" "),_c('FormFilter',{attrs:{"handle-filter":_vm.onSendFilter,"handle-reset":_vm.resetFilter}},[_c('MemberFilter',{ref:"filterForm",attrs:{"slot":"filter","values":_vm.filters},slot:"filter"})],1)],1)]},proxy:true},{key:"item.actions",fn:function(props){return _c('ActionCell',{attrs:{"handle-edit":_vm.canEditMember ? function () { return _vm.editHandler(props.item); } : null}})}}]),model:{value:(_vm.selected),callback:function ($$v) {_vm.selected=$$v},expression:"selected"}})],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./app/pages/admin/member/index.vue?vue&type=template&id=5bd06a20&
+// CONCATENATED MODULE: ./app/pages/admin/member/index.vue?vue&type=template&id=28af2e01&
 
 // EXTERNAL MODULE: external "nuxt-property-decorator"
 var external_nuxt_property_decorator_ = __webpack_require__(8);
@@ -7000,10 +7000,6 @@ let membervue_type_script_lang_ts_AdminMemberIndex = class AdminMemberIndex exte
     }
 
     return this.items.filter(item => !item.isAdmin);
-  }
-
-  get canDeleteMember() {
-    return this.hasPermission('USER_CAN_DELETE_MEMBERS');
   }
 
   get canEditMember() {

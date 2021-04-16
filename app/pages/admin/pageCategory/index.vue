@@ -38,7 +38,7 @@
           </v-btn>
         </v-toolbar>
       </template>
-      <template v-if="item.category" slot="item.category" slot-scope="{ item }">
+      <template v-if="item && item.category" slot="item.category" slot-scope="{ item }">
         {{ item.category.name }}
       </template>
       <ActionCell

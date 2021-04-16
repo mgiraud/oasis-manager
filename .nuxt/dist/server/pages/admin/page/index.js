@@ -7363,14 +7363,14 @@ module.exports = ___CSS_LOADER_EXPORT___;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/admin/page/index.vue?vue&type=template&id=f11be588&
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/admin/page/index.vue?vue&type=template&id=4578afcf&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-container',[_c('v-data-table',{staticClass:"elevation-1",attrs:{"headers":_vm.headers,"items":_vm.items,"items-per-page":_vm.options.itemsPerPage,"loading":_vm.isLoading,"loading-text":"Loading...","options":_vm.options,"server-items-length":_vm.totalItems,"item-key":"@id","show-select":""},on:{"update:itemsPerPage":function($event){return _vm.$set(_vm.options, "itemsPerPage", $event)},"update:items-per-page":function($event){return _vm.$set(_vm.options, "itemsPerPage", $event)},"update:options":[function($event){_vm.options=$event},_vm.onUpdateOptions]},scopedSlots:_vm._u([{key:"top",fn:function(){return [_c('v-toolbar',{attrs:{"flat":"","color":"white"}},[_c('v-toolbar-title',[_vm._v("Page")]),_vm._v(" "),_c('v-spacer'),_vm._v(" "),_c('FormFilter',{attrs:{"handle-filter":_vm.onSendFilter,"handle-reset":_vm.resetFilter}},[_c('PageFilter',{ref:"filterForm",attrs:{"slot":"filter","values":_vm.filters},slot:"filter"})],1),_vm._v(" "),_c('v-btn',{staticClass:"ml-2",attrs:{"color":"primary","dark":""},on:{"click":_vm.addHandler}},[_vm._v("\n          New Item\n        ")])],1)]},proxy:true},{key:"item.category",fn:function(ref){
 var item = ref.item;
-return (item.category)?[_c('nuxt-link',{attrs:{"to":{name: 'admin-pageCategory-id', params: {id: item.category.id }}}},[_vm._v("\n        "+_vm._s(item.category.name)+"\n      ")])]:undefined}},{key:"item.actions",fn:function(props){return _c('ActionCell',{attrs:{"handle-edit":_vm.canEditPage ? function () { return _vm.editHandler(props.item); } : null,"handle-delete":_vm.canDeletePage ? function () { return _vm.deleteHandler(props.item); } : null}})}}],null,true),model:{value:(_vm.selected),callback:function ($$v) {_vm.selected=$$v},expression:"selected"}})],1)}
+return (item && item.category)?[_c('nuxt-link',{attrs:{"to":{name: 'admin-pageCategory-id', params: {id: item.category.id }}}},[_vm._v("\n        "+_vm._s(item.category.name)+"\n      ")])]:undefined}},{key:"item.actions",fn:function(props){return _c('ActionCell',{attrs:{"handle-edit":_vm.canEditPage ? function () { return _vm.editHandler(props.item); } : null,"handle-delete":_vm.canDeletePage ? function () { return _vm.deleteHandler(props.item); } : null}})}}],null,true),model:{value:(_vm.selected),callback:function ($$v) {_vm.selected=$$v},expression:"selected"}})],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./app/pages/admin/page/index.vue?vue&type=template&id=f11be588&
+// CONCATENATED MODULE: ./app/pages/admin/page/index.vue?vue&type=template&id=4578afcf&
 
 // EXTERNAL MODULE: external "nuxt-property-decorator"
 var external_nuxt_property_decorator_ = __webpack_require__(8);

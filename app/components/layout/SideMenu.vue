@@ -29,8 +29,5 @@ const pageModule = namespace('page')
 @Component
 export default class SideMenu extends Vue {
     @pageModule.Getter('menu') menu !: MenuItem[]
-    mounted () {
-      console.log(this.menu)
-    }
 }
 </script>

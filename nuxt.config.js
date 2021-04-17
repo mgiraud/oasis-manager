@@ -94,5 +94,12 @@ export default {
     redirectSSL.create({
       enabled: process.env.NODE_ENV === 'production'
     })
-  ]
+  ],
+  head: {
+    titleTemplate: '%s - Les transalpins',
+    meta: [
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+    ]
+  }
 }

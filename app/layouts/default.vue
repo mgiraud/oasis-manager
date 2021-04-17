@@ -33,12 +33,18 @@
         </v-icon>
       </v-btn>
       <template #extension>
-        <Menu />
+        <v-container fluid class="header-extension-container">
+          <v-row no-gutters>
+            <Menu />
+          </v-row>
+          <v-row no-gutters class="header-extension-row-submenu">
+            <SubMenu v-if="activeSlug !== null" />
+          </v-row>
+        </v-container>
       </template>
     </v-app-bar>
 
     <v-main class="secondary lighten-3">
-      <SubMenu v-if="activeSlug !== null" />
       <v-card v-show="showSubHeader" class="card-newsletter">
         <v-card-text>
           <v-container fluid ma-0 pa-0 fill-height>
@@ -137,6 +143,21 @@ export default class DefaultLayout extends Vue {
 </script>
 
 <style>
+  .header-extension-container {
+    padding:0px;
+  }
+
+  .header-extension-container > .row{
+    margin-left: -16px;
+    margin-right: -16px;
+  }
+
+  .header-extension-row-submenu {
+    position: absolute;
+    min-width: 100%;
+    box-shadow: 0px 3px 3px -3px rgba(0, 0, 0, 0.1);
+  }
+
   .v-application a.header-link {
     text-decoration: none;
     text-transform: capitalize;

@@ -37,7 +37,7 @@ adminvue_type_script_lang_ts_AdminLayout = __decorate([Object(external_vue_prope
 // CONCATENATED MODULE: ./app/pages/admin.vue?vue&type=script&lang=ts&
  /* harmony default export */ var pages_adminvue_type_script_lang_ts_ = (adminvue_type_script_lang_ts_); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(10);
+var componentNormalizer = __webpack_require__(9);
 
 // EXTERNAL MODULE: ./node_modules/vuetify-loader/lib/runtime/installComponents.js
 var installComponents = __webpack_require__(12);

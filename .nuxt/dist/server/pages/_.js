@@ -14,7 +14,7 @@ var staticRenderFns = []
 // CONCATENATED MODULE: ./app/components/page/Template.vue?vue&type=template&id=31d1a6a0&
 
 // EXTERNAL MODULE: external "nuxt-property-decorator"
-var external_nuxt_property_decorator_ = __webpack_require__(8);
+var external_nuxt_property_decorator_ = __webpack_require__(7);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--12-0!./node_modules/ts-loader??ref--12-1!./node_modules/vue-loader/lib??vue-loader-options!./app/components/page/Template.vue?vue&type=script&lang=ts&
 var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
@@ -38,14 +38,14 @@ Templatevue_type_script_lang_ts_Tempate = __decorate([external_nuxt_property_dec
 // CONCATENATED MODULE: ./app/components/page/Template.vue?vue&type=script&lang=ts&
  /* harmony default export */ var page_Templatevue_type_script_lang_ts_ = (Templatevue_type_script_lang_ts_); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(10);
+var componentNormalizer = __webpack_require__(9);
 
 // EXTERNAL MODULE: ./node_modules/vuetify-loader/lib/runtime/installComponents.js
 var installComponents = __webpack_require__(12);
 var installComponents_default = /*#__PURE__*/__webpack_require__.n(installComponents);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/index.js
-var VCard = __webpack_require__(57);
+var VCard = __webpack_require__(58);
 
 // CONCATENATED MODULE: ./app/components/page/Template.vue
 
@@ -95,7 +95,7 @@ var staticRenderFns = []
 var external_vue_property_decorator_ = __webpack_require__(35);
 
 // EXTERNAL MODULE: external "vuex-class"
-var external_vuex_class_ = __webpack_require__(59);
+var external_vuex_class_ = __webpack_require__(60);
 
 // EXTERNAL MODULE: ./app/components/page/Template.vue + 4 modules
 var Template = __webpack_require__(301);
@@ -108,7 +108,7 @@ var _404vue_type_template_id_25d59706_staticRenderFns = []
 // CONCATENATED MODULE: ./app/components/error/404.vue?vue&type=template&id=25d59706&
 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(10);
+var componentNormalizer = __webpack_require__(9);
 
 // EXTERNAL MODULE: ./node_modules/vuetify-loader/lib/runtime/installComponents.js
 var installComponents = __webpack_require__(12);

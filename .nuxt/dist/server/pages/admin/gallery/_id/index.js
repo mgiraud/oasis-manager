@@ -37,7 +37,7 @@ var staticRenderFns = []
 // CONCATENATED MODULE: ./app/components/admin/gallery/ItemBreadcrumb.vue?vue&type=script&lang=js&
  /* harmony default export */ var gallery_ItemBreadcrumbvue_type_script_lang_js_ = (ItemBreadcrumbvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(10);
+var componentNormalizer = __webpack_require__(9);
 
 // EXTERNAL MODULE: ./node_modules/vuetify-loader/lib/runtime/installComponents.js
 var installComponents = __webpack_require__(12);
@@ -159,7 +159,7 @@ var ItemBreadcrumb = __webpack_require__(329);
 // CONCATENATED MODULE: ./app/pages/admin/gallery/_id/index.vue?vue&type=script&lang=js&
  /* harmony default export */ var gallery_idvue_type_script_lang_js_ = (_idvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(10);
+var componentNormalizer = __webpack_require__(9);
 
 // EXTERNAL MODULE: ./node_modules/vuetify-loader/lib/runtime/installComponents.js
 var installComponents = __webpack_require__(12);
@@ -172,7 +172,7 @@ var VCol = __webpack_require__(232);
 var VContainer = __webpack_require__(235);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VImg/VImg.js + 2 modules
-var VImg = __webpack_require__(55);
+var VImg = __webpack_require__(56);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
 var VRow = __webpack_require__(233);

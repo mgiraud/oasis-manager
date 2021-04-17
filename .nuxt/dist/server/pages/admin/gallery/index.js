@@ -57,7 +57,7 @@ var external_vuex_ = __webpack_require__(41);
 // CONCATENATED MODULE: ./app/pages/admin/gallery/index.vue?vue&type=script&lang=js&
  /* harmony default export */ var admin_galleryvue_type_script_lang_js_ = (galleryvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(10);
+var componentNormalizer = __webpack_require__(9);
 
 // EXTERNAL MODULE: ./node_modules/vuetify-loader/lib/runtime/installComponents.js
 var installComponents = __webpack_require__(12);

@@ -20,6 +20,7 @@ export type MenuItem = {
   name: string;
   slug: string | null;
   url: string | null;
+  children?: MenuItem[]
 }
 
 pageModule.getters.menuItems = (_state, getters) => {
@@ -70,6 +71,58 @@ pageModule.getters.findByActiveSlug = (state, getters) => {
 
 pageModule.mutations.setActiveSlug = (state, slug) => {
   Object.assign(state, { activeSlug: slug })
+}
+
+pageModule.getters.menu = (_state, getters) => {
+  const menu: MenuItem[] = []
+  getters.list.forEach((page: Page) => {
+    if (!page || !page.showInMenu) {
+      return
+    }
+    if (page.category) {
+      if (!page.category.showInMenu) {
+        return
+      }
+      const categoryItem = find(menu, { slug: page.category.slug })
+      if (!categoryItem) {
+        menu.push({
+          name: page.category.name,
+          slug: page.category.slug,
+          url: null,
+          children: [{
+            name: page.title,
+            url: page.url,
+            slug: null
+          }]
+        })
+      } else {
+        categoryItem.children?.push({
+          name: page.title,
+          url: page.url,
+          slug: null
+        })
+      }
+    } else {
+      menu.push({
+        name: page.title,
+        url: page.url,
+        slug: null
+      })
+    }
+  })
+
+  menu.push({
+    name: 'Contacte-nous !',
+    url: 'contact',
+    slug: null
+  })
+
+  menu.push({
+    name: 'Rejoindre le groupe fondateur',
+    url: 'survey_join',
+    slug: null
+  })
+  return menu
 }
 
 export default pageModule

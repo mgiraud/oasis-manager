@@ -9,6 +9,7 @@
       app
       dark
     >
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <template #img="{ props }">
         <v-img
           v-bind="props"
@@ -32,7 +33,7 @@
           ri-login-box-line
         </v-icon>
       </v-btn>
-      <template #extension>
+      <template v-if="!$vuetify.breakpoint.mobile" #extension>
         <v-container fluid class="header-extension-container">
           <v-row no-gutters>
             <Menu />
@@ -43,6 +44,16 @@
         </v-container>
       </template>
     </v-app-bar>
+
+    <v-navigation-drawer
+      v-if="$vuetify.breakpoint.mobile"
+      v-model="drawer"
+      app
+      width="auto"
+      temporary
+    >
+      <side-menu />
+    </v-navigation-drawer>
 
     <v-main class="secondary lighten-3">
       <v-card v-show="showSubHeader" class="card-newsletter">
@@ -104,6 +115,7 @@ import { Vue, Component } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 import Menu from '~/components/layout/Menu.vue'
 import SubMenu from '~/components/layout/SubMenu.vue'
+import SideMenu from '~/components/layout/SideMenu.vue'
 import NewsletterForm from '~/components/contact_newsletter/Form.vue'
 import Alert from '~/components/util/Alert.vue'
 
@@ -112,11 +124,12 @@ const pageModule = namespace('page')
 
 @Component({
   components: {
-    Menu, SubMenu, NewsletterForm, Alert
+    Menu, SubMenu, NewsletterForm, Alert, SideMenu
   }
 })
 export default class DefaultLayout extends Vue {
     showSubHeader = true
+    drawer = false
     @pageModule.State('activeSlug') activeSlug!: string | null
     @securityModule.Action('logout') logout!: () => void
 

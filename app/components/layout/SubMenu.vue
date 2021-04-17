@@ -1,6 +1,6 @@
 <template>
-  <v-tabs v-model="tab" fixed-tabs optional show-arrows>
-    <v-tab v-for="page in findByActiveSlug" :key="page['@id']" show-arrows>
+  <v-tabs v-model="tab" fixed-tabs optional show-arrows light>
+    <v-tab v-for="page in findByActiveSlug" :key="page['@id']" light>
       {{ page.title }}
     </v-tab>
   </v-tabs>

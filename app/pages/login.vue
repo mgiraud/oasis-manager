@@ -52,6 +52,12 @@ export default class Login extends Vue {
     password: ''
   }
 
+  public head () {
+    return {
+      title: 'Se connecter'
+    }
+  }
+
   @securityModule.State('credentialError') credentialError!: boolean;
 
   async postLogin () {

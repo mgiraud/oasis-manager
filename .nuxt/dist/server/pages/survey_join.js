@@ -1,12 +1,12 @@
 exports.ids = [23];
 exports.modules = {
 
-/***/ 236:
+/***/ 235:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _delayable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(237);
-/* harmony import */ var _toggleable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(17);
+/* harmony import */ var _delayable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(236);
+/* harmony import */ var _toggleable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(18);
 /* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
 /* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(0);
 /* harmony import */ var _util_console__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3);
@@ -204,7 +204,7 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_2__[/* default *
 
 /***/ }),
 
-/***/ 237:
+/***/ 236:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -263,7 +263,7 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_2__[/* default *
 
 /***/ }),
 
-/***/ 238:
+/***/ 237:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -398,7 +398,7 @@ function validateAttachTarget(val) {
 
 /***/ }),
 
-/***/ 239:
+/***/ 238:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -439,7 +439,7 @@ function validateAttachTarget(val) {
 
 /***/ }),
 
-/***/ 240:
+/***/ 239:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -500,7 +500,7 @@ function validateAttachTarget(val) {
 
 /***/ }),
 
-/***/ 241:
+/***/ 240:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -521,13 +521,13 @@ function validateAttachTarget(val) {
 
 /***/ }),
 
-/***/ 244:
+/***/ 243:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(245);
+var content = __webpack_require__(244);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -535,7 +535,7 @@ __webpack_require__(5).default("2065bca8", content, true)
 
 /***/ }),
 
-/***/ 245:
+/***/ 244:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -549,7 +549,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 247:
+/***/ 246:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -562,7 +562,7 @@ var staticRenderFns = []
 // CONCATENATED MODULE: ./app/components/util/ConfirmDelete.vue?vue&type=template&id=525f6b6b&
 
 // EXTERNAL MODULE: external "nuxt-property-decorator"
-var external_nuxt_property_decorator_ = __webpack_require__(8);
+var external_nuxt_property_decorator_ = __webpack_require__(7);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--12-0!./node_modules/ts-loader??ref--12-1!./node_modules/vue-loader/lib??vue-loader-options!./app/components/util/ConfirmDelete.vue?vue&type=script&lang=ts&
 var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
@@ -605,26 +605,26 @@ ConfirmDeletevue_type_script_lang_ts_ConfirmDelete = __decorate([Object(external
 // CONCATENATED MODULE: ./app/components/util/ConfirmDelete.vue?vue&type=script&lang=ts&
  /* harmony default export */ var util_ConfirmDeletevue_type_script_lang_ts_ = (ConfirmDeletevue_type_script_lang_ts_); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(10);
+var componentNormalizer = __webpack_require__(9);
 
 // EXTERNAL MODULE: ./node_modules/vuetify-loader/lib/runtime/installComponents.js
 var installComponents = __webpack_require__(12);
 var installComponents_default = /*#__PURE__*/__webpack_require__.n(installComponents);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBtn/VBtn.js
-var VBtn = __webpack_require__(68);
+var VBtn = __webpack_require__(43);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/VCard.js
-var VCard = __webpack_require__(69);
+var VCard = __webpack_require__(68);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/index.js
-var components_VCard = __webpack_require__(57);
+var components_VCard = __webpack_require__(58);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDialog/VDialog.js
 var VDialog = __webpack_require__(271);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VSpacer.js
-var VSpacer = __webpack_require__(234);
+var VSpacer = __webpack_require__(233);
 
 // CONCATENATED MODULE: ./app/components/util/ConfirmDelete.vue
 
@@ -660,11 +660,169 @@ installComponents_default()(component, {VBtn: VBtn["a" /* default */],VCard: VCa
 
 /***/ }),
 
+/***/ 252:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _src_components_VGrid_VGrid_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76);
+/* harmony import */ var _src_components_VGrid_VGrid_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VGrid_VGrid_sass__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _util_mergeData__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(20);
+/* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(0);
+
+
+
+ // no xs
+
+const breakpoints = ['sm', 'md', 'lg', 'xl'];
+
+const breakpointProps = (() => {
+  return breakpoints.reduce((props, val) => {
+    props[val] = {
+      type: [Boolean, String, Number],
+      default: false
+    };
+    return props;
+  }, {});
+})();
+
+const offsetProps = (() => {
+  return breakpoints.reduce((props, val) => {
+    props['offset' + Object(_util_helpers__WEBPACK_IMPORTED_MODULE_3__[/* upperFirst */ "F"])(val)] = {
+      type: [String, Number],
+      default: null
+    };
+    return props;
+  }, {});
+})();
+
+const orderProps = (() => {
+  return breakpoints.reduce((props, val) => {
+    props['order' + Object(_util_helpers__WEBPACK_IMPORTED_MODULE_3__[/* upperFirst */ "F"])(val)] = {
+      type: [String, Number],
+      default: null
+    };
+    return props;
+  }, {});
+})();
+
+const propMap = {
+  col: Object.keys(breakpointProps),
+  offset: Object.keys(offsetProps),
+  order: Object.keys(orderProps)
+};
+
+function breakpointClass(type, prop, val) {
+  let className = type;
+
+  if (val == null || val === false) {
+    return undefined;
+  }
+
+  if (prop) {
+    const breakpoint = prop.replace(type, '');
+    className += `-${breakpoint}`;
+  } // Handling the boolean style prop when accepting [Boolean, String, Number]
+  // means Vue will not convert <v-col sm></v-col> to sm: true for us.
+  // Since the default is false, an empty string indicates the prop's presence.
+
+
+  if (type === 'col' && (val === '' || val === true)) {
+    // .col-md
+    return className.toLowerCase();
+  } // .order-md-6
+
+
+  className += `-${val}`;
+  return className.toLowerCase();
+}
+
+const cache = new Map();
+/* harmony default export */ __webpack_exports__["a"] = (vue__WEBPACK_IMPORTED_MODULE_1___default.a.extend({
+  name: 'v-col',
+  functional: true,
+  props: {
+    cols: {
+      type: [Boolean, String, Number],
+      default: false
+    },
+    ...breakpointProps,
+    offset: {
+      type: [String, Number],
+      default: null
+    },
+    ...offsetProps,
+    order: {
+      type: [String, Number],
+      default: null
+    },
+    ...orderProps,
+    alignSelf: {
+      type: String,
+      default: null,
+      validator: str => ['auto', 'start', 'end', 'center', 'baseline', 'stretch'].includes(str)
+    },
+    tag: {
+      type: String,
+      default: 'div'
+    }
+  },
+
+  render(h, {
+    props,
+    data,
+    children,
+    parent
+  }) {
+    // Super-fast memoization based on props, 5x faster than JSON.stringify
+    let cacheKey = '';
+
+    for (const prop in props) {
+      cacheKey += String(props[prop]);
+    }
+
+    let classList = cache.get(cacheKey);
+
+    if (!classList) {
+      classList = []; // Loop through `col`, `offset`, `order` breakpoint props
+
+      let type;
+
+      for (type in propMap) {
+        propMap[type].forEach(prop => {
+          const value = props[prop];
+          const className = breakpointClass(type, prop, value);
+          if (className) classList.push(className);
+        });
+      }
+
+      const hasColClasses = classList.some(className => className.startsWith('col-'));
+      classList.push({
+        // Default to .col if no other col-{bp}-* classes generated nor `cols` specified.
+        col: !hasColClasses || !props.cols,
+        [`col-${props.cols}`]: props.cols,
+        [`offset-${props.offset}`]: props.offset,
+        [`order-${props.order}`]: props.order,
+        [`align-self-${props.alignSelf}`]: props.alignSelf
+      });
+      cache.set(cacheKey, classList);
+    }
+
+    return h(props.tag, Object(_util_mergeData__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])(data, {
+      class: classList
+    }), children);
+  }
+
+}));
+
+/***/ }),
+
 /***/ 263:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _directives_ripple__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(25);
+/* harmony import */ var _directives_ripple__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(26);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
 // Directives
@@ -714,7 +872,7 @@ var staticRenderFns = []
 // CONCATENATED MODULE: ./app/components/util/Loading.vue?vue&type=template&id=0db5b63a&
 
 // EXTERNAL MODULE: external "nuxt-property-decorator"
-var external_nuxt_property_decorator_ = __webpack_require__(8);
+var external_nuxt_property_decorator_ = __webpack_require__(7);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--12-0!./node_modules/ts-loader??ref--12-1!./node_modules/vue-loader/lib??vue-loader-options!./app/components/util/Loading.vue?vue&type=script&lang=ts&
 var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
@@ -738,7 +896,7 @@ Loadingvue_type_script_lang_ts_Loading = __decorate([external_nuxt_property_deco
 // CONCATENATED MODULE: ./app/components/util/Loading.vue?vue&type=script&lang=ts&
  /* harmony default export */ var util_Loadingvue_type_script_lang_ts_ = (Loadingvue_type_script_lang_ts_); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(10);
+var componentNormalizer = __webpack_require__(9);
 
 // EXTERNAL MODULE: ./node_modules/vuetify-loader/lib/runtime/installComponents.js
 var installComponents = __webpack_require__(12);
@@ -748,7 +906,7 @@ var installComponents_default = /*#__PURE__*/__webpack_require__.n(installCompon
 var VOverlay = __webpack_require__(67);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VProgressCircular/VProgressCircular.js
-var VProgressCircular = __webpack_require__(58);
+var VProgressCircular = __webpack_require__(59);
 
 // CONCATENATED MODULE: ./app/components/util/Loading.vue
 
@@ -793,10 +951,10 @@ var staticRenderFns = []
 // CONCATENATED MODULE: ./app/components/form/Toolbar.vue?vue&type=template&id=2f61bd33&
 
 // EXTERNAL MODULE: external "nuxt-property-decorator"
-var external_nuxt_property_decorator_ = __webpack_require__(8);
+var external_nuxt_property_decorator_ = __webpack_require__(7);
 
 // EXTERNAL MODULE: ./app/components/util/ConfirmDelete.vue + 4 modules
-var ConfirmDelete = __webpack_require__(247);
+var ConfirmDelete = __webpack_require__(246);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--12-0!./node_modules/ts-loader??ref--12-1!./node_modules/vue-loader/lib??vue-loader-options!./app/components/form/Toolbar.vue?vue&type=script&lang=ts&
 var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
@@ -899,23 +1057,23 @@ Toolbarvue_type_script_lang_ts_Toolbar = __decorate([Object(external_nuxt_proper
 // CONCATENATED MODULE: ./app/components/form/Toolbar.vue?vue&type=script&lang=ts&
  /* harmony default export */ var form_Toolbarvue_type_script_lang_ts_ = (Toolbarvue_type_script_lang_ts_); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(10);
+var componentNormalizer = __webpack_require__(9);
 
 // EXTERNAL MODULE: ./node_modules/vuetify-loader/lib/runtime/installComponents.js
 var installComponents = __webpack_require__(12);
 var installComponents_default = /*#__PURE__*/__webpack_require__.n(installComponents);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBtn/VBtn.js
-var VBtn = __webpack_require__(68);
+var VBtn = __webpack_require__(43);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VIcon/VIcon.js
 var VIcon = __webpack_require__(63);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VSpacer.js
-var VSpacer = __webpack_require__(234);
+var VSpacer = __webpack_require__(233);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VToolbar/VToolbar.js
-var VToolbar = __webpack_require__(16);
+var VToolbar = __webpack_require__(17);
 
 // CONCATENATED MODULE: ./app/components/form/Toolbar.vue
 
@@ -982,9 +1140,9 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return prevent; });
-/* harmony import */ var _components_VInput__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(23);
+/* harmony import */ var _components_VInput__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(25);
 /* harmony import */ var _rippleable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(263);
-/* harmony import */ var _comparable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(241);
+/* harmony import */ var _comparable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(240);
 /* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2);
 // Components
  // Mixins
@@ -1156,17 +1314,17 @@ function prevent(e) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _src_components_VDialog_VDialog_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(244);
+/* harmony import */ var _src_components_VDialog_VDialog_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(243);
 /* harmony import */ var _src_components_VDialog_VDialog_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VDialog_VDialog_sass__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _VThemeProvider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(272);
-/* harmony import */ var _mixins_activatable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(236);
-/* harmony import */ var _mixins_dependent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(75);
-/* harmony import */ var _mixins_detachable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(238);
+/* harmony import */ var _mixins_activatable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(235);
+/* harmony import */ var _mixins_dependent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(74);
+/* harmony import */ var _mixins_detachable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(237);
 /* harmony import */ var _mixins_overlayable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(81);
-/* harmony import */ var _mixins_returnable__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(239);
-/* harmony import */ var _mixins_stackable__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(240);
-/* harmony import */ var _mixins_toggleable__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(17);
-/* harmony import */ var _directives_click_outside__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(76);
+/* harmony import */ var _mixins_returnable__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(238);
+/* harmony import */ var _mixins_stackable__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(239);
+/* harmony import */ var _mixins_toggleable__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(18);
+/* harmony import */ var _directives_click_outside__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(75);
 /* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(2);
 /* harmony import */ var _util_console__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(3);
 /* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(0);
@@ -1575,7 +1733,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 "use strict";
 /* harmony import */ var _src_components_VTextarea_VTextarea_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(287);
 /* harmony import */ var _src_components_VTextarea_VTextarea_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VTextarea_VTextarea_sass__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _VTextField_VTextField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(204);
+/* harmony import */ var _VTextField_VTextField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(206);
 /* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
 // Styles
  // Extensions
@@ -1683,8 +1841,8 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_2__[/* default *
 /* harmony import */ var _src_components_VCheckbox_VCheckbox_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VCheckbox_VCheckbox_sass__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(266);
 /* harmony import */ var _src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _VIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(19);
-/* harmony import */ var _VInput__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(23);
+/* harmony import */ var _VIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(14);
+/* harmony import */ var _VInput__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(25);
 /* harmony import */ var _mixins_selectable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(268);
 // Styles
 
@@ -1812,15 +1970,15 @@ module.exports = __webpack_require__.p + "img/join_process_2.8a6bdd2.png";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/survey_join.vue?vue&type=template&id=49d8d952&
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/survey_join.vue?vue&type=template&id=e8a62ed6&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-container',[_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_c('v-card',[_c('v-card-title',[_vm._v("Tu souhaites nous rejoindre ?")]),_vm._v(" "),_c('v-card-text',[(_vm.page)?_c('div',{domProps:{"innerHTML":_vm._s(_vm.page.content)}}):_c('v-container',[_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_vm._v("\n                Avant de remplir le question, merci de prendre connaissance des éléments suivants :\n              ")])],1),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"6"}},[_c('v-img',{attrs:{"src":__webpack_require__(342),"contain":""}})],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"6"}},[_c('v-img',{attrs:{"src":__webpack_require__(343),"contain":""}})],1)],1),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_vm._v("\n                Tu peux remplir ce questionnaire en ligne ou bien "),_c('a',{attrs:{"href":_vm.downloadPdfUrl,"title":"Télécharger le formulaire","target":"_blank"}},[_vm._v("Télécharger le PDF")]),_vm._v(" pour le remplir numériquement ou manuellement et nous l'envoyer à l'addresse suivante : @AJOUTER\n              ")])],1)],1),_vm._v(" "),_c('survey-join-form',{ref:"createForm",attrs:{"values":_vm.item,"errors":_vm.violations}}),_vm._v(" "),_c('toolbar',{attrs:{"handle-submit":_vm.onSendForm,"handle-reset":_vm.resetForm}}),_vm._v(" "),_c('Loading',{attrs:{"visible":_vm.isLoading}})],1)],1)],1)],1)],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./app/pages/survey_join.vue?vue&type=template&id=49d8d952&
+// CONCATENATED MODULE: ./app/pages/survey_join.vue?vue&type=template&id=e8a62ed6&
 
 // EXTERNAL MODULE: external "nuxt-property-decorator"
-var external_nuxt_property_decorator_ = __webpack_require__(8);
+var external_nuxt_property_decorator_ = __webpack_require__(7);
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/components/survey_join/Form.vue?vue&type=template&id=ec56dbf2&
 var Formvue_type_template_id_ec56dbf2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-form',[_c('v-container',[_c('v-row',[_c('v-col',{attrs:{"cols":"12","md":"6"}},[_c('h2',[_vm._v("J'en dis un peu sur moi :")])])],1),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"12","md":"6"}},[_c('v-text-field',{attrs:{"prepend-inner-icon":"ri-mail-line","label":"Email *","error-messages":_vm.emailErrors,"required":""},on:{"input":function($event){return _vm.$v.item.email.$touch()},"blur":function($event){return _vm.$v.item.email.$touch()}},model:{value:(_vm.item.email),callback:function ($$v) {_vm.$set(_vm.item, "email", $$v)},expression:"item.email"}})],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"12","sm":"6","md":"6"}},[_c('v-text-field',{attrs:{"prepend-inner-icon":"ri-phone-line","label":"Numéro de téléphone","error-messages":_vm.phoneNumberErrors},on:{"input":function($event){return _vm.$v.item.phoneNumber.$touch()},"blur":function($event){return _vm.$v.item.phoneNumber.$touch()}},model:{value:(_vm.item.phoneNumber),callback:function ($$v) {_vm.$set(_vm.item, "phoneNumber", $$v)},expression:"item.phoneNumber"}})],1)],1),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"12","md":"6"}},[_c('v-text-field',{attrs:{"label":"Prénom *","error-messages":_vm.firstNameErrors},on:{"input":function($event){return _vm.$v.item.firstName.$touch()},"blur":function($event){return _vm.$v.item.firstName.$touch()}},model:{value:(_vm.item.firstName),callback:function ($$v) {_vm.$set(_vm.item, "firstName", $$v)},expression:"item.firstName"}})],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"12","sm":"6","md":"6"}},[_c('v-text-field',{attrs:{"label":"Nom *","error-messages":_vm.lastNameErrors},on:{"input":function($event){return _vm.$v.item.lastName.$touch()},"blur":function($event){return _vm.$v.item.lastName.$touch()}},model:{value:(_vm.item.lastName),callback:function ($$v) {_vm.$set(_vm.item, "lastName", $$v)},expression:"item.lastName"}})],1)],1),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"12","md":"6"}},[_c('v-text-field',{attrs:{"label":"Ville actuelle *","error-messages":_vm.cityErrors},on:{"input":function($event){return _vm.$v.item.city.$touch()},"blur":function($event){return _vm.$v.item.city.$touch()}},model:{value:(_vm.item.city),callback:function ($$v) {_vm.$set(_vm.item, "city", $$v)},expression:"item.city"}})],1)],1),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"12","md":"6"}},[_c('v-text-field',{attrs:{"label":"Comment nous as-tu connu ?"},model:{value:(_vm.item.origin),callback:function ($$v) {_vm.$set(_vm.item, "origin", $$v)},expression:"item.origin"}})],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"12","sm":"6","md":"6"}},[_c('v-checkbox',{attrs:{"label":"En cochant cette case tu acceptes que ces informations soient visibles par les membres de l'association « les Transalpins » ne faisant pas partie du bureau","hide-details":""},model:{value:(_vm.item.acceptance),callback:function ($$v) {_vm.$set(_vm.item, "acceptance", $$v)},expression:"item.acceptance"}})],1)],1),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_c('label',{staticClass:"v-label"},[_vm._v("De combien de personnes est composé ton foyer, prénom et âge des membres du foyer ?")])]),_vm._v(" "),_c('v-col',{attrs:{"cols":"12","md":"6"}},[_c('v-row',[_c('v-col',{attrs:{"cols":"6"}},[_c('v-text-field',{attrs:{"label":"Prénom"},model:{value:(_vm.item.family[0].firstName),callback:function ($$v) {_vm.$set(_vm.item.family[0], "firstName", $$v)},expression:"item.family[0].firstName"}})],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"6"}},[_c('v-text-field',{attrs:{"label":"Age","append-outer-icon":"ri-add-line","prepend-icon":"ri-subtract-line"},on:{"click:append-outer":function($event){return _vm.increment(0)},"click:prepend":function($event){return _vm.decrement(0)}},model:{value:(_vm.item.family[0].age),callback:function ($$v) {_vm.$set(_vm.item.family[0], "age", _vm._n($$v))},expression:"item.family[0].age"}})],1)],1)],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"12","md":"6"}},[_c('v-row',[_c('v-col',{attrs:{"cols":"6"}},[_c('v-text-field',{attrs:{"label":"Prénom"},model:{value:(_vm.item.family[1].firstName),callback:function ($$v) {_vm.$set(_vm.item.family[1], "firstName", $$v)},expression:"item.family[1].firstName"}})],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"6"}},[_c('v-text-field',{attrs:{"label":"Age","append-outer-icon":"ri-add-line","prepend-icon":"ri-subtract-line"},on:{"click:append-outer":function($event){return _vm.increment(1)},"click:prepend":function($event){return _vm.decrement(1)}},model:{value:(_vm.item.family[1].age),callback:function ($$v) {_vm.$set(_vm.item.family[1], "age", _vm._n($$v))},expression:"item.family[1].age"}})],1)],1)],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"12","md":"6"}},[_c('v-row',[_c('v-col',{attrs:{"cols":"6"}},[_c('v-text-field',{attrs:{"label":"Prénom"},model:{value:(_vm.item.family[2].firstName),callback:function ($$v) {_vm.$set(_vm.item.family[2], "firstName", $$v)},expression:"item.family[2].firstName"}})],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"6"}},[_c('v-text-field',{attrs:{"label":"Age","append-outer-icon":"ri-add-line","prepend-icon":"ri-subtract-line"},on:{"click:append-outer":function($event){return _vm.increment(2)},"click:prepend":function($event){return _vm.decrement(2)}},model:{value:(_vm.item.family[2].age),callback:function ($$v) {_vm.$set(_vm.item.family[2], "age", _vm._n($$v))},expression:"item.family[2].age"}})],1)],1)],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"12","md":"6"}},[_c('v-row',[_c('v-col',{attrs:{"cols":"6"}},[_c('v-text-field',{attrs:{"label":"Prénom"},model:{value:(_vm.item.family[3].firstName),callback:function ($$v) {_vm.$set(_vm.item.family[3], "firstName", $$v)},expression:"item.family[3].firstName"}})],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"6"}},[_c('v-text-field',{attrs:{"label":"Age","append-outer-icon":"ri-add-line","prepend-icon":"ri-subtract-line"},on:{"click:append-outer":function($event){return _vm.increment(3)},"click:prepend":function($event){return _vm.decrement(3)}},model:{value:(_vm.item.family[3].age),callback:function ($$v) {_vm.$set(_vm.item.family[3], "age", _vm._n($$v))},expression:"item.family[3].age"}})],1)],1)],1)],1),_vm._v(" "),_c('v-divider',{staticClass:"mb-5 mt-4"}),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_c('h2',[_vm._v("Quelle est ma raison d'être ? Quelles sont mes motivations pour rejoindre ce projet ?")])])],1),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_c('p',{staticClass:"v-label"},[_vm._v("\n          Dans les termes ci-dessous, quels sont ceux, quelques-uns qui définiraient le mieux ta motivation initiale à créer une oasis ? Les classer par ordre d’importance.\n        ")]),_vm._v(" "),_c('vuetify-draggable-treeview',{model:{value:(_vm.item.motivationsRaw),callback:function ($$v) {_vm.$set(_vm.item, "motivationsRaw", $$v)},expression:"item.motivationsRaw"}})],1)],1),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_c('v-textarea',{attrs:{"label":"Qu'est-ce qui te motive à créer ou à t'engager dans un projet d'Oasis ?","hint":"Tu peux développer à loisir ta réponse."},model:{value:(_vm.item.motivationsFreeThinking),callback:function ($$v) {_vm.$set(_vm.item, "motivationsFreeThinking", $$v)},expression:"item.motivationsFreeThinking"}})],1)],1),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_c('p',{staticClass:"v-label"},[_vm._v("\n          Quelles sont les valeurs essentielles que tu aimerais vivre : les valeurs non négociables, c-a-d dont l'absence ferait pour toi perdre son sens au projet et ta motivation à y participer ?\n        ")])])],1),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"6"}},[_c('v-textarea',{attrs:{"label":"Valeurs humaines"},model:{value:(_vm.item.coreValuesHuman),callback:function ($$v) {_vm.$set(_vm.item, "coreValuesHuman", $$v)},expression:"item.coreValuesHuman"}})],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"6"}},[_c('v-textarea',{attrs:{"label":"Valeurs autres"},model:{value:(_vm.item.coreValuesOther),callback:function ($$v) {_vm.$set(_vm.item, "coreValuesOther", $$v)},expression:"item.coreValuesOther"}})],1)],1),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"6"}},[_c('v-textarea',{attrs:{"label":"Qu’est-ce qui t'attire dans le projet des transalpins ?"},model:{value:(_vm.item.affinity),callback:function ($$v) {_vm.$set(_vm.item, "affinity", $$v)},expression:"item.affinity"}})],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"6"}},[_c('v-textarea',{attrs:{"label":"Qu’est-ce qui te questionne dans ce projet ?"},model:{value:(_vm.item.questioning),callback:function ($$v) {_vm.$set(_vm.item, "questioning", $$v)},expression:"item.questioning"}})],1)],1),_vm._v(" "),_c('v-divider',{staticClass:"mb-5 mt-4"}),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_c('h2',[_vm._v("Suis-je prêt.e à m'investir dans ce projet ?")])])],1),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_c('v-textarea',{attrs:{"label":"Qu'est tu prêt.e à lui apporter ?","hint":"(En plus de ce que tu peux apporter dans la vie quotidienne, développez ici des projets professionnels/rémunérateurs ou autre que tu souhaiterais mettre en place en marge de l'oasis et un exemple de fonctionnement)."},model:{value:(_vm.item.investment),callback:function ($$v) {_vm.$set(_vm.item, "investment", $$v)},expression:"item.investment"}})],1)],1),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"6"}},[_c('v-textarea',{attrs:{"label":"En tant qu’habitant.e, es-tu prêt.e à investir financièrement ?"},model:{value:(_vm.item.bring),callback:function ($$v) {_vm.$set(_vm.item, "bring", $$v)},expression:"item.bring"}})],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"6"}},[_c('v-textarea',{attrs:{"label":"Es-tu prêt.e à payer un loyer ?"},model:{value:(_vm.item.rent),callback:function ($$v) {_vm.$set(_vm.item, "rent", $$v)},expression:"item.rent"}})],1)],1),_vm._v(" "),_c('v-divider',{staticClass:"mb-5 mt-4"}),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_c('h2',[_vm._v("Ma vie au quotidien")])])],1),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_c('p',{staticClass:"v-label"},[_vm._v("\n          Des questions encore plus concrètes : A quoi ressemblera ma vie quand je vivrai là ?\n        ")])])],1),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"6"}},[_c('v-textarea',{attrs:{"label":"Décris une journée type"},model:{value:(_vm.item.typicalDay),callback:function ($$v) {_vm.$set(_vm.item, "typicalDay", $$v)},expression:"item.typicalDay"}})],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"6"}},[_c('v-textarea',{attrs:{"label":"Décris ton habitation"},model:{value:(_vm.item.dwelling),callback:function ($$v) {_vm.$set(_vm.item, "dwelling", $$v)},expression:"item.dwelling"}})],1)],1),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"6"}},[_c('v-textarea',{attrs:{"label":"Décrire les espaces communs","hint":"(Dans le cahier des charges nous avons déjà déterminé des espaces communs indispensables page 3, libre à toi d'en proposer d'autres)"},model:{value:(_vm.item.commonAreas),callback:function ($$v) {_vm.$set(_vm.item, "commonAreas", $$v)},expression:"item.commonAreas"}})],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"6"}},[_c('v-textarea',{attrs:{"label":"Décrire les relations au sein de l'oasis","hint":"(Nous souhaitons baser notre modèle de gouvernance sur la sociocratie avec des ajustements que nous ferons au fil des expérience)"},model:{value:(_vm.item.relationship),callback:function ($$v) {_vm.$set(_vm.item, "relationship", $$v)},expression:"item.relationship"}})],1)],1),_vm._v(" "),_c('v-divider',{staticClass:"mb-5 mt-4"}),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_c('h2',[_vm._v("Mes savoir-faire et savoir-être")])])],1),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"6"}},[_c('v-textarea',{attrs:{"label":"Connais-tu la CNV ? Si oui quelle est ton expérience ?"},model:{value:(_vm.item.cnvExperience),callback:function ($$v) {_vm.$set(_vm.item, "cnvExperience", $$v)},expression:"item.cnvExperience"}})],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"6"}},[_c('v-textarea',{attrs:{"label":"Connais-tu la gouvernance partagée si oui quelle est ton expérience ?"},model:{value:(_vm.item.sharedGovernance),callback:function ($$v) {_vm.$set(_vm.item, "sharedGovernance", $$v)},expression:"item.sharedGovernance"}})],1)],1),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"6"}},[_c('v-textarea',{attrs:{"label":"Quels sont tes savoir-faire/être que tu peux amener au projet"},model:{value:(_vm.item.skills),callback:function ($$v) {_vm.$set(_vm.item, "skills", $$v)},expression:"item.skills"}})],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"6"}},[_c('v-textarea',{attrs:{"label":"Quelles sont test limites ?"},model:{value:(_vm.item.limits),callback:function ($$v) {_vm.$set(_vm.item, "limits", $$v)},expression:"item.limits"}})],1)],1),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_c('v-textarea',{attrs:{"label":"Quelles sont test disponibilités durant la période de montage du projet ? Et tes disponibilités en semaine ?"},model:{value:(_vm.item.availability),callback:function ($$v) {_vm.$set(_vm.item, "availability", $$v)},expression:"item.availability"}})],1)],1),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"6"}},[_c('v-textarea',{attrs:{"label":"Serais-tu disposé.e à rencontrer des élus locaux, des banquiers, architectes… ?"},model:{value:(_vm.item.meet),callback:function ($$v) {_vm.$set(_vm.item, "meet", $$v)},expression:"item.meet"}})],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"6"}},[_c('v-textarea',{attrs:{"label":"Dans quel domaine utile au projet serais-tu prêt.e à te former ?"},model:{value:(_vm.item.skillUp),callback:function ($$v) {_vm.$set(_vm.item, "skillUp", $$v)},expression:"item.skillUp"}})],1)],1)],1)],1)}
@@ -1840,7 +1998,7 @@ var has_default = /*#__PURE__*/__webpack_require__.n(has_);
 var external_vuelidate_ = __webpack_require__(78);
 
 // EXTERNAL MODULE: external "vuetify-draggable-treeview"
-var external_vuetify_draggable_treeview_ = __webpack_require__(222);
+var external_vuetify_draggable_treeview_ = __webpack_require__(224);
 var external_vuetify_draggable_treeview_default = /*#__PURE__*/__webpack_require__.n(external_vuetify_draggable_treeview_);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--12-0!./node_modules/ts-loader??ref--12-1!./node_modules/vue-loader/lib??vue-loader-options!./app/components/survey_join/Form.vue?vue&type=script&lang=ts&
@@ -1993,7 +2151,7 @@ Formvue_type_script_lang_ts_SurveyJoinForm = __decorate([Object(external_nuxt_pr
 // CONCATENATED MODULE: ./app/components/survey_join/Form.vue?vue&type=script&lang=ts&
  /* harmony default export */ var survey_join_Formvue_type_script_lang_ts_ = (Formvue_type_script_lang_ts_); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(10);
+var componentNormalizer = __webpack_require__(9);
 
 // EXTERNAL MODULE: ./node_modules/vuetify-loader/lib/runtime/installComponents.js
 var installComponents = __webpack_require__(12);
@@ -2003,22 +2161,22 @@ var installComponents_default = /*#__PURE__*/__webpack_require__.n(installCompon
 var VCheckbox = __webpack_require__(331);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VCol.js
-var VCol = __webpack_require__(232);
+var VCol = __webpack_require__(252);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VContainer.js + 1 modules
-var VContainer = __webpack_require__(235);
+var VContainer = __webpack_require__(234);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDivider/VDivider.js
-var VDivider = __webpack_require__(205);
+var VDivider = __webpack_require__(207);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VForm/VForm.js
 var VForm = __webpack_require__(231);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
-var VRow = __webpack_require__(233);
+var VRow = __webpack_require__(232);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 4 modules
-var VTextField = __webpack_require__(204);
+var VTextField = __webpack_require__(206);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextarea/VTextarea.js
 var VTextarea = __webpack_require__(314);
@@ -2134,6 +2292,12 @@ let survey_joinvue_type_script_lang_ts_SurveyJoinPage = class SurveyJoinPage ext
       }]
     };
     this.downloadPdfUrl = "https://api.lestransalpins.org/api" + (((_a = "https://api.lestransalpins.org/api") === null || _a === void 0 ? void 0 : _a.endsWith('/')) ? '' : '/') + '../app-assets/files/questionnaire_transalpins_v1.pdf';
+  }
+
+  head() {
+    return {
+      title: this.page ? this.page.title : 'Rejoins le groupe fondateur !'
+    };
   }
 
   get page() {
@@ -2258,10 +2422,10 @@ survey_joinvue_type_script_lang_ts_SurveyJoinPage = survey_joinvue_type_script_l
 // CONCATENATED MODULE: ./app/pages/survey_join.vue?vue&type=script&lang=ts&
  /* harmony default export */ var pages_survey_joinvue_type_script_lang_ts_ = (survey_joinvue_type_script_lang_ts_); 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/VCard.js
-var VCard = __webpack_require__(69);
+var VCard = __webpack_require__(68);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/index.js
-var components_VCard = __webpack_require__(57);
+var components_VCard = __webpack_require__(58);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VImg/VImg.js + 2 modules
 var VImg = __webpack_require__(55);

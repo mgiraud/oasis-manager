@@ -63,6 +63,12 @@ export default class ContactVue extends mixins(NotificationMixin) {
 
   @pageModule.Getter('find') find!: (url: string) => Page | null
 
+  public head () {
+    return {
+      title: this.page ? this.page.title : 'Contacte-nous !'
+    }
+  }
+
   get page (): Page | null {
     return this.find('/api/pages/contact')
   };

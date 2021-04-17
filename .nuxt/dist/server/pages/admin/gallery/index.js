@@ -57,17 +57,17 @@ var external_vuex_ = __webpack_require__(41);
 // CONCATENATED MODULE: ./app/pages/admin/gallery/index.vue?vue&type=script&lang=js&
  /* harmony default export */ var admin_galleryvue_type_script_lang_js_ = (galleryvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(10);
+var componentNormalizer = __webpack_require__(9);
 
 // EXTERNAL MODULE: ./node_modules/vuetify-loader/lib/runtime/installComponents.js
 var installComponents = __webpack_require__(12);
 var installComponents_default = /*#__PURE__*/__webpack_require__.n(installComponents);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VContainer.js + 1 modules
-var VContainer = __webpack_require__(235);
+var VContainer = __webpack_require__(234);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
-var VRow = __webpack_require__(233);
+var VRow = __webpack_require__(232);
 
 // CONCATENATED MODULE: ./app/pages/admin/gallery/index.vue
 

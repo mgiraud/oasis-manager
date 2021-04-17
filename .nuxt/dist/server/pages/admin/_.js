@@ -16,7 +16,7 @@ var staticRenderFns = []
 // CONCATENATED MODULE: ./app/pages/admin/_.vue?vue&type=template&id=0e562272&
 
 // EXTERNAL MODULE: external "nuxt-property-decorator"
-var external_nuxt_property_decorator_ = __webpack_require__(8);
+var external_nuxt_property_decorator_ = __webpack_require__(7);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/admin/_.vue?vue&type=script&lang=js&
 var _dec, _class;
@@ -35,14 +35,14 @@ let _vue_type_script_lang_js_BackUpAdmin = (_dec = Object(external_nuxt_property
 // CONCATENATED MODULE: ./app/pages/admin/_.vue?vue&type=script&lang=js&
  /* harmony default export */ var _vue_type_script_lang_js_ = (_vue_type_script_lang_js_BackUpAdmin); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(10);
+var componentNormalizer = __webpack_require__(9);
 
 // EXTERNAL MODULE: ./node_modules/vuetify-loader/lib/runtime/installComponents.js
 var installComponents = __webpack_require__(12);
 var installComponents_default = /*#__PURE__*/__webpack_require__.n(installComponents);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VContainer.js + 1 modules
-var VContainer = __webpack_require__(235);
+var VContainer = __webpack_require__(234);
 
 // CONCATENATED MODULE: ./app/pages/admin/_.vue
 

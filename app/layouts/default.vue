@@ -9,6 +9,7 @@
       app
       dark
     >
+      <v-app-bar-nav-icon v-if="$vuetify.breakpoint.mobile" @click.stop="drawer = !drawer" />
       <template #img="{ props }">
         <v-img
           v-bind="props"
@@ -32,14 +33,30 @@
           ri-login-box-line
         </v-icon>
       </v-btn>
-      <template #extension>
-        <Menu />
+      <template v-if="!$vuetify.breakpoint.mobile" #extension>
+        <v-container fluid class="header-extension-container">
+          <v-row no-gutters>
+            <Menu />
+          </v-row>
+          <v-row no-gutters class="header-extension-row-submenu">
+            <SubMenu v-if="activeSlug !== null" />
+          </v-row>
+        </v-container>
       </template>
     </v-app-bar>
 
+    <v-navigation-drawer
+      v-if="$vuetify.breakpoint.mobile"
+      v-model="drawer"
+      app
+      width="auto"
+      temporary
+    >
+      <side-menu />
+    </v-navigation-drawer>
+
     <v-main class="secondary lighten-3">
-      <SubMenu v-if="activeSlug !== null" />
-      <v-card v-show="showSubHeader" class="card-newsletter">
+      <!-- <v-card v-show="showSubHeader" class="card-newsletter">
         <v-card-text>
           <v-container fluid ma-0 pa-0 fill-height>
             <v-row no-gutters align="center" justify="center">
@@ -58,7 +75,7 @@
             </v-row>
           </v-container>
         </v-card-text>
-      </v-card>
+      </v-card> -->
       <Nuxt />
       <alert />
     </v-main>
@@ -98,6 +115,7 @@ import { Vue, Component } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 import Menu from '~/components/layout/Menu.vue'
 import SubMenu from '~/components/layout/SubMenu.vue'
+import SideMenu from '~/components/layout/SideMenu.vue'
 import NewsletterForm from '~/components/contact_newsletter/Form.vue'
 import Alert from '~/components/util/Alert.vue'
 
@@ -106,11 +124,12 @@ const pageModule = namespace('page')
 
 @Component({
   components: {
-    Menu, SubMenu, NewsletterForm, Alert
+    Menu, SubMenu, NewsletterForm, Alert, SideMenu
   }
 })
 export default class DefaultLayout extends Vue {
     showSubHeader = true
+    drawer = false
     @pageModule.State('activeSlug') activeSlug!: string | null
     @securityModule.Action('logout') logout!: () => void
 
@@ -137,6 +156,21 @@ export default class DefaultLayout extends Vue {
 </script>
 
 <style>
+  .header-extension-container {
+    padding:0px;
+  }
+
+  .header-extension-container > .row{
+    margin-left: -16px;
+    margin-right: -16px;
+  }
+
+  .header-extension-row-submenu {
+    position: absolute;
+    min-width: 100%;
+    box-shadow: 0px 3px 3px -3px rgba(0, 0, 0, 0.1);
+  }
+
   .v-application a.header-link {
     text-decoration: none;
     text-transform: capitalize;

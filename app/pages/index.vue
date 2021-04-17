@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-row>
       <v-col cols="12">
         <v-card>
@@ -31,6 +31,12 @@ const pageModule = namespace('page')
 export default class IndexVue extends Vue {
   @securityModule.Action('logout') logout!: () => void
   @pageModule.Getter('find') find!: (url: string) => Page | null
+
+  public head () {
+    return {
+      title: 'Accueil'
+    }
+  }
 
   get page (): Page | null {
     return this.find('/api/pages/home')

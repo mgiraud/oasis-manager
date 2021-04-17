@@ -91,6 +91,12 @@ export default class SurveyJoinPage extends mixins(NotificationMixin) {
 
   @pageModule.Getter('find') find!: (url: string) => Page | null
 
+  public head () {
+    return {
+      title: this.page ? this.page.title : 'Rejoins le groupe fondateur !'
+    }
+  }
+
   get page (): Page | null {
     return this.find('/api/pages/survey-join')
   };

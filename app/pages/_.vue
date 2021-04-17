@@ -29,6 +29,12 @@ const pageModule = namespace('page')
 export default class BackUpVue extends Vue {
   @pageModule.Getter('find') find!: (url: string) => Page | null
 
+  public head () {
+    return {
+      title: this.page ? this.page.title : 'Le vide intersidédral'
+    }
+  }
+
   get page () {
     if (this.url !== null) {
       return this.find('/api/pages/' + decodeURIComponent(this.url))

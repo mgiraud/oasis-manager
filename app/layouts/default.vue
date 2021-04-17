@@ -9,7 +9,7 @@
       app
       dark
     >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon v-if="$vuetify.breakpoint.mobile" @click.stop="drawer = !drawer" />
       <template #img="{ props }">
         <v-img
           v-bind="props"

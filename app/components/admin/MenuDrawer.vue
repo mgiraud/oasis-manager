@@ -31,6 +31,32 @@
       </v-list-item>
 
       <v-list-group
+        v-if="filteredBlogItems.length > 0"
+        :value="true"
+        no-action
+        sub-group
+      >
+        <template #activator>
+          <v-list-item-content>
+            <v-list-item-title>Blog</v-list-item-title>
+          </v-list-item-content>
+        </template>
+
+        <v-list-item
+          v-for="([icon, title, path], i) in filteredBlogItems"
+          :key="i"
+          link
+          :to="{name: path}"
+        >
+          <v-list-item-title v-text="title" />
+
+          <v-list-item-icon>
+            <v-icon v-text="icon" />
+          </v-list-item-icon>
+        </v-list-item>
+      </v-list-group>
+
+      <v-list-group
         v-if="filteredPageItems.length > 0"
         :value="true"
         no-action
@@ -112,6 +138,11 @@ const securityModule = namespace('security')
 @Component
 export default class MenuDrawer extends Vue {
   drawer = null
+
+  blogItems = [
+    ['ri-article-line', 'Article', 'admin-blogArticle', 'USER_CAN_ACCESS_BLOG_ARTICLES']
+  ]
+
   pageItems = [
     ['ri-article-line', 'Pages', 'admin-page', 'USER_CAN_ACCESS_PAGES'],
     ['ri-folder-line', 'Categories', 'admin-pageCategory', 'USER_CAN_ACCESS_PAGE_CATEGORIES']
@@ -135,6 +166,10 @@ export default class MenuDrawer extends Vue {
 
   get filteredPageItems () {
     return this.pageItems.filter(([_icon, _title, _path, permission]) => this.hasPermission(permission))
+  }
+
+  get filteredBlogItems () {
+    return this.blogItems.filter(([_icon, _title, _path, permission]) => this.hasPermission(permission))
   }
 
   logout () {

@@ -116,6 +116,26 @@ class Permissions
      */
     const USER_CAN_DELETE_SURVEY_JOIN = 'user.can_delete_survey_joins';
 
+    /**
+     * The user can access page blog_articles
+     */
+    const USER_CAN_ACCESS_BLOG_ARTICLES = 'user.can_edit_access_blog_articles';
+
+    /**
+     * The user can create and edit page blog_articles
+     */
+    const USER_CAN_EDIT_BLOG_ARTICLES = 'user.can_edit_page_blog_articles';
+
+    /**
+     * The user can create and edit page blog_articles
+     */
+    const USER_CAN_DELETE_BLOG_ARTICLES = 'user.can_delete_page_blog_articles';
+
+    /**
+     * The user can delete tags
+     */
+    const USER_CAN_DELETE_TAGS = 'user.can_delete_page_blog_tags';
+
     public static function getPermissions(): array
     {
         $c = new \ReflectionClass(Permissions::class);

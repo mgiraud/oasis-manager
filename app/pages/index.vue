@@ -8,6 +8,13 @@
           <v-card-text v-else>
             Tu peux retrouver sur ce site toutes les informations relatives au projet de création d'un habitat partagé
           </v-card-text>
+          <v-container fluid>
+            <v-row v-for="article in articles" :key="article['@id']">
+              <v-col>
+                <blog-article-template :article="article" /></blog-article>
+              </v-col>
+            </v-row>
+          </v-container>
         </v-card>
       </v-col>
     </v-row>
@@ -18,19 +25,25 @@
 import { Vue, Component } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 import Template from '~/components/page/Template.vue'
+import { BlogArticle } from '~/store/blog_article'
 import { Page } from '~/store/page'
+import BlogArticleTemplate from '~/components/blog_article/BlogArticleTemplate.vue'
 
 const securityModule = namespace('security')
 const pageModule = namespace('page')
+const blogArticleModule = namespace('blog_article')
 
 @Component({
   components: {
-    Template
+    Template,
+    BlogArticleTemplate
   }
 })
 export default class IndexVue extends Vue {
   @securityModule.Action('logout') logout!: () => void
   @pageModule.Getter('find') find!: (url: string) => Page | null
+  @blogArticleModule.Action('fetchAll') fetchAll !: () => BlogArticle[]
+  @blogArticleModule.Getter('list') articles !: BlogArticle[]
 
   public head () {
     return {
@@ -41,5 +54,9 @@ export default class IndexVue extends Vue {
   get page (): Page | null {
     return this.find('/api/pages/home')
   };
+
+  mounted () {
+    this.fetchAll()
+  }
 }
 </script>

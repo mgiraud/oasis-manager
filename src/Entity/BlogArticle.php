@@ -1,0 +1,172 @@
+<?php
+
+namespace App\Entity;
+
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use App\Repository\BlogArticleRepository;
+use Doctrine\ORM\Mapping as ORM;
+use App\Controller\BlogArticle\GetTagsAction;
+use Symfony\Component\Serializer\Annotation\Groups;
+
+/**
+ * @ApiResource(
+ *     attributes={
+ *          "normalization_context"={"groups"={"blog_article:read"}},
+ *          "denormalization_context"={"groups"={"blog_article:write"}},
+ *     },
+ *     collectionOperations={
+ *         "get"={},
+ *         "post"={"security"="is_granted('USER_CAN_EDIT_BLOG_ARTICLES')"},
+ *         "get_tags"={
+ *             "method"="GET",
+ *             "path"="/blog_articles/tags",
+ *             "controller"=GetTagsAction::class,
+ *             "openapi_context"={
+ *                 "parameters"={}
+ *             },
+ *             "read"=false,
+ *         },
+ *     },
+ *     itemOperations={
+ *         "get"={},
+ *         "put"={"security"="is_granted('USER_CAN_EDIT_BLOG_ARTICLES')"},
+ *         "delete"={"security"="is_granted('USER_CAN_DELETE_BLOG_ARTICLES')"},
+ *     }
+ * )
+ * @ORM\Entity(repositoryClass=BlogArticleRepository::class)
+ * @ApiFilter(SearchFilter::class, properties={"title": "partial", "createdBy.nickname": "exact", "isPublished": "exact", "tags": "exact"})
+ * @ApiFilter(DateFilter::class, properties={"createdAt": DateFilter::EXCLUDE_NULL})
+ */
+class BlogArticle
+{
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="text")
+     * @Groups({"blog_article:read", "blog_article:write"})
+     */
+    private $title;
+
+    /**
+     * @ORM\Column(type="text")
+     * @Groups({"blog_article:read", "blog_article:write"})
+     */
+    private $content;
+
+    /**
+     * @ORM\Column(type="datetimetz")
+     * @Groups({"blog_article:read"})
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Member::class)
+     * @ORM\JoinColumn(nullable=false)
+     * @Groups({"blog_article:read"})
+     */
+    private $createdBy;
+
+    /**
+     * @ORM\Column(type="json")
+     * @Groups({"blog_article:read", "blog_article:write"})
+     */
+    private $tags;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @Groups({"blog_article:read", "blog_article:write"})
+     */
+    private $isPublished;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+        $this->isPublished = false;
+        $this->tags = [];
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(string $content): self
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getCreatedBy(): ?Member
+    {
+        return $this->createdBy;
+    }
+
+    public function setCreatedBy(?Member $createdBy): self
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    public function getTags(): array
+    {
+        return $this->tags;
+    }
+
+    public function setTags(array $tags): self
+    {
+        $this->tags = $tags;
+
+        return $this;
+    }
+
+    public function getIsPublished(): ?bool
+    {
+        return $this->isPublished;
+    }
+
+    public function setIsPublished(bool $isPublished): self
+    {
+        $this->isPublished = $isPublished;
+
+        return $this;
+    }
+}

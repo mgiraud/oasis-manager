@@ -15,6 +15,8 @@ let store = {};
   // Enforce store modules
   store.modules = store.modules || {}
 
+  resolveStoreModules(require('../app/store/blog_article_tags.ts'), 'blog_article_tags.ts')
+  resolveStoreModules(require('../app/store/blog_article.ts'), 'blog_article.ts')
   resolveStoreModules(require('../app/store/contact_newsletter.ts'), 'contact_newsletter.ts')
   resolveStoreModules(require('../app/store/contact.ts'), 'contact.ts')
   resolveStoreModules(require('../app/store/crud.ts'), 'crud.ts')

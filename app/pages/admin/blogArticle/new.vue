@@ -20,8 +20,8 @@ const blogArticleModule = namespace('blog_article')
   components: {
     Loading, Toolbar, Form
   },
-  servicePrefix: 'admin-blog_articles',
-  resourcePrefix: '/api/blogArticle/',
+  servicePrefix: 'admin-blogArticle',
+  resourcePrefix: '/api/blog_articles/',
   middleware: 'hasPermissions',
   meta: {
     permissions: ['USER_CAN_EDIT_BLOG_ARTICLES']

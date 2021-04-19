@@ -20,7 +20,6 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
 /**
  * @ApiResource(
  *     attributes={
- *          "pagination_enabled"=false,
  *          "normalization_context"={"groups"={"page:read"}},
  *          "denormalization_context"={"groups"={"page:write"}},
  *     },

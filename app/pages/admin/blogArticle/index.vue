@@ -57,6 +57,7 @@ import FormFilter from '~/components/form/FormFilter.vue'
 import list from '~/mixins/list'
 import { BlogArticle } from '~/store/blog_article'
 import { MUTATIONS } from '~/store/crud'
+import { HydraGetRequestFilter } from '~/api/hydra'
 
 const blogArticleModule = namespace('blog_article')
 
@@ -83,9 +84,10 @@ export default class AdminBlogArticleIndex extends mixins(list) {
     { text: 'Actions', value: 'actions', sortable: false }
   ]
 
-  async fetch ({ store }: { store: Store<any> }) {
-    return await store.dispatch('blog_article/fetchAll')
-  }
+    options: HydraGetRequestFilter = {
+      sortBy: ['createdAt'],
+      sortDesc: ['desc']
+    }
 
     @blogArticleModule.Getter('list') items !: () => BlogArticle
     @blogArticleModule.State('deleted') deletedItem!: BlogArticle | null
@@ -104,9 +106,5 @@ export default class AdminBlogArticleIndex extends mixins(list) {
 
     @blogArticleModule.Action('fetchAll') fetchAll!: () => BlogArticle[]
     @blogArticleModule.Action('del') deleteItem!: (BlogArticle: BlogArticle) => Promise<void>
-
-    editItem (item: BlogArticle) {
-      this.$router.push({ name: 'admin-blogArticle-id', params: { id: item['@id'] } })
-    }
 }
 </script>

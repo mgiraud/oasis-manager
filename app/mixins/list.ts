@@ -60,13 +60,12 @@ export default class ListMixin extends mixins(NotificationMixin) {
       itemsPerPage,
       totalItems
     })
-
     this.fetchAll(params)
   }
 
   onSendFilter () {
     this.resetList(true)
-    this.onUpdateOptions(this.options)
+    // this.onUpdateOptions(this.options)
   }
 
   resetFilter () {
@@ -94,6 +93,6 @@ export default class ListMixin extends mixins(NotificationMixin) {
   }
 
   deleteHandler (item: HydraMemberObject) {
-    this.deleteItem(item).then(() => this.onUpdateOptions(this.options))
+    // this.deleteItem(item).then(() => this.onUpdateOptions(this.options))
   }
 }

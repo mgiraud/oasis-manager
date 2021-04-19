@@ -5,16 +5,19 @@ import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
 const _2fe0b625 = () => interopDefault(import('../app/pages/admin.vue' /* webpackChunkName: "pages/admin" */))
+const _f65442e6 = () => interopDefault(import('../app/pages/admin/blogArticle/index.vue' /* webpackChunkName: "pages/admin/blogArticle/index" */))
 const _c7cea72a = () => interopDefault(import('../app/pages/admin/gallery/index.vue' /* webpackChunkName: "pages/admin/gallery/index" */))
 const _10a524f7 = () => interopDefault(import('../app/pages/admin/member/index.vue' /* webpackChunkName: "pages/admin/member/index" */))
 const _c3bc6344 = () => interopDefault(import('../app/pages/admin/memberGroup/index.vue' /* webpackChunkName: "pages/admin/memberGroup/index" */))
 const _6fb1572c = () => interopDefault(import('../app/pages/admin/page/index.vue' /* webpackChunkName: "pages/admin/page/index" */))
 const _154189ca = () => interopDefault(import('../app/pages/admin/pageCategory/index.vue' /* webpackChunkName: "pages/admin/pageCategory/index" */))
+const _15ac15ca = () => interopDefault(import('../app/pages/admin/blogArticle/new.vue' /* webpackChunkName: "pages/admin/blogArticle/new" */))
 const _320bce05 = () => interopDefault(import('../app/pages/admin/member/new.vue' /* webpackChunkName: "pages/admin/member/new" */))
 const _4da1a52c = () => interopDefault(import('../app/pages/admin/memberGroup/new.vue' /* webpackChunkName: "pages/admin/memberGroup/new" */))
 const _3779097a = () => interopDefault(import('../app/pages/admin/page/new.vue' /* webpackChunkName: "pages/admin/page/new" */))
 const _22114b98 = () => interopDefault(import('../app/pages/admin/pageCategory/new.vue' /* webpackChunkName: "pages/admin/pageCategory/new" */))
 const _45affbe8 = () => interopDefault(import('../app/pages/admin/gallery/folders/_id/index.vue' /* webpackChunkName: "pages/admin/gallery/folders/_id/index" */))
+const _3d17bf96 = () => interopDefault(import('../app/pages/admin/blogArticle/_id.vue' /* webpackChunkName: "pages/admin/blogArticle/_id" */))
 const _76c0cc54 = () => interopDefault(import('../app/pages/admin/gallery/_id/index.vue' /* webpackChunkName: "pages/admin/gallery/_id/index" */))
 const _1e55f91f = () => interopDefault(import('../app/pages/admin/member/_id.vue' /* webpackChunkName: "pages/admin/member/_id" */))
 const _39ebd046 = () => interopDefault(import('../app/pages/admin/memberGroup/_id.vue' /* webpackChunkName: "pages/admin/memberGroup/_id" */))
@@ -44,6 +47,10 @@ export const routerOptions = {
     component: _2fe0b625,
     name: "admin",
     children: [{
+      path: "blogArticle",
+      component: _f65442e6,
+      name: "admin-blogArticle"
+    }, {
       path: "gallery",
       component: _c7cea72a,
       name: "admin-gallery"
@@ -64,6 +71,10 @@ export const routerOptions = {
       component: _154189ca,
       name: "admin-pageCategory"
     }, {
+      path: "blogArticle/new",
+      component: _15ac15ca,
+      name: "admin-blogArticle-new"
+    }, {
       path: "member/new",
       component: _320bce05,
       name: "admin-member-new"
@@ -83,6 +94,10 @@ export const routerOptions = {
       path: "gallery/folders/:id",
       component: _45affbe8,
       name: "admin-gallery-folders-id"
+    }, {
+      path: "blogArticle/:id",
+      component: _3d17bf96,
+      name: "admin-blogArticle-id"
     }, {
       path: "gallery/:id",
       component: _76c0cc54,

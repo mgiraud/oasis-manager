@@ -1,7 +1,7 @@
 exports.ids = [3];
 exports.modules = {
 
-/***/ 364:
+/***/ 378:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -35,14 +35,14 @@ let _vue_type_script_lang_js_BackUpAdmin = (_dec = Object(external_nuxt_property
 // CONCATENATED MODULE: ./app/pages/admin/_.vue?vue&type=script&lang=js&
  /* harmony default export */ var _vue_type_script_lang_js_ = (_vue_type_script_lang_js_BackUpAdmin); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(9);
+var componentNormalizer = __webpack_require__(10);
 
 // EXTERNAL MODULE: ./node_modules/vuetify-loader/lib/runtime/installComponents.js
 var installComponents = __webpack_require__(12);
 var installComponents_default = /*#__PURE__*/__webpack_require__.n(installComponents);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VContainer.js + 1 modules
-var VContainer = __webpack_require__(234);
+var VContainer = __webpack_require__(238);
 
 // CONCATENATED MODULE: ./app/pages/admin/_.vue
 

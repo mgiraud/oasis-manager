@@ -1,7 +1,7 @@
-exports.ids = [6];
+exports.ids = [9];
 exports.modules = {
 
-/***/ 353:
+/***/ 365:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -57,17 +57,17 @@ var external_vuex_ = __webpack_require__(41);
 // CONCATENATED MODULE: ./app/pages/admin/gallery/index.vue?vue&type=script&lang=js&
  /* harmony default export */ var admin_galleryvue_type_script_lang_js_ = (galleryvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(9);
+var componentNormalizer = __webpack_require__(10);
 
 // EXTERNAL MODULE: ./node_modules/vuetify-loader/lib/runtime/installComponents.js
 var installComponents = __webpack_require__(12);
 var installComponents_default = /*#__PURE__*/__webpack_require__.n(installComponents);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VContainer.js + 1 modules
-var VContainer = __webpack_require__(234);
+var VContainer = __webpack_require__(238);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
-var VRow = __webpack_require__(232);
+var VRow = __webpack_require__(236);
 
 // CONCATENATED MODULE: ./app/pages/admin/gallery/index.vue
 

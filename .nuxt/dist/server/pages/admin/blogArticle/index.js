@@ -4682,8 +4682,7 @@ let ListMixin = class ListMixin extends Object(nuxt_property_decorator__WEBPACK_
   }
 
   onSendFilter() {
-    this.resetList(true);
-    this.onUpdateOptions(this.options);
+    this.resetList(true); // this.onUpdateOptions(this.options)
   }
 
   resetFilter() {
@@ -4716,8 +4715,7 @@ let ListMixin = class ListMixin extends Object(nuxt_property_decorator__WEBPACK_
     });
   }
 
-  deleteHandler(item) {
-    this.deleteItem(item).then(() => this.onUpdateOptions(this.options));
+  deleteHandler(item) {// this.deleteItem(item).then(() => this.onUpdateOptions(this.options))
   }
 
 };
@@ -9760,12 +9758,12 @@ installComponents_default()(component, {VDatePicker: VDatePicker,VMenu: VMenu["a
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/admin/blogArticle/index.vue?vue&type=template&id=b1a9b4ba&
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/admin/blogArticle/index.vue?vue&type=template&id=6239afce&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-container',[_c('v-data-table',{staticClass:"elevation-1",attrs:{"headers":_vm.headers,"items":_vm.items,"items-per-page":_vm.options.itemsPerPage,"loading":_vm.isLoading,"loading-text":"Loading...","options":_vm.options,"server-items-length":_vm.totalItems,"item-key":"@id","show-select":""},on:{"update:itemsPerPage":function($event){return _vm.$set(_vm.options, "itemsPerPage", $event)},"update:items-per-page":function($event){return _vm.$set(_vm.options, "itemsPerPage", $event)},"update:options":[function($event){_vm.options=$event},_vm.onUpdateOptions]},scopedSlots:_vm._u([{key:"top",fn:function(){return [_c('v-toolbar',{attrs:{"flat":"","color":"white"}},[_c('v-toolbar-title',[_vm._v("BlogArticle")]),_vm._v(" "),_c('v-spacer'),_vm._v(" "),_c('FormFilter',{attrs:{"handle-filter":_vm.onSendFilter,"handle-reset":_vm.resetFilter}},[_c('BlogArticleFilter',{ref:"filterForm",attrs:{"slot":"filter","values":_vm.filters},slot:"filter"})],1),_vm._v(" "),_c('v-btn',{staticClass:"ml-2",attrs:{"color":"primary","dark":""},on:{"click":_vm.addHandler}},[_vm._v("\n          New Item\n        ")])],1)]},proxy:true},{key:"item.actions",fn:function(props){return _c('ActionCell',{attrs:{"handle-edit":_vm.canEditBlogArticle ? function () { return _vm.editHandler(props.item); } : null,"handle-delete":_vm.canDeleteBlogArticle ? function () { return _vm.deleteHandler(props.item); } : null}})}}]),model:{value:(_vm.selected),callback:function ($$v) {_vm.selected=$$v},expression:"selected"}})],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./app/pages/admin/blogArticle/index.vue?vue&type=template&id=b1a9b4ba&
+// CONCATENATED MODULE: ./app/pages/admin/blogArticle/index.vue?vue&type=template&id=6239afce&
 
 // EXTERNAL MODULE: external "nuxt-property-decorator"
 var external_nuxt_property_decorator_ = __webpack_require__(7);
@@ -9773,12 +9771,12 @@ var external_nuxt_property_decorator_ = __webpack_require__(7);
 // EXTERNAL MODULE: ./app/components/table/ActionCell.vue + 4 modules
 var ActionCell = __webpack_require__(299);
 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/components/admin/blogArticle/BlogArticleFilter.vue?vue&type=template&id=2dc9ab68&
-var BlogArticleFiltervue_type_template_id_2dc9ab68_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-container',{attrs:{"fluid":""}},[_c('v-row',[_c('v-col',{attrs:{"cols":"12","sm":"6","md":"6"}},[_c('v-checkbox',{attrs:{"label":"Est publié"},model:{value:(_vm.item.isPublished),callback:function ($$v) {_vm.$set(_vm.item, "isPublished", $$v)},expression:"item.isPublished"}})],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"12","sm":"6","md":"6"}},[_c('DateType',{attrs:{"label":"Créé avant le"},model:{value:(_vm.item['createdAt[before]']),callback:function ($$v) {_vm.$set(_vm.item, 'createdAt[before]', $$v)},expression:"item['createdAt[before]']"}})],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"12","sm":"6","md":"6"}},[_c('DateType',{attrs:{"label":"Créé après le"},model:{value:(_vm.item['createdAt[after]']),callback:function ($$v) {_vm.$set(_vm.item, 'createdAt[after]', $$v)},expression:"item['createdAt[after]']"}})],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"12","sm":"6","md":"6"}},[(_vm.item.tags)?_c('v-combobox',{attrs:{"items":_vm.item.tags,"no-data-text":"Aucun tag","label":"Avec le tag","item-text":"name","item-value":"@id","clearable":""},model:{value:(_vm.item.tags),callback:function ($$v) {_vm.$set(_vm.item, "tags", $$v)},expression:"item.tags"}}):_vm._e()],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"12","sm":"6","md":"6"}},[_c('v-text-field',{attrs:{"label":"Le titre contient...","type":"text"},model:{value:(_vm.item.title),callback:function ($$v) {_vm.$set(_vm.item, "title", $$v)},expression:"item.title"}})],1)],1)],1)}
-var BlogArticleFiltervue_type_template_id_2dc9ab68_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/components/admin/blogArticle/BlogArticleFilter.vue?vue&type=template&id=1cd83106&
+var BlogArticleFiltervue_type_template_id_1cd83106_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-container',{attrs:{"fluid":""}},[_c('v-row',[_c('v-col',{attrs:{"cols":"12","sm":"6","md":"6"}},[_c('v-checkbox',{attrs:{"label":"Est publié"},model:{value:(_vm.item.isPublished),callback:function ($$v) {_vm.$set(_vm.item, "isPublished", $$v)},expression:"item.isPublished"}})],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"12","sm":"6","md":"6"}},[_c('DateType',{attrs:{"label":"Créé avant le"},model:{value:(_vm.item['createdAt[before]']),callback:function ($$v) {_vm.$set(_vm.item, 'createdAt[before]', $$v)},expression:"item['createdAt[before]']"}})],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"12","sm":"6","md":"6"}},[_c('DateType',{attrs:{"label":"Créé après le"},model:{value:(_vm.item['createdAt[after]']),callback:function ($$v) {_vm.$set(_vm.item, 'createdAt[after]', $$v)},expression:"item['createdAt[after]']"}})],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"12","sm":"6","md":"6"}},[(_vm.item.tags)?_c('v-combobox',{attrs:{"items":_vm.item.tags,"no-data-text":"Aucun tag","label":"Avec le tag","item-text":"name","item-value":"@id","clearable":""},model:{value:(_vm.item.tags),callback:function ($$v) {_vm.$set(_vm.item, "tags", $$v)},expression:"item.tags"}}):_vm._e()],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"12","sm":"6","md":"6"}},[_c('v-text-field',{attrs:{"label":"Le titre contient...","type":"text"},model:{value:(_vm.item.title),callback:function ($$v) {_vm.$set(_vm.item, "title", $$v)},expression:"item.title"}})],1)],1)],1)}
+var BlogArticleFiltervue_type_template_id_1cd83106_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./app/components/admin/blogArticle/BlogArticleFilter.vue?vue&type=template&id=2dc9ab68&
+// CONCATENATED MODULE: ./app/components/admin/blogArticle/BlogArticleFilter.vue?vue&type=template&id=1cd83106&
 
 // EXTERNAL MODULE: ./app/components/form/DateType.vue + 24 modules
 var DateType = __webpack_require__(342);
@@ -9849,8 +9847,8 @@ var VTextField = __webpack_require__(208);
 
 var component = Object(componentNormalizer["a" /* default */])(
   blogArticle_BlogArticleFiltervue_type_script_lang_ts_,
-  BlogArticleFiltervue_type_template_id_2dc9ab68_render,
-  BlogArticleFiltervue_type_template_id_2dc9ab68_staticRenderFns,
+  BlogArticleFiltervue_type_template_id_1cd83106_render,
+  BlogArticleFiltervue_type_template_id_1cd83106_staticRenderFns,
   false,
   null,
   null,
@@ -9916,12 +9914,10 @@ let blogArticlevue_type_script_lang_ts_AdminBlogArticleIndex = class AdminBlogAr
       value: 'actions',
       sortable: false
     }];
-  }
-
-  async fetch({
-    store
-  }) {
-    return await store.dispatch('blog_article/fetchAll');
+    this.options = {
+      sortBy: ['createdAt'],
+      sortDesc: ['desc']
+    };
   }
 
   get canEditBlogArticle() {
@@ -9930,15 +9926,6 @@ let blogArticlevue_type_script_lang_ts_AdminBlogArticleIndex = class AdminBlogAr
 
   get canDeleteBlogArticle() {
     return this.hasPermission('USER_CAN_DELETE_BLOG_ARTICLES');
-  }
-
-  editItem(item) {
-    this.$router.push({
-      name: 'admin-blogArticle-id',
-      params: {
-        id: item['@id']
-      }
-    });
   }
 
 };

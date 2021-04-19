@@ -4682,8 +4682,7 @@ let ListMixin = class ListMixin extends Object(nuxt_property_decorator__WEBPACK_
   }
 
   onSendFilter() {
-    this.resetList(true);
-    this.onUpdateOptions(this.options);
+    this.resetList(true); // this.onUpdateOptions(this.options)
   }
 
   resetFilter() {
@@ -4716,8 +4715,7 @@ let ListMixin = class ListMixin extends Object(nuxt_property_decorator__WEBPACK_
     });
   }
 
-  deleteHandler(item) {
-    this.deleteItem(item).then(() => this.onUpdateOptions(this.options));
+  deleteHandler(item) {// this.deleteItem(item).then(() => this.onUpdateOptions(this.options))
   }
 
 };

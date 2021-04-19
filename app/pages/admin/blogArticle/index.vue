@@ -79,7 +79,7 @@ export default class AdminBlogArticleIndex extends mixins(list) {
     { text: 'Title', value: 'title' },
     { text: 'Tags', value: 'tags' },
     { text: 'est publié', value: 'isPublished' },
-    { text: 'créé par', value: 'createdBy' },
+    { text: 'créé par', value: 'createdBy.nickname' },
     { text: 'Actions', value: 'actions', sortable: false }
   ]
 

@@ -24,9 +24,9 @@
 
       <v-col cols="12" sm="6" md="6">
         <v-combobox
-          v-if="blogTags"
+          v-if="item.tags"
           v-model="item.tags"
-          :items="blogTags"
+          :items="item.tags"
           no-data-text="Aucun tag"
           label="Avec le tag"
           item-text="name"
@@ -48,9 +48,6 @@
 <script lang="ts">
 import { Component, Vue, namespace, Prop } from 'nuxt-property-decorator'
 import DateType from '~/components/form/DateType.vue'
-import { BlogTag } from '~/store/blog_tag'
-
-const blogTagModule = namespace('blog_tag')
 
 @Component({
   components: {
@@ -59,13 +56,6 @@ const blogTagModule = namespace('blog_tag')
 })
 export default class BlogArticleFilter extends Vue {
   @Prop({ type: Object, required: true }) readonly values!: any
-
-  async fetch () {
-    return await this.categoryGetSelectItems()
-  }
-
-  @blogTagModule.State('selectItems') blogTags !: BlogTag[]
-  @blogTagModule.Action('fetchSelectItems') categoryGetSelectItems !: () => BlogTag[]
 
   get item () {
     return this.values

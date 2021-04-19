@@ -21,22 +21,17 @@
             input-value="true"
           />
         </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12" md="6">
-          <v-col cols="12" sm="6" md="6">
-            <v-combobox
-              v-if="blogTags"
-              v-model="item.tags"
-              :items="blogTags"
-              no-data-text="Aucun tag"
-              label="Tags"
-              :return-object="false"
-              clearable
-              multiple
-            />
-          </v-col>
-          <v-col cols="12" md="6" />
+        <v-col cols="12" sm="6" md="6">
+          <v-combobox
+            v-if="item.tags"
+            v-model="item.tags"
+            :items="item.tags"
+            no-data-text="Aucun tag"
+            label="Tags"
+            :return-object="false"
+            clearable
+            multiple
+          />
         </v-col>
       </v-row>
       <v-row>
@@ -59,8 +54,6 @@ import { required, minLength, helpers } from 'vuelidate/lib/validators'
 import has from 'lodash/has'
 import { validationMixin } from 'vuelidate'
 import Editor from '../../util/Editor.vue'
-
-const blogTagModule = namespace('blog_article_tags')
 
 @Component({
   name: 'AdminPageForm',
@@ -86,9 +79,6 @@ export default class AdminBlogArticleForm extends mixins(validationMixin) {
   @Prop({ type: Object, default: () => {} })
   initialValues!: any
 
-  @blogTagModule.State('selectItems') blogTags!: string[] | null
-  @blogTagModule.Action('fetchSelectItems') blogTagsGetSelectItems!: () => string[]
-
   get item () {
     return this.initialValues || this.values
   }
@@ -111,10 +101,6 @@ export default class AdminBlogArticleForm extends mixins(validationMixin) {
 
   get violations () {
     return this.errors || {}
-  }
-
-  mounted () {
-    this.blogTagsGetSelectItems()
   }
 }
 </script>

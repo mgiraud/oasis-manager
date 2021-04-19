@@ -54,7 +54,6 @@ export default (context: Context, { resource }: { resource: string }): Repositor
     }
 
     options.credentials = 'include'
-
     if (options.params) {
       const params = normalize(options.params)
       const queryString = Object.keys(params)

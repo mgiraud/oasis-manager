@@ -6517,12 +6517,12 @@ installComponents_default()(component, {VCol: VCol["a" /* default */],VCombobox:
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/admin/blogArticle/new.vue?vue&type=template&id=442431be&
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/admin/blogArticle/new.vue?vue&type=template&id=4728c5a1&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('Form',{ref:"createForm",attrs:{"values":_vm.item,"errors":_vm.violations}}),_vm._ssrNode(" "),_c('Toolbar',{attrs:{"handle-submit":_vm.onSendForm,"handle-reset":_vm.resetForm}}),_vm._ssrNode(" "),_c('Loading',{attrs:{"visible":_vm.isLoading}})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./app/pages/admin/blogArticle/new.vue?vue&type=template&id=442431be&
+// CONCATENATED MODULE: ./app/pages/admin/blogArticle/new.vue?vue&type=template&id=4728c5a1&
 
 // EXTERNAL MODULE: external "nuxt-property-decorator"
 var external_nuxt_property_decorator_ = __webpack_require__(7);
@@ -6584,8 +6584,8 @@ newvue_type_script_lang_ts_AdminBlogArticleNew = __decorate([Object(external_nux
     Toolbar: Toolbar["a" /* default */],
     Form: Form["a" /* default */]
   },
-  servicePrefix: 'admin-blog_articles',
-  resourcePrefix: '/api/blogArticle/',
+  servicePrefix: 'admin-blogArticle',
+  resourcePrefix: '/api/blog_articles/',
   middleware: 'hasPermissions',
   meta: {
     permissions: ['USER_CAN_EDIT_BLOG_ARTICLES']

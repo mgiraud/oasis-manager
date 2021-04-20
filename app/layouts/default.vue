@@ -56,7 +56,7 @@
     </v-navigation-drawer>
 
     <v-main class="secondary lighten-3">
-      <!-- <v-card v-show="showSubHeader" class="card-newsletter">
+      <v-card v-show="showSubHeader" class="card-newsletter">
         <v-card-text>
           <v-container fluid ma-0 pa-0 fill-height>
             <v-row no-gutters align="center" justify="center">
@@ -75,7 +75,7 @@
             </v-row>
           </v-container>
         </v-card-text>
-      </v-card> -->
+      </v-card>
       <Nuxt />
       <alert />
     </v-main>

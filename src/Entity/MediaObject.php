@@ -54,7 +54,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *     }
  * )
  * @Vich\Uploadable
- * @ApiFilter(SearchFilter::class, properties={"mediaGalleryItem.id": "exact"})
+ * @ApiFilter(SearchFilter::class, properties={"mediaGalleryItem": "exact"})
  * @ORM\HasLifecycleCallbacks()
  */
 class MediaObject
@@ -114,6 +114,14 @@ class MediaObject
      * @Groups({"media_object:read"})
      */
     public $isImage = false;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(nullable=true, type="text")
+     * @Groups({"media_object:read", "media_object:write"})
+     */
+    public $customName;
 
     public function getId(): ?int
     {

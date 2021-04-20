@@ -1,7 +1,7 @@
 <template>
   <v-dialog
     v-model="dialog"
-    width="600"
+    width="90%"
   >
     <template #activator="{ on: onDropdown, attrs: attrsDropdown }">
       <v-tooltip top>
@@ -55,7 +55,7 @@
           Sélectionner des fichiers à téléverser
         </v-btn>
         <v-divider />
-        <file-navigator :select-image="selectImage" :select-link="selectLink" />
+        <file-navigator :click-handler="selectItem" />
       </v-card-text>
       <v-card-actions>
         <v-spacer />
@@ -74,7 +74,7 @@
 <script lang="ts">
 import { Editor } from '@tiptap/core'
 import { Component, Prop, Vue, Watch } from 'nuxt-property-decorator'
-import FileNavigator from './FileNavigator.vue'
+import FileNavigator from '~/components/file_navigator/FileNavigator.vue'
 import { MediaObject } from '~/store/media_object'
 
 interface Thumbnail {
@@ -103,6 +103,14 @@ export default class FileUploadBtn extends Vue {
   reset (): void {
     this.thumbnails = []
     this.links = []
+  }
+
+  selectItem (item: MediaObject) {
+    if (item.isImage) {
+      this.selectImage(item)
+    } else {
+      this.selectLink(item)
+    }
   }
 
   selectImage (res: MediaObject) {

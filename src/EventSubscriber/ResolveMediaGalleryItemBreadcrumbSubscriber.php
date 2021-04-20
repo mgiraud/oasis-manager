@@ -26,18 +26,23 @@ class ResolveMediaGalleryItemBreadcrumbSubscriber implements EventSubscriberInte
     {
         $breadcrumb = [];
         while ($item->getParent() instanceof MediaGalleryItem) {
-            array_unshift($breadcrumb, ['id' => $item->getId(), 'name' => $item->getName()]);
+            array_unshift($breadcrumb, [
+                '@id' => '/api/media_gallery_items/' . $item->getId(),
+                'name' => $item->getName(),
+                'type' => 'item'
+            ]);
             $item = $item->getParent();
         }
         if ($item->getGallery() instanceof MediaGallery) {
             array_unshift($breadcrumb,
                 [
-                    'id' => $item->getGallery()->getId(),
+                    // TODO Dirty
+                    '@id' => '/api/media_galleries/' . $item->getGallery()->getId(),
                     'name' => $item->getGallery()->getName(),
+                    'type' => 'gallery'
                 ]
             );
         }
-
         return $breadcrumb;
     }
 
@@ -53,8 +58,7 @@ class ResolveMediaGalleryItemBreadcrumbSubscriber implements EventSubscriberInte
         }
 
         if (!($attributes = RequestAttributesExtractor::extractAttributes($request
-            )) || (!\is_a($attributes['resource_class'], MediaGalleryItem::class, true)
-                && !\is_a($attributes['resource_class'], MediaGallery::class, true))) {
+            )) || !\is_a($attributes['resource_class'], MediaGalleryItem::class, true)) {
             return;
         }
 

@@ -268,6 +268,9 @@ export default function makeCrudModule ({
         await handleError(commit, e)
       }
     },
+    resetList: ({ commit }) => {
+      commit(MUTATIONS.RESET_LIST)
+    },
     resetCreate: ({ commit }) => {
       commit(MUTATIONS.RESET_CREATE)
     },

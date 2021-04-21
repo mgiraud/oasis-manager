@@ -2,9 +2,15 @@
   <v-container>
     <v-row>
       <v-col v-for="item in mediaObjects" :key="item['@id']">
-        {{ item['@id'] }}
-        <v-img v-if="item.isImage" :src="item.contentUrl" max-height="200" max-width="200" @click="clickHandler(item)" />
-        <span v-else @click="clickHandler(item)">{{ item.filePath }}</span>
+        <v-img
+          v-if="item.isImage"
+          :src="item.contentUrl"
+          max-height="200"
+          max-width="200"
+          class="file-navigator-object"
+          @click="clickHandler(item)"
+        />
+        <span v-else class="file-navigator-object" @click="clickHandler(item)">{{ item.filePath }}</span>
       </v-col>
     </v-row>
   </v-container>
@@ -42,3 +48,9 @@ export default class FileNavigatorFiles extends Vue {
   }
 }
 </script>
+
+<style scoped>
+.file-navigator-object {
+  cursor: pointer;
+}
+</style>

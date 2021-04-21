@@ -9,6 +9,9 @@ parameters:
         no-reply:
             name: 'Ne pas répondre'
             email: '%env(EMAIL_NO_REPLY)%'
+        contact:
+            name: 'Ne pas répondre'
+            email: '%env(EMAIL_CONTACT)%'
     app_scheme: '%env(SCHEME)%'
     app_domain: '%env(DOMAIN)%'
 

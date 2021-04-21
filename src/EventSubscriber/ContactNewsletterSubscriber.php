@@ -70,6 +70,7 @@ class ContactNewsletterSubscriber implements EventSubscriberInterface
         $emailToWarnAdmin = (new Email())
             ->from($this->emailFactory->getAddress('no-reply'))
             ->to($this->emailFactory->getAddress('admin'))
+            ->addTo($this->emailFactory->getAddress('contact'))
             ->subject('Nouvelle inscription à la newsletter')
             ->html($this->twig->render('mail/contact_newsletter.html.twig', [
                 'contactNewsletter' => $contactNewsletter

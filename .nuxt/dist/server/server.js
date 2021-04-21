@@ -13581,14 +13581,14 @@ var Admin_component = Object(componentNormalizer["a" /* default */])(
 
 installComponents_default()(Admin_component, {VApp: VApp_VApp,VContainer: VContainer["a" /* default */],VMain: VMain["a" /* default */]})
 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/layouts/default.vue?vue&type=template&id=00ef67f4&
-var defaultvue_type_template_id_00ef67f4_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-app',[_c('v-app-bar',{attrs:{"src":"https://picsum.photos/1920/1080?random","color":"primary","flat":"","shrink-on-scroll":"","fade-img-on-scroll":"","app":"","dark":""},scopedSlots:_vm._u([{key:"img",fn:function(ref){
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/layouts/default.vue?vue&type=template&id=c273a756&
+var defaultvue_type_template_id_c273a756_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-app',[_c('v-app-bar',{attrs:{"src":"/images/vercors.jpg","color":"primary","flat":"","shrink-on-scroll":"","fade-img-on-scroll":"","app":"","dark":""},scopedSlots:_vm._u([{key:"img",fn:function(ref){
 var props = ref.props;
 return [_c('v-img',_vm._b({},'v-img',props,false))]}},(!_vm.$vuetify.breakpoint.mobile)?{key:"extension",fn:function(){return [_c('v-container',{staticClass:"header-extension-container",attrs:{"fluid":""}},[_c('v-row',{attrs:{"no-gutters":""}},[_c('Menu')],1),_vm._v(" "),_c('v-row',{staticClass:"header-extension-row-submenu",attrs:{"no-gutters":""}},[(_vm.activeSlug !== null)?_c('SubMenu'):_vm._e()],1)],1)]},proxy:true}:null],null,true)},[(_vm.$vuetify.breakpoint.mobile)?_c('v-app-bar-nav-icon',{on:{"click":function($event){$event.stopPropagation();_vm.drawer = !_vm.drawer}}}):_vm._e(),_vm._v(" "),_vm._v(" "),_c('v-toolbar-title',[_c('NuxtLink',{staticClass:"header-link",attrs:{"to":"/"}},[_vm._v("\n        Les transalpins\n      ")])],1),_vm._v(" "),_c('v-spacer'),_vm._v(" "),(_vm.isAdmin)?_c('v-btn',{attrs:{"icon":"","color":"primary darken-4"},on:{"click":_vm.redirectToAdmin}},[_vm._v("\n      Admin\n    ")]):_vm._e(),_vm._v(" "),(_vm.loggedIn)?_c('v-btn',{attrs:{"icon":"","color":"primary darken-4"},on:{"click":_vm.logout}},[_c('v-icon',[_vm._v("ri-logout-box-line")])],1):_c('v-btn',{attrs:{"icon":"","to":"/login"}},[_c('v-icon',{attrs:{"color":"primary darken-4"}},[_vm._v("\n        ri-login-box-line\n      ")])],1)],1),_vm._v(" "),(_vm.$vuetify.breakpoint.mobile)?_c('v-navigation-drawer',{attrs:{"app":"","width":"auto","temporary":""},model:{value:(_vm.drawer),callback:function ($$v) {_vm.drawer=$$v},expression:"drawer"}},[_c('side-menu')],1):_vm._e(),_vm._v(" "),_c('v-main',{staticClass:"secondary lighten-3"},[_c('v-card',{directives:[{name:"show",rawName:"v-show",value:(_vm.showSubHeader),expression:"showSubHeader"}],staticClass:"card-newsletter"},[_c('v-card-text',[_c('v-container',{attrs:{"fluid":"","ma-0":"","pa-0":"","fill-height":""}},[_c('v-row',{attrs:{"no-gutters":"","align":"center","justify":"center"}},[_c('v-col',{attrs:{"lg":"4","md":"5","sm":"6"}},[_c('newsletter-form')],1),_vm._v(" "),_c('v-col',{attrs:{"lg":"2","md":"3","sm":"6"}},[_vm._v("\n              ET  \n              "),_c('v-btn',{attrs:{"color":"primary"},on:{"click":_vm.redirectToHelloAsso}},[_vm._v("\n                Adhère à l'association !\n              ")])],1)],1)],1)],1)],1),_vm._v(" "),_c('Nuxt'),_vm._v(" "),_c('alert')],1),_vm._v(" "),_c('v-footer',{attrs:{"color":"primary","padless":"","app":""}},[_c('v-card',{staticClass:"text-center",attrs:{"flat":"","tile":"","color":"primary","width":"100%"}},[_c('v-card-text',{staticClass:"my-0 py-0"},_vm._l(([{label: 'Mentions légales', url: 'mentions_legales'}]),function(link){return _c('v-btn',{key:link.label,staticClass:"my-2",attrs:{"to":link.url,"color":"white","text":"","rounded":"","small":""}},[_vm._v("\n          "+_vm._s(link.label)+"\n        ")])}),1),_vm._v(" "),_c('v-divider'),_vm._v(" "),_c('v-card-text',{staticClass:"py-1"},[_vm._v("\n        2020-"+_vm._s(new Date().getFullYear())+" — "),_c('strong',[_vm._v("Les transalpins")])])],1)],1)],1)}
-var defaultvue_type_template_id_00ef67f4_staticRenderFns = []
+var defaultvue_type_template_id_c273a756_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./app/layouts/default.vue?vue&type=template&id=00ef67f4&
+// CONCATENATED MODULE: ./app/layouts/default.vue?vue&type=template&id=c273a756&
 
 // EXTERNAL MODULE: external "vuex-class"
 var external_vuex_class_ = __webpack_require__(60);
@@ -15793,8 +15793,8 @@ if (style0.__inject__) style0.__inject__(context)
 
 var default_component = Object(componentNormalizer["a" /* default */])(
   layouts_defaultvue_type_script_lang_ts_,
-  defaultvue_type_template_id_00ef67f4_render,
-  defaultvue_type_template_id_00ef67f4_staticRenderFns,
+  defaultvue_type_template_id_c273a756_render,
+  defaultvue_type_template_id_c273a756_staticRenderFns,
   false,
   default_injectStyles,
   null,
@@ -16211,8 +16211,6 @@ var framework = __webpack_require__(46);
 external_vue_default.a.use(framework["a" /* default */], {});
 /* harmony default export */ var vuetify_plugin = (ctx => {
   const vuetifyOptions = typeof vuetify_options === 'function' ? vuetify_options(ctx) : vuetify_options;
-  vuetifyOptions.icons = vuetifyOptions.icons || {};
-  vuetifyOptions.icons.iconfont = 'mdi';
   const vuetify = new framework["a" /* default */](vuetifyOptions);
   ctx.app.vuetify = vuetify;
   ctx.$vuetify = vuetify.framework;
@@ -16611,21 +16609,78 @@ async function createApp(ssrContext, config = {}) {
   const app = {
     head: {
       "titleTemplate": "%s - Les transalpins",
+      "htmlAttrs": {
+        "prefix": "og: https:\u002F\u002Fogp.me\u002Fns#"
+      },
       "meta": [{
         "charset": "utf-8"
       }, {
         "name": "viewport",
         "content": "width=device-width, initial-scale=1"
-      }],
-      "link": [{
-        "rel": "stylesheet",
-        "type": "text\u002Fcss",
-        "href": "https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Roboto:100,300,400,500,700,900&display=swap"
       }, {
-        "rel": "stylesheet",
-        "type": "text\u002Fcss",
-        "href": "https:\u002F\u002Fcdn.jsdelivr.net\u002Fnpm\u002F@mdi\u002Ffont@latest\u002Fcss\u002Fmaterialdesignicons.min.css"
+        "name": "title",
+        "content": "Projet d'habitat groupé participatif vers la région grenobloise"
+      }, {
+        "name": "description",
+        "content": "Projet d'habitat groupé participatif sobre, convivial et écologique situé vers la région grenobloise"
+      }, {
+        "hid": "og:locale",
+        "property": "og:locale",
+        "content": "fr_FR"
+      }, {
+        "hid": "og:site_name",
+        "property": "og:site_name",
+        "content": "Les Transalpins"
+      }, {
+        "hid": "og:title",
+        "property": "og:title",
+        "content": "Projet d'habitat groupé participatif vers la région grenobloise"
+      }, {
+        "hid": "og:description",
+        "property": "og:description",
+        "content": "Projet d'habitat groupé participatif sobre, convivial et écologique situé vers la région grenobloise"
+      }, {
+        "hid": "og:url",
+        "property": "og:url",
+        "content": "https:\u002F\u002Fwww.lestransalpins.org"
+      }, {
+        "hid": "og:type",
+        "property": "og:type",
+        "content": "website"
+      }, {
+        "hid": "og:image",
+        "property": "og:image",
+        "content": "https:\u002F\u002Fwww.lestransalpins.org\u002Fimages\u002Fvercors.jpg"
+      }, {
+        "hid": "og:image:alt",
+        "property": "og:image:alt",
+        "content": "Illustration : Les hauts plateaux du vercors | les Transalpins"
+      }, {
+        "hid": "twitter:card",
+        "name": "twitter:card",
+        "content": "summary"
+      }, {
+        "hid": "twitter:domain",
+        "name": "twitter:domain",
+        "content": "https:\u002F\u002Fwww.lestransalpins.org"
+      }, {
+        "hid": "twitter:title",
+        "name": "twitter:title",
+        "content": "Projet d'habitat groupé participatif vers la région grenobloise"
+      }, {
+        "hid": "twitter:description",
+        "name": "twitter:description",
+        "content": "Projet d'habitat groupé participatif sobre, convivial et écologique situé vers la région grenobloise"
+      }, {
+        "hid": "twitter:image",
+        "name": "twitter:image",
+        "content": "https:\u002F\u002Fwww.lestransalpins.org\u002Fimages\u002Fvercors.jpg"
+      }, {
+        "hid": "twitter:image:alt",
+        "name": "twitter:image:alt",
+        "content": "Illustration : Les hauts plateaux du vercors | les Transalpins"
       }],
+      "link": [],
       "style": [],
       "script": []
     },

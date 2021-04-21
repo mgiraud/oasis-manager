@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col>
-        <file-list :thumbnails="thumbnails" :links="links" />
+        <file-list :thumbnails="thumbnails" :links="links" :remove-link="removeLink" :remove-thumbnail="removeThumbnail" />
       </v-col>
     </v-row>
     <v-row>
@@ -71,6 +71,14 @@ export default class FileManager extends Vue {
       src: res.contentUrl,
       name: res.filePath
     })
+  }
+
+  removeThumbnail (index: number) {
+    this.thumbnails.splice(index, 1)
+  }
+
+  removeLink (index: number) {
+    this.links.splice(index, 1)
   }
 
   handleUpload () {

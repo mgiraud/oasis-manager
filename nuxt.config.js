@@ -53,6 +53,10 @@ export default {
       icons: {
         values: REMIX_ICONS
       },
+      defaultAssets: {
+        font: false,
+        icons: false
+      },
       theme: {
         themes: {
           light: {

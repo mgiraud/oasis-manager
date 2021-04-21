@@ -1,7 +1,7 @@
 exports.ids = [7];
 exports.modules = {
 
-/***/ 348:
+/***/ 361:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -75,7 +75,7 @@ installComponents_default()(component, {VRow: VRow["a" /* default */]})
 
 /***/ }),
 
-/***/ 373:
+/***/ 386:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -93,7 +93,7 @@ var staticRenderFns = []
 var external_vuex_ = __webpack_require__(41);
 
 // EXTERNAL MODULE: ./app/components/admin/gallery/ItemBreadcrumb.vue + 4 modules
-var ItemBreadcrumb = __webpack_require__(348);
+var ItemBreadcrumb = __webpack_require__(361);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/admin/gallery/_id/index.vue?vue&type=script&lang=js&
 //

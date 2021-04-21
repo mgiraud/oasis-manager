@@ -15,12 +15,12 @@ let store = {};
   // Enforce store modules
   store.modules = store.modules || {}
 
-  resolveStoreModules(require('../app/store/blog_article_tags.ts'), 'blog_article_tags.ts')
   resolveStoreModules(require('../app/store/blog_article.ts'), 'blog_article.ts')
   resolveStoreModules(require('../app/store/contact_newsletter.ts'), 'contact_newsletter.ts')
   resolveStoreModules(require('../app/store/contact.ts'), 'contact.ts')
   resolveStoreModules(require('../app/store/crud.ts'), 'crud.ts')
-  resolveStoreModules(require('../app/store/gallery.ts'), 'gallery.ts')
+  resolveStoreModules(require('../app/store/media_gallery_item.ts'), 'media_gallery_item.ts')
+  resolveStoreModules(require('../app/store/media_gallery.ts'), 'media_gallery.ts')
   resolveStoreModules(require('../app/store/media_object.ts'), 'media_object.ts')
   resolveStoreModules(require('../app/store/member_group.ts'), 'member_group.ts')
   resolveStoreModules(require('../app/store/member.ts'), 'member.ts')

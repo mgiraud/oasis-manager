@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col>
-        <file-list :thumbnails="thumbnails" :links="links" :remove-link="removeLink" :remove-thumbnail="removeThumbnail" />
+        <file-selection :thumbnails="thumbnails" :links="links" :remove-link="removeLink" :remove-thumbnail="removeThumbnail" />
       </v-col>
     </v-row>
     <v-row>
@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import FileList from './file_list/FileList.vue'
+import FileSelection from './file_selection/FileSelection.vue'
 import FileUploader from './file_uploader/FileUploader.vue'
 import FileNavigator from './file_navigator/FileNavigator.vue'
 import { MediaGalleryItem } from '~/store/media_gallery_item'
@@ -37,7 +37,7 @@ export type Link = {
 
 @Component({
   components: {
-    FileList,
+    FileSelection,
     FileUploader,
     FileNavigator
   }
@@ -81,12 +81,8 @@ export default class FileManager extends Vue {
     this.links.splice(index, 1)
   }
 
-  handleUpload () {
+  handleUpload (files: FileList) {
     if (!this.currentGalleryItem) {
-      return
-    }
-    const files = (this.$refs.fileSelection as HTMLInputElement).files
-    if (files === null) {
       return
     }
     for (let i = 0; i < files.length; i++) {

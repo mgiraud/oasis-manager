@@ -17,6 +17,12 @@ export type MediaGalleryItem = HydraMemberObject & {
   children: MediaGalleryItem[]
   mediaObjects: MediaObject[]
   breadcrumb: breadcrumbItem[]
+  parent?: string
+}
+
+export type MediaGalleryItemNew = {
+  name: string
+  parent: string
 }
 
 export default makeCrudModule({

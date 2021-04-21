@@ -53,14 +53,16 @@ export default class FileUploadBtn extends Vue {
   dialog = false
 
   injectFilesAndCloseDialog () {
-    this.dialog = false
-    (this.$refs['file-manager'] as FileManager).thumbnails.forEach((thumbnail: Thumbnail) => {
+    const fileManager = this.$refs['file-manager'] as FileManager
+    fileManager.thumbnails.forEach((thumbnail: Thumbnail) => {
       this.editor.chain().focus().setImage({ src: thumbnail.src }).run()
     })
-    (this.$refs['file-manager'] as FileManager).links.forEach((link: Link) => {
+    fileManager.links.forEach((link: Link) => {
       const node = this.editor.schema.text(link.name, [this.editor.schema.marks.link.create({ href: link.src })])
       this.editor.view.dispatch(this.editor.state.tr.replaceSelectionWith(node, false))
     })
+
+    this.dialog = false
   }
 
   @Watch('dialog')

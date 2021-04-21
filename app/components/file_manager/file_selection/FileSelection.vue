@@ -61,14 +61,10 @@ import { Component, Vue, Prop } from 'nuxt-property-decorator'
 import { Link, Thumbnail } from '../FileManager.vue'
 
 @Component
-export default class FileList extends Vue {
+export default class FileSelection extends Vue {
     @Prop({ type: Array, required: true }) readonly thumbnails!: Thumbnail[]
     @Prop({ type: Array, required: true }) readonly links!: Link[]
     @Prop({ type: Function, required: true }) readonly removeThumbnail!: (index: number) => {}
     @Prop({ type: Function, required: true }) readonly removeLink!: (index: number) => {}
-
-    openFileSelection () {
-      (this.$refs.fileSelection as HTMLInputElement).click()
-    }
 }
 </script>

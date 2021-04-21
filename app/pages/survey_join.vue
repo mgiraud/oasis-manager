@@ -22,7 +22,7 @@
               </v-row>
               <v-row>
                 <v-col cols="12">
-                  Tu peux remplir ce questionnaire en ligne ou bien <a :href="downloadPdfUrl" title="Télécharger le formulaire" target="_blank">Télécharger le PDF</a> pour le remplir numériquement ou manuellement et nous l'envoyer à l'addresse suivante : @AJOUTER
+                  Tu peux remplir ce questionnaire en ligne ou bien <a :href="downloadPdfUrl" title="Télécharger le formulaire" target="_blank">Télécharger le PDF</a> pour le remplir numériquement ou manuellement et nous l'envoyer à l'addresse suivante : <a href="mailto:contact@lestransalpins.org" title="Contacter les transalpins">contact@lestransalpins.org</a>
                 </v-col>
               </v-row>
             </v-container>

@@ -9,7 +9,7 @@
           multiple
           accept="image/*"
           style="display:none"
-          @change="handleUpload"
+          @change="onFileChange"
         ><v-btn @click="openFileSelection">
           Sélectionner des fichiers à téléverser
         </v-btn>
@@ -23,10 +23,17 @@ import { Component, Vue, Prop } from 'nuxt-property-decorator'
 
 @Component
 export default class FileUploader extends Vue {
-    @Prop({ type: Function, required: true }) readonly handleUpload!: (e: Event) => {}
+    @Prop({ type: Function, required: true }) readonly handleUpload!: (files: FileList) => {}
 
     openFileSelection () {
       (this.$refs.fileSelection as HTMLInputElement).click()
+    }
+
+    onFileChange () {
+      const files = (this.$refs.fileSelection as HTMLInputElement).files
+      if (files) {
+        this.handleUpload(files)
+      }
     }
 }
 </script>

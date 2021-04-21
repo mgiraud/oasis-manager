@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-app-bar
-      src="https://picsum.photos/1920/1080?random"
+      src="/images/vercors.jpg"
       color="primary"
       flat
       shrink-on-scroll

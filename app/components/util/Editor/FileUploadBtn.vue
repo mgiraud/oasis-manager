@@ -42,20 +42,21 @@
           Tu peux téleverser un fichier ou utiliser le navigateur pour sélectionner les fichiers à insérer
         </p>
         <v-divider />
-        <div id="dropDown" />
-        <input
-          id="fileElem"
-          ref="fileSelection"
-          type="file"
-          multiple
-          accept="image/*"
-          style="display:none"
-          @change="handleUpload"
-        ><v-btn @click="openFileSelection">
-          Sélectionner des fichiers à téléverser
-        </v-btn>
+        <div v-if="currentGalleryItem">
+          <input
+            id="fileElem"
+            ref="fileSelection"
+            type="file"
+            multiple
+            accept="image/*"
+            style="display:none"
+            @change="handleUpload"
+          ><v-btn @click="openFileSelection">
+            Sélectionner des fichiers à téléverser
+          </v-btn>
+        </div>
         <v-divider />
-        <file-navigator :click-handler="selectItem" />
+        <file-navigator ref="file-navigator" :click-handler="selectItem" :current-gallery-item.sync="currentGalleryItem" />
       </v-card-text>
       <v-card-actions>
         <v-spacer />
@@ -75,6 +76,7 @@
 import { Editor } from '@tiptap/core'
 import { Component, Prop, Vue, Watch } from 'nuxt-property-decorator'
 import FileNavigator from '~/components/file_navigator/FileNavigator.vue'
+import { MediaGalleryItem } from '~/store/media_gallery_item'
 import { MediaObject } from '~/store/media_object'
 
 interface Thumbnail {
@@ -95,6 +97,7 @@ export default class FileUploadBtn extends Vue {
   dialog = false
   thumbnails: Thumbnail[] = []
   links: Link[] = []
+  currentGalleryItem: MediaGalleryItem | null = null
 
   openFileSelection () {
     (this.$refs.fileSelection as HTMLInputElement).click()
@@ -127,6 +130,9 @@ export default class FileUploadBtn extends Vue {
   }
 
   handleUpload () {
+    if (!this.currentGalleryItem) {
+      return
+    }
     const files = (this.$refs.fileSelection as HTMLInputElement).files
     if (files === null) {
       return
@@ -144,18 +150,17 @@ export default class FileUploadBtn extends Vue {
 
       const formData = new FormData()
       formData.append('file', file)
-      formData.append('mediaGalleryItemId', '1')
+      formData.append('mediaGalleryItemId', this.currentGalleryItem.id.toString())
       this.$getRepository('media_objects').$post('/api/media_objects', {
         method: 'POST',
-        // headers: { 'Content-Type': 'multipart/form-data' },
         body: formData
       }).then((res) => {
-        const imageType = /^image\//
-        if (imageType.test(file.type)) {
+        if (res.isImage) {
           this.selectImage(res)
         } else {
           this.selectLink(res)
         }
+        (this.$refs['file-navigator'] as FileNavigator).reload()
       })
     }
   }

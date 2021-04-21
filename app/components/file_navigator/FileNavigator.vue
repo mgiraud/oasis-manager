@@ -62,7 +62,7 @@ const mediaObjectModule = namespace('media_object')
 })
 export default class FileNavigator extends Vue {
     currentGallery: MediaGallery | null = null
-    currentGalleryItem: MediaGalleryItem | null = null
+    @Prop({ type: Object, required: false }) readonly currentGalleryItem!: MediaGalleryItem| null
     @Prop({ type: Function, required: true }) readonly clickHandler!: (item: MediaObject) => void
     @Prop({ type: String, required: false, default: null }) readonly rootName!: string | null
     @mediaGalleryModule.Action('fetchAll') fetchAllGalleries!: (options?: {[propertyPath: string]: string | number}) => MediaGallery[]
@@ -83,25 +83,33 @@ export default class FileNavigator extends Vue {
     async onGalleryChange (gallery: MediaGallery | null | undefined) {
       this.resetMediaObjects()
       if (!gallery) {
-        this.currentGalleryItem = null
+        this.$emit('update:current-gallery-item', null)
       } else {
-        this.currentGalleryItem = await this.fetchGalleryItem(gallery.rootItem)
+        this.$emit('update:current-gallery-item', await this.fetchGalleryItem(gallery.rootItem))
       }
     }
 
     async handleGalleryClick (id: string) {
       this.currentGallery = this.findMediaGalleriesById(id)
-      this.currentGalleryItem = await this.fetchGalleryItem(this.currentGallery.rootItem)
+      this.$emit('update:current-gallery-item', await this.fetchGalleryItem(this.currentGallery.rootItem))
     }
 
     async handleGalleryItemClick (id: string) {
       this.resetMediaObjects()
-      this.currentGalleryItem = await this.fetchGalleryItem(id)
+      this.$emit('update:current-gallery-item', await this.fetchGalleryItem(id))
     }
 
     handleRootClick () {
       this.currentGallery = null
-      this.currentGalleryItem = null
+      this.$emit('update:current-gallery-item', null)
+    }
+
+    reload () {
+      const savedGalleryItem = this.currentGalleryItem
+      this.$emit('update:current-gallery-item', null)
+      this.$nextTick(() => {
+        this.$emit('update:current-gallery-item', savedGalleryItem)
+      })
     }
 }
 </script>

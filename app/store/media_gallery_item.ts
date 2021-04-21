@@ -10,6 +10,7 @@ export type breadcrumbItem = {
 }
 
 export type MediaGalleryItem = HydraMemberObject & {
+  id: number
   name: string
   description: string
   gallery: MediaGallery

@@ -20,6 +20,8 @@
           :click-handler="() => editor.chain().focus().toggleStrike().run()"
           icon="ri-strikethrough"
         />
+        <text-color-btn :editor="editor" />
+        <text-background-color-btn :editor="editor" />
         <editor-btn
           label="Supprimer le style de la sélection"
           :click-handler="() => editor.chain().focus().unsetAllMarks().run()"
@@ -181,13 +183,21 @@ import TableCell from '@tiptap/extension-table-cell'
 import TableHeader from '@tiptap/extension-table-header'
 import FileUploadBtn from '@/components/util/Editor/FileUploadBtn.vue'
 import Link from '@tiptap/extension-link'
+import TextStyle from '@tiptap/extension-text-style'
+import Text from '@tiptap/extension-text'
 import ResizableImage from './Editor/resizable-image/resizableImage'
+import TextColor from './Editor/text-color/text-color'
+import TextBackgroundColor from './Editor/text-background-color/text-background-color'
+import TextColorBtn from './Editor/TextColorBtn.vue'
+import TextBackgroundColorBtn from './Editor/TextBackgroundColorBtn.vue'
 
 @Component({
   components: {
     FileUploadBtn,
     EditorContent,
-    EditorBtn
+    EditorBtn,
+    TextColorBtn,
+    TextBackgroundColorBtn
   }
 })
 export default class AdminPageForm extends Vue {
@@ -222,7 +232,11 @@ export default class AdminPageForm extends Vue {
         TableHeader,
         TableCell,
         ResizableImage.configure({ inline: true }),
-        Link.configure({ openOnClick: true })
+        Link.configure({ openOnClick: true }),
+        TextStyle,
+        TextColor,
+        TextBackgroundColor,
+        Text
       ]
     })
 

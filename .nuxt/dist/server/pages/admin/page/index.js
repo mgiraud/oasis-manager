@@ -4437,6 +4437,11 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_10__[/* default 
         event.preventDefault();
         _VSelect_VSelect__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].options.methods.selectItem.call(this, pastedItemText);
       }
+    },
+
+    clearableCallback() {
+      this.editingIndex = -1;
+      _VAutocomplete_VAutocomplete__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"].options.methods.clearableCallback.call(this);
     }
 
   }
@@ -4931,7 +4936,7 @@ __webpack_require__(5).default("12a190a6", content, true)
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(4);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".v-input--checkbox.v-input--indeterminate.v-input--is-disabled{opacity:.6}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, ".v-input--checkbox.v-input--indeterminate.v-input--is-disabled{opacity:.6}.v-input--checkbox.v-input--dense{margin-top:4px}", ""]);
 // Exports
 module.exports = ___CSS_LOADER_EXPORT___;
 
@@ -7990,11 +7995,11 @@ var mergeData = __webpack_require__(16);
       }, eventColors.map(color => this.$createElement('div', this.setBackgroundColor(color)))) : null;
     },
 
-    isValidScroll(e, calculateTableDate) {
-      const tableDate = calculateTableDate(e.deltaY); // tableDate is 'YYYY-MM' for DateTable and 'YYYY' for MonthTable
+    isValidScroll(value, calculateTableDate) {
+      const tableDate = calculateTableDate(value); // tableDate is 'YYYY-MM' for DateTable and 'YYYY' for MonthTable
 
       const sanitizeType = tableDate.split('-').length === 1 ? 'year' : 'month';
-      return e.deltaY === 0 || e.deltaY < 0 && (this.min ? tableDate >= sanitizeDateString(this.min, sanitizeType) : true) || e.deltaY > 0 && (this.max ? tableDate <= sanitizeDateString(this.max, sanitizeType) : true);
+      return value === 0 || value < 0 && (this.min ? tableDate >= sanitizeDateString(this.min, sanitizeType) : true) || value > 0 && (this.max ? tableDate <= sanitizeDateString(this.max, sanitizeType) : true);
     },
 
     wheel(e, calculateTableDate) {
@@ -8016,8 +8021,8 @@ var mergeData = __webpack_require__(16);
       const touchDirective = {
         name: 'touch',
         value: {
-          left: e => e.offsetX < -15 && this.touch(1, calculateTableDate),
-          right: e => e.offsetX > 15 && this.touch(-1, calculateTableDate)
+          left: e => e.offsetX < -15 && this.isValidScroll(1, calculateTableDate) && this.touch(1, calculateTableDate),
+          right: e => e.offsetX > 15 && this.isValidScroll(-1, calculateTableDate) && this.touch(-1, calculateTableDate)
         }
       };
       return this.$createElement('div', {
@@ -8030,7 +8035,7 @@ var mergeData = __webpack_require__(16);
           wheel: e => {
             e.preventDefault();
 
-            if (this.isValidScroll(e, calculateTableDate)) {
+            if (this.isValidScroll(e.deltaY, calculateTableDate)) {
               this.wheelThrottle(e, calculateTableDate);
             }
           }

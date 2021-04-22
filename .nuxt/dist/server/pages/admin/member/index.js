@@ -4193,6 +4193,11 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_10__[/* default 
         event.preventDefault();
         _VSelect_VSelect__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].options.methods.selectItem.call(this, pastedItemText);
       }
+    },
+
+    clearableCallback() {
+      this.editingIndex = -1;
+      _VAutocomplete_VAutocomplete__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"].options.methods.clearableCallback.call(this);
     }
 
   }

@@ -6563,7 +6563,7 @@ class framework_Vuetify {
 }
 framework_Vuetify.install = install;
 framework_Vuetify.installed = false;
-framework_Vuetify.version = "2.4.9";
+framework_Vuetify.version = "2.4.11";
 framework_Vuetify.config = {
   silent: false
 };
@@ -7346,9 +7346,9 @@ const hasIntersect = typeof window !== 'undefined' && 'IntersectionObserver' in 
 
       image.onerror = this.onError;
       this.hasError = false;
-      image.src = this.normalisedSrc.src;
       this.sizes && (image.sizes = this.sizes);
       this.normalisedSrc.srcset && (image.srcset = this.normalisedSrc.srcset);
+      image.src = this.normalisedSrc.src;
       this.aspectRatio || this.pollForSize(image);
       this.getSrc();
     },
@@ -10209,7 +10209,7 @@ __webpack_require__(5).default("8f7a87bc", content, true)
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(4);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".v-slide-group{display:flex}.v-slide-group:not(.v-slide-group--has-affixes)>.v-slide-group__next,.v-slide-group:not(.v-slide-group--has-affixes)>.v-slide-group__prev{display:none}.v-slide-group.v-item-group>.v-slide-group__next,.v-slide-group.v-item-group>.v-slide-group__prev{cursor:pointer}.v-slide-item{display:inline-flex;flex:0 1 auto}.v-slide-group__next,.v-slide-group__prev{align-items:center;display:flex;flex:0 1 52px;justify-content:center;min-width:52px}.v-slide-group__content{display:flex;flex:1 0 auto;position:relative;transition:.3s cubic-bezier(.25,.8,.5,1);white-space:nowrap}.v-slide-group__wrapper{contain:content;display:flex;flex:1 1 auto;overflow:hidden;touch-action:none}.v-slide-group__next--disabled,.v-slide-group__prev--disabled{pointer-events:none}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, ".v-slide-group{display:flex}.v-slide-group:not(.v-slide-group--has-affixes)>.v-slide-group__next,.v-slide-group:not(.v-slide-group--has-affixes)>.v-slide-group__prev{display:none}.v-slide-group.v-item-group>.v-slide-group__next,.v-slide-group.v-item-group>.v-slide-group__prev{cursor:pointer}.v-slide-item{display:inline-flex;flex:0 1 auto}.v-slide-group__next,.v-slide-group__prev{align-items:center;display:flex;flex:0 1 52px;justify-content:center;min-width:52px}.v-slide-group__content{display:flex;flex:1 0 auto;position:relative;transition:.3s cubic-bezier(.25,.8,.5,1);white-space:nowrap}.v-slide-group__wrapper{contain:content;display:flex;flex:1 1 auto;overflow:hidden}.v-slide-group__next--disabled,.v-slide-group__prev--disabled{pointer-events:none}", ""]);
 // Exports
 module.exports = ___CSS_LOADER_EXPORT___;
 
@@ -10426,7 +10426,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(4);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".header-extension-container{padding:0}.header-extension-container>.row{margin-left:-16px;margin-right:-16px}.header-extension-row-submenu{position:absolute;min-width:100%;box-shadow:0 3px 3px -3px rgba(0,0,0,.1)}.v-application a.header-link{text-decoration:none;text-transform:capitalize;color:#fff}.card-newsletter>.v-card__text{padding-top:0;padding-bottom:0}.card-newsletter>.v-card__text>.v-form{padding-top:0}.card-newsletter>.v-card__text>.v-form>.v-text-field{margin-top:0}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, ".header-extension-container{padding:0}.header-extension-container>.row{margin-left:-16px;margin-right:-16px}.header-extension-row-submenu{position:absolute;min-width:100%;box-shadow:0 3px 3px -3px rgba(0,0,0,.1)}.v-application a.header-link{text-decoration:none;text-transform:capitalize;color:#fff}.v-application li>p{margin-bottom:0}.card-newsletter>.v-card__text{padding-top:0;padding-bottom:0}.card-newsletter>.v-card__text>.v-form{padding-top:0}.card-newsletter>.v-card__text>.v-form>.v-text-field{margin-top:0}", ""]);
 // Exports
 module.exports = ___CSS_LOADER_EXPORT___;
 
@@ -13581,14 +13581,14 @@ var Admin_component = Object(componentNormalizer["a" /* default */])(
 
 installComponents_default()(Admin_component, {VApp: VApp_VApp,VContainer: VContainer["a" /* default */],VMain: VMain["a" /* default */]})
 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/layouts/default.vue?vue&type=template&id=c273a756&
-var defaultvue_type_template_id_c273a756_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-app',[_c('v-app-bar',{attrs:{"src":"/images/vercors.jpg","color":"primary","flat":"","shrink-on-scroll":"","fade-img-on-scroll":"","app":"","dark":""},scopedSlots:_vm._u([{key:"img",fn:function(ref){
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/layouts/default.vue?vue&type=template&id=1e93c0c4&
+var defaultvue_type_template_id_1e93c0c4_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-app',[_c('v-app-bar',{attrs:{"src":"/images/vercors.jpg","color":"primary","flat":"","shrink-on-scroll":"","fade-img-on-scroll":"","app":"","dark":""},scopedSlots:_vm._u([{key:"img",fn:function(ref){
 var props = ref.props;
 return [_c('v-img',_vm._b({},'v-img',props,false))]}},(!_vm.$vuetify.breakpoint.mobile)?{key:"extension",fn:function(){return [_c('v-container',{staticClass:"header-extension-container",attrs:{"fluid":""}},[_c('v-row',{attrs:{"no-gutters":""}},[_c('Menu')],1),_vm._v(" "),_c('v-row',{staticClass:"header-extension-row-submenu",attrs:{"no-gutters":""}},[(_vm.activeSlug !== null)?_c('SubMenu'):_vm._e()],1)],1)]},proxy:true}:null],null,true)},[(_vm.$vuetify.breakpoint.mobile)?_c('v-app-bar-nav-icon',{on:{"click":function($event){$event.stopPropagation();_vm.drawer = !_vm.drawer}}}):_vm._e(),_vm._v(" "),_vm._v(" "),_c('v-toolbar-title',[_c('NuxtLink',{staticClass:"header-link",attrs:{"to":"/"}},[_vm._v("\n        Les transalpins\n      ")])],1),_vm._v(" "),_c('v-spacer'),_vm._v(" "),(_vm.isAdmin)?_c('v-btn',{attrs:{"icon":"","color":"primary darken-4"},on:{"click":_vm.redirectToAdmin}},[_vm._v("\n      Admin\n    ")]):_vm._e(),_vm._v(" "),(_vm.loggedIn)?_c('v-btn',{attrs:{"icon":"","color":"primary darken-4"},on:{"click":_vm.logout}},[_c('v-icon',[_vm._v("ri-logout-box-line")])],1):_c('v-btn',{attrs:{"icon":"","to":"/login"}},[_c('v-icon',{attrs:{"color":"primary darken-4"}},[_vm._v("\n        ri-login-box-line\n      ")])],1)],1),_vm._v(" "),(_vm.$vuetify.breakpoint.mobile)?_c('v-navigation-drawer',{attrs:{"app":"","width":"auto","temporary":""},model:{value:(_vm.drawer),callback:function ($$v) {_vm.drawer=$$v},expression:"drawer"}},[_c('side-menu')],1):_vm._e(),_vm._v(" "),_c('v-main',{staticClass:"secondary lighten-3"},[_c('v-card',{directives:[{name:"show",rawName:"v-show",value:(_vm.showSubHeader),expression:"showSubHeader"}],staticClass:"card-newsletter"},[_c('v-card-text',[_c('v-container',{attrs:{"fluid":"","ma-0":"","pa-0":"","fill-height":""}},[_c('v-row',{attrs:{"no-gutters":"","align":"center","justify":"center"}},[_c('v-col',{attrs:{"lg":"4","md":"5","sm":"6"}},[_c('newsletter-form')],1),_vm._v(" "),_c('v-col',{attrs:{"lg":"2","md":"3","sm":"6"}},[_vm._v("\n              ET  \n              "),_c('v-btn',{attrs:{"color":"primary"},on:{"click":_vm.redirectToHelloAsso}},[_vm._v("\n                Adhère à l'association !\n              ")])],1)],1)],1)],1)],1),_vm._v(" "),_c('Nuxt'),_vm._v(" "),_c('alert')],1),_vm._v(" "),_c('v-footer',{attrs:{"color":"primary","padless":"","app":""}},[_c('v-card',{staticClass:"text-center",attrs:{"flat":"","tile":"","color":"primary","width":"100%"}},[_c('v-card-text',{staticClass:"my-0 py-0"},_vm._l(([{label: 'Mentions légales', url: 'mentions_legales'}]),function(link){return _c('v-btn',{key:link.label,staticClass:"my-2",attrs:{"to":link.url,"color":"white","text":"","rounded":"","small":""}},[_vm._v("\n          "+_vm._s(link.label)+"\n        ")])}),1),_vm._v(" "),_c('v-divider'),_vm._v(" "),_c('v-card-text',{staticClass:"py-1"},[_vm._v("\n        2020-"+_vm._s(new Date().getFullYear())+" — "),_c('strong',[_vm._v("Les transalpins")])])],1)],1)],1)}
-var defaultvue_type_template_id_c273a756_staticRenderFns = []
+var defaultvue_type_template_id_1e93c0c4_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./app/layouts/default.vue?vue&type=template&id=c273a756&
+// CONCATENATED MODULE: ./app/layouts/default.vue?vue&type=template&id=1e93c0c4&
 
 // EXTERNAL MODULE: external "vuex-class"
 var external_vuex_class_ = __webpack_require__(60);
@@ -13832,6 +13832,8 @@ const BaseSlideGroup = Object(mixins["a" /* default */])(VItemGroup["a" /* BaseI
     isOverflowing: false,
     resizeTimeout: 0,
     startX: 0,
+    isSwipingHorizontal: false,
+    isSwiping: false,
     scrollOffset: 0,
     widths: {
       content: 0,
@@ -13839,6 +13841,10 @@ const BaseSlideGroup = Object(mixins["a" /* default */])(VItemGroup["a" /* BaseI
     }
   }),
   computed: {
+    canTouch() {
+      return typeof window !== 'undefined';
+    },
+
     __cachedNext() {
       return this.genTransition('next');
     },
@@ -14032,10 +14038,27 @@ const BaseSlideGroup = Object(mixins["a" /* default */])(VItemGroup["a" /* BaseI
     },
 
     onTouchMove(e) {
-      this.scrollOffset = this.startX - e.touchmoveX;
+      if (!this.canTouch) return;
+
+      if (!this.isSwiping) {
+        // only calculate disableSwipeHorizontal during the first onTouchMove invoke
+        // in order to ensure disableSwipeHorizontal value is consistent between onTouchStart and onTouchEnd
+        const diffX = e.touchmoveX - e.touchstartX;
+        const diffY = e.touchmoveY - e.touchstartY;
+        this.isSwipingHorizontal = Math.abs(diffX) > Math.abs(diffY);
+        this.isSwiping = true;
+      }
+
+      if (this.isSwipingHorizontal) {
+        // sliding horizontally
+        this.scrollOffset = this.startX - e.touchmoveX; // temporarily disable window vertical scrolling
+
+        document.documentElement.style.overflowY = 'hidden';
+      }
     },
 
     onTouchEnd() {
+      if (!this.canTouch) return;
       const {
         content,
         wrapper
@@ -14059,6 +14082,10 @@ const BaseSlideGroup = Object(mixins["a" /* default */])(VItemGroup["a" /* BaseI
           this.scrollOffset = maxScrollOffset;
         }
       }
+
+      this.isSwiping = false; // rollback whole page scrolling to default
+
+      document.documentElement.style.removeProperty('overflow-y');
     },
 
     overflowCheck(e, fn) {
@@ -15793,8 +15820,8 @@ if (style0.__inject__) style0.__inject__(context)
 
 var default_component = Object(componentNormalizer["a" /* default */])(
   layouts_defaultvue_type_script_lang_ts_,
-  defaultvue_type_template_id_c273a756_render,
-  defaultvue_type_template_id_c273a756_staticRenderFns,
+  defaultvue_type_template_id_1e93c0c4_render,
+  defaultvue_type_template_id_1e93c0c4_staticRenderFns,
   false,
   default_injectStyles,
   null,

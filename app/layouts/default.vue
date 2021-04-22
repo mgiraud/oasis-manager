@@ -177,6 +177,10 @@ export default class DefaultLayout extends Vue {
     color: white;
   }
 
+  .v-application li > p {
+    margin-bottom: 0px;
+  }
+
   .card-newsletter > .v-card__text {
     padding-top: 0px;
     padding-bottom: 0px;

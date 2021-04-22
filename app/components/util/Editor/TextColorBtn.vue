@@ -20,7 +20,9 @@
         :key="index"
         @click="chooseColor(color)"
       >
-        <v-list-item-title>{{ color.name }}</v-list-item-title>
+        <v-list-item-title :class="color.text + '--text'">
+          {{ color.name }}
+        </v-list-item-title>
       </v-list-item>
       <v-list-item
         @click="removeColor"
@@ -34,22 +36,16 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
 import { Editor } from '@tiptap/core'
-
-type EditorColor = {
-    name: string
-    value: string
-}
+import { EditorColor, editorColors } from './colors'
 
 @Component
 export default class TextColorBtn extends Vue {
   @Prop({ type: Object, required: true }) readonly editor!: Editor
   dialog = false
-  colors = [
-    { name: 'Primaire', value: 'primary' }
-  ]
+  colors = editorColors
 
   chooseColor (color: EditorColor) {
-    this.editor.chain().focus().setColor(color.value).run()
+    this.editor.chain().focus().setColor(color.text).run()
     this.dialog = false
   }
 

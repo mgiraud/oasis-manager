@@ -18,6 +18,7 @@
       <v-list-item
         v-for="(color, index) in colors"
         :key="index"
+        :class="color.background"
         @click="chooseBackgroundColor(color)"
       >
         <v-list-item-title>{{ color.name }}</v-list-item-title>
@@ -34,22 +35,16 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
 import { Editor } from '@tiptap/core'
-
-type EditorColor = {
-    name: string
-    value: string
-}
+import { EditorColor, editorColors } from './colors'
 
 @Component
 export default class TextBackgroundColorBtn extends Vue {
     @Prop({ type: Object, required: true }) readonly editor!: Editor
     dialog = false
-    colors = [
-      { name: 'Primaire', value: 'primary' }
-    ]
+    colors = editorColors
 
     chooseBackgroundColor (backgroundColor: EditorColor) {
-      this.editor.chain().focus().setBackgroundColor(backgroundColor.value).run()
+      this.editor.chain().focus().setBackgroundColor(backgroundColor.background).run()
       this.dialog = false
     }
 

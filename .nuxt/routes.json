@@ -9,178 +9,152 @@
         "name": "admin-blogArticle",
         "path": "blogArticle",
         "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/blogArticle/index.vue",
-        "chunkName": "pages/admin/blogArticle/index",
-        "_name": "_f65442e6"
+        "chunkName": "pages/admin/blogArticle/index"
       },
       {
         "name": "admin-gallery",
         "path": "gallery",
         "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/gallery/index.vue",
-        "chunkName": "pages/admin/gallery/index",
-        "_name": "_c7cea72a"
+        "chunkName": "pages/admin/gallery/index"
       },
       {
         "name": "admin-member",
         "path": "member",
         "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/member/index.vue",
-        "chunkName": "pages/admin/member/index",
-        "_name": "_10a524f7"
+        "chunkName": "pages/admin/member/index"
       },
       {
         "name": "admin-memberGroup",
         "path": "memberGroup",
         "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/memberGroup/index.vue",
-        "chunkName": "pages/admin/memberGroup/index",
-        "_name": "_c3bc6344"
+        "chunkName": "pages/admin/memberGroup/index"
       },
       {
         "name": "admin-page",
         "path": "page",
         "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/page/index.vue",
-        "chunkName": "pages/admin/page/index",
-        "_name": "_6fb1572c"
+        "chunkName": "pages/admin/page/index"
       },
       {
         "name": "admin-pageCategory",
         "path": "pageCategory",
         "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/pageCategory/index.vue",
-        "chunkName": "pages/admin/pageCategory/index",
-        "_name": "_154189ca"
+        "chunkName": "pages/admin/pageCategory/index"
       },
       {
         "name": "admin-blogArticle-new",
         "path": "blogArticle/new",
         "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/blogArticle/new.vue",
-        "chunkName": "pages/admin/blogArticle/new",
-        "_name": "_15ac15ca"
+        "chunkName": "pages/admin/blogArticle/new"
       },
       {
         "name": "admin-member-new",
         "path": "member/new",
         "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/member/new.vue",
-        "chunkName": "pages/admin/member/new",
-        "_name": "_320bce05"
+        "chunkName": "pages/admin/member/new"
       },
       {
         "name": "admin-memberGroup-new",
         "path": "memberGroup/new",
         "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/memberGroup/new.vue",
-        "chunkName": "pages/admin/memberGroup/new",
-        "_name": "_4da1a52c"
+        "chunkName": "pages/admin/memberGroup/new"
       },
       {
         "name": "admin-page-new",
         "path": "page/new",
         "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/page/new.vue",
-        "chunkName": "pages/admin/page/new",
-        "_name": "_3779097a"
+        "chunkName": "pages/admin/page/new"
       },
       {
         "name": "admin-pageCategory-new",
         "path": "pageCategory/new",
         "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/pageCategory/new.vue",
-        "chunkName": "pages/admin/pageCategory/new",
-        "_name": "_22114b98"
+        "chunkName": "pages/admin/pageCategory/new"
       },
       {
         "name": "admin-gallery-folders-id",
         "path": "gallery/folders/:id",
         "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/gallery/folders/_id/index.vue",
-        "chunkName": "pages/admin/gallery/folders/_id/index",
-        "_name": "_45affbe8"
+        "chunkName": "pages/admin/gallery/folders/_id/index"
       },
       {
         "name": "admin-blogArticle-id",
         "path": "blogArticle/:id",
         "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/blogArticle/_id.vue",
-        "chunkName": "pages/admin/blogArticle/_id",
-        "_name": "_3d17bf96"
+        "chunkName": "pages/admin/blogArticle/_id"
       },
       {
         "name": "admin-gallery-id",
         "path": "gallery/:id",
         "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/gallery/_id/index.vue",
-        "chunkName": "pages/admin/gallery/_id/index",
-        "_name": "_76c0cc54"
+        "chunkName": "pages/admin/gallery/_id/index"
       },
       {
         "name": "admin-member-id",
         "path": "member/:id",
         "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/member/_id.vue",
-        "chunkName": "pages/admin/member/_id",
-        "_name": "_1e55f91f"
+        "chunkName": "pages/admin/member/_id"
       },
       {
         "name": "admin-memberGroup-id",
         "path": "memberGroup/:id",
         "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/memberGroup/_id.vue",
-        "chunkName": "pages/admin/memberGroup/_id",
-        "_name": "_39ebd046"
+        "chunkName": "pages/admin/memberGroup/_id"
       },
       {
         "name": "admin-page-id",
         "path": "page/:id",
         "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/page/_id.vue",
-        "chunkName": "pages/admin/page/_id",
-        "_name": "_23c33494"
+        "chunkName": "pages/admin/page/_id"
       },
       {
         "name": "admin-pageCategory-id",
         "path": "pageCategory/:id",
         "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/pageCategory/_id.vue",
-        "chunkName": "pages/admin/pageCategory/_id",
-        "_name": "_0e5b76b2"
+        "chunkName": "pages/admin/pageCategory/_id"
       },
       {
         "name": "admin-all",
         "path": "*",
         "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/_.vue",
-        "chunkName": "pages/admin/_",
-        "_name": "_8a46f616"
+        "chunkName": "pages/admin/_"
       }
-    ],
-    "_name": "_2fe0b625"
+    ]
   },
   {
     "name": "contact",
     "path": "/contact",
     "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/contact.vue",
-    "chunkName": "pages/contact",
-    "_name": "_18f20ef6"
+    "chunkName": "pages/contact"
   },
   {
     "name": "login",
     "path": "/login",
     "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/login.vue",
-    "chunkName": "pages/login",
-    "_name": "_6fcdf582"
+    "chunkName": "pages/login"
   },
   {
     "name": "mentions_legales",
     "path": "/mentions_legales",
     "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/mentions_legales.vue",
-    "chunkName": "pages/mentions_legales",
-    "_name": "_0d1dbb6a"
+    "chunkName": "pages/mentions_legales"
   },
   {
     "name": "survey_join",
     "path": "/survey_join",
     "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/survey_join.vue",
-    "chunkName": "pages/survey_join",
-    "_name": "_600bd976"
+    "chunkName": "pages/survey_join"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/index.vue",
-    "chunkName": "pages/index",
-    "_name": "_031d3bb0"
+    "chunkName": "pages/index"
   },
   {
     "name": "all",
     "path": "/*",
     "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/_.vue",
-    "chunkName": "pages/_",
-    "_name": "_3d173a35"
+    "chunkName": "pages/_"
   }
 ]

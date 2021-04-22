@@ -1,7 +1,7 @@
 exports.ids = [2];
 exports.modules = {
 
-/***/ 377:
+/***/ 380:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -44,13 +44,13 @@ var installComponents = __webpack_require__(12);
 var installComponents_default = /*#__PURE__*/__webpack_require__.n(installComponents);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VCol.js
-var VCol = __webpack_require__(236);
+var VCol = __webpack_require__(239);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VContainer.js + 1 modules
-var VContainer = __webpack_require__(239);
+var VContainer = __webpack_require__(242);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
-var VRow = __webpack_require__(237);
+var VRow = __webpack_require__(240);
 
 // CONCATENATED MODULE: ./app/pages/admin.vue
 

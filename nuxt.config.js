@@ -50,11 +50,14 @@ export default {
   buildModules: [
     ['@nuxt/typescript-build', {}],
     ['@nuxtjs/vuetify', {
+      treeShake: true,
       icons: {
         values: REMIX_ICONS
       },
       defaultAssets: {
-        font: false,
+        font: {
+          family: 'Helvetica'
+        },
         icons: false
       },
       theme: {
@@ -123,6 +126,10 @@ export default {
       { hid: 'twitter:description', name: 'twitter:description', content: 'Projet d\'habitat groupé participatif sobre, convivial et écologique situé vers la région grenobloise' },
       { hid: 'twitter:image', name: 'twitter:image', content: 'https://www.lestransalpins.org/images/vercors.jpg' },
       { hid: 'twitter:image:alt', name: 'twitter:image:alt', content: 'Illustration : Les hauts plateaux du vercors | les Transalpins' }
+    ],
+    link: [
+      { rel: 'stylesheet', href: '//fonts.googleapis.com/css?family=Permanent+Marker' },
+      { rel: 'stylesheet', href: '//fonts.googleapis.com/css?family=Amatic+SC' }
     ]
   },
   render: {

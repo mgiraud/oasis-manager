@@ -22,6 +22,7 @@
         />
         <text-color-btn :editor="editor" />
         <text-background-color-btn :editor="editor" />
+        <font-family-btn :editor="editor" />
         <editor-btn
           label="Supprimer le style de la sélection"
           :click-handler="() => editor.chain().focus().unsetAllMarks().run()"
@@ -185,11 +186,13 @@ import FileUploadBtn from '@/components/util/Editor/FileUploadBtn.vue'
 import Link from '@tiptap/extension-link'
 import TextStyle from '@tiptap/extension-text-style'
 import Text from '@tiptap/extension-text'
+import FontFamily from '@tiptap/extension-font-family'
 import ResizableImage from './Editor/resizable-image/resizableImage'
 import TextColor from './Editor/text-color/text-color'
 import TextBackgroundColor from './Editor/text-background-color/text-background-color'
 import TextColorBtn from './Editor/TextColorBtn.vue'
 import TextBackgroundColorBtn from './Editor/TextBackgroundColorBtn.vue'
+import FontFamilyBtn from './Editor/FontFamilyBtn.vue'
 
 @Component({
   components: {
@@ -197,7 +200,8 @@ import TextBackgroundColorBtn from './Editor/TextBackgroundColorBtn.vue'
     EditorContent,
     EditorBtn,
     TextColorBtn,
-    TextBackgroundColorBtn
+    TextBackgroundColorBtn,
+    FontFamilyBtn
   }
 })
 export default class AdminPageForm extends Vue {
@@ -236,7 +240,8 @@ export default class AdminPageForm extends Vue {
         TextStyle,
         TextColor,
         TextBackgroundColor,
-        Text
+        Text,
+        FontFamily
       ]
     })
 

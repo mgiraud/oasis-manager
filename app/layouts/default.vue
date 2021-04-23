@@ -175,6 +175,7 @@ export default class DefaultLayout extends Vue {
     text-decoration: none;
     text-transform: capitalize;
     color: white;
+    font-family: 'Permanent Marker';
   }
 
   .v-application li > p {

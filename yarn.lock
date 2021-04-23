@@ -1411,6 +1411,11 @@
     prosemirror-state "^1.3.4"
     prosemirror-view "^1.18.2"
 
+"@tiptap/extension-font-family@^2.0.0-beta.3":
+  version "2.0.0-beta.3"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-font-family/-/extension-font-family-2.0.0-beta.3.tgz#6be34b57f4e5c49c8ecd0302bfeacd2da9b00159"
+  integrity sha512-dNZ1OXCfps4gf0IjCX0olcFAYMhycQbcPGhluIRX11znGoh4F7rnuBs3negsfeowdw7ul9NEfU/UJorEZQ9HHg==
+
 "@tiptap/extension-gapcursor@^2.0.0-beta.1", "@tiptap/extension-gapcursor@^2.0.0-beta.5":
   version "2.0.0-beta.5"
   resolved "https://registry.yarnpkg.com/@tiptap/extension-gapcursor/-/extension-gapcursor-2.0.0-beta.5.tgz#b81a8aa52171354c82e28eecfbdb1f4e3a2a0d37"

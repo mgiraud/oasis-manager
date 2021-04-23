@@ -1,7 +1,7 @@
 exports.ids = [25];
 exports.modules = {
 
-/***/ 396:
+/***/ 397:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -54,13 +54,13 @@ var VCard = __webpack_require__(70);
 var components_VCard = __webpack_require__(58);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VCol.js
-var VCol = __webpack_require__(239);
+var VCol = __webpack_require__(240);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VContainer.js + 1 modules
-var VContainer = __webpack_require__(242);
+var VContainer = __webpack_require__(243);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
-var VRow = __webpack_require__(240);
+var VRow = __webpack_require__(241);
 
 // CONCATENATED MODULE: ./app/pages/mentions_legales.vue
 

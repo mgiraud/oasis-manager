@@ -1,4 +1,4 @@
-exports.ids = [23];
+exports.ids = [24];
 exports.modules = {
 
 /***/ 334:
@@ -6,17 +6,17 @@ exports.modules = {
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/components/page/Template.vue?vue&type=template&id=31d1a6a0&
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/components/page/PageModel.vue?vue&type=template&id=57b9b634&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('v-card-title',{staticClass:"primary--text text--darken-4"},[_vm._v("\n    "+_vm._s(_vm._f("capitalize")(_vm.page.title))+"\n  ")]),_vm._ssrNode(" "),_c('v-card-text',{domProps:{"innerHTML":_vm._s(_vm.page.content)}})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./app/components/page/Template.vue?vue&type=template&id=31d1a6a0&
+// CONCATENATED MODULE: ./app/components/page/PageModel.vue?vue&type=template&id=57b9b634&
 
 // EXTERNAL MODULE: external "nuxt-property-decorator"
 var external_nuxt_property_decorator_ = __webpack_require__(7);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--12-0!./node_modules/ts-loader??ref--12-1!./node_modules/vue-loader/lib??vue-loader-options!./app/components/page/Template.vue?vue&type=script&lang=ts&
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--12-0!./node_modules/ts-loader??ref--12-1!./node_modules/vue-loader/lib??vue-loader-options!./app/components/page/PageModel.vue?vue&type=script&lang=ts&
 var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -26,17 +26,17 @@ var __decorate = undefined && undefined.__decorate || function (decorators, targ
 };
 
 
-let Templatevue_type_script_lang_ts_Tempate = class Tempate extends external_nuxt_property_decorator_["Vue"] {};
+let PageModelvue_type_script_lang_ts_PageModel = class PageModel extends external_nuxt_property_decorator_["Vue"] {};
 
 __decorate([Object(external_nuxt_property_decorator_["Prop"])({
   type: Object,
   required: true
-})], Templatevue_type_script_lang_ts_Tempate.prototype, "page", void 0);
+})], PageModelvue_type_script_lang_ts_PageModel.prototype, "page", void 0);
 
-Templatevue_type_script_lang_ts_Tempate = __decorate([external_nuxt_property_decorator_["Component"]], Templatevue_type_script_lang_ts_Tempate);
-/* harmony default export */ var Templatevue_type_script_lang_ts_ = (Templatevue_type_script_lang_ts_Tempate);
-// CONCATENATED MODULE: ./app/components/page/Template.vue?vue&type=script&lang=ts&
- /* harmony default export */ var page_Templatevue_type_script_lang_ts_ = (Templatevue_type_script_lang_ts_); 
+PageModelvue_type_script_lang_ts_PageModel = __decorate([external_nuxt_property_decorator_["Component"]], PageModelvue_type_script_lang_ts_PageModel);
+/* harmony default export */ var PageModelvue_type_script_lang_ts_ = (PageModelvue_type_script_lang_ts_PageModel);
+// CONCATENATED MODULE: ./app/components/page/PageModel.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var page_PageModelvue_type_script_lang_ts_ = (PageModelvue_type_script_lang_ts_); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 var componentNormalizer = __webpack_require__(10);
 
@@ -47,7 +47,7 @@ var installComponents_default = /*#__PURE__*/__webpack_require__.n(installCompon
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/index.js
 var VCard = __webpack_require__(58);
 
-// CONCATENATED MODULE: ./app/components/page/Template.vue
+// CONCATENATED MODULE: ./app/components/page/PageModel.vue
 
 
 
@@ -56,17 +56,17 @@ var VCard = __webpack_require__(58);
 /* normalize component */
 
 var component = Object(componentNormalizer["a" /* default */])(
-  page_Templatevue_type_script_lang_ts_,
+  page_PageModelvue_type_script_lang_ts_,
   render,
   staticRenderFns,
   false,
   null,
   null,
-  "751b31d5"
+  "703ecfe2"
   
 )
 
-/* harmony default export */ var Template = __webpack_exports__["a"] = (component.exports);
+/* harmony default export */ var page_PageModel = __webpack_exports__["a"] = (component.exports);
 
 /* vuetify-loader */
 
@@ -77,13 +77,13 @@ installComponents_default()(component, {VCardText: VCard["b" /* VCardText */],VC
 
 /***/ }),
 
-/***/ 366:
+/***/ 368:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(371);
+var content = __webpack_require__(373);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -95,19 +95,19 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 370:
+/***/ 372:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BlogArticleTemplate_vue_vue_type_style_index_0_id_6c16663f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(366);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BlogArticleTemplate_vue_vue_type_style_index_0_id_6c16663f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(368);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BlogArticleTemplate_vue_vue_type_style_index_0_id_6c16663f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BlogArticleTemplate_vue_vue_type_style_index_0_id_6c16663f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BlogArticleTemplate_vue_vue_type_style_index_0_id_6c16663f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_3_oneOf_1_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BlogArticleTemplate_vue_vue_type_style_index_0_id_6c16663f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 371:
+/***/ 373:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -121,19 +121,19 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 379:
+/***/ 383:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/index.vue?vue&type=template&id=3ab6c146&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-container',{attrs:{"fluid":""}},[_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_c('v-card',[_c('v-card-title',[_vm._v("Bienvenue chez les transalpins !")]),_vm._v(" "),(_vm.page)?_c('Template',{attrs:{"page":_vm.page}}):_c('v-card-text',[_vm._v("\n          Tu peux retrouver sur ce site toutes les informations relatives au projet de création d'un habitat partagé\n        ")]),_vm._v(" "),_c('v-container',{attrs:{"fluid":""}},_vm._l((_vm.articles),function(article){return _c('v-row',{key:article['@id']},[_c('v-col',[_c('blog-article-template',{attrs:{"article":article}})],1)],1)}),1)],1)],1)],1)],1)}
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/index.vue?vue&type=template&id=b0e86af0&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-container',{attrs:{"fluid":""}},[_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_c('v-card',[_c('v-card-title',[_vm._v("Bienvenue chez les transalpins !")]),_vm._v(" "),(_vm.page)?_c('PageModel',{attrs:{"page":_vm.page}}):_c('v-card-text',[_vm._v("\n          Tu peux retrouver sur ce site toutes les informations relatives au projet de création d'un habitat partagé\n        ")]),_vm._v(" "),_c('v-container',{attrs:{"fluid":""}},_vm._l((_vm.articles),function(article){return _c('v-row',{key:article['@id']},[_c('v-col',[_c('blog-article-template',{attrs:{"article":article}})],1)],1)}),1)],1)],1)],1)],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./app/pages/index.vue?vue&type=template&id=3ab6c146&
+// CONCATENATED MODULE: ./app/pages/index.vue?vue&type=template&id=b0e86af0&
 
 // EXTERNAL MODULE: external "vue-property-decorator"
 var external_vue_property_decorator_ = __webpack_require__(35);
@@ -141,8 +141,8 @@ var external_vue_property_decorator_ = __webpack_require__(35);
 // EXTERNAL MODULE: external "vuex-class"
 var external_vuex_class_ = __webpack_require__(60);
 
-// EXTERNAL MODULE: ./app/components/page/Template.vue + 4 modules
-var Template = __webpack_require__(334);
+// EXTERNAL MODULE: ./app/components/page/PageModel.vue + 4 modules
+var PageModel = __webpack_require__(334);
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/components/blog_article/BlogArticleTemplate.vue?vue&type=template&id=6c16663f&scoped=true&
 var BlogArticleTemplatevue_type_template_id_6c16663f_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('article',[_vm._ssrNode("<header data-v-6c16663f><h2 class=\"primary--text text--darken-4\" data-v-6c16663f>"+_vm._ssrEscape("\n      "+_vm._s(_vm.article.title)+"\n    ")+"</h2></header> <section data-v-6c16663f><div data-v-6c16663f>"+(_vm._s(_vm.article.content))+"</div></section> <footer data-v-6c16663f><small data-v-6c16663f>"+(_vm._ssrList((_vm.article.tags),function(tag,i){return ("<span data-v-6c16663f>"+_vm._ssrEscape(_vm._s(tag.toUpperCase()))+((i < _vm.article.tags.length - 1)?("<span data-v-6c16663f> / </span>"):"<!---->")+"</span>")}))+" - <time"+(_vm._ssrAttr("datetime",_vm.article.createdAt))+" data-v-6c16663f>"+_vm._ssrEscape(_vm._s(_vm.formatDate(_vm.article.createdAt)))+"</time>"+_vm._ssrEscape(" - "+_vm._s(_vm.article.createdBy.nickname)+".\n    ")+"</small></footer>")])}
@@ -199,7 +199,7 @@ var componentNormalizer = __webpack_require__(10);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(370)
+  var style0 = __webpack_require__(372)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -261,7 +261,7 @@ pagesvue_type_script_lang_ts_decorate([blogArticleModule.Getter('list')], pagesv
 
 pagesvue_type_script_lang_ts_IndexVue = pagesvue_type_script_lang_ts_decorate([Object(external_vue_property_decorator_["Component"])({
   components: {
-    Template: Template["a" /* default */],
+    PageModel: PageModel["a" /* default */],
     BlogArticleTemplate: BlogArticleTemplate
   }
 })], pagesvue_type_script_lang_ts_IndexVue);

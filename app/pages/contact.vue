@@ -5,9 +5,9 @@
         <v-card>
           <v-card-title>Contacte-nous !</v-card-title>
           <v-card-text>
-            <Template v-if="page" :page="page" />
+            <PageModel v-if="page" :page="page" />
             <div v-else>
-              <p>Pour nous contacter tu peux nous envoyer un email à <a href="mailto:contact@lestransalapins.org" title="Envoyer un email aux transalpins">contact@lestransalapins.org</a> ou bien remplir le formulaire suivant.</p>
+              <p>Pour nous contacter tu peux nous envoyer un email à <a href="mailto:contact@lestransalpins.org" title="Envoyer un email aux transalpins">contact@lestransalpins.org</a> ou bien remplir le formulaire suivant.</p>
               <p>Dans ce cas tu recevras un email de confirmation ou bien regarde dans tes spams si ce n'est pas le cas.</p>
             </div>
             <contact-form ref="createForm" :values="item" :errors="violations" />
@@ -30,7 +30,7 @@ import { Contact } from '~/store/contact'
 import NotificationMixin from '~/mixins/notification'
 import { ElementWithValidation } from '~/vue-shim'
 import { Page } from '~/store/page'
-import Template from '~/components/page/Template.vue'
+import PageModel from '~/components/page/PageModel.vue'
 
 const contactModule = namespace('contact')
 const notificationModule = namespace('notifications')
@@ -41,7 +41,7 @@ const pageModule = namespace('page')
   servicePrefix: 'contact',
   resourcePrefix: '/api/contacts/',
   components: {
-    Template,
+    PageModel,
     ContactForm,
     Toolbar,
     Loading

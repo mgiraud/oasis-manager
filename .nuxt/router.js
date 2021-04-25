@@ -24,6 +24,7 @@ const _39ebd046 = () => interopDefault(import('../app/pages/admin/memberGroup/_i
 const _23c33494 = () => interopDefault(import('../app/pages/admin/page/_id.vue' /* webpackChunkName: "pages/admin/page/_id" */))
 const _0e5b76b2 = () => interopDefault(import('../app/pages/admin/pageCategory/_id.vue' /* webpackChunkName: "pages/admin/pageCategory/_id" */))
 const _8a46f616 = () => interopDefault(import('../app/pages/admin/_.vue' /* webpackChunkName: "pages/admin/_" */))
+const _4667f21d = () => interopDefault(import('../app/pages/cahier-des-charges.vue' /* webpackChunkName: "pages/cahier-des-charges" */))
 const _18f20ef6 = () => interopDefault(import('../app/pages/contact.vue' /* webpackChunkName: "pages/contact" */))
 const _6fcdf582 = () => interopDefault(import('../app/pages/login.vue' /* webpackChunkName: "pages/login" */))
 const _0d1dbb6a = () => interopDefault(import('../app/pages/mentions_legales.vue' /* webpackChunkName: "pages/mentions_legales" */))
@@ -123,6 +124,10 @@ export const routerOptions = {
       component: _8a46f616,
       name: "admin-all"
     }]
+  }, {
+    path: "/cahier-des-charges",
+    component: _4667f21d,
+    name: "cahier-des-charges"
   }, {
     path: "/contact",
     component: _18f20ef6,

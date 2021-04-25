@@ -44,7 +44,6 @@ import Loading from '../components/util/Loading.vue'
 import NotificationMixin from '~/mixins/notification'
 import { SurveyJoin } from '~/store/survey_join'
 import { ElementWithValidation } from '~/vue-shim'
-import Template from '~/components/page/Template.vue'
 import { Page } from '~/store/page'
 
 const surveyJoinModule = namespace('survey_join')

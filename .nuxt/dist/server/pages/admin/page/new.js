@@ -7094,18 +7094,18 @@ var TextBackgroundColorBtn_component = Object(componentNormalizer["a" /* default
 
 installComponents_default()(TextBackgroundColorBtn_component, {VBtn: VBtn["a" /* default */],VDialog: VDialog["a" /* default */],VIcon: VIcon["a" /* default */],VList: VList["a" /* default */],VListItem: VListItem["a" /* default */],VListItemTitle: components_VList["b" /* VListItemTitle */],VTooltip: VTooltip_VTooltip})
 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/components/util/Editor/FontFamilyBtn.vue?vue&type=template&id=7f7ea8f1&
-var FontFamilyBtnvue_type_template_id_7f7ea8f1_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-dialog',{attrs:{"width":"300"},scopedSlots:_vm._u([{key:"activator",fn:function(ref){
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/components/util/Editor/FontFamilyBtn.vue?vue&type=template&id=7dcfea62&
+var FontFamilyBtnvue_type_template_id_7dcfea62_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-dialog',{attrs:{"width":"300"},scopedSlots:_vm._u([{key:"activator",fn:function(ref){
 var onDropdown = ref.on;
 var attrsDropdown = ref.attrs;
 return [_c('v-tooltip',{attrs:{"top":""},scopedSlots:_vm._u([{key:"activator",fn:function(ref){
 var onTooltip = ref.on;
 var attrsTooltip = ref.attrs;
 return [_c('v-btn',_vm._g(_vm._b({attrs:{"small":""}},'v-btn',Object.assign({}, attrsDropdown, attrsTooltip),false),Object.assign({}, onDropdown, onTooltip)),[_c('v-icon',[_vm._v("ri-font-size")])],1)]}}],null,true)},[_vm._v(" "),_c('span',[_vm._v("Police de caractère")])])]}}]),model:{value:(_vm.dialog),callback:function ($$v) {_vm.dialog=$$v},expression:"dialog"}},[_vm._v(" "),_c('v-list',[_vm._l((_vm.fonts),function(font,index){return _c('v-list-item',{key:index,on:{"click":function($event){return _vm.selectFontFamily(font)}}},[_c('v-list-item-title',{style:('font-family: ' + font)},[_vm._v("\n        "+_vm._s(font)+"\n      ")])],1)}),_vm._v(" "),_c('v-list-item',{on:{"click":_vm.removeFontFamily}},[_c('v-list-item-title',[_vm._v("Par défaut")])],1)],2)],1)}
-var FontFamilyBtnvue_type_template_id_7f7ea8f1_staticRenderFns = []
+var FontFamilyBtnvue_type_template_id_7dcfea62_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./app/components/util/Editor/FontFamilyBtn.vue?vue&type=template&id=7f7ea8f1&
+// CONCATENATED MODULE: ./app/components/util/Editor/FontFamilyBtn.vue?vue&type=template&id=7dcfea62&
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--12-0!./node_modules/ts-loader??ref--12-1!./node_modules/vue-loader/lib??vue-loader-options!./app/components/util/Editor/FontFamilyBtn.vue?vue&type=script&lang=ts&
 var FontFamilyBtnvue_type_script_lang_ts_decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
@@ -7121,7 +7121,7 @@ let FontFamilyBtnvue_type_script_lang_ts_TextColorBtn = class TextColorBtn exten
   constructor() {
     super(...arguments);
     this.dialog = false;
-    this.fonts = ['Permanent Marker', 'Amatic SC', 'Helvetica'];
+    this.fonts = ['Permanent Marker', 'Amatic SC', 'Caveat', 'Helvetica'];
   }
 
   selectFontFamily(font) {
@@ -7155,8 +7155,8 @@ FontFamilyBtnvue_type_script_lang_ts_TextColorBtn = FontFamilyBtnvue_type_script
 
 var FontFamilyBtn_component = Object(componentNormalizer["a" /* default */])(
   Editor_FontFamilyBtnvue_type_script_lang_ts_,
-  FontFamilyBtnvue_type_template_id_7f7ea8f1_render,
-  FontFamilyBtnvue_type_template_id_7f7ea8f1_staticRenderFns,
+  FontFamilyBtnvue_type_template_id_7dcfea62_render,
+  FontFamilyBtnvue_type_template_id_7dcfea62_staticRenderFns,
   false,
   null,
   null,
@@ -7473,7 +7473,7 @@ installComponents_default()(Editor_component, {VBtn: VBtn["a" /* default */],VTo
 
 /***/ }),
 
-/***/ 363:
+/***/ 365:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7674,7 +7674,7 @@ installComponents_default()(component, {VCol: VCol["a" /* default */],VCombobox:
 
 /***/ }),
 
-/***/ 386:
+/***/ 390:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7698,7 +7698,7 @@ var Loading = __webpack_require__(277);
 var Toolbar = __webpack_require__(278);
 
 // EXTERNAL MODULE: ./app/components/admin/page/Form.vue + 4 modules
-var Form = __webpack_require__(363);
+var Form = __webpack_require__(365);
 
 // EXTERNAL MODULE: ./app/mixins/create.ts
 var create = __webpack_require__(306);

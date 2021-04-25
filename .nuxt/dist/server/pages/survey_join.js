@@ -1,4 +1,4 @@
-exports.ids = [26];
+exports.ids = [27];
 exports.modules = {
 
 /***/ 244:
@@ -1791,33 +1791,33 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_2__[/* default *
 
 /***/ }),
 
-/***/ 368:
+/***/ 370:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "img/join_process_1.29bba9b.png";
 
 /***/ }),
 
-/***/ 369:
+/***/ 371:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "img/join_process_2.8a6bdd2.png";
 
 /***/ }),
 
-/***/ 378:
+/***/ 382:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/survey_join.vue?vue&type=template&id=2aae78cb&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-container',[_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_c('v-card',[_c('v-card-title',[_vm._v("Tu souhaites nous rejoindre ?")]),_vm._v(" "),_c('v-card-text',[(_vm.page)?_c('div',{domProps:{"innerHTML":_vm._s(_vm.page.content)}}):_c('v-container',[_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_vm._v("\n                Avant de remplir le question, merci de prendre connaissance des éléments suivants :\n              ")])],1),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"6"}},[_c('v-img',{attrs:{"src":__webpack_require__(368),"contain":""}})],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"6"}},[_c('v-img',{attrs:{"src":__webpack_require__(369),"contain":""}})],1)],1),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_vm._v("\n                Tu peux remplir ce questionnaire en ligne ou bien "),_c('a',{attrs:{"href":_vm.downloadPdfUrl,"title":"Télécharger le formulaire","target":"_blank"}},[_vm._v("Télécharger le PDF")]),_vm._v(" pour le remplir numériquement ou manuellement et nous l'envoyer à l'addresse suivante : "),_c('a',{attrs:{"href":"mailto:contact@lestransalpins.org","title":"Contacter les transalpins"}},[_vm._v("contact@lestransalpins.org")])])],1)],1),_vm._v(" "),_c('survey-join-form',{ref:"createForm",attrs:{"values":_vm.item,"errors":_vm.violations}}),_vm._v(" "),_c('toolbar',{attrs:{"handle-submit":_vm.onSendForm,"handle-reset":_vm.resetForm}}),_vm._v(" "),_c('Loading',{attrs:{"visible":_vm.isLoading}})],1)],1)],1)],1)],1)}
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/survey_join.vue?vue&type=template&id=5b9eb9e2&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-container',[_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_c('v-card',[_c('v-card-title',[_vm._v("Tu souhaites nous rejoindre ?")]),_vm._v(" "),_c('v-card-text',[(_vm.page)?_c('div',{domProps:{"innerHTML":_vm._s(_vm.page.content)}}):_c('v-container',[_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_vm._v("\n                Avant de remplir le question, merci de prendre connaissance des éléments suivants :\n              ")])],1),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"6"}},[_c('v-img',{attrs:{"src":__webpack_require__(370),"contain":""}})],1),_vm._v(" "),_c('v-col',{attrs:{"cols":"6"}},[_c('v-img',{attrs:{"src":__webpack_require__(371),"contain":""}})],1)],1),_vm._v(" "),_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_vm._v("\n                Tu peux remplir ce questionnaire en ligne ou bien "),_c('a',{attrs:{"href":_vm.downloadPdfUrl,"title":"Télécharger le formulaire","target":"_blank"}},[_vm._v("Télécharger le PDF")]),_vm._v(" pour le remplir numériquement ou manuellement et nous l'envoyer à l'addresse suivante : "),_c('a',{attrs:{"href":"mailto:contact@lestransalpins.org","title":"Contacter les transalpins"}},[_vm._v("contact@lestransalpins.org")])])],1)],1),_vm._v(" "),_c('survey-join-form',{ref:"createForm",attrs:{"values":_vm.item,"errors":_vm.violations}}),_vm._v(" "),_c('toolbar',{attrs:{"handle-submit":_vm.onSendForm,"handle-reset":_vm.resetForm}}),_vm._v(" "),_c('Loading',{attrs:{"visible":_vm.isLoading}})],1)],1)],1)],1)],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./app/pages/survey_join.vue?vue&type=template&id=2aae78cb&
+// CONCATENATED MODULE: ./app/pages/survey_join.vue?vue&type=template&id=5b9eb9e2&
 
 // EXTERNAL MODULE: external "nuxt-property-decorator"
 var external_nuxt_property_decorator_ = __webpack_require__(7);

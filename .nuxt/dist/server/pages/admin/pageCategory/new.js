@@ -1763,7 +1763,7 @@ CreateMixin = __decorate([Object(nuxt_property_decorator__WEBPACK_IMPORTED_MODUL
 
 /***/ }),
 
-/***/ 364:
+/***/ 366:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1911,7 +1911,7 @@ installComponents_default()(component, {VCol: VCol["a" /* default */],VContainer
 
 /***/ }),
 
-/***/ 387:
+/***/ 391:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1932,7 +1932,7 @@ var external_nuxt_property_decorator_ = __webpack_require__(7);
 var external_vuelidate_ = __webpack_require__(79);
 
 // EXTERNAL MODULE: ./app/components/admin/pageCategory/Form.vue + 4 modules
-var Form = __webpack_require__(364);
+var Form = __webpack_require__(366);
 
 // EXTERNAL MODULE: ./app/components/form/Toolbar.vue + 4 modules
 var Toolbar = __webpack_require__(278);

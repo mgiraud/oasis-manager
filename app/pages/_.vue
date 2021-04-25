@@ -3,7 +3,7 @@
     <v-container fluid>
       <v-row>
         <v-col>
-          <Template v-if="page" :page="page" />
+          <PageModel v-if="page" :page="page" />
           <Error404 v-else />
         </v-col>
       </v-row>
@@ -14,7 +14,7 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
-import Template from '~/components/page/Template.vue'
+import PageModel from '~/components/page/PageModel.vue'
 import Error404 from '~/components/error/404.vue'
 import { Page } from '~/store/page'
 
@@ -22,7 +22,7 @@ const pageModule = namespace('page')
 
 @Component({
   components: {
-    Template,
+    PageModel,
     Error404
   }
 })

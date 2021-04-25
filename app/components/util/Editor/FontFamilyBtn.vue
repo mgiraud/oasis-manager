@@ -44,6 +44,7 @@ export default class TextColorBtn extends Vue {
   fonts = [
     'Permanent Marker',
     'Amatic SC',
+    'Caveat',
     'Helvetica'
   ]
 

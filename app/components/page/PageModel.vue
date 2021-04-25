@@ -12,7 +12,7 @@ import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import { Page } from '~/store/page'
 
 @Component
-export default class Tempate extends Vue {
+export default class PageModel extends Vue {
   @Prop({ type: Object, required: true }) readonly page!: Page
 }
 </script>

@@ -129,7 +129,8 @@ export default {
     ],
     link: [
       { rel: 'stylesheet', href: '//fonts.googleapis.com/css?family=Permanent+Marker' },
-      { rel: 'stylesheet', href: '//fonts.googleapis.com/css?family=Amatic+SC' }
+      { rel: 'stylesheet', href: '//fonts.googleapis.com/css?family=Amatic+SC' },
+      { rel: 'stylesheet', href: '//fonts.googleapis.com/css?family=Caveat' }
     ]
   },
   render: {

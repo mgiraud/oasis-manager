@@ -4,7 +4,7 @@
       <v-col cols="12">
         <v-card>
           <v-card-title>Bienvenue chez les transalpins !</v-card-title>
-          <Template v-if="page" :page="page" />
+          <PageModel v-if="page" :page="page" />
           <v-card-text v-else>
             Tu peux retrouver sur ce site toutes les informations relatives au projet de création d'un habitat partagé
           </v-card-text>
@@ -24,7 +24,7 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
-import Template from '~/components/page/Template.vue'
+import PageModel from '~/components/page/PageModel.vue'
 import { BlogArticle } from '~/store/blog_article'
 import { Page } from '~/store/page'
 import BlogArticleTemplate from '~/components/blog_article/BlogArticleTemplate.vue'
@@ -35,7 +35,7 @@ const blogArticleModule = namespace('blog_article')
 
 @Component({
   components: {
-    Template,
+    PageModel,
     BlogArticleTemplate
   }
 })

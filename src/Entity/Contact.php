@@ -87,7 +87,7 @@ class Contact
     private $ip;
 
     /**
-     * @ORM\Column(type="datetimetz", nullable=true)
+     * @ORM\Column(type="datetimetz")
      */
     private $createdAt;
 

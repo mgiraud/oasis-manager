@@ -8,6 +8,7 @@ use ApiPlatform\Core\EventListener\EventPriorities;
 use App\Entity\ContactNewsletter;
 use App\Emails\EmailFactory;
 use App\Emails\Emails;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -21,12 +22,18 @@ class ContactNewsletterSubscriber implements EventSubscriberInterface
     private Environment $twig;
     private MailerInterface $mailer;
     private EmailFactory $emailFactory;
+    private LoggerInterface $logger;
 
-    public function __construct(Environment $twig, MailerInterface $mailer, EmailFactory $emailFactory)
-    {
+    public function __construct(
+        Environment $twig,
+        MailerInterface $mailer,
+        EmailFactory $emailFactory,
+        LoggerInterface $logger
+    ){
         $this->twig = $twig;
         $this->mailer = $mailer;
         $this->emailFactory = $emailFactory;
+        $this->logger = $logger;
     }
 
     public static function getSubscribedEvents()
@@ -79,21 +86,22 @@ class ContactNewsletterSubscriber implements EventSubscriberInterface
         try {
             $this->mailer->send($emailToWarnAdmin);
         } catch (TransportExceptionInterface $e) {
-            dump($e);
+            $this->logger->critical(sprintf('Could not send email to admin for newsletter contact creation reason: %s', $e->getMessage()));
         }
 
-        $emailToWarnAdmin = (new Email())
+        $emailToWarnUser = (new Email())
             ->from($this->emailFactory->getAddress('no-reply'))
             ->to($contactNewsletter->getEmail())
-            ->subject('Nouvelle inscription à la newsletter')
+            ->subject('Confirmation d\'inscription à la newsletter')
             ->html($this->twig->render('mail/contact_newsletter_confirm.html.twig', [
                 'contactNewsletter' => $contactNewsletter
             ]));
 
         try {
-            $this->mailer->send($emailToWarnAdmin);
+            $this->mailer->send($emailToWarnUser);
         } catch (TransportExceptionInterface $e) {
-            dump($e);
+            $this->logger->critical(sprintf('Could not send email to user for newsletter contact creation reason: %s', $e->getMessage()));
+
         }
     }
 

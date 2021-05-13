@@ -1,0 +1,84 @@
+<h1>Nouveau remplissage de questionnaire</h1>
+
+<ul>
+    <li>Email: {{ surveyJoin.email }}</li>
+    <li>Prénom: {{ surveyJoin.firstName }}</li>
+    <li>Nom: {{ surveyJoin.lastName }}</li>
+    <li>Ville: {{ surveyJoin.city }}</li>
+    <li>Téléphone: {{ surveyJoin.phoneNumber ? surveyJoin.phoneNumber: 'Non précisé' }}</li>
+</ul>
+
+<h4>Comment nous as-tu connu ?</h4>
+<p>{{ surveyJoin.origin }}</p>
+
+<h4>De combien de personnes est composé ton foyer, prénom et âge des membres du foyer ?</h4>
+<table>
+    <thead>
+        <tr><td>Prénom</td><td>Age</td></tr>
+    </thead>
+    <tbody>
+        {% for person in surveyJoin.family %}
+            <tr><td>{{ person.firstName }}</td><td>{{ person.age }}</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h4>Dans les termes ci-dessous, quels sont ceux, quelques-uns qui définiraient le mieux ta motivation initiale à créer une oasis ? Les classer par ordre d’importance.</h4>
+<ul>
+    {% for motivation in surveyJoin.motivations %}<li>{{ motivations[motivation] }}</li>{% endfor %}
+</ul>
+
+<h4>Qu'est-ce qui te motive à créer ou à t'engager dans un projet d'Oasis ?</h4>
+<p>{{ surveyJoin.motivationsFreeThinking }}</p>
+
+<h4>Quelles sont les valeurs essentielles que tu aimerais vivre : les valeurs non négociables, c-a-d dont l'absence ferait pour toi perdre son sens au projet et ta motivation à y participer ?</h4>
+<p>Valeurs humaines : {{ surveyJoin.coreValuesHuman }}</p>
+<p>Autres valeurs : {{ surveyJoin.coreValuesOther }}</p>
+
+<h4>Qu’est-ce qui t'attire dans le projet des transalpins ?</h4>
+<p>{{ surveyJoin.affinity }}</p>
+
+<h4>Qu’est-ce qui te questionne dans ce projet ?</h4>
+<p>{{ surveyJoin.questioning }}</p>
+
+<h4>Qu'est tu prêt.e à lui apporter ?</h4>
+<p>{{ surveyJoin.bring }}</p>
+
+<h4>En tant qu’habitant.e, es-tu prêt.e à investir financièrement ?</h4>
+<p>{{ surveyJoin.investment }}</p>
+
+<h4>Es-tu prêt.e à payer un loyer ?</h4>
+<p>{{ surveyJoin.rent }}</p>
+
+<h4>Décris une journée type</h4>
+<p>{{ surveyJoin.typicalDay }}</p>
+
+<h4>Décris ton habitation ?</h4>
+<p>{{ surveyJoin.dwelling }}</p>
+
+<h4>Décrire les espaces communs</h4>
+<p>{{ surveyJoin.commonAreas }}</p>
+
+<h4>Décrire les relations au sein de l'oasis</h4>
+<p>{{ surveyJoin.relationship }}</p>
+
+<h4>Connais-tu la CNV ? Si oui quelle est ton expérience ?</h4>
+<p>{{ surveyJoin.cnvExperience }}</p>
+
+<h4>Connais-tu la gouvernance partagée si oui quelle est ton expérience ?</h4>
+<p>{{ surveyJoin.sharedGovernance }}</p>
+
+<h4>Quels sont tes savoir-faire/être que tu peux amener au projet ?</h4>
+<p>{{ surveyJoin.skills }}</p>
+
+<h4>Quelles sont test limites ?</h4>
+<p>{{ surveyJoin.limits }}</p>
+
+<h4>Quelles sont test disponibilités durant la période de montage du projet ? Et tes disponibilités en semaine ?</h4>
+<p>{{ surveyJoin.availability }}</p>
+
+<h4>Serais-tu disposé.e à rencontrer des élus locaux, des banquiers, architectes… ?</h4>
+<p>{{ surveyJoin.meet }}</p>
+
+<h4>Dans quel domaine utile au projet serais-tu prêt.e à te former ?</h4>
+<p>{{ surveyJoin.skillUp }}</p>

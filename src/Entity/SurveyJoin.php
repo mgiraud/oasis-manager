@@ -226,6 +226,16 @@ class SurveyJoin
      */
     private $family = [];
 
+    /**
+     * @ORM\Column(type="datetimetz")
+     */
+    private $createdAt;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -563,6 +573,18 @@ class SurveyJoin
     public function setFamily(?array $family): self
     {
         $this->family = $family;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

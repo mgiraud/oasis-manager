@@ -169,7 +169,7 @@
       <v-row>
         <v-col cols="12">
           <p class="v-label">
-            Dans les termes ci-dessous, quels sont ceux, quelques-uns qui définiraient le mieux ta motivation initiale à créer une oasis ? Les classer par ordre d’importance.
+            Dans les termes ci-dessous, quels sont ceux, quelques-uns qui définiraient le mieux ta motivation initiale à créer une oasis ? Les classer par ordre d’importance, le plus important en premier. (Utilise le cliquer-glisser)
           </p>
           <vuetify-draggable-treeview v-model="item.motivationsRaw" />
         </v-col>
@@ -227,7 +227,7 @@
       <v-row>
         <v-col cols="12">
           <v-textarea
-            v-model="item.investment"
+            v-model="item.bring"
             label="Qu'est tu prêt.e à lui apporter ?"
             hint="(En plus de ce que tu peux apporter dans la vie quotidienne, développez ici des projets professionnels/rémunérateurs ou autre que tu souhaiterais mettre en place en marge de l'oasis et un exemple de fonctionnement)."
           />
@@ -236,7 +236,7 @@
       <v-row>
         <v-col cols="6">
           <v-textarea
-            v-model="item.bring"
+            v-model="item.investment"
             label="En tant qu’habitant.e, es-tu prêt.e à investir financièrement ?"
           />
         </v-col>
@@ -470,3 +470,9 @@ export default class SurveyJoinForm extends mixins(validationMixin) {
   }
 }
 </script>
+
+<style lang="scss">
+  .v-treeview-node__label {
+    cursor: pointer;
+  }
+</style>

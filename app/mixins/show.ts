@@ -12,11 +12,13 @@ export default class ShowMixin extends mixins(NotificationMixin) {
   reset!: () => void
 
   created () {
-    this.retrieve(decodeURIComponent(this.$route.params.id))
+    const id = this.$options.resourcePrefix ? this.$options.resourcePrefix + this.$route.params.id : this.$route.params.id
+    this.retrieve(decodeURIComponent(id))
   }
 
   get item () {
-    return this.find(decodeURIComponent(this.$route.params.id))
+    const id = this.$options.resourcePrefix ? this.$options.resourcePrefix + this.$route.params.id : this.$route.params.id
+    return this.find(decodeURIComponent(id))
   }
 
   @securityModule.Getter('hasPermission') hasPermission!: (permission: string) => boolean
@@ -34,6 +36,10 @@ export default class ShowMixin extends mixins(NotificationMixin) {
         .push({ name: `${this.$options.servicePrefix}` })
         .catch(() => {})
     })
+  }
+
+  back () {
+    this.$router.push({ name: `${this.$options.servicePrefix}` })
   }
 
   editHandler () {
@@ -57,6 +63,6 @@ export default class ShowMixin extends mixins(NotificationMixin) {
   }
 
   beforeDestroy () {
-    this.reset()
+    // this.reset()
   }
 }

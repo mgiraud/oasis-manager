@@ -2,7 +2,11 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\ContactRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -12,7 +16,6 @@ use App\Validation\Contact as ContactConstraint;
 /**
  * @ApiResource(
  *     attributes={
- *          "pagination_enabled"=false,
  *          "normalization_context"={"groups"={"contact:read"}},
  *          "denormalization_context"={"groups"={"contact:write"}},
  *     },
@@ -25,6 +28,9 @@ use App\Validation\Contact as ContactConstraint;
  *         "delete"={"security"="is_granted('USER_CAN_DELETE_CONTACT')"},
  *     }
  * )
+ * @ApiFilter(SearchFilter::class, properties={"email": "partial", "firstName": "partial", "lastName": "partial"})
+ * @ApiFilter(OrderFilter::class, properties={"firstName", "lastName", "createdAt", "email"})
+ * @ApiFilter(DateFilter::class, properties={"createdAt": DateFilter::EXCLUDE_NULL})
  * @ORM\Entity(repositoryClass=ContactRepository::class)
  * @ContactConstraint
  */
@@ -83,11 +89,13 @@ class Contact
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"contact:read"})
      */
     private $ip;
 
     /**
      * @ORM\Column(type="datetimetz")
+     * @Groups({"contact:read"})
      */
     private $createdAt;
 

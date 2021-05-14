@@ -2,7 +2,11 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\SurveyJoinRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -11,7 +15,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ApiResource(
  *     attributes={
- *          "pagination_enabled"=false,
  *          "normalization_context"={"groups"={"survey_join:read"}},
  *          "denormalization_context"={"groups"={"survey_join:write"}},
  *     },
@@ -24,6 +27,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  *         "delete"={"security"="is_granted('USER_CAN_DELETE_SURVEY_JOIN')"},
  *     }
  * )
+ * @ApiFilter(SearchFilter::class, properties={"email": "partial", "firstName": "partial", "lastName": "partial"})
+ * @ApiFilter(OrderFilter::class, properties={"firstName", "lastName", "createdAt", "email"})
+ * @ApiFilter(DateFilter::class, properties={"createdAt": DateFilter::EXCLUDE_NULL})
  * @ORM\Entity(repositoryClass=SurveyJoinRepository::class)
  */
 class SurveyJoin
@@ -228,6 +234,7 @@ class SurveyJoin
 
     /**
      * @ORM\Column(type="datetimetz", nullable=true)
+     * @Groups({"survey_join:read"})
      */
     private $createdAt;
 

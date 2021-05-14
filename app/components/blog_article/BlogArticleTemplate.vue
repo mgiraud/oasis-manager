@@ -26,7 +26,7 @@ import { BlogArticle } from '~/store/blog_article'
 export default class BlogArticleTemplateVue extends Vue {
   @Prop({ type: Object, required: true }) readonly article!: BlogArticle
 
-  formatDate (rawDate:string) {
+  formatDate (rawDate: string) {
     return formatRelative(parseISO(rawDate), new Date(), { locale: fr })
   }
 }

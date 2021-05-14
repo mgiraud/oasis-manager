@@ -3,17 +3,13 @@
     v-model="drawer"
     app
     width="auto"
+    color="primary darken-3"
   >
     <v-sheet
-      class="pa-4"
+      class="pa-4 white--text"
+      color="primary darken-3"
     >
-      <v-avatar
-        class="mb-4"
-        color="grey darken-1"
-        size="64"
-      />
-
-      <div>{{ member.email }}</div>
+      <div>{{ member.nickname || member.email }}</div>
     </v-sheet>
 
     <v-divider />
@@ -48,10 +44,10 @@
           link
           :to="{name: path}"
         >
-          <v-list-item-title v-text="title" />
+          <v-list-item-title class="white--text" v-text="title" />
 
           <v-list-item-icon>
-            <v-icon v-text="icon" />
+            <v-icon color="white" v-text="icon" />
           </v-list-item-icon>
         </v-list-item>
       </v-list-group>
@@ -74,10 +70,10 @@
           link
           :to="{name: path}"
         >
-          <v-list-item-title v-text="title" />
+          <v-list-item-title class="white--text" v-text="title" />
 
           <v-list-item-icon>
-            <v-icon v-text="icon" />
+            <v-icon color="white" v-text="icon" />
           </v-list-item-icon>
         </v-list-item>
       </v-list-group>
@@ -100,10 +96,10 @@
           link
           :to="{name: path}"
         >
-          <v-list-item-title v-text="title" />
+          <v-list-item-title class="white--text" v-text="title" />
 
           <v-list-item-icon>
-            <v-icon v-text="icon" />
+            <v-icon color="white" v-text="icon" />
           </v-list-item-icon>
         </v-list-item>
       </v-list-group>
@@ -151,8 +147,9 @@ export default class MenuDrawer extends Vue {
   memberItems = [
     ['ri-user-line', 'Gérer les membres', 'admin-member', 'USER_CAN_ACCESS_MEMBERS'],
     ['ri-group-line', 'Gérer les groupes', 'admin-memberGroup', 'USER_CAN_ACCESS_MEMBER_GROUPS'],
-    ['ri-group-line', 'Voir les prises de contact', 'admin-contact', 'USER_CAN_VIEW_CONTACT'],
-    ['ri-group-line', 'Inscriptions à la newsletter', 'admin-contact-newsletter', 'USER_CAN_VIEW_CONTACT_NEWSLETTER']
+    ['ri-contacts-line', 'Prises de contact', 'admin-contact', 'USER_CAN_VIEW_CONTACT'],
+    ['ri-mail-line', 'Inscriptions à la newsletter', 'admin-contact-newsletter', 'USER_CAN_VIEW_CONTACT_NEWSLETTER'],
+    ['ri-survey-line', 'Réponses au questionnaire', 'admin-survey-join', 'USER_CAN_VIEW_SURVEY_JOIN']
   ]
 
   @State('storage') storage!: {user?: Member}

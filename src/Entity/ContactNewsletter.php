@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\ContactNewsletterRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -15,7 +16,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ApiResource(
  *     attributes={
- *          "pagination_enabled"=false,
  *          "normalization_context"={"groups"={"contact_newsletter:read"}},
  *          "denormalization_context"={"groups"={"contact_newsletter:write"}},
  *     },
@@ -29,6 +29,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     }
  * )
  * @ApiFilter(SearchFilter::class, properties={"email": "partial"})
+ * @ApiFilter(OrderFilter::class, properties={"createdAt", "email"})
  * @ApiFilter(DateFilter::class, properties={"createdAt": DateFilter::EXCLUDE_NULL})
  * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(columns={"email"})})
  * @ORM\Entity(repositoryClass=ContactNewsletterRepository::class)

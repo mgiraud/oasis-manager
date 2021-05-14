@@ -83,11 +83,13 @@ class Contact
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"contact:read"})
      */
     private $ip;
 
     /**
      * @ORM\Column(type="datetimetz")
+     * @Groups({"contact:read"})
      */
     private $createdAt;
 

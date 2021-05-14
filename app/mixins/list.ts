@@ -65,7 +65,7 @@ export default class ListMixin extends mixins(NotificationMixin) {
 
   onSendFilter () {
     this.resetList(true)
-    // this.onUpdateOptions(this.options)
+    this.onUpdateOptions(this.options)
   }
 
   resetFilter () {
@@ -78,9 +78,10 @@ export default class ListMixin extends mixins(NotificationMixin) {
   }
 
   showHandler (item: HydraMemberObject) {
+    const id = this.$options.resourcePrefix ? item['@id'].replace(this.$options.resourcePrefix, '') : item['@id']
     this.$router.push({
       name: `${this.$options.servicePrefix}-id`,
-      params: { id: item['@id'] }
+      params: { id }
     })
   }
 

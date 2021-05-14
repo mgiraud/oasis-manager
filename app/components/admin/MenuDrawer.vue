@@ -150,7 +150,8 @@ export default class MenuDrawer extends Vue {
 
   memberItems = [
     ['ri-user-line', 'Gérer les membres', 'admin-member', 'USER_CAN_ACCESS_MEMBERS'],
-    ['ri-group-line', 'Gérer les groupes', 'admin-memberGroup', 'USER_CAN_ACCESS_MEMBER_GROUPS']
+    ['ri-group-line', 'Gérer les groupes', 'admin-memberGroup', 'USER_CAN_ACCESS_MEMBER_GROUPS'],
+    ['ri-group-line', 'Voir les prises de contact', 'admin-contact', 'USER_CAN_VIEW_CONTACT']
   ]
 
   @State('storage') storage!: {user?: Member}

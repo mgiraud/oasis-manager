@@ -8,13 +8,6 @@
           type="text"
         />
       </v-col>
-      <v-col cols="12" sm="6" md="6">
-        <v-text-field
-          v-model="item.firstName"
-          label="Le prénom contient..."
-          type="text"
-        />
-      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -23,7 +16,7 @@
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
 
 @Component
-export default class ContactFilter extends Vue {
+export default class ContactNewsletterFilter extends Vue {
   @Prop({ type: Object, required: true }) readonly values!: any
 
   get item () {

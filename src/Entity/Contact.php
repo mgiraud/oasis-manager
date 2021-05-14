@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\ContactRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -25,6 +28,8 @@ use App\Validation\Contact as ContactConstraint;
  *         "delete"={"security"="is_granted('USER_CAN_DELETE_CONTACT')"},
  *     }
  * )
+ * @ApiFilter(SearchFilter::class, properties={"email": "partial"})
+ * @ApiFilter(DateFilter::class, properties={"createdAt": DateFilter::EXCLUDE_NULL})
  * @ORM\Entity(repositoryClass=ContactRepository::class)
  * @ContactConstraint
  */

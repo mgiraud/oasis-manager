@@ -1,7 +1,7 @@
 exports.ids = [3];
 exports.modules = {
 
-/***/ 402:
+/***/ 412:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -42,7 +42,7 @@ var installComponents = __webpack_require__(12);
 var installComponents_default = /*#__PURE__*/__webpack_require__.n(installComponents);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VContainer.js + 1 modules
-var VContainer = __webpack_require__(243);
+var VContainer = __webpack_require__(241);
 
 // CONCATENATED MODULE: ./app/pages/admin/_.vue
 

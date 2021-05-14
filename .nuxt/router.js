@@ -6,11 +6,14 @@ import scrollBehavior from './router.scrollBehavior.js'
 
 const _2fe0b625 = () => interopDefault(import('../app/pages/admin.vue' /* webpackChunkName: "pages/admin" */))
 const _f65442e6 = () => interopDefault(import('../app/pages/admin/blogArticle/index.vue' /* webpackChunkName: "pages/admin/blogArticle/index" */))
+const _5c242fb9 = () => interopDefault(import('../app/pages/admin/contact/index.vue' /* webpackChunkName: "pages/admin/contact/index" */))
+const _773fee3a = () => interopDefault(import('../app/pages/admin/contact-newsletter/index.vue' /* webpackChunkName: "pages/admin/contact-newsletter/index" */))
 const _c7cea72a = () => interopDefault(import('../app/pages/admin/gallery/index.vue' /* webpackChunkName: "pages/admin/gallery/index" */))
 const _10a524f7 = () => interopDefault(import('../app/pages/admin/member/index.vue' /* webpackChunkName: "pages/admin/member/index" */))
 const _c3bc6344 = () => interopDefault(import('../app/pages/admin/memberGroup/index.vue' /* webpackChunkName: "pages/admin/memberGroup/index" */))
 const _6fb1572c = () => interopDefault(import('../app/pages/admin/page/index.vue' /* webpackChunkName: "pages/admin/page/index" */))
 const _154189ca = () => interopDefault(import('../app/pages/admin/pageCategory/index.vue' /* webpackChunkName: "pages/admin/pageCategory/index" */))
+const _39375c16 = () => interopDefault(import('../app/pages/admin/survey-join/index.vue' /* webpackChunkName: "pages/admin/survey-join/index" */))
 const _15ac15ca = () => interopDefault(import('../app/pages/admin/blogArticle/new.vue' /* webpackChunkName: "pages/admin/blogArticle/new" */))
 const _320bce05 = () => interopDefault(import('../app/pages/admin/member/new.vue' /* webpackChunkName: "pages/admin/member/new" */))
 const _4da1a52c = () => interopDefault(import('../app/pages/admin/memberGroup/new.vue' /* webpackChunkName: "pages/admin/memberGroup/new" */))
@@ -18,11 +21,13 @@ const _3779097a = () => interopDefault(import('../app/pages/admin/page/new.vue' 
 const _22114b98 = () => interopDefault(import('../app/pages/admin/pageCategory/new.vue' /* webpackChunkName: "pages/admin/pageCategory/new" */))
 const _45affbe8 = () => interopDefault(import('../app/pages/admin/gallery/folders/_id/index.vue' /* webpackChunkName: "pages/admin/gallery/folders/_id/index" */))
 const _3d17bf96 = () => interopDefault(import('../app/pages/admin/blogArticle/_id.vue' /* webpackChunkName: "pages/admin/blogArticle/_id" */))
+const _483ccc61 = () => interopDefault(import('../app/pages/admin/contact/_id.vue' /* webpackChunkName: "pages/admin/contact/_id" */))
 const _76c0cc54 = () => interopDefault(import('../app/pages/admin/gallery/_id/index.vue' /* webpackChunkName: "pages/admin/gallery/_id/index" */))
 const _1e55f91f = () => interopDefault(import('../app/pages/admin/member/_id.vue' /* webpackChunkName: "pages/admin/member/_id" */))
 const _39ebd046 = () => interopDefault(import('../app/pages/admin/memberGroup/_id.vue' /* webpackChunkName: "pages/admin/memberGroup/_id" */))
 const _23c33494 = () => interopDefault(import('../app/pages/admin/page/_id.vue' /* webpackChunkName: "pages/admin/page/_id" */))
 const _0e5b76b2 = () => interopDefault(import('../app/pages/admin/pageCategory/_id.vue' /* webpackChunkName: "pages/admin/pageCategory/_id" */))
+const _bc0d2804 = () => interopDefault(import('../app/pages/admin/survey-join/_id.vue' /* webpackChunkName: "pages/admin/survey-join/_id" */))
 const _8a46f616 = () => interopDefault(import('../app/pages/admin/_.vue' /* webpackChunkName: "pages/admin/_" */))
 const _4667f21d = () => interopDefault(import('../app/pages/cahier-des-charges.vue' /* webpackChunkName: "pages/cahier-des-charges" */))
 const _18f20ef6 = () => interopDefault(import('../app/pages/contact.vue' /* webpackChunkName: "pages/contact" */))
@@ -52,6 +57,14 @@ export const routerOptions = {
       component: _f65442e6,
       name: "admin-blogArticle"
     }, {
+      path: "contact",
+      component: _5c242fb9,
+      name: "admin-contact"
+    }, {
+      path: "contact-newsletter",
+      component: _773fee3a,
+      name: "admin-contact-newsletter"
+    }, {
       path: "gallery",
       component: _c7cea72a,
       name: "admin-gallery"
@@ -71,6 +84,10 @@ export const routerOptions = {
       path: "pageCategory",
       component: _154189ca,
       name: "admin-pageCategory"
+    }, {
+      path: "survey-join",
+      component: _39375c16,
+      name: "admin-survey-join"
     }, {
       path: "blogArticle/new",
       component: _15ac15ca,
@@ -100,6 +117,10 @@ export const routerOptions = {
       component: _3d17bf96,
       name: "admin-blogArticle-id"
     }, {
+      path: "contact/:id",
+      component: _483ccc61,
+      name: "admin-contact-id"
+    }, {
       path: "gallery/:id",
       component: _76c0cc54,
       name: "admin-gallery-id"
@@ -119,6 +140,10 @@ export const routerOptions = {
       path: "pageCategory/:id",
       component: _0e5b76b2,
       name: "admin-pageCategory-id"
+    }, {
+      path: "survey-join/:id?",
+      component: _bc0d2804,
+      name: "admin-survey-join-id"
     }, {
       path: "*",
       component: _8a46f616,

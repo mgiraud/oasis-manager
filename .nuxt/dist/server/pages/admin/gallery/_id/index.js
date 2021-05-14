@@ -1,4 +1,4 @@
-exports.ids = [7];
+exports.ids = [10];
 exports.modules = {
 
 /***/ 367:
@@ -44,7 +44,7 @@ var installComponents = __webpack_require__(12);
 var installComponents_default = /*#__PURE__*/__webpack_require__.n(installComponents);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
-var VRow = __webpack_require__(241);
+var VRow = __webpack_require__(239);
 
 // CONCATENATED MODULE: ./app/components/admin/gallery/ItemBreadcrumb.vue
 
@@ -75,7 +75,7 @@ installComponents_default()(component, {VRow: VRow["a" /* default */]})
 
 /***/ }),
 
-/***/ 397:
+/***/ 406:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -166,16 +166,16 @@ var installComponents = __webpack_require__(12);
 var installComponents_default = /*#__PURE__*/__webpack_require__.n(installComponents);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VCol.js
-var VCol = __webpack_require__(240);
+var VCol = __webpack_require__(238);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VContainer.js + 1 modules
-var VContainer = __webpack_require__(243);
+var VContainer = __webpack_require__(241);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VImg/VImg.js + 2 modules
-var VImg = __webpack_require__(56);
+var VImg = __webpack_require__(55);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
-var VRow = __webpack_require__(241);
+var VRow = __webpack_require__(239);
 
 // CONCATENATED MODULE: ./app/pages/admin/gallery/_id/index.vue
 

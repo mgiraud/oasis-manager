@@ -1,7 +1,7 @@
 exports.ids = [1];
 exports.modules = {
 
-/***/ 334:
+/***/ 338:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45,7 +45,7 @@ var installComponents = __webpack_require__(12);
 var installComponents_default = /*#__PURE__*/__webpack_require__.n(installComponents);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/index.js
-var VCard = __webpack_require__(58);
+var VCard = __webpack_require__(57);
 
 // CONCATENATED MODULE: ./app/components/page/PageModel.vue
 
@@ -77,7 +77,7 @@ installComponents_default()(component, {VCardText: VCard["b" /* VCardText */],VC
 
 /***/ }),
 
-/***/ 387:
+/***/ 395:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -95,10 +95,10 @@ var staticRenderFns = []
 var external_vue_property_decorator_ = __webpack_require__(35);
 
 // EXTERNAL MODULE: external "vuex-class"
-var external_vuex_class_ = __webpack_require__(60);
+var external_vuex_class_ = __webpack_require__(59);
 
 // EXTERNAL MODULE: ./app/components/page/PageModel.vue + 4 modules
-var PageModel = __webpack_require__(334);
+var PageModel = __webpack_require__(338);
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/components/error/404.vue?vue&type=template&id=25d59706&
 var _404vue_type_template_id_25d59706_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-main',[_vm._v("\n  404\n")])}
@@ -115,7 +115,7 @@ var installComponents = __webpack_require__(12);
 var installComponents_default = /*#__PURE__*/__webpack_require__.n(installComponents);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VMain/VMain.js
-var VMain = __webpack_require__(238);
+var VMain = __webpack_require__(236);
 
 // CONCATENATED MODULE: ./app/components/error/404.vue
 
@@ -187,16 +187,16 @@ _vue_type_script_lang_ts_BackUpVue = __decorate([Object(external_vue_property_de
 // CONCATENATED MODULE: ./app/pages/_.vue?vue&type=script&lang=ts&
  /* harmony default export */ var pages_vue_type_script_lang_ts_ = (_vue_type_script_lang_ts_); 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/VCard.js
-var VCard = __webpack_require__(70);
+var VCard = __webpack_require__(68);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VCol.js
-var VCol = __webpack_require__(240);
+var VCol = __webpack_require__(238);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VContainer.js + 1 modules
-var VContainer = __webpack_require__(243);
+var VContainer = __webpack_require__(241);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
-var VRow = __webpack_require__(241);
+var VRow = __webpack_require__(239);
 
 // CONCATENATED MODULE: ./app/pages/_.vue
 

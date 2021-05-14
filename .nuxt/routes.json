@@ -13,6 +13,20 @@
         "_name": "_f65442e6"
       },
       {
+        "name": "admin-contact",
+        "path": "contact",
+        "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/contact/index.vue",
+        "chunkName": "pages/admin/contact/index",
+        "_name": "_5c242fb9"
+      },
+      {
+        "name": "admin-contact-newsletter",
+        "path": "contact-newsletter",
+        "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/contact-newsletter/index.vue",
+        "chunkName": "pages/admin/contact-newsletter/index",
+        "_name": "_773fee3a"
+      },
+      {
         "name": "admin-gallery",
         "path": "gallery",
         "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/gallery/index.vue",
@@ -46,6 +60,13 @@
         "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/pageCategory/index.vue",
         "chunkName": "pages/admin/pageCategory/index",
         "_name": "_154189ca"
+      },
+      {
+        "name": "admin-survey-join",
+        "path": "survey-join",
+        "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/survey-join/index.vue",
+        "chunkName": "pages/admin/survey-join/index",
+        "_name": "_39375c16"
       },
       {
         "name": "admin-blogArticle-new",
@@ -97,6 +118,13 @@
         "_name": "_3d17bf96"
       },
       {
+        "name": "admin-contact-id",
+        "path": "contact/:id",
+        "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/contact/_id.vue",
+        "chunkName": "pages/admin/contact/_id",
+        "_name": "_483ccc61"
+      },
+      {
         "name": "admin-gallery-id",
         "path": "gallery/:id",
         "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/gallery/_id/index.vue",
@@ -130,6 +158,13 @@
         "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/pageCategory/_id.vue",
         "chunkName": "pages/admin/pageCategory/_id",
         "_name": "_0e5b76b2"
+      },
+      {
+        "name": "admin-survey-join-id",
+        "path": "survey-join/:id?",
+        "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/survey-join/_id.vue",
+        "chunkName": "pages/admin/survey-join/_id",
+        "_name": "_bc0d2804"
       },
       {
         "name": "admin-all",

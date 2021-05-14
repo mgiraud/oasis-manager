@@ -1,11 +1,11 @@
-exports.ids = [19];
+exports.ids = [22];
 exports.modules = {
 
-/***/ 244:
+/***/ 242:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _delayable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(245);
+/* harmony import */ var _delayable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(243);
 /* harmony import */ var _toggleable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(19);
 /* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
 /* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(0);
@@ -204,7 +204,7 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_2__[/* default *
 
 /***/ }),
 
-/***/ 245:
+/***/ 243:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -263,11 +263,11 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_2__[/* default *
 
 /***/ }),
 
-/***/ 246:
+/***/ 244:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _bootable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(81);
+/* harmony import */ var _bootable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(78);
 /* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
 /* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
 /* harmony import */ var _util_console__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
@@ -398,7 +398,7 @@ function validateAttachTarget(val) {
 
 /***/ }),
 
-/***/ 248:
+/***/ 245:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -439,7 +439,7 @@ function validateAttachTarget(val) {
 
 /***/ }),
 
-/***/ 249:
+/***/ 246:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -500,7 +500,7 @@ function validateAttachTarget(val) {
 
 /***/ }),
 
-/***/ 250:
+/***/ 248:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -521,13 +521,13 @@ function validateAttachTarget(val) {
 
 /***/ }),
 
-/***/ 254:
+/***/ 251:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(255);
+var content = __webpack_require__(252);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -535,7 +535,7 @@ __webpack_require__(5).default("2065bca8", content, true)
 
 /***/ }),
 
-/***/ 255:
+/***/ 252:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -549,7 +549,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 256:
+/***/ 253:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -615,16 +615,16 @@ var installComponents_default = /*#__PURE__*/__webpack_require__.n(installCompon
 var VBtn = __webpack_require__(43);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/VCard.js
-var VCard = __webpack_require__(70);
+var VCard = __webpack_require__(68);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCard/index.js
-var components_VCard = __webpack_require__(58);
+var components_VCard = __webpack_require__(57);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDialog/VDialog.js
-var VDialog = __webpack_require__(281);
+var VDialog = __webpack_require__(277);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VSpacer.js
-var VSpacer = __webpack_require__(242);
+var VSpacer = __webpack_require__(240);
 
 // CONCATENATED MODULE: ./app/components/util/ConfirmDelete.vue
 
@@ -660,7 +660,7 @@ installComponents_default()(component, {VBtn: VBtn["a" /* default */],VCard: VCa
 
 /***/ }),
 
-/***/ 265:
+/***/ 271:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -701,6 +701,254 @@ installComponents_default()(component, {VBtn: VBtn["a" /* default */],VCard: VCa
 
 /***/ }),
 
+/***/ 272:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/components/util/Loading.vue?vue&type=template&id=0db5b63a&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"text-center"},[_c('v-overlay',{attrs:{"value":_vm.visible}},[_c('v-progress-circular',{attrs:{"indeterminate":"","size":"64"}})],1)],1)}
+var staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./app/components/util/Loading.vue?vue&type=template&id=0db5b63a&
+
+// EXTERNAL MODULE: external "nuxt-property-decorator"
+var external_nuxt_property_decorator_ = __webpack_require__(7);
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--12-0!./node_modules/ts-loader??ref--12-1!./node_modules/vue-loader/lib??vue-loader-options!./app/components/util/Loading.vue?vue&type=script&lang=ts&
+var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+let Loadingvue_type_script_lang_ts_Loading = class Loading extends external_nuxt_property_decorator_["Vue"] {};
+
+__decorate([Object(external_nuxt_property_decorator_["Prop"])({
+  type: Boolean,
+  required: true
+})], Loadingvue_type_script_lang_ts_Loading.prototype, "visible", void 0);
+
+Loadingvue_type_script_lang_ts_Loading = __decorate([external_nuxt_property_decorator_["Component"]], Loadingvue_type_script_lang_ts_Loading);
+/* harmony default export */ var Loadingvue_type_script_lang_ts_ = (Loadingvue_type_script_lang_ts_Loading);
+// CONCATENATED MODULE: ./app/components/util/Loading.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var util_Loadingvue_type_script_lang_ts_ = (Loadingvue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__(10);
+
+// EXTERNAL MODULE: ./node_modules/vuetify-loader/lib/runtime/installComponents.js
+var installComponents = __webpack_require__(12);
+var installComponents_default = /*#__PURE__*/__webpack_require__.n(installComponents);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VOverlay/VOverlay.js
+var VOverlay = __webpack_require__(67);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VProgressCircular/VProgressCircular.js
+var VProgressCircular = __webpack_require__(58);
+
+// CONCATENATED MODULE: ./app/components/util/Loading.vue
+
+
+
+
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  util_Loadingvue_type_script_lang_ts_,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  "5fd2eab8"
+  
+)
+
+/* harmony default export */ var util_Loading = __webpack_exports__["a"] = (component.exports);
+
+/* vuetify-loader */
+
+
+
+installComponents_default()(component, {VOverlay: VOverlay["a" /* default */],VProgressCircular: VProgressCircular["a" /* default */]})
+
+
+/***/ }),
+
+/***/ 273:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/components/form/Toolbar.vue?vue&type=template&id=2f61bd33&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-toolbar',{attrs:{"flat":"","bottom":""}},[_vm._t("left"),_vm._v(" "),_c('v-spacer'),_vm._v(" "),_c('div',[(_vm.handleBack)?_c('v-btn',{attrs:{"loading":_vm.isLoading,"color":"primary"},on:{"click":_vm.goBack}},[_vm._v("\n      Retour\n    ")]):_vm._e(),_vm._v(" "),(_vm.handleEdit)?_c('v-btn',{attrs:{"loading":_vm.isLoading,"color":"primary"},on:{"click":_vm.editItem}},[_vm._v("\n      Editer\n    ")]):_vm._e(),_vm._v(" "),(_vm.handleSubmit)?_c('v-btn',{attrs:{"loading":_vm.isLoading,"color":"primary"},on:{"click":_vm.submitItem}},[_vm._v("\n      Envoyer\n    ")]):_vm._e(),_vm._v(" "),(_vm.handleReset)?_c('v-btn',{staticClass:"ml-sm-2",on:{"click":_vm.resetItem}},[_vm._v("\n      Reinitialiser\n    ")]):_vm._e(),_vm._v(" "),(_vm.handleDelete)?_c('v-btn',{staticClass:"ml-sm-2",attrs:{"color":"error"},on:{"click":function($event){_vm.confirmDelete = true}}},[_vm._v("\n      Supprimer\n    ")]):_vm._e(),_vm._v(" "),(_vm.handleAdd)?_c('v-btn',{attrs:{"color":"primary","rounded":""},on:{"click":_vm.addItem}},[_c('v-icon',[_vm._v("ri-add-line")])],1):_vm._e()],1),_vm._v(" "),(_vm.handleDelete)?_c('ConfirmDelete',{attrs:{"visible":_vm.confirmDelete,"handle-delete":_vm.handleDelete},on:{"close":function($event){_vm.confirmDelete = false}}}):_vm._e()],2)}
+var staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./app/components/form/Toolbar.vue?vue&type=template&id=2f61bd33&
+
+// EXTERNAL MODULE: external "nuxt-property-decorator"
+var external_nuxt_property_decorator_ = __webpack_require__(7);
+
+// EXTERNAL MODULE: ./app/components/util/ConfirmDelete.vue + 4 modules
+var ConfirmDelete = __webpack_require__(253);
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--12-0!./node_modules/ts-loader??ref--12-1!./node_modules/vue-loader/lib??vue-loader-options!./app/components/form/Toolbar.vue?vue&type=script&lang=ts&
+var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+let Toolbarvue_type_script_lang_ts_Toolbar = class Toolbar extends external_nuxt_property_decorator_["Vue"] {
+  constructor() {
+    super(...arguments);
+    this.confirmDelete = false;
+  }
+
+  goBack() {
+    if (this.handleBack) {
+      this.handleBack();
+    }
+  }
+
+  addItem() {
+    if (this.handleAdd) {
+      this.handleAdd();
+    }
+  }
+
+  editItem() {
+    if (this.handleEdit) {
+      this.handleEdit();
+    }
+  }
+
+  submitItem() {
+    if (this.handleSubmit) {
+      this.handleSubmit();
+    }
+  }
+
+  resetItem() {
+    if (this.handleReset) {
+      this.handleReset();
+    }
+  }
+
+};
+
+__decorate([Object(external_nuxt_property_decorator_["Prop"])({
+  type: Function,
+  default: null
+})], Toolbarvue_type_script_lang_ts_Toolbar.prototype, "handleBack", void 0);
+
+__decorate([Object(external_nuxt_property_decorator_["Prop"])({
+  type: Function,
+  default: null
+})], Toolbarvue_type_script_lang_ts_Toolbar.prototype, "handleEdit", void 0);
+
+__decorate([Object(external_nuxt_property_decorator_["Prop"])({
+  type: Function,
+  default: null
+})], Toolbarvue_type_script_lang_ts_Toolbar.prototype, "handleSubmit", void 0);
+
+__decorate([Object(external_nuxt_property_decorator_["Prop"])({
+  type: Function,
+  default: null
+})], Toolbarvue_type_script_lang_ts_Toolbar.prototype, "handleReset", void 0);
+
+__decorate([Object(external_nuxt_property_decorator_["Prop"])({
+  type: Function,
+  default: null
+})], Toolbarvue_type_script_lang_ts_Toolbar.prototype, "handleDelete", void 0);
+
+__decorate([Object(external_nuxt_property_decorator_["Prop"])({
+  type: Function,
+  default: null
+})], Toolbarvue_type_script_lang_ts_Toolbar.prototype, "handleAdd", void 0);
+
+__decorate([Object(external_nuxt_property_decorator_["Prop"])({
+  type: String,
+  default: '',
+  required: false
+})], Toolbarvue_type_script_lang_ts_Toolbar.prototype, "title", void 0);
+
+__decorate([Object(external_nuxt_property_decorator_["Prop"])({
+  type: Boolean,
+  default: false,
+  required: false
+})], Toolbarvue_type_script_lang_ts_Toolbar.prototype, "isLoading", void 0);
+
+Toolbarvue_type_script_lang_ts_Toolbar = __decorate([Object(external_nuxt_property_decorator_["Component"])({
+  name: 'Toolbar',
+  components: {
+    ConfirmDelete: ConfirmDelete["a" /* default */]
+  }
+})], Toolbarvue_type_script_lang_ts_Toolbar);
+/* harmony default export */ var Toolbarvue_type_script_lang_ts_ = (Toolbarvue_type_script_lang_ts_Toolbar);
+// CONCATENATED MODULE: ./app/components/form/Toolbar.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var form_Toolbarvue_type_script_lang_ts_ = (Toolbarvue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__(10);
+
+// EXTERNAL MODULE: ./node_modules/vuetify-loader/lib/runtime/installComponents.js
+var installComponents = __webpack_require__(12);
+var installComponents_default = /*#__PURE__*/__webpack_require__.n(installComponents);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBtn/VBtn.js
+var VBtn = __webpack_require__(43);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VIcon/VIcon.js
+var VIcon = __webpack_require__(62);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VSpacer.js
+var VSpacer = __webpack_require__(240);
+
+// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VToolbar/VToolbar.js
+var VToolbar = __webpack_require__(18);
+
+// CONCATENATED MODULE: ./app/components/form/Toolbar.vue
+
+
+
+
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  form_Toolbarvue_type_script_lang_ts_,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  "309e0725"
+  
+)
+
+/* harmony default export */ var form_Toolbar = __webpack_exports__["a"] = (component.exports);
+
+/* vuetify-loader */
+
+
+
+
+
+installComponents_default()(component, {VBtn: VBtn["a" /* default */],VIcon: VIcon["a" /* default */],VSpacer: VSpacer["a" /* default */],VToolbar: VToolbar["a" /* default */]})
+
+
+/***/ }),
+
 /***/ 274:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -735,8 +983,8 @@ module.exports = ___CSS_LOADER_EXPORT___;
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return prevent; });
 /* harmony import */ var _components_VInput__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(25);
-/* harmony import */ var _rippleable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(265);
-/* harmony import */ var _comparable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(250);
+/* harmony import */ var _rippleable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(271);
+/* harmony import */ var _comparable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(248);
 /* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2);
 // Components
  // Mixins
@@ -908,265 +1156,17 @@ function prevent(e) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/components/util/Loading.vue?vue&type=template&id=0db5b63a&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"text-center"},[_c('v-overlay',{attrs:{"value":_vm.visible}},[_c('v-progress-circular',{attrs:{"indeterminate":"","size":"64"}})],1)],1)}
-var staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./app/components/util/Loading.vue?vue&type=template&id=0db5b63a&
-
-// EXTERNAL MODULE: external "nuxt-property-decorator"
-var external_nuxt_property_decorator_ = __webpack_require__(7);
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--12-0!./node_modules/ts-loader??ref--12-1!./node_modules/vue-loader/lib??vue-loader-options!./app/components/util/Loading.vue?vue&type=script&lang=ts&
-var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
-  var c = arguments.length,
-      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-      d;
-  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-  return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-let Loadingvue_type_script_lang_ts_Loading = class Loading extends external_nuxt_property_decorator_["Vue"] {};
-
-__decorate([Object(external_nuxt_property_decorator_["Prop"])({
-  type: Boolean,
-  required: true
-})], Loadingvue_type_script_lang_ts_Loading.prototype, "visible", void 0);
-
-Loadingvue_type_script_lang_ts_Loading = __decorate([external_nuxt_property_decorator_["Component"]], Loadingvue_type_script_lang_ts_Loading);
-/* harmony default export */ var Loadingvue_type_script_lang_ts_ = (Loadingvue_type_script_lang_ts_Loading);
-// CONCATENATED MODULE: ./app/components/util/Loading.vue?vue&type=script&lang=ts&
- /* harmony default export */ var util_Loadingvue_type_script_lang_ts_ = (Loadingvue_type_script_lang_ts_); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(10);
-
-// EXTERNAL MODULE: ./node_modules/vuetify-loader/lib/runtime/installComponents.js
-var installComponents = __webpack_require__(12);
-var installComponents_default = /*#__PURE__*/__webpack_require__.n(installComponents);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VOverlay/VOverlay.js
-var VOverlay = __webpack_require__(69);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VProgressCircular/VProgressCircular.js
-var VProgressCircular = __webpack_require__(59);
-
-// CONCATENATED MODULE: ./app/components/util/Loading.vue
-
-
-
-
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  util_Loadingvue_type_script_lang_ts_,
-  render,
-  staticRenderFns,
-  false,
-  null,
-  null,
-  "5fd2eab8"
-  
-)
-
-/* harmony default export */ var util_Loading = __webpack_exports__["a"] = (component.exports);
-
-/* vuetify-loader */
-
-
-
-installComponents_default()(component, {VOverlay: VOverlay["a" /* default */],VProgressCircular: VProgressCircular["a" /* default */]})
-
-
-/***/ }),
-
-/***/ 278:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/components/form/Toolbar.vue?vue&type=template&id=2f61bd33&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-toolbar',{attrs:{"flat":"","bottom":""}},[_vm._t("left"),_vm._v(" "),_c('v-spacer'),_vm._v(" "),_c('div',[(_vm.handleBack)?_c('v-btn',{attrs:{"loading":_vm.isLoading,"color":"primary"},on:{"click":_vm.goBack}},[_vm._v("\n      Retour\n    ")]):_vm._e(),_vm._v(" "),(_vm.handleEdit)?_c('v-btn',{attrs:{"loading":_vm.isLoading,"color":"primary"},on:{"click":_vm.editItem}},[_vm._v("\n      Editer\n    ")]):_vm._e(),_vm._v(" "),(_vm.handleSubmit)?_c('v-btn',{attrs:{"loading":_vm.isLoading,"color":"primary"},on:{"click":_vm.submitItem}},[_vm._v("\n      Envoyer\n    ")]):_vm._e(),_vm._v(" "),(_vm.handleReset)?_c('v-btn',{staticClass:"ml-sm-2",on:{"click":_vm.resetItem}},[_vm._v("\n      Reinitialiser\n    ")]):_vm._e(),_vm._v(" "),(_vm.handleDelete)?_c('v-btn',{staticClass:"ml-sm-2",attrs:{"color":"error"},on:{"click":function($event){_vm.confirmDelete = true}}},[_vm._v("\n      Supprimer\n    ")]):_vm._e(),_vm._v(" "),(_vm.handleAdd)?_c('v-btn',{attrs:{"color":"primary","rounded":""},on:{"click":_vm.addItem}},[_c('v-icon',[_vm._v("ri-add-line")])],1):_vm._e()],1),_vm._v(" "),(_vm.handleDelete)?_c('ConfirmDelete',{attrs:{"visible":_vm.confirmDelete,"handle-delete":_vm.handleDelete},on:{"close":function($event){_vm.confirmDelete = false}}}):_vm._e()],2)}
-var staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./app/components/form/Toolbar.vue?vue&type=template&id=2f61bd33&
-
-// EXTERNAL MODULE: external "nuxt-property-decorator"
-var external_nuxt_property_decorator_ = __webpack_require__(7);
-
-// EXTERNAL MODULE: ./app/components/util/ConfirmDelete.vue + 4 modules
-var ConfirmDelete = __webpack_require__(256);
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--12-0!./node_modules/ts-loader??ref--12-1!./node_modules/vue-loader/lib??vue-loader-options!./app/components/form/Toolbar.vue?vue&type=script&lang=ts&
-var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
-  var c = arguments.length,
-      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-      d;
-  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-  return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-let Toolbarvue_type_script_lang_ts_Toolbar = class Toolbar extends external_nuxt_property_decorator_["Vue"] {
-  constructor() {
-    super(...arguments);
-    this.confirmDelete = false;
-  }
-
-  goBack() {
-    if (this.handleBack) {
-      this.handleBack();
-    }
-  }
-
-  addItem() {
-    if (this.handleAdd) {
-      this.handleAdd();
-    }
-  }
-
-  editItem() {
-    if (this.handleEdit) {
-      this.handleEdit();
-    }
-  }
-
-  submitItem() {
-    if (this.handleSubmit) {
-      this.handleSubmit();
-    }
-  }
-
-  resetItem() {
-    if (this.handleReset) {
-      this.handleReset();
-    }
-  }
-
-};
-
-__decorate([Object(external_nuxt_property_decorator_["Prop"])({
-  type: Function,
-  default: null
-})], Toolbarvue_type_script_lang_ts_Toolbar.prototype, "handleBack", void 0);
-
-__decorate([Object(external_nuxt_property_decorator_["Prop"])({
-  type: Function,
-  default: null
-})], Toolbarvue_type_script_lang_ts_Toolbar.prototype, "handleEdit", void 0);
-
-__decorate([Object(external_nuxt_property_decorator_["Prop"])({
-  type: Function,
-  default: null
-})], Toolbarvue_type_script_lang_ts_Toolbar.prototype, "handleSubmit", void 0);
-
-__decorate([Object(external_nuxt_property_decorator_["Prop"])({
-  type: Function,
-  default: null
-})], Toolbarvue_type_script_lang_ts_Toolbar.prototype, "handleReset", void 0);
-
-__decorate([Object(external_nuxt_property_decorator_["Prop"])({
-  type: Function,
-  default: null
-})], Toolbarvue_type_script_lang_ts_Toolbar.prototype, "handleDelete", void 0);
-
-__decorate([Object(external_nuxt_property_decorator_["Prop"])({
-  type: Function,
-  default: null
-})], Toolbarvue_type_script_lang_ts_Toolbar.prototype, "handleAdd", void 0);
-
-__decorate([Object(external_nuxt_property_decorator_["Prop"])({
-  type: String,
-  default: '',
-  required: false
-})], Toolbarvue_type_script_lang_ts_Toolbar.prototype, "title", void 0);
-
-__decorate([Object(external_nuxt_property_decorator_["Prop"])({
-  type: Boolean,
-  default: false,
-  required: false
-})], Toolbarvue_type_script_lang_ts_Toolbar.prototype, "isLoading", void 0);
-
-Toolbarvue_type_script_lang_ts_Toolbar = __decorate([Object(external_nuxt_property_decorator_["Component"])({
-  name: 'Toolbar',
-  components: {
-    ConfirmDelete: ConfirmDelete["a" /* default */]
-  }
-})], Toolbarvue_type_script_lang_ts_Toolbar);
-/* harmony default export */ var Toolbarvue_type_script_lang_ts_ = (Toolbarvue_type_script_lang_ts_Toolbar);
-// CONCATENATED MODULE: ./app/components/form/Toolbar.vue?vue&type=script&lang=ts&
- /* harmony default export */ var form_Toolbarvue_type_script_lang_ts_ = (Toolbarvue_type_script_lang_ts_); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(10);
-
-// EXTERNAL MODULE: ./node_modules/vuetify-loader/lib/runtime/installComponents.js
-var installComponents = __webpack_require__(12);
-var installComponents_default = /*#__PURE__*/__webpack_require__.n(installComponents);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBtn/VBtn.js
-var VBtn = __webpack_require__(43);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VIcon/VIcon.js
-var VIcon = __webpack_require__(64);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VSpacer.js
-var VSpacer = __webpack_require__(242);
-
-// EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VToolbar/VToolbar.js
-var VToolbar = __webpack_require__(18);
-
-// CONCATENATED MODULE: ./app/components/form/Toolbar.vue
-
-
-
-
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  form_Toolbarvue_type_script_lang_ts_,
-  render,
-  staticRenderFns,
-  false,
-  null,
-  null,
-  "309e0725"
-  
-)
-
-/* harmony default export */ var form_Toolbar = __webpack_exports__["a"] = (component.exports);
-
-/* vuetify-loader */
-
-
-
-
-
-installComponents_default()(component, {VBtn: VBtn["a" /* default */],VIcon: VIcon["a" /* default */],VSpacer: VSpacer["a" /* default */],VToolbar: VToolbar["a" /* default */]})
-
-
-/***/ }),
-
-/***/ 281:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _src_components_VDialog_VDialog_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(254);
+/* harmony import */ var _src_components_VDialog_VDialog_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(251);
 /* harmony import */ var _src_components_VDialog_VDialog_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VDialog_VDialog_sass__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _VThemeProvider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(282);
-/* harmony import */ var _mixins_activatable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(244);
-/* harmony import */ var _mixins_dependent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(76);
-/* harmony import */ var _mixins_detachable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(246);
-/* harmony import */ var _mixins_overlayable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(82);
-/* harmony import */ var _mixins_returnable__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(248);
-/* harmony import */ var _mixins_stackable__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(249);
+/* harmony import */ var _VThemeProvider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(278);
+/* harmony import */ var _mixins_activatable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(242);
+/* harmony import */ var _mixins_dependent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(74);
+/* harmony import */ var _mixins_detachable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(244);
+/* harmony import */ var _mixins_overlayable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(79);
+/* harmony import */ var _mixins_returnable__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(245);
+/* harmony import */ var _mixins_stackable__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(246);
 /* harmony import */ var _mixins_toggleable__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(19);
-/* harmony import */ var _directives_click_outside__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(77);
+/* harmony import */ var _directives_click_outside__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(75);
 /* harmony import */ var _util_mixins__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(2);
 /* harmony import */ var _util_console__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(3);
 /* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(0);
@@ -1483,7 +1483,7 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_10__[/* default 
 
 /***/ }),
 
-/***/ 282:
+/***/ 278:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1513,13 +1513,13 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_10__[/* default 
 
 /***/ }),
 
-/***/ 290:
+/***/ 300:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(291);
+var content = __webpack_require__(301);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -1527,7 +1527,7 @@ __webpack_require__(5).default("beda1088", content, true)
 
 /***/ }),
 
-/***/ 291:
+/***/ 301:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -1541,13 +1541,13 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 292:
+/***/ 304:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(293);
+var content = __webpack_require__(305);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -1555,7 +1555,7 @@ __webpack_require__(5).default("5db1c400", content, true)
 
 /***/ }),
 
-/***/ 293:
+/***/ 305:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -1569,13 +1569,13 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 307:
+/***/ 311:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var nuxt_property_decorator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7);
 /* harmony import */ var nuxt_property_decorator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(nuxt_property_decorator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _notification__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(80);
+/* harmony import */ var _notification__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(77);
 var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -1695,19 +1695,19 @@ UpdateMixin = __decorate([nuxt_property_decorator__WEBPACK_IMPORTED_MODULE_0__["
 
 /***/ }),
 
-/***/ 333:
+/***/ 335:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var _src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(274);
 /* harmony import */ var _src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _src_components_VSwitch_VSwitch_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(290);
+/* harmony import */ var _src_components_VSwitch_VSwitch_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(300);
 /* harmony import */ var _src_components_VSwitch_VSwitch_sass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_src_components_VSwitch_VSwitch_sass__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _mixins_selectable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(276);
 /* harmony import */ var _VInput__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(25);
 /* harmony import */ var _directives_touch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(34);
 /* harmony import */ var _transitions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(32);
-/* harmony import */ var _VProgressCircular_VProgressCircular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(59);
+/* harmony import */ var _VProgressCircular_VProgressCircular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(58);
 /* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(0);
 // Styles
 
@@ -1829,19 +1829,19 @@ UpdateMixin = __decorate([nuxt_property_decorator__WEBPACK_IMPORTED_MODULE_0__["
 
 /***/ }),
 
-/***/ 335:
+/***/ 339:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VAlert/VAlert.sass
-var VAlert = __webpack_require__(292);
+var VAlert = __webpack_require__(304);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VSheet/index.js
 var VSheet = __webpack_require__(29);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VBtn/index.js
-var VBtn = __webpack_require__(48);
+var VBtn = __webpack_require__(47);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VIcon/index.js
 var VIcon = __webpack_require__(14);
@@ -2119,14 +2119,14 @@ var staticRenderFns = []
 var external_nuxt_property_decorator_ = __webpack_require__(7);
 
 // EXTERNAL MODULE: external "vuelidate/lib/validators"
-var validators_ = __webpack_require__(85);
+var validators_ = __webpack_require__(83);
 
 // EXTERNAL MODULE: external "lodash/has"
-var has_ = __webpack_require__(51);
+var has_ = __webpack_require__(50);
 var has_default = /*#__PURE__*/__webpack_require__.n(has_);
 
 // EXTERNAL MODULE: external "vuelidate"
-var external_vuelidate_ = __webpack_require__(79);
+var external_vuelidate_ = __webpack_require__(80);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--12-0!./node_modules/ts-loader??ref--12-1!./node_modules/vue-loader/lib??vue-loader-options!./app/components/admin/pageCategory/Form.vue?vue&type=script&lang=ts&
 var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
@@ -2200,22 +2200,22 @@ var installComponents = __webpack_require__(12);
 var installComponents_default = /*#__PURE__*/__webpack_require__.n(installComponents);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VCol.js
-var VCol = __webpack_require__(240);
+var VCol = __webpack_require__(238);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VContainer.js + 1 modules
-var VContainer = __webpack_require__(243);
+var VContainer = __webpack_require__(241);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VForm/VForm.js
-var VForm = __webpack_require__(239);
+var VForm = __webpack_require__(237);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
-var VRow = __webpack_require__(241);
+var VRow = __webpack_require__(239);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VSwitch/VSwitch.js
-var VSwitch = __webpack_require__(333);
+var VSwitch = __webpack_require__(335);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 4 modules
-var VTextField = __webpack_require__(209);
+var VTextField = __webpack_require__(207);
 
 // CONCATENATED MODULE: ./app/components/admin/pageCategory/Form.vue
 
@@ -2251,7 +2251,7 @@ installComponents_default()(component, {VCol: VCol["a" /* default */],VContainer
 
 /***/ }),
 
-/***/ 401:
+/***/ 410:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2269,16 +2269,16 @@ var staticRenderFns = []
 var external_nuxt_property_decorator_ = __webpack_require__(7);
 
 // EXTERNAL MODULE: ./app/components/util/Loading.vue + 4 modules
-var Loading = __webpack_require__(277);
+var Loading = __webpack_require__(272);
 
 // EXTERNAL MODULE: ./app/components/form/Toolbar.vue + 4 modules
-var Toolbar = __webpack_require__(278);
+var Toolbar = __webpack_require__(273);
 
 // EXTERNAL MODULE: ./app/components/admin/pageCategory/Form.vue + 4 modules
 var Form = __webpack_require__(366);
 
 // EXTERNAL MODULE: ./app/mixins/update.ts
-var update = __webpack_require__(307);
+var update = __webpack_require__(311);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--12-0!./node_modules/ts-loader??ref--12-1!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/admin/pageCategory/_id.vue?vue&type=script&lang=ts&
 var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
@@ -2342,16 +2342,16 @@ var installComponents = __webpack_require__(12);
 var installComponents_default = /*#__PURE__*/__webpack_require__.n(installComponents);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VAlert/VAlert.js + 1 modules
-var VAlert = __webpack_require__(335);
+var VAlert = __webpack_require__(339);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VCol.js
-var VCol = __webpack_require__(240);
+var VCol = __webpack_require__(238);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VContainer.js + 1 modules
-var VContainer = __webpack_require__(243);
+var VContainer = __webpack_require__(241);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
-var VRow = __webpack_require__(241);
+var VRow = __webpack_require__(239);
 
 // CONCATENATED MODULE: ./app/pages/admin/pageCategory/_id.vue
 

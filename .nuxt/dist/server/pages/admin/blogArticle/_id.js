@@ -2412,7 +2412,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "4b80d673"
+  "d3627b4a"
   
 )
 
@@ -3686,7 +3686,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "5fd2eab8"
+  "171d848c"
   
 )
 
@@ -3853,7 +3853,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "309e0725"
+  "77a5010d"
   
 )
 
@@ -4454,7 +4454,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(317);
+var content = __webpack_require__(318);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -4472,7 +4472,7 @@ module.exports.__inject__ = function (context) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(319);
+var content = __webpack_require__(320);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -4490,7 +4490,7 @@ module.exports.__inject__ = function (context) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(321);
+var content = __webpack_require__(322);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -4508,7 +4508,7 @@ module.exports.__inject__ = function (context) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(323);
+var content = __webpack_require__(324);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -4526,7 +4526,7 @@ module.exports.__inject__ = function (context) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(327);
+var content = __webpack_require__(328);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -4544,7 +4544,7 @@ module.exports.__inject__ = function (context) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(329);
+var content = __webpack_require__(330);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -4982,13 +4982,13 @@ UpdateMixin = __decorate([nuxt_property_decorator__WEBPACK_IMPORTED_MODULE_0__["
 
 /***/ }),
 
-/***/ 314:
+/***/ 315:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(315);
+var content = __webpack_require__(316);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -4996,7 +4996,7 @@ __webpack_require__(5).default("dc0628f2", content, true)
 
 /***/ }),
 
-/***/ 315:
+/***/ 316:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -5010,7 +5010,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 316:
+/***/ 317:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5022,7 +5022,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 317:
+/***/ 318:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -5036,7 +5036,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 318:
+/***/ 319:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5048,7 +5048,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 319:
+/***/ 320:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -5062,7 +5062,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 320:
+/***/ 321:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5074,7 +5074,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 321:
+/***/ 322:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -5088,7 +5088,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 322:
+/***/ 323:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5100,7 +5100,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 323:
+/***/ 324:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -5114,13 +5114,13 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 324:
+/***/ 325:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(325);
+var content = __webpack_require__(326);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -5128,7 +5128,7 @@ __webpack_require__(5).default("04bf085e", content, true)
 
 /***/ }),
 
-/***/ 325:
+/***/ 326:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -5142,7 +5142,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 326:
+/***/ 327:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5154,7 +5154,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 327:
+/***/ 328:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -5168,7 +5168,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 328:
+/***/ 329:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5180,7 +5180,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 329:
+/***/ 330:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -5194,7 +5194,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 330:
+/***/ 331:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5280,7 +5280,7 @@ var VBtn = __webpack_require__(43);
 var VIcon = __webpack_require__(62);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VTooltip/VTooltip.sass
-var VTooltip = __webpack_require__(314);
+var VTooltip = __webpack_require__(315);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/mixins/activatable/index.js
 var activatable = __webpack_require__(242);
@@ -5542,7 +5542,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "7eb55cb5"
+  "dff5f066"
   
 )
 
@@ -5675,7 +5675,7 @@ var FileSelection_component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "001c81ec"
+  "a3d623bc"
   
 )
 
@@ -5749,7 +5749,7 @@ var FileUploader_component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "63901930"
+  "3de7ef00"
   
 )
 
@@ -5829,7 +5829,7 @@ FileNavigatorBreadCrumbvue_type_script_lang_ts_FileNavigatorBreadCrumbItems = Fi
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(316)
+  var style0 = __webpack_require__(317)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -5843,7 +5843,7 @@ var FileNavigatorBreadCrumb_component = Object(componentNormalizer["a" /* defaul
   false,
   injectStyles,
   "55925b90",
-  "8c28c23a"
+  "4a90cffb"
   
 )
 
@@ -5907,7 +5907,7 @@ var FileNavigatorFolders_component = Object(componentNormalizer["a" /* default *
   false,
   null,
   null,
-  "6fa56cf5"
+  "387b92dd"
   
 )
 
@@ -5984,7 +5984,7 @@ FileNavigatorFilesvue_type_script_lang_ts_FileNavigatorFiles = FileNavigatorFile
 
 function FileNavigatorFiles_injectStyles (context) {
   
-  var style0 = __webpack_require__(318)
+  var style0 = __webpack_require__(319)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -5998,7 +5998,7 @@ var FileNavigatorFiles_component = Object(componentNormalizer["a" /* default */]
   false,
   FileNavigatorFiles_injectStyles,
   "28f59eea",
-  "64d7f2a7"
+  "714e728f"
   
 )
 
@@ -6152,7 +6152,7 @@ var VTextField = __webpack_require__(207);
 
 function FileNavigatorContextMenu_injectStyles (context) {
   
-  var style0 = __webpack_require__(320)
+  var style0 = __webpack_require__(321)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -6166,7 +6166,7 @@ var FileNavigatorContextMenu_component = Object(componentNormalizer["a" /* defau
   false,
   FileNavigatorContextMenu_injectStyles,
   "5a00c5d7",
-  "99d03b44"
+  "3718d446"
   
 )
 
@@ -6314,7 +6314,7 @@ FileNavigatorvue_type_script_lang_ts_FileNavigator = FileNavigatorvue_type_scrip
 // CONCATENATED MODULE: ./app/components/file_manager/file_navigator/FileNavigator.vue?vue&type=script&lang=ts&
  /* harmony default export */ var file_navigator_FileNavigatorvue_type_script_lang_ts_ = (FileNavigatorvue_type_script_lang_ts_); 
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VOverflowBtn/VOverflowBtn.sass
-var VOverflowBtn = __webpack_require__(324);
+var VOverflowBtn = __webpack_require__(325);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VSelect/VSelect.js + 4 modules
 var VSelect = __webpack_require__(247);
@@ -6439,7 +6439,7 @@ var VToolbar = __webpack_require__(18);
 
 function FileNavigator_injectStyles (context) {
   
-  var style0 = __webpack_require__(322)
+  var style0 = __webpack_require__(323)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -6453,7 +6453,7 @@ var FileNavigator_component = Object(componentNormalizer["a" /* default */])(
   false,
   FileNavigator_injectStyles,
   "d9fa2b3c",
-  "c3a55340"
+  "4c508578"
   
 )
 
@@ -6581,7 +6581,7 @@ var FileManager_component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "5d7f4061"
+  "38d2c36e"
   
 )
 
@@ -6665,7 +6665,7 @@ var FileUploadBtn_component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "7b8982f6"
+  "01e0c4c6"
   
 )
 
@@ -6792,7 +6792,7 @@ ResizableImageNodevue_type_script_lang_ts_ResizableImageNode = ResizableImageNod
 
 function ResizableImageNode_injectStyles (context) {
   
-  var style0 = __webpack_require__(326)
+  var style0 = __webpack_require__(327)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -6806,7 +6806,7 @@ var ResizableImageNode_component = Object(componentNormalizer["a" /* default */]
   false,
   ResizableImageNode_injectStyles,
   null,
-  "394abc12"
+  "45c13bfa"
   
 )
 
@@ -7059,7 +7059,7 @@ var TextColorBtn_component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "485965a0"
+  "61eaab18"
   
 )
 
@@ -7143,7 +7143,7 @@ var TextBackgroundColorBtn_component = Object(componentNormalizer["a" /* default
   false,
   null,
   null,
-  "5a0f86be"
+  "7398a2a6"
   
 )
 
@@ -7226,7 +7226,7 @@ var FontFamilyBtn_component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "4ddb83cf"
+  "eaa03a32"
   
 )
 
@@ -7376,7 +7376,7 @@ Editorvue_type_script_lang_ts_AdminPageForm = Editorvue_type_script_lang_ts_deco
 
 function Editor_injectStyles (context) {
   
-  var style0 = __webpack_require__(328)
+  var style0 = __webpack_require__(329)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -7390,7 +7390,7 @@ var Editor_component = Object(componentNormalizer["a" /* default */])(
   false,
   Editor_injectStyles,
   "d347c6ee",
-  "36b686b5"
+  "0774afcd"
   
 )
 
@@ -7405,7 +7405,7 @@ installComponents_default()(Editor_component, {VBtn: VBtn["a" /* default */],VTo
 
 /***/ }),
 
-/***/ 335:
+/***/ 336:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7539,7 +7539,7 @@ installComponents_default()(Editor_component, {VBtn: VBtn["a" /* default */],VTo
 
 /***/ }),
 
-/***/ 339:
+/***/ 342:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7813,7 +7813,7 @@ var console = __webpack_require__(3);
 
 /***/ }),
 
-/***/ 363:
+/***/ 366:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7839,7 +7839,7 @@ var has_default = /*#__PURE__*/__webpack_require__.n(has_);
 var external_vuelidate_ = __webpack_require__(80);
 
 // EXTERNAL MODULE: ./app/components/util/Editor.vue + 81 modules
-var Editor = __webpack_require__(330);
+var Editor = __webpack_require__(331);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--12-0!./node_modules/ts-loader??ref--12-1!./node_modules/vue-loader/lib??vue-loader-options!./app/components/admin/blogArticle/Form.vue?vue&type=script&lang=ts&
 var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
@@ -7945,7 +7945,7 @@ var VForm = __webpack_require__(237);
 var VRow = __webpack_require__(239);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VSwitch/VSwitch.js
-var VSwitch = __webpack_require__(335);
+var VSwitch = __webpack_require__(336);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 4 modules
 var VTextField = __webpack_require__(207);
@@ -7965,7 +7965,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "2fa0dc34"
+  "4846941c"
   
 )
 
@@ -7985,7 +7985,7 @@ installComponents_default()(component, {VCol: VCol["a" /* default */],VCombobox:
 
 /***/ }),
 
-/***/ 404:
+/***/ 407:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8009,7 +8009,7 @@ var Loading = __webpack_require__(272);
 var Toolbar = __webpack_require__(273);
 
 // EXTERNAL MODULE: ./app/components/admin/blogArticle/Form.vue + 4 modules
-var Form = __webpack_require__(363);
+var Form = __webpack_require__(366);
 
 // EXTERNAL MODULE: ./app/mixins/update.ts
 var update = __webpack_require__(311);
@@ -8080,7 +8080,7 @@ var installComponents = __webpack_require__(12);
 var installComponents_default = /*#__PURE__*/__webpack_require__.n(installComponents);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VAlert/VAlert.js + 1 modules
-var VAlert = __webpack_require__(339);
+var VAlert = __webpack_require__(342);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VCol.js
 var VCol = __webpack_require__(238);
@@ -8106,7 +8106,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "0f4654e0"
+  "0e049b78"
   
 )
 

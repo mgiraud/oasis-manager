@@ -2412,7 +2412,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "4b80d673"
+  "d3627b4a"
   
 )
 
@@ -3871,7 +3871,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "0a2930ce"
+  "1fd0f6b6"
   
 )
 
@@ -3980,7 +3980,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "678333bc"
+  "5112433a"
   
 )
 
@@ -4000,7 +4000,7 @@ installComponents_default()(component, {VBtn: VBtn["a" /* default */],VCardActio
 
 /***/ }),
 
-/***/ 331:
+/***/ 332:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6160,7 +6160,7 @@ function searchTableItems(items, search, headersWithCustomFilters, headersWithou
 
 /***/ }),
 
-/***/ 387:
+/***/ 390:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6255,7 +6255,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "c7148506"
+  "654be365"
   
 )
 
@@ -6356,7 +6356,7 @@ contact_newslettervue_type_script_lang_ts_AdminContactIndex = contact_newsletter
 // CONCATENATED MODULE: ./app/pages/admin/contact-newsletter/index.vue?vue&type=script&lang=ts&
  /* harmony default export */ var admin_contact_newslettervue_type_script_lang_ts_ = (contact_newslettervue_type_script_lang_ts_); 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDataTable/VDataTable.js + 13 modules
-var VDataTable = __webpack_require__(331);
+var VDataTable = __webpack_require__(332);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VSpacer.js
 var VSpacer = __webpack_require__(240);
@@ -6382,7 +6382,7 @@ var contact_newsletter_component = Object(componentNormalizer["a" /* default */]
   false,
   null,
   null,
-  "94e3ac30"
+  "1b3aee00"
   
 )
 

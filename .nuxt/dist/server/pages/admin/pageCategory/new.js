@@ -641,7 +641,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "4b80d673"
+  "d3627b4a"
   
 )
 
@@ -765,7 +765,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "5fd2eab8"
+  "171d848c"
   
 )
 
@@ -932,7 +932,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "309e0725"
+  "77a5010d"
   
 )
 
@@ -1629,7 +1629,7 @@ CreateMixin = __decorate([Object(nuxt_property_decorator__WEBPACK_IMPORTED_MODUL
 
 /***/ }),
 
-/***/ 335:
+/***/ 336:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1763,7 +1763,7 @@ CreateMixin = __decorate([Object(nuxt_property_decorator__WEBPACK_IMPORTED_MODUL
 
 /***/ }),
 
-/***/ 366:
+/***/ 369:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1872,7 +1872,7 @@ var VForm = __webpack_require__(237);
 var VRow = __webpack_require__(239);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VSwitch/VSwitch.js
-var VSwitch = __webpack_require__(335);
+var VSwitch = __webpack_require__(336);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 4 modules
 var VTextField = __webpack_require__(207);
@@ -1892,7 +1892,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "1f892e41"
+  "1b9a7359"
   
 )
 
@@ -1911,7 +1911,7 @@ installComponents_default()(component, {VCol: VCol["a" /* default */],VContainer
 
 /***/ }),
 
-/***/ 402:
+/***/ 405:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1932,7 +1932,7 @@ var external_nuxt_property_decorator_ = __webpack_require__(7);
 var external_vuelidate_ = __webpack_require__(80);
 
 // EXTERNAL MODULE: ./app/components/admin/pageCategory/Form.vue + 4 modules
-var Form = __webpack_require__(366);
+var Form = __webpack_require__(369);
 
 // EXTERNAL MODULE: ./app/components/form/Toolbar.vue + 4 modules
 var Toolbar = __webpack_require__(273);
@@ -2057,7 +2057,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "2f817cc6"
+  "f0df8e96"
   
 )
 

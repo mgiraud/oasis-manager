@@ -9,7 +9,7 @@
       app
       dark
     >
-      <v-app-bar-nav-icon v-if="$vuetify.breakpoint.mobile" @click.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon v-if="$vuetify.breakpoint.mobile || $vuetify.breakpoint.xs" @click.stop="drawer = !drawer" />
       <template #img="{ props }">
         <v-img
           v-bind="props"
@@ -33,7 +33,7 @@
           ri-login-box-line
         </v-icon>
       </v-btn>
-      <template v-if="!$vuetify.breakpoint.mobile" #extension>
+      <template v-if="!$vuetify.breakpoint.mobile && !$vuetify.breakpoint.xs" #extension>
         <v-container fluid class="header-extension-container">
           <v-row no-gutters>
             <Menu />
@@ -46,11 +46,12 @@
     </v-app-bar>
 
     <v-navigation-drawer
-      v-if="$vuetify.breakpoint.mobile"
+      v-if="$vuetify.breakpoint.mobile || $vuetify.breakpoint.xs"
       v-model="drawer"
       app
       width="auto"
       temporary
+      color="primary darken-3"
     >
       <side-menu />
     </v-navigation-drawer>

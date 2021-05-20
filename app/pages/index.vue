@@ -3,7 +3,6 @@
     <v-row>
       <v-col cols="12">
         <v-card>
-          <v-card-title>Bienvenue chez les transalpins !</v-card-title>
           <PageModel v-if="page" :page="page" />
           <v-card-text v-else>
             Tu peux retrouver sur ce site toutes les informations relatives au projet de création d'un habitat partagé

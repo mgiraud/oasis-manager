@@ -1,7 +1,7 @@
 <template>
   <article>
     <header>
-      <h2 class="primary--text text--darken-4">
+      <h2 class="primary--text text--darken-4 article-title">
         {{ article.title }}
       </h2>
     </header>
@@ -10,7 +10,7 @@
     </section>
     <footer>
       <small>
-        <span v-for="(tag, i) in article.tags" :key="i">{{ tag.toUpperCase() }}<span v-if="i < article.tags.length - 1"> / </span></span> - <time :datetime="article.createdAt">{{ formatDate(article.createdAt) }}</time> - {{ article.createdBy.nickname }}.
+        <span v-for="(tag, i) in article.tags" :key="i">{{ tag.toUpperCase() }}<span v-if="i < article.tags.length - 1"> / </span></span><span v-if="article.tags.length > 0"> - </span><time :datetime="article.createdAt">{{ formatDate(article.createdAt) }}</time> - {{ article.createdBy.nickname | capitalize }}
       </small>
     </footer>
   </article>
@@ -43,5 +43,9 @@ section {
 
 article {
   padding-bottom: 10px;
+}
+
+.article-title {
+  font-family: 'Permanent Marker';
 }
 </style>

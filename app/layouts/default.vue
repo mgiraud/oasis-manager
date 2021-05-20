@@ -56,15 +56,15 @@
     </v-navigation-drawer>
 
     <v-main class="secondary lighten-3">
-      <v-card v-show="showSubHeader" class="card-newsletter">
+      <v-card v-show="showSubHeader" class="card-newsletter pb-1">
         <v-card-text>
           <v-container fluid ma-0 pa-0 fill-height>
             <v-row no-gutters align="center" justify="center">
-              <v-col lg="4" md="5" sm="6">
+              <v-col lg="4" md="5" sm="6" cols="12">
                 <newsletter-form />
               </v-col>
-              <v-col lg="2" md="3" sm="6">
-                ET&nbsp;&nbsp;
+              <v-col lg="3" md="4" sm="6" cols="12">
+                <span v-if="!$vuetify.breakpoint.mobile">ET&nbsp;&nbsp;</span>
                 <v-btn
                   color="primary"
                   @click="redirectToHelloAsso"

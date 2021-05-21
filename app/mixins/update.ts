@@ -10,7 +10,7 @@ export default class UpdateMixin extends mixins(NotificationMixin) {
   item : HydraMemberObject | {} = {}
 
   @securityModule.Getter('hasPermission') hasPermission!: (permission: string) => boolean
-  retrieve !: (id: string) => void
+  retrieve !: (id: string) => HydraMemberObject | null
   find !: (id: string) => HydraMemberObject | null
   deleteItem !: (item: HydraMemberObject) => Promise<void>
   createReset!: () => void

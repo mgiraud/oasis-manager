@@ -121,6 +121,20 @@ class Page
      */
     private $showInMenu;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Member::class)
+     * @ORM\JoinColumn(nullable=true)
+     * @Groups({"page:read"})
+     */
+    private $lastUpdateBy;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"page:read"})
+     */
+    private $lastUpdateAt;
+
+
     public function __construct()
     {
         $this->showInMenu = true;
@@ -251,6 +265,30 @@ class Page
     public function setShowInMenu(bool $showInMenu): self
     {
         $this->showInMenu = $showInMenu;
+
+        return $this;
+    }
+
+    public function getLastUpdateBy(): ?Member
+    {
+        return $this->lastUpdateBy;
+    }
+
+    public function setLastUpdateBy(?\DateTime $lastUpdateBy): self
+    {
+        $this->lastUpdateBy = $lastUpdateBy;
+
+        return $this;
+    }
+
+    public function getLastUpdateAt(): ?\DateTime
+    {
+        return $this->lastUpdateAt;
+    }
+
+    public function setLastUpdateAt(?\DateTime $lastUpdateAt): self
+    {
+        $this->lastUpdateAt = $lastUpdateAt;
 
         return $this;
     }

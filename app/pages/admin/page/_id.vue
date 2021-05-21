@@ -16,6 +16,7 @@
           ref="updateForm"
           :values="item"
           :errors="violations"
+          :page-logs="pageLogs"
         />
       </v-col>
     </v-row>
@@ -39,14 +40,17 @@
   </v-container>
 </template>
 <script lang="ts">
-import { Component, mixins, namespace } from 'nuxt-property-decorator'
+import { Component, mixins, namespace, Watch } from 'nuxt-property-decorator'
 import Loading from '~/components/util/Loading.vue'
 import Toolbar from '~/components/form/Toolbar.vue'
 import Form from '~/components/admin/page/Form.vue'
 import update from '~/mixins/update'
 import { Page } from '~/store/page'
+import {PageLog, PageLogPayload} from '~/store/page_log'
+import {FormOptions} from "~/api/repository";
 
 const pageModule = namespace('page')
+const pageLogModule = namespace('page_log')
 
 @Component({
   components: {
@@ -73,7 +77,43 @@ export default class AdminPageEdit extends mixins(update) {
   @pageModule.Action('resetCreate') createReset!: () => void
   @pageModule.Action('resetDelete') delReset!: () => void
   @pageModule.Action('load') retrieve!: (id: string) => void
-  @pageModule.Action('update') update!: (pageCateogry: Page) => Promise<Page>
+  @pageModule.Action('update') update!: (page: Page) => Promise<Page>
   @pageModule.Action('resetUpdate') updateReset!: () => void
+
+  @pageLogModule.Action('fetchAll') getLogs!: (options: {[name: string]: string}) => PageLog[]
+  @pageLogModule.Action('create') createLog !: (log: PageLogPayload) => Promise<PageLog>
+  @pageLogModule.Getter('list') pageLogs !: () => PageLog[]
+
+  autoSaveInterval: NodeJS.Timeout | null = null
+
+  @Watch('retrieved')
+  onRetrieved (val: Page) {
+    this.item = { ...val }
+    if (this.item) {
+      this.getLogs({
+        'page.url': (this.item as Page).url,
+        'order[updatedAt]': 'desc'
+      })
+    }
+  }
+
+  autoSave () {
+    this.createLog({
+      originalContent: (this.item as Page).content,
+      draft: true,
+      page: (this.item as Page)['@id']
+    })
+  }
+
+  mounted () {
+    this.autoSaveInterval = setInterval(this.autoSave, 120000)
+  }
+
+  beforeDestroy () {
+    if (this.autoSaveInterval) {
+      clearInterval(this.autoSaveInterval)
+    }
+    this.autoSaveInterval = null
+  }
 }
 </script>

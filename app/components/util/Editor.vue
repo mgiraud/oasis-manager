@@ -157,6 +157,7 @@
           icon="ri-link-unlink"
           :click-handler="() => editor.chain().focus().unsetLink().run()"
         />
+        <slot name="supplemental_btns"></slot>
       </v-toolbar>
       <editor-content class="editor__content" :editor="editor" />
     </div>
@@ -217,8 +218,7 @@ export default class AdminPageForm extends Vue {
     if (isSame) {
       return
     }
-
-    this.editor?.commands.setContent(this.value || '', false)
+    this.setContent(this.value || '')
   }
 
   mounted () {
@@ -242,11 +242,10 @@ export default class AdminPageForm extends Vue {
         TextBackgroundColor,
         Text,
         FontFamily
-      ]
-    })
-
-    this.editor.on('update', () => {
-      this.$emit('input', this.editor?.getHTML())
+      ],
+      onUpdate: () => {
+        this.$emit('input', this.editor?.getHTML())
+      }
     })
   }
 
@@ -255,7 +254,7 @@ export default class AdminPageForm extends Vue {
   }
 
   clearContent () {
-    this.editor?.commands.setContent('', false)
+    this.setContent('')
   }
 
   addImage () {
@@ -270,6 +269,12 @@ export default class AdminPageForm extends Vue {
     const url = window.prompt('URL')
     if (url) {
       this.editor?.chain().focus().setLink({ href: url }).run()
+    }
+  }
+
+  setContent (content: string) {
+    if (this.editor) {
+      this.editor.commands.setContent(content, false)
     }
   }
 }

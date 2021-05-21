@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use App\Repository\PageLogRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -15,17 +18,25 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     },
  *     collectionOperations={
  *         "get"={"method"="GET"},
- *         "post"={"security"="is_granted('USER_CAN_EDIT_PAGE')"},
+ *         "post"={"security"="is_granted('USER_CAN_EDIT_PAGES')"},
  *     },
  *     itemOperations={
  *         "get"={"method"="GET"},
  *     }
  * )
  * @ORM\Entity(repositoryClass=PageLogRepository::class)
+ * @ApiFilter(SearchFilter::class, properties={"page.url": "exact", "draft": "exact"})
+ * @ApiFilter(OrderFilter::class, properties={"updatedAt"})
  */
 class PageLog
 {
-    const LOGS_PER_PAGE = 3;
+    const LOGS_PER_PAGE = 5;
+    const DRAFT_LOGS_PER_PAGE = 3;
+
+    public function __construct()
+    {
+        $this->updatedAt = new \Datetime();
+    }
 
     /**
      * @ORM\Id
@@ -63,6 +74,7 @@ class PageLog
     /**
      * @ORM\ManyToOne(targetEntity=Page::class)
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"page_log:read", "page_log:write"})
      */
     private $page;
 
@@ -112,7 +124,7 @@ class PageLog
         return $this->draft;
     }
 
-    public function setIsDraft(bool $draft): self
+    public function setDraft(bool $draft): self
     {
         $this->draft = $draft;
 

@@ -26,6 +26,7 @@ let store = {};
   resolveStoreModules(require('../app/store/member.ts'), 'member.ts')
   resolveStoreModules(require('../app/store/notifications.ts'), 'notifications.ts')
   resolveStoreModules(require('../app/store/page_category.ts'), 'page_category.ts')
+  resolveStoreModules(require('../app/store/page_log.ts'), 'page_log.ts')
   resolveStoreModules(require('../app/store/page.ts'), 'page.ts')
   resolveStoreModules(require('../app/store/security.ts'), 'security.ts')
   resolveStoreModules(require('../app/store/survey_join.ts'), 'survey_join.ts')

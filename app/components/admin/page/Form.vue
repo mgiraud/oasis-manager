@@ -173,12 +173,10 @@ export default class AdminPageForm extends mixins(validationMixin) {
   @Prop({ type: Object, default: () => {} })
   initialValues!: any
 
-  @pageCategoryModule.State('selectItems')
-  @pageCategoryModule.Action('fetchSelectItems')
+  @pageCategoryModule.State('selectItems') categorySelectItems!: PageCategory[] | null
+  @pageCategoryModule.Action('fetchSelectItems') categoryGetSelectItems!: () => PageCategory[]
   @pageLogModule.Getter('find') findLog!: (id: string) => PageLog | null
 
-  categorySelectItems!: PageCategory[] | null
-  categoryGetSelectItems!: () => PageCategory[]
   dialog = false
   selectedLog: string | null = null
 

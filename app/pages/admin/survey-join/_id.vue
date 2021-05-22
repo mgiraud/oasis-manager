@@ -335,6 +335,7 @@ import Loading from '~/components/util/Loading.vue'
 import Toolbar from '~/components/form/Toolbar.vue'
 import ContactForm from '~/components/contact/Form.vue'
 import { Contact } from '~/store/contact'
+import { HydraMemberObject } from '~/api/hydra'
 
 const surveyJoinModule = namespace('survey_join')
 
@@ -352,7 +353,7 @@ const surveyJoinModule = namespace('survey_join')
 export default class ContactView extends mixins(show) {
   @surveyJoinModule.State('isLoading') isLoading!: boolean
   @surveyJoinModule.Getter('find') find!: (id: string) => Contact | null
-  @surveyJoinModule.Action('load') retrieve!: (id: string) => void
+  @surveyJoinModule.Action('load') retrieve!: (id: string) => HydraMemberObject | null
 }
 </script>
 

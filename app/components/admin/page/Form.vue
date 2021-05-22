@@ -62,58 +62,58 @@
           <ClientOnly>
             <Editor
               v-if="item.content !== undefined"
-              v-model="item.content"
               ref="editor"
+              v-model="item.content"
             >
-              <template v-slot:supplemental_btns>
-                  <v-dialog
-                    v-model="dialog"
-                    width="90%"
-                  >
-                    <template #activator="{ on: onDropdown, attrs: attrsDropdown }">
-                      <v-tooltip top>
-                        <template #activator="{ on: onTooltip, attrs: attrsTooltip }">
-                          <v-btn
-                            small
-                            v-bind="{...attrsDropdown, ...attrsTooltip}"
-                            v-on="{...onDropdown, ...onTooltip}"
-                          >
-                            <v-icon>ri-download-cloud-line</v-icon>
-                          </v-btn>
-                        </template>
-                        <span>Charger une ancienne version</span>
-                      </v-tooltip>
-                    </template>
-
-                    <v-card>
-                      <v-card-title class="headline grey lighten-2">
-                        Sélectionner une version de la page
-                      </v-card-title>
-
-                      <v-card-text>
-                        <v-select
-                          v-model="selectedLog"
-                          :items="pageLogs"
-                          :item-text="(item) => {
-                              return `#${item.id} ${formatDate(item.updatedAt)} - ${item.draft ? 'Automatique' : `Manuelle par ${item.updatedBy.nickname}`}`;
-                            }"
-                          item-value="@id"
-                          label="Choisissez une version"
-                        ></v-select>
-                        <v-textarea v-if="selectedLog && findLog(selectedLog)" v-html="findLog(selectedLog).originalContent"/>
-                      </v-card-text>
-                      <v-card-actions>
-                        <v-spacer />
+              <template #supplemental_btns>
+                <v-dialog
+                  v-model="dialog"
+                  width="90%"
+                >
+                  <template #activator="{ on: onDropdown, attrs: attrsDropdown }">
+                    <v-tooltip top>
+                      <template #activator="{ on: onTooltip, attrs: attrsTooltip }">
                         <v-btn
-                          color="primary"
-                          text
-                          @click.prevent="setContent"
+                          small
+                          v-bind="{...attrsDropdown, ...attrsTooltip}"
+                          v-on="{...onDropdown, ...onTooltip}"
                         >
-                          Récupérer la version sélectionnée
+                          <v-icon>ri-download-cloud-line</v-icon>
                         </v-btn>
-                      </v-card-actions>
-                    </v-card>
-                  </v-dialog>
+                      </template>
+                      <span>Charger une ancienne version</span>
+                    </v-tooltip>
+                  </template>
+
+                  <v-card>
+                    <v-card-title class="headline grey lighten-2">
+                      Sélectionner une version de la page
+                    </v-card-title>
+
+                    <v-card-text>
+                      <v-select
+                        v-model="selectedLog"
+                        :items="pageLogs"
+                        :item-text="(item) => {
+                          return `#${item.id} ${formatDate(item.updatedAt)} - ${item.draft ? 'Automatique' : `Manuelle par ${item.updatedBy.nickname}`}`
+                        }"
+                        item-value="@id"
+                        label="Choisissez une version"
+                      />
+                      <v-textarea v-if="selectedLog && findLog(selectedLog)" v-html="findLog(selectedLog).originalContent" />
+                    </v-card-text>
+                    <v-card-actions>
+                      <v-spacer />
+                      <v-btn
+                        color="primary"
+                        text
+                        @click.prevent="setContent"
+                      >
+                        Récupérer la version sélectionnée
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
               </template>
             </Editor>
           </ClientOnly>
@@ -142,7 +142,8 @@ const pageLogModule = namespace('page_log')
 @Component({
   name: 'AdminPageForm',
   components: {
-    Editor, EditorBtn
+    Editor,
+    EditorBtn
   },
   validations: {
     item: {
@@ -155,8 +156,7 @@ const pageLogModule = namespace('page_log')
         minLength: minLength(2),
         slug
       },
-      content: {
-      }
+      content: {}
     }
   }
 })
@@ -173,9 +173,12 @@ export default class AdminPageForm extends mixins(validationMixin) {
   @Prop({ type: Object, default: () => {} })
   initialValues!: any
 
-  @pageCategoryModule.State('selectItems') categorySelectItems!: PageCategory[] | null
-  @pageCategoryModule.Action('fetchSelectItems') categoryGetSelectItems!: () => PageCategory[]
+  @pageCategoryModule.State('selectItems')
+  @pageCategoryModule.Action('fetchSelectItems')
   @pageLogModule.Getter('find') findLog!: (id: string) => PageLog | null
+
+  categorySelectItems!: PageCategory[] | null
+  categoryGetSelectItems!: () => PageCategory[]
   dialog = false
   selectedLog: string | null = null
 
@@ -185,26 +188,38 @@ export default class AdminPageForm extends mixins(validationMixin) {
 
   get titleErrors () {
     const errors: string[] = []
-    if (!this.$v.item.title || !this.$v.item.title.$dirty) { return errors }
+    if (!this.$v.item.title || !this.$v.item.title.$dirty) {
+      return errors
+    }
     has(this.violations, 'title') && errors.push(this.violations.title)
-    !this.$v.item.title.minLength && errors.push('Le titre doit faire au moins 4 caractères')
+    !this.$v.item.title.minLength &&
+      errors.push('Le titre doit faire au moins 4 caractères')
     return errors
   }
 
   get urlErrors () {
     const errors: string[] = []
-    if (!this.$v.item.url || !this.$v.item.url.$dirty) { return errors }
+    if (!this.$v.item.url || !this.$v.item.url.$dirty) {
+      return errors
+    }
     has(this.violations, 'url') && errors.push(this.violations.url)
-    !this.$v.item.url.minLength && errors.push('Le titre doit faire au moins 2 caractères')
-    !this.$v.item.url.slug && errors.push('L\'url doit contenir seulement des chiffres, des lettres et le tiret du haut -')
+    !this.$v.item.url.minLength &&
+      errors.push('Le titre doit faire au moins 2 caractères')
+    !this.$v.item.url.slug &&
+      errors.push(
+        'L\'url doit contenir seulement des chiffres, des lettres et le tiret du haut -'
+      )
     return errors
   }
 
   get contentErrors () {
     const errors: string[] = []
-    if (!this.$v.item.content || !this.$v.item.content.$dirty) { return errors }
+    if (!this.$v.item.content || !this.$v.item.content.$dirty) {
+      return errors
+    }
     has(this.violations, 'url') && errors.push(this.violations.content)
-    !this.$v.item.content.slug && errors.push('Le titre doit faire au moins 2 caractères')
+    !this.$v.item.content.slug &&
+      errors.push('Le titre doit faire au moins 2 caractères')
     return errors
   }
 
@@ -217,8 +232,11 @@ export default class AdminPageForm extends mixins(validationMixin) {
   }
 
   setContent () {
-    if (this.findLog(this.selectedLog) && this.$refs.editor) {
-      this.$refs.editor.setContent(this.findLog(this.selectedLog).originalContent)
+    if (this.selectedLog && this.findLog(this.selectedLog) && this.$refs.editor) {
+      const selectedLogObj = this.findLog(this.selectedLog)
+      if (selectedLogObj) {
+        (this.$refs.editor as Editor).setContent(selectedLogObj.originalContent)
+      }
       this.dialog = false
     }
   }

@@ -71,7 +71,7 @@ class PageSubscriber implements EventSubscriberInterface
         $pageLog
             ->setUpdatedBy($user)
             ->setUpdatedAt(new \Datetime())
-            ->setIsDraft(false)
+            ->setDraft(false)
             ->setOriginalContent($page->getContent())
             ->setPage($page)
         ;

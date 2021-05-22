@@ -45,6 +45,7 @@ import Toolbar from '~/components/form/Toolbar.vue'
 import Form from '~/components/admin/memberGroup/Form.vue'
 import update from '~/mixins/update'
 import { MemberGroup } from '~/store/member_group'
+import { HydraMemberObject } from '~/api/hydra'
 
 const memberGroupModule = namespace('member_group')
 
@@ -73,7 +74,7 @@ export default class AdminMemberGroupEdit extends mixins(update) {
 
   @memberGroupModule.Action('resetCreate') createReset!: () => void
   @memberGroupModule.Action('resetDelete') delReset!: () => void
-  @memberGroupModule.Action('load') retrieve!: (id: string) => void
+  @memberGroupModule.Action('load') retrieve!: (id: string) => HydraMemberObject | null
   @memberGroupModule.Action('update') update!: (memberGroup: MemberGroup) => Promise<MemberGroup>
   @memberGroupModule.Action('resetUpdate') updateReset!: () => void
 }

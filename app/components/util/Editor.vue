@@ -157,7 +157,7 @@
           icon="ri-link-unlink"
           :click-handler="() => editor.chain().focus().unsetLink().run()"
         />
-        <slot name="supplemental_btns"></slot>
+        <slot name="supplemental_btns" />
       </v-toolbar>
       <editor-content class="editor__content" :editor="editor" />
     </div>

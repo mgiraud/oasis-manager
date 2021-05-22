@@ -34,6 +34,7 @@ import Loading from '~/components/util/Loading.vue'
 import Toolbar from '~/components/form/Toolbar.vue'
 import ContactForm from '~/components/contact/Form.vue'
 import { Contact } from '~/store/contact'
+import { HydraMemberObject } from '~/api/hydra'
 
 const contactModule = namespace('page')
 
@@ -51,7 +52,7 @@ const contactModule = namespace('page')
 export default class ContactView extends mixins(show) {
   @contactModule.State('isLoading') isLoading!: boolean
   @contactModule.Getter('find') find!: (id: string) => Contact | null
-  @contactModule.Action('load') retrieve!: (id: string) => void
+  @contactModule.Action('load') retrieve!: (id: string) => HydraMemberObject | null
 }
 </script>
 

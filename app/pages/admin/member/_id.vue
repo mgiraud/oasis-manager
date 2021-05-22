@@ -45,6 +45,7 @@ import Toolbar from '~/components/form/Toolbar.vue'
 import Form from '~/components/admin/member/Form.vue'
 import update from '~/mixins/update'
 import { Member } from '~/store/member'
+import { HydraMemberObject } from '~/api/hydra'
 
 const memberModule = namespace('member')
 
@@ -73,7 +74,7 @@ export default class AdminMemberEdit extends mixins(update) {
 
   @memberModule.Action('resetCreate') createReset!: () => void
   @memberModule.Action('resetDelete') delReset!: () => void
-  @memberModule.Action('load') retrieve!: (id: string) => void
+  @memberModule.Action('load') retrieve!: (id: string) => HydraMemberObject | null
   @memberModule.Action('update') update!: (member: Member) => Promise<Member>
   @memberModule.Action('resetUpdate') updateReset!: () => void
 }

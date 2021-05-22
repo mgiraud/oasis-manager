@@ -45,6 +45,7 @@ import Toolbar from '~/components/form/Toolbar.vue'
 import Form from '~/components/admin/pageCategory/Form.vue'
 import update from '~/mixins/update'
 import { PageCategory } from '~/store/page_category'
+import { HydraMemberObject } from '~/api/hydra'
 
 const pageCategoryModule = namespace('page_category')
 
@@ -70,7 +71,7 @@ export default class AdminPageCategoryEdit extends mixins(update) {
 
   @pageCategoryModule.Action('resetCreate') createReset!: () => void
   @pageCategoryModule.Action('resetDelete') delReset!: () => void
-  @pageCategoryModule.Action('load') retrieve!: (id: string) => void
+  @pageCategoryModule.Action('load') retrieve!: (id: string) => HydraMemberObject | null
   @pageCategoryModule.Action('update') update!: (pageCateogry: PageCategory) => Promise<PageCategory>
   @pageCategoryModule.Action('resetUpdate') updateReset!: () => void
 }

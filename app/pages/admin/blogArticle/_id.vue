@@ -45,6 +45,7 @@ import Toolbar from '~/components/form/Toolbar.vue'
 import Form from '~/components/admin/blogArticle/Form.vue'
 import update from '~/mixins/update'
 import { BlogArticle } from '~/store/blog_article'
+import { HydraMemberObject } from '~/api/hydra'
 
 const blogArticleModule = namespace('page')
 
@@ -72,7 +73,7 @@ export default class AdminPageEdit extends mixins(update) {
 
   @blogArticleModule.Action('resetCreate') createReset!: () => void
   @blogArticleModule.Action('resetDelete') delReset!: () => void
-  @blogArticleModule.Action('load') retrieve!: (id: string) => void
+  @blogArticleModule.Action('load') retrieve!: (id: string) => HydraMemberObject | null
   @blogArticleModule.Action('update') update!: (article: BlogArticle) => Promise<BlogArticle>
   @blogArticleModule.Action('resetUpdate') updateReset!: () => void
 }

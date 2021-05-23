@@ -102,7 +102,7 @@ export default class FileManager extends Vue {
       this.$getRepository('media_objects').$post('/api/media_objects', {
         method: 'POST',
         body: formData
-      }).then((res) => {
+      }).then((res: MediaObject) => {
         if (res.isImage) {
           this.selectImage(res)
         } else {

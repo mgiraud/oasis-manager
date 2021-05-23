@@ -4,24 +4,24 @@ import createRepository, { Repository } from '~/api/repository'
 
 declare module 'vue/types/vue' {
   interface Vue {
-      $getRepository(name: string): Repository
+      $getRepository: (name: string) => Repository
   }
 }
 
 declare module '@nuxt/types' {
   interface NuxtAppOptions {
-      $getRepository(name: string): Repository
+      $getRepository: (name: string) => Repository
   }
 
   interface Context {
-      $getRepository(name: string): Repository
+      $getRepository: (name: string) => Repository
   }
 }
 
 declare module 'vuex/types/index' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface Store<S> {
-      $getRepository(name: string): Repository
+      $getRepository: (name: string) => Repository
   }
 }
 

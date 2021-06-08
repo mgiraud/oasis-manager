@@ -29,7 +29,7 @@
           </FormFilter>
         </v-toolbar>
       </template>
-      <template v-if="item" slot="item.createdAt" slot-scope="{ item }">
+      <template v-if="item && item.createdAt" slot="item.createdAt" slot-scope="{ item }">
         {{ formatDate(item.createdAt) }}
       </template>
       <ActionCell

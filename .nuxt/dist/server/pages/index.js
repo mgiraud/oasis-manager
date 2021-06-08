@@ -111,7 +111,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "271f25df",
-  "6910b7f7"
+  "703ecfe2"
   
 )
 
@@ -177,12 +177,12 @@ module.exports = ___CSS_LOADER_EXPORT___;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/index.vue?vue&type=template&id=76321220&
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/index.vue?vue&type=template&id=211f891e&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-container',{attrs:{"fluid":""}},[_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_c('v-card',[(_vm.page)?_c('PageModel',{attrs:{"page":_vm.page}}):_c('v-card-text',[_vm._v("\n          Tu peux retrouver sur ce site toutes les informations relatives au projet de création d'un habitat partagé\n        ")]),_vm._v(" "),_c('v-container',{attrs:{"fluid":""}},_vm._l((_vm.articles),function(article){return _c('v-row',{key:article['@id']},[_c('v-col',[_c('blog-article-template',{attrs:{"article":article}})],1)],1)}),1)],1)],1)],1)],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./app/pages/index.vue?vue&type=template&id=76321220&
+// CONCATENATED MODULE: ./app/pages/index.vue?vue&type=template&id=211f891e&
 
 // EXTERNAL MODULE: external "vue-property-decorator"
 var external_vue_property_decorator_ = __webpack_require__(35);
@@ -262,7 +262,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "48b1f5a5",
-  "d9be1596"
+  "4c9c0166"
   
 )
 
@@ -295,7 +295,9 @@ let pagesvue_type_script_lang_ts_IndexVue = class IndexVue extends external_vue_
   }
 
   mounted() {
-    this.fetchAll();
+    this.fetchAll({
+      'order[createdAt]': 'desc'
+    });
   }
 
 };
@@ -351,7 +353,7 @@ var pages_component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "4b6ec36b"
+  "2dee2d83"
   
 )
 

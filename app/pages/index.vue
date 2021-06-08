@@ -41,7 +41,7 @@ const blogArticleModule = namespace('blog_article')
 export default class IndexVue extends Vue {
   @securityModule.Action('logout') logout!: () => void
   @pageModule.Getter('find') find!: (url: string) => Page | null
-  @blogArticleModule.Action('fetchAll') fetchAll !: () => BlogArticle[]
+  @blogArticleModule.Action('fetchAll') fetchAll !: (options?: {[propertyPath: string]: string | number}) => BlogArticle[]
   @blogArticleModule.Getter('list') articles !: BlogArticle[]
 
   public head () {
@@ -55,7 +55,9 @@ export default class IndexVue extends Vue {
   };
 
   mounted () {
-    this.fetchAll()
+    this.fetchAll({
+      'order[createdAt]': 'desc'
+    })
   }
 }
 </script>

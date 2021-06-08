@@ -60,12 +60,6 @@ class MediaGalleryItem
     private $children;
 
     /**
-     * @ORM\OneToMany(targetEntity=MediaObject::class, mappedBy="mediaGalleryItem", orphanRemoval=true)
-     * @Groups({"media_gallery_item:read"})
-     */
-    private $mediaObjects;
-
-    /**
      * @ORM\OneToOne(targetEntity=MediaGallery::class, mappedBy="rootItem")
      * @Groups({"media_gallery_item:write"})
      */
@@ -76,10 +70,16 @@ class MediaGalleryItem
      */
     public array $breadcrumb = [];
 
+    /**
+     * @ORM\ManyToMany(targetEntity=MediaObject::class, mappedBy="mediaGalleryItems")
+     * @Groups({"media_gallery_item:read"})
+     */
+    private $mediaObjects;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
-        $this->mediaObjects = new ArrayCollection();
+//        $this->mediaObjects = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -153,6 +153,18 @@ class MediaGalleryItem
         return $this;
     }
 
+    public function getGallery(): ?MediaGallery
+    {
+        return $this->gallery;
+    }
+
+    public function setGallery(MediaGallery $gallery): self
+    {
+        $this->gallery = $gallery;
+
+        return $this;
+    }
+
     /**
      * @return Collection|MediaObject[]
      */
@@ -165,7 +177,7 @@ class MediaGalleryItem
     {
         if (!$this->mediaObjects->contains($mediaObject)) {
             $this->mediaObjects[] = $mediaObject;
-            $mediaObject->setMediaGalleryItem($this);
+            $mediaObject->addMediaGalleryItem($this);
         }
 
         return $this;
@@ -174,23 +186,8 @@ class MediaGalleryItem
     public function removeMediaObject(MediaObject $mediaObject): self
     {
         if ($this->mediaObjects->removeElement($mediaObject)) {
-            // set the owning side to null (unless already changed)
-            if ($mediaObject->getMediaGalleryItem() === $this) {
-                $mediaObject->setMediaGalleryItem(null);
-            }
+            $mediaObject->removeMediaGalleryItem($this);
         }
-
-        return $this;
-    }
-
-    public function getGallery(): ?MediaGallery
-    {
-        return $this->gallery;
-    }
-
-    public function setGallery(MediaGallery $gallery): self
-    {
-        $this->gallery = $gallery;
 
         return $this;
     }

@@ -8,6 +8,8 @@ use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Controller\Media\CreateMediaObjectAction;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -94,13 +96,6 @@ class MediaObject
     public $filePath;
 
     /**
-     * @ORM\ManyToOne(targetEntity=MediaGalleryItem::class, inversedBy="mediaObjects")
-     * @ORM\JoinColumn(nullable=false)
-     * @ApiProperty(readableLink=false, writableLink=false)
-     */
-    private $mediaGalleryItem;
-
-    /**
      * @var string|null
      *
      * @ORM\Column(nullable=false, type="text", unique=true)
@@ -123,26 +118,49 @@ class MediaObject
      */
     public $customName;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=MediaGalleryItem::class, inversedBy="mediaObjects")
+     * @ApiProperty(readableLink=false, writableLink=false)
+     */
+    private $mediaGalleryItems;
+
+    public function __construct()
+    {
+        $this->mediaGalleryItems = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getMediaGalleryItem(): ?MediaGalleryItem
-    {
-        return $this->mediaGalleryItem;
-    }
-
-    public function setMediaGalleryItem(?MediaGalleryItem $mediaGalleryItem): self
-    {
-        $this->mediaGalleryItem = $mediaGalleryItem;
-
-        return $this;
     }
 
     /** @ORM\PrePersist() */
     public function generateUniqueId()
     {
         $this->uniqueId = substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, 24);
+    }
+
+    /**
+     * @return Collection|MediaGalleryItem[]
+     */
+    public function getMediaGalleryItems(): Collection
+    {
+        return $this->mediaGalleryItems;
+    }
+
+    public function addMediaGalleryItem(MediaGalleryItem $mediaGalleryItem): self
+    {
+        if (!$this->mediaGalleryItems->contains($mediaGalleryItem)) {
+            $this->mediaGalleryItems[] = $mediaGalleryItem;
+        }
+
+        return $this;
+    }
+
+    public function removeMediaGalleryItem(MediaGalleryItem $mediaGalleryItem): self
+    {
+        $this->mediaGalleryItems->removeElement($mediaGalleryItem);
+
+        return $this;
     }
 }

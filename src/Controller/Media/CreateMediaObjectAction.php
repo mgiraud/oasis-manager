@@ -28,7 +28,7 @@ final class CreateMediaObjectAction
 
         $mediaObject = new MediaObject();
         $mediaObject->file = $uploadedFile;
-        $mediaObject->setMediaGalleryItem($galleryItem);
+        $mediaObject->addMediaGalleryItem($galleryItem);
 
         return $mediaObject;
     }

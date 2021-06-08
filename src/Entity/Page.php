@@ -134,6 +134,11 @@ class Page
      */
     private $lastUpdateAt;
 
+    /**
+     * @ORM\ManyToOne (targetEntity=MediaGalleryItem::class)
+     * @Groups({"page:read"})
+     */
+    private $galleryItem;
 
     public function __construct()
     {

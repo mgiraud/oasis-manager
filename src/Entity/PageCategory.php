@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     attributes={
  *     "pagination_enabled"=false,
  *     "normalization_context"={"groups"={"page_category:read"}},
- *     "denormalizationContext"={"groups"={"page_category:write"}}
+ *     "denormalization_context"={"groups"={"page_category:write"}}
  *     },
  *     collectionOperations={
  *         "get"={},

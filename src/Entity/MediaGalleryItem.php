@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\MediaGalleryItemRepository;
@@ -19,7 +20,7 @@ use Symfony\Component\Serializer\Annotation\Ignore;
  *         "post"={"security"="is_granted('ROLE_ADMIN')"},
  *     },
  *     attributes={"pagination_enabled"=false},
- *     normalizationContext={"groups"={"media_gallery_item:read"}},
+ *     normalizationContext={"groups"={"media_gallery_item:read", "media_gallery_tree:read"}},
  *     denormalizationContext={"groups"={"media_gallery_item:write"}},
  * )
  * @ORM\Entity(repositoryClass=MediaGalleryItemRepository::class)
@@ -31,19 +32,19 @@ class MediaGalleryItem
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"media_gallery_item:read"})
+     * @Groups({"media_gallery_item:read", "page:read", "media_gallery_tree:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"media_gallery_item:read", "media_gallery_item:write"})
+     * @Groups({"media_gallery_item:read", "media_gallery_item:write", "page:read", "media_gallery_tree:read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"media_gallery_item:read", "media_gallery_item:write"})
+     * @Groups({"media_gallery_item:read", "media_gallery_item:write", "page:read", "media_gallery_tree:read"})
      */
     private $description;
 
@@ -55,7 +56,8 @@ class MediaGalleryItem
 
     /**
      * @ORM\OneToMany(targetEntity=MediaGalleryItem::class, mappedBy="parent")
-     * @Groups({"media_gallery_item:read"})
+     * @Groups({"media_gallery_item:read", "media_gallery_tree:read"})
+     * @ApiProperty(readableLink=true)
      */
     private $children;
 
@@ -72,14 +74,14 @@ class MediaGalleryItem
 
     /**
      * @ORM\ManyToMany(targetEntity=MediaObject::class, mappedBy="mediaGalleryItems")
-     * @Groups({"media_gallery_item:read"})
+     * @Groups({"media_gallery_item:read", "page:read"})
      */
     private $mediaObjects;
 
     public function __construct()
     {
         $this->children = new ArrayCollection();
-//        $this->mediaObjects = new ArrayCollection();
+        $this->mediaObjects = new ArrayCollection();
     }
 
     public function getId(): ?int

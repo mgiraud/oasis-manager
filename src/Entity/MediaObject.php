@@ -75,7 +75,7 @@ class MediaObject
      * @var string|null
      *
      * @ApiProperty(iri="http://schema.org/contentUrl")
-     * @Groups({"media_object:read"})
+     * @Groups({"media_object:read", "page:read"})
      */
     public $contentUrl;
 
@@ -91,7 +91,7 @@ class MediaObject
      * @var string|null
      *
      * @ORM\Column(nullable=true, type="text")
-     * @Groups({"media_object:read"})
+     * @Groups({"media_object:read", "page:read"})
      */
     public $filePath;
 
@@ -106,7 +106,7 @@ class MediaObject
 
     /**
      * @ApiProperty()
-     * @Groups({"media_object:read"})
+     * @Groups({"media_object:read", "page:read"})
      */
     public $isImage = false;
 
@@ -114,7 +114,7 @@ class MediaObject
      * @var string|null
      *
      * @ORM\Column(nullable=true, type="text")
-     * @Groups({"media_object:read", "media_object:write"})
+     * @Groups({"media_object:read", "media_object:write", "page:read"})
      */
     public $customName;
 

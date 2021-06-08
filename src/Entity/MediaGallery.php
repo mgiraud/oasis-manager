@@ -2,14 +2,28 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\MediaGalleryRepository;
+use App\Controller\Media\MediaGalleryTreeAction;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
- *     normalizationContext={"groups"={"media_gallery:read"}}
+ *     collectionOperations={
+ *         "get"={
+ *             "normalization_context"={"groups"={"media_gallery:read"}}
+ *          },
+ *         "post"={"security"="is_granted('USER_CAN_EDIT_GALLERIES')"},
+ *         "tree"={
+ *             "security"="is_granted('USER_CAN_EDIT_GALLERIES')",
+ *             "method"="GET",
+ *             "path"="/media_galleries/tree",
+ *             "controller"=MediaGalleryTreeAction::class,
+ *             "normalization_context"={"groups"={"media_gallery_tree:read"}}
+ *         },
+ *     },
  * )
  * @ORM\Entity(repositoryClass=MediaGalleryRepository::class)
  */
@@ -25,20 +39,21 @@ class MediaGallery
 
     /**
      * @ORM\Column(type="text")
-     * @Groups("media_gallery:read")
+     * @Groups({"media_gallery:read", "media_gallery_tree:read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups("media_gallery:read")
+     * @Groups({"media_gallery:read", "media_gallery_tree:read"})
      */
     private $description;
 
     /**
      * @ORM\OneToOne(targetEntity=MediaGalleryItem::class, cascade={"persist", "remove"}, inversedBy="gallery")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups("media_gallery:read")
+     * @Groups({"media_gallery:read", "media_gallery_tree:read"})
+     * @ApiProperty(readableLink=true)
      */
     private $rootItem;
 

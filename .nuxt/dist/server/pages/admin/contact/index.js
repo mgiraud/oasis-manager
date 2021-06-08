@@ -2412,7 +2412,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "d3627b4a"
+  "4b80d673"
   
 )
 
@@ -3871,7 +3871,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "1fd0f6b6"
+  "0a2930ce"
   
 )
 
@@ -3980,7 +3980,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "5112433a"
+  "678333bc"
   
 )
 
@@ -6167,14 +6167,14 @@ function searchTableItems(items, search, headersWithCustomFilters, headersWithou
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/admin/contact/index.vue?vue&type=template&id=224099c0&
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/admin/contact/index.vue?vue&type=template&id=c34d20c0&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-container',[_c('v-data-table',{staticClass:"elevation-1",attrs:{"headers":_vm.headers,"items":_vm.items,"items-per-page":_vm.options.itemsPerPage,"loading":_vm.isLoading,"loading-text":"Loading...","options":_vm.options,"server-items-length":_vm.totalItems,"item-key":"@id","show-select":""},on:{"update:itemsPerPage":function($event){return _vm.$set(_vm.options, "itemsPerPage", $event)},"update:items-per-page":function($event){return _vm.$set(_vm.options, "itemsPerPage", $event)},"update:options":[function($event){_vm.options=$event},_vm.onUpdateOptions]},scopedSlots:_vm._u([{key:"top",fn:function(){return [_c('v-toolbar',{attrs:{"flat":"","color":"white"}},[_c('v-toolbar-title',[_vm._v("Contact")]),_vm._v(" "),_c('v-spacer'),_vm._v(" "),_c('FormFilter',{attrs:{"handle-filter":_vm.onSendFilter,"handle-reset":_vm.resetFilter}},[_c('ContactFilter',{ref:"filterForm",attrs:{"slot":"filter","values":_vm.filters},slot:"filter"})],1)],1)]},proxy:true},{key:"item.createdAt",fn:function(ref){
 var item = ref.item;
-return (item)?[_vm._v("\n      "+_vm._s(_vm.formatDate(item.createdAt))+"\n    ")]:undefined}},{key:"item.actions",fn:function(props){return _c('ActionCell',{attrs:{"handle-show":function () { return _vm.showHandler(props.item); }}})}}],null,true),model:{value:(_vm.selected),callback:function ($$v) {_vm.selected=$$v},expression:"selected"}})],1)}
+return (item && item.createdAt)?[_vm._v("\n      "+_vm._s(_vm.formatDate(item.createdAt))+"\n    ")]:undefined}},{key:"item.actions",fn:function(props){return _c('ActionCell',{attrs:{"handle-show":function () { return _vm.showHandler(props.item); }}})}}],null,true),model:{value:(_vm.selected),callback:function ($$v) {_vm.selected=$$v},expression:"selected"}})],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./app/pages/admin/contact/index.vue?vue&type=template&id=224099c0&
+// CONCATENATED MODULE: ./app/pages/admin/contact/index.vue?vue&type=template&id=c34d20c0&
 
 // EXTERNAL MODULE: external "nuxt-property-decorator"
 var external_nuxt_property_decorator_ = __webpack_require__(7);
@@ -6255,7 +6255,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "7061273c"
+  "17282e24"
   
 )
 
@@ -6392,7 +6392,7 @@ var contact_component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "52109fbc"
+  "9e3f0058"
   
 )
 

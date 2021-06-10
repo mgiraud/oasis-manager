@@ -3,57 +3,51 @@
     <v-row>
       <v-col>
         <h3 class="navigator-title" @click="handleRootClick">
-          Navigateur de fichier
-        </h3><file-navigator-bread-crumb :gallery-item="currentGalleryItem" :gallery-click-handler="handleGalleryClick" :gallery-item-click-handler="handleGalleryItemClick" />
+          <v-btn rounded depressed small>Navigateur de fichier</v-btn>
+        </h3><file-navigator-bread-crumb :media-node="currentMediaNode" :media-node-click-handler="handleMediaNodeClick" />
       </v-col>
     </v-row>
-    <v-row @contextmenu.prevent="onRightClick">
-      <v-toolbar v-if="!currentGallery" dense>
-        <v-overflow-btn
-          v-model="currentGallery"
-          :items="mediaGalleries"
-          item-text="name"
-          :item-value="getMediaGallery"
-          label="Sélectionner une gallerie..."
-          hide-details
-          class="pa-0"
-          overflow
-        />
-      </v-toolbar>
-    </v-row>
-    <v-row v-if="currentGalleryItem" @contextmenu.prevent="onRightClick">
+    <v-row v-if="currentMediaNode" @contextmenu.prevent="onRightClick">
       <v-col cols="12">
         <h4>Dossiers</h4>
       </v-col>
       <v-col cols="12">
-        <file-navigator-folders :gallery-item="currentGalleryItem" :handle-click="handleGalleryItemClick" v-if="currentGalleryItem.children.length > 0"/>
+        <file-navigator-folders :media-node="currentMediaNode" :handle-click="handleMediaNodeClick" v-if="currentMediaNode.children.length > 0"/>
         <p v-else>Aucun dossier</p>
       </v-col>
     </v-row>
-    <v-row v-if="currentGalleryItem && currentGalleryItem.mediaObjects.length > 0">
+    <v-row v-if="currentMediaNode && currentMediaNode.mediaObjects.length > 0">
       <v-col cols="12">
         <h4>Fichiers</h4>
       </v-col>
       <v-col>
-        <file-navigator-files :select-click-handler="selectClickHandler" :edit-click-handler="editClickHandler" :gallery-item="currentGalleryItem" />
+        <file-navigator-files :select-click-handler="selectClickHandler" :edit-click-handler="editClickHandler" :media-node="currentMediaNode" />
       </v-col>
     </v-row>
-    <file-navigator-context-menu ref="file-navigator-context-menu" :gallery-item="currentGalleryItem" />
+    <v-row v-if="!currentMediaNode">
+      <v-col cols="12">
+        <h4>Sélectionner un dossier</h4>
+      </v-col>
+      <v-col cols="3" v-for="node in rootMediaNodes" :key="node['@id']">
+        <v-btn @click="handleMediaNodeClick(node['@id'])">
+          {{ node.name }}
+        </v-btn>
+      </v-col>
+    </v-row>
+    <file-navigator-context-menu ref="file-navigator-context-menu" :media-node="currentMediaNode" />
   </v-container>
 </template>
 
 <script lang="ts">
-import { Component, Vue, namespace, Prop, Watch, InjectReactive } from 'nuxt-property-decorator'
+import { Component, Vue, namespace, Prop, InjectReactive } from 'nuxt-property-decorator'
 import FileNavigatorBreadCrumb from './FileNavigatorBreadCrumb.vue'
 import FileNavigatorFolders from './FileNavigatorFolders.vue'
 import FileNavigatorFiles from './FileNavigatorFiles.vue'
 import FileNavigatorContextMenu from './FileNavigatorContextMenu.vue'
 import { MediaObject } from '~/store/media_object'
-import { MediaGalleryItem } from '~/store/media_gallery_item'
-import { MediaGallery } from '~/store/media_gallery'
+import { MediaNode } from '~/store/media_node'
 
-const mediaGalleryModule = namespace('media_gallery')
-const mediaGalleryItemModule = namespace('media_gallery_item')
+const mediaNodeModule = namespace('media_node')
 const mediaObjectModule = namespace('media_object')
 
 @Component({
@@ -65,67 +59,48 @@ const mediaObjectModule = namespace('media_object')
   }
 })
 export default class FileNavigator extends Vue {
-    currentGallery: MediaGallery | null = null
-    @Prop({ type: Object, required: false }) readonly currentGalleryItem!: MediaGalleryItem| null
+    @Prop({ type: Object, required: false }) readonly currentMediaNode!: MediaNode| null
     @Prop({ type: Function, required: true }) readonly editClickHandler!: (item: MediaObject) => void
     @Prop({ type: Function, required: true }) readonly selectClickHandler!: (item: MediaObject) => void
     @Prop({ type: String, required: false, default: null }) readonly rootName!: string | null
     @InjectReactive() readonly closeDetailPanel !: () => void
-    @mediaGalleryModule.Action('fetchAll') fetchAllGalleries!: (options?: {[propertyPath: string]: string | number}) => MediaGallery[]
-    @mediaGalleryItemModule.Action('load') fetchGalleryItem!: (id: string) => MediaGalleryItem
-    @mediaGalleryModule.Getter('list') mediaGalleries !: MediaGallery[]
-    @mediaGalleryModule.Getter('find') findMediaGalleriesById !: (id: string) => MediaGallery
+    @mediaNodeModule.Action('fetchAll') fetchRootMediaNode!: (options?: {[propertyPath: string]: string | number}) => MediaNode[]
+    @mediaNodeModule.Action('load') fetchMediaNode!: (id: string) => MediaNode
+    @mediaNodeModule.Getter('list') rootMediaNodes !: MediaNode[]
+    @mediaNodeModule.Getter('find') findMediaGalleriesById !: (id: string) => MediaNode
     @mediaObjectModule.Action('resetList') resetMediaObjects !: () => {}
 
     async fetch () {
-      return await this.fetchAllGalleries()
+      return await this.fetchRootMediaNode({
+        'exists[parent]': false
+      })
     }
 
-    getMediaGallery (value: MediaGallery) {
-      return value
-    }
-
-    @Watch('currentGallery')
-    async onGalleryChange (gallery: MediaGallery | null | undefined) {
+    async handleMediaNodeClick (id: string) {
       this.resetMediaObjects()
-      this.closeDetailPanel()
-      if (!gallery) {
-        this.$emit('update:current-gallery-item', null)
-      } else {
-        this.$emit('update:current-gallery-item', await this.fetchGalleryItem(gallery.rootItem['@id']))
-      }
-    }
-
-    async handleGalleryClick (id: string) {
-      this.currentGallery = this.findMediaGalleriesById(id)
-      this.$emit('update:current-gallery-item', await this.fetchGalleryItem(this.currentGallery.rootItem['@id']))
-    }
-
-    async handleGalleryItemClick (id: string) {
-      this.resetMediaObjects()
-      this.$emit('update:current-gallery-item', await this.fetchGalleryItem(id))
+      this.$emit('update:current-media-node', await this.fetchMediaNode(id))
     }
 
     handleRootClick () {
-      this.currentGallery = null
-      this.$emit('update:current-gallery-item', null)
+      this.$emit('update:current-media-node', null)
+      this.closeDetailPanel()
     }
 
     async refresh () {
-      if (!this.currentGalleryItem) {
+      if (!this.currentMediaNode) {
         return
       }
-      this.$emit('update:current-gallery-item', await this.fetchGalleryItem(this.currentGalleryItem['@id']))
+      this.$emit('update:current-media-node', await this.fetchMediaNode(this.currentMediaNode['@id']))
       this.$nextTick(() => {
         this.reload()
       })
     }
 
     reload () {
-      const savedGalleryItem = this.currentGalleryItem
-      this.$emit('update:current-gallery-item', null)
+      const savedMediaNode = this.currentMediaNode
+      this.$emit('update:current-media-node', null)
       this.$nextTick(() => {
-        this.$emit('update:current-gallery-item', savedGalleryItem)
+        this.$emit('update:current-media-node', savedMediaNode)
       })
     }
 

@@ -6,14 +6,13 @@ namespace App\EventSubscriber;
 
 use ApiPlatform\Core\EventListener\EventPriorities;
 use ApiPlatform\Core\Util\RequestAttributesExtractor;
-use App\Entity\MediaGallery;
-use App\Entity\MediaGalleryItem;
+use App\Entity\MediaNode;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-class ResolveMediaGalleryItemBreadcrumbSubscriber implements EventSubscriberInterface
+class ResolveMediaNodeBreadcrumbSubscriber implements EventSubscriberInterface
 {
     public static function getSubscribedEvents(): array
     {
@@ -22,27 +21,22 @@ class ResolveMediaGalleryItemBreadcrumbSubscriber implements EventSubscriberInte
         ];
     }
 
-    private function getBreadcrumbForMediaGalleryItem(MediaGalleryItem $item): array
+    private function getBreadcrumbForMediaNode(MediaNode $item): array
     {
         $breadcrumb = [];
-        while ($item->getParent() instanceof MediaGalleryItem) {
+        while ($item->getParent()) {
             array_unshift($breadcrumb, [
-                '@id' => '/api/media_gallery_items/' . $item->getId(),
+                '@id' => '/api/media_nodes/' . $item->getId(),
                 'name' => $item->getName(),
                 'type' => 'item'
             ]);
             $item = $item->getParent();
         }
-        if ($item->getGallery() instanceof MediaGallery) {
-            array_unshift($breadcrumb,
-                [
-                    // TODO Dirty
-                    '@id' => '/api/media_galleries/' . $item->getGallery()->getId(),
-                    'name' => $item->getGallery()->getName(),
-                    'type' => 'gallery'
-                ]
-            );
-        }
+        array_unshift($breadcrumb, [
+            '@id' => '/api/media_nodes/' . $item->getId(),
+            'name' => $item->getName(),
+            'type' => 'item'
+        ]);
         return $breadcrumb;
     }
 
@@ -58,7 +52,7 @@ class ResolveMediaGalleryItemBreadcrumbSubscriber implements EventSubscriberInte
         }
 
         if (!($attributes = RequestAttributesExtractor::extractAttributes($request
-            )) || !\is_a($attributes['resource_class'], MediaGalleryItem::class, true)) {
+            )) || !\is_a($attributes['resource_class'], MediaNode::class, true)) {
             return;
         }
 
@@ -69,14 +63,7 @@ class ResolveMediaGalleryItemBreadcrumbSubscriber implements EventSubscriberInte
         }
 
         foreach ($objects as $object) {
-            if ($object instanceof MediaGalleryItem) {
-                $object->breadcrumb = $this->getBreadcrumbForMediaGalleryItem($object);
-            } else {
-                if ($object instanceof MediaGallery && $object->getRootItem()) {
-                    $object->getRootItem(
-                    )->breadcrumb = $this->getBreadcrumbForMediaGalleryItem($object->getRootItem());
-                }
-            }
+            $object->breadcrumb = $this->getBreadcrumbForMediaNode($object);
         }
     }
 }

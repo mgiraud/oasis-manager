@@ -10,7 +10,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
-class MediaObjectGalleryItemCountValidator extends ConstraintValidator
+class MediaNodeCountValidator extends ConstraintValidator
 {
     public function validate($value, Constraint $constraint)
     {
@@ -18,8 +18,8 @@ class MediaObjectGalleryItemCountValidator extends ConstraintValidator
             throw new UnexpectedValueException($value, Collection::class);
         }
 
-        if (!$constraint instanceof MediaObjectGalleryItemCount) {
-            throw new UnexpectedTypeException($constraint, MediaObjectGalleryItemCount::class);
+        if (!$constraint instanceof MediaNodeCount) {
+            throw new UnexpectedTypeException($constraint, MediaNodeCount::class);
         }
 
         if ($value->count() === 0) {

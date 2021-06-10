@@ -37,9 +37,9 @@
       <v-row>
         <v-col>
           <v-combobox
-              v-if="mediaGalleryItems"
-              v-model="item.galleryItem"
-              :items="mediaGalleryItems"
+              v-if="mediaNodes"
+              v-model="item.mediaNode"
+              :items="mediaNodes"
               no-data-text="Aucun galerie n'a ce nom"
               label="Lier une galerie à cette page"
               item-text="name"
@@ -70,8 +70,9 @@ import has from 'lodash/has'
 import { validationMixin } from 'vuelidate'
 import Editor from '../../util/Editor.vue'
 import { PageCategory } from '~/store/page_category'
+import { MediaNode } from '~/store/media_node'
 
-const mediaGalleryItemModule = namespace('media_gallery_item')
+const mediaNodeModule = namespace('media_node')
 
 @Component({
   components: {
@@ -96,8 +97,8 @@ export default class AdminBlogArticleForm extends mixins(validationMixin) {
   @Prop({ type: Object, default: () => {} })
   initialValues!: any
 
-  @mediaGalleryItemModule.State('selectItems') mediaGalleryItems!: PageCategory[] | null
-  @mediaGalleryItemModule.Action('fetchSelectItems') getMediaGalleryItems!: () => PageCategory[]
+  @mediaNodeModule.State('selectItems') mediaNodes!: MediaNode[] | null
+  @mediaNodeModule.Action('fetchSelectItems') getMediaNodes!: () => MediaNode[]
 
   get item () {
     return this.initialValues || this.values
@@ -124,7 +125,7 @@ export default class AdminBlogArticleForm extends mixins(validationMixin) {
   }
 
   mounted() {
-    this.getMediaGalleryItems()
+    this.getMediaNodes()
   }
 }
 </script>

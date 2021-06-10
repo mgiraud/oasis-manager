@@ -1,7 +1,7 @@
 import makeCrudModule from './crud'
 import { Member } from './member'
 import { HydraMemberObject } from '~/api/hydra'
-import { MediaGalleryItem } from '~/store/media_gallery_item'
+import { MediaNode } from '~/store/media_node'
 
 export default makeCrudModule({
   resource: 'blog_articles'
@@ -14,5 +14,5 @@ export type BlogArticle = HydraMemberObject & {
     'createdBy': Member;
     'tags': string[];
     'showInMenu': boolean;
-    galleryItem: MediaGalleryItem
+    mediaNode: MediaNode
   }

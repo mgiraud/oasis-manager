@@ -11,13 +11,13 @@
           </v-row>
           <v-row>
             <v-col>
-              <file-navigator ref="file-navigator" :select-click-handler="selectItem"
-                              :current-gallery-item.sync="currentGalleryItem"
+              <file-navigator ref="file-navigator" :select-click-handler="selectMediaObject"
+                              :current-media-node.sync="currentMediaNode"
                               :edit-click-handler="editMediaObject"
                               :show-selection="showSelection"/>
             </v-col>
           </v-row>
-          <v-row v-if="currentGalleryItem">
+          <v-row v-if="currentMediaNode">
             <v-col>
               <file-uploader :handle-upload="handleUpload"/>
             </v-col>
@@ -43,8 +43,8 @@ import FileSelection from './file_selection/FileSelection.vue'
 import FileUploader from './file_uploader/FileUploader.vue'
 import FileNavigator from './file_navigator/FileNavigator.vue'
 import FileDetails from "./file_details/FileDetails.vue";
-import {MediaGalleryItem} from '~/store/media_gallery_item'
 import {MediaObject} from '~/store/media_object'
+import { MediaNode } from '~/store/media_node'
 
 export type Thumbnail = {
   src: string
@@ -70,7 +70,7 @@ export default class FileManager extends Vue {
     this.detailsPanel = false
     this.selectedMediaObject = null
   }
-  currentGalleryItem: MediaGalleryItem | null = null
+  currentMediaNode: MediaNode | null = null
   thumbnails: Thumbnail[] = []
   links: Link[] = []
   detailsPanel = false
@@ -81,11 +81,11 @@ export default class FileManager extends Vue {
     this.links = []
   }
 
-  selectItem(item: MediaObject) {
-    if (item.isImage) {
-      this.selectImage(item)
+  selectMediaObject(mediaObject: MediaObject) {
+    if (mediaObject.isImage) {
+      this.selectImage(mediaObject)
     } else {
-      this.selectLink(item)
+      this.selectLink(mediaObject)
     }
   }
 
@@ -111,7 +111,7 @@ export default class FileManager extends Vue {
   }
 
   handleUpload(files: FileList) {
-    if (!this.currentGalleryItem) {
+    if (!this.currentMediaNode) {
       return
     }
     for (let i = 0; i < files.length; i++) {
@@ -127,7 +127,7 @@ export default class FileManager extends Vue {
 
       const formData = new FormData()
       formData.append('file', file)
-      formData.append('mediaGalleryItemId', this.currentGalleryItem.id.toString())
+      formData.append('mediaNodeId', this.currentMediaNode.id.toString())
       this.$getRepository('media_objects').$post('/api/media_objects', {
         method: 'POST',
         body: formData
@@ -137,7 +137,7 @@ export default class FileManager extends Vue {
         } else {
           this.selectLink(res)
         }
-        (this.$refs['file-navigator'] as FileNavigator).reload()
+        (this.$refs['file-navigator'] as FileNavigator).refresh()
       })
     }
   }

@@ -25,7 +25,7 @@
       <v-row>
         <v-col cols="12" md="12">
           <p>Appartient aux catégories...</p>
-          <p class="error--text" v-if="errors && errors.mediaGalleryItems">{{ errors.mediaGalleryItems }}</p>
+          <p class="error--text" v-if="errors && errors.mediaNodes">{{ errors.mediaNodes }}</p>
           <v-treeview
               :items="tree"
               selectable
@@ -33,7 +33,7 @@
               hoverable
               open-all
               selection-type="independent"
-              v-model="item.mediaGalleryItems"
+              v-model="item.mediaNodes"
               item-key="@id"
           >
           </v-treeview>
@@ -56,7 +56,7 @@ import { validationMixin } from 'vuelidate'
       customName: {
         minLength: minLength(3)
       },
-      mediaGalleryItems: {
+      mediaNodes: {
         minLength: minLength(1)
       }
     }
@@ -84,13 +84,13 @@ export default class FileDetailsForm extends mixins(validationMixin) {
     return errors
   }
 
-  get mediaGalleryItemsErrors () {
+  get mediaNodesErrors () {
     const errors: string[] = []
-    if (!this.$v.item.mediaGalleryItems || !this.$v.item.mediaGalleryItems.$dirty) {
+    if (!this.$v.item.mediaNodes || !this.$v.item.mediaNodes.$dirty) {
       return errors
     }
-    has(this.violations, 'mediaGalleryItems') && errors.push(this.violations.mediaGalleryItems)
-    !this.$v.item.mediaGalleryItems.minLength && errors.push('Le fichier doit appartenir a au moins une galerie')
+    has(this.violations, 'mediaNodes') && errors.push(this.violations.mediaNodes)
+    !this.$v.item.mediaNodes.minLength && errors.push('Le fichier doit appartenir a au moins une galerie')
     return errors
   }
 

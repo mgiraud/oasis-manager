@@ -45,14 +45,14 @@
 
 <script lang="ts">
 import { Component, Vue, Prop, namespace, Watch, Inject } from 'nuxt-property-decorator'
-import { MediaGalleryItem } from '~/store/media_gallery_item'
+import { MediaNode } from '~/store/media_node'
 import { MediaObject } from '~/store/media_object'
 
 const mediaObjectModule = namespace('media_object')
 
 @Component
 export default class FileNavigatorFiles extends Vue {
-  @Prop({ type: Object, required: true }) readonly galleryItem!: MediaGalleryItem
+  @Prop({ type: Object, required: true }) readonly mediaNode!: MediaNode | null
   @Prop({
     type: Function,
     required: true
@@ -63,9 +63,9 @@ export default class FileNavigatorFiles extends Vue {
   @mediaObjectModule.Getter('list') mediaObjects !: MediaObject[]
 
   loadObjects () {
-    if (this.galleryItem !== null) {
+    if (this.mediaNode !== null) {
       this.fetchMediaObjects({
-        mediaGalleryItems: this.galleryItem['@id']
+        mediaNodes: this.mediaNode['@id']
       })
     }
   }
@@ -74,8 +74,8 @@ export default class FileNavigatorFiles extends Vue {
     this.loadObjects()
   }
 
-  @Watch('galleryItem')
-  onGalleryItemChange (galleryItem: MediaGalleryItem | null) {
+  @Watch('mediaNode')
+  onMediaNodeChange (mediaNode: MediaNode | null) {
     this.loadObjects()
   }
 }

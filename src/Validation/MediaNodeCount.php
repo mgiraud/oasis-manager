@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @Annotation
  */
-class MediaObjectGalleryItemCount extends Constraint
+class MediaNodeCount extends Constraint
 {
 
 }

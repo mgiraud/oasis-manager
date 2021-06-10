@@ -55,9 +55,9 @@
         </v-col>
         <v-col cols="12" sm="6" md="6">
           <v-combobox
-              v-if="mediaGalleryItems"
-              v-model="item.galleryItem"
-              :items="mediaGalleryItems"
+              v-if="mediaNodes"
+              v-model="item.mediaNode"
+              :items="mediaNodes"
               no-data-text="Aucun galerie n'a ce nom"
               label="Lier une galerie à cette page"
               item-text="name"
@@ -144,11 +144,12 @@ import EditorBtn from '~/components/util/Editor/EditorBtn.vue'
 import Editor from '~/components/util/Editor.vue'
 import { PageCategory } from '~/store/page_category'
 import { PageLog } from '~/store/page_log'
+import { MediaNode } from '~/store/media_node'
 
 const slug = helpers.regex('slug', /^[a-zA-Z0-9-]*$/)
 const pageCategoryModule = namespace('page_category')
 const pageLogModule = namespace('page_log')
-const mediaGalleryItemModule = namespace('media_gallery_item')
+const mediaNodeModule = namespace('media_node')
 
 @Component({
   name: 'AdminPageForm',
@@ -187,8 +188,8 @@ export default class AdminPageForm extends mixins(validationMixin) {
   @pageCategoryModule.State('selectItems') categorySelectItems!: PageCategory[] | null
   @pageCategoryModule.Action('fetchSelectItems') categoryGetSelectItems!: () => PageCategory[]
   @pageLogModule.Getter('find') findLog!: (id: string) => PageLog | null
-  @mediaGalleryItemModule.State('selectItems') mediaGalleryItems!: PageCategory[] | null
-  @mediaGalleryItemModule.Action('fetchSelectItems') getMediaGalleryItems!: () => PageCategory[]
+  @mediaNodeModule.State('selectItems') mediaNodes!: MediaNode[] | null
+  @mediaNodeModule.Action('fetchSelectItems') getMediaNodes!: () => MediaNode[]
 
   dialog = false
   selectedLog: string | null = null
@@ -240,7 +241,7 @@ export default class AdminPageForm extends mixins(validationMixin) {
 
   mounted () {
     this.categoryGetSelectItems()
-    this.getMediaGalleryItems()
+    this.getMediaNodes()
   }
 
   setContent () {

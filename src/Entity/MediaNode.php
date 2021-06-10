@@ -5,9 +5,11 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\ExistsFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
-use App\Repository\MediaGalleryItemRepository;
+use App\Controller\Media\MediaNodeTreeAction;
+use App\Repository\MediaNodeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -18,64 +20,66 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     collectionOperations={
  *         "get",
  *         "post"={"security"="is_granted('ROLE_ADMIN')"},
+ *          "tree"={
+ *             "security"="is_granted('USER_CAN_EDIT_GALLERIES')",
+ *             "method"="GET",
+ *             "path"="/media_nodes/tree",
+ *             "controller"=MediaNodeTreeAction::class,
+ *             "normalization_context"={"groups"={"media_node_tree:read"}}
+ *         },
  *     },
  *     attributes={"pagination_enabled"=false},
- *     normalizationContext={"groups"={"media_gallery_item:read", "media_gallery_tree:read"}},
- *     denormalizationContext={"groups"={"media_gallery_item:write"}},
+ *     normalizationContext={"groups"={"media_node:read", "media_node_tree:read"}},
+ *     denormalizationContext={"groups"={"media_node:write"}},
  * )
- * @ORM\Entity(repositoryClass=MediaGalleryItemRepository::class)
- * @ApiFilter(SearchFilter::class, properties={"name": "partial", "parent": "exact", "gallery.id": "exact"})
+ * @ORM\Entity(repositoryClass=MediaNodeRepository::class)
+ * @ApiFilter(SearchFilter::class, properties={"name": "partial", "parent": "exact"})
  * @ApiFilter(PropertyFilter::class, arguments={"whitelist": {"name"}})
+ * @ApiFilter(ExistsFilter::class, properties={"parent"})
  */
-class MediaGalleryItem
+class MediaNode
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"media_gallery_item:read", "page:read", "media_gallery_tree:read", "blog_article:read"})
+     * @Groups({"media_node:read", "page:read", "media_node_tree:read", "blog_article:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"media_gallery_item:read", "media_gallery_item:write", "page:read", "media_gallery_tree:read", "blog_article:read"})
+     * @Groups({"media_node:read", "media_node:write", "page:read", "media_node_tree:read", "blog_article:read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"media_gallery_item:read", "media_gallery_item:write", "page:read", "media_gallery_tree:read", "blog_article:read"})
+     * @Groups({"media_node:read", "media_node:write", "page:read", "media_node_tree:read", "blog_article:read"})
      */
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity=MediaGalleryItem::class, inversedBy="children")
-     * @Groups({"media_gallery_item:write"})
+     * @ORM\ManyToOne(targetEntity=MediaNode::class, inversedBy="children")
+     * @Groups({"media_node:write"})
      */
     private $parent;
 
     /**
-     * @ORM\OneToMany(targetEntity=MediaGalleryItem::class, mappedBy="parent")
-     * @Groups({"media_gallery_item:read", "media_gallery_tree:read"})
+     * @ORM\OneToMany(targetEntity=MediaNode::class, mappedBy="parent")
+     * @Groups({"media_node:read", "media_node_tree:read"})
      * @ApiProperty(readableLink=true)
      */
     private $children;
 
     /**
-     * @ORM\OneToOne(targetEntity=MediaGallery::class, mappedBy="rootItem")
-     * @Groups({"media_gallery_item:write"})
-     */
-    private $gallery;
-
-    /**
-     * @Groups({"media_gallery_item:read"})
+     * @Groups({"media_node:read"})
      */
     public array $breadcrumb = [];
 
     /**
-     * @ORM\ManyToMany(targetEntity=MediaObject::class, mappedBy="mediaGalleryItems")
-     * @Groups({"media_gallery_item:read", "page:read", "blog_article:read"})
+     * @ORM\ManyToMany(targetEntity=MediaObject::class, mappedBy="mediaNodes")
+     * @Groups({"media_node:read", "page:read", "blog_article:read"})
      */
     private $mediaObjects;
 
@@ -156,18 +160,6 @@ class MediaGalleryItem
         return $this;
     }
 
-    public function getGallery(): ?MediaGallery
-    {
-        return $this->gallery;
-    }
-
-    public function setGallery(MediaGallery $gallery): self
-    {
-        $this->gallery = $gallery;
-
-        return $this;
-    }
-
     /**
      * @return Collection|MediaObject[]
      */
@@ -180,7 +172,7 @@ class MediaGalleryItem
     {
         if (!$this->mediaObjects->contains($mediaObject)) {
             $this->mediaObjects[] = $mediaObject;
-            $mediaObject->addMediaGalleryItem($this);
+            $mediaObject->addMediaNode($this);
         }
 
         return $this;
@@ -189,7 +181,7 @@ class MediaGalleryItem
     public function removeMediaObject(MediaObject $mediaObject): self
     {
         if ($this->mediaObjects->removeElement($mediaObject)) {
-            $mediaObject->removeMediaGalleryItem($this);
+            $mediaObject->removeMediaNode($this);
         }
 
         return $this;

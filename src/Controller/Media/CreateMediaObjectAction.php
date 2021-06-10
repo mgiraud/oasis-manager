@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller\Media;
 
-use App\Entity\MediaGalleryItem;
+use App\Entity\MediaNode;
 use App\Entity\MediaObject;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,19 +16,19 @@ final class CreateMediaObjectAction
             throw new BadRequestHttpException('"file" is required');
         }
 
-        $galleryItemId = $request->request->get('mediaGalleryItemId');
-        if (!$galleryItemId) {
-            throw new BadRequestHttpException('"mediaGalleryItemId" is required');
+        $mediaNodeId = $request->request->get('mediaNodeId');
+        if (!$mediaNodeId) {
+            throw new BadRequestHttpException('"mediaNodeId" is required');
         }
 
-        $galleryItem = $manager->getRepository(MediaGalleryItem::class)->find($galleryItemId);
-        if (!$galleryItem instanceof MediaGalleryItem) {
-            throw new BadRequestHttpException(sprintf('"mediaGalleryItem" not found for id %d', $galleryItemId));
+        $mediaNode = $manager->getRepository(MediaNode::class)->find($mediaNodeId);
+        if (!$mediaNode instanceof MediaNode) {
+            throw new BadRequestHttpException(sprintf('"mediaNode" not found for id %d', $mediaNodeId));
         }
 
         $mediaObject = new MediaObject();
         $mediaObject->file = $uploadedFile;
-        $mediaObject->addMediaGalleryItem($galleryItem);
+        $mediaObject->addMediaNode($mediaNode);
 
         return $mediaObject;
     }

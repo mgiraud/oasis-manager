@@ -31,14 +31,13 @@
 <script lang="ts">
 import { Component, InjectReactive, namespace, Prop, Vue, Watch } from 'nuxt-property-decorator'
 import { MediaObject } from "~/store/media_object";
-import { MediaGallery } from "~/store/media_gallery";
 import FileDetailsForm from './FileDetailsForm.vue'
 import { Repository } from '~/api/repository'
 import Toolbar from '~/components/form/Toolbar.vue'
 import { ElementWithValidation } from '~/vue-shim'
-import { Page } from '~/store/page'
+import { MediaNode } from '~/store/media_node'
 
-const mediaGalleryModule = namespace('media_gallery')
+const mediaNodeModule = namespace('media_node')
 const mediaObjectModule = namespace('media_object')
 
 @Component({
@@ -49,9 +48,9 @@ const mediaObjectModule = namespace('media_object')
 })
 export default class FileDetails extends Vue {
   @Prop({type: Object, required: true}) readonly mediaObject!: MediaObject
-  @mediaGalleryModule.Getter('tree') readonly tree!: () => MediaGallery[]
-  @mediaGalleryModule.Action('fetchTree') fetchTree !: (repository: Repository) => MediaGallery[]
-  @mediaGalleryModule.State('treeIds') allTreeIds !: string[]
+  @mediaNodeModule.Getter('tree') readonly tree!: () => MediaNode[]
+  @mediaNodeModule.Action('fetchTree') fetchTree !: (repository: Repository) => MediaNode[]
+  @mediaNodeModule.State('treeIds') allTreeIds !: string[]
   @mediaObjectModule.Action('update') update!: (mediaObject: MediaObject) => Promise<MediaObject>
   @mediaObjectModule.State('violations') violations!: string[]
   @InjectReactive() readonly closeDetailPanel !: () => void
@@ -62,8 +61,10 @@ export default class FileDetails extends Vue {
     this.item = { ...val }
   }
 
-  async mounted() {
-    await this.fetchTree(this.$getRepository('media_galleries'))
+  async fetch() {
+    if (this.tree.length === 0) {
+      await this.fetchTree(this.$getRepository('media_nodes'))
+    }
   }
 
   onSendForm () {

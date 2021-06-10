@@ -8,7 +8,7 @@ use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Controller\Media\CreateMediaObjectAction;
-use App\Validation\MediaObjectGalleryItemCount;
+use App\Validation\MediaNodeCount;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -42,7 +42,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *                                         "type"="string",
  *                                         "format"="binary"
  *                                     },
- *                                      "mediaGalleryItemId"={
+ *                                      "mediaNodeId"={
  *                                          "type"="integer",
  *                                      }
  *                                 }
@@ -60,7 +60,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *     }
  * )
  * @Vich\Uploadable
- * @ApiFilter(SearchFilter::class, properties={"mediaGalleryItems": "exact"})
+ * @ApiFilter(SearchFilter::class, properties={"mediaNodes": "exact"})
  * @ORM\HasLifecycleCallbacks()
  */
 class MediaObject
@@ -123,16 +123,16 @@ class MediaObject
     public $customName;
 
     /**
-     * @ORM\ManyToMany(targetEntity=MediaGalleryItem::class, inversedBy="mediaObjects")
+     * @ORM\ManyToMany(targetEntity=MediaNode::class, inversedBy="mediaObjects")
      * @ApiProperty(readableLink=false, writableLink=false)
-     * @Groups({"media_object:write", "media_object:read", "media_gallery_tree:read"})
-     * @MediaObjectGalleryItemCount()
+     * @Groups({"media_object:write", "media_object:read", "media_node_tree:read"})
+     * @MediaNodeCount()
      */
-    private $mediaGalleryItems;
+    private $mediaNodes;
 
     public function __construct()
     {
-        $this->mediaGalleryItems = new ArrayCollection();
+        $this->mediaNodes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -147,25 +147,25 @@ class MediaObject
     }
 
     /**
-     * @return Collection|MediaGalleryItem[]
+     * @return Collection|MediaNode[]
      */
-    public function getMediaGalleryItems(): Collection
+    public function getMediaNodes(): Collection
     {
-        return $this->mediaGalleryItems;
+        return $this->mediaNodes;
     }
 
-    public function addMediaGalleryItem(MediaGalleryItem $mediaGalleryItem): self
+    public function addMediaNode(MediaNode $mediaNode): self
     {
-        if (!$this->mediaGalleryItems->contains($mediaGalleryItem)) {
-            $this->mediaGalleryItems[] = $mediaGalleryItem;
+        if (!$this->mediaNodes->contains($mediaNode)) {
+            $this->mediaNodes[] = $mediaNode;
         }
 
         return $this;
     }
 
-    public function removeMediaGalleryItem(MediaGalleryItem $mediaGalleryItem): self
+    public function removeMediaNode(MediaNode $mediaNode): self
     {
-        $this->mediaGalleryItems->removeElement($mediaGalleryItem);
+        $this->mediaNodes->removeElement($mediaNode);
 
         return $this;
     }

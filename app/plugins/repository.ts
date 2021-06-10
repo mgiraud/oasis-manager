@@ -27,9 +27,9 @@ declare module 'vuex/types/index' {
 
 const createRepositories = (context: Context) => {
   const resources = [
-    'members', 'media_galleries', 'media_gallery_items', 'media_objects', 'pages', 'blog_articles',
+    'members', 'media_nodes', 'media_objects', 'pages', 'blog_articles',
     'page_categories', 'member_groups', 'contacts', 'contact_newsletters', 'survey_joins', 'media_objects',
-    'media_galleries', 'media_gallery_items', 'page_logs'
+    'media_nodes', 'page_logs'
   ]
   const repositories: {[name: string]: Repository} = {}
   resources.forEach((resource) => {

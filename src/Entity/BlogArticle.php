@@ -89,10 +89,10 @@ class BlogArticle
     private $isPublished;
 
     /**
-     * @ORM\ManyToOne(targetEntity=MediaGalleryItem::class)
+     * @ORM\ManyToOne(targetEntity=MediaNode::class)
      * @Groups({"blog_article:read", "blog_article:write"})
      */
-    private $galleryItem;
+    private $mediaNode;
 
     public function __construct()
     {
@@ -178,14 +178,14 @@ class BlogArticle
         return $this;
     }
 
-    public function getGalleryItem(): ?MediaGalleryItem
+    public function getMediaNode(): ?MediaNode
     {
-        return $this->galleryItem;
+        return $this->mediaNode;
     }
 
-    public function setGalleryItem(?MediaGalleryItem $galleryItem): self
+    public function setMediaNode(?MediaNode $mediaNode): self
     {
-        $this->galleryItem = $galleryItem;
+        $this->mediaNode = $mediaNode;
 
         return $this;
     }

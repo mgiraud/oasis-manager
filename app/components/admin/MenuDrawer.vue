@@ -116,7 +116,7 @@
         </v-list-item>
       </v-list-group>
 
-      <v-list-item link :to="{name: 'index'}">
+      <v-list-item link :to="{name: 'index'}" class="white--text">
         <v-list-item-icon>
           <v-icon>ri-arrow-left-circle-fill</v-icon>
         </v-list-item-icon>

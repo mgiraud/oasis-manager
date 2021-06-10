@@ -88,6 +88,12 @@ class BlogArticle
      */
     private $isPublished;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=MediaGalleryItem::class)
+     * @Groups({"blog_article:read", "blog_article:write"})
+     */
+    private $galleryItem;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -168,6 +174,18 @@ class BlogArticle
     public function setIsPublished(bool $isPublished): self
     {
         $this->isPublished = $isPublished;
+
+        return $this;
+    }
+
+    public function getGalleryItem(): ?MediaGalleryItem
+    {
+        return $this->galleryItem;
+    }
+
+    public function setGalleryItem(?MediaGalleryItem $galleryItem): self
+    {
+        $this->galleryItem = $galleryItem;
 
         return $this;
     }

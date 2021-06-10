@@ -2,6 +2,7 @@ import { find, filter } from 'lodash'
 import makeCrudModule from './crud'
 import { PageCategory } from './page_category'
 import { HydraMemberObject } from '~/api/hydra'
+import { MediaGalleryItem } from '~/store/media_gallery_item'
 
 const pageModule = makeCrudModule({
   resource: 'pages'
@@ -14,6 +15,7 @@ export type Page = HydraMemberObject & {
   'isPublished': boolean;
   'category': PageCategory;
   'showInMenu': boolean;
+  'galleryItem': MediaGalleryItem | null;
 }
 
 export type MenuItem = {

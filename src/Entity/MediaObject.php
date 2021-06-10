@@ -8,6 +8,7 @@ use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Controller\Media\CreateMediaObjectAction;
+use App\Validation\MediaObjectGalleryItemCount;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -23,8 +24,10 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *     normalizationContext={
  *         "groups"={"media_object:read"}
  *     },
+ *     denormalizationContext={"groups"={"media_object:write"}},
  *     collectionOperations={
  *         "post"={
+ *             "security"="is_granted('USER_CAN_UPLOAD_MEDIA_OBJECTS')",
  *             "controller"=CreateMediaObjectAction::class,
  *             "deserialize"=false,
  *             "validation_groups"={"Default", "media_object_create"},
@@ -52,11 +55,12 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *         "get"
  *     },
  *     itemOperations={
- *         "get"
+ *         "get",
+ *         "put"={"security"="is_granted('USER_CAN_EDIT_MEDIA_OBJECTS')"}
  *     }
  * )
  * @Vich\Uploadable
- * @ApiFilter(SearchFilter::class, properties={"mediaGalleryItem": "exact"})
+ * @ApiFilter(SearchFilter::class, properties={"mediaGalleryItems": "exact"})
  * @ORM\HasLifecycleCallbacks()
  */
 class MediaObject
@@ -91,7 +95,7 @@ class MediaObject
      * @var string|null
      *
      * @ORM\Column(nullable=true, type="text")
-     * @Groups({"media_object:read", "page:read"})
+     * @Groups({"media_object:read", "page:read", "blog_article:read"})
      */
     public $filePath;
 
@@ -106,7 +110,7 @@ class MediaObject
 
     /**
      * @ApiProperty()
-     * @Groups({"media_object:read", "page:read"})
+     * @Groups({"media_object:read", "page:read", "blog_article:read"})
      */
     public $isImage = false;
 
@@ -114,13 +118,15 @@ class MediaObject
      * @var string|null
      *
      * @ORM\Column(nullable=true, type="text")
-     * @Groups({"media_object:read", "media_object:write", "page:read"})
+     * @Groups({"media_object:read", "media_object:write", "page:read", "media_object:write", "blog_article:read"})
      */
     public $customName;
 
     /**
      * @ORM\ManyToMany(targetEntity=MediaGalleryItem::class, inversedBy="mediaObjects")
      * @ApiProperty(readableLink=false, writableLink=false)
+     * @Groups({"media_object:write", "media_object:read", "media_gallery_tree:read"})
+     * @MediaObjectGalleryItemCount()
      */
     private $mediaGalleryItems;
 

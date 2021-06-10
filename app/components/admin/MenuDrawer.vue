@@ -15,7 +15,7 @@
     <v-divider />
 
     <v-list>
-      <v-list-item link :to="{name: 'admin'}">
+      <v-list-item link :to="{name: 'admin'}" class="white--text">
         <v-list-item-icon>
           <v-icon>ri-home-line</v-icon>
         </v-list-item-icon>
@@ -24,6 +24,18 @@
             Accueil
           </v-list-item-title>
         </v-list-item-content>
+      </v-list-item>
+
+      <v-list-item
+          link
+          :to="{name: 'admin-gallery'}"
+      >
+        <v-list-item-icon>
+          <v-icon color="white">ri-folder-open-line</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title class="white--text" v-text="">
+          Gérer les fichiers
+        </v-list-item-title>
       </v-list-item>
 
       <v-list-group

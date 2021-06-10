@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiProperty;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
 use App\Controller\Page\PublishCategoryAction;
 use App\Controller\Page\UnpublishCategoryAction;
 use App\Repository\PageCategoryRepository;
@@ -50,6 +51,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     }
  * )
  * @ORM\Entity(repositoryClass=PageCategoryRepository::class)
+ * @ApiFilter(PropertyFilter::class, arguments={"whitelist": {"name"}})
  */
 class PageCategory
 {

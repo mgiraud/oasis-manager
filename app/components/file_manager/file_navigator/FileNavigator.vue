@@ -1,5 +1,5 @@
 <template>
-  <v-container @contextmenu.prevent="onRightClick">
+  <v-container>
     <v-row>
       <v-col>
         <h3 class="navigator-title" @click="handleRootClick">
@@ -7,7 +7,7 @@
         </h3><file-navigator-bread-crumb :gallery-item="currentGalleryItem" :gallery-click-handler="handleGalleryClick" :gallery-item-click-handler="handleGalleryItemClick" />
       </v-col>
     </v-row>
-    <v-row>
+    <v-row @contextmenu.prevent="onRightClick">
       <v-toolbar v-if="!currentGallery" dense>
         <v-overflow-btn
           v-model="currentGallery"
@@ -21,12 +21,13 @@
         />
       </v-toolbar>
     </v-row>
-    <v-row v-if="currentGalleryItem && currentGalleryItem.children.length > 0">
+    <v-row v-if="currentGalleryItem" @contextmenu.prevent="onRightClick">
       <v-col cols="12">
         <h4>Dossiers</h4>
       </v-col>
       <v-col cols="12">
-        <file-navigator-folders :gallery-item="currentGalleryItem" :handle-click="handleGalleryItemClick" />
+        <file-navigator-folders :gallery-item="currentGalleryItem" :handle-click="handleGalleryItemClick" v-if="currentGalleryItem.children.length > 0"/>
+        <p v-else>Aucun dossier</p>
       </v-col>
     </v-row>
     <v-row v-if="currentGalleryItem && currentGalleryItem.mediaObjects.length > 0">
@@ -34,7 +35,7 @@
         <h4>Fichiers</h4>
       </v-col>
       <v-col>
-        <file-navigator-files :click-handler="clickHandler" :gallery-item="currentGalleryItem" />
+        <file-navigator-files :select-click-handler="selectClickHandler" :edit-click-handler="editClickHandler" :gallery-item="currentGalleryItem" />
       </v-col>
     </v-row>
     <file-navigator-context-menu ref="file-navigator-context-menu" :gallery-item="currentGalleryItem" />
@@ -42,7 +43,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, namespace, Prop, Watch } from 'nuxt-property-decorator'
+import { Component, Vue, namespace, Prop, Watch, InjectReactive } from 'nuxt-property-decorator'
 import FileNavigatorBreadCrumb from './FileNavigatorBreadCrumb.vue'
 import FileNavigatorFolders from './FileNavigatorFolders.vue'
 import FileNavigatorFiles from './FileNavigatorFiles.vue'
@@ -66,8 +67,10 @@ const mediaObjectModule = namespace('media_object')
 export default class FileNavigator extends Vue {
     currentGallery: MediaGallery | null = null
     @Prop({ type: Object, required: false }) readonly currentGalleryItem!: MediaGalleryItem| null
-    @Prop({ type: Function, required: true }) readonly clickHandler!: (item: MediaObject) => void
+    @Prop({ type: Function, required: true }) readonly editClickHandler!: (item: MediaObject) => void
+    @Prop({ type: Function, required: true }) readonly selectClickHandler!: (item: MediaObject) => void
     @Prop({ type: String, required: false, default: null }) readonly rootName!: string | null
+    @InjectReactive() readonly closeDetailPanel !: () => void
     @mediaGalleryModule.Action('fetchAll') fetchAllGalleries!: (options?: {[propertyPath: string]: string | number}) => MediaGallery[]
     @mediaGalleryItemModule.Action('load') fetchGalleryItem!: (id: string) => MediaGalleryItem
     @mediaGalleryModule.Getter('list') mediaGalleries !: MediaGallery[]
@@ -85,16 +88,17 @@ export default class FileNavigator extends Vue {
     @Watch('currentGallery')
     async onGalleryChange (gallery: MediaGallery | null | undefined) {
       this.resetMediaObjects()
+      this.closeDetailPanel()
       if (!gallery) {
         this.$emit('update:current-gallery-item', null)
       } else {
-        this.$emit('update:current-gallery-item', await this.fetchGalleryItem(gallery.rootItem))
+        this.$emit('update:current-gallery-item', await this.fetchGalleryItem(gallery.rootItem['@id']))
       }
     }
 
     async handleGalleryClick (id: string) {
       this.currentGallery = this.findMediaGalleriesById(id)
-      this.$emit('update:current-gallery-item', await this.fetchGalleryItem(this.currentGallery.rootItem))
+      this.$emit('update:current-gallery-item', await this.fetchGalleryItem(this.currentGallery.rootItem['@id']))
     }
 
     async handleGalleryItemClick (id: string) {

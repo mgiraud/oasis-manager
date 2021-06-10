@@ -35,6 +35,21 @@
         </v-col>
       </v-row>
       <v-row>
+        <v-col>
+          <v-combobox
+              v-if="mediaGalleryItems"
+              v-model="item.galleryItem"
+              :items="mediaGalleryItems"
+              no-data-text="Aucun galerie n'a ce nom"
+              label="Lier une galerie à cette page"
+              item-text="name"
+              item-value="@id"
+              :return-object="false"
+              clearable
+          />
+        </v-col>
+      </v-row>
+      <v-row>
         <v-col cols="12">
           <ClientOnly>
             <Editor
@@ -50,13 +65,15 @@
 
 <script lang="ts">
 import { Component, mixins, namespace, Prop } from 'nuxt-property-decorator'
-import { required, minLength, helpers } from 'vuelidate/lib/validators'
+import { required, minLength } from 'vuelidate/lib/validators'
 import has from 'lodash/has'
 import { validationMixin } from 'vuelidate'
 import Editor from '../../util/Editor.vue'
+import { PageCategory } from '~/store/page_category'
+
+const mediaGalleryItemModule = namespace('media_gallery_item')
 
 @Component({
-  name: 'AdminPageForm',
   components: {
     Editor
   },
@@ -78,6 +95,9 @@ export default class AdminBlogArticleForm extends mixins(validationMixin) {
 
   @Prop({ type: Object, default: () => {} })
   initialValues!: any
+
+  @mediaGalleryItemModule.State('selectItems') mediaGalleryItems!: PageCategory[] | null
+  @mediaGalleryItemModule.Action('fetchSelectItems') getMediaGalleryItems!: () => PageCategory[]
 
   get item () {
     return this.initialValues || this.values
@@ -101,6 +121,10 @@ export default class AdminBlogArticleForm extends mixins(validationMixin) {
 
   get violations () {
     return this.errors || {}
+  }
+
+  mounted() {
+    this.getMediaGalleryItems()
   }
 }
 </script>

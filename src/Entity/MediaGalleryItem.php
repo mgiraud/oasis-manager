@@ -6,12 +6,12 @@ use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
 use App\Repository\MediaGalleryItemRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Serializer\Annotation\Ignore;
 
 /**
  * @ApiResource(
@@ -25,6 +25,7 @@ use Symfony\Component\Serializer\Annotation\Ignore;
  * )
  * @ORM\Entity(repositoryClass=MediaGalleryItemRepository::class)
  * @ApiFilter(SearchFilter::class, properties={"name": "partial", "parent": "exact", "gallery.id": "exact"})
+ * @ApiFilter(PropertyFilter::class, arguments={"whitelist": {"name"}})
  */
 class MediaGalleryItem
 {
@@ -32,19 +33,19 @@ class MediaGalleryItem
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"media_gallery_item:read", "page:read", "media_gallery_tree:read"})
+     * @Groups({"media_gallery_item:read", "page:read", "media_gallery_tree:read", "blog_article:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"media_gallery_item:read", "media_gallery_item:write", "page:read", "media_gallery_tree:read"})
+     * @Groups({"media_gallery_item:read", "media_gallery_item:write", "page:read", "media_gallery_tree:read", "blog_article:read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"media_gallery_item:read", "media_gallery_item:write", "page:read", "media_gallery_tree:read"})
+     * @Groups({"media_gallery_item:read", "media_gallery_item:write", "page:read", "media_gallery_tree:read", "blog_article:read"})
      */
     private $description;
 
@@ -74,7 +75,7 @@ class MediaGalleryItem
 
     /**
      * @ORM\ManyToMany(targetEntity=MediaObject::class, mappedBy="mediaGalleryItems")
-     * @Groups({"media_gallery_item:read", "page:read"})
+     * @Groups({"media_gallery_item:read", "page:read", "blog_article:read"})
      */
     private $mediaObjects;
 

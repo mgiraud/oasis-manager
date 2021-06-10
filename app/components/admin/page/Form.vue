@@ -40,21 +40,31 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" md="6">
-          <v-col cols="12" sm="6" md="6">
-            <v-combobox
-              v-if="categorySelectItems"
-              v-model="item.category"
-              :items="categorySelectItems"
-              no-data-text="Aucune catégorie n'a ce nom"
-              label="category"
+        <v-col cols="12" sm="6" md="6">
+          <v-combobox
+            v-if="categorySelectItems"
+            v-model="item.category"
+            :items="categorySelectItems"
+            no-data-text="Aucune catégorie n'a ce nom"
+            label="Catégorie de la page"
+            item-text="name"
+            item-value="@id"
+            :return-object="false"
+            clearable
+          />
+        </v-col>
+        <v-col cols="12" sm="6" md="6">
+          <v-combobox
+              v-if="mediaGalleryItems"
+              v-model="item.galleryItem"
+              :items="mediaGalleryItems"
+              no-data-text="Aucun galerie n'a ce nom"
+              label="Lier une galerie à cette page"
               item-text="name"
               item-value="@id"
               :return-object="false"
               clearable
-            />
-          </v-col>
-          <v-col cols="12" md="6" />
+          />
         </v-col>
       </v-row>
       <v-row>
@@ -138,6 +148,7 @@ import { PageLog } from '~/store/page_log'
 const slug = helpers.regex('slug', /^[a-zA-Z0-9-]*$/)
 const pageCategoryModule = namespace('page_category')
 const pageLogModule = namespace('page_log')
+const mediaGalleryItemModule = namespace('media_gallery_item')
 
 @Component({
   name: 'AdminPageForm',
@@ -176,6 +187,8 @@ export default class AdminPageForm extends mixins(validationMixin) {
   @pageCategoryModule.State('selectItems') categorySelectItems!: PageCategory[] | null
   @pageCategoryModule.Action('fetchSelectItems') categoryGetSelectItems!: () => PageCategory[]
   @pageLogModule.Getter('find') findLog!: (id: string) => PageLog | null
+  @mediaGalleryItemModule.State('selectItems') mediaGalleryItems!: PageCategory[] | null
+  @mediaGalleryItemModule.Action('fetchSelectItems') getMediaGalleryItems!: () => PageCategory[]
 
   dialog = false
   selectedLog: string | null = null
@@ -227,6 +240,7 @@ export default class AdminPageForm extends mixins(validationMixin) {
 
   mounted () {
     this.categoryGetSelectItems()
+    this.getMediaGalleryItems()
   }
 
   setContent () {

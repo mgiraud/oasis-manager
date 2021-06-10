@@ -1,30 +1,50 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col>
-        <file-selection :thumbnails="thumbnails" :links="links" :remove-link="removeLink" :remove-thumbnail="removeThumbnail" />
+    <v-row no-gutters>
+      <v-col :cols="detailsPanel ? 8 : 12">
+        <v-container>
+          <v-row v-if="showSelection">
+            <v-col>
+              <file-selection :thumbnails="thumbnails" :links="links" :remove-link="removeLink"
+                              :remove-thumbnail="removeThumbnail"/>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <file-navigator ref="file-navigator" :select-click-handler="selectItem"
+                              :current-gallery-item.sync="currentGalleryItem"
+                              :edit-click-handler="editMediaObject"
+                              :show-selection="showSelection"/>
+            </v-col>
+          </v-row>
+          <v-row v-if="currentGalleryItem">
+            <v-col>
+              <file-uploader :handle-upload="handleUpload"/>
+            </v-col>
+          </v-row>
+        </v-container>
       </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
-        <file-navigator ref="file-navigator" :click-handler="selectItem" :current-gallery-item.sync="currentGalleryItem" />
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
-        <file-uploader :handle-upload="handleUpload" />
+      <v-col v-if="detailsPanel">
+        <v-container>
+          <v-row no-gutters>
+            <v-col>
+              <file-details :media-object="selectedMediaObject" />
+            </v-col>
+          </v-row>
+        </v-container>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Component, Prop, Vue, Provide, ProvideReactive } from 'nuxt-property-decorator'
 import FileSelection from './file_selection/FileSelection.vue'
 import FileUploader from './file_uploader/FileUploader.vue'
 import FileNavigator from './file_navigator/FileNavigator.vue'
-import { MediaGalleryItem } from '~/store/media_gallery_item'
-import { MediaObject } from '~/store/media_object'
+import FileDetails from "./file_details/FileDetails.vue";
+import {MediaGalleryItem} from '~/store/media_gallery_item'
+import {MediaObject} from '~/store/media_object'
 
 export type Thumbnail = {
   src: string
@@ -39,20 +59,29 @@ export type Link = {
   components: {
     FileSelection,
     FileUploader,
-    FileNavigator
+    FileNavigator,
+    FileDetails
   }
 })
 export default class FileManager extends Vue {
+  @Prop({type: Boolean, default: true}) readonly showSelection!: boolean
+  @Provide() selectionEnabled = this.showSelection
+  @ProvideReactive() closeDetailPanel() {
+    this.detailsPanel = false
+    this.selectedMediaObject = null
+  }
   currentGalleryItem: MediaGalleryItem | null = null
   thumbnails: Thumbnail[] = []
   links: Link[] = []
+  detailsPanel = false
+  selectedMediaObject: MediaObject | null = null
 
-  reset (): void {
+  reset(): void {
     this.thumbnails = []
     this.links = []
   }
 
-  selectItem (item: MediaObject) {
+  selectItem(item: MediaObject) {
     if (item.isImage) {
       this.selectImage(item)
     } else {
@@ -60,28 +89,28 @@ export default class FileManager extends Vue {
     }
   }
 
-  selectImage (res: MediaObject) {
+  selectImage(res: MediaObject) {
     this.thumbnails.push({
       src: res.contentUrl
     })
   }
 
-  selectLink (res: MediaObject) {
+  selectLink(res: MediaObject) {
     this.links.push({
       src: res.contentUrl,
       name: res.filePath
     })
   }
 
-  removeThumbnail (index: number) {
+  removeThumbnail(index: number) {
     this.thumbnails.splice(index, 1)
   }
 
-  removeLink (index: number) {
+  removeLink(index: number) {
     this.links.splice(index, 1)
   }
 
-  handleUpload (files: FileList) {
+  handleUpload(files: FileList) {
     if (!this.currentGalleryItem) {
       return
     }
@@ -111,6 +140,11 @@ export default class FileManager extends Vue {
         (this.$refs['file-navigator'] as FileNavigator).reload()
       })
     }
+  }
+
+  editMediaObject(mediaObject: MediaObject) {
+    this.detailsPanel = true
+    this.selectedMediaObject = mediaObject
   }
 }
 </script>

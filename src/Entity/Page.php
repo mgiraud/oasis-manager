@@ -135,8 +135,8 @@ class Page
     private $lastUpdateAt;
 
     /**
-     * @ORM\ManyToOne (targetEntity=MediaGalleryItem::class)
-     * @Groups({"page:read"})
+     * @ORM\ManyToOne(targetEntity=MediaGalleryItem::class)
+     * @Groups({"page:read", "page:write"})
      */
     private $galleryItem;
 
@@ -294,6 +294,18 @@ class Page
     public function setLastUpdateAt(?\DateTime $lastUpdateAt): self
     {
         $this->lastUpdateAt = $lastUpdateAt;
+
+        return $this;
+    }
+
+    public function getGalleryItem(): ?MediaGalleryItem
+    {
+        return $this->galleryItem;
+    }
+
+    public function setGalleryItem(?MediaGalleryItem $galleryItem): self
+    {
+        $this->galleryItem = $galleryItem;
 
         return $this;
     }

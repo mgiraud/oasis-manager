@@ -50,3 +50,7 @@ services:
     App\Emails\EmailFactory:
         arguments:
             $emailConfigs: '%emailConfigs%'
+
+#    App\Serializer\MediaObjectSerializer:
+#        # By default .inner is passed as argument
+#        decorates: 'api_platform.jsonld.normalizer.item'

@@ -72,7 +72,7 @@ export default class FileNavigator extends Vue {
 
     async fetch () {
       return await this.fetchRootMediaNode({
-        'exists[parent]': false
+        'exists[parent]': 'false'
       })
     }
 

@@ -4,33 +4,33 @@
       <v-row>
         <v-col cols="12">
           <v-text-field
-            v-model="item.title"
-            label="Titre"
-            :error-messages="titleErrors"
-            required
-            @input="$v.item.title.$touch()"
-            @blur="$v.item.title.$touch()"
+              v-model="item.title"
+              label="Titre"
+              :error-messages="titleErrors"
+              required
+              @input="$v.item.title.$touch()"
+              @blur="$v.item.title.$touch()"
           />
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="12" md="6">
           <v-switch
-            v-model="item.isPublished"
-            label="Publier"
-            input-value="true"
+              v-model="item.isPublished"
+              label="Publier"
+              input-value="true"
           />
         </v-col>
         <v-col cols="12" sm="6" md="6">
           <v-combobox
-            v-if="item.tags"
-            v-model="item.tags"
-            :items="item.tags"
-            no-data-text="Aucun tag"
-            label="Tags"
-            :return-object="false"
-            clearable
-            multiple
+              v-if="item.tags"
+              v-model="item.tags"
+              :items="item.tags"
+              no-data-text="Aucun tag"
+              label="Tags"
+              :return-object="false"
+              clearable
+              multiple
           />
         </v-col>
       </v-row>
@@ -53,8 +53,8 @@
         <v-col cols="12">
           <ClientOnly>
             <Editor
-              v-if="item.content !== undefined"
-              v-model="item.content"
+                v-if="item.content !== undefined"
+                v-model="item.content"
             />
           </ClientOnly>
         </v-col>
@@ -91,10 +91,16 @@ export default class AdminBlogArticleForm extends mixins(validationMixin) {
   @Prop({ type: Object, required: true })
   values!: any
 
-  @Prop({ type: Object, default: () => {} })
+  @Prop({
+    type: Object, default: () => {
+    }
+  })
   errors!: any
 
-  @Prop({ type: Object, default: () => {} })
+  @Prop({
+    type: Object, default: () => {
+    }
+  })
   initialValues!: any
 
   @mediaNodeModule.State('selectItems') mediaNodes!: MediaNode[] | null
@@ -106,7 +112,9 @@ export default class AdminBlogArticleForm extends mixins(validationMixin) {
 
   get titleErrors () {
     const errors: string[] = []
-    if (!this.$v.item.title || !this.$v.item.title.$dirty) { return errors }
+    if (!this.$v.item.title || !this.$v.item.title.$dirty) {
+      return errors
+    }
     has(this.violations, 'title') && errors.push(this.violations.title)
     !this.$v.item.title.minLength && errors.push('Le titre doit faire au moins 4 caractères')
     return errors
@@ -114,7 +122,9 @@ export default class AdminBlogArticleForm extends mixins(validationMixin) {
 
   get contentErrors () {
     const errors: string[] = []
-    if (!this.$v.item.content || !this.$v.item.content.$dirty) { return errors }
+    if (!this.$v.item.content || !this.$v.item.content.$dirty) {
+      return errors
+    }
     has(this.violations, 'content') && errors.push(this.violations.content)
     !this.$v.item.content.slug && errors.push('Le contenu doit faire au moins 2 caractères')
     return errors
@@ -124,7 +134,7 @@ export default class AdminBlogArticleForm extends mixins(validationMixin) {
     return this.errors || {}
   }
 
-  mounted() {
+  mounted () {
     this.getMediaNodes()
   }
 }

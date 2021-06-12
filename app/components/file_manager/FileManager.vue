@@ -28,7 +28,7 @@
         <v-container>
           <v-row no-gutters>
             <v-col>
-              <file-details :media-object="selectedMediaObject" />
+              <file-details :media-object="selectedMediaObject"/>
             </v-col>
           </v-row>
         </v-container>
@@ -42,8 +42,8 @@ import { Component, Prop, Vue, Provide, ProvideReactive } from 'nuxt-property-de
 import FileSelection from './file_selection/FileSelection.vue'
 import FileUploader from './file_uploader/FileUploader.vue'
 import FileNavigator from './file_navigator/FileNavigator.vue'
-import FileDetails from "./file_details/FileDetails.vue";
-import {MediaObject} from '~/store/media_object'
+import FileDetails from "./file_details/FileDetails.vue"
+import { MediaObject } from '~/store/media_object'
 import { MediaNode } from '~/store/media_node'
 
 export type Thumbnail = {
@@ -64,24 +64,26 @@ export type Link = {
   }
 })
 export default class FileManager extends Vue {
-  @Prop({type: Boolean, default: true}) readonly showSelection!: boolean
+  @Prop({ type: Boolean, default: true }) readonly showSelection!: boolean
   @Provide() selectionEnabled = this.showSelection
-  @ProvideReactive() closeDetailPanel() {
+
+  @ProvideReactive() closeDetailPanel () {
     this.detailsPanel = false
     this.selectedMediaObject = null
   }
+
   currentMediaNode: MediaNode | null = null
   thumbnails: Thumbnail[] = []
   links: Link[] = []
   detailsPanel = false
   selectedMediaObject: MediaObject | null = null
 
-  reset(): void {
+  reset (): void {
     this.thumbnails = []
     this.links = []
   }
 
-  selectMediaObject(mediaObject: MediaObject) {
+  selectMediaObject (mediaObject: MediaObject) {
     if (mediaObject.isImage) {
       this.selectImage(mediaObject)
     } else {
@@ -89,28 +91,28 @@ export default class FileManager extends Vue {
     }
   }
 
-  selectImage(res: MediaObject) {
+  selectImage (res: MediaObject) {
     this.thumbnails.push({
       src: res.contentUrl
     })
   }
 
-  selectLink(res: MediaObject) {
+  selectLink (res: MediaObject) {
     this.links.push({
       src: res.contentUrl,
       name: res.filePath
     })
   }
 
-  removeThumbnail(index: number) {
+  removeThumbnail (index: number) {
     this.thumbnails.splice(index, 1)
   }
 
-  removeLink(index: number) {
+  removeLink (index: number) {
     this.links.splice(index, 1)
   }
 
-  handleUpload(files: FileList) {
+  handleUpload (files: FileList) {
     if (!this.currentMediaNode) {
       return
     }
@@ -142,7 +144,7 @@ export default class FileManager extends Vue {
     }
   }
 
-  editMediaObject(mediaObject: MediaObject) {
+  editMediaObject (mediaObject: MediaObject) {
     this.detailsPanel = true
     this.selectedMediaObject = mediaObject
   }

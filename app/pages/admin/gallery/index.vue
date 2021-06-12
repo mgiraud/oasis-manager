@@ -17,6 +17,6 @@ export default {
   middleware: 'hasPermissions',
   meta: {
     permissions: ['USER_CAN_ACCESS_GALLERIES']
-  },
+  }
 }
 </script>

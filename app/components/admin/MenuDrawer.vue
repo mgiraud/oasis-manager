@@ -1,18 +1,18 @@
 <template>
   <v-navigation-drawer
-    v-model="drawer"
-    app
-    width="auto"
-    color="primary darken-3"
+      v-model="drawer"
+      app
+      width="auto"
+      color="primary darken-3"
   >
     <v-sheet
-      class="pa-4 white--text"
-      color="primary darken-3"
+        class="pa-4 white--text"
+        color="primary darken-3"
     >
       <div>{{ member.nickname || member.email }}</div>
     </v-sheet>
 
-    <v-divider />
+    <v-divider/>
 
     <v-list>
       <v-list-item link :to="{name: 'admin'}" class="white--text">
@@ -39,10 +39,10 @@
       </v-list-item>
 
       <v-list-group
-        v-if="filteredBlogItems.length > 0"
-        :value="true"
-        no-action
-        sub-group
+          v-if="filteredBlogItems.length > 0"
+          :value="true"
+          no-action
+          sub-group
       >
         <template #activator>
           <v-list-item-content>
@@ -51,24 +51,24 @@
         </template>
 
         <v-list-item
-          v-for="([icon, title, path], i) in filteredBlogItems"
-          :key="i"
-          link
-          :to="{name: path}"
+            v-for="([icon, title, path], i) in filteredBlogItems"
+            :key="i"
+            link
+            :to="{name: path}"
         >
-          <v-list-item-title class="white--text" v-text="title" />
+          <v-list-item-title class="white--text" v-text="title"/>
 
           <v-list-item-icon>
-            <v-icon color="white" v-text="icon" />
+            <v-icon color="white" v-text="icon"/>
           </v-list-item-icon>
         </v-list-item>
       </v-list-group>
 
       <v-list-group
-        v-if="filteredPageItems.length > 0"
-        :value="true"
-        no-action
-        sub-group
+          v-if="filteredPageItems.length > 0"
+          :value="true"
+          no-action
+          sub-group
       >
         <template #activator>
           <v-list-item-content>
@@ -77,24 +77,24 @@
         </template>
 
         <v-list-item
-          v-for="([icon, title, path], i) in filteredPageItems"
-          :key="i"
-          link
-          :to="{name: path}"
+            v-for="([icon, title, path], i) in filteredPageItems"
+            :key="i"
+            link
+            :to="{name: path}"
         >
-          <v-list-item-title class="white--text" v-text="title" />
+          <v-list-item-title class="white--text" v-text="title"/>
 
           <v-list-item-icon>
-            <v-icon color="white" v-text="icon" />
+            <v-icon color="white" v-text="icon"/>
           </v-list-item-icon>
         </v-list-item>
       </v-list-group>
 
       <v-list-group
-        v-if="filteredMemberItems.length > 0"
-        :value="true"
-        no-action
-        sub-group
+          v-if="filteredMemberItems.length > 0"
+          :value="true"
+          no-action
+          sub-group
       >
         <template #activator>
           <v-list-item-content>
@@ -103,15 +103,15 @@
         </template>
 
         <v-list-item
-          v-for="([icon, title, path], i) in filteredMemberItems"
-          :key="i"
-          link
-          :to="{name: path}"
+            v-for="([icon, title, path], i) in filteredMemberItems"
+            :key="i"
+            link
+            :to="{name: path}"
         >
-          <v-list-item-title class="white--text" v-text="title" />
+          <v-list-item-title class="white--text" v-text="title"/>
 
           <v-list-item-icon>
-            <v-icon color="white" v-text="icon" />
+            <v-icon color="white" v-text="icon"/>
           </v-list-item-icon>
         </v-list-item>
       </v-list-group>
@@ -164,7 +164,7 @@ export default class MenuDrawer extends Vue {
     ['ri-survey-line', 'Réponses au questionnaire', 'admin-survey-join', 'USER_CAN_VIEW_SURVEY_JOIN']
   ]
 
-  @State('storage') storage!: {user?: Member}
+  @State('storage') storage!: { user?: Member }
   @securityModule.Getter('hasPermission') hasPermission!: (permission: string) => boolean
 
   get member () {

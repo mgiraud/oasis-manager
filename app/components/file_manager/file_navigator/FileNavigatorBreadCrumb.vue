@@ -15,7 +15,7 @@ export default class FileNavigatorBreadCrumbItems extends Vue {
     name='file-navigator-bread-crumb-items'
 
     handleCrumbClick (crumb: breadcrumbItem) {
-        this.mediaNodeClickHandler(crumb['@id'])
+      this.mediaNodeClickHandler(crumb['@id'])
     }
 }
 </script>

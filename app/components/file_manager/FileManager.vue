@@ -5,21 +5,28 @@
         <v-container>
           <v-row v-if="showSelection">
             <v-col>
-              <file-selection :thumbnails="thumbnails" :links="links" :remove-link="removeLink"
-                              :remove-thumbnail="removeThumbnail"/>
+              <file-selection
+                :thumbnails="thumbnails"
+                :links="links"
+                :remove-link="removeLink"
+                :remove-thumbnail="removeThumbnail"
+              />
             </v-col>
           </v-row>
           <v-row>
             <v-col>
-              <file-navigator ref="file-navigator" :select-click-handler="selectMediaObject"
-                              :current-media-node.sync="currentMediaNode"
-                              :edit-click-handler="editMediaObject"
-                              :show-selection="showSelection"/>
+              <file-navigator
+                ref="file-navigator"
+                :select-click-handler="selectMediaObject"
+                :current-media-node.sync="currentMediaNode"
+                :edit-click-handler="editMediaObject"
+                :show-selection="showSelection"
+              />
             </v-col>
           </v-row>
           <v-row v-if="currentMediaNode">
             <v-col>
-              <file-uploader :handle-upload="handleUpload"/>
+              <file-uploader :handle-upload="handleUpload" />
             </v-col>
           </v-row>
         </v-container>
@@ -28,7 +35,7 @@
         <v-container>
           <v-row no-gutters>
             <v-col>
-              <file-details :media-object="selectedMediaObject"/>
+              <file-details :media-object="selectedMediaObject" />
             </v-col>
           </v-row>
         </v-container>
@@ -42,7 +49,7 @@ import { Component, Prop, Vue, Provide, ProvideReactive } from 'nuxt-property-de
 import FileSelection from './file_selection/FileSelection.vue'
 import FileUploader from './file_uploader/FileUploader.vue'
 import FileNavigator from './file_navigator/FileNavigator.vue'
-import FileDetails from "./file_details/FileDetails.vue"
+import FileDetails from './file_details/FileDetails.vue'
 import { MediaObject } from '~/store/media_object'
 import { MediaNode } from '~/store/media_node'
 

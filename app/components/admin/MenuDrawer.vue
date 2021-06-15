@@ -1,21 +1,25 @@
 <template>
   <v-navigation-drawer
-      v-model="drawer"
-      app
-      width="auto"
-      color="primary darken-3"
+    v-model="drawer"
+    app
+    width="auto"
+    color="primary darken-3"
   >
     <v-sheet
-        class="pa-4 white--text"
-        color="primary darken-3"
+      class="pa-4 white--text"
+      color="primary darken-3"
     >
       <div>{{ member.nickname || member.email }}</div>
     </v-sheet>
 
-    <v-divider/>
+    <v-divider />
 
     <v-list>
-      <v-list-item link :to="{name: 'admin'}" class="white--text">
+      <v-list-item
+        link
+        :to="{name: 'admin'}"
+        class="white--text"
+      >
         <v-list-item-icon>
           <v-icon>ri-home-line</v-icon>
         </v-list-item-icon>
@@ -27,22 +31,24 @@
       </v-list-item>
 
       <v-list-item
-          link
-          :to="{name: 'admin-gallery'}"
+        link
+        :to="{name: 'admin-gallery'}"
       >
         <v-list-item-icon>
-          <v-icon color="white">ri-folder-open-line</v-icon>
+          <v-icon color="white">
+            ri-folder-open-line
+          </v-icon>
         </v-list-item-icon>
-        <v-list-item-title class="white--text" v-text="">
+        <v-list-item-title class="white--text">
           Gérer les fichiers
         </v-list-item-title>
       </v-list-item>
 
       <v-list-group
-          v-if="filteredBlogItems.length > 0"
-          :value="true"
-          no-action
-          sub-group
+        v-if="filteredBlogItems.length > 0"
+        :value="true"
+        no-action
+        sub-group
       >
         <template #activator>
           <v-list-item-content>
@@ -51,24 +57,30 @@
         </template>
 
         <v-list-item
-            v-for="([icon, title, path], i) in filteredBlogItems"
-            :key="i"
-            link
-            :to="{name: path}"
+          v-for="([icon, title, path], i) in filteredBlogItems"
+          :key="i"
+          link
+          :to="{name: path}"
         >
-          <v-list-item-title class="white--text" v-text="title"/>
+          <v-list-item-title
+            class="white--text"
+            v-text="title"
+          />
 
           <v-list-item-icon>
-            <v-icon color="white" v-text="icon"/>
+            <v-icon
+              color="white"
+              v-text="icon"
+            />
           </v-list-item-icon>
         </v-list-item>
       </v-list-group>
 
       <v-list-group
-          v-if="filteredPageItems.length > 0"
-          :value="true"
-          no-action
-          sub-group
+        v-if="filteredPageItems.length > 0"
+        :value="true"
+        no-action
+        sub-group
       >
         <template #activator>
           <v-list-item-content>
@@ -77,24 +89,30 @@
         </template>
 
         <v-list-item
-            v-for="([icon, title, path], i) in filteredPageItems"
-            :key="i"
-            link
-            :to="{name: path}"
+          v-for="([icon, title, path], i) in filteredPageItems"
+          :key="i"
+          link
+          :to="{name: path}"
         >
-          <v-list-item-title class="white--text" v-text="title"/>
+          <v-list-item-title
+            class="white--text"
+            v-text="title"
+          />
 
           <v-list-item-icon>
-            <v-icon color="white" v-text="icon"/>
+            <v-icon
+              color="white"
+              v-text="icon"
+            />
           </v-list-item-icon>
         </v-list-item>
       </v-list-group>
 
       <v-list-group
-          v-if="filteredMemberItems.length > 0"
-          :value="true"
-          no-action
-          sub-group
+        v-if="filteredMemberItems.length > 0"
+        :value="true"
+        no-action
+        sub-group
       >
         <template #activator>
           <v-list-item-content>
@@ -103,20 +121,30 @@
         </template>
 
         <v-list-item
-            v-for="([icon, title, path], i) in filteredMemberItems"
-            :key="i"
-            link
-            :to="{name: path}"
+          v-for="([icon, title, path], i) in filteredMemberItems"
+          :key="i"
+          link
+          :to="{name: path}"
         >
-          <v-list-item-title class="white--text" v-text="title"/>
+          <v-list-item-title
+            class="white--text"
+            v-text="title"
+          />
 
           <v-list-item-icon>
-            <v-icon color="white" v-text="icon"/>
+            <v-icon
+              color="white"
+              v-text="icon"
+            />
           </v-list-item-icon>
         </v-list-item>
       </v-list-group>
 
-      <v-list-item link :to="{name: 'index'}" class="white--text">
+      <v-list-item
+        link
+        :to="{name: 'index'}"
+        class="white--text"
+      >
         <v-list-item-icon>
           <v-icon>ri-arrow-left-circle-fill</v-icon>
         </v-list-item-icon>
@@ -125,7 +153,10 @@
         </v-list-item-content>
       </v-list-item>
 
-      <v-list-item link @click="logout">
+      <v-list-item
+        link
+        @click="logout"
+      >
         <v-list-item-icon>
           <v-icon>ri-logout-circle-line</v-icon>
         </v-list-item-icon>

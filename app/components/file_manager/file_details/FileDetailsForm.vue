@@ -4,39 +4,46 @@
       <v-row>
         <v-col cols="12">
           <v-text-field
-              v-model="item.uniqueId"
-              label="Identifiant unique"
-              disabled
+            v-model="item.uniqueId"
+            label="Identifiant unique"
+            disabled
           />
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="12">
           <v-text-field
-              v-model="item.customName"
-              label="Nom personnalisé"
-              :error-messages="customNameErrors"
-              required
-              @input="$v.item.customName.$touch()"
-              @blur="$v.item.customName.$touch()"
+            v-model="item.customName"
+            label="Nom personnalisé"
+            :error-messages="customNameErrors"
+            required
+            @input="$v.item.customName.$touch()"
+            @blur="$v.item.customName.$touch()"
           />
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" md="12">
+        <v-col
+          cols="12"
+          md="12"
+        >
           <p>Appartient aux catégories...</p>
-          <p class="error--text" v-if="errors && errors.mediaNodes">{{ errors.mediaNodes }}</p>
-          <v-treeview
-              :items="tree"
-              selectable
-              rounded
-              hoverable
-              open-all
-              selection-type="independent"
-              v-model="item.mediaNodes"
-              item-key="@id"
+          <p
+            class="error--text"
+            v-if="errors && errors.mediaNodes"
           >
-          </v-treeview>
+            {{ errors.mediaNodes }}
+          </p>
+          <v-treeview
+            v-model="item.mediaNodes"
+            :items="tree"
+            selectable
+            rounded
+            hoverable
+            open-all
+            selection-type="independent"
+            item-key="@id"
+          />
         </v-col>
       </v-row>
     </v-container>
@@ -64,10 +71,7 @@ import { validationMixin } from 'vuelidate'
 })
 export default class FileDetailsForm extends mixins(validationMixin) {
   @Prop({ type: Object, required: true }) values!: any
-  @Prop({
-    type: Object, default: () => {
-    }
-  }) errors!: any
+  @Prop({ type: Object, default: () => {} }) errors!: any
   @Prop({ type: Array, default: () => [] }) tree!: any
 
   get item () {

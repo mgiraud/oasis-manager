@@ -1,28 +1,42 @@
 <template>
   <v-container>
     <v-row>
-      <v-col v-for="item in mediaObjects" :key="item['@id']" cols="12" md="6" lg="3">
+      <v-col
+        v-for="item in mediaObjects"
+        :key="item['@id']"
+        cols="12"
+        md="6"
+        lg="3"
+      >
         <v-card>
           <v-img
-              v-if="item.isImage"
-              :src="item.contentUrl"
-              max-height="300"
-              contain
-              class="file-navigator-object"
-          >
-          </v-img>
-          <span v-else class="file-navigator-object">{{
-              item.filePath
-            }}</span>
+            v-if="item.isImage"
+            :src="item.contentUrl"
+            max-height="300"
+            contain
+            class="file-navigator-object"
+          />
+          <span
+            v-else
+            class="file-navigator-object"
+          >{{ item.filePath }}</span>
           <v-card-title>
             <span v-if="item.customName">{{ item.customName }}</span>
             <small v-else>Titre non défini</small>
           </v-card-title>
           <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-tooltip top v-if="selectionEnabled">
+            <v-spacer />
+            <v-tooltip
+              v-if="selectionEnabled"
+              top
+            >
               <template #activator="{ on, attrs }">
-                <v-btn icon @click="selectClickHandler(item)" v-on="on" v-bind="attrs">
+                <v-btn
+                  v-bind="attrs"
+                  v-on="on"
+                  icon
+                  @click="selectClickHandler(item)"
+                >
                   <v-icon>ri-arrow-left-up-line</v-icon>
                 </v-btn>
               </template>
@@ -30,7 +44,12 @@
             </v-tooltip>
             <v-tooltip top>
               <template #activator="{ on, attrs }">
-                <v-btn icon @click="editClickHandler(item)" v-on="on" v-bind="attrs">
+                <v-btn
+                  v-bind="attrs"
+                  v-on="on"
+                  icon
+                  @click="editClickHandler(item)"
+                >
                   <v-icon>ri-pencil-line</v-icon>
                 </v-btn>
               </template>

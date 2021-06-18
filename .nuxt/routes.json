@@ -104,13 +104,6 @@
         "_name": "_22114b98"
       },
       {
-        "name": "admin-gallery-folders-id",
-        "path": "gallery/folders/:id",
-        "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/gallery/folders/_id/index.vue",
-        "chunkName": "pages/admin/gallery/folders/_id/index",
-        "_name": "_45affbe8"
-      },
-      {
         "name": "admin-blogArticle-id",
         "path": "blogArticle/:id",
         "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/blogArticle/_id.vue",
@@ -123,13 +116,6 @@
         "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/contact/_id.vue",
         "chunkName": "pages/admin/contact/_id",
         "_name": "_483ccc61"
-      },
-      {
-        "name": "admin-gallery-id",
-        "path": "gallery/:id",
-        "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/admin/gallery/_id/index.vue",
-        "chunkName": "pages/admin/gallery/_id/index",
-        "_name": "_76c0cc54"
       },
       {
         "name": "admin-member-id",

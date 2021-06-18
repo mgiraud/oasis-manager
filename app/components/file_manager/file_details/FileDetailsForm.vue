@@ -29,8 +29,8 @@
         >
           <p>Appartient aux catégories...</p>
           <p
-            class="error--text"
             v-if="errors && errors.mediaNodes"
+            class="error--text"
           >
             {{ errors.mediaNodes }}
           </p>

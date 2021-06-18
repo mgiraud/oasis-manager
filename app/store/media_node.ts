@@ -142,4 +142,9 @@ mediaNodeModule.getters.tree = (state: MediaNodeModuleState, getters) => {
   return tree
 }
 
+// @ts-ignore
+mediaNodeModule.getters.rootNodes = (state: MediaNodeModuleState, getters) => {
+  return getters.list.filter((mediaNode: MediaNode) => !mediaNode.parent)
+}
+
 export default mediaNodeModule

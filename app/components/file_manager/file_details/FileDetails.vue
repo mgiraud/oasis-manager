@@ -22,9 +22,9 @@
     <v-row>
       <v-col>
         <file-details-form
+          ref="updateForm"
           :tree="tree"
           :values="item"
-          ref="updateForm"
           :errors="violations"
         />
       </v-col>

@@ -99,7 +99,7 @@ export default class FileNavigator extends Vue {
   @InjectReactive() readonly closeDetailPanel !: () => void
   @mediaNodeModule.Action('fetchAll') fetchRootMediaNode!: (options?: { [propertyPath: string]: string | number }) => MediaNode[]
   @mediaNodeModule.Action('load') fetchMediaNode!: (id: string) => MediaNode
-  @mediaNodeModule.Getter('list') rootMediaNodes !: MediaNode[]
+  @mediaNodeModule.Getter('rootNodes') rootMediaNodes !: MediaNode[]
   @mediaNodeModule.Getter('find') findMediaGalleriesById !: (id: string) => MediaNode
   @mediaObjectModule.Action('resetList') resetMediaObjects !: () => {}
 

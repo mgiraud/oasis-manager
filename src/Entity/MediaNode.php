@@ -61,7 +61,8 @@ class MediaNode
 
     /**
      * @ORM\ManyToOne(targetEntity=MediaNode::class, inversedBy="children")
-     * @Groups({"media_node:write"})
+     * @Groups({"media_node:write", "media_node:read"})
+     * @ApiProperty(readableLink=false)
      */
     private $parent;
 

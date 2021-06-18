@@ -10975,6 +10975,11 @@ mediaNodeModule.getters.tree = (state, getters) => {
     return tree;
   });
   return tree;
+}; // @ts-ignore
+
+
+mediaNodeModule.getters.rootNodes = (state, getters) => {
+  return getters.list.filter(mediaNode => !mediaNode.parent);
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (mediaNodeModule);

@@ -33,8 +33,8 @@
               <template #activator="{ on, attrs }">
                 <v-btn
                   v-bind="attrs"
-                  v-on="on"
                   icon
+                  v-on="on"
                   @click="selectClickHandler(item)"
                 >
                   <v-icon>ri-arrow-left-up-line</v-icon>
@@ -46,8 +46,8 @@
               <template #activator="{ on, attrs }">
                 <v-btn
                   v-bind="attrs"
-                  v-on="on"
                   icon
+                  v-on="on"
                   @click="editClickHandler(item)"
                 >
                   <v-icon>ri-pencil-line</v-icon>

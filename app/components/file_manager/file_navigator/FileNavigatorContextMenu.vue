@@ -9,7 +9,7 @@
         color="primary"
       >
         <v-dialog
-          v-if="galleryItem"
+          v-if="mediaNode"
           v-model="dialog"
           width="500"
         >
@@ -64,14 +64,14 @@
 <script lang="ts">
 import { Component, Vue, namespace, Prop } from 'nuxt-property-decorator'
 import FileNavigator from './FileNavigator.vue'
-import { MediaGalleryItem, MediaGalleryItemNew } from '~/store/media_gallery_item'
+import { MediaNode, MediaNodeNew } from '~/store/media_node'
 
-const mediaGalleryItemModule = namespace('media_gallery_item')
+const mediaNodeModule = namespace('media_node')
 
 @Component
 export default class FileNavigatorFolders extends Vue {
-    @Prop({ type: Object, required: false }) readonly galleryItem!: MediaGalleryItem | null
-    @mediaGalleryItemModule.Action('create') create!: (item: MediaGalleryItemNew) => Promise<MediaGalleryItem>
+    @Prop({ type: Object, required: false }) readonly mediaNode!: MediaNode | null
+    @mediaNodeModule.Action('create') create!: (item: MediaNodeNew) => Promise<MediaNode>
 
     contextMenu : HTMLElement | null = null
     dialog = false
@@ -120,12 +120,12 @@ export default class FileNavigatorFolders extends Vue {
 
     async onFolderCreate () {
       this.dialog = false
-      if (!this.newFolderName || !this.galleryItem) {
+      if (!this.newFolderName || !this.mediaNode) {
         return
       }
       await this.create({
         name: this.newFolderName,
-        parent: this.galleryItem['@id']
+        parent: this.mediaNode['@id']
       })
       const parent = this.$parent as FileNavigator
       await parent.refresh()

@@ -109,7 +109,7 @@ export default class AdminPageIndex extends mixins(list) {
     }
 
     @pageModule.Action('fetchAll') fetchAll!: () => Page[]
-    @pageModule.Action('del') deleteItem!: (pageCateogry: Page) => Promise<void>
+    @pageModule.Action('del') deleteItem!: (page: Page) => Promise<void>
 
     editItem (item: Page) {
       this.$router.push({ name: 'admin-page-id', params: { id: item['@id'] } })

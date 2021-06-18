@@ -8,6 +8,9 @@ use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Controller\Media\CreateMediaObjectAction;
+use App\Validation\MediaNodeCount;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -21,8 +24,10 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *     normalizationContext={
  *         "groups"={"media_object:read"}
  *     },
+ *     denormalizationContext={"groups"={"media_object:write"}},
  *     collectionOperations={
  *         "post"={
+ *             "security"="is_granted('USER_CAN_UPLOAD_MEDIA_OBJECTS')",
  *             "controller"=CreateMediaObjectAction::class,
  *             "deserialize"=false,
  *             "validation_groups"={"Default", "media_object_create"},
@@ -37,7 +42,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *                                         "type"="string",
  *                                         "format"="binary"
  *                                     },
- *                                      "mediaGalleryItemId"={
+ *                                      "mediaNodeId"={
  *                                          "type"="integer",
  *                                      }
  *                                 }
@@ -50,11 +55,12 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *         "get"
  *     },
  *     itemOperations={
- *         "get"
+ *         "get",
+ *         "put"={"security"="is_granted('USER_CAN_EDIT_MEDIA_OBJECTS')"}
  *     }
  * )
  * @Vich\Uploadable
- * @ApiFilter(SearchFilter::class, properties={"mediaGalleryItem": "exact"})
+ * @ApiFilter(SearchFilter::class, properties={"mediaNodes": "exact"})
  * @ORM\HasLifecycleCallbacks()
  */
 class MediaObject
@@ -73,7 +79,7 @@ class MediaObject
      * @var string|null
      *
      * @ApiProperty(iri="http://schema.org/contentUrl")
-     * @Groups({"media_object:read"})
+     * @Groups({"media_object:read", "page:read", "blog_article:read"})
      */
     public $contentUrl;
 
@@ -89,16 +95,9 @@ class MediaObject
      * @var string|null
      *
      * @ORM\Column(nullable=true, type="text")
-     * @Groups({"media_object:read"})
+     * @Groups({"media_object:read", "page:read", "blog_article:read"})
      */
     public $filePath;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=MediaGalleryItem::class, inversedBy="mediaObjects")
-     * @ORM\JoinColumn(nullable=false)
-     * @ApiProperty(readableLink=false, writableLink=false)
-     */
-    private $mediaGalleryItem;
 
     /**
      * @var string|null
@@ -111,7 +110,7 @@ class MediaObject
 
     /**
      * @ApiProperty()
-     * @Groups({"media_object:read"})
+     * @Groups({"media_object:read", "page:read", "blog_article:read"})
      */
     public $isImage = false;
 
@@ -119,30 +118,55 @@ class MediaObject
      * @var string|null
      *
      * @ORM\Column(nullable=true, type="text")
-     * @Groups({"media_object:read", "media_object:write"})
+     * @Groups({"media_object:read", "media_object:write", "page:read", "media_object:write", "blog_article:read"})
      */
     public $customName;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=MediaNode::class, inversedBy="mediaObjects")
+     * @ApiProperty(readableLink=false, writableLink=false)
+     * @Groups({"media_object:write", "media_object:read", "media_node_tree:read"})
+     * @MediaNodeCount()
+     */
+    private $mediaNodes;
+
+    public function __construct()
+    {
+        $this->mediaNodes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getMediaGalleryItem(): ?MediaGalleryItem
-    {
-        return $this->mediaGalleryItem;
-    }
-
-    public function setMediaGalleryItem(?MediaGalleryItem $mediaGalleryItem): self
-    {
-        $this->mediaGalleryItem = $mediaGalleryItem;
-
-        return $this;
-    }
-
     /** @ORM\PrePersist() */
     public function generateUniqueId()
     {
         $this->uniqueId = substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, 24);
+    }
+
+    /**
+     * @return Collection|MediaNode[]
+     */
+    public function getMediaNodes(): Collection
+    {
+        return $this->mediaNodes;
+    }
+
+    public function addMediaNode(MediaNode $mediaNode): self
+    {
+        if (!$this->mediaNodes->contains($mediaNode)) {
+            $this->mediaNodes[] = $mediaNode;
+        }
+
+        return $this;
+    }
+
+    public function removeMediaNode(MediaNode $mediaNode): self
+    {
+        $this->mediaNodes->removeElement($mediaNode);
+
+        return $this;
     }
 }

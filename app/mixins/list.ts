@@ -94,6 +94,6 @@ export default class ListMixin extends mixins(NotificationMixin) {
   }
 
   deleteHandler (item: HydraMemberObject) {
-    // this.deleteItem(item).then(() => this.onUpdateOptions(this.options))
+    this.deleteItem(item).then(() => this.onUpdateOptions(this.options))
   }
 }

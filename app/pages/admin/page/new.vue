@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Form ref="createForm" :values="item" :errors="violations" />
+    <Form ref="createForm" :values="item" :errors="violations" :page-logs="[]" />
     <Toolbar :handle-submit="onSendForm" :handle-reset="resetForm" />
     <Loading :visible="isLoading" />
   </div>

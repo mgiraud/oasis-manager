@@ -5,7 +5,8 @@ export type MediaObject = HydraMemberObject & {
   contentUrl: string
   filePath: string
   uniqueId: string
-  isImage: boolean
+  isImage: boolean,
+  customName?: string
 }
 
 export default makeCrudModule({

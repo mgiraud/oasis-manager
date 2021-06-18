@@ -2,7 +2,10 @@
   <v-form>
     <v-container>
       <v-row>
-        <v-col cols="12" md="6">
+        <v-col
+          cols="12"
+          md="6"
+        >
           <v-text-field
             v-model="item.title"
             label="Titre"
@@ -12,7 +15,10 @@
             @blur="$v.item.title.$touch()"
           />
         </v-col>
-        <v-col cols="12" md="6">
+        <v-col
+          cols="12"
+          md="6"
+        >
           <v-text-field
             v-model="item.url"
             label="Url"
@@ -24,14 +30,20 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" md="6">
+        <v-col
+          cols="12"
+          md="6"
+        >
           <v-switch
             v-model="item.isPublished"
             label="Publier"
             input-value="true"
           />
         </v-col>
-        <v-col cols="12" md="6">
+        <v-col
+          cols="12"
+          md="6"
+        >
           <v-switch
             v-model="item.showInMenu"
             label="Ajouter au menu"
@@ -40,21 +52,39 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" md="6">
-          <v-col cols="12" sm="6" md="6">
-            <v-combobox
-              v-if="categorySelectItems"
-              v-model="item.category"
-              :items="categorySelectItems"
-              no-data-text="Aucune catégorie n'a ce nom"
-              label="category"
-              item-text="name"
-              item-value="@id"
-              :return-object="false"
-              clearable
-            />
-          </v-col>
-          <v-col cols="12" md="6" />
+        <v-col
+          cols="12"
+          sm="6"
+          md="6"
+        >
+          <v-combobox
+            v-if="categorySelectItems"
+            v-model="item.category"
+            :items="categorySelectItems"
+            no-data-text="Aucune catégorie n'a ce nom"
+            label="Catégorie de la page"
+            item-text="name"
+            item-value="@id"
+            :return-object="false"
+            clearable
+          />
+        </v-col>
+        <v-col
+          cols="12"
+          sm="6"
+          md="6"
+        >
+          <v-combobox
+            v-if="mediaNodes"
+            v-model="item.mediaNode"
+            :items="mediaNodes"
+            no-data-text="Aucun galerie n'a ce nom"
+            label="Lier une galerie à cette page"
+            item-text="name"
+            item-value="@id"
+            :return-object="false"
+            clearable
+          />
         </v-col>
       </v-row>
       <v-row>
@@ -100,7 +130,10 @@
                         item-value="@id"
                         label="Choisissez une version"
                       />
-                      <v-textarea v-if="selectedLog && findLog(selectedLog)" v-html="findLog(selectedLog).originalContent" />
+                      <v-textarea
+                        v-if="selectedLog && findLog(selectedLog)"
+                        v-html="findLog(selectedLog).originalContent"
+                      />
                     </v-card-text>
                     <v-card-actions>
                       <v-spacer />
@@ -134,10 +167,12 @@ import EditorBtn from '~/components/util/Editor/EditorBtn.vue'
 import Editor from '~/components/util/Editor.vue'
 import { PageCategory } from '~/store/page_category'
 import { PageLog } from '~/store/page_log'
+import { MediaNode } from '~/store/media_node'
 
 const slug = helpers.regex('slug', /^[a-zA-Z0-9-]*$/)
 const pageCategoryModule = namespace('page_category')
 const pageLogModule = namespace('page_log')
+const mediaNodeModule = namespace('media_node')
 
 @Component({
   name: 'AdminPageForm',
@@ -176,6 +211,8 @@ export default class AdminPageForm extends mixins(validationMixin) {
   @pageCategoryModule.State('selectItems') categorySelectItems!: PageCategory[] | null
   @pageCategoryModule.Action('fetchSelectItems') categoryGetSelectItems!: () => PageCategory[]
   @pageLogModule.Getter('find') findLog!: (id: string) => PageLog | null
+  @mediaNodeModule.State('selectItems') mediaNodes!: MediaNode[] | null
+  @mediaNodeModule.Action('fetchSelectItems') getMediaNodes!: () => MediaNode[]
 
   dialog = false
   selectedLog: string | null = null
@@ -191,7 +228,7 @@ export default class AdminPageForm extends mixins(validationMixin) {
     }
     has(this.violations, 'title') && errors.push(this.violations.title)
     !this.$v.item.title.minLength &&
-      errors.push('Le titre doit faire au moins 4 caractères')
+    errors.push('Le titre doit faire au moins 4 caractères')
     return errors
   }
 
@@ -202,11 +239,11 @@ export default class AdminPageForm extends mixins(validationMixin) {
     }
     has(this.violations, 'url') && errors.push(this.violations.url)
     !this.$v.item.url.minLength &&
-      errors.push('Le titre doit faire au moins 2 caractères')
+    errors.push('Le titre doit faire au moins 2 caractères')
     !this.$v.item.url.slug &&
-      errors.push(
-        'L\'url doit contenir seulement des chiffres, des lettres et le tiret du haut -'
-      )
+    errors.push(
+      'L\'url doit contenir seulement des chiffres, des lettres et le tiret du haut -'
+    )
     return errors
   }
 
@@ -217,7 +254,7 @@ export default class AdminPageForm extends mixins(validationMixin) {
     }
     has(this.violations, 'url') && errors.push(this.violations.content)
     !this.$v.item.content.slug &&
-      errors.push('Le titre doit faire au moins 2 caractères')
+    errors.push('Le titre doit faire au moins 2 caractères')
     return errors
   }
 
@@ -227,6 +264,7 @@ export default class AdminPageForm extends mixins(validationMixin) {
 
   mounted () {
     this.categoryGetSelectItems()
+    this.getMediaNodes()
   }
 
   setContent () {

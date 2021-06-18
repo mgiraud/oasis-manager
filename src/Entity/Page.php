@@ -134,6 +134,11 @@ class Page
      */
     private $lastUpdateAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=MediaNode::class)
+     * @Groups({"page:read", "page:write"})
+     */
+    private $mediaNode;
 
     public function __construct()
     {
@@ -289,6 +294,18 @@ class Page
     public function setLastUpdateAt(?\DateTime $lastUpdateAt): self
     {
         $this->lastUpdateAt = $lastUpdateAt;
+
+        return $this;
+    }
+
+    public function getMediaNode(): ?MediaNode
+    {
+        return $this->mediaNode;
+    }
+
+    public function setMediaNode(?MediaNode $mediaNode): self
+    {
+        $this->mediaNode = $mediaNode;
 
         return $this;
     }

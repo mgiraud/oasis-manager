@@ -88,6 +88,12 @@ class BlogArticle
      */
     private $isPublished;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=MediaNode::class)
+     * @Groups({"blog_article:read", "blog_article:write"})
+     */
+    private $mediaNode;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -168,6 +174,18 @@ class BlogArticle
     public function setIsPublished(bool $isPublished): self
     {
         $this->isPublished = $isPublished;
+
+        return $this;
+    }
+
+    public function getMediaNode(): ?MediaNode
+    {
+        return $this->mediaNode;
+    }
+
+    public function setMediaNode(?MediaNode $mediaNode): self
+    {
+        $this->mediaNode = $mediaNode;
 
         return $this;
     }

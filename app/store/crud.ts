@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import remove from 'lodash/remove'
+import { Store } from 'vuex'
 import type { GetterTree, ActionTree, MutationTree, Commit } from 'vuex'
 import { filter } from 'lodash'
 import SubmissionError from '../error/SubmissionError'
@@ -59,6 +60,7 @@ export default function makeCrudModule ({
   normalizeRelations = (x: HydraMemberObject) => x,
   resolveRelations = (x: HydraMemberObject) => x,
   additionalState = {},
+  additionalActions = ((store) => {}) as (store: Store<any>) => ActionTree<CrudState, RootState>,
   resource = ''
 } = {}) {
   const crudState : CrudState = {
@@ -151,12 +153,8 @@ export default function makeCrudModule ({
       Object.assign(state, { totalItems })
     },
     [MUTATIONS.SET_UPDATED]: (state, updated) => {
-      Object.assign(state, {
-        byId: {
-          [updated['@id']]: updated
-        },
-        updated
-      })
+      Vue.set(state, 'updated', updated)
+      Vue.set(state.byId, updated['@id'], updated)
     },
     [MUTATIONS.SET_VIEW]: (state, view) => {
       Object.assign(state, { view })
@@ -172,6 +170,7 @@ export default function makeCrudModule ({
   const actions: ActionTree<CrudState, RootState> = {
     async create ({ commit }, values) {
       commit(MUTATIONS.SET_ERROR, '')
+      commit(MUTATIONS.SET_VIOLATIONS, null)
       commit(MUTATIONS.TOGGLE_LOADING)
 
       try {
@@ -216,7 +215,7 @@ export default function makeCrudModule ({
         )
         commit(MUTATIONS.SET_VIEW, retrieved['hydra:view'])
 
-        if (state.resetList === true) {
+        if (state.resetList) {
           commit(MUTATIONS.RESET_LIST)
         }
 
@@ -285,6 +284,7 @@ export default function makeCrudModule ({
     },
     async update ({ commit }, item) {
       commit(MUTATIONS.SET_ERROR, '')
+      commit(MUTATIONS.SET_VIOLATIONS, null)
       commit(MUTATIONS.TOGGLE_LOADING)
 
       try {
@@ -297,7 +297,6 @@ export default function makeCrudModule ({
       }
     }
   }
-
   const getters: GetterTree<CrudState, RootState> = {
     find: state => (id: string | number) => {
       return resolveRelations(state.byId[id])

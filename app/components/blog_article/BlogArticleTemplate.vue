@@ -8,9 +8,22 @@
     <section>
       <div v-html="article.content" />
     </section>
+    <image-preview
+      v-if="article.mediaNode"
+      :media-objects="article.mediaNode.mediaObjects"
+    />
     <footer>
       <small>
-        <span v-for="(tag, i) in article.tags" :key="i">{{ tag.toUpperCase() }}<span v-if="i < article.tags.length - 1"> / </span></span><span v-if="article.tags.length > 0"> - </span><time :datetime="article.createdAt">{{ formatDate(article.createdAt) }}</time> - {{ article.createdBy.nickname | capitalize }}
+        <span
+          v-for="(tag, i) in article.tags"
+          :key="i"
+        >
+          {{ tag.toUpperCase() }}
+          <span v-if="i < article.tags.length - 1"> / </span>
+        </span>
+        <span v-if="article.tags.length > 0"> -</span>
+        <time :datetime="article.createdAt">{{ formatDate(article.createdAt) }}</time>
+        - {{ article.createdBy.nickname | capitalize }}
       </small>
     </footer>
   </article>
@@ -21,8 +34,11 @@ import { Component, Vue, Prop } from 'nuxt-property-decorator'
 import { formatRelative, parseISO } from 'date-fns'
 import { fr } from 'date-fns/locale'
 import { BlogArticle } from '~/store/blog_article'
+import ImagePreview from '~/components/util/ImagePreview.vue'
 
-@Component
+@Component({
+  components: { ImagePreview }
+})
 export default class BlogArticleTemplateVue extends Vue {
   @Prop({ type: Object, required: true }) readonly article!: BlogArticle
 

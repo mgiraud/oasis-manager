@@ -17,12 +17,22 @@ class Permissions
     const USER_CAN_EDIT_GALLERIES = 'user.can_edit_galleries';
 
     /**
-     * The user can delete media object and empty gallery items
+     * The user can upload files
+     */
+    const USER_CAN_UPLOAD_MEDIA_OBJECTS = 'user.can_upload_media_objects';
+
+    /**
+     * The user can edit files
+     */
+    const USER_CAN_EDIT_MEDIA_OBJECTS = 'user.can_edit_media_objects';
+
+    /**
+     * The user can delete media object and empty media objects
      */
     const USER_CAN_DELETE_FILES = 'user.can_delete_files';
 
     /**
-     * The user can delete media object and non empty gallery items
+     * The user can delete media node and non empty media object
      */
     const USER_CAN_DELETE_FILE_RECURSIVELY = 'user.can_delete_files_recursively';
 

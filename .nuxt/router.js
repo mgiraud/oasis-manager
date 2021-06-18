@@ -19,10 +19,8 @@ const _320bce05 = () => interopDefault(import('../app/pages/admin/member/new.vue
 const _4da1a52c = () => interopDefault(import('../app/pages/admin/memberGroup/new.vue' /* webpackChunkName: "pages/admin/memberGroup/new" */))
 const _3779097a = () => interopDefault(import('../app/pages/admin/page/new.vue' /* webpackChunkName: "pages/admin/page/new" */))
 const _22114b98 = () => interopDefault(import('../app/pages/admin/pageCategory/new.vue' /* webpackChunkName: "pages/admin/pageCategory/new" */))
-const _45affbe8 = () => interopDefault(import('../app/pages/admin/gallery/folders/_id/index.vue' /* webpackChunkName: "pages/admin/gallery/folders/_id/index" */))
 const _3d17bf96 = () => interopDefault(import('../app/pages/admin/blogArticle/_id.vue' /* webpackChunkName: "pages/admin/blogArticle/_id" */))
 const _483ccc61 = () => interopDefault(import('../app/pages/admin/contact/_id.vue' /* webpackChunkName: "pages/admin/contact/_id" */))
-const _76c0cc54 = () => interopDefault(import('../app/pages/admin/gallery/_id/index.vue' /* webpackChunkName: "pages/admin/gallery/_id/index" */))
 const _1e55f91f = () => interopDefault(import('../app/pages/admin/member/_id.vue' /* webpackChunkName: "pages/admin/member/_id" */))
 const _39ebd046 = () => interopDefault(import('../app/pages/admin/memberGroup/_id.vue' /* webpackChunkName: "pages/admin/memberGroup/_id" */))
 const _23c33494 = () => interopDefault(import('../app/pages/admin/page/_id.vue' /* webpackChunkName: "pages/admin/page/_id" */))
@@ -109,10 +107,6 @@ export const routerOptions = {
       component: _22114b98,
       name: "admin-pageCategory-new"
     }, {
-      path: "gallery/folders/:id",
-      component: _45affbe8,
-      name: "admin-gallery-folders-id"
-    }, {
       path: "blogArticle/:id",
       component: _3d17bf96,
       name: "admin-blogArticle-id"
@@ -120,10 +114,6 @@ export const routerOptions = {
       path: "contact/:id",
       component: _483ccc61,
       name: "admin-contact-id"
-    }, {
-      path: "gallery/:id",
-      component: _76c0cc54,
-      name: "admin-gallery-id"
     }, {
       path: "member/:id",
       component: _1e55f91f,

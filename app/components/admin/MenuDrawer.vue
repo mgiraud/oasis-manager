@@ -15,7 +15,11 @@
     <v-divider />
 
     <v-list>
-      <v-list-item link :to="{name: 'admin'}">
+      <v-list-item
+        link
+        :to="{name: 'admin'}"
+        class="white--text"
+      >
         <v-list-item-icon>
           <v-icon>ri-home-line</v-icon>
         </v-list-item-icon>
@@ -24,6 +28,20 @@
             Accueil
           </v-list-item-title>
         </v-list-item-content>
+      </v-list-item>
+
+      <v-list-item
+        link
+        :to="{name: 'admin-gallery'}"
+      >
+        <v-list-item-icon>
+          <v-icon color="white">
+            ri-folder-open-line
+          </v-icon>
+        </v-list-item-icon>
+        <v-list-item-title class="white--text">
+          Gérer les fichiers
+        </v-list-item-title>
       </v-list-item>
 
       <v-list-group
@@ -44,10 +62,16 @@
           link
           :to="{name: path}"
         >
-          <v-list-item-title class="white--text" v-text="title" />
+          <v-list-item-title
+            class="white--text"
+            v-text="title"
+          />
 
           <v-list-item-icon>
-            <v-icon color="white" v-text="icon" />
+            <v-icon
+              color="white"
+              v-text="icon"
+            />
           </v-list-item-icon>
         </v-list-item>
       </v-list-group>
@@ -70,10 +94,16 @@
           link
           :to="{name: path}"
         >
-          <v-list-item-title class="white--text" v-text="title" />
+          <v-list-item-title
+            class="white--text"
+            v-text="title"
+          />
 
           <v-list-item-icon>
-            <v-icon color="white" v-text="icon" />
+            <v-icon
+              color="white"
+              v-text="icon"
+            />
           </v-list-item-icon>
         </v-list-item>
       </v-list-group>
@@ -96,15 +126,25 @@
           link
           :to="{name: path}"
         >
-          <v-list-item-title class="white--text" v-text="title" />
+          <v-list-item-title
+            class="white--text"
+            v-text="title"
+          />
 
           <v-list-item-icon>
-            <v-icon color="white" v-text="icon" />
+            <v-icon
+              color="white"
+              v-text="icon"
+            />
           </v-list-item-icon>
         </v-list-item>
       </v-list-group>
 
-      <v-list-item link :to="{name: 'index'}">
+      <v-list-item
+        link
+        :to="{name: 'index'}"
+        class="white--text"
+      >
         <v-list-item-icon>
           <v-icon>ri-arrow-left-circle-fill</v-icon>
         </v-list-item-icon>
@@ -113,7 +153,10 @@
         </v-list-item-content>
       </v-list-item>
 
-      <v-list-item link @click="logout">
+      <v-list-item
+        link
+        @click="logout"
+      >
         <v-list-item-icon>
           <v-icon>ri-logout-circle-line</v-icon>
         </v-list-item-icon>
@@ -152,7 +195,7 @@ export default class MenuDrawer extends Vue {
     ['ri-survey-line', 'Réponses au questionnaire', 'admin-survey-join', 'USER_CAN_VIEW_SURVEY_JOIN']
   ]
 
-  @State('storage') storage!: {user?: Member}
+  @State('storage') storage!: { user?: Member }
   @securityModule.Getter('hasPermission') hasPermission!: (permission: string) => boolean
 
   get member () {

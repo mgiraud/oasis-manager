@@ -9,7 +9,10 @@
       app
       dark
     >
-      <v-app-bar-nav-icon v-if="$vuetify.breakpoint.mobile || $vuetify.breakpoint.xs" @click.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon
+        v-if="$vuetify.breakpoint.mobile || $vuetify.breakpoint.xs"
+        @click.stop="drawer = !drawer"
+      />
       <template #img="{ props }">
         <v-img
           v-bind="props"
@@ -17,29 +20,55 @@
       </template>
 
       <v-toolbar-title>
-        <NuxtLink to="/" class="header-link">
+        <NuxtLink
+          to="/"
+          class="header-link"
+        >
           Les transalpins
         </NuxtLink>
       </v-toolbar-title>
       <v-spacer />
-      <v-btn v-if="isAdmin" icon color="primary darken-4" @click="redirectToAdmin">
+      <v-btn
+        v-if="isAdmin"
+        icon
+        color="primary darken-4"
+        @click="redirectToAdmin"
+      >
         Admin
       </v-btn>
-      <v-btn v-if="loggedIn" icon color="primary darken-4" @click="logout">
+      <v-btn
+        v-if="loggedIn"
+        icon
+        color="primary darken-4"
+        @click="logout"
+      >
         <v-icon>ri-logout-box-line</v-icon>
       </v-btn>
-      <v-btn v-else icon to="/login">
+      <v-btn
+        v-else
+        icon
+        to="/login"
+      >
         <v-icon color="primary darken-4">
           ri-login-box-line
         </v-icon>
       </v-btn>
-      <template v-if="!$vuetify.breakpoint.mobile && !$vuetify.breakpoint.xs" #extension>
-        <v-container fluid class="header-extension-container">
+      <template
+        v-if="!$vuetify.breakpoint.mobile && !$vuetify.breakpoint.xs"
+        #extension
+      >
+        <v-container
+          fluid
+          class="header-extension-container"
+        >
           <v-row no-gutters>
             <Menu />
           </v-row>
-          <v-row no-gutters class="header-extension-row-submenu">
-            <SubMenu v-if="activeSlug !== null" />
+          <v-row
+            no-gutters
+            class="header-extension-row-submenu"
+          >
+            <SubMenu v-if="pageState.activeSlug !== null" />
           </v-row>
         </v-container>
       </template>
@@ -57,14 +86,36 @@
     </v-navigation-drawer>
 
     <v-main class="secondary lighten-3">
-      <v-card v-show="showSubHeader" class="card-newsletter pb-1">
+      <v-card
+        v-show="showSubHeader"
+        class="card-newsletter pb-1"
+      >
         <v-card-text>
-          <v-container fluid ma-0 pa-0 fill-height>
-            <v-row no-gutters align="center" justify="center">
-              <v-col lg="4" md="5" sm="6" cols="12">
+          <v-container
+            fluid
+            ma-0
+            pa-0
+            fill-height
+          >
+            <v-row
+              no-gutters
+              align="center"
+              justify="center"
+            >
+              <v-col
+                lg="4"
+                md="5"
+                sm="6"
+                cols="12"
+              >
                 <newsletter-form />
               </v-col>
-              <v-col lg="3" md="4" sm="6" cols="12">
+              <v-col
+                lg="3"
+                md="4"
+                sm="6"
+                cols="12"
+              >
                 <span v-if="!$vuetify.breakpoint.mobile">ET&nbsp;&nbsp;</span>
                 <v-btn
                   color="primary"
@@ -80,7 +131,11 @@
       <Nuxt />
       <alert />
     </v-main>
-    <v-footer color="primary" padless app>
+    <v-footer
+      color="primary"
+      padless
+      app
+    >
       <v-card
         flat
         tile
@@ -112,87 +167,101 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
-import { namespace } from 'vuex-class'
 import Menu from '~/components/layout/Menu.vue'
 import SubMenu from '~/components/layout/SubMenu.vue'
 import SideMenu from '~/components/layout/SideMenu.vue'
 import NewsletterForm from '~/components/contact_newsletter/Form.vue'
 import Alert from '~/components/util/Alert.vue'
+import {
+  defineComponent, useContext, useFetch, onMounted, isReactive, watchEffect
+} from '@nuxtjs/composition-api'
+import { securityStore } from '~/store/SecurityStore'
+import { pageStore } from '~/store/PageStore'
 
-const securityModule = namespace('security')
-const pageModule = namespace('page')
-
-@Component({
+export default defineComponent({
   components: {
     Menu, SubMenu, NewsletterForm, Alert, SideMenu
-  }
-})
-export default class DefaultLayout extends Vue {
-    showSubHeader = true
-    drawer = false
-    @pageModule.State('activeSlug') activeSlug!: string | null
-    @securityModule.Action('logout') logout!: () => void
+  },
+  setup () {
+    const context = useContext()
+    pageStore.setContext(context)
+    securityStore.setContext(context)
 
-    get loggedIn () {
-      return this.$auth.loggedIn
+    if (process.server) {
+      useFetch(() => {
+        securityStore.loadPermissions()
+      })
     }
 
-    get isAdmin () {
-      return this.$auth.isAdmin
+    onMounted(async () => {
+      try {
+        await pageStore.fetchAll()
+      } catch (e) {
+        context.$auth.reset()
+      }
+    })
+    return {
+      pageState: pageStore.getState(),
+      logout: () => securityStore.logout(),
+      loggedIn: context.$auth.loggedIn,
+      isAdmin: context.$auth.isAdmin
     }
-
+  },
+  data () {
+    return {
+      showSubHeader: true,
+      drawer: false
+    }
+  },
+  methods: {
     redirectToAdmin () {
       this.$router.push({ path: 'admin' })
-    }
-
-    onSubHeaderClose () {
-      this.showSubHeader = false
-    }
+    },
 
     redirectToHelloAsso () {
       window.open('https://www.helloasso.com/associations/les-transalpins/adhesions/adhesion-a-l-association-les-translapins', '_')
     }
-}
+  }
+})
 </script>
 
 <style>
-  .header-extension-container {
-    padding:0px;
-  }
+.header-extension-container {
+  padding: 0;
+}
 
-  .header-extension-container > .row{
-    margin-left: -16px;
-    margin-right: -16px;
-  }
+.header-extension-container > .row {
+  margin-left: -16px;
+  margin-right: -16px;
+}
 
-  .header-extension-row-submenu {
-    position: absolute;
-    min-width: 100%;
-    box-shadow: 0px 3px 3px -3px rgba(0, 0, 0, 0.1);
-  }
+.header-extension-row-submenu {
+  position: absolute;
+  min-width: 100%;
+  box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.1);
+}
 
-  .v-application a.header-link {
-    text-decoration: none;
-    text-transform: capitalize;
-    color: white;
-    font-family: 'Permanent Marker';
-  }
+.v-application a.header-link {
+  text-decoration: none;
+  text-transform: capitalize;
+  color: white;
+  font-family: 'Permanent Marker', serif;
+}
 
-  .v-application li > p {
-    margin-bottom: 0px;
-  }
+.v-application li > p {
+  margin-bottom: 0;
+}
 
-  .card-newsletter > .v-card__text {
-    padding-top: 0px;
-    padding-bottom: 0px;
-  }
+.card-newsletter > .v-card__text {
+  padding-top: 0;
+  padding-bottom: 0;
+}
 
-  .card-newsletter > .v-card__text > .v-form {
-    padding-top: 0px;
-  }
+.card-newsletter > .v-card__text > .v-form {
+  padding-top: 0;
+}
 
-  .card-newsletter > .v-card__text > .v-form > .v-text-field {
-    margin-top: 0px;
-  }
+.card-newsletter > .v-card__text > .v-form > .v-text-field {
+  margin-top: 0;
+}
 </style>

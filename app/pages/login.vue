@@ -27,7 +27,7 @@
             </v-form>
           </v-card-text>
           <v-card-actions>
-            <v-btn text @click="postLogin">
+            <v-btn text @click="login">
               login
             </v-btn>
           </v-card-actions>
@@ -38,32 +38,37 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
-import { namespace } from 'vuex-class'
+import {
+  defineComponent, useContext
+} from '@nuxtjs/composition-api'
+import { securityStore } from '~/store/SecurityStore'
 
-const securityModule = namespace('security')
-
-@Component({
-  middleware: 'notAuthenticated'
-})
-export default class Login extends Vue {
-  credentials = {
-    email: '',
-    password: ''
-  }
-
-  public head () {
+export default defineComponent({
+  setup() {
+    securityStore.setContext(useContext())
+    return {
+      credentialError: securityStore.getState().credentialError
+    }
+  },
+  data() {
+    return {
+      credentials : {
+        email: '',
+        password: ''
+      }
+    }
+  },
+  head() {
     return {
       title: 'Se connecter'
     }
-  }
-
-  @securityModule.State('credentialError') credentialError!: boolean;
-
-  async postLogin () {
-    if (await this.$auth.loginRequest(this.credentials)) {
-      window.location.replace('/')
+  },
+  methods: {
+    async login () {
+      if (await this.$auth.loginRequest(this.credentials)) {
+        window.location.replace('/')
+      }
     }
   }
-}
+})
 </script>

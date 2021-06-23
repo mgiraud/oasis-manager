@@ -5,7 +5,8 @@ export type Storage = {
   user: Member | null
 }
 
-export interface RootState {}
+export interface RootState {
+}
 
 export const actions: ActionTree<RootState, RootState> = {
   async nuxtServerInit ({ dispatch }, { $auth }) {

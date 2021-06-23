@@ -1,5 +1,5 @@
 import { Context } from '@nuxt/types'
-import { HydraMemberObject, normalize } from './hydra'
+import { HydraGetAllResponse, HydraMemberObject, normalize } from './hydra'
 import SubmissionError from '~/error/SubmissionError'
 
 // eslint-disable-next-line no-undef
@@ -10,9 +10,9 @@ export type FormOptions = RequestInit & {
 export interface Repository {
   call: (query: string, options: FormOptions) => Promise<Response>
   validateAndDecodeResponse : (url: string, options: object) => Promise<any>
-  $findAll: (params: object) => Promise<any>
+  $findAll: (params: object) => Promise<HydraGetAllResponse>
   $find: (id: string) => Promise<any>
-  $create: (payload: object) => Promise<any>
+  $create: (payload: object) => Promise<HydraMemberObject>
   $remove: (item: HydraMemberObject) => Promise<any>
   $update: (item: HydraMemberObject) => Promise<any>
   $post: (url: string, options: FormOptions) => Promise<any>

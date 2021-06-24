@@ -1,5 +1,5 @@
 import makeCrudModule from './crud'
-import { Page } from './page'
+import { Page } from '~/store/PageStore'
 import { HydraMemberObject } from '~/api/hydra'
 
 export interface PageCategory extends HydraMemberObject {

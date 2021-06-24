@@ -1,10 +1,10 @@
-import { Ref, useRouter, watch } from '@nuxtjs/composition-api'
+import { reactive, Ref, useRouter, watch } from '@nuxtjs/composition-api'
+import { Validation } from '@vuelidate/core'
 import { HydraMemberObject } from '~/api/hydra'
 import { PersistentApiStore } from '~/store/main'
 import { notificationStore } from '~/store/NotificationStore'
-import { ElementWithValidation } from '~/vue-shim'
 
-const itemCreate = <T, U extends HydraMemberObject> (store: PersistentApiStore<T, U>, form: ElementWithValidation) => {
+const itemCreate = <T, U extends HydraMemberObject> (store: PersistentApiStore<T, U>, form: Ref<Element & Validation>) => {
   const router = useRouter()
 
   const onCreated = (item: U | null) => {
@@ -30,16 +30,24 @@ const itemCreate = <T, U extends HydraMemberObject> (store: PersistentApiStore<T
   })
 
   const onSendForm = () => {
-    form.$v.$touch()
-    if (!form.$v.$invalid) {
-      store.create(form.$v.item.$model)
+    console.log(form.value)
+    form.value.v$.$touch()
+    if (!form.value.v$.$invalid) {
+      // @ts-ignore
+      store.create(form.value.item)
     }
   }
 
   const resetForm = (item: Ref<Object>) => {
-    form.$v.$reset()
+    form.value.v$.$reset()
     item.value = {}
   }
+
+  return reactive({
+    onCreated,
+    onSendForm,
+    resetForm
+  })
 }
 
 export default itemCreate

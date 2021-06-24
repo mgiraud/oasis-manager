@@ -64,7 +64,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref, useContext, useMeta, toRefs, useRouter, useFetch } from '@nuxtjs/composition-api'
+import { computed, defineComponent, ref, useContext, toRefs, useRouter, useFetch } from '@nuxtjs/composition-api'
 import ActionCell from '~/components/table/ActionCell.vue'
 import PageFilter from '~/components/admin/page/PageFilter.vue'
 import FormFilter from '~/components/form/FormFilter.vue'

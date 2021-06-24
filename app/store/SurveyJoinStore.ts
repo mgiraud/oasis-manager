@@ -48,11 +48,11 @@ class SurveyJoinStore extends PersistentApiStore<SurveyJoinState, SurveyJoin> {
   }
 
   getListLocation (): RawLocation | null {
-    return null;
+    return null
   }
 
   getIdentifierFromUrlParam (param: string): string {
-    return '';
+    return ''
   }
 }
 

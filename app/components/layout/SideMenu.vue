@@ -28,13 +28,16 @@
 </template>
 
 <script lang="ts">
-import { Vue, namespace, State, Component, Watch, Prop } from 'nuxt-property-decorator'
-import { MenuItem } from '~/store/page'
+import { defineComponent, useContext } from '@nuxtjs/composition-api'
+import { pageStore } from '~/store/PageStore'
 
-const pageModule = namespace('page')
+export default defineComponent({
+  setup () {
+    pageStore.setContext(useContext())
 
-@Component
-export default class SideMenu extends Vue {
-    @pageModule.Getter('menu') menu !: MenuItem[]
-}
+    return {
+      menu: pageStore.menu
+    }
+  }
+})
 </script>

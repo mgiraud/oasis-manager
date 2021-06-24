@@ -14,10 +14,9 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent, useContext
-} from '@nuxtjs/composition-api'
-import { pageStore } from '~/store/PageStore'
+import { findIndex } from 'lodash'
+import { defineComponent, useContext } from '@nuxtjs/composition-api'
+import { Page, pageStore } from '~/store/PageStore'
 
 export default defineComponent({
   setup () {
@@ -52,35 +51,4 @@ export default defineComponent({
     }
   },
 })
-import { Component, namespace, Vue, Watch } from 'nuxt-property-decorator'
-import { findIndex } from 'lodash'
-import { MenuItem, Page } from '~/store/page'
-
-// const pageModule = namespace('page')
-//
-// @Component
-// export default class Toolbar extends Vue {
-//   tab: number | null = null
-//   @pageModule.Getter('menuItems') menuItems !: MenuItem[]
-//   @pageModule.Getter('findByActiveSlug') findByActiveSlug !: Page[]
-//
-//   @Watch('tab')
-//   onTabUpdated (tabIndex: number) {
-//     if (tabIndex !== undefined || !this.findByActiveSlug[tabIndex]) {
-//       this.redirect(this.findByActiveSlug[tabIndex])
-//     }
-//   }
-//
-//   mounted () {
-//     if (this.$route.params.pathMatch) {
-//       this.tab = findIndex(this.findByActiveSlug, { url: this.$route.params.pathMatch })
-//     }
-//   }
-//
-//   redirect (item: Page) {
-//     if (item && item.url) {
-//       this.$router.push(item.url)
-//     }
-//   }
-// }
 </script>

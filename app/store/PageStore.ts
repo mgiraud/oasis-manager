@@ -53,21 +53,66 @@ class PageStore extends PersistentApiStore<PageState, Page> {
       }
     })
 
-    if (menu.length > 0) {
-      menu.push({
-        name: 'Contacte-nous !',
-        url: 'contact',
-        slug: null
-      })
-
-      menu.push({
-        name: 'Rejoindre le groupe fondateur',
-        url: 'survey_join',
-        slug: null
-      })
-    }
+    this.appendStaticPages(menu)
     return menu
   })
+
+  menu = computed(() => {
+    const menu: MenuItem[] = []
+    this.list.value.forEach((page: Page) => {
+      if (!page || !page.showInMenu) {
+        return
+      }
+      if (page.category) {
+        if (!page.category.showInMenu) {
+          return
+        }
+        const categoryItem = find(menu, { slug: page.category.slug })
+        if (!categoryItem) {
+          menu.push({
+            name: page.category.name,
+            slug: page.category.slug,
+            url: null,
+            children: [{
+              name: page.title,
+              url: page.url,
+              slug: null
+            }]
+          })
+        } else {
+          categoryItem.children?.push({
+            name: page.title,
+            url: page.url,
+            slug: null
+          })
+        }
+      } else {
+        menu.push({
+          name: page.title,
+          url: page.url,
+          slug: null
+        })
+      }
+    })
+
+    this.appendStaticPages(menu)
+    return menu
+  })
+
+  appendStaticPages (menu: MenuItem[]) {
+    if (menu.length === 0) return
+    menu.push({
+      name: 'Contacte-nous !',
+      url: 'contact',
+      slug: null
+    })
+
+    menu.push({
+      name: 'Rejoindre le groupe fondateur',
+      url: 'survey_join',
+      slug: null
+    })
+  }
 
   setActiveSlug (slug: string | null) {
     this.state.activeSlug = slug

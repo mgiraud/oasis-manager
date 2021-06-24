@@ -1,7 +1,7 @@
 import { RawLocation } from 'vue-router'
 import { HydraMemberObject } from '~/api/hydra'
 import { CrudState, PersistentApiStore } from '~/store/main'
-import { Page } from '~/store/page'
+import { Page } from '~/store/PageStore'
 
 export interface PageCategory extends HydraMemberObject {
   'name': string;

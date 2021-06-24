@@ -27,7 +27,7 @@
 <script lang="ts">
 import { findIndex } from 'lodash'
 import { Route } from 'vue-router'
-import { MenuItem } from '~/store/page'
+import { MenuItem } from '~/store/PageStore'
 import {
   defineComponent, ref, useContext
 } from '@nuxtjs/composition-api'

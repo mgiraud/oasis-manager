@@ -28,7 +28,7 @@
           Filter
         </v-btn>
         <v-btn color="primary" class="ml-2" text @click="onCancel">
-          Cancel
+          Remise à zéro
         </v-btn>
       </v-card-actions>
     </v-sheet>

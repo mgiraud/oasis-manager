@@ -28,7 +28,7 @@ export default class DateType extends Vue {
   @Prop({ type: String, required: false, default: '' }) readonly label!: any
   @Prop({ type: String, required: false, default: null }) readonly value!: any
 
-  date = new Date().toISOString().substr(0, 10)
+  date = null
   showMenu = false
 
   created () {

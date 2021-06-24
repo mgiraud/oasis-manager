@@ -224,11 +224,11 @@ export default defineComponent({
 </script>
 
 <style>
-.header-extension-container {
+.container.header-extension-container {
   padding: 0;
 }
 
-.header-extension-container > .row {
+.container.header-extension-container > .row {
   margin-left: -16px;
   margin-right: -16px;
 }

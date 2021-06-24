@@ -86,7 +86,6 @@
             clearable
           />
         </v-col>
-        {{ dialog }}
       </v-row>
       <v-row>
         <v-col cols="12">
@@ -159,14 +158,14 @@
 
 <script lang="ts">
 import { PropType } from 'vue'
-import { required, minLength, helpers } from '@vuelidate/validators'
+import { required, minLength} from '@vuelidate/validators'
 import { formatRelative, parseISO } from 'date-fns'
 import { fr } from 'date-fns/locale'
 import has from 'lodash/has'
 import { FormErrors } from '~/api/repository'
 import EditorBtn from '~/components/util/Editor/EditorBtn.vue'
 import Editor from '~/components/util/Editor.vue'
-import { computed, defineComponent, onBeforeUnmount, onMounted, reactive, Ref, ref, toRefs, useContext, watch } from '@nuxtjs/composition-api'
+import { computed, defineComponent, onMounted, Ref, ref, useContext, watch } from '@nuxtjs/composition-api'
 import { PageLog } from '~/store/PageLogStore'
 import { Page } from '~/store/PageStore'
 import { mediaNodeStore } from '~/store/MediaNodeStore'
@@ -203,9 +202,10 @@ export default defineComponent({
     const dialog = ref(false)
     const selectedLog: Ref<string | null> = ref(null)
     const editor: Ref<Editor | null> = ref(null)
-    const item = ref({})
+    const item = ref(props.values)
 
     watch(() => props.values, (values) => {
+      console.log(values)
       item.value = values
     })
     const validation = computed(() => ({
@@ -294,117 +294,4 @@ export default defineComponent({
     }
   }
 })
-
-// const slug = helpers.regex('slug', /^[a-zA-Z0-9-]*$/)
-// const pageCategoryModule = namespace('page_category')
-// const pageLogModule = namespace('page_log')
-// const mediaNodeModule = namespace('media_node')
-//
-// @Component({
-//   name: 'AdminPageForm',
-//   components: {
-//     Editor,
-//     EditorBtn
-//   },
-//   validations: {
-//     item: {
-//       title: {
-//         required,
-//         minLength: minLength(4)
-//       },
-//       url: {
-//         required,
-//         minLength: minLength(2),
-//         slug
-//       },
-//       content: {}
-//     }
-//   }
-// })
-// export default class AdminPageForm extends mixins(validationMixin) {
-//   @Prop({ type: Array, required: true })
-//   pageLogs!: PageLog[]
-//
-//   @Prop({ type: Object, required: true })
-//   values!: any
-//
-//   @Prop({ type: Object, default: () => {} })
-//   errors!: any
-//
-//   @Prop({ type: Object, default: () => {} })
-//   initialValues!: any
-//
-//   @pageCategoryModule.State('selectItems') categorySelectItems!: PageCategory[] | null
-//   @pageCategoryModule.Action('fetchSelectItems') categoryGetSelectItems!: () => PageCategory[]
-//   @pageLogModule.Getter('find') findLog!: (id: string) => PageLog | null
-//   @mediaNodeModule.State('selectItems') mediaNodes!: MediaNode[] | null
-//   @mediaNodeModule.Action('fetchSelectItems') getMediaNodes!: () => MediaNode[]
-//
-//   dialog = false
-//   selectedLog: string | null = null
-//
-//   get item () {
-//     return this.initialValues || this.values
-//   }
-//
-//   get titleErrors () {
-//     const errors: string[] = []
-//     if (!this.v$.title || !this.$v.item.title.$dirty) {
-//       return errors
-//     }
-//     has(this.violations, 'title') && errors.push(this.violations.title)
-//     !this.$v.item.title.minLength &&
-//     errors.push('Le titre doit faire au moins 4 caractères')
-//     return errors
-//   }
-//
-//   get urlErrors () {
-//     const errors: string[] = []
-//     if (!this.$v.item.url || !this.$v.item.url.$dirty) {
-//       return errors
-//     }
-//     has(this.violations, 'url') && errors.push(this.violations.url)
-//     !this.$v.item.url.minLength &&
-//     errors.push('Le titre doit faire au moins 2 caractères')
-//     !this.$v.item.url.slug &&
-//     errors.push(
-//       'L\'url doit contenir seulement des chiffres, des lettres et le tiret du haut -'
-//     )
-//     return errors
-//   }
-//
-//   get contentErrors () {
-//     const errors: string[] = []
-//     if (!this.$v.item.content || !this.$v.item.content.$dirty) {
-//       return errors
-//     }
-//     has(this.violations, 'url') && errors.push(this.violations.content)
-//     !this.$v.item.content.slug &&
-//     errors.push('Le titre doit faire au moins 2 caractères')
-//     return errors
-//   }
-//
-//   get violations () {
-//     return this.errors || {}
-//   }
-//
-//   mounted () {
-//     this.categoryGetSelectItems()
-//     this.getMediaNodes()
-//   }
-//
-//   setContent () {
-//     if (this.selectedLog && this.findLog(this.selectedLog) && this.$refs.editor) {
-//       const selectedLogObj = this.findLog(this.selectedLog)
-//       if (selectedLogObj) {
-//         (this.$refs.editor as Editor).setContent(selectedLogObj.originalContent)
-//       }
-//       this.dialog = false
-//     }
-//   }
-//
-//   formatDate (rawDate: string) {
-//     return formatRelative(parseISO(rawDate), new Date(), { locale: fr })
-//   }
-// }
 </script>

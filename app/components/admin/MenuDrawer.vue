@@ -2,7 +2,7 @@
   <v-navigation-drawer
     v-model="drawer"
     app
-    width="300px"
+    width="400px"
     color="primary darken-3"
   >
     <v-sheet

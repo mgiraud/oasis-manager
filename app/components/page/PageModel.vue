@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { Page } from '~/store/page'
+import { Page } from '~/store/PageStore'
 import ImagePreview from '~/components/util/ImagePreview.vue'
 @Component({
   components: { ImagePreview }

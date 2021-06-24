@@ -28,23 +28,18 @@
 </template>
 
 <script lang="ts">
-import { HydraMemberObject } from '~/api/hydra'
-import PageModel from '~/components/page/PageModel.vue'
-import BlogArticleTemplate from '~/components/blog_article/BlogArticleTemplate.vue'
 import {
   defineComponent,
   useFetch,
   useContext, ref, Ref
 } from '@nuxtjs/composition-api'
+import { HydraMemberObject } from '~/api/hydra'
+import PageModel from '~/components/page/PageModel.vue'
+import BlogArticleTemplate from '~/components/blog_article/BlogArticleTemplate.vue'
 import { pageStore } from '~/store/PageStore'
 import { blogArticleStore } from '~/store/BlogArticleStore'
 
 export default defineComponent({
-  head () {
-    return {
-      title: 'Accueil'
-    }
-  },
   components: {
     PageModel,
     BlogArticleTemplate
@@ -63,6 +58,11 @@ export default defineComponent({
     return {
       articles,
       page: pageStore.find('/api/pages/home')
+    }
+  },
+  head () {
+    return {
+      title: 'Accueil'
     }
   }
 })

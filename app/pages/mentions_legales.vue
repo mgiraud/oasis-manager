@@ -15,11 +15,11 @@
 
             <p>
               Le site transalpins.org est hébergé par la société O2switch
-              <ul>
-                <li>Siret : 510 909 807 00024</li>
-                <li>RCS Clermont Ferrand</li>
-                <li>SARL au capital de 100 000€</li>
-              </ul>
+            <ul>
+              <li>Siret : 510 909 807 00024</li>
+              <li>RCS Clermont Ferrand</li>
+              <li>SARL au capital de 100 000€</li>
+            </ul>
             </p>
             <p>
               Le stockage des données personnelles des Utilisateurs est exclusivement réalisé sur
@@ -39,14 +39,13 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
 
-@Component
-export default class MentionsLegales extends Vue {
-  public head () {
+export default defineComponent({
+  head () {
     return {
       title: 'Mentions légales'
     }
   }
-}
+})
 </script>

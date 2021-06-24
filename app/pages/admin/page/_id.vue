@@ -1,11 +1,11 @@
 <template>
   <v-container>
-    <v-row v-if="error">
+    <v-row v-if="pageState.error">
       <v-col cols="12">
         <v-alert
           type="error"
         >
-          {{ error }}
+          {{ pageState.error }}
         </v-alert>
       </v-col>
     </v-row>
@@ -15,7 +15,7 @@
           v-if="item"
           ref="updateForm"
           :values="item"
-          :errors="violations"
+          :errors="pageState.violations"
           :page-logs="pageLogs"
         />
       </v-col>
@@ -36,104 +36,99 @@
         </Toolbar>
       </v-col>
     </v-row>
-    <Loading :visible="isLoading" />
+    <Loading :visible="pageState.isLoading" />
   </v-container>
 </template>
 <script lang="ts">
-import { Component, mixins, namespace, Watch } from 'nuxt-property-decorator'
+import { computed, defineComponent, onBeforeUnmount, onMounted, ref, toRefs, useContext, watch } from '@nuxtjs/composition-api'
 import Loading from '~/components/util/Loading.vue'
 import Toolbar from '~/components/form/Toolbar.vue'
 import Form from '~/components/admin/page/Form.vue'
-import update from '~/mixins/update'
-import { Page } from '~/store/page'
-import { PageLog, PageLogPayload } from '~/store/page_log'
-import { MUTATIONS } from '~/store/crud'
-import { HydraMemberObject } from '~/api/hydra'
+import itemUpdate from '~/composable/itemUpdate'
+import { notificationStore } from '~/store/NotificationStore'
+import { pageStore } from '~/store/PageStore'
+import { pageLogStore } from '~/store/PageLogStore'
+import { securityStore } from '~/store/SecurityStore'
 
-const pageModule = namespace('page')
-const pageLogModule = namespace('page_log')
-
-@Component({
+export default defineComponent({
   components: {
     Loading, Toolbar, Form
   },
-  servicePrefix: 'admin-page',
-  resourcePrefix: '/api/pages/',
   middleware: 'hasPermissions',
   meta: {
     permissions: ['USER_CAN_EDIT_PAGES']
-  }
-})
-export default class AdminPageEdit extends mixins(update) {
-  @pageModule.State('updated') updated!: Page | null
-  @pageModule.State('error') error!: string | null
-  @pageModule.State('isLoading') isLoading!: boolean
-  @pageModule.State('violations') violations!: string[]
+  },
+  setup () {
+    const context = useContext()
+    const updateForm = ref(null)
+    pageStore.setContext(context)
+    pageLogStore.setContext(context)
 
-  @pageModule.Getter('find') find!: (id: string) => Page | null
-  get canDeletePage () {
-    return this.hasPermission('USER_CAN_DELETE_PAGES')
-  }
+    const itemUpdateHelper = itemUpdate(pageStore, updateForm)
 
-  @pageModule.Action('resetCreate') createReset!: () => void
-  @pageModule.Action('resetDelete') delReset!: () => void
-  @pageModule.Action('load') retrieve!: (id: string) => HydraMemberObject | null
-  @pageModule.Action('update') update!: (page: Page) => Promise<Page>
-  @pageModule.Action('resetUpdate') updateReset!: () => void
+    const canDeletePage = computed(() => {
+      return securityStore.hasPermission('USER_CAN_DELETE_PAGES')
+    })
 
-  @pageLogModule.Action('fetchAll') getLogs!: (options: {[name: string]: string}) => PageLog[]
-  @pageLogModule.Action('create') createLog !: (log: PageLogPayload) => Promise<PageLog>
-  @pageLogModule.Getter('list') pageLogs !: () => PageLog[]
-  @pageLogModule.Mutation(MUTATIONS.RESET_LIST) resetLogList!: () => void
+    let autoSaveInterval: number | null = null
 
-  autoSaveInterval: number | null = null
+    watch(() => pageStore.getState().updated, (val: U | null) => {
+      if (val) {
+        notificationStore.showMessage(pageStore.getUpdateMessage(val))
+      }
+    })
 
-  @Watch('retrieved')
-  onRetrieved (val: Page) {
-    this.item = { ...val }
-    if (this.item) {
-      this.loadLogs()
+    watch(() => itemUpdateHelper.retrieved, (val) => {
+      if (val) {
+        loadLogs()
+      }
+    })
+
+    onMounted(() => {
+      if (process.client) {
+        autoSaveInterval = window.setInterval(autoSave, 120000)
+      }
+    })
+
+    onBeforeUnmount(() => {
+      if (autoSaveInterval) {
+        clearInterval(autoSaveInterval)
+      }
+      autoSaveInterval = null
+    })
+
+    const loadLogs = () => {
+      if (itemUpdateHelper.item) {
+        pageLogStore.resetList()
+        pageLogStore.fetchAll({
+          'page.url': itemUpdateHelper.item.url,
+          'order[updatedAt]': 'desc'
+        })
+      }
     }
-  }
 
-  @Watch('updated')
-  onPageUpdated (val: HydraMemberObject) {
-    if (val) {
-      this.loadLogs()
-    }
-  }
-
-  loadLogs () {
-    if (this.item) {
-      this.resetLogList()
-      this.getLogs({
-        'page.url': (this.item as Page).url,
-        'order[updatedAt]': 'desc'
+    const autoSave = () => {
+      pageLogStore.create({
+        originalContent: itemUpdateHelper.item.content,
+        draft: true,
+        page: itemUpdateHelper.item['@id']
+      }).then(() => {
+        loadLogs()
       })
     }
-  }
 
-  autoSave () {
-    this.createLog({
-      originalContent: (this.item as Page).content,
-      draft: true,
-      page: (this.item as Page)['@id']
-    }).then(() => {
-      this.loadLogs()
-    })
-  }
-
-  mounted () {
-    if (process.client) {
-      this.autoSaveInterval = window.setInterval(this.autoSave, 120000)
+    return {
+      ...toRefs(itemUpdateHelper),
+      canDeletePage,
+      pageState: pageStore.getState(),
+      pageLogs: pageLogStore.list,
+      updateForm
+    }
+  },
+  head () {
+    return {
+      title: 'Edition d\'une page'
     }
   }
-
-  beforeDestroy () {
-    if (this.autoSaveInterval) {
-      clearInterval(this.autoSaveInterval)
-    }
-    this.autoSaveInterval = null
-  }
-}
+})
 </script>

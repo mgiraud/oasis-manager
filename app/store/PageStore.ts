@@ -1,5 +1,6 @@
 import { computed } from '@nuxtjs/composition-api'
 import { filter, find } from 'lodash'
+import { RawLocation } from 'vue-router'
 import { HydraMemberObject } from '~/api/hydra'
 import { CrudState, PersistentApiStore } from '~/store/main'
 import { MediaNode } from '~/store/media_node'
@@ -68,7 +69,7 @@ class PageStore extends PersistentApiStore<PageState, Page> {
     return menu
   })
 
-  setActiveSlug(slug: string | null) {
+  setActiveSlug (slug: string | null) {
     this.state.activeSlug = slug
   }
 
@@ -76,6 +77,27 @@ class PageStore extends PersistentApiStore<PageState, Page> {
       return page.category && page.category.slug === this.state.activeSlug
     })
   )
+
+  getAddLocation (): RawLocation | null {
+    return { name: 'admin-page-new' }
+  }
+
+  getEditLocation (item: Page): RawLocation | null {
+    return {
+      name: 'admin-page-id',
+      params: {
+        id: item.url
+      }
+    }
+  }
+
+  getListLocation (): RawLocation | null {
+    return { name: 'admin-page' }
+  }
+
+  getIdentifierFromUrlParam (param: string): string {
+    return `/api/pages/${decodeURIComponent(param)}`
+  }
 }
 
 export const pageStore = new PageStore('pages')

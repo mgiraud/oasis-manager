@@ -1,6 +1,15 @@
 <template>
-  <v-container fluid fill-height mb-md-3 mb-lg-5>
-    <v-row v-if="credentialError" align="center" justify="center">
+  <v-container
+    fluid
+    fill-height
+    mb-md-3
+    mb-lg-5
+  >
+    <v-row
+      v-if="credentialError"
+      align="center"
+      justify="center"
+    >
       <v-col lg="4">
         <v-alert
           color="red"
@@ -11,7 +20,10 @@
         </v-alert>
       </v-col>
     </v-row>
-    <v-row align="center" justify="center">
+    <v-row
+      align="center"
+      justify="center"
+    >
       <v-col lg="4">
         <v-card
           elevation="2"
@@ -22,12 +34,25 @@
           <v-card-title>Connectes-toi !</v-card-title>
           <v-card-text>
             <v-form>
-              <v-text-field v-model="credentials.email" prepend-inner-icon="ri-account-circle-line" label="email" type="email" />
-              <v-text-field v-model="credentials.password" prepend-inner-icon="ri-lock-2-line" label="password" type="password" />
+              <v-text-field
+                v-model="credentials.email"
+                prepend-inner-icon="ri-account-circle-line"
+                label="email"
+                type="email"
+              />
+              <v-text-field
+                v-model="credentials.password"
+                prepend-inner-icon="ri-lock-2-line"
+                label="password"
+                type="password"
+              />
             </v-form>
           </v-card-text>
           <v-card-actions>
-            <v-btn text @click="login">
+            <v-btn
+              text
+              @click="login"
+            >
               login
             </v-btn>
           </v-card-actions>
@@ -44,21 +69,21 @@ import {
 import { securityStore } from '~/store/SecurityStore'
 
 export default defineComponent({
-  setup() {
+  setup () {
     securityStore.setContext(useContext())
     return {
       credentialError: securityStore.getState().credentialError
     }
   },
-  data() {
+  data () {
     return {
-      credentials : {
+      credentials: {
         email: '',
         password: ''
       }
     }
   },
-  head() {
+  head () {
     return {
       title: 'Se connecter'
     }

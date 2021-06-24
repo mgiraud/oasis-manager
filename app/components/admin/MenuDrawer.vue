@@ -2,7 +2,7 @@
   <v-navigation-drawer
     v-model="drawer"
     app
-    width="auto"
+    width="300px"
     color="primary darken-3"
   >
     <v-sheet
@@ -169,58 +169,60 @@
 </template>
 
 <script lang="ts">
-import { Vue, namespace, State, Component } from 'nuxt-property-decorator'
-import { Member } from '~/store/member'
+import { computed, defineComponent, ref, useContext } from '@nuxtjs/composition-api'
+import { securityStore } from '~/store/SecurityStore'
 
-const securityModule = namespace('security')
+const blogItems = [
+  ['ri-article-line', 'Article', 'admin-blog-article', 'USER_CAN_ACCESS_BLOG_ARTICLES']
+]
 
-@Component
-export default class MenuDrawer extends Vue {
-  drawer = null
+const pageItems = [
+  ['ri-article-line', 'Pages', 'admin-page', 'USER_CAN_ACCESS_PAGES'],
+  ['ri-folder-line', 'Categories', 'admin-pageCategory', 'USER_CAN_ACCESS_PAGE_CATEGORIES']
+]
 
-  blogItems = [
-    ['ri-article-line', 'Article', 'admin-blogArticle', 'USER_CAN_ACCESS_BLOG_ARTICLES']
-  ]
+const memberItems = [
+  ['ri-user-line', 'Gérer les membres', 'admin-member', 'USER_CAN_ACCESS_MEMBERS'],
+  ['ri-group-line', 'Gérer les groupes', 'admin-memberGroup', 'USER_CAN_ACCESS_MEMBER_GROUPS'],
+  ['ri-contacts-line', 'Prises de contact', 'admin-contact', 'USER_CAN_VIEW_CONTACT'],
+  ['ri-mail-line', 'Inscriptions à la newsletter', 'admin-contact-newsletter', 'USER_CAN_VIEW_CONTACT_NEWSLETTER'],
+  ['ri-survey-line', 'Réponses au questionnaire', 'admin-survey-join', 'USER_CAN_VIEW_SURVEY_JOIN']
+]
 
-  pageItems = [
-    ['ri-article-line', 'Pages', 'admin-page', 'USER_CAN_ACCESS_PAGES'],
-    ['ri-folder-line', 'Categories', 'admin-pageCategory', 'USER_CAN_ACCESS_PAGE_CATEGORIES']
-  ]
+export default defineComponent({
+  setup() {
+    const context = useContext()
+    const drawer = ref(null)
+    const member = computed(() => {
+      return context.$auth.member ?? {}
+    })
 
-  memberItems = [
-    ['ri-user-line', 'Gérer les membres', 'admin-member', 'USER_CAN_ACCESS_MEMBERS'],
-    ['ri-group-line', 'Gérer les groupes', 'admin-memberGroup', 'USER_CAN_ACCESS_MEMBER_GROUPS'],
-    ['ri-contacts-line', 'Prises de contact', 'admin-contact', 'USER_CAN_VIEW_CONTACT'],
-    ['ri-mail-line', 'Inscriptions à la newsletter', 'admin-contact-newsletter', 'USER_CAN_VIEW_CONTACT_NEWSLETTER'],
-    ['ri-survey-line', 'Réponses au questionnaire', 'admin-survey-join', 'USER_CAN_VIEW_SURVEY_JOIN']
-  ]
+    const filteredMemberItems = computed(() => {
+        return memberItems.filter(([_icon, _title, _path, permission]) => securityStore.hasPermission(permission))
+    })
 
-  @State('storage') storage!: { user?: Member }
-  @securityModule.Getter('hasPermission') hasPermission!: (permission: string) => boolean
+    const filteredPageItems = computed(() =>  {
+      return pageItems.filter(([_icon, _title, _path, permission]) => securityStore.hasPermission(permission))
+    })
 
-  get member () {
-    return this.$auth.member ?? {}
+    const filteredBlogItems = computed(() =>  {
+      return blogItems.filter(([_icon, _title, _path, permission]) => securityStore.hasPermission(permission))
+    })
+
+    return {
+      drawer,
+      member,
+      filteredMemberItems,
+      filteredPageItems,
+      filteredBlogItems
+    }
+  },
+  methods: {
+    logout () {
+      this.$auth.logout()
+      this.$router.push({ name: 'index' })
+    }
   }
+})
 
-  get filteredMemberItems () {
-    return this.memberItems.filter(([_icon, _title, _path, permission]) => this.hasPermission(permission))
-  }
-
-  get filteredPageItems () {
-    return this.pageItems.filter(([_icon, _title, _path, permission]) => this.hasPermission(permission))
-  }
-
-  get filteredBlogItems () {
-    return this.blogItems.filter(([_icon, _title, _path, permission]) => this.hasPermission(permission))
-  }
-
-  logout () {
-    this.$auth.logout()
-    this.$router.push({ name: 'index' })
-  }
-
-  redirectTo (name: string) {
-    this.$router.push({ name })
-  }
-}
 </script>

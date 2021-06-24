@@ -69,7 +69,7 @@ const pageCategoryModule = namespace('page_category')
   },
   servicePrefix: 'admin-pageCategory',
   resourcePrefix: '/api/page_categories/',
-  layout: 'Admin',
+  layout: 'admin',
   middleware: 'hasPermissions',
   fetchOnServer: false,
   meta: {

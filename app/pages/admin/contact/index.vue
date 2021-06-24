@@ -61,7 +61,7 @@ const contactModule = namespace('contact')
   },
   servicePrefix: 'admin-contact',
   resourcePrefix: '/api/contacts/',
-  layout: 'Admin',
+  layout: 'admin',
   middleware: 'hasPermissions',
   fetchOnServer: false,
   meta: {

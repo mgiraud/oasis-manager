@@ -12,37 +12,36 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
-import { namespace } from 'vuex-class'
 import PageModel from '~/components/page/PageModel.vue'
 import Error404 from '~/components/error/404.vue'
-import { Page } from '~/store/page'
+import { defineComponent, useContext, computed, useRoute } from '@nuxtjs/composition-api'
+import { pageStore } from '~/store/PageStore'
 
-const pageModule = namespace('page')
-
-@Component({
+export default defineComponent({
   components: {
     PageModel,
     Error404
+  },
+  setup() {
+    pageStore.setContext(useContext())
+    const route = useRoute()
+
+    const url = computed(() => {
+      return route.value.params ? route.value.params.pathMatch : null
+    })
+
+    const page = computed(() => {
+      return !pageStore.getState().isLoading && url.value !== null ? pageStore.find('/api/pages/' + decodeURIComponent(url.value)) : null
+    })
+
+    return {
+      page
+    }
+  },
+  head() {
+    return {
+      title: this.page ? this.page.title : 'Le vide intersidéral'
+    }
   }
 })
-export default class BackUpVue extends Vue {
-  @pageModule.Getter('find') find!: (url: string) => Page | null
-
-  public head () {
-    return {
-      title: this.page ? this.page.title : 'Le vide intersidédral'
-    }
-  }
-
-  get page () {
-    if (this.url !== null) {
-      return this.find('/api/pages/' + decodeURIComponent(this.url))
-    }
-  };
-
-  get url () {
-    return this.$route.params ? this.$route.params.pathMatch : null
-  }
-}
 </script>

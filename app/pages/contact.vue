@@ -5,14 +5,28 @@
         <v-card>
           <v-card-title>Contacte-nous !</v-card-title>
           <v-card-text>
-            <PageModel v-if="page" :page="page" />
+            <PageModel
+              v-if="page"
+              :page="page"
+            />
             <div v-else>
-              <p>Pour nous contacter tu peux nous envoyer un email à <a href="mailto:contact@lestransalpins.org" title="Envoyer un email aux transalpins">contact@lestransalpins.org</a> ou bien remplir le formulaire suivant.</p>
-              <p>Dans ce cas tu recevras un email de confirmation ou bien regarde dans tes spams si ce n'est pas le cas.</p>
+              <p>Pour nous contacter tu peux nous envoyer un email à <a
+                href="mailto:contact@lestransalpins.org"
+                title="Envoyer un email aux transalpins"
+              >contact@lestransalpins.org</a> ou bien remplir le formulaire suivant.</p>
+              <p>Dans ce cas tu recevras un email de confirmation ou bien regarde dans tes spams si
+                ce n'est pas le cas.</p>
             </div>
-            <contact-form ref="createForm" :values="item" :errors="violations" />
-            <toolbar :handle-submit="onSendForm" :handle-reset="resetForm" />
-            <Loading :visible="isLoading" />
+            <contact-form
+              ref="createForm"
+              :values="item"
+              :errors="contactState.violations"
+            />
+            <toolbar
+              :handle-submit="onSendForm"
+              :handle-reset="resetForm"
+            />
+            <Loading :visible="contactState.isLoading" />
           </v-card-text>
         </v-card>
       </v-col>
@@ -22,94 +36,77 @@
 
 <script lang="ts">
 
-import { Component, namespace, Watch, mixins } from 'nuxt-property-decorator'
+import { defineComponent, ref, useContext, watch, useRouter } from '@nuxtjs/composition-api'
 import ContactForm from '../components/contact/Form.vue'
 import Toolbar from '../components/form/Toolbar.vue'
 import Loading from '../components/util/Loading.vue'
 import { Contact } from '~/store/contact'
-import NotificationMixin from '~/mixins/notification'
 import { ElementWithValidation } from '~/vue-shim'
-import { Page } from '~/store/page'
 import PageModel from '~/components/page/PageModel.vue'
+import { contactStore } from '~/store/ContactStore'
+import { notificationStore } from '~/store/NotificationStore'
+import { pageStore } from '~/store/PageStore'
 
-const contactModule = namespace('contact')
-const notificationModule = namespace('notifications')
-const pageModule = namespace('page')
-
-@Component({
-  // @ts-ignore
-  servicePrefix: 'contact',
-  resourcePrefix: '/api/contacts/',
+export default defineComponent({
   components: {
     PageModel,
     ContactForm,
     Toolbar,
     Loading
-  }
-})
-export default class ContactVue extends mixins(NotificationMixin) {
-  item = {
-    content: null
-  }
+  },
+  setup () {
+    const context = useContext()
+    const router = useRouter()
+    contactStore.setContext(context)
+    pageStore.setContext(context)
+    const item = ref({ content: null })
 
-  @contactModule.State('error') error!: string | null;
-  @contactModule.State('isLoading') isLoading!: boolean;
-  @contactModule.State('created') created!: Contact;
-  @contactModule.State('violations') violations!: string[];
+    watch(() => contactStore.getState().violations, (violations: string[] | null) => {
+      if (violations && violations['']) {
+        notificationStore.setTimeout(10000)
+        notificationStore.showError(violations[''])
+      }
+    })
 
-  @contactModule.Action('create') create !: (contact: Contact) => Contact
-  @contactModule.Action('reset') reset !: () => void
-  @notificationModule.Action('setTimeout') setTimeoutDuration!: (show: number) => void
+    watch(() => contactStore.getState().created, (created: Contact) => {
+      if (!created) {
+        return
+      }
+      notificationStore.showMessage('Ta prise de contact a bien été enregistrée, nous reviendrons vers toi aussi rapidement que possible')
+      router.push({ path: '/' })
+    })
 
-  @pageModule.Getter('find') find!: (url: string) => Page | null
+    watch(() => contactStore.getState().error, (message: string) => {
+      message && notificationStore.showError(message)
+    })
 
-  public head () {
+    return {
+      item,
+      contactState: contactStore.getState(),
+      createContact: (contact: Contact) => contactStore.create(contact),
+      notificationState: notificationStore.getState(),
+      page: pageStore.find('/api/pages/contact')
+    }
+  },
+  head () {
     return {
       title: this.page ? this.page.title : 'Contacte-nous !'
     }
-  }
-
-  get page (): Page | null {
-    return this.find('/api/pages/contact')
-  };
-
-  resetForm () {
-    (this.$refs.createForm as ElementWithValidation).$v.$reset()
-    this.item = {
-      content: null
+  },
+  methods: {
+    resetForm () {
+      (this.$refs.createForm as ElementWithValidation).$v.$reset()
+      this.item = {
+        content: null
+      }
+    },
+    onSendForm () {
+      const createForm = this.$refs.createForm as ElementWithValidation
+      createForm.$v.$touch()
+      if (!createForm.$v.$invalid) {
+        this.createContact(createForm.$v.item.$model)
+      }
     }
   }
-
-  onSendForm () {
-    const createForm = this.$refs.createForm as ElementWithValidation
-    createForm.$v.$touch()
-    if (!createForm.$v.$invalid) {
-      this.create(createForm.$v.item.$model)
-    }
-  }
-
-  @Watch('violations')
-  onViolationsChanged (violations: string[] | null) {
-    // @ts-ignore
-    if (violations && violations['']) {
-      this.setTimeoutDuration(10000)
-      // @ts-ignore
-      this.showError(violations[''])
-    }
-  }
-
-  @Watch('created')
-  onCreated (created: Contact) {
-    if (!created) {
-      return
-    }
-    this.showMessage('Votre prise de contact a bien été enregistrée, nous reviendrons vers toi aussi rapidement que possible')
-    this.$router.push({ path: '/' })
-  }
-
-  @Watch('error')
-  onError (message: string) {
-    message && this.showError(message)
-  }
-}
+})
 </script>

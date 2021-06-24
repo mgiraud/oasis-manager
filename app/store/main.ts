@@ -1,7 +1,7 @@
 import { reactive, readonly, watch, ref, Ref, computed } from '@nuxtjs/composition-api'
 import { set, get } from 'idb-keyval'
 import { Context } from '@nuxt/types'
-import { Route } from 'vue-router'
+import { Route, RawLocation } from 'vue-router'
 import { HydraGetRequestFilter, HydraMemberObject, HydraObject, HydraView } from '~/api/hydra'
 import { FormErrors } from '~/api/repository'
 import SubmissionError from '~/error/SubmissionError'
@@ -24,7 +24,7 @@ export interface CrudState<U extends HydraMemberObject> {
   resetList: boolean;
   selectItems: U[] | null;
   totalItems: number;
-  updated: HydraObject | null;
+  updated: U | null;
   view: HydraView | null;
   violations: FormErrors | null;
   activeSlug: string | null;
@@ -71,7 +71,15 @@ export abstract class PersistentStore<T extends Object> extends Store<T> {
   }
 }
 
-export abstract class PersistentApiStore<T, U extends HydraMemberObject> extends PersistentStore<CrudState<T, U>> {
+export abstract class PersistentApiStore<T, U extends HydraMemberObject> extends PersistentStore<CrudState<U>> {
+  public abstract getListLocation (): RawLocation | null
+
+  public abstract getAddLocation (): RawLocation | null
+
+  public abstract getEditLocation (item: U): RawLocation | null
+
+  public abstract getIdentifierFromUrlParam (param: string): string
+
   protected context!: UseContextReturn
 
   protected getAdditionalData (): T { return {} as T }
@@ -105,7 +113,7 @@ export abstract class PersistentApiStore<T, U extends HydraMemberObject> extends
     }
   }
 
-  find (id: string | number) {
+  find = (id: string | number) => {
     return this.state.byId[id] ?? null
   }
 
@@ -149,6 +157,10 @@ export abstract class PersistentApiStore<T, U extends HydraMemberObject> extends
     this.toggleLoading()
     try {
       const retrieved = await this.context.$getRepository(this.storeName).$findAll({ params })
+
+      if (this.state.resetList) {
+        this.resetList()
+      }
 
       retrieved['hydra:member'].forEach((item: U) => {
         this.addItem(item)
@@ -217,7 +229,7 @@ export abstract class PersistentApiStore<T, U extends HydraMemberObject> extends
     }
   }
 
-  async load (id: string) {
+  async load (id: string): Promise<U | undefined> {
     if (!this.context.$getRepository(this.storeName)) {
       throw new Error(`Repository ${this.storeName} does not exist`)
     }
@@ -245,6 +257,10 @@ export abstract class PersistentApiStore<T, U extends HydraMemberObject> extends
     } catch (e) {
       await this.handleError(e)
     }
+  }
+
+  prepareResetList () {
+    this.state.resetList = true
   }
 
   resetList () {
@@ -288,5 +304,17 @@ export abstract class PersistentApiStore<T, U extends HydraMemberObject> extends
       updated: null,
       violations: null
     })
+  }
+
+  getCreateMessage (item: U) {
+    return `${item['@id']} créé avec succès`
+  }
+
+  getUpdateMessage (item: U) {
+    return `${item['@id']} mis à jour avec succès`
+  }
+
+  getDeleteMessage (item: U) {
+    return `${item['@id']} supprimé avec succès`
   }
 }

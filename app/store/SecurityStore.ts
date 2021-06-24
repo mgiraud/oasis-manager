@@ -39,12 +39,13 @@ export class SecurityStore extends PersistentStore<SecurityState> {
   }
 
   loadPermissions () {
-    fs.readFile(path.resolve('app/security/permissions.json'), 'utf8', (err: Error, data: string) => {
-      if (err) {
-        throw err
-      }
+    try {
+      const data = fs.readFileSync(path.resolve('app/security/permissions.json'), { encoding: 'utf8', flag: 'r' })
       this.state.permissions = JSON.parse(data)
-    })
+      return this.state.permissions
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   async login (credentials: LoginCredentials) {
@@ -101,6 +102,10 @@ export class SecurityStore extends PersistentStore<SecurityState> {
 
   setLoggedIn (loggedIn: boolean) {
     this.state.loggedIn = loggedIn
+  }
+
+  setPermissions (permissions: string[]) {
+    this.state.permissions = permissions
   }
 }
 

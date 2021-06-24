@@ -4,31 +4,18 @@ import { PersistentApiStore } from '~/store/main'
 import { notificationStore } from '~/store/NotificationStore'
 import { ElementWithValidation } from '~/vue-shim'
 
-interface CreateItemOptions<U> {
-    creationMessageIdentifier: keyof U,
-    redirectAfterCreationName: string,
-    redirectAfterCreationParamIdentifier: keyof U,
-    form: ElementWithValidation
-}
-
-const createItem = <T, U extends HydraMemberObject>(store: PersistentApiStore<T, U>, options: CreateItemOptions<U> = {
-  creationMessageIdentifier: 'id',
-  redirectAfterCreationName: 'admin',
-  redirectAfterCreationParamIdentifier: 'admin'
-}) => {
+const itemCreate = <T, U extends HydraMemberObject> (store: PersistentApiStore<T, U>, form: ElementWithValidation) => {
   const router = useRouter()
 
   const onCreated = (item: U | null) => {
     if (item === null) {
       return
     }
-    notificationStore.showMessage(`${item[options.creationMessageIdentifier]} created`)
-
-
-    router.push({
-      name: options.redirectAfterCreationName,
-      params: { [options.redirectAfterCreationParamIdentifier]: item[options.redirectAfterCreationParamIdentifier] }
-    })
+    notificationStore.showMessage(store.getCreateMessage(item))
+    const location = store.getEditLocation(item)
+    if (location) {
+      router.push(location)
+    }
   }
 
   watch(() => store.getState().created, (created: U | null) => {
@@ -43,16 +30,16 @@ const createItem = <T, U extends HydraMemberObject>(store: PersistentApiStore<T,
   })
 
   const onSendForm = () => {
-    options.form.$v.$touch()
-    if (!options.form.$v.$invalid) {
-      store.create(options.form.$v.item.$model)
+    form.$v.$touch()
+    if (!form.$v.$invalid) {
+      store.create(form.$v.item.$model)
     }
   }
 
   const resetForm = (item: Ref<Object>) => {
-    options.form.$v.$reset()
+    form.$v.$reset()
     item.value = {}
   }
 }
 
-export default createItem
+export default itemCreate

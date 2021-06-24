@@ -61,7 +61,7 @@ const surveyJoinModule = namespace('survey_join')
   },
   servicePrefix: 'admin-survey-join',
   resourcePrefix: '/api/survey_joins/',
-  layout: 'Admin',
+  layout: 'admin',
   middleware: 'hasPermissions',
   fetchOnServer: false,
   meta: {

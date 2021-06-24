@@ -36,16 +36,13 @@ import { pageStore } from '~/store/PageStore'
 export default defineComponent({
   setup () {
     pageStore.setContext(useContext())
+    const tab = ref(undefined)
 
     return {
       menuItems: pageStore.menuItems,
       pageState: pageStore.getState(),
-      setActiveSlug: (slug: string | null) => pageStore.setActiveSlug(slug)
-    }
-  },
-  data () {
-    return {
-      tab: undefined
+      setActiveSlug: (slug: string | null) => pageStore.setActiveSlug(slug),
+      tab
     }
   },
   methods: {
@@ -95,62 +92,4 @@ export default defineComponent({
     }
   }
 })
-
-// const pageModule = namespace('page')
-//
-// @Component
-// export default class Toolbar extends Vue {
-//   tab: number | null = null
-//
-//   @pageModule.State('activeSlug') activeSlug !: string | null
-//   @pageModule.Getter('menuItems') menuItems !: MenuItem[]
-//   @pageModule.Mutation('setActiveSlug') setActiveSlug !: (slug: string | null) => void
-//
-//   @Watch('tab')
-//   onTabUpdate (tabIndex: number) {
-//     if (tabIndex === undefined || !this.menuItems[tabIndex]) {
-//       this.setActiveSlug(null)
-//     } else {
-//       this.redirectOrToggleSubMenu(this.menuItems[tabIndex])
-//     }
-//   }
-//
-//   @Watch('$route')
-//   onRouteChange (route: Route | null) {
-//     if (route === null) {
-//       return
-//     }
-//     // Check that static page is in menu
-//     const staticPageInMenu = this.menuItems.find((menuItem: MenuItem) => {
-//       return menuItem.url === route.name
-//     })
-//
-//     // Check that dynamic page is in menu
-//     const dynamicPageIsInMenu = this.menuItems.find((menuItem: MenuItem) => {
-//       return menuItem.url === route.params.pathMatch
-//     })
-//
-//     const isInMenu = staticPageInMenu || dynamicPageIsInMenu
-//     if (!isInMenu) {
-//       this.tab = null
-//     }
-//   }
-//
-//   mounted () {
-//     if (this.$route.params.pathMatch) {
-//       this.tab = findIndex(this.menuItems, { url: this.$route.params.pathMatch })
-//     }
-//   }
-//
-//   redirectOrToggleSubMenu (item: MenuItem) {
-//     if (item.url) {
-//       this.$router.push(item.url)
-//       this.setActiveSlug(null)
-//     } else if (this.activeSlug !== item.slug) {
-//       this.setActiveSlug(item.slug)
-//     } else {
-//       this.setActiveSlug(null)
-//     }
-//   }
-// }
 </script>

@@ -167,14 +167,14 @@
 </template>
 
 <script lang="ts">
+import {
+  defineComponent, useContext, onMounted
+} from '@nuxtjs/composition-api'
 import Menu from '~/components/layout/Menu.vue'
 import SubMenu from '~/components/layout/SubMenu.vue'
 import SideMenu from '~/components/layout/SideMenu.vue'
 import NewsletterForm from '~/components/contact_newsletter/Form.vue'
 import Alert from '~/components/util/Alert.vue'
-import {
-  defineComponent, useContext, useFetch, onMounted, isReactive, watchEffect
-} from '@nuxtjs/composition-api'
 import { securityStore } from '~/store/SecurityStore'
 import { pageStore } from '~/store/PageStore'
 
@@ -188,9 +188,7 @@ export default defineComponent({
     securityStore.setContext(context)
 
     if (process.server) {
-      useFetch(() => {
         securityStore.loadPermissions()
-      })
     }
 
     onMounted(async () => {

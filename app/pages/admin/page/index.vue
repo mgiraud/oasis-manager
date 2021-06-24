@@ -4,23 +4,29 @@
       v-model="selected"
       :headers="headers"
       :items="items"
-      :items-per-page.sync="options.itemsPerPage"
-      :loading="isLoading"
+      :items-per-page.sync="filterOptions.itemsPerPage"
+      :loading="pageState.isLoading"
       loading-text="Loading..."
-      :options.sync="options"
-      :server-items-length="totalItems"
+      :options.sync="filterOptions"
+      :server-items-length="pageState.totalItems"
       class="elevation-1"
       item-key="@id"
       show-select
       @update:options="onUpdateOptions"
     >
       <template #top>
-        <v-toolbar flat color="white">
+        <v-toolbar
+          flat
+          color="white"
+        >
           <v-toolbar-title>Page</v-toolbar-title>
 
           <v-spacer />
 
-          <FormFilter :handle-filter="onSendFilter" :handle-reset="resetFilter">
+          <FormFilter
+            :handle-filter="onSendFilter"
+            :handle-reset="resetFilter"
+          >
             <PageFilter
               ref="filterForm"
               slot="filter"
@@ -38,7 +44,11 @@
           </v-btn>
         </v-toolbar>
       </template>
-      <template v-if="item && item.category" slot="item.category" slot-scope="{ item }">
+      <template
+        v-if="item && item.category"
+        slot="item.category"
+        slot-scope="{ item }"
+      >
         <nuxt-link :to="{name: 'admin-pageCategory-id', params: {id: item.category.id }}">
           {{ item.category.name }}
         </nuxt-link>
@@ -54,65 +64,69 @@
 </template>
 
 <script lang="ts">
-import { Store } from 'vuex'
-import { Component, mixins, namespace } from 'nuxt-property-decorator'
+import { computed, defineComponent, ref, useContext, useMeta, toRefs, useRouter, useFetch } from '@nuxtjs/composition-api'
 import ActionCell from '~/components/table/ActionCell.vue'
 import PageFilter from '~/components/admin/page/PageFilter.vue'
 import FormFilter from '~/components/form/FormFilter.vue'
-import list from '~/mixins/list'
-import { Page } from '~/store/page'
-import { MUTATIONS } from '~/store/crud'
+import { Page, pageStore } from '~/store/PageStore'
+import { securityStore } from '~/store/SecurityStore'
+import itemList from '~/composable/ItemList'
 
-const pageModule = namespace('page')
+const headers = [
+  { text: 'Title', value: 'title' },
+  { text: 'Url', value: 'url' },
+  { text: 'Catégorie', value: 'category' },
+  { text: 'est publié', value: 'isPublished' },
+  { text: 'est visible dans le menu', value: 'showInMenu' },
+  { text: 'Actions', value: 'actions', sortable: false }
+]
 
-@Component({
+export default defineComponent({
   components: {
     ActionCell, PageFilter, FormFilter
   },
-  servicePrefix: 'admin-page',
-  resourcePrefix: '/api/pages/',
-  layout: 'Admin',
+  layout: 'admin',
   middleware: 'hasPermissions',
-  fetchOnServer: false,
+  setup () {
+    const router = useRouter()
+    const selected = ref([])
+    pageStore.setContext(useContext())
+
+    const canEditPage = computed(() => {
+      return securityStore.hasPermission('USER_CAN_EDIT_PAGES')
+    })
+
+    const canDeletePage = computed(() => {
+      return securityStore.hasPermission('USER_CAN_DELETE_PAGES')
+    })
+
+    const editItem = (item: Page) => {
+      router.push(pageStore.getEditLocation(item))
+    }
+
+    useFetch(async () => {
+      await pageStore.fetchAll()
+    });
+
+    const itemListHelper = itemList(pageStore)
+    return {
+      selected,
+      canEditPage,
+      canDeletePage,
+      editItem,
+      ...toRefs(itemListHelper),
+      pageState: pageStore.getState(),
+      items: pageStore.list,
+      headers
+    }
+  },
+  head () {
+    return {
+      title: 'Administration - Liste des pages'
+    }
+  },
   meta: {
     permissions: ['USER_CAN_ACCESS_PAGES']
   }
 })
-export default class AdminPageIndex extends mixins(list) {
-  selected = []
-  headers = [
-    { text: 'Title', value: 'title' },
-    { text: 'Url', value: 'url' },
-    { text: 'Catégorie', value: 'category' },
-    { text: 'est publié', value: 'isPublished' },
-    { text: 'est visible dans le menu', value: 'showInMenu' },
-    { text: 'Actions', value: 'actions', sortable: false }
-  ]
-
-  async fetch ({ store }: { store: Store<any> }) {
-    return await store.dispatch('page/fetchAll')
-  }
-
-    @pageModule.Getter('list') items !: () => Page
-    @pageModule.State('deleted') deletedItem!: Page | null
-    @pageModule.State('error') error!: string | null
-    @pageModule.State('isLoading') isLoading!: boolean
-    @pageModule.State('totalItems') totalItems!: number
-    @pageModule.Mutation(MUTATIONS.RESET_LIST) resetList!: (reset: boolean) => void
-
-    get canEditPage () {
-      return this.hasPermission('USER_CAN_EDIT_PAGES')
-    }
-
-    get canDeletePage () {
-      return this.hasPermission('USER_CAN_DELETE_PAGES')
-    }
-
-    @pageModule.Action('fetchAll') fetchAll!: () => Page[]
-    @pageModule.Action('del') deleteItem!: (page: Page) => Promise<void>
-
-    editItem (item: Page) {
-      this.$router.push({ name: 'admin-page-id', params: { id: item['@id'] } })
-    }
-}
 </script>

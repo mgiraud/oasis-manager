@@ -2,24 +2,27 @@
   <v-app>
     <MenuDrawer />
     <v-main>
-      <v-container fluid>
-        <Nuxt />
-        <Alert />
-      </v-container>
+      <Nuxt />
+      <Alert />
     </v-main>
   </v-app>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
 import MenuDrawer from '~/components/admin/MenuDrawer.vue'
 import Alert from '~/components/util/Alert.vue'
+import { securityStore } from '~/store/SecurityStore'
 
-@Component({
+export default defineComponent({
   components: {
     MenuDrawer, Alert
+  },
+  setup () {
+    if (process.server) {
+      securityStore.loadPermissions()
+    }
+    return {}
   }
 })
-export default class AdminLayout extends Vue {
-}
 </script>

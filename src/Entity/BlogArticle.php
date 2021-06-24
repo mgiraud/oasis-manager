@@ -48,6 +48,7 @@ class BlogArticle
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"blog_article:read"})
      */
     private $id;
 

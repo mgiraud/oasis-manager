@@ -71,7 +71,7 @@ const memberGroupModule = namespace('member_group')
   },
   servicePrefix: 'admin-memberGroup',
   resourcePrefix: '/api/member_groups/',
-  layout: 'Admin',
+  layout: 'admin',
   middleware: 'hasPermissions',
   meta: {
     permissions: ['USER_CAN_ACCESS_MEMBER_GROUPS']

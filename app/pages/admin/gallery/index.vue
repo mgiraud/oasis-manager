@@ -16,7 +16,7 @@ import FileManager from '~/components/file_manager/FileManager.vue'
   components: {
     FileManager
   },
-  layout: 'Admin',
+  layout: 'admin',
   middleware: 'hasPermissions',
   meta: {
     permissions: ['USER_CAN_ACCESS_GALLERIES']

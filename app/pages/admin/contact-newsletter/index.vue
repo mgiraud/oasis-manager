@@ -56,7 +56,7 @@ const contactNewsletterModule = namespace('contact_newsletter')
   },
   servicePrefix: 'admin-contact',
   resourcePrefix: '/api/contacts/',
-  layout: 'Admin',
+  layout: 'admin',
   middleware: 'hasPermissions',
   fetchOnServer: false,
   meta: {

@@ -57,7 +57,7 @@ const memberModule = namespace('member')
   },
   servicePrefix: 'admin-member',
   resourcePrefix: '/api/members/',
-  layout: 'Admin',
+  layout: 'admin',
   middleware: 'hasPermissions',
   fetchOnServer: false,
   meta: {

@@ -26,6 +26,8 @@
     "@tiptap/extension-typography": "^2.0.0-beta.1",
     "@tiptap/starter-kit": "^2.0.0-beta.1",
     "@tiptap/vue-2": "^2.0.0-beta.1",
+    "@vuelidate/core": "^2.0.0-alpha.19",
+    "@vuelidate/validators": "^2.0.0-alpha.17",
     "cookie": "^0.4.1",
     "date-fns": "^2.21.1",
     "dotenv": "^8.2.0",

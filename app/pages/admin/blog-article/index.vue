@@ -67,7 +67,7 @@ const blogArticleModule = namespace('blog_article')
   },
   servicePrefix: 'admin-blogArticle',
   resourcePrefix: '/api/blog_articles/',
-  layout: 'Admin',
+  layout: 'admin',
   middleware: 'hasPermissions',
   fetchOnServer: false,
   meta: {

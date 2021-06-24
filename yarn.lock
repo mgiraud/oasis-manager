@@ -2174,6 +2174,20 @@
   dependencies:
     tslib "^2.2.0"
 
+"@vuelidate/core@^2.0.0-alpha.19":
+  version "2.0.0-alpha.19"
+  resolved "https://registry.yarnpkg.com/@vuelidate/core/-/core-2.0.0-alpha.19.tgz#d0482ed6d55269084ce42bfcdc7b9892f1f17b6e"
+  integrity sha512-P5vGGWzoFmdHSXXVrC009abPs3XS/25w2xsH45evPO3Od9gvjwXdEzTGehmb/MLBfk4BJ5GkD6NKfjmnFHd5sw==
+  dependencies:
+    vue-demi "^0.9.1"
+
+"@vuelidate/validators@^2.0.0-alpha.17":
+  version "2.0.0-alpha.17"
+  resolved "https://registry.yarnpkg.com/@vuelidate/validators/-/validators-2.0.0-alpha.17.tgz#e7ce84e020f41f98e58bdc73ad1a647d2d7f5deb"
+  integrity sha512-Sl+T/ejjjS4Z+dOU6pBEGyPjuITg/jQB+sU/oAzZt0ugW7Ar/fckHrbcR4YVPbANQ0/YgftaZ7+WkxUv5YrhPA==
+  dependencies:
+    vue-demi "^0.9.1"
+
 "@webassemblyjs/ast@1.9.0":
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/@webassemblyjs/ast/-/ast-1.9.0.tgz#bd850604b4042459a5a41cd7d338cbed695ed964"
@@ -9414,6 +9428,11 @@ vue-client-only@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/vue-client-only/-/vue-client-only-2.0.0.tgz#ddad8d675ee02c761a14229f0e440e219de1da1c"
   integrity sha512-arhk1wtWAfLsJyxGMoEYhoBowM87/i6HLSG2LH/03Yog6i2d9JEN1peMP0Ceis+/n9DxdenGYZZTxbPPJyHciA==
+
+vue-demi@^0.9.1:
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/vue-demi/-/vue-demi-0.9.1.tgz#25d6e1ebd4d4010757ff3571e2bf6a1d7bf3de82"
+  integrity sha512-7s1lufRD2l369eFWPjgLvhqCRk0XzGWJsQc7K4q+0mZtixyGIvsK1Cg88P4NcaRIEiBuuN4q1NN4SZKFKwQswA==
 
 vue-eslint-parser@^7.6.0:
   version "7.6.0"

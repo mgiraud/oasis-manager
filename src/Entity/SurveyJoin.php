@@ -56,6 +56,7 @@ class SurveyJoin
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"survey_join:read"})
      */
     private $id;
 

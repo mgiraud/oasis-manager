@@ -11,7 +11,7 @@ export interface LoginCredentials {
   password: string
 }
 
-interface SecurityState {
+export interface SecurityState {
   permissions: string[]
   credentialError: boolean
   loggedIn: boolean

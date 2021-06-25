@@ -4,17 +4,22 @@ import { HydraGetRequestFilter, HydraMemberObject } from '~/api/hydra'
 import { notificationStore } from '~/store/NotificationStore'
 import { PersistentApiStore } from '~/store/main'
 
-const itemList = <T, U extends HydraMemberObject> (store: PersistentApiStore<T, U>) => {
+const itemList = <T, U extends HydraMemberObject> (store: PersistentApiStore<T, U>, additionalOptions ?: HydraGetRequestFilter) => {
   const router = useRouter()
   const selected = ref([])
-
-  const filterOptions: HydraGetRequestFilter = reactive({
+  const options = {
     sortBy: [],
     sortDesc: [],
     page: 1,
     itemsPerPage: 15,
     totalItems: 0
-  })
+  }
+
+  if (additionalOptions) {
+    Object.assign(options, additionalOptions)
+  }
+
+  const filterOptions: HydraGetRequestFilter = reactive(options)
 
   const filters: Ref<{ [key: string]: string }> = ref({})
 
@@ -77,18 +82,15 @@ const itemList = <T, U extends HydraMemberObject> (store: PersistentApiStore<T, 
 
   const editHandler = (item: U) => {
     const location = store.getEditLocation(item)
-    if (location) {
-      router.push(location)
-    }
+    location && router.push(location)
+  }
+
+  const showHandler = (item: U) => {
+    editHandler(item)
   }
 
   const deleteHandler = (item: U) => {
     store.del(item).then(() => onUpdateOptions(filterOptions))
-  }
-
-  const editItem = (item: U) => {
-    const location = store.getEditLocation(item)
-    location && router.push(location)
   }
 
   return reactive({
@@ -98,10 +100,10 @@ const itemList = <T, U extends HydraMemberObject> (store: PersistentApiStore<T, 
     resetFilter,
     addHandler,
     editHandler,
+    showHandler,
     deleteHandler,
     onUpdateOptions,
     onSendFilter,
-    editItem,
     state: store.getState(),
     items: store.list
   })

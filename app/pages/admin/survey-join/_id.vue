@@ -36,7 +36,7 @@
             <v-col cols="12">
               <label class="v-label">De combien de personnes est composé ton foyer, prénom et âge des membres du foyer ?</label>
             </v-col>
-            <v-col v-if="item.family.length > 0" cols="12" md="6">
+            <v-col v-if="item.family && item.family.length > 0" cols="12" md="6">
               <v-row>
                 <v-col cols="6">
                   <v-text-field
@@ -54,7 +54,7 @@
                 </v-col>
               </v-row>
             </v-col>
-            <v-col v-if="item.family.length > 1" cols="12" md="6">
+            <v-col v-if="item.family && item.family.length > 1" cols="12" md="6">
               <v-row>
                 <v-col cols="6">
                   <v-text-field
@@ -72,7 +72,7 @@
                 </v-col>
               </v-row>
             </v-col>
-            <v-col v-if="item.family.length > 2" cols="12" md="6">
+            <v-col v-if="item.family && item.family.length > 2" cols="12" md="6">
               <v-row>
                 <v-col cols="6">
                   <v-text-field
@@ -90,7 +90,7 @@
                 </v-col>
               </v-row>
             </v-col>
-            <v-col v-if="item.family.length > 3" cols="12" md="6">
+            <v-col v-if="item.family && item.family.length > 3" cols="12" md="6">
               <v-row>
                 <v-col cols="6">
                   <v-text-field
@@ -324,37 +324,34 @@
         />
       </v-col>
     </v-row>
-    <Loading :visible="isLoading" />
+    <Loading :visible="state.isLoading" />
   </v-container>
 </template>
 <script lang="ts">
+import { defineComponent, toRefs, useContext } from '@nuxtjs/composition-api'
 import VuetifyDraggableTreeview from 'vuetify-draggable-treeview'
-import { Component, mixins, namespace } from 'nuxt-property-decorator'
-import show from '~/mixins/show'
+import itemUpdate from '~/composable/itemUpdate'
 import Loading from '~/components/util/Loading.vue'
 import Toolbar from '~/components/form/Toolbar.vue'
 import ContactForm from '~/components/contact/Form.vue'
-import { Contact } from '~/store/contact'
-import { HydraMemberObject } from '~/api/hydra'
+import { surveyJoinStore } from '~/store/SurveyJoinStore'
 
-const surveyJoinModule = namespace('survey_join')
-
-@Component({
+export default defineComponent({
   components: {
     Loading, Toolbar, ContactForm, VuetifyDraggableTreeview
   },
-  servicePrefix: 'admin-survey-join',
-  resourcePrefix: '/api/survey_joins/',
   middleware: 'hasPermissions',
   meta: {
     permissions: ['USER_CAN_VIEW_SURVEY_JOIN']
+  },
+  setup () {
+    surveyJoinStore.setContext(useContext())
+
+    return {
+      ...toRefs(itemUpdate(surveyJoinStore)),
+    }
   }
 })
-export default class ContactView extends mixins(show) {
-  @surveyJoinModule.State('isLoading') isLoading!: boolean
-  @surveyJoinModule.Getter('find') find!: (id: string) => Contact | null
-  @surveyJoinModule.Action('load') retrieve!: (id: string) => HydraMemberObject | null
-}
 </script>
 
 <style lang="scss" scoped>

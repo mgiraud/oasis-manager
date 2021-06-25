@@ -65,7 +65,7 @@
 import SurveyJoinForm from '../components/survey_join/Form.vue'
 import Toolbar from '../components/form/Toolbar.vue'
 import Loading from '../components/util/Loading.vue'
-import { SurveyJoin } from '~/store/survey_join'
+import { SurveyJoin } from '~/store/SurveyJoinStore'
 import { ElementWithValidation } from '~/vue-shim'
 import { defineComponent, ref, useContext, watch, useRouter } from '@nuxtjs/composition-api'
 import { surveyJoinStore } from '~/store/SurveyJoinStore'

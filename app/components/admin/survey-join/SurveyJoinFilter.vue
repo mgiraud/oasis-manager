@@ -27,14 +27,21 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'nuxt-property-decorator'
+import { defineComponent, ref } from '@nuxtjs/composition-api'
 
-@Component
-export default class ContactFilter extends Vue {
-  @Prop({ type: Object, required: true }) readonly values!: any
+export default defineComponent({
+  props: {
+    values: {
+      type: Object,
+      required: true
+    }
+  },
+  setup (props) {
+    const item = ref(props.values)
 
-  get item () {
-    return this.values
+    return {
+      item
+    }
   }
-}
+})
 </script>

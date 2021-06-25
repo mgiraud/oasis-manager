@@ -1,9 +1,14 @@
 import { RawLocation } from 'vue-router'
 import { HydraMemberObject } from '~/api/hydra'
 import { CrudState, PersistentApiStore } from '~/store/main'
-import { MotivationRaw } from '~/store/survey_join'
+
+export type MotivationRaw = {
+  name: string
+  id: string
+}
 
 export type SurveyJoin = HydraMemberObject & {
+  id: number
   firstName: string
   lastName: string
   city: string
@@ -44,16 +49,21 @@ class SurveyJoinStore extends PersistentApiStore<SurveyJoinState, SurveyJoin> {
   }
 
   getEditLocation (item: SurveyJoin): RawLocation | null {
-    return null
+    return {
+      name: 'admin-survey-join-id',
+      params: {
+        id: encodeURIComponent(item.id)
+      }
+    }
   }
 
   getListLocation (): RawLocation | null {
-    return null
+    return { name: 'admin-survey-join' }
   }
 
-  getIdentifierFromUrlParam (param: string): string {
-    return ''
-  }
+  deleteRole = 'USER_CAN_DELETE_SURVEY_JOIN'
+  editRole = 'USER_CAN_EDIT_SURVEY_JOIN'
+  listRole = 'USER_CAN_VIEW_SURVEY_JOIN'
 }
 
 export const surveyJoinStore = new SurveyJoinStore('survey_joins')

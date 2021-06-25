@@ -3,8 +3,7 @@ import { computed, defineNuxtPlugin } from '@nuxtjs/composition-api'
 import { Cookie } from './auth/cookie'
 import Token from './auth/token'
 import { Repository } from '~/api/repository'
-import { LoginCredentials, SecurityState } from '~/store/security'
-import { securityStore, SecurityStore } from '~/store/SecurityStore'
+import { securityStore, SecurityStore, LoginCredentials, SecurityState } from '~/store/SecurityStore'
 
 declare module 'vue/types/vue' {
   interface Vue {

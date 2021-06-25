@@ -34,10 +34,6 @@ class PageCategoryStore extends PersistentApiStore<PageCategoryState, PageCatego
     return { name: 'admin-page-category' }
   }
 
-  getIdentifierFromUrlParam (param: string): string {
-    return `/api/page_categories/${decodeURIComponent(param)}`
-  }
-
   listRole = 'USER_CAN_ACCESS_PAGE_CATEGORIES'
   editRole = 'USER_CAN_EDIT_PAGE_CATEGORIES'
   deleteRole = 'USER_CAN_DELETE_PAGE_CATEGORIES'

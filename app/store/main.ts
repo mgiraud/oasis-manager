@@ -78,8 +78,6 @@ export abstract class PersistentApiStore<T, U extends HydraMemberObject> extends
 
   public abstract getEditLocation (item: U): RawLocation | null
 
-  public abstract getIdentifierFromUrlParam (param: string): string
-
   public abstract listRole: string
 
   public abstract editRole: string
@@ -320,5 +318,9 @@ export abstract class PersistentApiStore<T, U extends HydraMemberObject> extends
 
   getDeleteMessage (item: U) {
     return `${item['@id']} supprimé avec succès`
+  }
+
+  getIdentifierFromUrlParam (param: string): string {
+    return `/api/${this.storeName}/${decodeURIComponent(param)}`
   }
 }

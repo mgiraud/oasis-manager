@@ -140,10 +140,6 @@ class PageStore extends PersistentApiStore<PageState, Page> {
     return { name: 'admin-page' }
   }
 
-  getIdentifierFromUrlParam (param: string): string {
-    return `/api/pages/${decodeURIComponent(param)}`
-  }
-
   listRole = 'USER_CAN_ACCESS_PAGES'
   editRole = 'USER_CAN_EDIT_PAGES'
   deleteRole = 'USER_CAN_DELETE_PAGES'

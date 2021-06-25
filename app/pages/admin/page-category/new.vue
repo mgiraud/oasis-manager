@@ -63,7 +63,7 @@ export default class AdminPageCategoryNew extends mixins(NotificationMixin) {
     this.showMessage(`La catégorie "${item.name}" a bien été crée`)
 
     this.$router.push({
-      name: 'admin-pageCategory-id',
+      name: 'admin-page-category-id',
       params: { id: item['@id'].replace('/api/page_categories/', '') }
     })
   }

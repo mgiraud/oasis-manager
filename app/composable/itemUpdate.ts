@@ -4,11 +4,12 @@ import { HydraMemberObject } from '~/api/hydra'
 import { PersistentApiStore } from '~/store/main'
 import { notificationStore } from '~/store/NotificationStore'
 
-const itemUpdate = <T, U extends HydraMemberObject> (store: PersistentApiStore<T, U>, form: Ref<Element & Validation>) => {
+const itemUpdate = <T, U extends HydraMemberObject> (store: PersistentApiStore<T, U>) => {
   const router = useRouter()
   const route = useRoute()
   const item = ref({}) as Ref<U>
   const retrieved: Ref<U | null> = ref(null)
+  const updateForm = ref(null) as Ref<Element & Validation | null>
 
   store.load(store.getIdentifierFromUrlParam(route.value.params.id)).then((item) => {
     if (item) {
@@ -26,23 +27,26 @@ const itemUpdate = <T, U extends HydraMemberObject> (store: PersistentApiStore<T
   }
 
   const reset = () => {
-    form.value.v$.$reset()
+    if (!updateForm.value) return
+    updateForm.value.v$.$reset()
     store.resetUpdate()
     store.resetDelete()
     store.resetCreate()
   }
 
   const onSendForm = () => {
-    form.value.v$.$touch()
+    if (!updateForm.value) return
+    updateForm.value.v$.$touch()
 
-    if (!form.value.v$.$invalid) {
+    if (!updateForm.value.v$.$invalid) {
       // @ts-ignore
-      store.update(form.value.item)
+      store.update(updateForm.value.item)
     }
   }
 
   const resetForm = () => {
-    form.value.v$.$reset()
+    if (!updateForm.value) return
+    updateForm.value.v$.$reset()
     if (retrieved.value) {
       item.value = { ...retrieved.value }
     }
@@ -83,13 +87,15 @@ const itemUpdate = <T, U extends HydraMemberObject> (store: PersistentApiStore<T
   })
 
   return reactive({
+    updateForm,
     retrieved,
     item,
     del,
     reset,
     onSendForm,
     resetForm,
-    back
+    back,
+    state: store.getState()
   })
 }
 

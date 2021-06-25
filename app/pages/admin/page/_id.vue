@@ -1,11 +1,11 @@
 <template>
   <v-container>
-    <v-row v-if="pageState.error">
+    <v-row v-if="state.error">
       <v-col cols="12">
         <v-alert
           type="error"
         >
-          {{ pageState.error }}
+          {{ state.error }}
         </v-alert>
       </v-col>
     </v-row>
@@ -15,7 +15,7 @@
           v-if="item"
           ref="updateForm"
           :values="item"
-          :errors="pageState.violations"
+          :errors="state.violations"
           :page-logs="pageLogs"
         />
       </v-col>
@@ -25,7 +25,7 @@
         <Toolbar
           :handle-submit="onSendForm"
           :handle-reset="resetForm"
-          :handle-delete="canDeletePage ? del : null"
+          :handle-delete="canDelete ? del : null"
           :handle-back="back"
         >
           <template #left>
@@ -36,7 +36,7 @@
         </Toolbar>
       </v-col>
     </v-row>
-    <Loading :visible="pageState.isLoading" />
+    <Loading :visible="state.isLoading" />
   </v-container>
 </template>
 <script lang="ts">
@@ -44,6 +44,7 @@ import { computed, defineComponent, onBeforeUnmount, onMounted, ref, toRefs, use
 import Loading from '~/components/util/Loading.vue'
 import Toolbar from '~/components/form/Toolbar.vue'
 import Form from '~/components/admin/page/Form.vue'
+import itemSecurity from '~/composable/itemSecurity'
 import itemUpdate from '~/composable/itemUpdate'
 import { notificationStore } from '~/store/NotificationStore'
 import { pageStore } from '~/store/PageStore'
@@ -60,13 +61,12 @@ export default defineComponent({
   },
   setup () {
     const context = useContext()
-    const updateForm = ref(null)
     pageStore.setContext(context)
     pageLogStore.setContext(context)
 
-    const itemUpdateHelper = itemUpdate(pageStore, updateForm)
+    const itemUpdateHelper = itemUpdate(pageStore)
 
-    const canDeletePage = computed(() => {
+    const canDelete = computed(() => {
       return securityStore.hasPermission('USER_CAN_DELETE_PAGES')
     })
 
@@ -119,10 +119,8 @@ export default defineComponent({
 
     return {
       ...toRefs(itemUpdateHelper),
-      canDeletePage,
-      pageState: pageStore.getState(),
+      ...toRefs(itemSecurity(pageStore)),
       pageLogs: pageLogStore.list,
-      updateForm
     }
   },
   head () {

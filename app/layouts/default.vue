@@ -12,7 +12,12 @@
       <v-app-bar-nav-icon
         v-if="$vuetify.breakpoint.mobile || $vuetify.breakpoint.xs"
         @click.stop="drawer = !drawer"
-      />
+      >
+        <v-icon color="primary" class="text--darken-4">
+          ri-menu-line
+        </v-icon>
+      </v-app-bar-nav-icon>
+
       <template #img="{ props }">
         <v-img
           v-bind="props"

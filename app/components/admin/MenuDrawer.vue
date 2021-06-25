@@ -178,7 +178,7 @@ const blogItems = [
 
 const pageItems = [
   ['ri-article-line', 'Pages', 'admin-page', 'USER_CAN_ACCESS_PAGES'],
-  ['ri-folder-line', 'Categories', 'admin-pageCategory', 'USER_CAN_ACCESS_PAGE_CATEGORIES']
+  ['ri-folder-line', 'Categories', 'admin-page-category', 'USER_CAN_ACCESS_PAGE_CATEGORIES']
 ]
 
 const memberItems = [

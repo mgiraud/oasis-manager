@@ -205,7 +205,6 @@ export default defineComponent({
     const item = ref(props.values)
 
     watch(() => props.values, (values) => {
-      console.log(values)
       item.value = values
     })
     const validation = computed(() => ({
@@ -290,7 +289,7 @@ export default defineComponent({
       mediaNodeState: mediaNodeStore.getState(),
       pageCategoryState: pageCategoryStore.getState(),
       findLog: pageLogStore.find,
-      editor
+      editor,
     }
   }
 })

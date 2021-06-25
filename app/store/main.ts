@@ -80,6 +80,12 @@ export abstract class PersistentApiStore<T, U extends HydraMemberObject> extends
 
   public abstract getIdentifierFromUrlParam (param: string): string
 
+  public abstract listRole: string
+
+  public abstract editRole: string
+
+  public abstract deleteRole: string
+
   protected context!: UseContextReturn
 
   protected getAdditionalData (): T { return {} as T }
@@ -157,7 +163,6 @@ export abstract class PersistentApiStore<T, U extends HydraMemberObject> extends
     this.toggleLoading()
     try {
       const retrieved = await this.context.$getRepository(this.storeName).$findAll({ params })
-
       if (this.state.resetList) {
         this.resetList()
       }
@@ -268,7 +273,6 @@ export abstract class PersistentApiStore<T, U extends HydraMemberObject> extends
       allIds: [],
       byId: {},
       error: '',
-      isLoading: false,
       resetList: false
     })
   }

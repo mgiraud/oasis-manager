@@ -1,5 +1,6 @@
 <template>
   <v-container>
+  {{state.isLoading}}
     <v-data-table
       v-model="selected"
       :headers="headers"
@@ -27,7 +28,7 @@
             :handle-filter="onSendFilter"
             :handle-reset="resetFilter"
           >
-            <PageFilter
+            <PageCategoryFilter
               ref="filterForm"
               slot="filter"
               :values="filters"
@@ -49,65 +50,50 @@
         slot="item.category"
         slot-scope="{ item }"
       >
-        <nuxt-link :to="{name: 'admin-page-category-id', params: {id: item.category.id }}">
-          {{ item.category.name }}
-        </nuxt-link>
+        {{ item.category.name }}
       </template>
       <ActionCell
         slot="item.actions"
         slot-scope="props"
-        :handle-edit="canEdit ? () => editHandler(props.item) : null"
-        :handle-delete="canDelete ? () => deleteHandler(props.item) : null"
+        :handle-edit="() => canEdit ? editHandler(props.item) : null"
+        :handle-delete="() => canDelete ? deleteHandler(props.item) : null"
       />
     </v-data-table>
   </v-container>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref, useContext, toRefs, useRouter, useFetch } from '@nuxtjs/composition-api'
-import ActionCell from '~/components/table/ActionCell.vue'
-import PageFilter from '~/components/admin/page/PageFilter.vue'
-import FormFilter from '~/components/form/FormFilter.vue'
-import itemSecurity from '~/composable/itemSecurity'
-import { Page, pageStore } from '~/store/PageStore'
-import { securityStore } from '~/store/SecurityStore'
+import { defineComponent, toRefs, useContext } from '@nuxtjs/composition-api'
 import itemList from '~/composable/ItemList'
+import itemSecurity from '~/composable/itemSecurity'
+import { pageCategoryStore } from '~/store/PageCategoryStore'
+import ActionCell from '~/components/table/ActionCell.vue'
+import PageCategoryFilter from '~/components/admin/page-category/PageCategoryFilter.vue'
+import FormFilter from '~/components/form/FormFilter.vue'
 
 const headers = [
-  { text: 'Title', value: 'title' },
-  { text: 'Url', value: 'url' },
-  { text: 'Catégorie', value: 'category' },
-  { text: 'est publié', value: 'isPublished' },
-  { text: 'est visible dans le menu', value: 'showInMenu' },
+  { text: 'Name', value: 'name' },
+  { text: 'Visible dans le menu', value: 'showInMenu' },
+  { text: 'Est publié', value: 'isPublished' },
   { text: 'Actions', value: 'actions', sortable: false }
 ]
 
 export default defineComponent({
   components: {
-    ActionCell, PageFilter, FormFilter
+    ActionCell, PageCategoryFilter, FormFilter
   },
   layout: 'admin',
   middleware: 'hasPermissions',
+  meta: {
+    permissions: ['USER_CAN_ACCESS_PAGE_CATEGORIES']
+  },
   setup () {
-    pageStore.setContext(useContext())
-
-    useFetch(async () => {
-      await pageStore.fetchAll()
-    });
-
+    pageCategoryStore.setContext(useContext())
     return {
-      ...toRefs(itemList(pageStore)),
-      ...toRefs(itemSecurity(pageStore)),
+      ...toRefs(itemList(pageCategoryStore)),
+      ...toRefs(itemSecurity(pageCategoryStore)),
       headers
     }
-  },
-  head () {
-    return {
-      title: 'Administration - Liste des pages'
-    }
-  },
-  meta: {
-    permissions: ['USER_CAN_ACCESS_PAGES']
   }
 })
 </script>

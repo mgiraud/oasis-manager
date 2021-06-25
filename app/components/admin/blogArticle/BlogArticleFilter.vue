@@ -46,19 +46,25 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'nuxt-property-decorator'
+import { defineComponent, ref } from '@nuxtjs/composition-api'
 import DateType from '~/components/form/DateType.vue'
 
-@Component({
+export default defineComponent({
   components: {
     DateType
+  },
+  props: {
+    values: {
+      type: Object,
+      required: true
+    }
+  },
+  setup (props: any[]) {
+    const item = ref(props.values)
+
+    return {
+      item
+    }
   }
 })
-export default class BlogArticleFilter extends Vue {
-  @Prop({ type: Object, required: true }) readonly values!: any
-
-  get item () {
-    return this.values
-  }
-}
 </script>

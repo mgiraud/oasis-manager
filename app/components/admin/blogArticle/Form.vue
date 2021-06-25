@@ -8,8 +8,8 @@
             label="Titre"
             :error-messages="titleErrors"
             required
-            @input="$v.item.title.$touch()"
-            @blur="$v.item.title.$touch()"
+            @input="v$.title.$touch()"
+            @blur="v$.title.$touch()"
           />
         </v-col>
       </v-row>
@@ -44,9 +44,9 @@
       <v-row>
         <v-col>
           <v-combobox
-            v-if="mediaNodes"
+            v-if="state.mediaNodes"
             v-model="item.mediaNode"
-            :items="mediaNodes"
+            :items="state.mediaNodes"
             no-data-text="Aucun galerie n'a ce nom"
             label="Lier une galerie à cette page"
             item-text="name"
@@ -71,71 +71,78 @@
 </template>
 
 <script lang="ts">
-import { Component, mixins, namespace, Prop } from 'nuxt-property-decorator'
+import { computed, defineComponent, onMounted } from '@nuxtjs/composition-api'
+import useVuelidate from '@vuelidate/core'
 import { required, minLength } from 'vuelidate/lib/validators'
 import has from 'lodash/has'
-import { validationMixin } from 'vuelidate'
+import { FormErrors } from '~/api/repository'
+import { mediaNodeStore } from '~/store/MediaNodeStore'
+import { Page } from '~/store/PageStore'
 import Editor from '../../util/Editor.vue'
-import { MediaNode } from '~/store/media_node'
 
-const mediaNodeModule = namespace('media_node')
-
-@Component({
+export default defineComponent({
   components: {
     Editor
   },
-  validations: {
-    item: {
+  props: {
+    values: {
+      type: Object as () => Page,
+      required: true
+    },
+    errors: {
+      type: Object as () => FormErrors,
+      default: () => {}
+    }
+  },
+  setup (props) {
+    const item = computed(() => props.values)
+
+    const validation = computed(() => ({
       title: {
         required,
         minLength: minLength(4)
+      },
+      content: {
+        required,
+        minLength: minLength(2)
       }
+    }))
+
+    const v$ = useVuelidate(validation, item)
+
+    const violations = computed(() => props.errors)
+
+    const titleErrors = computed(() => {
+      const errors: string[] = []
+      if (!v$.value.title || !v$.value.title.$dirty) {
+        return errors
+      }
+      has(violations.value, 'title') && errors.push(violations.value.title)
+      v$.value.title.minLength.$invalid && errors.push('Le titre doit faire au moins 4 caractères')
+      return errors
+    })
+
+    const contentErrors = computed(() => {
+      const errors: string[] = []
+      if (!v$.value.content || !v$.value.content.$dirty) {
+        return errors
+      }
+      has(violations.value, 'content') && errors.push(violations.value.content)
+      v$.value.content.slug.$invalid && errors.push('Le contenu doit faire au moins 2 caractères')
+      return errors
+    })
+
+    onMounted(() => {
+      mediaNodeStore.fetchAll()
+    })
+
+    return {
+      item,
+      v$,
+      titleErrors,
+      contentErrors,
+      state: mediaNodeStore.getState()
     }
   }
 })
-export default class AdminBlogArticleForm extends mixins(validationMixin) {
-  @Prop({ type: Object, required: true })
-  values!: any
-
-  @Prop({ type: Object, default: () => {} })
-  errors!: any
-
-  @Prop({ type: Object, default: () => {} })
-  initialValues!: any
-
-  @mediaNodeModule.State('selectItems') mediaNodes!: MediaNode[] | null
-  @mediaNodeModule.Action('fetchSelectItems') getMediaNodes!: () => MediaNode[]
-
-  get item () {
-    return this.initialValues || this.values
-  }
-
-  get titleErrors () {
-    const errors: string[] = []
-    if (!this.$v.item.title || !this.$v.item.title.$dirty) {
-      return errors
-    }
-    has(this.violations, 'title') && errors.push(this.violations.title)
-    !this.$v.item.title.minLength && errors.push('Le titre doit faire au moins 4 caractères')
-    return errors
-  }
-
-  get contentErrors () {
-    const errors: string[] = []
-    if (!this.$v.item.content || !this.$v.item.content.$dirty) {
-      return errors
-    }
-    has(this.violations, 'content') && errors.push(this.violations.content)
-    !this.$v.item.content.slug && errors.push('Le contenu doit faire au moins 2 caractères')
-    return errors
-  }
-
-  get violations () {
-    return this.errors || {}
-  }
-
-  mounted () {
-    this.getMediaNodes()
-  }
-}
 </script>

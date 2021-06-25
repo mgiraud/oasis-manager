@@ -80,7 +80,7 @@ export default defineComponent({
       if (!v$.value.name || !v$.value.name.$dirty) {
         return errors
       }
-      has(violations, 'name') && errors.push(violations.name)
+      has(violations.value, 'name') && errors.push(violations.value.name)
       v$.value.name.minLength.$invalid && errors.push('Le titre doit faire au moins 4 caractères')
       return errors
     })

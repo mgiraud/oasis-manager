@@ -19,21 +19,24 @@ interface MediaNodeState extends CrudState<MediaNode> {
 
 class MediaNodeStore extends PersistentApiStore<MediaNodeState, MediaNode> {
   getAddLocation (): RawLocation | null {
-    return null;
+    return null
   }
 
   getEditLocation (item: MediaNode): RawLocation | null {
-    return null;
+    return null
   }
 
   getIdentifierFromUrlParam (param: string): string {
-    return '';
+    return ''
   }
 
   getListLocation (): RawLocation | null {
-    return null;
+    return null
   }
 
+  deleteRole = 'USER_CAN_DELETE_GALLERIES'
+  editRole = 'USER_CAN_EDIT_GALLERIES'
+  listRole = 'USER_CAN_ACCESS_GALLERIES'
 }
 
 export const mediaNodeStore = new MediaNodeStore('media_nodes')

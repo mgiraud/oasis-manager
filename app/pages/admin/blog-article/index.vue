@@ -4,11 +4,11 @@
       v-model="selected"
       :headers="headers"
       :items="items"
-      :items-per-page.sync="options.itemsPerPage"
-      :loading="isLoading"
+      :items-per-page.sync="filterOptions.itemsPerPage"
+      :loading="state.isLoading"
       loading-text="Loading..."
-      :options.sync="options"
-      :server-items-length="totalItems"
+      :options.sync="filterOptions"
+      :server-items-length="state.totalItems"
       class="elevation-1"
       item-key="@id"
       show-select
@@ -41,70 +41,65 @@
       <ActionCell
         slot="item.actions"
         slot-scope="props"
-        :handle-edit="canEditBlogArticle ? () => editHandler(props.item) : null"
-        :handle-delete="canDeleteBlogArticle ? () => deleteHandler(props.item) : null"
+        :handle-edit="canEdit ? () => editHandler(props.item) : null"
+        :handle-delete="canDelete ? () => deleteHandler(props.item) : null"
       />
+      <template v-if="item" slot="item.createdAt" slot-scope="{ item }">
+        {{ formatDate(item.createdAt) }}
+      </template>
     </v-data-table>
   </v-container>
 </template>
 
 <script lang="ts">
-import { Store } from 'vuex'
-import { Component, mixins, namespace } from 'nuxt-property-decorator'
+import { defineComponent, toRefs, useContext, useFetch } from '@nuxtjs/composition-api'
 import ActionCell from '~/components/table/ActionCell.vue'
 import BlogArticleFilter from '~/components/admin/blogArticle/BlogArticleFilter.vue'
 import FormFilter from '~/components/form/FormFilter.vue'
-import list from '~/mixins/list'
-import { BlogArticle } from '~/store/blog_article'
-import { MUTATIONS } from '~/store/crud'
-import { HydraGetRequestFilter } from '~/api/hydra'
+import itemList from '~/composable/ItemList'
+import itemSecurity from '~/composable/itemSecurity'
+import { blogArticleStore } from '~/store/BlogArticleStore'
+import { formatDate } from '~/composable/helpers/formatDate'
 
-const blogArticleModule = namespace('blog_article')
+const headers = [
+  { text: 'Title', value: 'title' },
+  { text: 'Tags', value: 'tags' },
+  { text: 'est publié', value: 'isPublished' },
+  { text: 'créé le', value: 'createdAt' },
+  { text: 'créé par', value: 'createdBy.nickname' },
+  { text: 'Actions', value: 'actions', sortable: false }
+]
 
-@Component({
+export default defineComponent({
   components: {
     ActionCell, BlogArticleFilter, FormFilter
   },
-  servicePrefix: 'admin-blogArticle',
-  resourcePrefix: '/api/blog_articles/',
   layout: 'admin',
   middleware: 'hasPermissions',
-  fetchOnServer: false,
+  setup () {
+    blogArticleStore.setContext(useContext())
+
+    useFetch(async () => {
+      await blogArticleStore.fetchAll()
+    });
+
+    return {
+      ...toRefs(itemList(blogArticleStore, {
+        sortBy: ['createdAt'],
+        sortDesc: ['desc']
+      })),
+      ...toRefs(itemSecurity(blogArticleStore)),
+      headers,
+      formatDate
+    }
+  },
+  head () {
+    return {
+      title: 'Administration - Liste des articles de blog'
+    }
+  },
   meta: {
     permissions: ['USER_CAN_ACCESS_BLOG_ARTICLES']
   }
 })
-export default class AdminBlogArticleIndex extends mixins(list) {
-  selected = []
-  headers = [
-    { text: 'Title', value: 'title' },
-    { text: 'Tags', value: 'tags' },
-    { text: 'est publié', value: 'isPublished' },
-    { text: 'créé par', value: 'createdBy.nickname' },
-    { text: 'Actions', value: 'actions', sortable: false }
-  ]
-
-    options: HydraGetRequestFilter = {
-      sortBy: ['createdAt'],
-      sortDesc: ['desc']
-    }
-
-    @blogArticleModule.Getter('list') items !: () => BlogArticle
-    @blogArticleModule.State('deleted') deletedItem!: BlogArticle | null
-    @blogArticleModule.State('error') error!: string | null
-    @blogArticleModule.State('isLoading') isLoading!: boolean
-    @blogArticleModule.State('totalItems') totalItems!: number
-    @blogArticleModule.Mutation(MUTATIONS.RESET_LIST) resetList!: (reset: boolean) => void
-
-    get canEditBlogArticle () {
-      return this.hasPermission('USER_CAN_EDIT_BLOG_ARTICLES')
-    }
-
-    get canDeleteBlogArticle () {
-      return this.hasPermission('USER_CAN_DELETE_BLOG_ARTICLES')
-    }
-
-    @blogArticleModule.Action('fetchAll') fetchAll!: () => BlogArticle[]
-    @blogArticleModule.Action('del') deleteItem!: (BlogArticle: BlogArticle) => Promise<void>
-}
 </script>

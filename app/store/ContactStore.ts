@@ -30,7 +30,7 @@ class ContactStore extends PersistentApiStore<ContactState, Contact> {
   }
 
   getListLocation (): RawLocation | null {
-    return null;
+    return { name: 'admin-contact' };
   }
 
   deleteRole = 'USER_CAN_DELETE_CONTACT'

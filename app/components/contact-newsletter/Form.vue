@@ -19,7 +19,7 @@ import { Component, mixins, namespace, Prop, Watch } from 'nuxt-property-decorat
 import { email } from 'vuelidate/lib/validators'
 import has from 'lodash/has'
 import { validationMixin } from 'vuelidate'
-import { ContactNewsletter } from '~/store/contact_newsletter'
+import { ContactNewsletter } from '~/store/ContactNewsletterStore'
 import { FormErrors } from '~/api/repository'
 import NotificationMixin from '~/mixins/notification'
 

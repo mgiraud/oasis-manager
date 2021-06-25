@@ -4,11 +4,11 @@
       v-model="selected"
       :headers="headers"
       :items="items"
-      :items-per-page.sync="options.itemsPerPage"
-      :loading="isLoading"
+      :items-per-page.sync="filterOptions.itemsPerPage"
+      :loading="state.isLoading"
       loading-text="Loading..."
-      :options.sync="options"
-      :server-items-length="totalItems"
+      :options.sync="filterOptions"
+      :server-items-length="state.totalItems"
       class="elevation-1"
       item-key="@id"
       show-select
@@ -37,55 +37,41 @@
 </template>
 
 <script lang="ts">
-import { Component, mixins, namespace } from 'nuxt-property-decorator'
-import { formatRelative, parseISO } from 'date-fns'
-import { fr } from 'date-fns/locale'
+import { defineComponent, toRefs, useContext } from '@nuxtjs/composition-api'
 import ActionCell from '~/components/table/ActionCell.vue'
 import ContactNewsletterFilter from '~/components/admin/contact-newsletter/ContactNewsletterFilter.vue'
 import FormFilter from '~/components/form/FormFilter.vue'
-import list from '~/mixins/list'
-import { Contact } from '~/store/ContactStore'
-import { MUTATIONS } from '~/store/crud'
-import { HydraGetRequestFilter } from '~/api/hydra'
+import itemList from '~/composable/ItemList'
+import itemSecurity from '~/composable/itemSecurity'
+import { contactNewsletterStore } from '~/store/ContactNewsletterStore'
+import { formatDate } from '~/composable/helpers/formatDate'
 
-const contactNewsletterModule = namespace('contact_newsletter')
+const headers = [
+  { text: 'Email', value: 'email' },
+  { text: 'Enregistré le ', value: 'createdAt' }
+]
 
-@Component({
+export default defineComponent({
   components: {
     ActionCell, ContactNewsletterFilter, FormFilter
   },
-  servicePrefix: 'admin-contact',
-  resourcePrefix: '/api/contacts/',
   layout: 'admin',
   middleware: 'hasPermissions',
-  fetchOnServer: false,
   meta: {
     permissions: ['USER_CAN_VIEW_CONTACT_NEWSLETTER']
+  },
+  setup () {
+    contactNewsletterStore.setContext(useContext())
+
+    return {
+      headers,
+      formatDate,
+      ...toRefs(itemList(contactNewsletterStore, {
+        sortBy: ['createdAt'],
+        sortDesc: ['desc']
+      })),
+      ...toRefs(itemSecurity(contactNewsletterStore)),
+    }
   }
 })
-export default class AdminContactIndex extends mixins(list) {
-  selected = []
-  headers = [
-    { text: 'Email', value: 'email' },
-    { text: 'Enregistré le ', value: 'createdAt' }
-  ]
-
-  options: HydraGetRequestFilter = {
-    sortBy: ['createdAt'],
-    sortDesc: ['desc']
-  }
-
-  @contactNewsletterModule.Getter('list') items !: () => Contact
-  @contactNewsletterModule.State('deleted') deletedItem!: Contact | null
-  @contactNewsletterModule.State('error') error!: string | null
-  @contactNewsletterModule.State('isLoading') isLoading!: boolean
-  @contactNewsletterModule.State('totalItems') totalItems!: number
-  @contactNewsletterModule.Mutation(MUTATIONS.RESET_LIST) resetList!: (reset: boolean) => void
-  @contactNewsletterModule.Action('fetchAll') fetchAll!: () => Contact[]
-  @contactNewsletterModule.Action('del') deleteItem!: (Contact: Contact) => Promise<void>
-
-  formatDate (rawDate: string) {
-    return formatRelative(parseISO(rawDate), new Date(), { locale: fr })
-  }
-}
 </script>

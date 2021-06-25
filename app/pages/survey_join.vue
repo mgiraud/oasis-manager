@@ -62,7 +62,7 @@
 </template>
 
 <script lang="ts">
-import SurveyJoinForm from '../components/survey_join/Form.vue'
+import SurveyJoinForm from '../components/survey-join/Form.vue'
 import Toolbar from '../components/form/Toolbar.vue'
 import Loading from '../components/util/Loading.vue'
 import { SurveyJoin } from '~/store/SurveyJoinStore'

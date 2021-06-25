@@ -4,7 +4,7 @@ import { RawLocation } from 'vue-router'
 import { HydraMemberObject } from '~/api/hydra'
 import { CrudState, PersistentApiStore } from '~/store/main'
 import { MediaNode } from '~/store/media_node'
-import { PageCategory } from '~/store/page_category'
+import { PageCategory } from '~/store/PageCategoryStore'
 
 export type Page = HydraMemberObject & {
   'url': string;

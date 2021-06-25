@@ -2,17 +2,23 @@
   <v-form>
     <v-container>
       <v-row>
-        <v-col cols="12" md="6">
+        <v-col
+          cols="12"
+          md="6"
+        >
           <v-text-field
             v-model="item.name"
             label="Nom"
             :error-messages="nameErrors"
             required
-            @input="$v.item.name.$touch()"
-            @blur="$v.item.name.$touch()"
+            @input="v$.name.$touch()"
+            @blur="v$.name.$touch()"
           />
         </v-col>
-        <v-col cols="12" md="6">
+        <v-col
+          cols="12"
+          md="6"
+        >
           <v-switch
             v-model="item.showInMenu"
             label="Ajouter au menu"
@@ -21,7 +27,10 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" md="6">
+        <v-col
+          cols="12"
+          md="6"
+        >
           <v-switch
             v-model="item.isPublished"
             label="Publier"
@@ -34,40 +43,53 @@
 </template>
 
 <script lang="ts">
-import { Component, mixins, Prop } from 'nuxt-property-decorator'
-import { required, minLength } from 'vuelidate/lib/validators'
+import { computed, defineComponent } from '@nuxtjs/composition-api'
+import useVuelidate from '@vuelidate/core'
+import { required, minLength } from '@vuelidate/validators'
 import has from 'lodash/has'
-import { validationMixin } from 'vuelidate'
+import { FormErrors } from '~/api/repository'
+import { Page } from '~/store/PageStore'
 
-@Component({
-  validations: {
-    item: {
+export default defineComponent({
+  props: {
+    values: {
+      type: Object as () => Page,
+      required: true
+    },
+    errors: {
+      type: Object as () => FormErrors,
+      default: () => {}
+    }
+  },
+  setup (props) {
+    const item = computed(() => props.values)
+
+    const validation = computed(() => ({
       name: {
         required,
         minLength: minLength(4)
       }
+    }))
+
+    const v$ = useVuelidate(validation, item)
+
+    const violations = computed(() => props.errors)
+
+    const nameErrors = computed(() => {
+      const errors: string[] = []
+      if (!v$.value.name || !v$.value.name.$dirty) {
+        return errors
+      }
+      has(violations, 'name') && errors.push(violations.name)
+      v$.value.name.minLength.$invalid && errors.push('Le titre doit faire au moins 4 caractères')
+      return errors
+    })
+
+    return {
+      item,
+      v$,
+      nameErrors
     }
   }
 })
-export default class PageCategoryForm extends mixins(validationMixin) {
-  @Prop({ type: Object, default: () => {} }) readonly values!: any
-  @Prop({ type: Object, default: () => {} }) readonly errors!: any
-  @Prop({ type: Object, default: () => {} }) readonly initialValues!: any
-
-  get item () {
-    return this.initialValues || this.values
-  }
-
-  get nameErrors () {
-    const errors: string[] = []
-    if (!this.$v.item.name || !this.$v.item.name.$dirty) { return errors }
-    has(this.violations, 'name') && errors.push(this.violations.name)
-    !this.$v.item.name.minLength && errors.push('Le titre doit faire au moins 4 caractères')
-    return errors
-  }
-
-  get violations () {
-    return this.errors || {}
-  }
-}
 </script>

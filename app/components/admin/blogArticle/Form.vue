@@ -76,7 +76,6 @@ import { required, minLength } from 'vuelidate/lib/validators'
 import has from 'lodash/has'
 import { validationMixin } from 'vuelidate'
 import Editor from '../../util/Editor.vue'
-import { PageCategory } from '~/store/page_category'
 import { MediaNode } from '~/store/media_node'
 
 const mediaNodeModule = namespace('media_node')

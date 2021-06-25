@@ -202,11 +202,7 @@ export default defineComponent({
     const dialog = ref(false)
     const selectedLog: Ref<string | null> = ref(null)
     const editor: Ref<Editor | null> = ref(null)
-    const item = ref(props.values)
-
-    watch(() => props.values, (values) => {
-      item.value = values
-    })
+    const item = computed(() => props.values)
     const validation = computed(() => ({
       title: {
         required,
@@ -222,7 +218,7 @@ export default defineComponent({
     const v$ = useVuelidate(validation, item)
 
     const violations = computed(() => {
-      return props.errors || {}
+      return props.errors
     })
 
     const titleErrors = computed(() => {

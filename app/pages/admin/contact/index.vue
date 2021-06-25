@@ -4,11 +4,11 @@
       v-model="selected"
       :headers="headers"
       :items="items"
-      :items-per-page.sync="options.itemsPerPage"
-      :loading="isLoading"
+      :items-per-page.sync="filterOptions.itemsPerPage"
+      :loading="state.isLoading"
       loading-text="Loading..."
-      :options.sync="options"
-      :server-items-length="totalItems"
+      :options.sync="filterOptions"
+      :server-items-length="state.totalItems"
       class="elevation-1"
       item-key="@id"
       show-select
@@ -42,58 +42,49 @@
 </template>
 
 <script lang="ts">
-import { Component, mixins, namespace } from 'nuxt-property-decorator'
+import { defineComponent, toRefs, useContext } from '@nuxtjs/composition-api'
 import { formatRelative, parseISO } from 'date-fns'
 import { fr } from 'date-fns/locale'
 import ActionCell from '~/components/table/ActionCell.vue'
 import ContactFilter from '~/components/admin/contact/ContactFilter.vue'
 import FormFilter from '~/components/form/FormFilter.vue'
-import list from '~/mixins/list'
-import { Contact } from '~/store/contact'
-import { MUTATIONS } from '~/store/crud'
-import { HydraGetRequestFilter } from '~/api/hydra'
+import itemList from '~/composable/ItemList'
+import itemSecurity from '~/composable/itemSecurity'
+import { contactStore } from '~/store/ContactStore'
 
-const contactModule = namespace('contact')
+const headers = [
+  { text: 'Email', value: 'email' },
+  { text: 'Prénom', value: 'firstName' },
+  { text: 'Nom', value: 'lastName' },
+  { text: 'nous a contacte', value: 'createdAt' },
+  { text: 'Actions', value: 'actions', sortable: false }
+]
 
-@Component({
+export default defineComponent({
   components: {
     ActionCell, ContactFilter, FormFilter
   },
-  servicePrefix: 'admin-contact',
-  resourcePrefix: '/api/contacts/',
   layout: 'admin',
   middleware: 'hasPermissions',
-  fetchOnServer: false,
   meta: {
     permissions: ['USER_CAN_VIEW_CONTACT']
+  },
+  setup () {
+    contactStore.setContext(useContext())
+
+    const formatDate = (rawDate: string) => {
+      return formatRelative(parseISO(rawDate), new Date(), { locale: fr })
+    }
+
+    return {
+      headers,
+      formatDate,
+      ...toRefs(itemList(contactStore, {
+        sortBy: ['createdAt'],
+        sortDesc: ['desc']
+      })),
+      ...toRefs(itemSecurity(contactStore))
+    }
   }
 })
-export default class AdminContactIndex extends mixins(list) {
-  selected = []
-  headers = [
-    { text: 'Email', value: 'email' },
-    { text: 'Prénom', value: 'firstName' },
-    { text: 'Nom', value: 'lastName' },
-    { text: 'nous a contacte', value: 'createdAt' },
-    { text: 'Actions', value: 'actions', sortable: false }
-  ]
-
-  options: HydraGetRequestFilter = {
-    sortBy: ['createdAt'],
-    sortDesc: ['desc']
-  }
-
-  @contactModule.Getter('list') items !: () => Contact
-  @contactModule.State('deleted') deletedItem!: Contact | null
-  @contactModule.State('error') error!: string | null
-  @contactModule.State('isLoading') isLoading!: boolean
-  @contactModule.State('totalItems') totalItems!: number
-  @contactModule.Mutation(MUTATIONS.RESET_LIST) resetList!: (reset: boolean) => void
-  @contactModule.Action('fetchAll') fetchAll!: () => Contact[]
-  @contactModule.Action('del') deleteItem!: (Contact: Contact) => Promise<void>
-
-  formatDate (rawDate: string) {
-    return formatRelative(parseISO(rawDate), new Date(), { locale: fr })
-  }
-}
 </script>

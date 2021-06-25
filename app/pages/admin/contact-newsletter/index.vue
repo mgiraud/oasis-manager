@@ -44,7 +44,7 @@ import ActionCell from '~/components/table/ActionCell.vue'
 import ContactNewsletterFilter from '~/components/admin/contact-newsletter/ContactNewsletterFilter.vue'
 import FormFilter from '~/components/form/FormFilter.vue'
 import list from '~/mixins/list'
-import { Contact } from '~/store/contact'
+import { Contact } from '~/store/ContactStore'
 import { MUTATIONS } from '~/store/crud'
 import { HydraGetRequestFilter } from '~/api/hydra'
 

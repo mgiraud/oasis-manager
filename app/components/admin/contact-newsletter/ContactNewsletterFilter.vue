@@ -13,14 +13,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
+import filterComponent from '~/composable/filter/filterComponent'
 
-@Component
-export default class ContactNewsletterFilter extends Vue {
-  @Prop({ type: Object, required: true }) readonly values!: any
-
-  get item () {
-    return this.values
-  }
-}
+export default defineComponent(filterComponent)
 </script>

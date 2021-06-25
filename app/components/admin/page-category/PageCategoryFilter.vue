@@ -36,21 +36,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@nuxtjs/composition-api'
+import { defineComponent } from '@nuxtjs/composition-api'
+import filterComponent from '~/composable/filter/filterComponent'
 
-export default defineComponent({
-  props: {
-    values: {
-      type: Object,
-      required: true
-    }
-  },
-  setup (props) {
-    const item = ref(props.values)
-
-    return {
-      item
-    }
-  }
-})
+export default defineComponent(filterComponent)
 </script>

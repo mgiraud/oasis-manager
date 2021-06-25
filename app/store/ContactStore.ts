@@ -3,6 +3,7 @@ import { HydraMemberObject } from '~/api/hydra'
 import { CrudState, PersistentApiStore } from '~/store/main'
 
 export type Contact = HydraMemberObject & {
+  id: number
   firstName: string
   lastName: string
   email: string
@@ -21,20 +22,20 @@ class ContactStore extends PersistentApiStore<ContactState, Contact> {
 
   getEditLocation (item: Contact): RawLocation | null {
     return {
-      name: 'contact-id',
+      name: 'admin-contact-id',
       params: {
-        id: item.email
+        id: item.id.toString()
       }
     }
-  }
-
-  getIdentifierFromUrlParam (param: string): string {
-    return '';
   }
 
   getListLocation (): RawLocation | null {
     return null;
   }
+
+  deleteRole = 'USER_CAN_DELETE_CONTACT'
+  editRole = 'USER_CAN_EDIT_CONTACT'
+  listRole = 'USER_CAN_VIEW_CONTACT'
 }
 
 export const contactStore = new ContactStore('contacts')

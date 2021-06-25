@@ -40,7 +40,7 @@ import { defineComponent, ref, useContext, watch, useRouter } from '@nuxtjs/comp
 import ContactForm from '../components/contact/Form.vue'
 import Toolbar from '../components/form/Toolbar.vue'
 import Loading from '../components/util/Loading.vue'
-import { Contact } from '~/store/contact'
+import { Contact } from '~/store/ContactStore'
 import { ElementWithValidation } from '~/vue-shim'
 import PageModel from '~/components/page/PageModel.vue'
 import { contactStore } from '~/store/ContactStore'

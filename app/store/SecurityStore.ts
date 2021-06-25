@@ -1,5 +1,5 @@
 import { Context } from '@nuxt/types'
-import { computed } from '@nuxtjs/composition-api'
+import { reactive, Ref, ssrRef } from '@nuxtjs/composition-api'
 import { PersistentStore, UseContextReturn } from '~/store/main'
 import { Member } from '~/store/member'
 
@@ -12,7 +12,7 @@ export interface LoginCredentials {
 }
 
 export interface SecurityState {
-  permissions: string[]
+  permissions: Ref<string[]> | null
   credentialError: boolean
   loggedIn: boolean
   tokenExpiration: number
@@ -24,28 +24,23 @@ export class SecurityStore extends PersistentStore<SecurityState> {
   protected context!: UseContextReturn | Context
 
   protected data (): SecurityState {
-    return {
-      permissions: [],
+    return reactive({
+      permissions: null,
       credentialError: false,
       loggedIn: false,
       tokenExpiration: 0,
       refreshTokenExpiration: 0,
       member: null
-    }
+    })
   }
 
   public setContext (context: UseContextReturn | Context) {
     this.context = context
   }
 
-  loadPermissions () {
-    try {
-      const data = fs.readFileSync(path.resolve('app/security/permissions.json'), { encoding: 'utf8', flag: 'r' })
-      this.state.permissions = JSON.parse(data)
-      return this.state.permissions
-    } catch (e) {
-      console.log(e)
-    }
+  loadPermissions (): string[] {
+    const data = fs.readFileSync(path.resolve('app/security/permissions.json'), { encoding: 'utf8', flag: 'r' })
+    return JSON.parse(data)
   }
 
   async login (credentials: LoginCredentials) {
@@ -104,7 +99,7 @@ export class SecurityStore extends PersistentStore<SecurityState> {
     this.state.loggedIn = loggedIn
   }
 
-  setPermissions (permissions: string[]) {
+  setPermissions (permissions: Ref<string[]>) {
     this.state.permissions = permissions
   }
 }

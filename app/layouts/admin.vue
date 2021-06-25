@@ -12,6 +12,7 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 import MenuDrawer from '~/components/admin/MenuDrawer.vue'
 import Alert from '~/components/util/Alert.vue'
+import usePermissions from '~/composable/usePermissions'
 import { securityStore } from '~/store/SecurityStore'
 
 export default defineComponent({
@@ -19,10 +20,13 @@ export default defineComponent({
     MenuDrawer, Alert
   },
   setup () {
-    if (process.server) {
-      securityStore.loadPermissions()
+    const { permissions } = usePermissions()
+
+
+    return {
+      a: securityStore.getState().permissions,
+      permissions
     }
-    return {}
   }
 })
 </script>

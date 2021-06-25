@@ -1,7 +1,12 @@
 <template>
   <v-container fluid>
+    {{groups}}
     <v-row>
-      <v-col cols="12" sm="6" md="6">
+      <v-col
+        cols="12"
+        sm="6"
+        md="6"
+      >
         <v-text-field
           v-model="item.email"
           label="Email du membre"
@@ -9,7 +14,11 @@
         />
       </v-col>
 
-      <v-col cols="12" sm="6" md="6">
+      <v-col
+        cols="12"
+        sm="6"
+        md="6"
+      >
         <v-text-field
           v-model="item.nickname"
           label="Le pseudo du membre"
@@ -18,15 +27,20 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12" md="6">
+      <v-col
+        cols="12"
+        md="6"
+      >
+        {{item.groups}}
         <v-combobox
-          v-if="groupsSelectItems"
+          v-if="memberGroupState.selectItems"
           v-model="item.groups"
-          :items="groupsSelectItems"
+          :items="memberGroupState.selectItems"
           label="Dans le groupe"
           item-text="name"
           item-value="name"
           clearable
+          :return-object="false"
         />
       </v-col>
     </v-row>
@@ -34,23 +48,29 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, namespace, Prop } from 'nuxt-property-decorator'
-import { MemberGroup } from '~/store/member_group'
+import { defineComponent, onMounted, ref, useContext } from '@nuxtjs/composition-api'
+import { memberGroupStore } from '~/store/MemberGroupStore'
+import { Member } from '~/store/MemberStore'
 
-const memberGroupModule = namespace('member_group')
+export default defineComponent({
+  props: {
+    values: {
+      type: Object as () => Member,
+      required: true
+    },
+  },
+  setup (props: any[]) {
+    const item = ref(props.values)
+    memberGroupStore.setContext(useContext())
 
-@Component
-export default class MemberFilter extends Vue {
-  @Prop({ type: Object, required: true }) readonly values!: any
-  @memberGroupModule.State('selectItems') groupsSelectItems !: MemberGroup[]
-  @memberGroupModule.Action('fetchSelectItems') groupsGetSelectItems !: () => MemberGroup[]
+    onMounted(() => {
+      memberGroupStore.fetchSelectItems()
+    })
 
-  get item () {
-    return this.values
+    return {
+      item,
+      memberGroupState: memberGroupStore.getState()
+    }
   }
-
-  mounted () {
-    this.groupsGetSelectItems()
-  }
-}
+})
 </script>

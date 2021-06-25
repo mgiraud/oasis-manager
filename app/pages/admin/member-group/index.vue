@@ -3,7 +3,7 @@
     <v-data-table
       v-model="selected"
       :headers="headers"
-      :items="filteredItems"
+      :items="items"
       :items-per-page.sync="filterOptions.itemsPerPage"
       :loading="state.isLoading"
       loading-text="Loading..."
@@ -16,78 +16,84 @@
     >
       <template #top>
         <v-toolbar flat color="white">
-          <v-toolbar-title>Liste de membres</v-toolbar-title>
+          <v-toolbar-title>Groupe de membres</v-toolbar-title>
 
           <v-spacer />
 
           <FormFilter :handle-filter="onSendFilter" :handle-reset="resetFilter">
-            <MemberFilter
+            <MemberGroupFilter
               ref="filterForm"
               slot="filter"
               :values="filters"
             />
           </FormFilter>
+
+          <v-btn
+            color="primary"
+            dark
+            class="ml-2"
+            @click="addHandler"
+          >
+            New Item
+          </v-btn>
         </v-toolbar>
+      </template>
+      <template v-if="item && item.category" slot="item.category" slot-scope="{ item }">
+        <nuxt-link :to="{name: 'admin-member-group-id', params: {id: item.category.id }}">
+          {{ item.category.name }}
+        </nuxt-link>
       </template>
       <ActionCell
         slot="item.actions"
         slot-scope="props"
         :handle-edit="canEdit ? () => editHandler(props.item) : null"
+        :handle-delete="canDelete ? () => deleteHandler(props.item) : null"
       />
     </v-data-table>
   </v-container>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, toRefs, useContext, useFetch } from '@nuxtjs/composition-api'
-import itemList from '~/composable/ItemList'
-import itemSecurity from '~/composable/itemSecurity'
+import { defineComponent, toRefs, useContext, useFetch } from '@nuxtjs/composition-api'
 import ActionCell from '~/components/table/ActionCell.vue'
 import FormFilter from '~/components/form/FormFilter.vue'
-import MemberFilter from '~/components/admin/member/MemberFilter.vue'
-import { memberStore } from '~/store/MemberStore'
+import MemberGroupFilter from '~/components/admin/memberGroup/MemberGroupFilter.vue'
+import itemList from '~/composable/ItemList'
+import itemSecurity from '~/composable/itemSecurity'
+import { memberGroupStore } from '~/store/MemberGroupStore'
 
 const headers = [
-  { text: 'Email', value: 'email' },
-  { text: 'Pseudo', value: 'nickname' },
+  { text: 'Nom', value: 'name' },
+  { text: 'Nombre de membres', value: 'memberCount' },
   { text: 'Actions', value: 'actions', sortable: false }
 ]
 
 export default defineComponent({
   components: {
-    ActionCell, MemberFilter, FormFilter
+    ActionCell, MemberGroupFilter, FormFilter
   },
   layout: 'admin',
   middleware: 'hasPermissions',
   setup () {
-    const context = useContext()
-    memberStore.setContext(context)
+    memberGroupStore.setContext(useContext())
 
     useFetch(async () => {
-      await memberStore.fetchAll()
+      await memberGroupStore.fetchAll()
     });
 
-    const itemListHelper = itemList(memberStore)
-
-    const filteredItems = computed(() => {
-      if (context.$auth.isAdmin) { return itemListHelper.items }
-      return itemListHelper.items.filter(item => !item.isAdmin)
-    })
-
     return {
-      ...toRefs(itemListHelper),
-      ...toRefs(itemSecurity(memberStore)),
-      headers,
-      filteredItems
+      ...toRefs(itemList(memberGroupStore)),
+      ...toRefs(itemSecurity(memberGroupStore)),
+      headers
     }
   },
   head () {
     return {
-      title: 'Administration - Liste des membres'
+      title: 'Administration - Liste des groupes de membre'
     }
   },
   meta: {
-    permissions: ['USER_CAN_ACCESS_MEMBERS']
+    permissions: ['USER_CAN_ACCESS_MEMBER_GROUPS']
   }
 })
 </script>

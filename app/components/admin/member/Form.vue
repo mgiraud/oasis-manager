@@ -8,15 +8,15 @@
             label="Pseudo"
             :error-messages="nicknameErrors"
             required
-            @input="$v.item.nickname.$touch()"
-            @blur="$v.item.nickname.$touch()"
+            @input="v$.nickname.$touch()"
+            @blur="v$.nickname.$touch()"
           />
         </v-col>
         <v-col cols="12" sm="6" md="6">
           <v-combobox
-            v-if="groupsSelectItems"
+            v-if="groupSelectItems"
             v-model="item.groups"
-            :items="groupsSelectItems"
+            :items="groupSelectItems"
             label="Groupe"
             item-text="name"
             item-value="@id"
@@ -53,61 +53,68 @@
 </template>
 
 <script lang="ts">
-import { Component, mixins, namespace, Prop } from 'nuxt-property-decorator'
+import { computed, defineComponent, onMounted } from '@nuxtjs/composition-api'
+import useVuelidate from '@vuelidate/core'
 import { required, minLength } from 'vuelidate/lib/validators'
 import has from 'lodash/has'
-import { validationMixin } from 'vuelidate'
-import { MemberGroup } from '~/store/member_group'
+import { FormErrors } from '~/api/repository'
+import usePermissions from '~/composable/usePermissions'
+import { memberGroupStore } from '~/store/MemberGroupStore'
+import { Member } from '~/store/MemberStore'
+import { securityStore } from '~/store/SecurityStore'
 
-const memberGroupModule = namespace('member_group')
-const securityModule = namespace('security')
+const permissionOverride = ['Fusionner les permissions', 'Permissions du groupe seulement', 'Permission du membre seulement']
 
-@Component({
-  name: 'MemberForm',
-  validations: {
-    item: {
+export default defineComponent({
+  props: {
+    values: {
+      type: Object as () => Member,
+      required: true
+    },
+    errors: {
+      type: Object as () => FormErrors,
+      default: () => {}
+    }
+  },
+  setup (props) {
+    const item = computed(() => props.values)
+
+    const validation = computed(() => ({
       nickname: {
         required,
         minLength: minLength(4)
       }
+    }))
+
+    const v$ = useVuelidate(validation, item)
+
+    const violations = computed(() => props.errors)
+
+    const nicknameErrors = computed(() => {
+      const errors: string[] = []
+      if (!v$.value.nickname || !v$.value.nickname.$dirty) {
+        return errors
+      }
+      has(violations.value, 'nickname') && errors.push(violations.value.nickname)
+      v$.value.nickname.minLength.$invalid && errors.push('Le titre doit faire au moins 4 caractères')
+      return errors
+    })
+
+    onMounted(() => {
+      memberGroupStore.fetchAll()
+    })
+
+    usePermissions()
+
+    return {
+      item,
+      v$,
+      nicknameErrors,
+      state: securityStore.getState(),
+      permissionOverride,
+      permissions: securityStore.getState().permissions,
+      groupSelectItems: memberGroupStore.list
     }
   }
 })
-export default class MemberForm extends mixins(validationMixin) {
-  @Prop({ type: Object, default: () => {} })
-  values!: any
-
-  @Prop({ type: Object, default: () => {} })
-  errors!: any
-
-  @Prop({ type: Object, default: () => {} })
-  initialValues!: any
-
-  permissionOverride = ['Fusionner les permissions', 'Permissions du groupe seulement', 'Permission du membre seulement']
-
-  @securityModule.State('permissions') permissions !: string[]
-  @memberGroupModule.State('selectItems') groupsSelectItems !: string[]
-
-  get item () {
-    return this.initialValues || this.values
-  }
-
-  get nicknameErrors () {
-    const errors:string[] = []
-    if (!this.$v.item.nickname || !this.$v.item.nickname.$dirty) { return errors }
-    has(this.violations, 'nickname') && errors.push(this.violations.nickname)
-    !this.$v.item.nickname.minLength && errors.push('Le pseudo doit faire au moins 4 caractères')
-    return errors
-  }
-
-  get violations () {
-    return this.errors || {}
-  }
-
-  mounted () {
-    this.groupsGetSelectItems()
-  }
-
-  @memberGroupModule.Action('fetchSelectItems') groupsGetSelectItems !: () => MemberGroup[]
-}
 </script>

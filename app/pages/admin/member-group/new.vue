@@ -10,9 +10,9 @@
 import { defineComponent, reactive, toRefs, useContext } from '@nuxtjs/composition-api'
 import Loading from '~/components/util/Loading.vue'
 import Toolbar from '~/components/form/Toolbar.vue'
-import Form from '~/components/admin/member/Form.vue'
+import Form from '~/components/admin/memberGroup/Form.vue'
 import itemCreate from '~/composable/ItemCreate'
-import { memberStore } from '~/store/MemberStore'
+import { memberGroupStore } from '~/store/MemberGroupStore'
 
 export default defineComponent({
   components: {
@@ -20,15 +20,15 @@ export default defineComponent({
   },
   middleware: 'hasPermissions',
   meta: {
-    permissions: ['USER_CAN_EDIT_MEMBERS']
+    permissions: ['USER_CAN_EDIT_MEMBER_GROUPS']
   },
   setup () {
     const item = reactive({ content: null })
-    memberStore.setContext(useContext())
+    memberGroupStore.setContext(useContext())
 
     return {
       item,
-      ...toRefs(itemCreate(memberStore)),
+      ...toRefs(itemCreate(memberGroupStore)),
     }
   }
 })

@@ -24,12 +24,12 @@
         <Toolbar
           :handle-submit="onSendForm"
           :handle-reset="resetForm"
-          :handle-delete="null"
+          :handle-delete="canDelete ? del : null"
           :handle-back="back"
         >
           <template #left>
             <h1 v-if="item">
-              Edit {{ item['url'] }}
+              Edition du groupe "{{ item['name'] }}"
             </h1>
           </template>
         </Toolbar>
@@ -42,10 +42,10 @@
 import { defineComponent, toRefs, useContext } from '@nuxtjs/composition-api'
 import Loading from '~/components/util/Loading.vue'
 import Toolbar from '~/components/form/Toolbar.vue'
-import Form from '~/components/admin/member/Form.vue'
+import Form from '~/components/admin/memberGroup/Form.vue'
 import itemSecurity from '~/composable/itemSecurity'
 import itemUpdate from '~/composable/itemUpdate'
-import { memberStore } from '~/store/MemberStore'
+import { memberGroupStore } from '~/store/MemberGroupStore'
 
 export default defineComponent({
   components: {
@@ -53,15 +53,16 @@ export default defineComponent({
   },
   middleware: 'hasPermissions',
   meta: {
-    permissions: ['USER_CAN_EDIT_MEMBERS']
+    permissions: ['USER_CAN_EDIT_MEMBER_GROUPS']
   },
   setup () {
-    memberStore.setContext(useContext())
+    memberGroupStore.setContext(useContext())
 
     return {
-      ...toRefs(itemUpdate(memberStore)),
-      ...toRefs(itemSecurity(memberStore)),
+      ...toRefs(itemUpdate(memberGroupStore)),
+      ...toRefs(itemSecurity(memberGroupStore)),
     }
   }
 })
+
 </script>

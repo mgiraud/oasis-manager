@@ -180,6 +180,7 @@ import SubMenu from '~/components/layout/SubMenu.vue'
 import SideMenu from '~/components/layout/SideMenu.vue'
 import NewsletterForm from '~/components/contact-newsletter/Form.vue'
 import Alert from '~/components/util/Alert.vue'
+import usePermissions from '~/composable/usePermissions'
 import { securityStore } from '~/store/SecurityStore'
 import { pageStore } from '~/store/PageStore'
 
@@ -192,10 +193,6 @@ export default defineComponent({
     pageStore.setContext(context)
     securityStore.setContext(context)
 
-    if (process.server) {
-        securityStore.loadPermissions()
-    }
-
     onMounted(async () => {
       try {
         await pageStore.fetchAll()
@@ -203,6 +200,9 @@ export default defineComponent({
         context.$auth.reset()
       }
     })
+
+    usePermissions()
+
     return {
       pageState: pageStore.getState(),
       logout: () => securityStore.logout(),

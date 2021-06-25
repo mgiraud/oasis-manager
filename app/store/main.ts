@@ -219,10 +219,6 @@ export abstract class PersistentApiStore<T, U extends HydraMemberObject> extends
     }
     this.toggleLoading()
 
-    if (!this.context.$getRepository(this.storeName)) {
-      throw new Error(`Repository ${this.storeName} does not exist`)
-    }
-
     try {
       const retrieved = await this.context.$getRepository(this.storeName).$findAll({ params })
       this.setSelectItems(retrieved['hydra:member'])

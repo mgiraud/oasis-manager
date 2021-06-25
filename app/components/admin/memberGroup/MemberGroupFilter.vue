@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col cols="12" sm="6" md="6">
+      <v-col cols="12">
         <v-text-field
           v-model="item.name"
           label="Le nom contient..."

@@ -1,6 +1,5 @@
 <template>
   <v-container>
-  {{state.isLoading}}
     <v-data-table
       v-model="selected"
       :headers="headers"

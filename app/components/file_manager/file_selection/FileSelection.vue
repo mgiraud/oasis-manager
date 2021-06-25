@@ -57,14 +57,27 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
 import { Link, Thumbnail } from '../FileManager.vue'
 
-@Component
-export default class FileSelection extends Vue {
-    @Prop({ type: Array, required: true }) readonly thumbnails!: Thumbnail[]
-    @Prop({ type: Array, required: true }) readonly links!: Link[]
-    @Prop({ type: Function, required: true }) readonly removeThumbnail!: (index: number) => {}
-    @Prop({ type: Function, required: true }) readonly removeLink!: (index: number) => {}
-}
+export default defineComponent({
+  props: {
+    thumbnails: {
+      type: Array as Thumbnail[],
+      required: true
+    },
+    links: {
+      type: Array as Link[],
+      required: true
+    },
+    removeThumbnail: {
+      type: Function as (index: number) => {},
+      required: true
+    },
+    removeLink: {
+      type: Function as (index: number) => {},
+      required: true
+    }
+  }
+})
 </script>

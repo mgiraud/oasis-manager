@@ -9,7 +9,7 @@ export type FormOptions = RequestInit & {
 
 export interface Repository {
   call: (query: string, options: FormOptions) => Promise<Response>
-  validateAndDecodeResponse : (url: string, options: object) => Promise<any>
+  validateAndDecodeResponse : (url: string, options?: object) => Promise<any>
   $findAll: (params: object) => Promise<HydraGetAllResponse>
   $find: (id: string) => Promise<any>
   $create: (payload: object) => Promise<HydraMemberObject>
@@ -82,7 +82,7 @@ export default (context: Context, { resource }: { resource: string }): Repositor
     }
     // TODO deal with refresh token in the future
     if (response.status === 401 && context.route.name !== 'login') {
-      await context.store.dispatch('security/logout')
+      await context.$auth.logout()
       return context.redirect({ name: 'login' })
     }
     let json = null

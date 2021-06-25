@@ -1,5 +1,4 @@
 import { PersistentStore } from '~/store/main'
-import { MUTATIONS } from '~/store/notifications'
 
 export interface NotificationState {
   show: boolean

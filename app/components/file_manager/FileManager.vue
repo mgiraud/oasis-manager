@@ -16,7 +16,7 @@
           <v-row>
             <v-col>
               <file-navigator
-                ref="file-navigator"
+                ref="fileNavigator"
                 :select-click-handler="selectMediaObject"
                 :current-media-node.sync="currentMediaNode"
                 :edit-click-handler="editMediaObject"
@@ -45,7 +45,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Provide, ProvideReactive } from 'nuxt-property-decorator'
+import { defineComponent, provide, Ref, ref, useContext } from '@nuxtjs/composition-api'
 import FileSelection from './file_selection/FileSelection.vue'
 import FileUploader from './file_uploader/FileUploader.vue'
 import FileNavigator from './file_navigator/FileNavigator.vue'
@@ -53,107 +53,127 @@ import FileDetails from './file_details/FileDetails.vue'
 import { MediaObject } from '~/store/media_object'
 import { MediaNode } from '~/store/media_node'
 
-export type Thumbnail = {
+export interface Thumbnail {
   src: string
 }
 
-export type Link = {
+export interface Link {
   src: string
   name: string
 }
 
-@Component({
+export default defineComponent({
   components: {
     FileSelection,
     FileUploader,
     FileNavigator,
     FileDetails
-  }
-})
-export default class FileManager extends Vue {
-  @Prop({ type: Boolean, default: true }) readonly showSelection!: boolean
-  @Provide() selectionEnabled = this.showSelection
-
-  @ProvideReactive() closeDetailPanel () {
-    this.detailsPanel = false
-    this.selectedMediaObject = null
-  }
-
-  currentMediaNode: MediaNode | null = null
-  thumbnails: Thumbnail[] = []
-  links: Link[] = []
-  detailsPanel = false
-  selectedMediaObject: MediaObject | null = null
-
-  reset (): void {
-    this.thumbnails = []
-    this.links = []
-  }
-
-  selectMediaObject (mediaObject: MediaObject) {
-    if (mediaObject.isImage) {
-      this.selectImage(mediaObject)
-    } else {
-      this.selectLink(mediaObject)
+  },
+  props: {
+    showSelection: {
+      type: Boolean,
+      default: true
     }
-  }
-
-  selectImage (res: MediaObject) {
-    this.thumbnails.push({
-      src: res.contentUrl
+  },
+  setup(props) {
+    const detailsPanel = ref(false)
+    const selectedMediaObject = ref(null) as Ref<null | MediaObject>
+    const links = ref([]) as Ref<Link[]>
+    const thumbnails = ref([]) as Ref<Thumbnail[]>
+    const currentMediaNode = ref(null) as Ref<MediaNode | null>
+    const fileNavigator = ref(null) as Ref<FileNavigator | null>
+    const context = useContext()
+    provide('closeDetailPanel', () => {
+      detailsPanel.value = false
+      selectedMediaObject.value = null
     })
-  }
+    provide('selectionEnabled', props.showSelection)
 
-  selectLink (res: MediaObject) {
-    this.links.push({
-      src: res.contentUrl,
-      name: res.filePath
-    })
-  }
-
-  removeThumbnail (index: number) {
-    this.thumbnails.splice(index, 1)
-  }
-
-  removeLink (index: number) {
-    this.links.splice(index, 1)
-  }
-
-  handleUpload (files: FileList) {
-    if (!this.currentMediaNode) {
-      return
+    const reset = () => {
+      thumbnails.value = []
+      links.value = []
     }
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i]
 
-      // const reader = new FileReader()
-      // reader.onload = (e) => {
-      //   this.thumbnails.push({
-      //     src: e.target.result
-      //   })
-      // }
-      // reader.readAsDataURL(file)
+    const selectMediaObject = (mediaObject: MediaObject) => {
+      if (mediaObject.isImage) {
+        selectImage(mediaObject)
+      } else {
+        selectLink(mediaObject)
+      }
+    }
 
-      const formData = new FormData()
-      formData.append('file', file)
-      formData.append('mediaNodeId', this.currentMediaNode.id.toString())
-      this.$getRepository('media_objects').$post('/api/media_objects', {
-        method: 'POST',
-        body: formData
-      }).then((res: MediaObject) => {
-        if (res.isImage) {
-          this.selectImage(res)
-        } else {
-          this.selectLink(res)
-        }
-        (this.$refs['file-navigator'] as FileNavigator).refresh()
+    const selectImage = (res: MediaObject) => {
+      thumbnails.value.push({
+        src: res.contentUrl
       })
     }
-  }
 
-  editMediaObject (mediaObject: MediaObject) {
-    this.detailsPanel = true
-    this.selectedMediaObject = mediaObject
+    const selectLink = (res: MediaObject) => {
+      links.value.push({
+        src: res.contentUrl,
+        name: res.filePath
+      })
+    }
+
+    const removeThumbnail = (index: number) => {
+      thumbnails.value.splice(index, 1)
+    }
+
+    const removeLink = (index: number) => {
+      links.value.splice(index, 1)
+    }
+
+    const handleUpload = (files: FileList) => {
+      if (!currentMediaNode.value) {
+        return
+      }
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i]
+
+        // const reader = new FileReader()
+        // reader.onload = (e) => {
+        //   this.thumbnails.push({
+        //     src: e.target.result
+        //   })
+        // }
+        // reader.readAsDataURL(file)
+
+        const formData = new FormData()
+        formData.append('file', file)
+        formData.append('mediaNodeId', currentMediaNode.value.id.toString())
+        context.$getRepository('media_objects').$post('/api/media_objects', {
+          method: 'POST',
+          body: formData
+        }).then((res: MediaObject) => {
+          if (res.isImage) {
+            selectImage(res)
+          } else {
+            selectLink(res)
+          }
+          fileNavigator.value?.refresh()
+        })
+      }
+    }
+
+    const editMediaObject = (mediaObject: MediaObject) => {
+      detailsPanel.value = true
+      selectedMediaObject.value = mediaObject
+    }
+
+    return {
+      detailsPanel,
+      selectedMediaObject,
+      links,
+      thumbnails,
+      currentMediaNode,
+      fileNavigator,
+      selectMediaObject,
+      reset,
+      removeThumbnail,
+      removeLink,
+      handleUpload,
+      editMediaObject
+    }
   }
-}
+})
 </script>

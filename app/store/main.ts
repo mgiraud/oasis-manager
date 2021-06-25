@@ -71,7 +71,7 @@ export abstract class PersistentStore<T extends Object> extends Store<T> {
   }
 }
 
-export abstract class PersistentApiStore<T, U extends HydraMemberObject> extends PersistentStore<CrudState<U>> {
+export abstract class PersistentApiStore<T, U extends HydraMemberObject> extends PersistentStore<CrudState<U> & T> {
   public abstract getListLocation (): RawLocation | null
 
   public abstract getAddLocation (): RawLocation | null
@@ -86,7 +86,9 @@ export abstract class PersistentApiStore<T, U extends HydraMemberObject> extends
 
   protected context!: UseContextReturn
 
-  protected getAdditionalData (): T { return {} as T }
+  protected getAdditionalData (): Partial<T> {
+    return {}
+  }
 
   constructor (readonly storeName: string) {
     super(storeName)

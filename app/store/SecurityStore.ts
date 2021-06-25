@@ -1,7 +1,7 @@
 import { Context } from '@nuxt/types'
-import { reactive, Ref, ssrRef } from '@nuxtjs/composition-api'
+import { reactive, Ref } from '@nuxtjs/composition-api'
 import { PersistentStore, UseContextReturn } from '~/store/main'
-import { Member } from '~/store/member'
+import { Member } from '~/store/MemberStore'
 
 const fs = process.server ? require('fs') : null
 const path = process.server ? require('path') : null

@@ -19,21 +19,34 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'nuxt-property-decorator'
+import { defineComponent, Ref, ref } from '@nuxtjs/composition-api'
 
-@Component
-export default class FileUploader extends Vue {
-    @Prop({ type: Function, required: true }) readonly handleUpload!: (files: FileList) => {}
+export default defineComponent({
+  props: {
+    handleUpload: {
+      type: Function,
+      required: true
+    }
+  },
+  setup(props) {
+    const fileSelection = ref(null) as Ref<HTMLInputElement | null>
 
-    openFileSelection () {
-      (this.$refs.fileSelection as HTMLInputElement).click()
+    const openFileSelection = () => {
+      fileSelection.value.click()
     }
 
-    onFileChange () {
-      const files = (this.$refs.fileSelection as HTMLInputElement).files
+    const onFileChange = () => {
+      const files = fileSelection.value.files
       if (files) {
-        this.handleUpload(files)
+        props.handleUpload(files)
       }
     }
-}
+
+    return {
+      fileSelection,
+      openFileSelection,
+      onFileChange
+    }
+  }
+})
 </script>

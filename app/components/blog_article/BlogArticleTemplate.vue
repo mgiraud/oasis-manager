@@ -30,22 +30,25 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'nuxt-property-decorator'
-import { formatRelative, parseISO } from 'date-fns'
-import { fr } from 'date-fns/locale'
-import { BlogArticle } from '~/store/blog_article'
+import { defineComponent } from '@nuxtjs/composition-api'
+import { BlogArticle } from '~/store/BlogArticleStore'
 import ImagePreview from '~/components/util/ImagePreview.vue'
+import { formatDate } from '~/composable/helpers/formatDate'
 
-@Component({
-  components: { ImagePreview }
-})
-export default class BlogArticleTemplateVue extends Vue {
-  @Prop({ type: Object, required: true }) readonly article!: BlogArticle
-
-  formatDate (rawDate: string) {
-    return formatRelative(parseISO(rawDate), new Date(), { locale: fr })
+export default defineComponent({
+  props: {
+    article: {
+      type: Object as () => BlogArticle,
+      required: true
+    }
+  },
+  components: { ImagePreview },
+  setup () {
+    return {
+      formatDate
+    }
   }
-}
+})
 </script>
 
 <style scoped>

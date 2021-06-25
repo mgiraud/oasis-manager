@@ -76,8 +76,8 @@ import useVuelidate from '@vuelidate/core'
 import { required, minLength } from 'vuelidate/lib/validators'
 import has from 'lodash/has'
 import { FormErrors } from '~/api/repository'
+import { BlogArticle } from '~/store/BlogArticleStore'
 import { mediaNodeStore } from '~/store/MediaNodeStore'
-import { Page } from '~/store/PageStore'
 import Editor from '../../util/Editor.vue'
 
 export default defineComponent({
@@ -86,7 +86,7 @@ export default defineComponent({
   },
   props: {
     values: {
-      type: Object as () => Page,
+      type: Object as () => BlogArticle,
       required: true
     },
     errors: {

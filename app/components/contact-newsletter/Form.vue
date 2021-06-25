@@ -7,79 +7,80 @@
       class="newsletter-input"
       prepend-icon="ri-mail-line"
       append-outer-icon="ri-send-plane-fill"
-      @input="$v.item.email.$touch()"
-      @blur="$v.item.email.$touch()"
+      @input="v$.email.$touch()"
+      @blur="v$.email.$touch()"
       @click:append-outer="sendForm"
     />
   </v-form>
 </template>
 
 <script lang="ts">
-import { Component, mixins, namespace, Prop, Watch } from 'nuxt-property-decorator'
-import { email } from 'vuelidate/lib/validators'
+import { computed, defineComponent, reactive, useContext, watch } from '@nuxtjs/composition-api'
+import useVuelidate from '@vuelidate/core'
+import { email } from '@vuelidate/validators'
 import has from 'lodash/has'
-import { validationMixin } from 'vuelidate'
-import { ContactNewsletter } from '~/store/ContactNewsletterStore'
-import { FormErrors } from '~/api/repository'
-import NotificationMixin from '~/mixins/notification'
+import { ContactNewsletter, contactNewsletterStore } from '~/store/ContactNewsletterStore'
+import { notificationStore } from '~/store/NotificationStore'
 
-const contactNewsletterModule = namespace('contact_newsletter')
+export default defineComponent({
+  setup () {
+    contactNewsletterStore.setContext(useContext())
+    const item = reactive({ email: null })
 
-@Component({
-  validations: {
-    item: {
+    const validation = computed(() => ({
       email: {
         email
       }
-    }
-  },
-  mixins: [validationMixin]
-})
-export default class ContactNewsletterForm extends mixins(NotificationMixin) {
-  item = { email: null }
+    }))
 
-  @contactNewsletterModule.State('violations') violations !: FormErrors;
-  @contactNewsletterModule.State('error') error !: string;
-  @contactNewsletterModule.State('created') created !: ContactNewsletter | null;
-  @contactNewsletterModule.Action('create') create !: (cn: ContactNewsletter) => ContactNewsletter;
+    const v$ = useVuelidate(validation, item)
+    const violations = computed(() => contactNewsletterStore.getState().violations)
 
-  get emailErrors () {
-    const errors: string[] = []
-    if (!this.$v.item.email || !this.$v.item.email.$dirty) {
+    const emailErrors = computed(() => {
+      const errors: string[] = []
+      if (!v$.value.email || !v$.value.email.$dirty) {
+        return errors
+      }
+      has(violations, 'email') && errors.push(violations.email)
+      v$.value.email.$invalid && errors.push('Cet email n\'est pas valide')
       return errors
+    })
+
+    watch(() => contactNewsletterStore.getState().created, (created: ContactNewsletter) => {
+      if (!created) {
+        return
+      }
+
+      item.email = null
+      notificationStore.showMessage('Tu es maintenant inscrit à la newsletter !')
+    })
+
+    watch(() => contactNewsletterStore.getState().error, (message: string | null) => {
+      message && notificationStore.showError(message)
+    })
+
+      const sendForm = () => {
+        if (!v$.value) return
+        v$.value.$touch()
+        if (!v$.value.$invalid) {
+          contactNewsletterStore.create(item)
+        }
+      }
+
+    return {
+      item,
+      v$,
+      emailErrors,
+      sendForm,
+      state: contactNewsletterStore.getState()
     }
-    has(this.violations, 'email') && errors.push(this.violations.email)
-    !this.$v.item.email.email && errors.push('Cet email n\'est pas valide')
-    return errors
   }
-
-  @Watch('created')
-  onCreated (created: ContactNewsletter) {
-    if (!created) {
-      return
-    }
-
-    this.item.email = null
-    this.showMessage('Tu es maintenant inscrit à la newsletter !')
-  }
-
-  @Watch('error')
-  onError (message: string) {
-    message && this.showError(message)
-  }
-
-  sendForm () {
-    this.$v.$touch()
-    if (!this.$v.$invalid) {
-      this.create(this.$v.item.$model)
-    }
-  }
-}
+})
 </script>
 
 <style scoped>
 form {
   margin-right: 20px;
-  padding-top:10px;
+  padding-top: 10px;
 }
 </style>

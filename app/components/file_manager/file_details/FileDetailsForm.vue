@@ -17,12 +17,13 @@
             label="Nom personnalisé"
             :error-messages="customNameErrors"
             required
-            @input="$v.item.customName.$touch()"
-            @blur="$v.item.customName.$touch()"
+            @input="v$.customName.$touch()"
+            @blur="v$.customName.$touch()"
           />
         </v-col>
       </v-row>
       <v-row>
+        {{item.mediaNodes}}
         <v-col
           cols="12"
           md="12"
@@ -51,55 +52,70 @@
 </template>
 
 <script lang="ts">
-import { Component, mixins, namespace, Prop } from 'nuxt-property-decorator'
-import { minLength } from 'vuelidate/lib/validators'
+import { computed, defineComponent } from '@nuxtjs/composition-api'
+import useVuelidate from '@vuelidate/core'
+import { minLength } from '@vuelidate/validators'
 import has from 'lodash/has'
-import { validationMixin } from 'vuelidate'
+import { FormErrors } from '~/api/repository'
+import { Member } from '~/store/MemberStore'
+import { securityStore } from '~/store/SecurityStore'
 
-@Component({
-  name: 'AdminPageForm',
-  validations: {
-    item: {
+export default defineComponent({
+  props: {
+    values: {
+      type: Object as () => Member,
+      required: true
+    },
+    errors: {
+      type: Object as () => FormErrors,
+      default: () => {}
+    },
+    tree: {
+      type: Array,
+      default: () => []
+    }
+  },
+  setup(props) {
+    const item = computed(() => props.values)
+    const validation = computed(() => ({
       customName: {
         minLength: minLength(3)
       },
       mediaNodes: {
         minLength: minLength(1)
       }
+    }))
+    const v$ = useVuelidate(validation, item)
+
+    const violations = computed(() => props.errors)
+
+    const customNameErrors = computed(() => {
+      const errors: string[] = []
+      if (!v$.value.customName || !v$.value.customName.$dirty) {
+        return errors
+      }
+      has(violations.value, 'customName') && errors.push(violations.value.customName)
+      v$.value.customName.minLength.$invalid && errors.push('Le nom personnalisé doit faire au moins 3 caractères')
+      return errors
+    })
+
+    const mediaNodesErrors = computed(() => {
+      const errors: string[] = []
+      if (!v$.value.mediaNodes || !v$.value.mediaNodes.$dirty) {
+        return errors
+      }
+      has(violations.value, 'mediaNodes') && errors.push(violations.value.mediaNodes)
+      v$.value.mediaNodes.minLength.$invalid && errors.push('Le fichier doit appartenir a au moins une galerie')
+      return errors
+    })
+
+    return {
+      item,
+      v$,
+      customNameErrors,
+      mediaNodesErrors,
+      state: securityStore.getState(),
     }
   }
 })
-export default class FileDetailsForm extends mixins(validationMixin) {
-  @Prop({ type: Object, required: true }) values!: any
-  @Prop({ type: Object, default: () => {} }) errors!: any
-  @Prop({ type: Array, default: () => [] }) tree!: any
-
-  get item () {
-    return this.values
-  }
-
-  get customNameErrors () {
-    const errors: string[] = []
-    if (!this.$v.item.customName || !this.$v.item.customName.$dirty) {
-      return errors
-    }
-    has(this.violations, 'customName') && errors.push(this.violations.customName)
-    !this.$v.item.customName.minLength && errors.push('Le nom personnalisé doit faire au moins 3 caractères')
-    return errors
-  }
-
-  get mediaNodesErrors () {
-    const errors: string[] = []
-    if (!this.$v.item.mediaNodes || !this.$v.item.mediaNodes.$dirty) {
-      return errors
-    }
-    has(this.violations, 'mediaNodes') && errors.push(this.violations.mediaNodes)
-    !this.$v.item.mediaNodes.minLength && errors.push('Le fichier doit appartenir a au moins une galerie')
-    return errors
-  }
-
-  get violations () {
-    return this.errors || {}
-  }
-}
 </script>

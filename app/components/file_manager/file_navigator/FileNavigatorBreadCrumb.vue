@@ -5,19 +5,30 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'nuxt-property-decorator'
-import { MediaNode, breadcrumbItem } from '~/store/media_node'
+import { defineComponent } from '@nuxtjs/composition-api'
+import { breadcrumbItem } from '~/store/MediaNodeStore'
 
-@Component
-export default class FileNavigatorBreadCrumbItems extends Vue {
-    @Prop({ type: Object, required: false, default: null }) readonly mediaNode!: MediaNode
-    @Prop({ type: Function, required: true }) readonly mediaNodeClickHandler!: (id: string) => void
-    name='file-navigator-bread-crumb-items'
-
-    handleCrumbClick (crumb: breadcrumbItem) {
-      this.mediaNodeClickHandler(crumb['@id'])
+export default defineComponent({
+  props: {
+    mediaNode: {
+      type: Object,
+      default: null
+    },
+    mediaNodeClickHandler: {
+      type: Function,
+      required: true
     }
-}
+  },
+  setup(props) {
+    const handleCrumbClick = (crumb: breadcrumbItem) => {
+      props.mediaNodeClickHandler(crumb['@id'])
+    }
+
+    return {
+      handleCrumbClick
+    }
+  }
+})
 </script>
 
 <style scoped>

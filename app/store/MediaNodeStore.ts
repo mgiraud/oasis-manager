@@ -1,8 +1,6 @@
 import { computed } from '@nuxtjs/composition-api'
 import { RawLocation } from 'vue-router'
-import { Commit } from 'vuex'
 import { HydraMemberObject } from '~/api/hydra'
-import { Repository } from '~/api/repository'
 import { CrudState, PersistentApiStore } from '~/store/main'
 import { MediaObject } from '~/store/MediaObjectStore'
 

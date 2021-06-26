@@ -25,7 +25,7 @@
           ref="updateForm"
           :tree="tree"
           :values="item"
-          :errors="violations"
+          :errors="state.violations"
         />
       </v-col>
     </v-row>
@@ -40,7 +40,12 @@
 </template>
 
 <script lang="ts">
+import { computed, defineComponent, inject, Ref, ref, useContext, useFetch, watch } from '@nuxtjs/composition-api'
+import { Validation } from '@vuelidate/core'
 import { Component, InjectReactive, namespace, Prop, Vue, Watch } from 'nuxt-property-decorator'
+import { mediaNodeStore } from '~/store/MediaNodeStore'
+import { mediaObjectStore } from '~/store/MediaObjectStore'
+import { notificationStore } from '~/store/NotificationStore'
 import FileDetailsForm from './FileDetailsForm.vue'
 import { MediaObject } from '~/store/media_object'
 import { Repository } from '~/api/repository'
@@ -48,43 +53,57 @@ import Toolbar from '~/components/form/Toolbar.vue'
 import { ElementWithValidation } from '~/vue-shim'
 import { MediaNode } from '~/store/media_node'
 
-const mediaNodeModule = namespace('media_node')
-const mediaObjectModule = namespace('media_object')
-
-@Component({
+export default defineComponent({
   components: {
     Toolbar,
     FileDetailsForm
+  },
+  props: {
+    mediaObject: {
+      type: Object as () => MediaObject,
+      required: true
+    }
+  },
+  setup(props) {
+    const context = useContext()
+    mediaNodeStore.setContext(context)
+    mediaObjectStore.setContext(context)
+    const closeDetailPanel = inject('closeDetailPanel')
+    const item = computed(() => props.mediaObject) as MediaObject
+    const updateForm = ref(null) as Ref<Element & Validation | null>
+
+    useFetch(async () => {
+      if (mediaNodeStore.tree.value.length === 0) {
+        await mediaNodeStore.fetchTree()
+      }
+    })
+
+    const onSendForm = () => {
+      if (!updateForm.value) {
+        return
+      }
+      updateForm.value.v$.$touch()
+
+      if (!updateForm.value.v$.$invalid) {
+        mediaObjectStore.update(item.value)
+      }
+    }
+
+    watch(() => mediaObjectStore.getState().updated, (created: MediaObject | null) => {
+      if (!created) {
+        return
+      }
+      notificationStore.showMessage('Fichier mis à jour')
+    })
+
+    return {
+      item,
+      state: mediaObjectStore.getState(),
+      tree: mediaNodeStore.tree,
+      closeDetailPanel,
+      updateForm,
+      onSendForm
+    }
   }
 })
-export default class FileDetails extends Vue {
-  @Prop({ type: Object, required: true }) readonly mediaObject!: MediaObject
-  @mediaNodeModule.Getter('tree') readonly tree!: () => MediaNode[]
-  @mediaNodeModule.Action('fetchTree') fetchTree !: (repository: Repository) => MediaNode[]
-  @mediaNodeModule.State('treeIds') allTreeIds !: string[]
-  @mediaObjectModule.Action('update') update!: (mediaObject: MediaObject) => Promise<MediaObject>
-  @mediaObjectModule.State('violations') violations!: string[]
-  @InjectReactive() readonly closeDetailPanel !: () => void
-  item = { ...this.mediaObject }
-
-  @Watch('mediaObject')
-  onRetrieved (val: MediaObject) {
-    this.item = { ...val }
-  }
-
-  async fetch () {
-    if (this.tree.length === 0) {
-      await this.fetchTree(this.$getRepository('media_nodes'))
-    }
-  }
-
-  onSendForm () {
-    const updateForm = this.$refs.updateForm as ElementWithValidation
-    updateForm.$v.$touch()
-
-    if (!updateForm.$v.$invalid) {
-      this.update(updateForm.$v.item.$model)
-    }
-  }
-}
 </script>

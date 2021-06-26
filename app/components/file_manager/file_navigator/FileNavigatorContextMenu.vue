@@ -1,6 +1,6 @@
 <template>
   <v-card
-    id="file-navigator-context-menu"
+    id="fileNavigatorContextMenu"
     class="context-menu"
     tile
   >
@@ -62,75 +62,88 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, namespace, Prop } from 'nuxt-property-decorator'
-import FileNavigator from './FileNavigator.vue'
-import { MediaNode, MediaNodeNew } from '~/store/media_node'
+import { defineComponent, onMounted, Ref, ref, useContext } from '@nuxtjs/composition-api'
+import { mediaNodeStore } from '~/store/MediaNodeStore'
 
-const mediaNodeModule = namespace('media_node')
+export default defineComponent({
+  props: {
+    mediaNode: {
+      type: Object,
+      default: null
+    },
+    refresh: {
+      type: Function as () => {},
+      required: true
+    }
+  },
+  setup(props) {
+    const context = useContext()
+    const contextMenu : Ref<HTMLElement | null> = ref(null)
+    const dialog = ref(false)
+    const newFolderName = ref(null) as Ref<null | string>
+    mediaNodeStore.setContext(context)
 
-@Component
-export default class FileNavigatorFolders extends Vue {
-    @Prop({ type: Object, required: false }) readonly mediaNode!: MediaNode | null
-    @mediaNodeModule.Action('create') create!: (item: MediaNodeNew) => Promise<MediaNode>
+    onMounted(() => {
+        contextMenu.value = document.getElementById('fileNavigatorContextMenu') as HTMLElement
+        document.addEventListener(document.ontouchstart !== null ? 'click' : 'touchstart', onClick, false)
+    })
 
-    contextMenu : HTMLElement | null = null
-    dialog = false
-    newFolderName: string | null = null
-
-    showMenu (event: MouseEvent) {
-      if (!this.contextMenu) {
+    const showMenu = (event: MouseEvent) => {
+      if (!contextMenu.value) {
         return
       }
-      if ((this.contextMenu.offsetWidth + event.pageX) >= window.innerWidth) {
-        this.contextMenu.style.left = (event.pageX - this.contextMenu.offsetWidth + 2) + 'px'
+      if ((contextMenu.value.offsetWidth + event.pageX) >= window.innerWidth) {
+        contextMenu.value.style.left = (event.pageX - contextMenu.value.offsetWidth + 2) + 'px'
       } else {
-        this.contextMenu.style.left = (event.pageX - 2) + 'px'
+        contextMenu.value.style.left = (event.pageX - 2) + 'px'
       }
-      if ((this.contextMenu?.offsetHeight + event.pageY) >= window.innerHeight) {
-        this.contextMenu.style.top = (event.pageY - this.contextMenu?.offsetHeight + 2) + 'px'
+      if ((contextMenu.value.offsetHeight + event.pageY) >= window.innerHeight) {
+        contextMenu.value.style.top = (event.pageY - contextMenu.value.offsetHeight + 2) + 'px'
       } else {
-        this.contextMenu.style.top = (event.pageY - 2) + 'px'
+        contextMenu.value.style.top = (event.pageY - 2) + 'px'
       }
-      this.contextMenu.classList.add('context-menu--active')
+      contextMenu.value.classList.add('context-menu--active')
     }
 
-    hideMenu () {
-      if (!this.contextMenu) {
+    const hideMenu = () => {
+      if (!contextMenu.value) {
         return
       }
 
-      this.contextMenu.style.left = '0px'
-      this.contextMenu.style.top = '0px'
-      this.contextMenu.classList.remove('context-menu--active')
+      contextMenu.value.style.left = '0px'
+      contextMenu.value.style.top = '0px'
+      contextMenu.value.classList.remove('context-menu--active')
     }
 
-    onClick (e: MouseEvent | TouchEvent) {
-      if (!e.target || !this.contextMenu) {
+    const onClick = (e: MouseEvent | TouchEvent) => {
+      if (!e.target || !contextMenu.value) {
         return
       }
-      if (!this.contextMenu.contains(e.target as Node)) {
-        this.hideMenu()
+      if (!contextMenu.value.contains(e.target as Node)) {
+        hideMenu()
       }
     }
 
-    mounted () {
-      this.contextMenu = document.getElementById('file-navigator-context-menu') as HTMLElement
-      document.addEventListener(document.ontouchstart !== null ? 'click' : 'touchstart', this.onClick, false)
-    }
-
-    async onFolderCreate () {
-      this.dialog = false
-      if (!this.newFolderName || !this.mediaNode) {
+    const onFolderCreate = async () => {
+      dialog.value = false
+      if (!newFolderName || !props.mediaNode) {
         return
       }
-      await this.create({
-        name: this.newFolderName,
-        parent: this.mediaNode['@id']
+      await mediaNodeStore.create({
+        name: newFolderName.value,
+        parent: props.mediaNode['@id']
       })
-      const parent = this.$parent as FileNavigator
-      await parent.refresh()
+      await props.refresh()
     }
-}
+
+    return {
+      newFolderName,
+      dialog,
+      onFolderCreate,
+      showMenu
+    }
+  }
+})
 </script>
 
 <style scoped lang="scss">

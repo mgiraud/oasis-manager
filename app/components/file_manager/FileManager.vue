@@ -50,7 +50,7 @@ import FileSelection from './file_selection/FileSelection.vue'
 import FileUploader from './file_uploader/FileUploader.vue'
 import FileNavigator from './file_navigator/FileNavigator.vue'
 import FileDetails from './file_details/FileDetails.vue'
-import { MediaObject } from '~/store/media_object'
+import { MediaObject } from '~/store/MediaObjectStore'
 import { MediaNode } from '~/store/media_node'
 
 export interface Thumbnail {

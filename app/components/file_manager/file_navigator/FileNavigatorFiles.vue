@@ -63,40 +63,51 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, namespace, Watch, Inject } from 'nuxt-property-decorator'
-import { MediaNode } from '~/store/media_node'
-import { MediaObject } from '~/store/media_object'
+import { defineComponent, inject, onMounted, useContext, watch } from '@nuxtjs/composition-api'
+import { MediaNode } from '~/store/MediaNodeStore'
+import { mediaObjectStore } from '~/store/MediaObjectStore'
 
-const mediaObjectModule = namespace('media_object')
+export default defineComponent({
+  props: {
+    mediaNode: {
+      type: Object as () => MediaNode | null,
+      required: true
+    },
+    selectClickHandler: {
+      type: Function,
+      required: true
+    },
+    editClickHandler: {
+      type: Function,
+      required: true
+    }
+  },
+  setup (props) {
+    const context = useContext()
+    const selectionEnabled = inject<boolean>('selectionEnabled')
+    mediaObjectStore.setContext(context)
 
-@Component
-export default class FileNavigatorFiles extends Vue {
-  @Prop({ type: Object, required: true }) readonly mediaNode!: MediaNode | null
-  @Prop({ type: Function, required: true }) readonly selectClickHandler!: (item: MediaObject) => void
-  @Prop({ type: Function, required: true }) readonly editClickHandler!: (item: MediaObject) => void
-  @Inject() readonly selectionEnabled !: boolean
-  @mediaObjectModule.Action('fetchAll') fetchMediaObjects !: (options?: { [propertyPath: string]: string | number }) => MediaObject[]
-  @mediaObjectModule.Getter('list') mediaObjects !: MediaObject[]
+    const loadObjects = () => {
+      if (props.mediaNode) {
+        mediaObjectStore.fetchAll({
+          mediaNodes: props.mediaNode['@id']
+        })
+      }
+    }
 
-  loadObjects () {
-    if (this.mediaNode !== null) {
-      this.fetchMediaObjects({
-        mediaNodes: this.mediaNode['@id']
-      })
+    onMounted(() => {
+      loadObjects()
+    })
+
+    watch(() => props.mediaNode, (mediaNode: MediaNode | null) => {
+      loadObjects()
+    })
+
+    return {
+      selectionEnabled,
+      mediaObjects: mediaObjectStore.list,
+      loadObjects
     }
   }
-
-  mounted () {
-    this.loadObjects()
-  }
-
-  @Watch('mediaNode')
-  onMediaNodeChange (mediaNode: MediaNode | null) {
-    this.loadObjects()
-  }
-}
+})
 </script>
-
-<style scoped>
-
-</style>

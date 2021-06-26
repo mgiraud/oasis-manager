@@ -65,83 +65,105 @@
       </v-col>
     </v-row>
     <file-navigator-context-menu
-      ref="file-navigator-context-menu"
+      ref="fileNavigatorContextMenu"
       :media-node="currentMediaNode"
+      :refresh="refresh"
     />
   </v-container>
 </template>
 
 <script lang="ts">
-import { Component, Vue, namespace, Prop, InjectReactive } from 'nuxt-property-decorator'
+import { defineComponent, useContext, inject, useFetch, nextTick, ref, Ref } from '@nuxtjs/composition-api'
+import { mediaNodeStore, MediaNode } from '~/store/MediaNodeStore'
+import { mediaObjectStore } from '~/store/MediaObjectStore'
 import FileNavigatorBreadCrumb from './FileNavigatorBreadCrumb.vue'
 import FileNavigatorFolders from './FileNavigatorFolders.vue'
 import FileNavigatorFiles from './FileNavigatorFiles.vue'
 import FileNavigatorContextMenu from './FileNavigatorContextMenu.vue'
-import { MediaObject } from '~/store/media_object'
-import { MediaNode } from '~/store/media_node'
 
-const mediaNodeModule = namespace('media_node')
-const mediaObjectModule = namespace('media_object')
-
-@Component({
+export default defineComponent({
   components: {
     FileNavigatorBreadCrumb,
     FileNavigatorFolders,
     FileNavigatorFiles,
     FileNavigatorContextMenu
+  },
+  props: {
+    editClickHandler: {
+      type: Function,
+      required: true
+    },
+    selectClickHandler: {
+      type: Function,
+      required: true
+    },
+    currentMediaNode: {
+      type: Object as () => MediaNode | undefined,
+      default: null
+    },
+    rootName: {
+      type: String,
+      default: null
+    }
+  },
+  setup (props, {emit}) {
+    const context = useContext()
+    mediaNodeStore.setContext(context)
+    mediaObjectStore.setContext(context)
+
+    const closeDetailPanel = inject<() => {}>('closeDetailPanel')
+    const fileNavigatorContextMenu = ref(null) as Ref<null | FileNavigatorContextMenu>
+
+    useFetch(() => {
+      mediaNodeStore.fetchAll({
+        'exists[parent]': 'false'
+      })
+    })
+
+    const handleMediaNodeClick = async (id: string) => {
+      mediaObjectStore.resetList()
+      emit('update:current-media-node', await mediaNodeStore.load(id))
+    }
+
+    const handleRootClick = () => {
+      emit('update:current-media-node', undefined)
+      closeDetailPanel && closeDetailPanel()
+    }
+
+     const refresh = async () => {
+      if (!props.currentMediaNode) {
+        return
+      }
+      emit('update:current-media-node', await mediaNodeStore.load(props.currentMediaNode['@id']))
+      nextTick(() => {
+        reload()
+      })
+    }
+
+    const reload = () => {
+      const savedMediaNode = props.currentMediaNode
+      emit('update:current-media-node', undefined)
+      nextTick(() => {
+        emit('update:current-media-node', savedMediaNode)
+      })
+    }
+
+    const onRightClick = (e: MouseEvent) => {
+      fileNavigatorContextMenu.value && fileNavigatorContextMenu.value.showMenu(e)
+    }
+
+    return {
+      closeDetailPanel,
+      fileNavigatorContextMenu,
+      rootMediaNodes: mediaNodeStore.rootNodes,
+      handleMediaNodeClick,
+      handleRootClick,
+      refresh,
+      reload,
+      onRightClick
+    }
   }
 })
-export default class FileNavigator extends Vue {
-  @Prop({ type: Object, required: false }) readonly currentMediaNode!: MediaNode | null
-  @Prop({ type: Function, required: true }) readonly editClickHandler!: (item: MediaObject) => void
-  @Prop({ type: Function, required: true }) readonly selectClickHandler!: (item: MediaObject) => void
-  @Prop({ type: String, required: false, default: null }) readonly rootName!: string | null
-  @InjectReactive() readonly closeDetailPanel !: () => void
-  @mediaNodeModule.Action('fetchAll') fetchRootMediaNode!: (options?: { [propertyPath: string]: string | number }) => MediaNode[]
-  @mediaNodeModule.Action('load') fetchMediaNode!: (id: string) => MediaNode
-  @mediaNodeModule.Getter('rootNodes') rootMediaNodes !: MediaNode[]
-  @mediaNodeModule.Getter('find') findMediaGalleriesById !: (id: string) => MediaNode
-  @mediaObjectModule.Action('resetList') resetMediaObjects !: () => {}
-
-  async fetch () {
-    return await this.fetchRootMediaNode({
-      'exists[parent]': 'false'
-    })
-  }
-
-  async handleMediaNodeClick (id: string) {
-    this.resetMediaObjects()
-    this.$emit('update:current-media-node', await this.fetchMediaNode(id))
-  }
-
-  handleRootClick () {
-    this.$emit('update:current-media-node', null)
-    this.closeDetailPanel()
-  }
-
-  async refresh () {
-    if (!this.currentMediaNode) {
-      return
-    }
-    this.$emit('update:current-media-node', await this.fetchMediaNode(this.currentMediaNode['@id']))
-    this.$nextTick(() => {
-      this.reload()
-    })
-  }
-
-  reload () {
-    const savedMediaNode = this.currentMediaNode
-    this.$emit('update:current-media-node', null)
-    this.$nextTick(() => {
-      this.$emit('update:current-media-node', savedMediaNode)
-    })
-  }
-
-  onRightClick (e: MouseEvent) {
-    const fileNavigatorContextMenu = this.$refs['file-navigator-context-menu'] as FileNavigatorContextMenu
-    fileNavigatorContextMenu.showMenu(e)
-  }
-}
 </script>
 
 <style scoped>

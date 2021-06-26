@@ -7,16 +7,29 @@
     </v-row>
     <v-row v-if="thumbnails.length + links.length === 0">
       <v-col>
-        <p>Tu peux téleverser un fichier ou utiliser le navigateur pour sélectionner les fichiers à insérer</p>
+        <p>Tu peux téleverser un fichier ou utiliser le navigateur pour sélectionner les fichiers à
+          insérer</p>
       </v-col>
     </v-row>
-    <v-row v-else no-gutters>
+    <v-row
+      v-else
+      no-gutters
+    >
       <v-col>
         <v-container>
           <v-row no-gutters>
-            <v-col v-for="(thumbnail, i) in thumbnails" :key="i" cols="4" align-self="center">
+            <v-col
+              v-for="(thumbnail, i) in thumbnails"
+              :key="i"
+              cols="4"
+              align-self="center"
+            >
               <v-card>
-                <v-img :src="thumbnail.src" max-height="200" contain />
+                <v-img
+                  :src="thumbnail.src"
+                  max-height="200"
+                  contain
+                />
                 <v-card-actions>
                   <v-btn
                     class="btn-remove-thumbnail"
@@ -35,7 +48,10 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col v-for="(link, i) in links" :key="i">
+            <v-col
+              v-for="(link, i) in links"
+              :key="i"
+            >
               <span>{{ link.name }}<v-btn
                 class="btn-remove-thumbnail"
                 fab
@@ -58,24 +74,23 @@
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
-import { Link, Thumbnail } from '../FileManager.vue'
 
 export default defineComponent({
   props: {
     thumbnails: {
-      type: Array as Thumbnail[],
+      type: Array,
       required: true
     },
     links: {
-      type: Array as Link[],
+      type: Array,
       required: true
     },
     removeThumbnail: {
-      type: Function as (index: number) => {},
+      type: Function,
       required: true
     },
     removeLink: {
-      type: Function as (index: number) => {},
+      type: Function,
       required: true
     }
   }

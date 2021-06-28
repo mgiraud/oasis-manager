@@ -1,28 +1,44 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col cols="12" sm="6" md="6">
+      <v-col
+        cols="12"
+        sm="6"
+        md="6"
+      >
         <v-checkbox
           v-model="item.isPublished"
           label="Est publié"
         />
       </v-col>
 
-      <v-col cols="12" sm="6" md="6">
+      <v-col
+        cols="12"
+        sm="6"
+        md="6"
+      >
         <DateType
           v-model="item['createdAt[before]']"
           label="Créé avant le"
         />
       </v-col>
 
-      <v-col cols="12" sm="6" md="6">
+      <v-col
+        cols="12"
+        sm="6"
+        md="6"
+      >
         <DateType
           v-model="item['createdAt[after]']"
           label="Créé après le"
         />
       </v-col>
 
-      <v-col cols="12" sm="6" md="6">
+      <v-col
+        cols="12"
+        sm="6"
+        md="6"
+      >
         <v-combobox
           v-if="item.tags"
           v-model="item.tags"
@@ -34,7 +50,11 @@
           clearable
         />
       </v-col>
-      <v-col cols="12" sm="6" md="6">
+      <v-col
+        cols="12"
+        sm="6"
+        md="6"
+      >
         <v-text-field
           v-model="item.title"
           label="Le titre contient..."

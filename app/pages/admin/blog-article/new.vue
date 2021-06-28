@@ -1,7 +1,14 @@
 <template>
   <div>
-    <Form ref="createForm" :values="item" :errors="state.violations" />
-    <Toolbar :handle-submit="onSendForm" :handle-reset="resetForm" />
+    <Form
+      ref="createForm"
+      :values="item"
+      :errors="state.violations"
+    />
+    <Toolbar
+      :handle-submit="onSendForm"
+      :handle-reset="resetForm"
+    />
     <Loading :visible="state.isLoading" />
   </div>
 </template>
@@ -12,7 +19,7 @@ import Loading from '~/components/util/Loading.vue'
 import Toolbar from '~/components/form/Toolbar.vue'
 import Form from '~/components/admin/blog-article/Form.vue'
 import itemCreate from '~/composable/ItemCreate'
-import { blogArticleStore } from '~/store/BlogArticleStore'
+import { blogArticleStore } from '~/custom-store/BlogArticleStore'
 
 export default defineComponent({
   components: {
@@ -22,19 +29,19 @@ export default defineComponent({
   meta: {
     permissions: ['USER_CAN_EDIT_BLOG_ARTICLES']
   },
-  setup() {
+  setup () {
     const item = reactive({ content: '', isPublished: false })
     blogArticleStore.setContext(useContext())
 
     return {
       item,
-      ...toRefs(itemCreate(blogArticleStore)),
+      ...toRefs(itemCreate(blogArticleStore))
     }
   },
-  head() {
+  head () {
     return {
       title: 'Ajout d\'une article'
     }
-  },
+  }
 })
 </script>

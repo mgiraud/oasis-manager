@@ -24,7 +24,7 @@
       </v-card-title>
 
       <v-card-text>
-        <file-manager ref="file-manager" />
+        <file-manager ref="fileManager" />
       </v-card-text>
       <v-card-actions>
         <v-spacer />
@@ -41,35 +41,45 @@
 </template>
 
 <script lang="ts">
+import { defineComponent, nextTick, Ref, ref, watch } from '@nuxtjs/composition-api'
 import { Editor } from '@tiptap/core'
-import { Component, Prop, Vue, Watch } from 'nuxt-property-decorator'
 import FileManager, { Link, Thumbnail } from '~/components/file-manager/FileManager.vue'
 
-@Component({
-  components: { FileManager }
+export default defineComponent({
+  components: { FileManager },
+  props: {
+    editor: {
+      type: Object as () => Editor | null,
+      required: true
+    }
+  },
+  setup (props) {
+    const dialog = ref(false)
+    const fileManager = ref(null) as Ref<FileManager | null>
+
+    const injectFilesAndCloseDialog = () => {
+      fileManager.value?.thumbnails.forEach((thumbnail: Thumbnail) => {
+        props.editor.chain().focus().setImage({ src: thumbnail.src }).run()
+      })
+      fileManager.value?.links.forEach((link: Link) => {
+        const node = props.editor.schema.text(link.name, [props.editor.schema.marks.link.create({ href: link.src })])
+        props.editor.view.dispatch(props.editor.state.tr.replaceSelectionWith(node, false))
+      })
+
+      dialog.value = false
+    }
+
+    watch(dialog, () => {
+      nextTick(() => {
+        fileManager.value?.reset()
+      })
+    })
+
+    return {
+      dialog,
+      injectFilesAndCloseDialog,
+      fileManager
+    }
+  }
 })
-export default class FileUploadBtn extends Vue {
-  @Prop({ type: Object, required: true }) readonly editor!: Editor
-  dialog = false
-
-  injectFilesAndCloseDialog () {
-    const fileManager = this.$refs['file-manager'] as FileManager
-    fileManager.thumbnails.forEach((thumbnail: Thumbnail) => {
-      this.editor.chain().focus().setImage({ src: thumbnail.src }).run()
-    })
-    fileManager.links.forEach((link: Link) => {
-      const node = this.editor.schema.text(link.name, [this.editor.schema.marks.link.create({ href: link.src })])
-      this.editor.view.dispatch(this.editor.state.tr.replaceSelectionWith(node, false))
-    })
-
-    this.dialog = false
-  }
-
-  @Watch('dialog')
-  onDialogToggle () {
-    this.$nextTick(() => {
-      (this.$refs['file-manager'] as FileManager).reset()
-    })
-  }
-}
 </script>

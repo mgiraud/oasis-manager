@@ -10,12 +10,15 @@
               :page="page"
             />
             <div v-else>
-              <p>Pour nous contacter tu peux nous envoyer un email à <a
+              <p>
+                Pour nous contacter tu peux nous envoyer un email à <a
                 href="mailto:contact@lestransalpins.org"
                 title="Envoyer un email aux transalpins"
               >contact@lestransalpins.org</a> ou bien remplir le formulaire suivant.</p>
-              <p>Dans ce cas tu recevras un email de confirmation ou bien regarde dans tes spams si
-                ce n'est pas le cas.</p>
+              <p>
+                Dans ce cas tu recevras un email de confirmation ou bien regarde dans tes spams si
+                ce n'est pas le cas.
+              </p>
             </div>
             <contact-form
               ref="createForm"
@@ -36,14 +39,14 @@
 
 <script lang="ts">
 
-import { defineComponent, ref, useContext, toRefs, useRouter } from '@nuxtjs/composition-api'
+import { defineComponent, ref, useContext, toRefs } from '@nuxtjs/composition-api'
 import itemCreate from '~/composable/ItemCreate'
 import ContactForm from '../components/contact/Form.vue'
 import Toolbar from '../components/form/Toolbar.vue'
 import Loading from '../components/util/Loading.vue'
 import PageModel from '~/components/page/PageModel.vue'
-import { contactStore } from '~/store/ContactStore'
-import { pageStore } from '~/store/PageStore'
+import { contactStore } from '~/custom-store/ContactStore'
+import { pageStore } from '~/custom-store/PageStore'
 
 export default defineComponent({
   components: {
@@ -63,13 +66,13 @@ export default defineComponent({
       page: pageStore.find('/api/pages/contact'),
       ...toRefs(itemCreate(contactStore, {
         admin: false
-      })),
+      }))
     }
   },
   head () {
     return {
       title: this.page ? this.page.title : 'Contacte-nous !'
     }
-  },
+  }
 })
 </script>

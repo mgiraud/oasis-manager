@@ -1,6 +1,6 @@
 import { RawLocation } from 'vue-router'
 import { HydraMemberObject } from '~/api/hydra'
-import { CrudState, PersistentApiStore } from '~/store/AbstractStore'
+import { CrudState, PersistentApiStore } from '~/custom-store/AbstractStore'
 
 export interface Member extends HydraMemberObject {
   id: number
@@ -17,7 +17,6 @@ interface MemberState extends CrudState<Member> {
 }
 
 class MemberStore extends PersistentApiStore<MemberState, Member> {
-
   getAddLocation (): RawLocation | null {
     return { name: 'admin-member-new' }
   }

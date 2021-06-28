@@ -14,7 +14,7 @@ import { defineComponent } from '@nuxtjs/composition-api'
 export default defineComponent({
   layout: 'admin',
   middleware: ['isAdmin'],
-  head() {
+  head () {
     return {
       title: 'Administration'
     }

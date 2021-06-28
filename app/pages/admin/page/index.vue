@@ -69,8 +69,8 @@ import ActionCell from '~/components/table/ActionCell.vue'
 import PageFilter from '~/components/admin/page/PageFilter.vue'
 import FormFilter from '~/components/form/FormFilter.vue'
 import itemSecurity from '~/composable/itemSecurity'
-import { Page, pageStore } from '~/store/PageStore'
-import { securityStore } from '~/store/SecurityStore'
+import { Page, pageStore } from '~/custom-store/PageStore'
+import { securityStore } from '~/custom-store/SecurityStore'
 import itemList from '~/composable/ItemList'
 
 const headers = [
@@ -93,7 +93,7 @@ export default defineComponent({
 
     useFetch(async () => {
       await pageStore.fetchAll()
-    });
+    })
 
     return {
       ...toRefs(itemList(pageStore)),

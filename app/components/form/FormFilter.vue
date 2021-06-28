@@ -10,7 +10,8 @@
         v-bind="attrs"
         v-on="on"
       >
-        Filtres <v-icon right>
+        Filtres
+        <v-icon right>
           ri-filter-line
         </v-icon>
       </v-btn>
@@ -24,10 +25,18 @@
       <v-card-actions>
         <v-spacer />
 
-        <v-btn color="primary" @click="onFilter">
+        <v-btn
+          color="primary"
+          @click="onFilter"
+        >
           Filtrer
         </v-btn>
-        <v-btn color="primary" class="ml-2" text @click="onCancel">
+        <v-btn
+          color="primary"
+          class="ml-2"
+          text
+          @click="onCancel"
+        >
           Remise à zéro
         </v-btn>
       </v-card-actions>
@@ -49,7 +58,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props) {
+  setup (props) {
     const onFilter = () => {
       props.handleFilter()
     }

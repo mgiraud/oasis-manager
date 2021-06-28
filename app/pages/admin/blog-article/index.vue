@@ -15,12 +15,18 @@
       @update:options="onUpdateOptions"
     >
       <template #top>
-        <v-toolbar flat color="white">
+        <v-toolbar
+          flat
+          color="white"
+        >
           <v-toolbar-title>BlogArticle</v-toolbar-title>
 
           <v-spacer />
 
-          <FormFilter :handle-filter="onSendFilter" :handle-reset="resetFilter">
+          <FormFilter
+            :handle-filter="onSendFilter"
+            :handle-reset="resetFilter"
+          >
             <BlogArticleFilter
               ref="filterForm"
               slot="filter"
@@ -44,7 +50,11 @@
         :handle-edit="canEdit ? () => editHandler(props.item) : null"
         :handle-delete="canDelete ? () => deleteHandler(props.item) : null"
       />
-      <template v-if="item" slot="item.createdAt" slot-scope="{ item }">
+      <template
+        v-if="item"
+        slot="item.createdAt"
+        slot-scope="{ item }"
+      >
         {{ formatDate(item.createdAt) }}
       </template>
     </v-data-table>
@@ -58,7 +68,7 @@ import BlogArticleFilter from '~/components/admin/blog-article/BlogArticleFilter
 import FormFilter from '~/components/form/FormFilter.vue'
 import itemList from '~/composable/ItemList'
 import itemSecurity from '~/composable/itemSecurity'
-import { blogArticleStore } from '~/store/BlogArticleStore'
+import { blogArticleStore } from '~/custom-store/BlogArticleStore'
 import { formatDate } from '~/composable/helpers/formatDate'
 
 const headers = [
@@ -81,7 +91,7 @@ export default defineComponent({
 
     useFetch(async () => {
       await blogArticleStore.fetchAll()
-    });
+    })
 
     return {
       ...toRefs(itemList(blogArticleStore, {

@@ -170,7 +170,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref, useContext } from '@nuxtjs/composition-api'
-import { securityStore } from '~/store/SecurityStore'
+import { securityStore } from '~/custom-store/SecurityStore'
 
 const blogItems = [
   ['ri-article-line', 'Article', 'admin-blog-article', 'USER_CAN_ACCESS_BLOG_ARTICLES']
@@ -190,7 +190,7 @@ const memberItems = [
 ]
 
 export default defineComponent({
-  setup() {
+  setup () {
     const context = useContext()
     const drawer = ref(null)
     const member = computed(() => {
@@ -198,14 +198,14 @@ export default defineComponent({
     })
 
     const filteredMemberItems = computed(() => {
-        return memberItems.filter(([_icon, _title, _path, permission]) => securityStore.hasPermission(permission))
+      return memberItems.filter(([_icon, _title, _path, permission]) => securityStore.hasPermission(permission))
     })
 
-    const filteredPageItems = computed(() =>  {
+    const filteredPageItems = computed(() => {
       return pageItems.filter(([_icon, _title, _path, permission]) => securityStore.hasPermission(permission))
     })
 
-    const filteredBlogItems = computed(() =>  {
+    const filteredBlogItems = computed(() => {
       return blogItems.filter(([_icon, _title, _path, permission]) => securityStore.hasPermission(permission))
     })
 

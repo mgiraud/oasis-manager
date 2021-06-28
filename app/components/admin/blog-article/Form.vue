@@ -71,14 +71,14 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted } from '@nuxtjs/composition-api'
+import { computed, defineComponent, onMounted, useContext } from '@nuxtjs/composition-api'
 import useVuelidate from '@vuelidate/core'
 import { required, minLength } from '@vuelidate/validators'
 import has from 'lodash/has'
 import { FormErrors } from '~/api/repository'
-import { BlogArticle } from '~/store/BlogArticleStore'
-import { mediaNodeStore } from '~/store/MediaNodeStore'
-import Editor from '../../util/Editor.vue'
+import { BlogArticle } from '~/custom-store/BlogArticleStore'
+import { mediaNodeStore } from '~/custom-store/MediaNodeStore'
+import Editor from '~/components/util/Editor.vue'
 
 export default defineComponent({
   components: {
@@ -95,6 +95,7 @@ export default defineComponent({
     }
   },
   setup (props) {
+    mediaNodeStore.setContext(useContext())
     const item = computed(() => props.values)
 
     const validation = computed(() => ({

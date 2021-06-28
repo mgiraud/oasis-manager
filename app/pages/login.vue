@@ -66,7 +66,7 @@
 import {
   defineComponent, useContext
 } from '@nuxtjs/composition-api'
-import { securityStore } from '~/store/SecurityStore'
+import { securityStore } from '~/custom-store/SecurityStore'
 
 export default defineComponent({
   setup () {

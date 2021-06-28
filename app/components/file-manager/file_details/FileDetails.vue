@@ -42,11 +42,11 @@
 <script lang="ts">
 import { computed, defineComponent, inject, Ref, ref, useContext, useFetch, watch } from '@nuxtjs/composition-api'
 import { Validation } from '@vuelidate/core'
-import { mediaNodeStore } from '~/store/MediaNodeStore'
-import { mediaObjectStore } from '~/store/MediaObjectStore'
-import { notificationStore } from '~/store/NotificationStore'
+import { mediaNodeStore } from '~/custom-store/MediaNodeStore'
+import { mediaObjectStore } from '~/custom-store/MediaObjectStore'
+import { notificationStore } from '~/custom-store/NotificationStore'
 import FileDetailsForm from './FileDetailsForm.vue'
-import { MediaObject } from '~/store/media_object'
+import { MediaObject } from '~/custom-store/media_object'
 import Toolbar from '~/components/form/Toolbar.vue'
 
 export default defineComponent({
@@ -60,7 +60,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props) {
+  setup (props) {
     const context = useContext()
     mediaNodeStore.setContext(context)
     mediaObjectStore.setContext(context)

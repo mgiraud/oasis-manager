@@ -2,9 +2,9 @@ import { computed } from '@nuxtjs/composition-api'
 import { filter, find } from 'lodash'
 import { RawLocation } from 'vue-router'
 import { HydraMemberObject } from '~/api/hydra'
-import { CrudState, PersistentApiStore } from '~/store/AbstractStore'
-import { MediaNode } from '~/store/MediaNodeStore'
-import { PageCategory } from '~/store/PageCategoryStore'
+import { CrudState, PersistentApiStore } from '~/custom-store/AbstractStore'
+import { MediaNode } from '~/custom-store/MediaNodeStore'
+import { PageCategory } from '~/custom-store/PageCategoryStore'
 
 export type Page = HydraMemberObject & {
   'url': string;
@@ -100,7 +100,9 @@ class PageStore extends PersistentApiStore<PageState, Page> {
   })
 
   appendStaticPages (menu: MenuItem[]) {
-    if (menu.length === 0) return
+    if (menu.length === 0) {
+      return
+    }
     menu.push({
       name: 'Contacte-nous !',
       url: 'contact',

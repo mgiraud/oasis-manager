@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    {{groups}}
+    {{ groups }}
     <v-row>
       <v-col
         cols="12"
@@ -31,7 +31,7 @@
         cols="12"
         md="6"
       >
-        {{item.groups}}
+        {{ item.groups }}
         <v-combobox
           v-if="memberGroupState.selectItems"
           v-model="item.groups"
@@ -49,15 +49,15 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref, useContext } from '@nuxtjs/composition-api'
-import { memberGroupStore } from '~/store/MemberGroupStore'
-import { Member } from '~/store/MemberStore'
+import { memberGroupStore } from '~/custom-store/MemberGroupStore'
+import { Member } from '~/custom-store/MemberStore'
 
 export default defineComponent({
   props: {
     values: {
       type: Object as () => Member,
       required: true
-    },
+    }
   },
   setup (props: any[]) {
     const item = ref(props.values)

@@ -15,12 +15,18 @@
       @update:options="onUpdateOptions"
     >
       <template #top>
-        <v-toolbar flat color="white">
+        <v-toolbar
+          flat
+          color="white"
+        >
           <v-toolbar-title>Contact</v-toolbar-title>
 
           <v-spacer />
 
-          <FormFilter :handle-filter="onSendFilter" :handle-reset="resetFilter">
+          <FormFilter
+            :handle-filter="onSendFilter"
+            :handle-reset="resetFilter"
+          >
             <ContactFilter
               ref="filterForm"
               slot="filter"
@@ -29,7 +35,11 @@
           </FormFilter>
         </v-toolbar>
       </template>
-      <template v-if="item && item.createdAt" slot="item.createdAt" slot-scope="{ item }">
+      <template
+        v-if="item && item.createdAt"
+        slot="item.createdAt"
+        slot-scope="{ item }"
+      >
         {{ formatDate(item.createdAt) }}
       </template>
       <ActionCell
@@ -50,7 +60,7 @@ import ContactFilter from '~/components/admin/contact/ContactFilter.vue'
 import FormFilter from '~/components/form/FormFilter.vue'
 import itemList from '~/composable/ItemList'
 import itemSecurity from '~/composable/itemSecurity'
-import { contactStore } from '~/store/ContactStore'
+import { contactStore } from '~/custom-store/ContactStore'
 
 const headers = [
   { text: 'Email', value: 'email' },

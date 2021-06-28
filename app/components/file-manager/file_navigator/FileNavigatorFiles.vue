@@ -64,8 +64,8 @@
 
 <script lang="ts">
 import { defineComponent, inject, onMounted, useContext, watch } from '@nuxtjs/composition-api'
-import { MediaNode } from '~/store/MediaNodeStore'
-import { mediaObjectStore } from '~/store/MediaObjectStore'
+import { MediaNode } from '~/custom-store/MediaNodeStore'
+import { mediaObjectStore } from '~/custom-store/MediaObjectStore'
 
 export default defineComponent({
   props: {

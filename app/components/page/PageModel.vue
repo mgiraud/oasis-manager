@@ -4,13 +4,16 @@
       {{ page.title | capitalize }}
     </v-card-title>
     <v-card-text v-html="page.content" />
-    <image-preview v-if="page.mediaNode" :media-objects="page.mediaNode.mediaObjects" />
+    <image-preview
+      v-if="page.mediaNode"
+      :media-objects="page.mediaNode.mediaObjects"
+    />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
-import { Page } from '~/store/PageStore'
+import { Page } from '~/custom-store/PageStore'
 import ImagePreview from '~/components/util/ImagePreview.vue'
 
 export default defineComponent({
@@ -24,7 +27,10 @@ export default defineComponent({
 })
 </script>
 
-<style scoped lang="scss">
+<style
+  scoped
+  lang="scss"
+>
 .page-title {
   font-family: 'Permanent Marker', serif;
 }

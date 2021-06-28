@@ -2,12 +2,18 @@
   <v-form>
     <v-container>
       <v-row>
-        <v-col cols="12" md="6">
+        <v-col
+          cols="12"
+          md="6"
+        >
           <h2>J'en dis un peu sur moi :</h2>
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" md="6">
+        <v-col
+          cols="12"
+          md="6"
+        >
           <v-text-field
             v-model="item.email"
             prepend-inner-icon="ri-mail-line"
@@ -18,7 +24,11 @@
             @blur="v$.email.$touch()"
           />
         </v-col>
-        <v-col cols="12" sm="6" md="6">
+        <v-col
+          cols="12"
+          sm="6"
+          md="6"
+        >
           <v-text-field
             v-model="item.phoneNumber"
             prepend-inner-icon="ri-phone-line"
@@ -30,7 +40,10 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" md="6">
+        <v-col
+          cols="12"
+          md="6"
+        >
           <v-text-field
             v-model="item.firstName"
             label="Prénom *"
@@ -39,7 +52,11 @@
             @blur="v$.firstName.$touch()"
           />
         </v-col>
-        <v-col cols="12" sm="6" md="6">
+        <v-col
+          cols="12"
+          sm="6"
+          md="6"
+        >
           <v-text-field
             v-model="item.lastName"
             label="Nom *"
@@ -50,7 +67,10 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" md="6">
+        <v-col
+          cols="12"
+          md="6"
+        >
           <v-text-field
             v-model="item.city"
             label="Ville actuelle *"
@@ -61,13 +81,20 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" md="6">
+        <v-col
+          cols="12"
+          md="6"
+        >
           <v-text-field
             v-model="item.origin"
             label="Comment nous as-tu connu ?"
           />
         </v-col>
-        <v-col cols="12" sm="6" md="6">
+        <v-col
+          cols="12"
+          sm="6"
+          md="6"
+        >
           <v-checkbox
             v-model="item.acceptance"
             label="En cochant cette case tu acceptes que ces informations soient visibles par les membres de l'association « les Transalpins » ne faisant pas partie du bureau"
@@ -77,9 +104,13 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-          <label class="v-label">De combien de personnes est composé ton foyer, prénom et âge des membres du foyer ?</label>
+          <label class="v-label">De combien de personnes est composé ton foyer, prénom et âge des
+            membres du foyer ?</label>
         </v-col>
-        <v-col cols="12" md="6">
+        <v-col
+          cols="12"
+          md="6"
+        >
           <v-row>
             <v-col cols="6">
               <v-text-field
@@ -99,7 +130,10 @@
             </v-col>
           </v-row>
         </v-col>
-        <v-col cols="12" md="6">
+        <v-col
+          cols="12"
+          md="6"
+        >
           <v-row>
             <v-col cols="6">
               <v-text-field
@@ -119,7 +153,10 @@
             </v-col>
           </v-row>
         </v-col>
-        <v-col cols="12" md="6">
+        <v-col
+          cols="12"
+          md="6"
+        >
           <v-row>
             <v-col cols="6">
               <v-text-field
@@ -139,7 +176,10 @@
             </v-col>
           </v-row>
         </v-col>
-        <v-col cols="12" md="6">
+        <v-col
+          cols="12"
+          md="6"
+        >
           <v-row>
             <v-col cols="6">
               <v-text-field
@@ -163,13 +203,16 @@
       <v-divider class="mb-5 mt-4" />
       <v-row>
         <v-col cols="12">
-          <h2>Quelle est ma raison d'être ? Quelles sont mes motivations pour rejoindre ce projet ?</h2>
+          <h2>Quelle est ma raison d'être ? Quelles sont mes motivations pour rejoindre ce projet
+            ?</h2>
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="12">
           <p class="v-label">
-            Dans les termes ci-dessous, quels sont ceux, quelques-uns qui définiraient le mieux ta motivation initiale à créer une oasis ? Les classer par ordre d’importance, le plus important en premier. (Utilise le cliquer-glisser)
+            Dans les termes ci-dessous, quels sont ceux, quelques-uns qui définiraient le mieux ta
+            motivation initiale à créer une oasis ? Les classer par ordre d’importance, le plus
+            important en premier. (Utilise le cliquer-glisser)
           </p>
           <vuetify-draggable-treeview v-model="item.motivationsRaw" />
         </v-col>
@@ -186,7 +229,9 @@
       <v-row>
         <v-col cols="12">
           <p class="v-label">
-            Quelles sont les valeurs essentielles que tu aimerais vivre : les valeurs non négociables, c-a-d dont l'absence ferait pour toi perdre son sens au projet et ta motivation à y participer ?
+            Quelles sont les valeurs essentielles que tu aimerais vivre : les valeurs non
+            négociables, c-a-d dont l'absence ferait pour toi perdre son sens au projet et ta
+            motivation à y participer ?
           </p>
         </v-col>
       </v-row>
@@ -357,7 +402,7 @@ import { required, email, maxLength } from '@vuelidate/validators'
 import has from 'lodash/has'
 import VuetifyDraggableTreeview from 'vuetify-draggable-treeview'
 import { FormErrors } from '~/api/repository'
-import { SurveyJoin } from '~/store/SurveyJoinStore'
+import { SurveyJoin } from '~/custom-store/SurveyJoinStore'
 
 export default defineComponent({
   components: {
@@ -484,7 +529,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-  .v-treeview-node__label {
-    cursor: pointer;
-  }
+.v-treeview-node__label {
+  cursor: pointer;
+}
 </style>

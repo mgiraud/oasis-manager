@@ -62,15 +62,14 @@
 </template>
 
 <script lang="ts">
+import { defineComponent, ref, useContext, watch, useRouter, toRefs } from '@nuxtjs/composition-api'
 import itemCreate from '~/composable/ItemCreate'
-import { contactStore } from '~/store/ContactStore'
 import SurveyJoinForm from '../components/survey-join/Form.vue'
 import Toolbar from '../components/form/Toolbar.vue'
 import Loading from '../components/util/Loading.vue'
-import { SurveyJoin } from '~/store/SurveyJoinStore'
-import { defineComponent, ref, useContext, watch, useRouter, toRefs } from '@nuxtjs/composition-api'
-import { surveyJoinStore } from '~/store/SurveyJoinStore'
-import { pageStore } from '~/store/PageStore'
+import { SurveyJoin } from '~/custom-store/SurveyJoinStore'
+import { surveyJoinStore } from '~/custom-store/SurveyJoinStore'
+import { pageStore } from '~/custom-store/PageStore'
 
 const initialItem = {
   family: [{ firstName: null, age: null }, { firstName: null, age: null }, { firstName: null, age: null }, { firstName: null, age: null }],
@@ -112,7 +111,7 @@ export default defineComponent({
           data.acceptance = !!data.acceptance
           return data
         }
-      })),
+      }))
     }
   },
   head () {

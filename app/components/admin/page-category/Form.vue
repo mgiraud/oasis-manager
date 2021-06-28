@@ -48,7 +48,7 @@ import useVuelidate from '@vuelidate/core'
 import { required, minLength } from '@vuelidate/validators'
 import has from 'lodash/has'
 import { FormErrors } from '~/api/repository'
-import { PageCategory } from '~/store/PageCategoryStore'
+import { PageCategory } from '~/custom-store/PageCategoryStore'
 
 export default defineComponent({
   props: {

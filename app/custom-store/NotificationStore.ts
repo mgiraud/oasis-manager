@@ -1,4 +1,4 @@
-import { PersistentStore } from '~/store/AbstractStore'
+import { PersistentStore } from '~/custom-store/AbstractStore'
 
 export interface NotificationState {
   show: boolean

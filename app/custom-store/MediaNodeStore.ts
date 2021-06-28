@@ -1,8 +1,8 @@
 import { computed } from '@nuxtjs/composition-api'
 import { RawLocation } from 'vue-router'
 import { HydraMemberObject } from '~/api/hydra'
-import { CrudState, PersistentApiStore } from '~/store/AbstractStore'
-import { MediaObject } from '~/store/MediaObjectStore'
+import { CrudState, PersistentApiStore } from '~/custom-store/AbstractStore'
+import { MediaObject } from '~/custom-store/MediaObjectStore'
 
 export interface breadcrumbItem {
   '@id': string

@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
-import { BlogArticle } from '~/store/BlogArticleStore'
+import { BlogArticle } from '~/custom-store/BlogArticleStore'
 import ImagePreview from '~/components/util/ImagePreview.vue'
 import { formatDate } from '~/composable/helpers/formatDate'
 

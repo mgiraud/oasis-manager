@@ -2,7 +2,10 @@
   <v-form>
     <v-container>
       <v-row>
-        <v-col cols="12" md="6">
+        <v-col
+          cols="12"
+          md="6"
+        >
           <v-text-field
             v-model="item.email"
             prepend-inner-icon="ri-mail-line"
@@ -13,7 +16,11 @@
             @blur="v$.email.$touch()"
           />
         </v-col>
-        <v-col cols="12" sm="6" md="6">
+        <v-col
+          cols="12"
+          sm="6"
+          md="6"
+        >
           <v-text-field
             v-model="item.phoneNumber"
             prepend-inner-icon="ri-phone-line"
@@ -25,7 +32,10 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" md="6">
+        <v-col
+          cols="12"
+          md="6"
+        >
           <v-text-field
             v-model="item.firstName"
             label="Prénom"
@@ -34,7 +44,11 @@
             @blur="v$.firstName.$touch()"
           />
         </v-col>
-        <v-col cols="12" sm="6" md="6">
+        <v-col
+          cols="12"
+          sm="6"
+          md="6"
+        >
           <v-text-field
             v-model="item.lastName"
             label="Nom"
@@ -79,7 +93,7 @@ import useVuelidate from '@vuelidate/core'
 import { required, minLength, email, maxLength } from '@vuelidate/validators'
 import has from 'lodash/has'
 import { FormErrors } from '~/api/repository'
-import { BlogArticle } from '~/store/BlogArticleStore'
+import { BlogArticle } from '~/custom-store/BlogArticleStore'
 
 export default defineComponent({
   props: {

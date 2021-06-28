@@ -26,7 +26,7 @@
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
-import { notificationStore } from '~/store/NotificationStore'
+import { notificationStore } from '~/custom-store/NotificationStore'
 
 export default defineComponent({
   setup () {

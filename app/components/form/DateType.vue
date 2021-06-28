@@ -24,8 +24,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from '@nuxtjs/composition-api'
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { defineComponent, ref } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   props: {

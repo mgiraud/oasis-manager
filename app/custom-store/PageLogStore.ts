@@ -1,6 +1,6 @@
 import { RawLocation } from 'vue-router'
 import { HydraMemberObject } from '~/api/hydra'
-import { CrudState, PersistentApiStore } from '~/store/AbstractStore'
+import { CrudState, PersistentApiStore } from '~/custom-store/AbstractStore'
 
 export interface PageLog extends HydraMemberObject {
   id: number;
@@ -14,7 +14,6 @@ interface PageLogState extends CrudState<PageLog> {
 }
 
 class PageLogStore extends PersistentApiStore<PageLogState, PageLog> {
-
   getAddLocation (): RawLocation | null {
     return null
   }
@@ -28,8 +27,12 @@ class PageLogStore extends PersistentApiStore<PageLogState, PageLog> {
   }
 
   getIdentifierFromUrlParam (param: string): string {
-    return `api/page_logs/${decodeURIComponent(param)}`;
+    return `api/page_logs/${decodeURIComponent(param)}`
   }
+
+  deleteRole = ''
+  editRole = ''
+  listRole = ''
 }
 
 export const pageLogStore = new PageLogStore('page_logs')

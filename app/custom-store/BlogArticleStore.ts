@@ -1,8 +1,8 @@
 import { RawLocation } from 'vue-router'
 import { HydraMemberObject } from '~/api/hydra'
-import { CrudState, PersistentApiStore } from '~/store/AbstractStore'
-import { MediaNode } from '~/store/MediaNodeStore'
-import { Member } from '~/store/MemberStore'
+import { CrudState, PersistentApiStore } from '~/custom-store/AbstractStore'
+import { MediaNode } from '~/custom-store/MediaNodeStore'
+import { Member } from '~/custom-store/MemberStore'
 
 export type BlogArticle = HydraMemberObject & {
   id: number;

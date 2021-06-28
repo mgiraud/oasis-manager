@@ -1,8 +1,8 @@
 import { reactive, ref, Ref, useRouter, watch } from '@nuxtjs/composition-api'
 import { Validation } from '@vuelidate/core'
 import { HydraMemberObject } from '~/api/hydra'
-import { PersistentApiStore } from '~/store/AbstractStore'
-import { notificationStore } from '~/store/NotificationStore'
+import { PersistentApiStore } from '~/custom-store/AbstractStore'
+import { notificationStore } from '~/custom-store/NotificationStore'
 
 export interface ItemCreateOptions<U> {
   admin: boolean,

@@ -1,9 +1,15 @@
 <template>
-  <v-card class="fill-height ma-md-10" elevation="5">
+  <v-card
+    class="fill-height ma-md-10"
+    elevation="5"
+  >
     <v-container fluid>
       <v-row>
         <v-col>
-          <PageModel v-if="page" :page="page" />
+          <PageModel
+            v-if="page"
+            :page="page"
+          />
           <Error404 v-else />
         </v-col>
       </v-row>
@@ -15,14 +21,14 @@
 import PageModel from '~/components/page/PageModel.vue'
 import Error404 from '~/components/error/404.vue'
 import { defineComponent, useContext, computed, useRoute } from '@nuxtjs/composition-api'
-import { pageStore } from '~/store/PageStore'
+import { pageStore } from '~/custom-store/PageStore'
 
 export default defineComponent({
   components: {
     PageModel,
     Error404
   },
-  setup() {
+  setup () {
     pageStore.setContext(useContext())
     const route = useRoute()
 
@@ -38,7 +44,7 @@ export default defineComponent({
       page
     }
   },
-  head() {
+  head () {
     return {
       title: this.page ? this.page.title : 'Le vide intersidéral'
     }

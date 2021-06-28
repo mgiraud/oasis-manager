@@ -10,7 +10,8 @@
           accept="image/*"
           style="display:none"
           @change="onFileChange"
-        ><v-btn @click="openFileSelection">
+        >
+        <v-btn @click="openFileSelection">
           Sélectionner des fichiers à téléverser
         </v-btn>
       </v-col>
@@ -28,7 +29,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props) {
+  setup (props) {
     const fileSelection = ref(null) as Ref<HTMLInputElement | null>
 
     const openFileSelection = () => {

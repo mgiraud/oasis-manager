@@ -3,7 +3,7 @@ import { computed, defineNuxtPlugin } from '@nuxtjs/composition-api'
 import { Cookie } from './auth/cookie'
 import Token from './auth/token'
 import { Repository } from '~/api/repository'
-import { securityStore, SecurityStore, LoginCredentials, SecurityState } from '~/store/SecurityStore'
+import { securityStore, SecurityStore, LoginCredentials, SecurityState } from '~/custom-store/SecurityStore'
 
 declare module 'vue/types/vue' {
   interface Vue {
@@ -17,12 +17,6 @@ declare module '@nuxt/types' {
   }
 
   interface Context {
-    $auth: Auth
-  }
-}
-
-declare module 'vuex/types/index' {
-  interface Store<S> { // eslint-disable-line no-debugger
     $auth: Auth
   }
 }

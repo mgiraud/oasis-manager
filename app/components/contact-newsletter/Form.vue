@@ -19,8 +19,8 @@ import { computed, defineComponent, reactive, useContext, watch } from '@nuxtjs/
 import useVuelidate from '@vuelidate/core'
 import { email } from '@vuelidate/validators'
 import has from 'lodash/has'
-import { ContactNewsletter, contactNewsletterStore } from '~/store/ContactNewsletterStore'
-import { notificationStore } from '~/store/NotificationStore'
+import { ContactNewsletter, contactNewsletterStore } from '~/custom-store/ContactNewsletterStore'
+import { notificationStore } from '~/custom-store/NotificationStore'
 
 export default defineComponent({
   setup () {
@@ -59,13 +59,13 @@ export default defineComponent({
       message && notificationStore.showError(message)
     })
 
-      const sendForm = () => {
-        if (!v$.value) return
-        v$.value.$touch()
-        if (!v$.value.$invalid) {
-          contactNewsletterStore.create(item)
-        }
+    const sendForm = () => {
+      if (!v$.value) return
+      v$.value.$touch()
+      if (!v$.value.$invalid) {
+        contactNewsletterStore.create(item)
       }
+    }
 
     return {
       item,

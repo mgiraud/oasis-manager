@@ -1,7 +1,7 @@
 import { RawLocation } from 'vue-router'
 import { HydraMemberObject } from '~/api/hydra'
-import { CrudState, PersistentApiStore } from '~/store/AbstractStore'
-import { Contact } from '~/store/ContactStore'
+import { CrudState, PersistentApiStore } from '~/custom-store/AbstractStore'
+import { Contact } from '~/custom-store/ContactStore'
 
 export interface MotivationRaw {
   name: string
@@ -71,7 +71,7 @@ class SurveyJoinStore extends PersistentApiStore<SurveyJoinState, SurveyJoin> {
   editRole = 'USER_CAN_EDIT_SURVEY_JOIN'
   listRole = 'USER_CAN_VIEW_SURVEY_JOIN'
 
-  getCreateMessage(_: SurveyJoin) {
+  getCreateMessage (_: SurveyJoin) {
     return 'Le questionnaire a correctement été enregistré, nous prendrons contact avec toi le plus rapidement possible'
   }
 }

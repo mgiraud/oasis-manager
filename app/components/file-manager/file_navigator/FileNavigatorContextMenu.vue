@@ -63,7 +63,7 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, Ref, ref, useContext } from '@nuxtjs/composition-api'
-import { mediaNodeStore } from '~/store/MediaNodeStore'
+import { mediaNodeStore } from '~/custom-store/MediaNodeStore'
 
 export default defineComponent({
   props: {
@@ -76,16 +76,16 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props) {
+  setup (props) {
     const context = useContext()
-    const contextMenu : Ref<HTMLElement | null> = ref(null)
+    const contextMenu: Ref<HTMLElement | null> = ref(null)
     const dialog = ref(false)
     const newFolderName = ref(null) as Ref<null | string>
     mediaNodeStore.setContext(context)
 
     onMounted(() => {
-        contextMenu.value = document.getElementById('fileNavigatorContextMenu') as HTMLElement
-        document.addEventListener(document.ontouchstart !== null ? 'click' : 'touchstart', onClick, false)
+      contextMenu.value = document.getElementById('fileNavigatorContextMenu') as HTMLElement
+      document.addEventListener(document.ontouchstart !== null ? 'click' : 'touchstart', onClick, false)
     })
 
     const showMenu = (event: MouseEvent) => {
@@ -146,7 +146,10 @@ export default defineComponent({
 })
 </script>
 
-<style scoped lang="scss">
+<style
+  scoped
+  lang="scss"
+>
 .context-menu {
   top: 0;
   left: 0;

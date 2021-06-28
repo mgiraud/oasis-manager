@@ -45,7 +45,7 @@ import Toolbar from '~/components/form/Toolbar.vue'
 import Form from '~/components/admin/memberGroup/Form.vue'
 import itemSecurity from '~/composable/itemSecurity'
 import itemUpdate from '~/composable/itemUpdate'
-import { memberGroupStore } from '~/store/MemberGroupStore'
+import { memberGroupStore } from '~/custom-store/MemberGroupStore'
 
 export default defineComponent({
   components: {
@@ -60,7 +60,7 @@ export default defineComponent({
 
     return {
       ...toRefs(itemUpdate(memberGroupStore)),
-      ...toRefs(itemSecurity(memberGroupStore)),
+      ...toRefs(itemSecurity(memberGroupStore))
     }
   }
 })

@@ -15,12 +15,18 @@
       @update:options="onUpdateOptions"
     >
       <template #top>
-        <v-toolbar flat color="white">
+        <v-toolbar
+          flat
+          color="white"
+        >
           <v-toolbar-title>Liste de membres</v-toolbar-title>
 
           <v-spacer />
 
-          <FormFilter :handle-filter="onSendFilter" :handle-reset="resetFilter">
+          <FormFilter
+            :handle-filter="onSendFilter"
+            :handle-reset="resetFilter"
+          >
             <MemberFilter
               ref="filterForm"
               slot="filter"
@@ -45,7 +51,7 @@ import itemSecurity from '~/composable/itemSecurity'
 import ActionCell from '~/components/table/ActionCell.vue'
 import FormFilter from '~/components/form/FormFilter.vue'
 import MemberFilter from '~/components/admin/member/MemberFilter.vue'
-import { memberStore } from '~/store/MemberStore'
+import { memberStore } from '~/custom-store/MemberStore'
 
 const headers = [
   { text: 'Email', value: 'email' },
@@ -65,12 +71,14 @@ export default defineComponent({
 
     useFetch(async () => {
       await memberStore.fetchAll()
-    });
+    })
 
     const itemListHelper = itemList(memberStore)
 
     const filteredItems = computed(() => {
-      if (context.$auth.isAdmin) { return itemListHelper.items }
+      if (context.$auth.isAdmin) {
+        return itemListHelper.items
+      }
       return itemListHelper.items.filter(item => !item.isAdmin)
     })
 

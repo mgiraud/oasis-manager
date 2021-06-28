@@ -90,7 +90,11 @@
       <v-row v-if="contentErrors">
         <v-col cols="12">
           <ul>
-            <li v-for="(error, i) in contentErrors" :key="i" class="error--text">
+            <li
+              v-for="(error, i) in contentErrors"
+              :key="i"
+              class="error--text"
+            >
               {{ error }}
             </li>
           </ul>
@@ -168,7 +172,7 @@
 
 <script lang="ts">
 import { PropType } from 'vue'
-import { required, minLength} from '@vuelidate/validators'
+import { required, minLength } from '@vuelidate/validators'
 import { formatRelative, parseISO } from 'date-fns'
 import { fr } from 'date-fns/locale'
 import has from 'lodash/has'
@@ -176,11 +180,11 @@ import { FormErrors } from '~/api/repository'
 import EditorBtn from '~/components/util/Editor/EditorBtn.vue'
 import Editor from '~/components/util/Editor.vue'
 import { computed, defineComponent, onMounted, Ref, ref, useContext, watch } from '@nuxtjs/composition-api'
-import { PageLog } from '~/store/PageLogStore'
-import { Page } from '~/store/PageStore'
-import { mediaNodeStore } from '~/store/MediaNodeStore'
-import { pageCategoryStore } from '~/store/PageCategoryStore'
-import { pageLogStore } from '~/store/PageLogStore'
+import { PageLog } from '~/custom-store/PageLogStore'
+import { Page } from '~/custom-store/PageStore'
+import { mediaNodeStore } from '~/custom-store/MediaNodeStore'
+import { pageCategoryStore } from '~/custom-store/PageCategoryStore'
+import { pageLogStore } from '~/custom-store/PageLogStore'
 import useVuelidate from '@vuelidate/core'
 
 const slug = (value: string) => value.match(/^[a-zA-Z0-9-]*$/)
@@ -299,7 +303,7 @@ export default defineComponent({
       mediaNodeState: mediaNodeStore.getState(),
       pageCategoryState: pageCategoryStore.getState(),
       findLog: pageLogStore.find,
-      editor,
+      editor
     }
   }
 })

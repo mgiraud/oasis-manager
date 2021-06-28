@@ -1,5 +1,5 @@
 import { onServerPrefetch, reactive, Ref, ssrRef } from '@nuxtjs/composition-api'
-import { securityStore } from '~/store/SecurityStore'
+import { securityStore } from '~/custom-store/SecurityStore'
 
 const usePermissions = () => {
   const permissions = ssrRef([]) as Ref<string[]>

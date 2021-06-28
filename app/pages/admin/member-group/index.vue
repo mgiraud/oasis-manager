@@ -15,12 +15,18 @@
       @update:options="onUpdateOptions"
     >
       <template #top>
-        <v-toolbar flat color="white">
+        <v-toolbar
+          flat
+          color="white"
+        >
           <v-toolbar-title>Groupe de membres</v-toolbar-title>
 
           <v-spacer />
 
-          <FormFilter :handle-filter="onSendFilter" :handle-reset="resetFilter">
+          <FormFilter
+            :handle-filter="onSendFilter"
+            :handle-reset="resetFilter"
+          >
             <MemberGroupFilter
               ref="filterForm"
               slot="filter"
@@ -38,7 +44,11 @@
           </v-btn>
         </v-toolbar>
       </template>
-      <template v-if="item && item.category" slot="item.category" slot-scope="{ item }">
+      <template
+        v-if="item && item.category"
+        slot="item.category"
+        slot-scope="{ item }"
+      >
         <nuxt-link :to="{name: 'admin-member-group-id', params: {id: item.category.id }}">
           {{ item.category.name }}
         </nuxt-link>
@@ -60,7 +70,7 @@ import FormFilter from '~/components/form/FormFilter.vue'
 import MemberGroupFilter from '~/components/admin/memberGroup/MemberGroupFilter.vue'
 import itemList from '~/composable/ItemList'
 import itemSecurity from '~/composable/itemSecurity'
-import { memberGroupStore } from '~/store/MemberGroupStore'
+import { memberGroupStore } from '~/custom-store/MemberGroupStore'
 
 const headers = [
   { text: 'Nom', value: 'name' },
@@ -79,7 +89,7 @@ export default defineComponent({
 
     useFetch(async () => {
       await memberGroupStore.fetchAll()
-    });
+    })
 
     return {
       ...toRefs(itemList(memberGroupStore)),

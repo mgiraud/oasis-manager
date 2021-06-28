@@ -13,7 +13,10 @@
         v-if="$vuetify.breakpoint.mobile || $vuetify.breakpoint.xs"
         @click.stop="drawer = !drawer"
       >
-        <v-icon color="primary" class="text--darken-4">
+        <v-icon
+          color="primary"
+          class="text--darken-4"
+        >
           ri-menu-line
         </v-icon>
       </v-app-bar-nav-icon>
@@ -181,8 +184,8 @@ import SideMenu from '~/components/layout/SideMenu.vue'
 import NewsletterForm from '~/components/contact-newsletter/Form.vue'
 import Alert from '~/components/util/Alert.vue'
 import usePermissions from '~/composable/usePermissions'
-import { securityStore } from '~/store/SecurityStore'
-import { pageStore } from '~/store/PageStore'
+import { securityStore } from '~/custom-store/SecurityStore'
+import { pageStore } from '~/custom-store/PageStore'
 
 export default defineComponent({
   components: {

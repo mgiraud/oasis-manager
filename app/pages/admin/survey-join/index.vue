@@ -60,7 +60,7 @@ import ContactFilter from '~/components/admin/survey-join/SurveyJoinFilter.vue'
 import FormFilter from '~/components/form/FormFilter.vue'
 import itemList from '~/composable/ItemList'
 import itemSecurity from '~/composable/itemSecurity'
-import { surveyJoinStore } from '~/store/SurveyJoinStore'
+import { surveyJoinStore } from '~/custom-store/SurveyJoinStore'
 
 const headers = [
   { text: 'Email', value: 'email' },

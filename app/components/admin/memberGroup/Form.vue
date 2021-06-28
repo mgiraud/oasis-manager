@@ -2,7 +2,10 @@
   <v-form>
     <v-container>
       <v-row>
-        <v-col cols="12" md="6">
+        <v-col
+          cols="12"
+          md="6"
+        >
           <v-text-field
             v-model="item.name"
             label="Nom"
@@ -12,7 +15,10 @@
             @blur="v$.name.$touch()"
           />
         </v-col>
-        <v-col cols="12" md="6">
+        <v-col
+          cols="12"
+          md="6"
+        >
           <v-textarea
             v-model="item.description"
             label="Description"
@@ -20,7 +26,10 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" md="6">
+        <v-col
+          cols="12"
+          md="6"
+        >
           <v-combobox
             v-model="item.permissions"
             :items="state.permissions"
@@ -41,8 +50,8 @@ import useVuelidate from '@vuelidate/core'
 import { required, minLength } from '@vuelidate/validators'
 import has from 'lodash/has'
 import { FormErrors } from '~/api/repository'
-import { MemberGroup } from '~/store/MemberGroupStore'
-import { securityStore } from '~/store/SecurityStore'
+import { MemberGroup } from '~/custom-store/MemberGroupStore'
+import { securityStore } from '~/custom-store/SecurityStore'
 
 export default defineComponent({
   props: {
@@ -83,7 +92,7 @@ export default defineComponent({
       item,
       v$,
       nameErrors,
-      state: securityStore.getState(),
+      state: securityStore.getState()
     }
   }
 })

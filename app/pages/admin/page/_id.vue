@@ -40,16 +40,15 @@
   </v-container>
 </template>
 <script lang="ts">
-import { computed, defineComponent, onBeforeUnmount, onMounted, ref, toRefs, useContext, watch } from '@nuxtjs/composition-api'
+import { defineComponent, onBeforeUnmount, onMounted, toRefs, useContext, watch } from '@nuxtjs/composition-api'
 import Loading from '~/components/util/Loading.vue'
 import Toolbar from '~/components/form/Toolbar.vue'
 import Form from '~/components/admin/page/Form.vue'
 import itemSecurity from '~/composable/itemSecurity'
 import itemUpdate from '~/composable/itemUpdate'
-import { notificationStore } from '~/store/NotificationStore'
-import { pageStore } from '~/store/PageStore'
-import { pageLogStore } from '~/store/PageLogStore'
-import { securityStore } from '~/store/SecurityStore'
+import { notificationStore } from '~/custom-store/NotificationStore'
+import { pageStore } from '~/custom-store/PageStore'
+import { pageLogStore } from '~/custom-store/PageLogStore'
 
 export default defineComponent({
   components: {
@@ -65,10 +64,6 @@ export default defineComponent({
     pageLogStore.setContext(context)
 
     const itemUpdateHelper = itemUpdate(pageStore)
-
-    const canDelete = computed(() => {
-      return securityStore.hasPermission('USER_CAN_DELETE_PAGES')
-    })
 
     let autoSaveInterval: number | null = null
 
@@ -120,7 +115,7 @@ export default defineComponent({
     return {
       ...toRefs(itemUpdateHelper),
       ...toRefs(itemSecurity(pageStore)),
-      pageLogs: pageLogStore.list,
+      pageLogs: pageLogStore.list
     }
   },
   head () {

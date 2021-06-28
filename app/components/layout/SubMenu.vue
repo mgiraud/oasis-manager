@@ -7,7 +7,11 @@
     background-color="primary"
     color="white"
   >
-    <v-tab v-for="page in findByActiveSlug" :key="page['@id']" class="white--text">
+    <v-tab
+      v-for="page in findByActiveSlug"
+      :key="page['@id']"
+      class="white--text"
+    >
       {{ page.title }}
     </v-tab>
   </v-tabs>
@@ -16,7 +20,7 @@
 <script lang="ts">
 import { findIndex } from 'lodash'
 import { defineComponent, useContext } from '@nuxtjs/composition-api'
-import { Page, pageStore } from '~/store/PageStore'
+import { Page, pageStore } from '~/custom-store/PageStore'
 
 export default defineComponent({
   setup () {
@@ -26,7 +30,7 @@ export default defineComponent({
       findByActiveSlug: pageStore.findByActiveSlug
     }
   },
-  data() {
+  data () {
     return {
       tab: undefined
     }
@@ -49,6 +53,6 @@ export default defineComponent({
     if (this.$route.params.pathMatch) {
       this.tab = findIndex(this.findByActiveSlug, { url: this.$route.params.pathMatch })
     }
-  },
+  }
 })
 </script>

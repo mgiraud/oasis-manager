@@ -1,8 +1,8 @@
 import { useRouter, onBeforeUnmount, computed, useRoute, ref, Ref, reactive, watch } from '@nuxtjs/composition-api'
 import { Validation } from '@vuelidate/core'
 import { HydraMemberObject } from '~/api/hydra'
-import { PersistentApiStore } from '~/store/AbstractStore'
-import { notificationStore } from '~/store/NotificationStore'
+import { PersistentApiStore } from '~/custom-store/AbstractStore'
+import { notificationStore } from '~/custom-store/NotificationStore'
 
 const itemUpdate = <T, U extends HydraMemberObject> (store: PersistentApiStore<T, U>) => {
   const router = useRouter()

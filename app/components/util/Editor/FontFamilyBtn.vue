@@ -1,5 +1,8 @@
 <template>
-  <v-dialog v-model="dialog" width="300">
+  <v-dialog
+    v-model="dialog"
+    width="300"
+  >
     <template #activator="{ on: onDropdown, attrs: attrsDropdown }">
       <v-tooltip top>
         <template #activator="{ on: onTooltip, attrs: attrsTooltip }">
@@ -34,28 +37,42 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'nuxt-property-decorator'
+import { defineComponent, ref } from '@nuxtjs/composition-api'
 import { Editor } from '@tiptap/core'
 
-@Component
-export default class TextColorBtn extends Vue {
-  @Prop({ type: Object, required: true }) readonly editor!: Editor
-  dialog = false
-  fonts = [
-    'Permanent Marker',
-    'Amatic SC',
-    'Caveat',
-    'Helvetica'
-  ]
+const fonts = [
+  'Permanent Marker',
+  'Amatic SC',
+  'Caveat',
+  'Helvetica'
+]
 
-  selectFontFamily (font: string) {
-    this.editor.chain().focus().setFontFamily(font).run()
-    this.dialog = false
-  }
+export default defineComponent({
+  props: {
+    editor: {
+      type: Object as () => Editor | null,
+      required: true
+    }
+  },
+  setup (props) {
+    const dialog = ref(false)
 
-  removeFontFamily () {
-    this.editor.chain().focus().unsetFontFamily().run()
-    this.dialog = false
+    const selectFontFamily = (font: string) => {
+      props.editor.chain().focus().setFontFamily(font).run()
+      dialog.value = false
+    }
+
+    const removeFontFamily = () => {
+      props.editor.chain().focus().unsetFontFamily().run()
+      dialog.value = false
+    }
+
+    return {
+      dialog,
+      fonts,
+      selectFontFamily,
+      removeFontFamily
+    }
   }
-}
+})
 </script>

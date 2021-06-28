@@ -1,5 +1,8 @@
 <template>
-  <v-dialog v-model="dialog" width="300">
+  <v-dialog
+    v-model="dialog"
+    width="300"
+  >
     <template #activator="{ on: onDropdown, attrs: attrsDropdown }">
       <v-tooltip top>
         <template #activator="{ on: onTooltip, attrs: attrsTooltip }">
@@ -33,24 +36,37 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'nuxt-property-decorator'
+import { defineComponent, ref } from '@nuxtjs/composition-api'
 import { Editor } from '@tiptap/core'
 import { EditorColor, editorColors } from './colors'
 
-@Component
-export default class TextBackgroundColorBtn extends Vue {
-    @Prop({ type: Object, required: true }) readonly editor!: Editor
-    dialog = false
-    colors = editorColors
+export default defineComponent({
+  props: {
+    editor: {
+      type: Object as () => Editor | null,
+      required: true
+    }
+  },
+  setup (props) {
+    const dialog = ref(false)
+    const colors = editorColors
 
-    chooseBackgroundColor (backgroundColor: EditorColor) {
-      this.editor.chain().focus().setBackgroundColor(backgroundColor.background).run()
-      this.dialog = false
+    const chooseBackgroundColor = (backgroundColor: EditorColor) => {
+      props.editor?.chain().focus().setBackgroundColor(backgroundColor.background).run()
+      dialog.value = false
     }
 
-    removeBackgroundColor () {
-      this.editor.chain().focus().removeBackgroundColor().run()
-      this.dialog = false
+    const removeBackgroundColor = () => {
+      props.editor?.chain().focus().removeBackgroundColor().run()
+      dialog.value = false
     }
-}
+
+    return {
+      dialog,
+      colors,
+      chooseBackgroundColor,
+      removeBackgroundColor
+    }
+  }
+})
 </script>

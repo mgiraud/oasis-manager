@@ -2,7 +2,10 @@
   <v-form>
     <v-container>
       <v-row>
-        <v-col cols="12" md="6">
+        <v-col
+          cols="12"
+          md="6"
+        >
           <v-text-field
             v-model="item.nickname"
             label="Pseudo"
@@ -12,7 +15,11 @@
             @blur="v$.nickname.$touch()"
           />
         </v-col>
-        <v-col cols="12" sm="6" md="6">
+        <v-col
+          cols="12"
+          sm="6"
+          md="6"
+        >
           <v-combobox
             v-if="groupSelectItems"
             v-model="item.groups"
@@ -26,7 +33,10 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" md="6">
+        <v-col
+          cols="12"
+          md="6"
+        >
           <v-combobox
             v-if="permissions"
             v-model="item.memberPermissions"
@@ -37,7 +47,10 @@
             multiple
           />
         </v-col>
-        <v-col cols="12" md="6">
+        <v-col
+          cols="12"
+          md="6"
+        >
           <v-radio-group v-model="item.groupPermissionsOverrideType">
             <v-radio
               v-for="(label, index) in permissionOverride"
@@ -59,9 +72,9 @@ import { required, minLength } from '@vuelidate/validators'
 import has from 'lodash/has'
 import { FormErrors } from '~/api/repository'
 import usePermissions from '~/composable/usePermissions'
-import { memberGroupStore } from '~/store/MemberGroupStore'
-import { Member } from '~/store/MemberStore'
-import { securityStore } from '~/store/SecurityStore'
+import { memberGroupStore } from '~/custom-store/MemberGroupStore'
+import { Member } from '~/custom-store/MemberStore'
+import { securityStore } from '~/custom-store/SecurityStore'
 
 const permissionOverride = ['Fusionner les permissions', 'Permissions du groupe seulement', 'Permission du membre seulement']
 

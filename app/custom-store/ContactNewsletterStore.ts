@@ -1,6 +1,6 @@
 import { RawLocation } from 'vue-router'
 import { HydraMemberObject } from '~/api/hydra'
-import { CrudState, PersistentApiStore } from '~/store/AbstractStore'
+import { CrudState, PersistentApiStore } from '~/custom-store/AbstractStore'
 
 export type ContactNewsletter = HydraMemberObject & {
   email: string,
@@ -20,7 +20,7 @@ class ContactNewsletterStore extends PersistentApiStore<ContactNewsletterState, 
   }
 
   getListLocation (): RawLocation | null {
-    return { name: 'admin-contact-newsletter' };
+    return { name: 'admin-contact-newsletter' }
   }
 
   deleteRole = 'USER_CAN_DELETE_CONTACT_NEWSLETTER'

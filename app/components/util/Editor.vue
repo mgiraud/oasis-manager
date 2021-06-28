@@ -1,7 +1,11 @@
 <template>
   <div>
     <div class="editor">
-      <v-toolbar v-if="editor" flat dark>
+      <v-toolbar
+        v-if="editor"
+        flat
+        dark
+      >
         <editor-btn
           label="Gras"
           :btn-class="{ 'grey darken-3': editor.isActive('bold') }"
@@ -159,11 +163,17 @@
         />
         <slot name="supplemental_btns" />
       </v-toolbar>
-      <editor-content class="editor__content" :editor="editor" />
+      <editor-content
+        class="editor__content"
+        :editor="editor"
+      />
     </div>
 
     <div class="actions">
-      <v-btn class="v-icon" @click="clearContent">
+      <v-btn
+        class="v-icon"
+        @click="clearContent"
+      >
         Clear Content
       </v-btn>
     </div>
@@ -171,7 +181,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from 'nuxt-property-decorator'
+import { defineComponent, onBeforeUnmount, onMounted, Ref, ref, toRefs, watch } from '@nuxtjs/composition-api'
 // import the component and the necessary extensions
 import { Editor, EditorContent } from '@tiptap/vue-2'
 import { defaultExtensions } from '@tiptap/starter-kit'
@@ -195,7 +205,7 @@ import TextColorBtn from './Editor/TextColorBtn.vue'
 import TextBackgroundColorBtn from './Editor/TextBackgroundColorBtn.vue'
 import FontFamilyBtn from './Editor/FontFamilyBtn.vue'
 
-@Component({
+export default defineComponent({
   components: {
     FileUploadBtn,
     EditorContent,
@@ -203,84 +213,95 @@ import FontFamilyBtn from './Editor/FontFamilyBtn.vue'
     TextColorBtn,
     TextBackgroundColorBtn,
     FontFamilyBtn
+  },
+  props: {
+    value: {
+      type: String,
+      default: null
+    }
+  },
+  setup (props, { emit }) {
+    const editor = ref(null) as Ref<Editor | null>
+    const { value } = toRefs(props)
+
+    onMounted(() => {
+      editor.value = new Editor({
+        content: value.value,
+        extensions: [
+          ...defaultExtensions(),
+          TextAlign,
+          Gapcursor,
+          Typography,
+          Table.configure({
+            resizable: true
+          }),
+          TableRow,
+          TableHeader,
+          TableCell,
+          ResizableImage.configure({ inline: true }),
+          Link.configure({ openOnClick: true }),
+          TextStyle,
+          TextColor,
+          TextBackgroundColor,
+          Text,
+          FontFamily
+        ],
+        onUpdate: () => {
+          emit('input', editor.value?.getHTML())
+        }
+      })
+    })
+    onBeforeUnmount(() => {
+      editor.value?.destroy()
+    })
+
+    const clearContent = () => {
+      setContent('')
+    }
+
+    const addImage = () => {
+      const url = window.prompt('URL')
+
+      if (url) {
+        editor.value?.chain().focus().setImage({ src: url }).run()
+      }
+    }
+
+    const setLink = () => {
+      const url = window.prompt('URL')
+      if (url) {
+        editor.value?.chain().focus().setLink({ href: url }).run()
+      }
+    }
+
+    const setContent = (content: string) => {
+      editor.value?.commands.setContent(content, false)
+    }
+
+    watch(value, (newValue) => {
+      const isSame = editor.value?.getHTML() === value
+
+      if (isSame) {
+        return
+      }
+      setContent(newValue || '')
+    })
+
+    return {
+      editor,
+      clearContent,
+      setLink,
+      addImage,
+      setContent
+    }
   }
 })
-export default class AdminPageForm extends Vue {
-  @Prop({ type: String, required: false, default: null })
-  value!: string | null
-
-  editor: Editor | null = null
-
-  @Watch('value')
-  onValueChange (value: string) {
-    const isSame = this.editor?.getHTML() === value
-
-    if (isSame) {
-      return
-    }
-    this.setContent(this.value || '')
-  }
-
-  mounted () {
-    this.editor = new Editor({
-      content: this.value,
-      extensions: [
-        ...defaultExtensions(),
-        TextAlign,
-        Gapcursor,
-        Typography,
-        Table.configure({
-          resizable: true
-        }),
-        TableRow,
-        TableHeader,
-        TableCell,
-        ResizableImage.configure({ inline: true }),
-        Link.configure({ openOnClick: true }),
-        TextStyle,
-        TextColor,
-        TextBackgroundColor,
-        Text,
-        FontFamily
-      ],
-      onUpdate: () => {
-        this.$emit('input', this.editor?.getHTML())
-      }
-    })
-  }
-
-  beforeDestroy () {
-    this.editor?.destroy()
-  }
-
-  clearContent () {
-    this.setContent('')
-  }
-
-  addImage () {
-    const url = window.prompt('URL')
-
-    if (url) {
-      this.editor?.chain().focus().setImage({ src: url }).run()
-    }
-  }
-
-  setLink () {
-    const url = window.prompt('URL')
-    if (url) {
-      this.editor?.chain().focus().setLink({ href: url }).run()
-    }
-  }
-
-  setContent (content: string) {
-    if (this.editor) {
-      this.editor.commands.setContent(content, false)
-    }
-  }
-}
 </script>
 
-<style lang="scss" scoped>
+<style
+  lang="scss"
+  scoped
+>
 .editor__content {
   ::v-deep {
     .ProseMirror {

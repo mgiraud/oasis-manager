@@ -1,7 +1,7 @@
 import { RawLocation } from 'vue-router'
 import { HydraMemberObject } from '~/api/hydra'
-import { CrudState, PersistentApiStore } from '~/store/AbstractStore'
-import { Page } from '~/store/PageStore'
+import { CrudState, PersistentApiStore } from '~/custom-store/AbstractStore'
+import { Page } from '~/custom-store/PageStore'
 
 export interface PageCategory extends HydraMemberObject {
   id: number
@@ -16,7 +16,6 @@ interface PageCategoryState extends CrudState<PageCategory> {
 }
 
 class PageCategoryStore extends PersistentApiStore<PageCategoryState, PageCategory> {
-
   getAddLocation (): RawLocation | null {
     return { name: 'admin-page-category-new' }
   }

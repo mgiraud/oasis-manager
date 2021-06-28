@@ -36,8 +36,8 @@ import {
 import { HydraMemberObject } from '~/api/hydra'
 import PageModel from '~/components/page/PageModel.vue'
 import BlogArticleTemplate from '~/components/blog-article/BlogArticleTemplate.vue'
-import { pageStore } from '~/store/PageStore'
-import { blogArticleStore } from '~/store/BlogArticleStore'
+import { pageStore } from '~/custom-store/PageStore'
+import { blogArticleStore } from '~/custom-store/BlogArticleStore'
 
 export default defineComponent({
   components: {

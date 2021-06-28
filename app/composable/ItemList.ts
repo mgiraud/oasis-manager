@@ -1,8 +1,8 @@
 import { reactive, ref, useRouter, watch } from '@nuxtjs/composition-api'
 import isEmpty from 'lodash/isEmpty'
 import { HydraGetRequestFilter, HydraMemberObject } from '~/api/hydra'
-import { notificationStore } from '~/store/NotificationStore'
-import { PersistentApiStore } from '~/store/AbstractStore'
+import { notificationStore } from '~/custom-store/NotificationStore'
+import { PersistentApiStore } from '~/custom-store/AbstractStore'
 
 const itemList = <T, U extends HydraMemberObject> (store: PersistentApiStore<T, U>, additionalOptions ?: HydraGetRequestFilter) => {
   const router = useRouter()

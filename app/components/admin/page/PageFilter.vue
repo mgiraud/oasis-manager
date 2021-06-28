@@ -78,7 +78,7 @@
 <script lang="ts">
 import DateType from '~/components/form/DateType.vue'
 import { computed, defineComponent, ref, useContext, useFetch, watch } from '@nuxtjs/composition-api'
-import { pageCategoryStore } from '~/store/PageCategoryStore'
+import { pageCategoryStore } from '~/custom-store/PageCategoryStore'
 
 export default defineComponent({
   components: {
@@ -95,7 +95,7 @@ export default defineComponent({
 
     watch(props.values, (data) => {
       console.log(data)
-    }, {deep: true})
+    }, { deep: true })
 
     pageCategoryStore.setContext(useContext())
     useFetch(async () => {

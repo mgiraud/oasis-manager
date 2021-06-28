@@ -1,5 +1,8 @@
 <template>
-  <v-toolbar flat bottom>
+  <v-toolbar
+    flat
+    bottom
+  >
     <slot name="left" />
     <v-spacer />
     <div>
@@ -43,7 +46,12 @@
         Supprimer
       </v-btn>
 
-      <v-btn v-if="handleAdd" color="primary" rounded @click="addItem">
+      <v-btn
+        v-if="handleAdd"
+        color="primary"
+        rounded
+        @click="addItem"
+      >
         <v-icon>ri-add-line</v-icon>
       </v-btn>
     </div>
@@ -57,70 +65,89 @@
 </template>
 
 <script lang="ts">
+import { defineComponent, ref } from '@nuxtjs/composition-api'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import ConfirmDelete from '~/components/util/ConfirmDelete.vue'
 
-@Component({
-  name: 'Toolbar',
+export default defineComponent({
   components: {
     ConfirmDelete
+  },
+  props: {
+    handleBack: {
+      type: Function,
+      default: null
+    },
+    handleEdit: {
+      type: Function,
+      default: null
+    },
+    handleSubmit: {
+      type: Function,
+      default: null
+    },
+    handleReset: {
+      type: Function,
+      default: null
+    },
+    handleDelete: {
+      type: Function,
+      default: null
+    },
+    handleAdd: {
+      type: Function,
+      default: null
+    },
+    title: {
+      type: String,
+      default: ''
+    },
+    isLoading: {
+      type: Boolean,
+      default: false
+    }
+  },
+  setup (props) {
+    const confirmDelete = ref(false)
+
+    const goBack = () => {
+      if (props.handleBack) {
+        props.handleBack()
+      }
+    }
+
+    const addItem = () => {
+      if (props.handleAdd) {
+        props.handleAdd()
+      }
+    }
+
+    const editItem = () => {
+      if (props.handleEdit) {
+        props.handleEdit()
+      }
+    }
+
+    const submitItem = () => {
+      if (props.handleSubmit) {
+        props.handleSubmit()
+      }
+    }
+
+    const resetItem = () => {
+      if (props.handleReset) {
+        props.handleReset()
+      }
+    }
+
+    return {
+      confirmDelete,
+      goBack,
+      addItem,
+      editItem,
+      submitItem,
+      resetItem
+    }
   }
 })
-export default class Toolbar extends Vue {
-  @Prop({ type: Function, default: null })
-  handleBack!: any
-
-  @Prop({ type: Function, default: null })
-  handleEdit!: any
-
-  @Prop({ type: Function, default: null })
-  handleSubmit!: any
-
-  @Prop({ type: Function, default: null })
-  handleReset!: any
-
-  @Prop({ type: Function, default: null })
-  handleDelete: any
-
-  @Prop({ type: Function, default: null })
-  handleAdd!: any
-
-  @Prop({ type: String, default: '', required: false })
-  title!: any
-
-  @Prop({ type: Boolean, default: false, required: false })
-  isLoading!: any
-
-  confirmDelete = false
-
-  goBack () {
-    if (this.handleBack) {
-      this.handleBack()
-    }
-  }
-
-  addItem () {
-    if (this.handleAdd) {
-      this.handleAdd()
-    }
-  }
-
-  editItem () {
-    if (this.handleEdit) {
-      this.handleEdit()
-    }
-  }
-
-  submitItem () {
-    if (this.handleSubmit) {
-      this.handleSubmit()
-    }
-  }
-
-  resetItem () {
-    if (this.handleReset) {
-      this.handleReset()
-    }
-  }
-}
 </script>

@@ -27,11 +27,11 @@
 <script lang="ts">
 import { findIndex } from 'lodash'
 import { Route } from 'vue-router'
-import { MenuItem } from '~/store/PageStore'
+import { MenuItem } from '~/custom-store/PageStore'
 import {
   defineComponent, ref, useContext
 } from '@nuxtjs/composition-api'
-import { pageStore } from '~/store/PageStore'
+import { pageStore } from '~/custom-store/PageStore'
 
 export default defineComponent({
   setup () {
@@ -83,7 +83,7 @@ export default defineComponent({
       if (!isInMenu) {
         this.tab = undefined
       }
-    },
+    }
   },
   mounted () {
     if (this.$route.params.pathMatch) {

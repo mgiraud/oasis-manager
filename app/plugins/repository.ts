@@ -18,13 +18,6 @@ declare module '@nuxt/types' {
   }
 }
 
-declare module 'vuex/types/index' {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  interface Store<S> {
-      $getRepository: (name: string) => Repository
-  }
-}
-
 const createRepositories = (context: Context) => {
   const resources = [
     'members', 'media_nodes', 'media_objects', 'pages', 'blog_articles',

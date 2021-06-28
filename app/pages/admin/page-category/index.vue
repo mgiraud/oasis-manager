@@ -65,7 +65,7 @@
 import { defineComponent, toRefs, useContext } from '@nuxtjs/composition-api'
 import itemList from '~/composable/ItemList'
 import itemSecurity from '~/composable/itemSecurity'
-import { pageCategoryStore } from '~/store/PageCategoryStore'
+import { pageCategoryStore } from '~/custom-store/PageCategoryStore'
 import ActionCell from '~/components/table/ActionCell.vue'
 import PageCategoryFilter from '~/components/admin/page-category/PageCategoryFilter.vue'
 import FormFilter from '~/components/form/FormFilter.vue'

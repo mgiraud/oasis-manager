@@ -5,18 +5,30 @@
   >
     <v-list>
       <template v-for="(menuItem, i) in menu">
-        <v-list-item v-if="!menuItem.children" :key="i" :to="menuItem.url">
+        <v-list-item
+          v-if="!menuItem.children"
+          :key="i"
+          :to="menuItem.url"
+        >
           <v-list-item-title class="white--text">
             {{ menuItem.name }}
           </v-list-item-title>
         </v-list-item>
-        <v-list-group v-if="menuItem.children" :key="i" :to="menuItem.url">
+        <v-list-group
+          v-if="menuItem.children"
+          :key="i"
+          :to="menuItem.url"
+        >
           <template #activator>
             <v-list-item-title class="primary--text">
               {{ menuItem.name }}
             </v-list-item-title>
           </template>
-          <v-list-item v-for="(subMenuItem, j) in menuItem.children" :key="j" :to="subMenuItem.url">
+          <v-list-item
+            v-for="(subMenuItem, j) in menuItem.children"
+            :key="j"
+            :to="subMenuItem.url"
+          >
             <v-list-item-title class="white--text">
               {{ subMenuItem.name }}
             </v-list-item-title>
@@ -29,7 +41,7 @@
 
 <script lang="ts">
 import { defineComponent, useContext } from '@nuxtjs/composition-api'
-import { pageStore } from '~/store/PageStore'
+import { pageStore } from '~/custom-store/PageStore'
 
 export default defineComponent({
   setup () {

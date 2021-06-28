@@ -74,8 +74,8 @@
 
 <script lang="ts">
 import { defineComponent, useContext, inject, useFetch, nextTick, ref, Ref } from '@nuxtjs/composition-api'
-import { mediaNodeStore, MediaNode } from '~/store/MediaNodeStore'
-import { mediaObjectStore } from '~/store/MediaObjectStore'
+import { mediaNodeStore, MediaNode } from '~/custom-store/MediaNodeStore'
+import { mediaObjectStore } from '~/custom-store/MediaObjectStore'
 import FileNavigatorBreadCrumb from './FileNavigatorBreadCrumb.vue'
 import FileNavigatorFolders from './FileNavigatorFolders.vue'
 import FileNavigatorFiles from './FileNavigatorFiles.vue'
@@ -106,7 +106,7 @@ export default defineComponent({
       default: null
     }
   },
-  setup (props, {emit}) {
+  setup (props, { emit }) {
     const context = useContext()
     mediaNodeStore.setContext(context)
     mediaObjectStore.setContext(context)
@@ -130,7 +130,7 @@ export default defineComponent({
       closeDetailPanel && closeDetailPanel()
     }
 
-     const refresh = async () => {
+    const refresh = async () => {
       if (!props.currentMediaNode) {
         return
       }

@@ -28,7 +28,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from '@nuxtjs/composition-api'
-import { MediaObject } from '~/store/MediaObjectStore'
+import { MediaObject } from '~/custom-store/MediaObjectStore'
 
 export default defineComponent({
   props: {
@@ -37,7 +37,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props) {
+  setup (props) {
     const size = '250px'
     const images = computed(() => props.mediaObjects.filter((mediaObject: MediaObject) => mediaObject.isImage))
 

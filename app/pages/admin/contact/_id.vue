@@ -4,8 +4,14 @@
       <v-col cols="12">
         <h3>Informations du contact</h3>
         <ul class="contact-informations">
-          <li><v-icon>ri-mail-line</v-icon> {{ item.email }}</li>
-          <li><v-icon>ri-phone-line</v-icon> {{ item.phoneNumber || 'Non précisé' }}</li>
+          <li>
+            <v-icon>ri-mail-line</v-icon>
+            {{ item.email }}
+          </li>
+          <li>
+            <v-icon>ri-phone-line</v-icon>
+            {{ item.phoneNumber || 'Non précisé' }}
+          </li>
           <li>Prénom : {{ item.firstName || 'Non précisé' }}</li>
           <li>Nom : {{ item.lastName || 'Non précisé' }}</li>
         </ul>
@@ -15,7 +21,11 @@
       </v-col>
       <v-col cols="12">
         <label>
-          <textarea v-model="item.content" readonly class="content-textarea primary white--text" />
+          <textarea
+            v-model="item.content"
+            readonly
+            class="content-textarea primary white--text"
+          />
         </label>
       </v-col>
     </v-row>
@@ -35,7 +45,7 @@ import itemUpdate from '~/composable/itemUpdate'
 import Loading from '~/components/util/Loading.vue'
 import Toolbar from '~/components/form/Toolbar.vue'
 import ContactForm from '~/components/contact/Form.vue'
-import { contactStore } from '~/store/ContactStore'
+import { contactStore } from '~/custom-store/ContactStore'
 
 export default defineComponent({
   components: {
@@ -49,20 +59,23 @@ export default defineComponent({
     contactStore.setContext(useContext())
 
     return {
-      ...toRefs(itemUpdate(contactStore)),
+      ...toRefs(itemUpdate(contactStore))
     }
   }
 })
 </script>
 
-<style lang="scss" scoped>
+<style
+  lang="scss"
+  scoped
+>
 ul.contact-informations {
   list-style-type: none;
 }
 
 .content-textarea {
   width: 100%;
-  padding : 10px;
+  padding: 10px;
   min-height: 200px;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;

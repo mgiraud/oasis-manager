@@ -1,7 +1,15 @@
 <template>
   <div>
-    <Form ref="createForm" :values="item" :errors="state.violations" :page-logs="[]" />
-    <Toolbar :handle-submit="onSendForm" :handle-reset="resetForm" />
+    <Form
+      ref="createForm"
+      :values="item"
+      :errors="state.violations"
+      :page-logs="[]"
+    />
+    <Toolbar
+      :handle-submit="onSendForm"
+      :handle-reset="resetForm"
+    />
     <Loading :visible="state.isLoading" />
   </div>
 </template>
@@ -12,7 +20,7 @@ import Toolbar from '~/components/form/Toolbar.vue'
 import Form from '~/components/admin/page/Form.vue'
 import itemCreate from '~/composable/ItemCreate'
 import { defineComponent, useContext, toRefs, reactive } from '@nuxtjs/composition-api'
-import { pageStore } from '~/store/PageStore'
+import { pageStore } from '~/custom-store/PageStore'
 
 export default defineComponent({
   components: {
@@ -22,19 +30,19 @@ export default defineComponent({
   meta: {
     permissions: ['USER_CAN_EDIT_PAGES']
   },
-  setup() {
+  setup () {
     const item = reactive({ content: '', showInMenu: false, isPublished: false })
     pageStore.setContext(useContext())
 
     return {
       item,
-      ...toRefs(itemCreate(pageStore)),
+      ...toRefs(itemCreate(pageStore))
     }
   },
-  head() {
+  head () {
     return {
       title: 'Ajout d\'une page'
     }
-  },
+  }
 })
 </script>

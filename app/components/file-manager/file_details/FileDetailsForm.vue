@@ -56,8 +56,8 @@ import useVuelidate from '@vuelidate/core'
 import { minLength } from '@vuelidate/validators'
 import has from 'lodash/has'
 import { FormErrors } from '~/api/repository'
-import { Member } from '~/store/MemberStore'
-import { securityStore } from '~/store/SecurityStore'
+import { Member } from '~/custom-store/MemberStore'
+import { securityStore } from '~/custom-store/SecurityStore'
 
 export default defineComponent({
   props: {
@@ -74,7 +74,7 @@ export default defineComponent({
       default: () => []
     }
   },
-  setup(props) {
+  setup (props) {
     const item = computed(() => props.values)
     const validation = computed(() => ({
       customName: {
@@ -113,7 +113,7 @@ export default defineComponent({
       v$,
       customNameErrors,
       mediaNodesErrors,
-      state: securityStore.getState(),
+      state: securityStore.getState()
     }
   }
 })

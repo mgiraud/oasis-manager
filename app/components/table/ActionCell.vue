@@ -66,7 +66,7 @@ export default defineComponent({
       default: null
     }
   },
-  setup() {
+  setup () {
     const confirmDelete = ref(false)
 
     return {

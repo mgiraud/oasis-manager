@@ -50,8 +50,8 @@ import FileSelection from './file_selection/FileSelection.vue'
 import FileUploader from './file_uploader/FileUploader.vue'
 import FileNavigator from './file_navigator/FileNavigator.vue'
 import FileDetails from './file_details/FileDetails.vue'
-import { MediaObject } from '~/store/MediaObjectStore'
-import { MediaNode } from '~/store/MediaNodeStore'
+import { MediaObject } from '~/custom-store/MediaObjectStore'
+import { MediaNode } from '~/custom-store/MediaNodeStore'
 
 export interface Thumbnail {
   src: string
@@ -75,7 +75,7 @@ export default defineComponent({
       default: true
     }
   },
-  setup(props) {
+  setup (props) {
     const detailsPanel = ref(false)
     const selectedMediaObject = ref(null) as Ref<null | MediaObject>
     const links = ref([]) as Ref<Link[]>

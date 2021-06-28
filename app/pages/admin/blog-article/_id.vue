@@ -45,7 +45,7 @@ import Toolbar from '~/components/form/Toolbar.vue'
 import Form from '~/components/admin/blog-article/Form.vue'
 import itemSecurity from '~/composable/itemSecurity'
 import itemUpdate from '~/composable/itemUpdate'
-import { blogArticleStore } from '~/store/BlogArticleStore'
+import { blogArticleStore } from '~/custom-store/BlogArticleStore'
 
 export default defineComponent({
   components: {

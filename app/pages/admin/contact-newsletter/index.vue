@@ -15,12 +15,18 @@
       @update:options="onUpdateOptions"
     >
       <template #top>
-        <v-toolbar flat color="white">
+        <v-toolbar
+          flat
+          color="white"
+        >
           <v-toolbar-title>Inscriptions à la newsletter</v-toolbar-title>
 
           <v-spacer />
 
-          <FormFilter :handle-filter="onSendFilter" :handle-reset="resetFilter">
+          <FormFilter
+            :handle-filter="onSendFilter"
+            :handle-reset="resetFilter"
+          >
             <ContactNewsletterFilter
               ref="filterForm"
               slot="filter"
@@ -29,7 +35,11 @@
           </FormFilter>
         </v-toolbar>
       </template>
-      <template v-if="item" slot="item.createdAt" slot-scope="{ item }">
+      <template
+        v-if="item"
+        slot="item.createdAt"
+        slot-scope="{ item }"
+      >
         {{ formatDate(item.createdAt) }}
       </template>
     </v-data-table>
@@ -43,7 +53,7 @@ import ContactNewsletterFilter from '~/components/admin/contact-newsletter/Conta
 import FormFilter from '~/components/form/FormFilter.vue'
 import itemList from '~/composable/ItemList'
 import itemSecurity from '~/composable/itemSecurity'
-import { contactNewsletterStore } from '~/store/ContactNewsletterStore'
+import { contactNewsletterStore } from '~/custom-store/ContactNewsletterStore'
 import { formatDate } from '~/composable/helpers/formatDate'
 
 const headers = [
@@ -70,7 +80,7 @@ export default defineComponent({
         sortBy: ['createdAt'],
         sortDesc: ['desc']
       })),
-      ...toRefs(itemSecurity(contactNewsletterStore)),
+      ...toRefs(itemSecurity(contactNewsletterStore))
     }
   }
 })

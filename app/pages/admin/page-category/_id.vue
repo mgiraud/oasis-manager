@@ -44,8 +44,8 @@ import Form from '~/components/admin/page-category/Form.vue'
 import Toolbar from '~/components/form/Toolbar.vue'
 import Loading from '~/components/util/Loading.vue'
 import itemUpdate from '~/composable/itemUpdate'
-import { pageLogStore } from '~/store/PageLogStore'
-import { pageCategoryStore } from '~/store/PageCategoryStore'
+import { pageLogStore } from '~/custom-store/PageLogStore'
+import { pageCategoryStore } from '~/custom-store/PageCategoryStore'
 
 export default defineComponent({
   components: {

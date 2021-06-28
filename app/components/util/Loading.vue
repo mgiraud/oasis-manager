@@ -7,10 +7,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
 
-@Component
-export default class Loading extends Vue {
-  @Prop({ type: Boolean, required: true }) readonly visible!: boolean
-}
+export default defineComponent({
+  props: {
+    visible: {
+      type: Boolean,
+      required: true
+    }
+  }
+})
 </script>

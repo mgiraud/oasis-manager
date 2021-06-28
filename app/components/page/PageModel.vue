@@ -9,15 +9,19 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
 import { Page } from '~/store/PageStore'
 import ImagePreview from '~/components/util/ImagePreview.vue'
-@Component({
-  components: { ImagePreview }
+
+export default defineComponent({
+  components: { ImagePreview },
+  props: {
+    page: {
+      type: Object as () => Page,
+      required: true
+    }
+  }
 })
-export default class PageModel extends Vue {
-  @Prop({ type: Object, required: true }) readonly page!: Page
-}
 </script>
 
 <style scoped lang="scss">

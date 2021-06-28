@@ -2,8 +2,8 @@ import { computed } from '@nuxtjs/composition-api'
 import { filter, find } from 'lodash'
 import { RawLocation } from 'vue-router'
 import { HydraMemberObject } from '~/api/hydra'
-import { CrudState, PersistentApiStore } from '~/store/main'
-import { MediaNode } from '~/store/media_node'
+import { CrudState, PersistentApiStore } from '~/store/AbstractStore'
+import { MediaNode } from '~/store/MediaNodeStore'
 import { PageCategory } from '~/store/PageCategoryStore'
 
 export type Page = HydraMemberObject & {

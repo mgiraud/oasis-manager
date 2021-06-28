@@ -54,7 +54,7 @@
 <script lang="ts">
 import { defineComponent, toRefs, useContext, useFetch } from '@nuxtjs/composition-api'
 import ActionCell from '~/components/table/ActionCell.vue'
-import BlogArticleFilter from '~/components/admin/blogArticle/BlogArticleFilter.vue'
+import BlogArticleFilter from '~/components/admin/blog-article/BlogArticleFilter.vue'
 import FormFilter from '~/components/form/FormFilter.vue'
 import itemList from '~/composable/ItemList'
 import itemSecurity from '~/composable/itemSecurity'

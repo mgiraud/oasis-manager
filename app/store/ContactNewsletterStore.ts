@@ -1,6 +1,6 @@
 import { RawLocation } from 'vue-router'
 import { HydraMemberObject } from '~/api/hydra'
-import { CrudState, PersistentApiStore } from '~/store/main'
+import { CrudState, PersistentApiStore } from '~/store/AbstractStore'
 
 export type ContactNewsletter = HydraMemberObject & {
   email: string,

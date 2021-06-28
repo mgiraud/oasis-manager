@@ -47,13 +47,13 @@
             <survey-join-form
               ref="createForm"
               :values="item"
-              :errors="surveyJoinState.violations"
+              :errors="state.violations"
             />
             <toolbar
               :handle-submit="onSendForm"
               :handle-reset="resetForm"
             />
-            <Loading :visible="surveyJoinState.isLoading" />
+            <Loading :visible="state.isLoading" />
           </v-card-text>
         </v-card>
       </v-col>
@@ -62,15 +62,15 @@
 </template>
 
 <script lang="ts">
+import itemCreate from '~/composable/ItemCreate'
+import { contactStore } from '~/store/ContactStore'
 import SurveyJoinForm from '../components/survey-join/Form.vue'
 import Toolbar from '../components/form/Toolbar.vue'
 import Loading from '../components/util/Loading.vue'
 import { SurveyJoin } from '~/store/SurveyJoinStore'
-import { ElementWithValidation } from '~/vue-shim'
-import { defineComponent, ref, useContext, watch, useRouter } from '@nuxtjs/composition-api'
+import { defineComponent, ref, useContext, watch, useRouter, toRefs } from '@nuxtjs/composition-api'
 import { surveyJoinStore } from '~/store/SurveyJoinStore'
 import { pageStore } from '~/store/PageStore'
-import { notificationStore } from '~/store/NotificationStore'
 
 const initialItem = {
   family: [{ firstName: null, age: null }, { firstName: null, age: null }, { firstName: null, age: null }, { firstName: null, age: null }],
@@ -96,53 +96,28 @@ export default defineComponent({
   },
   setup () {
     const context = useContext()
-    const router = useRouter()
     pageStore.setContext(context)
     surveyJoinStore.setContext(context)
 
     const item = ref({ ...initialItem })
 
-    watch(() => surveyJoinStore.getState().violations, (violations: string[] | null) => {
-      if (violations && violations['']) {
-        notificationStore.setTimeoutDuration(10000)
-        notificationStore.showError(violations[''])
-      }
-    })
-
-    watch(() => surveyJoinStore.getState().created, () => {
-      notificationStore.showMessage('Le questionnaire a correctement été enregistré, nous prendrons contact avec toi le plus rapidement possible')
-      router.push({ name: 'index' })
-    })
-
     return {
       item,
       downloadPdfUrl: process.env.apiBaseUrl + (process.env.apiBaseUrl?.endsWith('/') ? '' : '/') + '../app-assets/files/questionnaire_transalpins_v1.pdf',
       page: pageStore.find('/api/pages/survey-join'),
-      surveyJoinState: surveyJoinStore.getState()
+      ...toRefs(itemCreate(surveyJoinStore, {
+        admin: false,
+        dataCallback: (data: SurveyJoin) => {
+          data.motivations = data.motivationsRaw.map(motivation => motivation.id)
+          data.acceptance = !!data.acceptance
+          return data
+        }
+      })),
     }
   },
   head () {
     return {
       title: this.page ? this.page.title : 'Rejoins le groupe fondateur !'
-    }
-  },
-  methods: {
-    create (data: SurveyJoin) {
-      data.motivations = data.motivationsRaw.map(motivation => motivation.id)
-      data.acceptance = !!data.acceptance
-      surveyJoinStore.create(data)
-    },
-    resetForm () {
-      const createForm = this.$refs.createForm as ElementWithValidation
-      createForm.$v.$reset()
-      this.item = { ...initialItem }
-    },
-    onSendForm () {
-      const createForm = this.$refs.createForm as ElementWithValidation
-      createForm.$v.$touch()
-      if (!createForm.$v.$invalid) {
-        this.create(createForm.$v.item.$model)
-      }
     }
   }
 })

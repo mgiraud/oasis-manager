@@ -38,7 +38,7 @@
 <script lang="ts">
 import { computed, defineComponent } from '@nuxtjs/composition-api'
 import useVuelidate from '@vuelidate/core'
-import { required, minLength } from 'vuelidate/lib/validators'
+import { required, minLength } from '@vuelidate/validators'
 import has from 'lodash/has'
 import { FormErrors } from '~/api/repository'
 import { MemberGroup } from '~/store/MemberGroupStore'

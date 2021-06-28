@@ -14,8 +14,8 @@
             label="Email *"
             :error-messages="emailErrors"
             required
-            @input="$v.item.email.$touch()"
-            @blur="$v.item.email.$touch()"
+            @input="v$.email.$touch()"
+            @blur="v$.email.$touch()"
           />
         </v-col>
         <v-col cols="12" sm="6" md="6">
@@ -24,8 +24,8 @@
             prepend-inner-icon="ri-phone-line"
             label="Numéro de téléphone"
             :error-messages="phoneNumberErrors"
-            @input="$v.item.phoneNumber.$touch()"
-            @blur="$v.item.phoneNumber.$touch()"
+            @input="v$.phoneNumber.$touch()"
+            @blur="v$.phoneNumber.$touch()"
           />
         </v-col>
       </v-row>
@@ -35,8 +35,8 @@
             v-model="item.firstName"
             label="Prénom *"
             :error-messages="firstNameErrors"
-            @input="$v.item.firstName.$touch()"
-            @blur="$v.item.firstName.$touch()"
+            @input="v$.firstName.$touch()"
+            @blur="v$.firstName.$touch()"
           />
         </v-col>
         <v-col cols="12" sm="6" md="6">
@@ -44,8 +44,8 @@
             v-model="item.lastName"
             label="Nom *"
             :error-messages="lastNameErrors"
-            @input="$v.item.lastName.$touch()"
-            @blur="$v.item.lastName.$touch()"
+            @input="v$.lastName.$touch()"
+            @blur="v$.lastName.$touch()"
           />
         </v-col>
       </v-row>
@@ -55,8 +55,8 @@
             v-model="item.city"
             label="Ville actuelle *"
             :error-messages="cityErrors"
-            @input="$v.item.city.$touch()"
-            @blur="$v.item.city.$touch()"
+            @input="v$.city.$touch()"
+            @blur="v$.city.$touch()"
           />
         </v-col>
       </v-row>
@@ -351,18 +351,32 @@
 </template>
 
 <script lang="ts">
-import { required, email, maxLength } from 'vuelidate/lib/validators'
+import { computed, defineComponent } from '@nuxtjs/composition-api'
+import useVuelidate from '@vuelidate/core'
+import { required, email, maxLength } from '@vuelidate/validators'
 import has from 'lodash/has'
-import { validationMixin } from 'vuelidate'
 import VuetifyDraggableTreeview from 'vuetify-draggable-treeview'
-import { Component, mixins, Prop } from 'nuxt-property-decorator'
+import { FormErrors } from '~/api/repository'
+import { SurveyJoin } from '~/store/SurveyJoinStore'
 
-@Component({
+export default defineComponent({
   components: {
     VuetifyDraggableTreeview
   },
-  validations: {
-    item: {
+  props: {
+    values: {
+      type: Object as () => SurveyJoin,
+      required: true
+    },
+    errors: {
+      type: Object as () => FormErrors,
+      default: () => {}
+    }
+  },
+  setup (props) {
+    const item = computed(() => props.values)
+
+    const validation = computed(() => ({
       email: {
         required,
         email
@@ -381,94 +395,92 @@ import { Component, mixins, Prop } from 'nuxt-property-decorator'
       city: {
         required
       }
+    }))
+
+    const v$ = useVuelidate(validation, item)
+
+    const violations = computed(() => props.errors)
+
+    const emailErrors = computed(() => {
+      const errors: string[] = []
+      if (!v$.value.email || !v$.value.email.$dirty) {
+        return errors
+      }
+      has(violations.value, 'email') && errors.push(violations.value.email)
+      v$.value.email.email.$invalid && errors.push('Cet email n\'est pas valide')
+      v$.value.email.required.$invalid && errors.push('l\'email est obligatoire')
+      return errors
+    })
+
+    const firstNameErrors = computed(() => {
+      const errors: string[] = []
+      if (!v$.value.firstName || !v$.value.firstName.$dirty) {
+        return errors
+      }
+      has(violations.value, 'firstName') && errors.push(violations.value.firstName)
+      v$.value.firstName.maxLength.$invalid && errors.push('Le prénom doit faire au maximum 60 caractères')
+      v$.value.firstName.required.$invalid && errors.push('Le prénom doit être renseigné')
+      return errors
+    })
+
+    const lastNameErrors = computed(() => {
+      const errors: string[] = []
+      if (!v$.value.lastName || !v$.value.lastName.$dirty) {
+        return errors
+      }
+      has(violations.value, 'lastName') && errors.push(violations.value.lastName)
+      v$.value.lastName.maxLength.$invalid && errors.push('Le nom doit faire au maximum 60 caractères')
+      v$.value.lastName.required.$invalid && errors.push('Le nom doit être renseigné')
+      return errors
+    })
+
+    const phoneNumberErrors = computed(() => {
+      const errors: string[] = []
+      if (!v$.value.phoneNumber || !v$.value.phoneNumber.$dirty) {
+        return errors
+      }
+      has(violations.value, 'phoneNumber') && errors.push(violations.value.phoneNumber)
+      v$.value.phoneNumber.maxLength.$invalid && errors.push('Le téléphone doit faire au maximum 12 caractères')
+      return errors
+    })
+
+    const cityErrors = computed(() => {
+      const errors: string[] = []
+      if (!v$.value.city || !v$.value.city.$dirty) {
+        return errors
+      }
+      has(violations.value, 'city') && errors.push(violations.value.city)
+      v$.value.city.required.$invalid && errors.push('La ville doit être renseignée')
+      return errors
+    })
+
+    const increment = (index: number) => {
+      if (item.value.family[index].age === null) {
+        item.value.family[index].age = 0
+      }
+      item.value.family[index].age = parseInt(item.value.family[index].age, 10) + 1
+    }
+
+    const decrement = (index: number) => {
+      if (item.value.family[index].age === null) {
+        item.value.family[index].age = 0
+      }
+      item.value.family[index].age = parseInt(item.value.family[index].age, 10) - 1
+    }
+
+    return {
+      item,
+      v$,
+      emailErrors,
+      firstNameErrors,
+      lastNameErrors,
+      phoneNumberErrors,
+      cityErrors,
+      increment,
+      decrement
     }
   }
 })
-export default class SurveyJoinForm extends mixins(validationMixin) {
-  @Prop({ type: Object, required: true })
-  values!: any
-
-  @Prop({ type: Object, default: () => {} })
-  errors!: any
-
-  @Prop({ type: Object, default: () => {} })
-  initialValues!: any
-
-  get item () {
-    return this.initialValues || this.values
-  }
-
-  get emailErrors () {
-    const errors: string[] = []
-    if (!this.$v.item.email || !this.$v.item.email.$dirty) {
-      return errors
-    }
-    has(this.violations, 'email') && errors.push(this.violations.email)
-    !this.$v.item.email.required && errors.push('l\'email est obligatoire')
-    !this.$v.item.email.email && errors.push('Cet email n\'est pas valide')
-    return errors
-  }
-
-  get firstNameErrors () {
-    const errors: string[] = []
-    if (!this.$v.item.firstName || !this.$v.item.firstName.$dirty) {
-      return errors
-    }
-    has(this.violations, 'firstName') && errors.push(this.violations.firstName)
-    !this.$v.item.firstName.required && errors.push('Le prénom doit être renseignée')
-    !this.$v.item.firstName.maxLength && errors.push('Le prénom doit faire au maximum 60 caractères')
-    return errors
-  }
-
-  get lastNameErrors () {
-    const errors: string[] = []
-    if (!this.$v.item.lastName || !this.$v.item.lastName.$dirty) {
-      return errors
-    }
-    has(this.violations, 'lastName') && errors.push(this.violations.lastName)
-    !this.$v.item.lastName.required && errors.push('Le nom doit être renseignée')
-    !this.$v.item.lastName.maxLength && errors.push('Le nom doit faire au maximum 60 caractères')
-    return errors
-  }
-
-  get phoneNumberErrors () {
-    const errors: string[] = []
-    if (!this.$v.item.phoneNumber || !this.$v.item.phoneNumber.$dirty) {
-      return errors
-    }
-    has(this.violations, 'phoneNumber') && errors.push(this.violations.phoneNumber)
-    !this.$v.item.phoneNumber.maxLength && errors.push('Le téléphone doit faire au maximum 12 caractères')
-    return errors
-  }
-
-  get cityErrors () {
-    const errors: string[] = []
-    if (!this.$v.item.city || !this.$v.item.city.$dirty) {
-      return errors
-    }
-    has(this.violations, 'city') && errors.push(this.violations.city)
-    !this.$v.item.city.required && errors.push('La ville doit être renseignée')
-    return errors
-  }
-
-  get violations () {
-    return this.errors || {}
-  }
-
-  increment (index: number) {
-    if (this.item.family[index].age === null) {
-      this.item.family[index].age = 0
-    }
-    this.item.family[index].age = parseInt(this.item.family[index].age, 10) + 1
-  }
-
-  decrement (index: number) {
-    if (this.item.family[index].age === null) {
-      this.item.family[index].age = 0
-    }
-    this.item.family[index].age = parseInt(this.item.family[index].age, 10) - 1
-  }
-}
 </script>
 
 <style lang="scss">

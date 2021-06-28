@@ -42,16 +42,12 @@
 <script lang="ts">
 import { computed, defineComponent, inject, Ref, ref, useContext, useFetch, watch } from '@nuxtjs/composition-api'
 import { Validation } from '@vuelidate/core'
-import { Component, InjectReactive, namespace, Prop, Vue, Watch } from 'nuxt-property-decorator'
 import { mediaNodeStore } from '~/store/MediaNodeStore'
 import { mediaObjectStore } from '~/store/MediaObjectStore'
 import { notificationStore } from '~/store/NotificationStore'
 import FileDetailsForm from './FileDetailsForm.vue'
 import { MediaObject } from '~/store/media_object'
-import { Repository } from '~/api/repository'
 import Toolbar from '~/components/form/Toolbar.vue'
-import { ElementWithValidation } from '~/vue-shim'
-import { MediaNode } from '~/store/media_node'
 
 export default defineComponent({
   components: {

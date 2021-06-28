@@ -51,7 +51,7 @@ import FileUploader from './file_uploader/FileUploader.vue'
 import FileNavigator from './file_navigator/FileNavigator.vue'
 import FileDetails from './file_details/FileDetails.vue'
 import { MediaObject } from '~/store/MediaObjectStore'
-import { MediaNode } from '~/store/media_node'
+import { MediaNode } from '~/store/MediaNodeStore'
 
 export interface Thumbnail {
   src: string

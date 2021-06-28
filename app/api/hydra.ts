@@ -46,7 +46,7 @@ export type HydraGetRequestFilter = {
   sortBy?: string[]
   sortDesc?: string[]
   totalItems?: number
-  [key: string]: string | number | string [] | undefined
+  [key: string]: string | number | string [] | undefined | null
 }
 
 export function normalize (data: any) {

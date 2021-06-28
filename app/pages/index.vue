@@ -35,7 +35,7 @@ import {
 } from '@nuxtjs/composition-api'
 import { HydraMemberObject } from '~/api/hydra'
 import PageModel from '~/components/page/PageModel.vue'
-import BlogArticleTemplate from '~/components/blog_article/BlogArticleTemplate.vue'
+import BlogArticleTemplate from '~/components/blog-article/BlogArticleTemplate.vue'
 import { pageStore } from '~/store/PageStore'
 import { blogArticleStore } from '~/store/BlogArticleStore'
 

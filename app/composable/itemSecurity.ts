@@ -1,6 +1,6 @@
 import { reactive } from '@nuxtjs/composition-api'
 import { HydraMemberObject } from '~/api/hydra'
-import { PersistentApiStore } from '~/store/main'
+import { PersistentApiStore } from '~/store/AbstractStore'
 import { securityStore } from '~/store/SecurityStore'
 
 const itemSecurity = <T, U extends HydraMemberObject> (store: PersistentApiStore<T, U>) => {

@@ -1,8 +1,8 @@
-import { reactive, Ref, ref, useRouter, watch, isReactive } from '@nuxtjs/composition-api'
+import { reactive, ref, useRouter, watch } from '@nuxtjs/composition-api'
 import isEmpty from 'lodash/isEmpty'
 import { HydraGetRequestFilter, HydraMemberObject } from '~/api/hydra'
 import { notificationStore } from '~/store/NotificationStore'
-import { PersistentApiStore } from '~/store/main'
+import { PersistentApiStore } from '~/store/AbstractStore'
 
 const itemList = <T, U extends HydraMemberObject> (store: PersistentApiStore<T, U>, additionalOptions ?: HydraGetRequestFilter) => {
   const router = useRouter()
@@ -19,9 +19,9 @@ const itemList = <T, U extends HydraMemberObject> (store: PersistentApiStore<T, 
     Object.assign(options, additionalOptions)
   }
 
-  const filterOptions: HydraGetRequestFilter = reactive(options)
+  const filterOptions: HydraGetRequestFilter = options
 
-  const filters: Ref<{ [key: string]: string }> = ref({})
+  const filters: { [key: string]: string | null } = {}
 
   watch(() => store.getState().deleted, (item: HydraMemberObject | null) => {
     item && notificationStore.showMessage(`${item['@id']} deleted.`)
@@ -36,8 +36,8 @@ const itemList = <T, U extends HydraMemberObject> (store: PersistentApiStore<T, 
   })
 
   const onUpdateOptions = ({ page, itemsPerPage, sortBy, sortDesc, totalItems }: HydraGetRequestFilter = {}) => {
-    let params: HydraGetRequestFilter & { [key: string]: string } = {
-      ...filters.value
+    let params: HydraGetRequestFilter & { [key: string]: string | null } = {
+      ...filters
     }
 
     if (itemsPerPage && itemsPerPage > 0) {
@@ -67,8 +67,8 @@ const itemList = <T, U extends HydraMemberObject> (store: PersistentApiStore<T, 
   }
 
   const resetFilter = () => {
-    for (const prop of Object.getOwnPropertyNames(filters.value)) {
-      delete filters.value[prop];
+    for (const prop of Object.getOwnPropertyNames(filters)) {
+      filters[prop] = null;
     }
     onSendFilter()
   }

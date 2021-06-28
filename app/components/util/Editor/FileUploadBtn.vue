@@ -43,7 +43,7 @@
 <script lang="ts">
 import { Editor } from '@tiptap/core'
 import { Component, Prop, Vue, Watch } from 'nuxt-property-decorator'
-import FileManager, { Link, Thumbnail } from '~/components/file_manager/FileManager.vue'
+import FileManager, { Link, Thumbnail } from '~/components/file-manager/FileManager.vue'
 
 @Component({
   components: { FileManager }

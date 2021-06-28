@@ -10,7 +10,7 @@
 import { defineComponent, reactive, toRefs, useContext } from '@nuxtjs/composition-api'
 import Loading from '~/components/util/Loading.vue'
 import Toolbar from '~/components/form/Toolbar.vue'
-import Form from '~/components/admin/blogArticle/Form.vue'
+import Form from '~/components/admin/blog-article/Form.vue'
 import itemCreate from '~/composable/ItemCreate'
 import { blogArticleStore } from '~/store/BlogArticleStore'
 

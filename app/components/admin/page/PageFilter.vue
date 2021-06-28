@@ -77,7 +77,7 @@
 
 <script lang="ts">
 import DateType from '~/components/form/DateType.vue'
-import { defineComponent, ref, useContext, useFetch } from '@nuxtjs/composition-api'
+import { computed, defineComponent, ref, useContext, useFetch, watch } from '@nuxtjs/composition-api'
 import { pageCategoryStore } from '~/store/PageCategoryStore'
 
 export default defineComponent({
@@ -91,7 +91,12 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const item = ref(props.values)
+    const item = computed(() => props.values)
+
+    watch(props.values, (data) => {
+      console.log(data)
+    }, {deep: true})
+
     pageCategoryStore.setContext(useContext())
     useFetch(async () => {
       await pageCategoryStore.fetchSelectItems()

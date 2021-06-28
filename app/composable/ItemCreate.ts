@@ -1,10 +1,17 @@
 import { reactive, ref, Ref, useRouter, watch } from '@nuxtjs/composition-api'
 import { Validation } from '@vuelidate/core'
 import { HydraMemberObject } from '~/api/hydra'
-import { PersistentApiStore } from '~/store/main'
+import { PersistentApiStore } from '~/store/AbstractStore'
 import { notificationStore } from '~/store/NotificationStore'
 
-const itemCreate = <T, U extends HydraMemberObject> (store: PersistentApiStore<T, U>) => {
+export interface ItemCreateOptions<U> {
+  admin: boolean,
+  dataCallback?: ((_: U) => U)
+}
+
+const itemCreate = <T, U extends HydraMemberObject> (store: PersistentApiStore<T, U>, options = {
+  admin: true,
+} as ItemCreateOptions<U>) => {
   const router = useRouter()
   const createForm = ref(null) as Ref<Element & Validation | null>
 
@@ -13,7 +20,7 @@ const itemCreate = <T, U extends HydraMemberObject> (store: PersistentApiStore<T
       return
     }
     notificationStore.showMessage(store.getCreateMessage(item))
-    const location = store.getEditLocation(item)
+    const location = options.admin ? store.getEditLocation(item) : store.getEditFrontLocation(item)
     if (location) {
       router.push(location)
     }
@@ -34,6 +41,10 @@ const itemCreate = <T, U extends HydraMemberObject> (store: PersistentApiStore<T
     if (!createForm.value) return
     createForm.value.v$.$touch()
     if (!createForm.value.v$.$invalid) {
+      if (options.dataCallback) {
+        // @ts-ignore
+        createForm.value.item = options.dataCallback(createForm.value.item)
+      }
       // @ts-ignore
       store.create(createForm.value.item)
     }

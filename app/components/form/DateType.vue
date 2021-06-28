@@ -16,28 +16,41 @@
         v-on="on"
       />
     </template>
-    <v-date-picker v-model="date" @input="handleInput" />
+    <v-date-picker
+      v-model="date"
+      @input="handleInput"
+    />
   </v-menu>
 </template>
 
 <script lang="ts">
+import { defineComponent, ref, watch } from '@nuxtjs/composition-api'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
-@Component
-export default class DateType extends Vue {
-  @Prop({ type: String, required: false, default: '' }) readonly label!: any
-  @Prop({ type: String, required: false, default: null }) readonly value!: any
+export default defineComponent({
+  props: {
+    label: {
+      type: String,
+      default: () => ''
+    },
+    value: {
+      type: String,
+      default: () => null
+    }
+  },
+  setup (props, { emit }) {
+    const date = ref(props.value)
+    const showMenu = ref(false)
+    const handleInput = () => {
+      showMenu.value = false
+      emit('input', date.value)
+    }
 
-  date = null
-  showMenu = false
-
-  created () {
-    this.date = this.value || this.date
+    return {
+      date,
+      showMenu,
+      handleInput
+    }
   }
-
-  handleInput () {
-    this.showMenu = false
-    this.$emit('input', this.date)
-  }
-}
+})
 </script>

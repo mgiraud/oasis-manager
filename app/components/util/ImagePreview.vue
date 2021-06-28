@@ -27,16 +27,24 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { MediaObject } from '~/store/media_object'
+import { computed, defineComponent } from '@nuxtjs/composition-api'
+import { MediaObject } from '~/store/MediaObjectStore'
 
-@Component
-export default class ImagePreview extends Vue {
-  @Prop({ type: Array, required: true }) readonly mediaObjects!: MediaObject[]
-  size = '250px'
+export default defineComponent({
+  props: {
+    mediaObjects: {
+      type: Array as () => MediaObject[],
+      required: true
+    }
+  },
+  setup(props) {
+    const size = '250px'
+    const images = computed(() => props.mediaObjects.filter((mediaObject: MediaObject) => mediaObject.isImage))
 
-  get images (): MediaObject[] {
-    return this.mediaObjects.filter((mediaObject: MediaObject) => mediaObject.isImage)
+    return {
+      size,
+      images
+    }
   }
-}
+})
 </script>

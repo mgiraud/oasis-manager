@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import FileManager from '~/components/file_manager/FileManager.vue'
+import FileManager from '~/components/file-manager/FileManager.vue'
 
 @Component({
   components: {

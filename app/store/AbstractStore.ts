@@ -2,7 +2,7 @@ import { reactive, readonly, watch, ref, Ref, computed } from '@nuxtjs/compositi
 import { set, get } from 'idb-keyval'
 import { Context } from '@nuxt/types'
 import { Route, RawLocation } from 'vue-router'
-import { HydraGetRequestFilter, HydraMemberObject, HydraObject, HydraView } from '~/api/hydra'
+import { HydraGetRequestFilter, HydraMemberObject, HydraView } from '~/api/hydra'
 import { FormErrors } from '~/api/repository'
 import SubmissionError from '~/error/SubmissionError'
 
@@ -320,5 +320,9 @@ export abstract class PersistentApiStore<T, U extends HydraMemberObject> extends
 
   getIdentifierFromUrlParam (param: string): string {
     return `/api/${this.storeName}/${decodeURIComponent(param)}`
+  }
+
+  public getEditFrontLocation (_: U): RawLocation {
+    return { name: 'index' }
   }
 }

@@ -87,6 +87,15 @@
           />
         </v-col>
       </v-row>
+      <v-row v-if="contentErrors">
+        <v-col cols="12">
+          <ul>
+            <li v-for="(error, i) in contentErrors" :key="i" class="error--text">
+              {{ error }}
+            </li>
+          </ul>
+        </v-col>
+      </v-row>
       <v-row>
         <v-col cols="12">
           <ClientOnly>
@@ -94,6 +103,7 @@
               v-if="item.content !== undefined"
               ref="editor"
               v-model="item.content"
+              :class="{'editor-has-error': contentErrors.length > 0}"
             >
               <template #supplemental_btns>
                 <v-dialog
@@ -173,7 +183,7 @@ import { pageCategoryStore } from '~/store/PageCategoryStore'
 import { pageLogStore } from '~/store/PageLogStore'
 import useVuelidate from '@vuelidate/core'
 
-const slug = value => value.match(/^[a-zA-Z0-9-]*$/)
+const slug = (value: string) => value.match(/^[a-zA-Z0-9-]*$/)
 
 export default defineComponent({
   components: {
@@ -207,6 +217,10 @@ export default defineComponent({
       title: {
         required,
         minLength: minLength(4)
+      },
+      content: {
+        required,
+        minLength: minLength(1)
       },
       url: {
         required,
@@ -245,11 +259,11 @@ export default defineComponent({
 
     const contentErrors = computed(() => {
       const errors: string[] = []
-      if (!v$.content || !v$.content.$dirty) {
+      if (!v$.value.content || !v$.value.content.$dirty) {
         return errors
       }
       has(violations.value, 'url') && errors.push(violations.value.content)
-      v$.content.slug.$invalid && errors.push('Le titre doit faire au moins 2 caractères')
+      v$.value.content.$invalid && errors.push('Le titre doit faire au moins 2 caractères')
       return errors
     })
 
@@ -259,7 +273,7 @@ export default defineComponent({
     })
 
     const setContent = () => {
-      if (selectedLog && pageLogStore.find(selectedLog.value) && editor.value) {
+      if (selectedLog.value && pageLogStore.find(selectedLog.value) && editor.value) {
         const selectedLogObj = pageLogStore.find(selectedLog.value)
         if (selectedLogObj) {
           editor.value.setContent(selectedLogObj.originalContent)
@@ -290,3 +304,9 @@ export default defineComponent({
   }
 })
 </script>
+
+<style lang="scss">
+.editor-has-error {
+  border: 1px solid red
+}
+</style>

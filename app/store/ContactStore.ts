@@ -1,8 +1,8 @@
 import { RawLocation } from 'vue-router'
 import { HydraMemberObject } from '~/api/hydra'
-import { CrudState, PersistentApiStore } from '~/store/main'
+import { CrudState, PersistentApiStore } from '~/store/AbstractStore'
 
-export type Contact = HydraMemberObject & {
+export interface Contact extends HydraMemberObject {
   id: number
   firstName: string
   lastName: string
@@ -36,6 +36,10 @@ class ContactStore extends PersistentApiStore<ContactState, Contact> {
   deleteRole = 'USER_CAN_DELETE_CONTACT'
   editRole = 'USER_CAN_EDIT_CONTACT'
   listRole = 'USER_CAN_VIEW_CONTACT'
+
+  getCreateMessage(contact: Contact) {
+    return 'Ta prise de contact a bien été enregistrée, nous reviendrons vers toi aussi rapidement que possible'
+  }
 }
 
 export const contactStore = new ContactStore('contacts')

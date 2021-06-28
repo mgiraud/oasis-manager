@@ -1,13 +1,19 @@
 import { RawLocation } from 'vue-router'
 import { HydraMemberObject } from '~/api/hydra'
-import { CrudState, PersistentApiStore } from '~/store/main'
+import { CrudState, PersistentApiStore } from '~/store/AbstractStore'
+import { Contact } from '~/store/ContactStore'
 
-export type MotivationRaw = {
+export interface MotivationRaw {
   name: string
   id: string
 }
 
-export type SurveyJoin = HydraMemberObject & {
+export interface FamilyMember {
+  firstName: string
+  age: string
+}
+
+export interface SurveyJoin extends HydraMemberObject {
   id: number
   firstName: string
   lastName: string
@@ -36,7 +42,7 @@ export type SurveyJoin = HydraMemberObject & {
   availability: string
   meet: string
   skillUp: string
-  family: string[],
+  family: FamilyMember[],
   motivationsRaw: MotivationRaw[]
 }
 
@@ -64,6 +70,10 @@ class SurveyJoinStore extends PersistentApiStore<SurveyJoinState, SurveyJoin> {
   deleteRole = 'USER_CAN_DELETE_SURVEY_JOIN'
   editRole = 'USER_CAN_EDIT_SURVEY_JOIN'
   listRole = 'USER_CAN_VIEW_SURVEY_JOIN'
+
+  getCreateMessage(_: SurveyJoin) {
+    return 'Le questionnaire a correctement été enregistré, nous prendrons contact avec toi le plus rapidement possible'
+  }
 }
 
 export const surveyJoinStore = new SurveyJoinStore('survey_joins')

@@ -20,13 +20,13 @@
             <contact-form
               ref="createForm"
               :values="item"
-              :errors="contactState.violations"
+              :errors="state.violations"
             />
             <toolbar
               :handle-submit="onSendForm"
               :handle-reset="resetForm"
             />
-            <Loading :visible="contactState.isLoading" />
+            <Loading :visible="state.isLoading" />
           </v-card-text>
         </v-card>
       </v-col>
@@ -36,15 +36,13 @@
 
 <script lang="ts">
 
-import { defineComponent, ref, useContext, watch, useRouter } from '@nuxtjs/composition-api'
+import { defineComponent, ref, useContext, toRefs, useRouter } from '@nuxtjs/composition-api'
+import itemCreate from '~/composable/ItemCreate'
 import ContactForm from '../components/contact/Form.vue'
 import Toolbar from '../components/form/Toolbar.vue'
 import Loading from '../components/util/Loading.vue'
-import { Contact } from '~/store/ContactStore'
-import { ElementWithValidation } from '~/vue-shim'
 import PageModel from '~/components/page/PageModel.vue'
 import { contactStore } from '~/store/ContactStore'
-import { notificationStore } from '~/store/NotificationStore'
 import { pageStore } from '~/store/PageStore'
 
 export default defineComponent({
@@ -56,36 +54,16 @@ export default defineComponent({
   },
   setup () {
     const context = useContext()
-    const router = useRouter()
     contactStore.setContext(context)
     pageStore.setContext(context)
     const item = ref({ content: null })
 
-    watch(() => contactStore.getState().violations, (violations: string[] | null) => {
-      if (violations && violations['']) {
-        notificationStore.setTimeout(10000)
-        notificationStore.showError(violations[''])
-      }
-    })
-
-    watch(() => contactStore.getState().created, (created: Contact) => {
-      if (!created) {
-        return
-      }
-      notificationStore.showMessage('Ta prise de contact a bien été enregistrée, nous reviendrons vers toi aussi rapidement que possible')
-      router.push({ path: '/' })
-    })
-
-    watch(() => contactStore.getState().error, (message: string) => {
-      message && notificationStore.showError(message)
-    })
-
     return {
       item,
-      contactState: contactStore.getState(),
-      createContact: (contact: Contact) => contactStore.create(contact),
-      notificationState: notificationStore.getState(),
-      page: pageStore.find('/api/pages/contact')
+      page: pageStore.find('/api/pages/contact'),
+      ...toRefs(itemCreate(contactStore, {
+        admin: false
+      })),
     }
   },
   head () {
@@ -93,20 +71,5 @@ export default defineComponent({
       title: this.page ? this.page.title : 'Contacte-nous !'
     }
   },
-  methods: {
-    resetForm () {
-      (this.$refs.createForm as ElementWithValidation).$v.$reset()
-      this.item = {
-        content: null
-      }
-    },
-    onSendForm () {
-      const createForm = this.$refs.createForm as ElementWithValidation
-      createForm.$v.$touch()
-      if (!createForm.$v.$invalid) {
-        this.createContact(createForm.$v.item.$model)
-      }
-    }
-  }
 })
 </script>

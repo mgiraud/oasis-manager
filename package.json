@@ -40,7 +40,6 @@
     "remixicon": "^2.5.0",
     "vue-class-component": "^7.2.6",
     "vuedraggable": "^2.24.3",
-    "vuelidate": "^0.7.6",
     "vuetify-draggable-treeview": "^0.0.6",
     "vuex-map-fields": "^1.4.1"
   },

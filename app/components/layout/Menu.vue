@@ -25,13 +25,12 @@
 </template>
 
 <script lang="ts">
-import { findIndex } from 'lodash'
-import { Route } from 'vue-router'
-import { MenuItem } from '~/custom-store/PageStore'
 import {
   defineComponent, onMounted, Ref, ref, useContext, useRoute, useRouter, watch
 } from '@nuxtjs/composition-api'
-import { pageStore } from '~/custom-store/PageStore'
+import { findIndex } from 'lodash'
+import { Route } from 'vue-router'
+import { MenuItem, pageStore } from '~/custom-store/PageStore'
 
 export default defineComponent({
   setup () {

@@ -67,8 +67,7 @@ import itemCreate from '~/composable/ItemCreate'
 import SurveyJoinForm from '~/components/survey-join/Form.vue'
 import Toolbar from '~/components/form/Toolbar.vue'
 import Loading from '~/components/util/Loading.vue'
-import { SurveyJoin } from '~/custom-store/SurveyJoinStore'
-import { surveyJoinStore } from '~/custom-store/SurveyJoinStore'
+import { SurveyJoin, surveyJoinStore } from '~/custom-store/SurveyJoinStore'
 import { Page, pageStore } from '~/custom-store/PageStore'
 
 const initialItem = {

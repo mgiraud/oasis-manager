@@ -5,26 +5,26 @@ import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
 const _2fe0b625 = () => interopDefault(import('../app/pages/admin.vue' /* webpackChunkName: "pages/admin" */))
-const _f65442e6 = () => interopDefault(import('../app/pages/admin/blogArticle/index.vue' /* webpackChunkName: "pages/admin/blogArticle/index" */))
+const _7ea4d568 = () => interopDefault(import('../app/pages/admin/blog-article/index.vue' /* webpackChunkName: "pages/admin/blog-article/index" */))
 const _5c242fb9 = () => interopDefault(import('../app/pages/admin/contact/index.vue' /* webpackChunkName: "pages/admin/contact/index" */))
 const _773fee3a = () => interopDefault(import('../app/pages/admin/contact-newsletter/index.vue' /* webpackChunkName: "pages/admin/contact-newsletter/index" */))
 const _c7cea72a = () => interopDefault(import('../app/pages/admin/gallery/index.vue' /* webpackChunkName: "pages/admin/gallery/index" */))
 const _10a524f7 = () => interopDefault(import('../app/pages/admin/member/index.vue' /* webpackChunkName: "pages/admin/member/index" */))
-const _c3bc6344 = () => interopDefault(import('../app/pages/admin/memberGroup/index.vue' /* webpackChunkName: "pages/admin/memberGroup/index" */))
+const _3947182e = () => interopDefault(import('../app/pages/admin/member-group/index.vue' /* webpackChunkName: "pages/admin/member-group/index" */))
 const _6fb1572c = () => interopDefault(import('../app/pages/admin/page/index.vue' /* webpackChunkName: "pages/admin/page/index" */))
-const _154189ca = () => interopDefault(import('../app/pages/admin/pageCategory/index.vue' /* webpackChunkName: "pages/admin/pageCategory/index" */))
+const _6fe34095 = () => interopDefault(import('../app/pages/admin/page-category/index.vue' /* webpackChunkName: "pages/admin/page-category/index" */))
 const _39375c16 = () => interopDefault(import('../app/pages/admin/survey-join/index.vue' /* webpackChunkName: "pages/admin/survey-join/index" */))
-const _15ac15ca = () => interopDefault(import('../app/pages/admin/blogArticle/new.vue' /* webpackChunkName: "pages/admin/blogArticle/new" */))
+const _a7223294 = () => interopDefault(import('../app/pages/admin/blog-article/new.vue' /* webpackChunkName: "pages/admin/blog-article/new" */))
+const _6bce3177 = () => interopDefault(import('../app/pages/admin/member-group/new.vue' /* webpackChunkName: "pages/admin/member-group/new" */))
 const _320bce05 = () => interopDefault(import('../app/pages/admin/member/new.vue' /* webpackChunkName: "pages/admin/member/new" */))
-const _4da1a52c = () => interopDefault(import('../app/pages/admin/memberGroup/new.vue' /* webpackChunkName: "pages/admin/memberGroup/new" */))
+const _0ab83923 = () => interopDefault(import('../app/pages/admin/page-category/new.vue' /* webpackChunkName: "pages/admin/page-category/new" */))
 const _3779097a = () => interopDefault(import('../app/pages/admin/page/new.vue' /* webpackChunkName: "pages/admin/page/new" */))
-const _22114b98 = () => interopDefault(import('../app/pages/admin/pageCategory/new.vue' /* webpackChunkName: "pages/admin/pageCategory/new" */))
-const _3d17bf96 = () => interopDefault(import('../app/pages/admin/blogArticle/_id.vue' /* webpackChunkName: "pages/admin/blogArticle/_id" */))
+const _ce8ddc60 = () => interopDefault(import('../app/pages/admin/blog-article/_id.vue' /* webpackChunkName: "pages/admin/blog-article/_id" */))
 const _483ccc61 = () => interopDefault(import('../app/pages/admin/contact/_id.vue' /* webpackChunkName: "pages/admin/contact/_id" */))
+const _58185c91 = () => interopDefault(import('../app/pages/admin/member-group/_id.vue' /* webpackChunkName: "pages/admin/member-group/_id" */))
 const _1e55f91f = () => interopDefault(import('../app/pages/admin/member/_id.vue' /* webpackChunkName: "pages/admin/member/_id" */))
-const _39ebd046 = () => interopDefault(import('../app/pages/admin/memberGroup/_id.vue' /* webpackChunkName: "pages/admin/memberGroup/_id" */))
+const _11fb3786 = () => interopDefault(import('../app/pages/admin/page-category/_id.vue' /* webpackChunkName: "pages/admin/page-category/_id" */))
 const _23c33494 = () => interopDefault(import('../app/pages/admin/page/_id.vue' /* webpackChunkName: "pages/admin/page/_id" */))
-const _0e5b76b2 = () => interopDefault(import('../app/pages/admin/pageCategory/_id.vue' /* webpackChunkName: "pages/admin/pageCategory/_id" */))
 const _bc0d2804 = () => interopDefault(import('../app/pages/admin/survey-join/_id.vue' /* webpackChunkName: "pages/admin/survey-join/_id" */))
 const _8a46f616 = () => interopDefault(import('../app/pages/admin/_.vue' /* webpackChunkName: "pages/admin/_" */))
 const _4667f21d = () => interopDefault(import('../app/pages/cahier-des-charges.vue' /* webpackChunkName: "pages/cahier-des-charges" */))
@@ -51,9 +51,9 @@ export const routerOptions = {
     component: _2fe0b625,
     name: "admin",
     children: [{
-      path: "blogArticle",
-      component: _f65442e6,
-      name: "admin-blogArticle"
+      path: "blog-article",
+      component: _7ea4d568,
+      name: "admin-blog-article"
     }, {
       path: "contact",
       component: _5c242fb9,
@@ -71,65 +71,65 @@ export const routerOptions = {
       component: _10a524f7,
       name: "admin-member"
     }, {
-      path: "memberGroup",
-      component: _c3bc6344,
-      name: "admin-memberGroup"
+      path: "member-group",
+      component: _3947182e,
+      name: "admin-member-group"
     }, {
       path: "page",
       component: _6fb1572c,
       name: "admin-page"
     }, {
-      path: "pageCategory",
-      component: _154189ca,
-      name: "admin-pageCategory"
+      path: "page-category",
+      component: _6fe34095,
+      name: "admin-page-category"
     }, {
       path: "survey-join",
       component: _39375c16,
       name: "admin-survey-join"
     }, {
-      path: "blogArticle/new",
-      component: _15ac15ca,
-      name: "admin-blogArticle-new"
+      path: "blog-article/new",
+      component: _a7223294,
+      name: "admin-blog-article-new"
+    }, {
+      path: "member-group/new",
+      component: _6bce3177,
+      name: "admin-member-group-new"
     }, {
       path: "member/new",
       component: _320bce05,
       name: "admin-member-new"
     }, {
-      path: "memberGroup/new",
-      component: _4da1a52c,
-      name: "admin-memberGroup-new"
+      path: "page-category/new",
+      component: _0ab83923,
+      name: "admin-page-category-new"
     }, {
       path: "page/new",
       component: _3779097a,
       name: "admin-page-new"
     }, {
-      path: "pageCategory/new",
-      component: _22114b98,
-      name: "admin-pageCategory-new"
-    }, {
-      path: "blogArticle/:id",
-      component: _3d17bf96,
-      name: "admin-blogArticle-id"
+      path: "blog-article/:id?",
+      component: _ce8ddc60,
+      name: "admin-blog-article-id"
     }, {
       path: "contact/:id",
       component: _483ccc61,
       name: "admin-contact-id"
     }, {
+      path: "member-group/:id",
+      component: _58185c91,
+      name: "admin-member-group-id"
+    }, {
       path: "member/:id",
       component: _1e55f91f,
       name: "admin-member-id"
     }, {
-      path: "memberGroup/:id",
-      component: _39ebd046,
-      name: "admin-memberGroup-id"
+      path: "page-category/:id",
+      component: _11fb3786,
+      name: "admin-page-category-id"
     }, {
       path: "page/:id",
       component: _23c33494,
       name: "admin-page-id"
-    }, {
-      path: "pageCategory/:id",
-      component: _0e5b76b2,
-      name: "admin-pageCategory-id"
     }, {
       path: "survey-join/:id?",
       component: _bc0d2804,

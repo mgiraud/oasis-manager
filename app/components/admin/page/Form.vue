@@ -176,21 +176,20 @@ import { required, minLength } from '@vuelidate/validators'
 import { formatRelative, parseISO } from 'date-fns'
 import { fr } from 'date-fns/locale'
 import has from 'lodash/has'
+import { computed, defineComponent, onMounted, Ref, ref, useContext } from '@nuxtjs/composition-api'
+import useVuelidate from '@vuelidate/core'
 import { FormErrors } from '~/api/repository'
 import Editor from '~/components/util/Editor.vue'
-import { computed, defineComponent, onMounted, Ref, ref, useContext } from '@nuxtjs/composition-api'
-import { PageLog } from '~/custom-store/PageLogStore'
 import { Page } from '~/custom-store/PageStore'
 import { mediaNodeStore } from '~/custom-store/MediaNodeStore'
 import { pageCategoryStore } from '~/custom-store/PageCategoryStore'
-import { pageLogStore } from '~/custom-store/PageLogStore'
-import useVuelidate from '@vuelidate/core'
+import { pageLogStore, PageLog } from '~/custom-store/PageLogStore'
 
 const slug = (value: any) => !!value.match(/^[a-zA-Z0-9-]*$/)
 
 export default defineComponent({
   components: {
-    Editor,
+    Editor
   },
   props: {
     pageLogs: {

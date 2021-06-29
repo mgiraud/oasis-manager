@@ -51,6 +51,6 @@ export default defineComponent({
       tab,
       redirect
     }
-  },
+  }
 })
 </script>

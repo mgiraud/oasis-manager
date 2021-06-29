@@ -7,10 +7,10 @@ import NuxtLoading from './components/nuxt-loading.vue'
 
 import '../node_modules/remixicon/fonts/remixicon.css'
 
-import _754390f9 from '../app/layouts/Admin.vue'
+import _77068119 from '../app/layouts/admin.vue'
 import _6f6c098b from '../app/layouts/default.vue'
 
-const layouts = { "_Admin": sanitizeComponent(_754390f9),"_default": sanitizeComponent(_6f6c098b) }
+const layouts = { "_admin": sanitizeComponent(_77068119),"_default": sanitizeComponent(_6f6c098b) }
 
 export default {
   render (h, props) {

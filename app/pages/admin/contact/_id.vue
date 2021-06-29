@@ -2,10 +2,16 @@
   <v-container fluid>
     <v-row v-if="item">
       <v-col cols="12">
+        <h3>Informations du contact</h3>
         <ul class="contact-informations">
-          <h3>Informations du contact</h3>
-          <li><v-icon>ri-mail-line</v-icon> {{ item.email }}</li>
-          <li><v-icon>ri-phone-line</v-icon> {{ item.phoneNumber || 'Non précisé' }}</li>
+          <li>
+            <v-icon>ri-mail-line</v-icon>
+            {{ item.email }}
+          </li>
+          <li>
+            <v-icon>ri-phone-line</v-icon>
+            {{ item.phoneNumber || 'Non précisé' }}
+          </li>
           <li>Prénom : {{ item.firstName || 'Non précisé' }}</li>
           <li>Nom : {{ item.lastName || 'Non précisé' }}</li>
         </ul>
@@ -14,7 +20,13 @@
         Sujet : <b class="primary--text text--darken-3">{{ item.subject }}</b>
       </v-col>
       <v-col cols="12">
-        <textarea v-model="item.content" readonly class="content-textarea primary white--text" />
+        <label>
+          <textarea
+            v-model="item.content"
+            readonly
+            class="content-textarea primary white--text"
+          />
+        </label>
       </v-col>
     </v-row>
     <v-row>
@@ -24,46 +36,45 @@
         />
       </v-col>
     </v-row>
-    <Loading :visible="isLoading" />
+    <Loading :visible="state.isLoading" />
   </v-container>
 </template>
 <script lang="ts">
-import { Component, mixins, namespace } from 'nuxt-property-decorator'
-import show from '~/mixins/show'
+import { defineComponent, toRefs, useContext } from '@nuxtjs/composition-api'
+import itemUpdate from '~/composable/itemUpdate'
 import Loading from '~/components/util/Loading.vue'
 import Toolbar from '~/components/form/Toolbar.vue'
-import ContactForm from '~/components/contact/Form.vue'
-import { Contact } from '~/store/contact'
-import { HydraMemberObject } from '~/api/hydra'
+import { contactStore } from '~/custom-store/ContactStore'
 
-const contactModule = namespace('page')
-
-@Component({
+export default defineComponent({
   components: {
-    Loading, Toolbar, ContactForm
+    Loading, Toolbar
   },
-  servicePrefix: 'admin-contact',
-  resourcePrefix: '/api/contacts/',
   middleware: 'hasPermissions',
   meta: {
     permissions: ['USER_CAN_VIEW_CONTACT']
+  },
+  setup () {
+    contactStore.setContext(useContext())
+
+    return {
+      ...toRefs(itemUpdate(contactStore))
+    }
   }
 })
-export default class ContactView extends mixins(show) {
-  @contactModule.State('isLoading') isLoading!: boolean
-  @contactModule.Getter('find') find!: (id: string) => Contact | null
-  @contactModule.Action('load') retrieve!: (id: string) => HydraMemberObject | null
-}
 </script>
 
-<style lang="scss" scoped>
+<style
+  lang="scss"
+  scoped
+>
 ul.contact-informations {
   list-style-type: none;
 }
 
 .content-textarea {
   width: 100%;
-  padding : 10px;
+  padding: 10px;
   min-height: 200px;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;

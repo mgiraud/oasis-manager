@@ -3,14 +3,21 @@
     <v-row>
       <v-col cols="12">
         <v-card>
-          <PageModel v-if="page" :page="page" />
+          <PageModel
+            v-if="page"
+            :page="page"
+          />
           <v-card-text v-else>
-            Tu peux retrouver sur ce site toutes les informations relatives au projet de création d'un habitat partagé
+            Tu peux retrouver sur ce site toutes les informations relatives au projet de création
+            d'un habitat partagé
           </v-card-text>
           <v-container fluid>
-            <v-row v-for="article in articles" :key="article['@id']">
+            <v-row
+              v-for="article in articles"
+              :key="article['@id']"
+            >
               <v-col>
-                <blog-article-template :article="article" /></blog-article>
+                <blog-article-template :article="article" />
               </v-col>
             </v-row>
           </v-container>
@@ -21,43 +28,42 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
-import { namespace } from 'vuex-class'
+import {
+  defineComponent,
+  useFetch,
+  useContext, ref, Ref
+} from '@nuxtjs/composition-api'
+import { HydraMemberObject } from '~/api/hydra'
 import PageModel from '~/components/page/PageModel.vue'
-import { BlogArticle } from '~/store/blog_article'
-import { Page } from '~/store/page'
-import BlogArticleTemplate from '~/components/blog_article/BlogArticleTemplate.vue'
+import BlogArticleTemplate from '~/components/blog-article/BlogArticleTemplate.vue'
+import { pageStore } from '~/custom-store/PageStore'
+import { blogArticleStore } from '~/custom-store/BlogArticleStore'
 
-const securityModule = namespace('security')
-const pageModule = namespace('page')
-const blogArticleModule = namespace('blog_article')
-
-@Component({
+export default defineComponent({
   components: {
     PageModel,
     BlogArticleTemplate
-  }
-})
-export default class IndexVue extends Vue {
-  @securityModule.Action('logout') logout!: () => void
-  @pageModule.Getter('find') find!: (url: string) => Page | null
-  @blogArticleModule.Action('fetchAll') fetchAll !: (options?: {[propertyPath: string]: string | number}) => BlogArticle[]
-  @blogArticleModule.Getter('list') articles !: BlogArticle[]
+  },
+  setup () {
+    const context = useContext()
+    pageStore.setContext(context)
+    blogArticleStore.setContext(context)
+    const articles = ref([]) as Ref<HydraMemberObject[]>
 
-  public head () {
+    useFetch(async () => {
+      await blogArticleStore.fetchAll({ 'order[createdAt]': 'desc' })
+      articles.value = blogArticleStore.list.value
+    })
+
+    return {
+      articles,
+      page: pageStore.find('/api/pages/home')
+    }
+  },
+  head () {
     return {
       title: 'Accueil'
     }
   }
-
-  get page (): Page | null {
-    return this.find('/api/pages/home')
-  };
-
-  mounted () {
-    this.fetchAll({
-      'order[createdAt]': 'desc'
-    })
-  }
-}
+})
 </script>

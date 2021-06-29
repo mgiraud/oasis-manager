@@ -4,23 +4,33 @@
       {{ page.title | capitalize }}
     </v-card-title>
     <v-card-text v-html="page.content" />
-    <image-preview v-if="page.mediaNode" :media-objects="page.mediaNode.mediaObjects" />
+    <image-preview
+      v-if="page.mediaNode"
+      :media-objects="page.mediaNode.mediaObjects"
+    />
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { Page } from '~/store/page'
+import { defineComponent } from '@nuxtjs/composition-api'
+import { Page } from '~/custom-store/PageStore'
 import ImagePreview from '~/components/util/ImagePreview.vue'
-@Component({
-  components: { ImagePreview }
+
+export default defineComponent({
+  components: { ImagePreview },
+  props: {
+    page: {
+      type: Object as () => Page,
+      required: true
+    }
+  }
 })
-export default class PageModel extends Vue {
-  @Prop({ type: Object, required: true }) readonly page!: Page
-}
 </script>
 
-<style scoped lang="scss">
+<style
+  scoped
+  lang="scss"
+>
 .page-title {
   font-family: 'Permanent Marker', serif;
 }

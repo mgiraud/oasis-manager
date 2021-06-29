@@ -4,23 +4,29 @@
       v-model="selected"
       :headers="headers"
       :items="filteredItems"
-      :items-per-page.sync="options.itemsPerPage"
-      :loading="isLoading"
+      :items-per-page.sync="filterOptions.itemsPerPage"
+      :loading="state.isLoading"
       loading-text="Loading..."
-      :options.sync="options"
-      :server-items-length="totalItems"
+      :options.sync="filterOptions"
+      :server-items-length="state.totalItems"
       class="elevation-1"
       item-key="@id"
       show-select
       @update:options="onUpdateOptions"
     >
       <template #top>
-        <v-toolbar flat color="white">
+        <v-toolbar
+          flat
+          color="white"
+        >
           <v-toolbar-title>Liste de membres</v-toolbar-title>
 
           <v-spacer />
 
-          <FormFilter :handle-filter="onSendFilter" :handle-reset="resetFilter">
+          <FormFilter
+            :handle-filter="onSendFilter"
+            :handle-reset="resetFilter"
+          >
             <MemberFilter
               ref="filterForm"
               slot="filter"
@@ -32,71 +38,64 @@
       <ActionCell
         slot="item.actions"
         slot-scope="props"
-        :handle-edit="canEditMember ? () => editHandler(props.item) : null"
+        :handle-edit="canEdit ? () => editHandler(props.item) : null"
       />
     </v-data-table>
   </v-container>
 </template>
 
 <script lang="ts">
-import { Store } from 'vuex'
-import { Component, mixins, namespace } from 'nuxt-property-decorator'
-import isAdmin from '~/middleware/isAdmin'
+import { computed, defineComponent, toRefs, useContext, useFetch } from '@nuxtjs/composition-api'
+import itemList from '~/composable/ItemList'
+import itemSecurity from '~/composable/itemSecurity'
 import ActionCell from '~/components/table/ActionCell.vue'
 import FormFilter from '~/components/form/FormFilter.vue'
 import MemberFilter from '~/components/admin/member/MemberFilter.vue'
-import list from '~/mixins/list'
-import { Member } from '~/store/member'
-import { MUTATIONS } from '~/store/crud'
+import { memberStore } from '~/custom-store/MemberStore'
 
-const memberModule = namespace('member')
+const headers = [
+  { text: 'Email', value: 'email' },
+  { text: 'Pseudo', value: 'nickname' },
+  { text: 'Actions', value: 'actions', sortable: false }
+]
 
-@Component({
+export default defineComponent({
   components: {
-    ActionCell, FormFilter, MemberFilter
+    ActionCell, MemberFilter, FormFilter
   },
-  servicePrefix: 'admin-member',
-  resourcePrefix: '/api/members/',
-  layout: 'Admin',
+  layout: 'admin',
   middleware: 'hasPermissions',
-  fetchOnServer: false,
+  setup () {
+    const context = useContext()
+    memberStore.setContext(context)
+
+    useFetch(async () => {
+      await memberStore.fetchAll()
+    })
+
+    const itemListHelper = itemList(memberStore)
+
+    const filteredItems = computed(() => {
+      if (context.$auth.isAdmin) {
+        return itemListHelper.items
+      }
+      return itemListHelper.items.filter(item => !item.isAdmin)
+    })
+
+    return {
+      ...toRefs(itemListHelper),
+      ...toRefs(itemSecurity(memberStore)),
+      headers,
+      filteredItems
+    }
+  },
+  head () {
+    return {
+      title: 'Administration - Liste des membres'
+    }
+  },
   meta: {
     permissions: ['USER_CAN_ACCESS_MEMBERS']
   }
 })
-export default class AdminMemberIndex extends mixins(list) {
-  selected = []
-  headers = [
-    { text: 'Email', value: 'email' },
-    { text: 'Pseudo', value: 'nickname' },
-    { text: 'Actions', value: 'actions', sortable: false }
-  ]
-
-  async fetch ({ store }: {store: Store<any>}) {
-    await store.dispatch('member/fetchAll')
-  }
-
-  @memberModule.Getter('list') items !: Member[]
-  @memberModule.State('deleted') deletedItem!: Member | null
-  @memberModule.State('error') error!: string | null
-  @memberModule.State('isLoading') isLoading!: boolean
-  @memberModule.State('totalItems') totalItems!: number
-  @memberModule.Mutation(MUTATIONS.RESET_LIST) resetList!: (reset: boolean) => void
-
-  get filteredItems () {
-    if (isAdmin) { return this.items }
-    return this.items.filter(item => !item.isAdmin)
-  }
-
-  get canEditMember () {
-    return this.hasPermission('USER_CAN_EDIT_MEMBERS')
-  }
-
-    @memberModule.Action('fetchAll') fetchAll!: () => Member[]
-    @memberModule.Action('del') deleteItem!: (member: Member) => Promise<void>
-
-    editItem (item: Member) {
-      this.$router.push({ name: 'admin-member-id', params: { id: item.id.toString() } })
-    }
-}
 </script>

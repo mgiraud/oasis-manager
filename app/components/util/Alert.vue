@@ -1,14 +1,14 @@
 <template>
   <v-snackbar
-    v-model="show"
-    :color="color"
+    v-model="notificationState.show"
+    :color="notificationState.color"
     :multi-line="true"
-    :timeout="timeout"
+    :timeout="notificationState.timeout"
     bottom
   >
-    {{ text }}
-    <template v-if="subText">
-      <p>{{ subText }}</p>
+    {{ notificationState.text }}
+    <template v-if="notificationState.subText">
+      <p>{{ notificationState.subText }}</p>
     </template>
 
     <template #action="{ attrs }">
@@ -25,22 +25,19 @@
 </template>
 
 <script lang="ts">
-import { Component, namespace, Vue } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
+import { notificationStore } from '~/custom-store/NotificationStore'
 
-const notificationModule = namespace('notifications')
-
-@Component
-export default class Alert extends Vue {
-  @notificationModule.State('color') color!: string;
-  @notificationModule.State('text') text!: string;
-  @notificationModule.State('subText') subText!: string;
-  @notificationModule.State('show') show!: boolean;
-  @notificationModule.State('timeout') timeout!: number;
-
-  @notificationModule.Action('setShow') setShow!: (show: boolean) => void
-
-  close () {
-    this.setShow(false)
+export default defineComponent({
+  setup () {
+    return {
+      notificationState: notificationStore.getState()
+    }
+  },
+  methods: {
+    close () {
+      notificationStore.setShow(false)
+    }
   }
-}
+})
 </script>

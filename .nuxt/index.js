@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Vuex from 'vuex'
+
 import Meta from 'vue-meta'
 import ClientOnly from 'vue-client-only'
 import NoSsr from 'vue-no-ssr'
@@ -9,14 +9,15 @@ import NuxtError from './components/nuxt-error.vue'
 import Nuxt from './components/nuxt.js'
 import App from './App.js'
 import { setContext, getLocation, getRouteData, normalizeError } from './utils'
-import { createStore } from './store.js'
 
 /* Plugins */
 
 import nuxt_plugin_plugin_f7c66008 from 'nuxt_plugin_plugin_f7c66008' // Source: ./vuetify/plugin.js (mode: 'all')
+import nuxt_plugin_plugin_293ec6cc from 'nuxt_plugin_plugin_293ec6cc' // Source: ./composition-api/plugin.mjs (mode: 'all')
 import nuxt_plugin_repository_02bac980 from 'nuxt_plugin_repository_02bac980' // Source: ../app/plugins/repository (mode: 'all')
 import nuxt_plugin_capitalize_f5d14914 from 'nuxt_plugin_capitalize_f5d14914' // Source: ../app/plugins/filters/capitalize (mode: 'all')
 import nuxt_plugin_auth_7f755f62 from 'nuxt_plugin_auth_7f755f62' // Source: ../app/plugins/auth.ts (mode: 'all')
+import nuxt_plugin_meta_121ad62c from 'nuxt_plugin_meta_121ad62c' // Source: ./composition-api/meta.mjs (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -58,26 +59,8 @@ Vue.use(Meta, {"keyName":"head","attribute":"data-n-head","ssrAttribute":"data-n
 
 const defaultTransition = {"name":"page","mode":"out-in","appear":false,"appearClass":"appear","appearActiveClass":"appear-active","appearToClass":"appear-to"}
 
-const originalRegisterModule = Vuex.Store.prototype.registerModule
-
-function registerModule (path, rawModule, options = {}) {
-  const preserveState = process.client && (
-    Array.isArray(path)
-      ? !!path.reduce((namespacedState, path) => namespacedState && namespacedState[path], this.state)
-      : path in this.state
-  )
-  return originalRegisterModule.call(this, path, rawModule, { preserveState, ...options })
-}
-
 async function createApp(ssrContext, config = {}) {
   const router = await createRouter(ssrContext, config)
-
-  const store = createStore(ssrContext)
-  // Add this.$router into store actions/mutations
-  store.$router = router
-
-  // Fix SSR caveat https://github.com/nuxt/nuxt.js/issues/3757#issuecomment-414689141
-  store.registerModule = registerModule
 
   // Create Root instance
 
@@ -86,7 +69,6 @@ async function createApp(ssrContext, config = {}) {
   const app = {
     head: {"titleTemplate":"%s - Les transalpins","htmlAttrs":{"prefix":"og: https:\u002F\u002Fogp.me\u002Fns#"},"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"name":"title","content":"Projet d'habitat groupé participatif vers la région grenobloise"},{"name":"description","content":"Projet d'habitat groupé participatif sobre, convivial et écologique situé vers la région grenobloise"},{"hid":"og:locale","property":"og:locale","content":"fr_FR"},{"hid":"og:site_name","property":"og:site_name","content":"Les Transalpins"},{"hid":"og:title","property":"og:title","content":"Projet d'habitat groupé participatif vers la région grenobloise"},{"hid":"og:description","property":"og:description","content":"Projet d'habitat groupé participatif sobre, convivial et écologique situé vers la région grenobloise"},{"hid":"og:url","property":"og:url","content":"https:\u002F\u002Fwww.lestransalpins.org"},{"hid":"og:type","property":"og:type","content":"website"},{"hid":"og:image","property":"og:image","content":"https:\u002F\u002Fwww.lestransalpins.org\u002Fimages\u002Fvercors.jpg"},{"hid":"og:image:alt","property":"og:image:alt","content":"Illustration : Les hauts plateaux du vercors | les Transalpins"},{"hid":"twitter:card","name":"twitter:card","content":"summary"},{"hid":"twitter:domain","name":"twitter:domain","content":"https:\u002F\u002Fwww.lestransalpins.org"},{"hid":"twitter:title","name":"twitter:title","content":"Projet d'habitat groupé participatif vers la région grenobloise"},{"hid":"twitter:description","name":"twitter:description","content":"Projet d'habitat groupé participatif sobre, convivial et écologique situé vers la région grenobloise"},{"hid":"twitter:image","name":"twitter:image","content":"https:\u002F\u002Fwww.lestransalpins.org\u002Fimages\u002Fvercors.jpg"},{"hid":"twitter:image:alt","name":"twitter:image:alt","content":"Illustration : Les hauts plateaux du vercors | les Transalpins"}],"link":[{"rel":"stylesheet","href":"\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Permanent+Marker"},{"rel":"stylesheet","href":"\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Amatic+SC"},{"rel":"stylesheet","href":"\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Caveat"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Helvetica:100,300,400,500,700,900&display=swap"}],"style":[],"script":[]},
 
-    store,
     router,
     nuxt: {
       defaultTransition,
@@ -131,9 +113,6 @@ async function createApp(ssrContext, config = {}) {
     ...App
   }
 
-  // Make app available into store via this.app
-  store.app = app
-
   const next = ssrContext ? ssrContext.next : location => app.router.push(location)
   // Resolve route
   let route
@@ -146,7 +125,6 @@ async function createApp(ssrContext, config = {}) {
 
   // Set context to app.context
   await setContext(app, {
-    store,
     route,
     next,
     error: app.nuxt.error.bind(app),
@@ -173,9 +151,6 @@ async function createApp(ssrContext, config = {}) {
       app.context[key] = value
     }
 
-    // Add into store
-    store[key] = app[key]
-
     // Check if plugin not already installed
     const installKey = '__nuxt_' + key + '_installed__'
     if (Vue[installKey]) {
@@ -197,13 +172,6 @@ async function createApp(ssrContext, config = {}) {
   // Inject runtime config as $config
   inject('config', config)
 
-  if (process.client) {
-    // Replace store state before plugins execution
-    if (window.__NUXT__ && window.__NUXT__.state) {
-      store.replaceState(window.__NUXT__.state)
-    }
-  }
-
   // Add enablePreview(previewData = {}) in context for plugins
   if (process.static && process.client) {
     app.context.enablePreview = function (previewData = {}) {
@@ -217,6 +185,10 @@ async function createApp(ssrContext, config = {}) {
     await nuxt_plugin_plugin_f7c66008(app.context, inject)
   }
 
+  if (typeof nuxt_plugin_plugin_293ec6cc === 'function') {
+    await nuxt_plugin_plugin_293ec6cc(app.context, inject)
+  }
+
   if (typeof nuxt_plugin_repository_02bac980 === 'function') {
     await nuxt_plugin_repository_02bac980(app.context, inject)
   }
@@ -227,6 +199,10 @@ async function createApp(ssrContext, config = {}) {
 
   if (typeof nuxt_plugin_auth_7f755f62 === 'function') {
     await nuxt_plugin_auth_7f755f62(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_meta_121ad62c === 'function') {
+    await nuxt_plugin_meta_121ad62c(app.context, inject)
   }
 
   // Lock enablePreview in context
@@ -258,7 +234,6 @@ async function createApp(ssrContext, config = {}) {
   })
 
   return {
-    store,
     app,
     router
   }

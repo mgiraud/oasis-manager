@@ -33,8 +33,8 @@ export interface HydraObject extends HydraMemberObject {
   '@context': string
 }
 
-export interface HydraGetAllResponse extends HydraObject {
-  'hydra:member': HydraMemberObject[]
+export interface HydraGetAllResponse<U> extends HydraObject {
+  'hydra:member': U[]
   'hydra:totalItems': number
   'hydra:search': HydraSearch
   'hydra:view': HydraView
@@ -46,6 +46,7 @@ export type HydraGetRequestFilter = {
   sortBy?: string[]
   sortDesc?: string[]
   totalItems?: number
+  [key: string]: string | number | string [] | undefined | null
 }
 
 export function normalize (data: any) {

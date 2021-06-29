@@ -9,11 +9,16 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
-@Component({
-  layout: 'Admin',
-  middleware: ['isAdmin']
+import { defineComponent } from '@nuxtjs/composition-api'
+
+export default defineComponent({
+  layout: 'admin',
+  middleware: ['isAdmin'],
+  head () {
+    return {
+      title: 'Administration'
+    }
+  }
 })
-export default class AdminLayout extends Vue {
-}
+
 </script>

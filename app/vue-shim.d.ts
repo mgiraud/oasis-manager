@@ -1,4 +1,3 @@
-import { Validation } from 'vuelidate'
 import Vue from 'vue'
 
 declare module '*.vue' {
@@ -13,5 +12,4 @@ declare module 'vue/types/options' {
     }
 }
 
-declare type ElementWithValidation = (Vue | Element) & Validation
 declare module 'vuetify-draggable-treeview';

@@ -1,5 +1,5 @@
 import { Context } from '@nuxt/types'
-import { HydraMemberObject, normalize } from './hydra'
+import { HydraGetAllResponse, HydraMemberObject, normalize } from './hydra'
 import SubmissionError from '~/error/SubmissionError'
 
 // eslint-disable-next-line no-undef
@@ -7,15 +7,15 @@ export type FormOptions = RequestInit & {
   params?: {[propertyPath: string]: string}
 }
 
-export interface Repository {
+export interface Repository<U extends HydraMemberObject> {
   call: (query: string, options: FormOptions) => Promise<Response>
-  validateAndDecodeResponse : (url: string, options: object) => Promise<any>
-  $findAll: (params: object) => Promise<any>
-  $find: (id: string) => Promise<any>
-  $create: (payload: object) => Promise<any>
-  $remove: (item: HydraMemberObject) => Promise<any>
-  $update: (item: HydraMemberObject) => Promise<any>
-  $post: (url: string, options: FormOptions) => Promise<any>
+  validateAndDecodeResponse : (url: string, options?: object) => Promise<any>
+  $findAll: (params: object) => Promise<HydraGetAllResponse<U>>
+  $find: (id: string) => Promise<U>
+  $create: (payload: object) => Promise<U>
+  $remove: (item: U) => Promise<any>
+  $update: (item: U) => Promise<U>
+  $post: (url: string, options: FormOptions) => Promise<U>
 }
 
 export interface FormViolation {
@@ -31,7 +31,7 @@ export interface FormErrors {
 const makeParamArray = (key: string, arr: string[]) =>
   arr.map(val => `${key}[]=${val}`).join('&')
 
-export default (context: Context, { resource }: { resource: string }): Repository => ({
+export default (context: Context, { resource }: { resource: string }): Repository<any> => ({
   async call (query, options = {}) {
     const jsonLdMimeType = 'application/ld+json'
     options.headers = options.headers as Record<string, string>
@@ -82,7 +82,7 @@ export default (context: Context, { resource }: { resource: string }): Repositor
     }
     // TODO deal with refresh token in the future
     if (response.status === 401 && context.route.name !== 'login') {
-      await context.store.dispatch('security/logout')
+      await context.$auth.logout()
       return context.redirect({ name: 'login' })
     }
     let json = null

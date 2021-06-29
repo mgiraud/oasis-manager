@@ -1,138 +1,119 @@
-import { Context, Plugin } from '@nuxt/types'
-import { Store } from 'vuex'
+import { Context } from '@nuxt/types'
+import { computed, defineNuxtPlugin } from '@nuxtjs/composition-api'
 import { Cookie } from './auth/cookie'
 import Token from './auth/token'
+import { Member } from '~/custom-store/MemberStore'
 import { Repository } from '~/api/repository'
-import { LoginCredentials, SecurityState } from '~/store/security'
-import { Member } from '~/store/member'
+import { securityStore, SecurityStore, LoginCredentials, SecurityState } from '~/custom-store/SecurityStore'
 
 declare module 'vue/types/vue' {
-    interface Vue {
-        $auth: Auth
-    }
+  interface Vue {
+    $auth: Auth
+  }
 }
 
 declare module '@nuxt/types' {
-    interface NuxtAppOptions {
-        $auth: Auth
-    }
+  interface NuxtAppOptions {
+    $auth: Auth
+  }
 
-    interface Context {
-        $auth: Auth
-    }
-}
-
-declare module 'vuex/types/index' {
-    interface Store<S> { // eslint-disable-line no-debugger
-        $auth: Auth
-    }
+  interface Context {
+    $auth: Auth
+  }
 }
 
 class Auth {
-    ctx: Context
-    store: Store<any>
-    state: SecurityState
-    memberRepository: Repository
-    cookie: Cookie
+  ctx: Context
+  store: SecurityStore
+  state: SecurityState
+  memberRepository: Repository<Member>
+  cookie: Cookie
 
-    token: Token | null = null
-    refreshToken: Token | null = null
+  token: Token | null = null
+  refreshToken: Token | null = null
 
-    constructor (ctx: Context) {
-      this.ctx = ctx
-      this.store = ctx.store
-      this.state = this.store.state.security
-      this.memberRepository = ctx.$getRepository('members')
-      this.cookie = new Cookie(ctx)
-    }
+  constructor (ctx: Context) {
+    this.ctx = ctx
+    this.store = securityStore
+    this.store.setContext(ctx)
+    this.state = securityStore.getState()
+    this.memberRepository = ctx.$getRepository('members')
+    this.cookie = new Cookie(ctx)
+  }
 
-    get loggedIn (): boolean {
-      return this.state.loggedIn
-    }
+  loggedIn = computed(() => this.state.loggedIn)
+  member = computed(() => this.state.member)
+  isAdmin = computed(() => {
+    return this.state.member !== null && this.state.member.isAdmin
+  })
 
-    get member (): Member | null {
-      return this.store.state.security.member
-    }
+  reset () {
+    this.token?.resetCookie()
+    this.refreshToken?.resetCookie()
+  }
 
-    reset () {
-      this.token?.resetCookie()
-      this.refreshToken?.resetCookie()
-    }
+  async logout () {
+    await this.store.logout()
+    this.reset()
+  }
 
-    async logout () {
-      await this.store.dispatch('security/logout')
+  async loginRequest (credentials: LoginCredentials): Promise<boolean> {
+    return await this.store.login(credentials)
+  }
+
+  async check (): Promise<boolean> {
+    if (!this.refreshToken || !this.refreshToken.isValid) {
       this.reset()
+      return Promise.resolve(false)
     }
 
-    get isAdmin (): boolean {
-      return this.store.state.security.member !== null && this.store.state.security.member.isAdmin
+    if (!this.token || !this.token.isValid) {
+      await this._refreshTokens()
+      return Promise.resolve(!!this.token && this.token.isValid)
     }
 
-    async loginRequest (credentials: LoginCredentials): Promise<boolean> {
-      return await this.store.dispatch('security/login', credentials)
+    return Promise.resolve(true)
+  }
+
+  private async _fetchMember () {
+    if (!this.token || !this.token.isValid) {
+      return Promise.resolve(null)
     }
+    return await this.store.fetchMember()
+  }
 
-    async check (): Promise<boolean> {
-      if (!this.refreshToken || !this.refreshToken.isValid) {
-        this.reset()
-        return Promise.resolve(false)
-      }
-
-      if (!this.token || !this.token.isValid) {
-        await this._refreshTokens()
-        return Promise.resolve(!!this.token && this.token.isValid)
-      }
-
-      return Promise.resolve(true)
+  private _initTokens () {
+    try {
+      this.token = new Token(this.cookie, 'BEARER')
+      this.refreshToken = new Token(this.cookie, 'REFRESH')
+    } catch (e) {
+      // console.log(e)
     }
+  }
 
-    private async _fetchMember () {
-      if (!this.token || !this.token.isValid) {
-        return Promise.resolve(null)
-      }
-      return await this.store.dispatch('security/fetchMember')
+  private async _refreshTokens () {
+    await this.memberRepository.call('refresh', {})
+    this._initTokens()
+  }
+
+  async init (): Promise<any> {
+    this._initTokens()
+    if (await this.check()) {
+      this.store.setLoggedIn(true)
+      await this._fetchMember()
     }
-
-    private _initTokens () {
-      try {
-        this.token = new Token(this.cookie, 'BEARER')
-        this.refreshToken = new Token(this.cookie, 'REFRESH')
-      } catch (e) {
-        // console.log(e)
-      }
-    }
-
-    private async _refreshTokens () {
-      await this.memberRepository.call('refresh', {})
-      this._initTokens()
-    }
-
-    async init (): Promise<any> {
-      this._initTokens()
-
-      if (await this.check()) {
-        this.store.commit('security/SET_LOGGED_IN', true)
-        await this._fetchMember()
-      }
-    }
+  }
 }
 
-const authPlugin: Plugin = (context: Context, inject) => {
-  const $auth = new Auth(context)
+export default defineNuxtPlugin((ctx, inject) => {
+  const $auth = new Auth(ctx)
   inject('auth', $auth)
-  context.$auth = $auth
+  ctx.$auth = $auth
 
   $auth.init()
     .catch((error) => {
       if (process.client) {
-        // if (error instanceof ExpiredAuthSessionError) {
-        //     return
-        // }
-
-        // @ts-ignore
         console.error('[ERROR] [AUTH]', error)
       }
     })
-}
-
-export default authPlugin
+})

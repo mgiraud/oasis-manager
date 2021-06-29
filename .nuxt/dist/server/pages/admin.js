@@ -1,56 +1,53 @@
 exports.ids = [2];
 exports.modules = {
 
-/***/ 404:
+/***/ 403:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/admin.vue?vue&type=template&id=44d697a7&
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/admin.vue?vue&type=template&id=f0b51b70&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-container',[_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_c('Nuxt')],1)],1)],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./app/pages/admin.vue?vue&type=template&id=44d697a7&
+// CONCATENATED MODULE: ./app/pages/admin.vue?vue&type=template&id=f0b51b70&
 
-// EXTERNAL MODULE: external "vue-property-decorator"
-var external_vue_property_decorator_ = __webpack_require__(35);
+// EXTERNAL MODULE: ./node_modules/@nuxtjs/composition-api/dist/runtime/index.mjs + 1 modules
+var runtime = __webpack_require__(3);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--12-0!./node_modules/ts-loader??ref--12-1!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/admin.vue?vue&type=script&lang=ts&
-var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
-  var c = arguments.length,
-      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-      d;
-  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-  return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
 
+/* harmony default export */ var adminvue_type_script_lang_ts_ = (Object(runtime["b" /* defineComponent */])({
+  layout: 'admin',
+  middleware: ['isAdmin'],
 
-let adminvue_type_script_lang_ts_AdminLayout = class AdminLayout extends external_vue_property_decorator_["Vue"] {};
-adminvue_type_script_lang_ts_AdminLayout = __decorate([Object(external_vue_property_decorator_["Component"])({
-  layout: 'Admin',
-  middleware: ['isAdmin']
-})], adminvue_type_script_lang_ts_AdminLayout);
-/* harmony default export */ var adminvue_type_script_lang_ts_ = (adminvue_type_script_lang_ts_AdminLayout);
+  head() {
+    return {
+      title: 'Administration'
+    };
+  }
+
+}));
 // CONCATENATED MODULE: ./app/pages/admin.vue?vue&type=script&lang=ts&
  /* harmony default export */ var pages_adminvue_type_script_lang_ts_ = (adminvue_type_script_lang_ts_); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(10);
+var componentNormalizer = __webpack_require__(11);
 
 // EXTERNAL MODULE: ./node_modules/vuetify-loader/lib/runtime/installComponents.js
-var installComponents = __webpack_require__(12);
+var installComponents = __webpack_require__(14);
 var installComponents_default = /*#__PURE__*/__webpack_require__.n(installComponents);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VCol.js
-var VCol = __webpack_require__(240);
+var VCol = __webpack_require__(231);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VContainer.js + 1 modules
-var VContainer = __webpack_require__(243);
+var VContainer = __webpack_require__(234);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VRow.js
-var VRow = __webpack_require__(241);
+var VRow = __webpack_require__(232);
 
 // CONCATENATED MODULE: ./app/pages/admin.vue
 

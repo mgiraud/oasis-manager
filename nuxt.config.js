@@ -48,6 +48,7 @@ export default {
     '~/plugins/auth.ts'
   ],
   buildModules: [
+    '@nuxtjs/composition-api/module',
     ['@nuxt/typescript-build', {}],
     ['@nuxtjs/vuetify', {
       treeShake: true,

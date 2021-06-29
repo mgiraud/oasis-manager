@@ -2,28 +2,37 @@
   <v-form>
     <v-container>
       <v-row>
-        <v-col cols="12" md="6">
+        <v-col
+          cols="12"
+          md="6"
+        >
           <v-text-field
             v-model="item.name"
             label="Nom"
             :error-messages="nameErrors"
             required
-            @input="$v.item.name.$touch()"
-            @blur="$v.item.name.$touch()"
+            @input="v$.name.$touch()"
+            @blur="v$.name.$touch()"
           />
         </v-col>
-        <v-col cols="12" md="6">
+        <v-col
+          cols="12"
+          md="6"
+        >
           <v-textarea
             v-model="item.description"
-            label="Nom"
+            label="Description"
           />
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" md="6">
+        <v-col
+          cols="12"
+          md="6"
+        >
           <v-combobox
             v-model="item.permissions"
-            :items="permissions"
+            :items="state.permissions"
             label="Permissions"
             :return-object="false"
             multiple
@@ -36,49 +45,55 @@
 </template>
 
 <script lang="ts">
-import { Component, mixins, namespace, Prop } from 'nuxt-property-decorator'
-import { required, minLength } from 'vuelidate/lib/validators'
+import { computed, defineComponent } from '@nuxtjs/composition-api'
+import useVuelidate from '@vuelidate/core'
+import { required, minLength } from '@vuelidate/validators'
 import has from 'lodash/has'
-import { validationMixin } from 'vuelidate'
+import { FormErrors } from '~/api/repository'
+import { MemberGroup } from '~/custom-store/MemberGroupStore'
+import { securityStore } from '~/custom-store/SecurityStore'
 
-const securityModule = namespace('security')
+export default defineComponent({
+  props: {
+    values: {
+      type: Object as () => MemberGroup,
+      required: true
+    },
+    errors: {
+      type: Object as () => FormErrors,
+      default: () => {}
+    }
+  },
+  setup (props) {
+    const item = computed(() => props.values)
 
-@Component({
-  validations: {
-    item: {
+    const validation = computed(() => ({
       name: {
         required,
         minLength: minLength(4)
       }
+    }))
+
+    const v$ = useVuelidate(validation, item)
+
+    const violations = computed(() => props.errors)
+
+    const nameErrors = computed(() => {
+      const errors: string[] = []
+      if (!v$.value.name || !v$.value.name.$dirty) {
+        return errors
+      }
+      has(violations.value, 'name') && errors.push(violations.value.name)
+      v$.value.name.minLength.$invalid && errors.push('Le titre doit faire au moins 4 caractères')
+      return errors
+    })
+
+    return {
+      item,
+      v$,
+      nameErrors,
+      state: securityStore.getState()
     }
   }
 })
-export default class MemberGroupForm extends mixins(validationMixin) {
-  @Prop({ type: Object, default: () => {} })
-  values!: any
-
-  @Prop({ type: Object, default: () => {} })
-  errors!: any
-
-  @Prop({ type: Object, default: () => {} })
-  initialValues!: any
-
-  @securityModule.State('permissions') permissions !: string[]
-
-  get item () {
-    return this.initialValues || this.values
-  }
-
-  get nameErrors () {
-    const errors: string[] = []
-    if (!this.$v.item.name || !this.$v.item.name.$dirty) { return errors }
-    has(this.violations, 'name') && errors.push(this.violations.name)
-    !this.$v.item.name.minLength && errors.push('Le titre doit faire au moins 4 caractères')
-    return errors
-  }
-
-  get violations () {
-    return this.errors || {}
-  }
-}
 </script>

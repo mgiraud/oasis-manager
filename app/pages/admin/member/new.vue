@@ -1,41 +1,42 @@
 <template>
   <div>
-    <Form ref="createForm" :values="item" :errors="violations" />
-    <Toolbar :handle-submit="onSendForm" :handle-reset="resetForm" />
-    <Loading :visible="isLoading" />
+    <Form
+      ref="createForm"
+      :values="item"
+      :errors="state.violations"
+    />
+    <Toolbar
+      :handle-submit="onSendForm"
+      :handle-reset="resetForm"
+    />
+    <Loading :visible="state.isLoading" />
   </div>
 </template>
 
 <script lang="ts">
-import { Component, mixins, namespace } from 'nuxt-property-decorator'
+import { defineComponent, reactive, toRefs, useContext } from '@nuxtjs/composition-api'
 import Loading from '~/components/util/Loading.vue'
 import Toolbar from '~/components/form/Toolbar.vue'
 import Form from '~/components/admin/member/Form.vue'
-import create from '~/mixins/create'
-import { Member } from '~/store/member'
+import itemCreate from '~/composable/ItemCreate'
+import { memberStore } from '~/custom-store/MemberStore'
 
-const memberModule = namespace('member')
-
-@Component({
+export default defineComponent({
   components: {
     Loading, Toolbar, Form
   },
-  servicePrefix: 'admin-member',
-  resourcePrefix: '/api/member/',
   middleware: 'hasPermissions',
   meta: {
     permissions: ['USER_CAN_EDIT_MEMBERS']
+  },
+  setup () {
+    const item = reactive({ content: null })
+    memberStore.setContext(useContext())
+
+    return {
+      item,
+      ...toRefs(itemCreate(memberStore))
+    }
   }
 })
-export default class AdminMemberNew extends mixins(create) {
-  item = {}
-
-  @memberModule.State('created') created!: Member | null
-  @memberModule.State('error') error!: string | null
-  @memberModule.State('isLoading') isLoading!: boolean
-  @memberModule.State('violations') violations!: string[]
-
-  @memberModule.Action('create') create!: (member: Member) => Promise<Member>
-  @memberModule.Action('reset') reset!: () => void
-}
 </script>

@@ -3,8 +3,10 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
 use App\Repository\MemberGroupRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -21,7 +23,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     },
  * )
  * @ORM\Entity(repositoryClass=MemberGroupRepository::class)
- * @ApiFilter(SearchFilter::class, properties={"name": "exact"})
+ * @ApiFilter(SearchFilter::class, properties={"name": "partial"})
+ * @ApiFilter(PropertyFilter::class, arguments={"whitelist": {"name"}})
  * @UniqueEntity("name")
  */
 class MemberGroup
@@ -30,12 +33,14 @@ class MemberGroup
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @ApiProperty(identifier=false)
      */
     private $id;
 
     /**
      * @ORM\Column(type="text", unique=true)
      * @Groups({"member:read", "member_category:read", "member_category:write"})
+     * @ApiProperty(identifier=true)
      */
     private $name;
 

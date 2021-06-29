@@ -51,7 +51,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     },
  * )
  * @UniqueEntity("email", groups={"register"})
- * @ApiFilter(SearchFilter::class, properties={"email": "partial", "nickname": "partial", "groups.name": "ipartial"})
+ * @ApiFilter(SearchFilter::class, properties={"email": "partial", "nickname": "partial", "groups": "ipartial"})
  * @UniqueEntity("nickname")
  */
 class Member implements UserInterface

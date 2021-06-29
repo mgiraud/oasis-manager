@@ -16,13 +16,26 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
 
-@Component
-export default class EditorBtn extends Vue {
-  @Prop({ type: Object, required: false, default: null }) readonly btnClass!: any
-  @Prop({ type: Function, required: true }) readonly clickHandler!: any
-  @Prop({ type: String, required: true }) readonly icon!: string
-  @Prop({ type: String, required: true }) readonly label!: string
-}
+export default defineComponent({
+  props: {
+    btnClass: {
+      type: Object,
+      default: null
+    },
+    clickHandler: {
+      type: Function,
+      required: true
+    },
+    icon: {
+      type: String,
+      required: true
+    },
+    label: {
+      type: String,
+      required: true
+    }
+  }
+})
 </script>

@@ -1,41 +1,48 @@
 <template>
   <div>
-    <Form ref="createForm" :values="item" :errors="violations" :page-logs="[]" />
-    <Toolbar :handle-submit="onSendForm" :handle-reset="resetForm" />
-    <Loading :visible="isLoading" />
+    <Form
+      ref="createForm"
+      :values="item"
+      :errors="state.violations"
+      :page-logs="[]"
+    />
+    <Toolbar
+      :handle-submit="onSendForm"
+      :handle-reset="resetForm"
+    />
+    <Loading :visible="state.isLoading" />
   </div>
 </template>
 
 <script lang="ts">
-import { Component, mixins, namespace } from 'nuxt-property-decorator'
+import { defineComponent, useContext, toRefs, reactive } from '@nuxtjs/composition-api'
 import Loading from '~/components/util/Loading.vue'
 import Toolbar from '~/components/form/Toolbar.vue'
 import Form from '~/components/admin/page/Form.vue'
-import { Page } from '~/store/page'
-import CreateMixin from '~/mixins/create'
+import itemCreate from '~/composable/ItemCreate'
+import { pageStore } from '~/custom-store/PageStore'
 
-const pageModule = namespace('page')
-
-@Component({
+export default defineComponent({
   components: {
     Loading, Toolbar, Form
   },
-  servicePrefix: 'admin-page',
-  resourcePrefix: '/api/pages/',
   middleware: 'hasPermissions',
   meta: {
     permissions: ['USER_CAN_EDIT_PAGES']
+  },
+  setup () {
+    const item = reactive({ content: '', showInMenu: false, isPublished: false })
+    pageStore.setContext(useContext())
+
+    return {
+      item,
+      ...toRefs(itemCreate(pageStore))
+    }
+  },
+  head () {
+    return {
+      title: 'Ajout d\'une page'
+    }
   }
 })
-export default class AdminPageNew extends mixins(CreateMixin) {
-  item = { content: '', showInMenu: false, isPublished: false }
-
-  @pageModule.State('created') created!: Page | null
-  @pageModule.State('error') error!: string | null
-  @pageModule.State('isLoading') isLoading!: boolean
-  @pageModule.State('violations') violations!: string[]
-
-  @pageModule.Action('create') create!: (page: Page) => Promise<Page>
-  @pageModule.Action('reset') reset!: () => void
-}
 </script>

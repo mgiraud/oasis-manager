@@ -9,19 +9,17 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
-import FileManager from '~/components/file_manager/FileManager.vue'
+import { defineComponent } from '@nuxtjs/composition-api'
+import FileManager from '~/components/file-manager/FileManager.vue'
 
-@Component({
+export default defineComponent({
   components: {
     FileManager
   },
-  layout: 'Admin',
+  layout: 'admin',
   middleware: 'hasPermissions',
   meta: {
     permissions: ['USER_CAN_ACCESS_GALLERIES']
   }
 })
-export default class AdminGallery extends Vue {
-}
 </script>

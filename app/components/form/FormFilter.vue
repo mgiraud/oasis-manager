@@ -10,25 +10,34 @@
         v-bind="attrs"
         v-on="on"
       >
-        Filter <v-icon right>
+        Filtres
+        <v-icon right>
           ri-filter-line
         </v-icon>
       </v-btn>
     </template>
 
     <v-sheet>
-      <v-card-title>Filters</v-card-title>
+      <v-card-title>Filtres</v-card-title>
 
       <slot name="filter" />
 
       <v-card-actions>
         <v-spacer />
 
-        <v-btn color="primary" @click="onFilter">
-          Filter
+        <v-btn
+          color="primary"
+          @click="onFilter"
+        >
+          Filtrer
         </v-btn>
-        <v-btn color="primary" class="ml-2" text @click="onCancel">
-          Cancel
+        <v-btn
+          color="primary"
+          class="ml-2"
+          text
+          @click="onCancel"
+        >
+          Remise à zéro
         </v-btn>
       </v-card-actions>
     </v-sheet>
@@ -36,22 +45,34 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
 
-@Component
-export default class FormFilter extends Vue {
-  @Prop({ type: Function, required: true })
-  handleReset!: any
+export default defineComponent({
+  props: {
+    handleReset: {
+      type: Function,
+      required: true
+    },
+    handleFilter: {
+      type: Function,
+      required: true
+    }
+  },
+  setup (props) {
+    const onFilter = () => {
+      // @ts-ignore
+      props.handleFilter()
+    }
 
-  @Prop({ type: Function, required: true })
-  handleFilter!: any
+    const onCancel = () => {
+      // @ts-ignore
+      props.handleReset()
+    }
 
-  onFilter () {
-    this.handleFilter()
+    return {
+      onFilter,
+      onCancel
+    }
   }
-
-  onCancel () {
-    this.handleReset()
-  }
-}
+})
 </script>

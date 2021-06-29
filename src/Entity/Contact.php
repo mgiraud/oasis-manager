@@ -40,6 +40,7 @@ class Contact
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"contact:read"})
      */
     private $id;
 

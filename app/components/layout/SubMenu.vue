@@ -7,42 +7,50 @@
     background-color="primary"
     color="white"
   >
-    <v-tab v-for="page in findByActiveSlug" :key="page['@id']" class="white--text">
+    <v-tab
+      v-for="page in findByActiveSlug"
+      :key="page['@id']"
+      class="white--text"
+    >
       {{ page.title }}
     </v-tab>
   </v-tabs>
 </template>
 
 <script lang="ts">
-import { Component, namespace, Vue, Watch } from 'nuxt-property-decorator'
 import { findIndex } from 'lodash'
-import { MenuItem, Page } from '~/store/page'
+import { defineComponent, onMounted, Ref, ref, useContext, useRoute, useRouter, watch } from '@nuxtjs/composition-api'
+import { Page, pageStore } from '~/custom-store/PageStore'
 
-const pageModule = namespace('page')
+export default defineComponent({
+  setup () {
+    const tab = ref(null) as Ref<number | null>
+    const router = useRouter()
+    const route = useRoute()
+    pageStore.setContext(useContext())
 
-@Component
-export default class Toolbar extends Vue {
-  tab: number | null = null
-  @pageModule.Getter('menuItems') menuItems !: MenuItem[]
-  @pageModule.Getter('findByActiveSlug') findByActiveSlug !: Page[]
+    const redirect = (item: Page) => {
+      if (item && item.url) {
+        router.push(item.url)
+      }
+    }
 
-  @Watch('tab')
-  onTabUpdated (tabIndex: number) {
-    if (tabIndex !== undefined || !this.findByActiveSlug[tabIndex]) {
-      this.redirect(this.findByActiveSlug[tabIndex])
+    // @ts-ignore
+    watch(tab, (tabIndex: number) => {
+      if (pageStore.findByActiveSlug.value[tabIndex]) {
+        redirect(pageStore.findByActiveSlug.value[tabIndex])
+      }
+    })
+
+    onMounted(() => {
+      tab.value = findIndex(pageStore.findByActiveSlug.value, { url: route.value.params.pathMatch })
+    })
+
+    return {
+      findByActiveSlug: pageStore.findByActiveSlug,
+      tab,
+      redirect
     }
   }
-
-  mounted () {
-    if (this.$route.params.pathMatch) {
-      this.tab = findIndex(this.findByActiveSlug, { url: this.$route.params.pathMatch })
-    }
-  }
-
-  redirect (item: Page) {
-    if (item && item.url) {
-      this.$router.push(item.url)
-    }
-  }
-}
+})
 </script>

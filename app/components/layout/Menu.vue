@@ -8,12 +8,16 @@
     slider-color="primary darken-4"
     show-arrows
   >
-    <v-tab v-for="item in menuItems" :key="item.name" class="primary--text text--darken-4">
+    <v-tab
+      v-for="item in menuItems"
+      :key="item.name"
+      class="primary--text text--darken-4"
+    >
       {{ item.name }}
-      <v-icon v-if="!item.url && activeSlug !== item.slug">
+      <v-icon v-if="!item.url && pageState.activeSlug !== item.slug">
         ri-arrow-drop-down-fill
       </v-icon>
-      <v-icon v-if="!item.url && activeSlug === item.slug">
+      <v-icon v-if="!item.url && pageState.activeSlug === item.slug">
         ri-arrow-drop-up-fill
       </v-icon>
     </v-tab>
@@ -21,66 +25,74 @@
 </template>
 
 <script lang="ts">
-import { Component, namespace, Vue, Watch } from 'nuxt-property-decorator'
+import {
+  defineComponent, onMounted, Ref, ref, useContext, useRoute, useRouter, watch
+} from '@nuxtjs/composition-api'
 import { findIndex } from 'lodash'
 import { Route } from 'vue-router'
-import { MenuItem } from '~/store/page'
+import { MenuItem, pageStore } from '~/custom-store/PageStore'
 
-const pageModule = namespace('page')
+export default defineComponent({
+  setup () {
+    pageStore.setContext(useContext())
+    const router = useRouter()
+    const route = useRoute()
+    const tab = ref(undefined) as Ref<number | null | undefined>
 
-@Component
-export default class Toolbar extends Vue {
-  tab: number | null = null
-
-  @pageModule.State('activeSlug') activeSlug !: string | null
-  @pageModule.Getter('menuItems') menuItems !: MenuItem[]
-  @pageModule.Mutation('setActiveSlug') setActiveSlug !: (slug: string | null) => void
-
-  @Watch('tab')
-  onTabUpdate (tabIndex: number) {
-    if (tabIndex === undefined || !this.menuItems[tabIndex]) {
-      this.setActiveSlug(null)
-    } else {
-      this.redirectOrToggleSubMenu(this.menuItems[tabIndex])
+    const redirectOrToggleSubMenu = (item: MenuItem) => {
+      if (item.url) {
+        router.push(item.url)
+        pageStore.setActiveSlug(null)
+      } else if (pageStore.getState().activeSlug !== item.slug) {
+        pageStore.setActiveSlug(item.slug)
+      } else {
+        pageStore.setActiveSlug(null)
+      }
     }
-  }
 
-  @Watch('$route')
-  onRouteChange (route: Route | null) {
-    if (route === null) {
-      return
-    }
-    // Check that static page is in menu
-    const staticPageInMenu = this.menuItems.find((menuItem: MenuItem) => {
-      return menuItem.url === route.name
+    onMounted(() => {
+      if (route.value.params.pathMatch) {
+        const index = findIndex(pageStore.menuItems.value, { url: route.value.params.pathMatch })
+        tab.value = index === -1 ? undefined : index
+      }
     })
 
-    // Check that dynamic page is in menu
-    const dynamicPageIsInMenu = this.menuItems.find((menuItem: MenuItem) => {
-      return menuItem.url === route.params.pathMatch
+    // @ts-ignore
+    watch(tab, (tabIndex: number | undefined) => {
+      if (tabIndex === undefined || !pageStore.menuItems.value[tabIndex]) {
+        pageStore.setActiveSlug(null)
+      } else {
+        redirectOrToggleSubMenu(pageStore.menuItems.value[tabIndex])
+      }
     })
 
-    const isInMenu = staticPageInMenu || dynamicPageIsInMenu
-    if (!isInMenu) {
-      this.tab = null
-    }
-  }
+    watch(route, (route: Route | null) => {
+      if (route === null) {
+        return
+      }
+      // Check that static page is in menu
+      const staticPageInMenu = pageStore.menuItems.value.find((menuItem: MenuItem) => {
+        return menuItem.url === route.name
+      })
 
-  mounted () {
-    if (this.$route.params.pathMatch) {
-      this.tab = findIndex(this.menuItems, { url: this.$route.params.pathMatch })
-    }
-  }
+      // Check that dynamic page is in menu
+      const dynamicPageIsInMenu = pageStore.menuItems.value.find((menuItem: MenuItem) => {
+        return menuItem.url === route.params.pathMatch
+      })
 
-  redirectOrToggleSubMenu (item: MenuItem) {
-    if (item.url) {
-      this.$router.push(item.url)
-      this.setActiveSlug(null)
-    } else if (this.activeSlug !== item.slug) {
-      this.setActiveSlug(item.slug)
-    } else {
-      this.setActiveSlug(null)
+      const isInMenu = staticPageInMenu || dynamicPageIsInMenu
+      if (!isInMenu) {
+        tab.value = undefined
+      }
+    })
+
+    return {
+      tab,
+      menuItems: pageStore.menuItems,
+      pageState: pageStore.getState(),
+      setActiveSlug: (slug: string | null) => pageStore.setActiveSlug(slug),
+      redirectOrToggleSubMenu
     }
   }
-}
+})
 </script>

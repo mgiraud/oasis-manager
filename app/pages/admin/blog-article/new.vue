@@ -30,7 +30,7 @@ export default defineComponent({
     permissions: ['USER_CAN_EDIT_BLOG_ARTICLES']
   },
   setup () {
-    const item = reactive({ content: '', isPublished: false })
+    const item = reactive({ content: '', isPublished: false, tags: [] })
     blogArticleStore.setContext(useContext())
 
     return {

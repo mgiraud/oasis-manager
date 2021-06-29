@@ -44,9 +44,9 @@
       <v-row>
         <v-col>
           <v-combobox
-            v-if="state.mediaNodes"
+            v-if="state.selectItems"
             v-model="item.mediaNode"
-            :items="state.mediaNodes"
+            :items="state.selectItems"
             no-data-text="Aucun galerie n'a ce nom"
             label="Lier une galerie à cette page"
             item-text="name"
@@ -134,7 +134,7 @@ export default defineComponent({
     })
 
     onMounted(() => {
-      mediaNodeStore.fetchAll()
+      mediaNodeStore.fetchSelectItems()
     })
 
     return {

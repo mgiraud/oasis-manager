@@ -800,12 +800,12 @@ module.exports = ___CSS_LOADER_EXPORT___;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/index.vue?vue&type=template&id=e5cec634&
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/index.vue?vue&type=template&id=3d595fb6&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-container',{attrs:{"fluid":""}},[_c('v-row',[_c('v-col',{attrs:{"cols":"12"}},[_c('v-card',[(_vm.page)?_c('PageModel',{attrs:{"page":_vm.page}}):_c('v-card-text',[_vm._v("\n          Tu peux retrouver sur ce site toutes les informations relatives au projet de création\n          d'un habitat partagé\n        ")]),_vm._v(" "),_c('v-container',{attrs:{"fluid":""}},_vm._l((_vm.articles),function(article){return _c('v-row',{key:article['@id']},[_c('v-col',[_c('blog-article-template',{attrs:{"article":article}})],1)],1)}),1)],1)],1)],1)],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./app/pages/index.vue?vue&type=template&id=e5cec634&
+// CONCATENATED MODULE: ./app/pages/index.vue?vue&type=template&id=3d595fb6&
 
 // EXTERNAL MODULE: ./node_modules/@nuxtjs/composition-api/dist/runtime/index.mjs + 1 modules
 var runtime = __webpack_require__(3);
@@ -907,9 +907,12 @@ var BlogArticleStore = __webpack_require__(322);
       });
       articles.value = BlogArticleStore["a" /* blogArticleStore */].list.value;
     });
+    const page = Object(runtime["a" /* computed */])(() => {
+      return !PageStore["a" /* pageStore */].getState().isLoading ? PageStore["a" /* pageStore */].find('/api/pages/home') : null;
+    });
     return {
       articles,
-      page: PageStore["a" /* pageStore */].find('/api/pages/home')
+      page
     };
   },
 

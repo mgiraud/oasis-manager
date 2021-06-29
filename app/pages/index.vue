@@ -31,12 +31,12 @@
 import {
   defineComponent,
   useFetch,
-  useContext, ref, Ref
+  useContext, ref, Ref, watch, computed
 } from '@nuxtjs/composition-api'
 import { HydraMemberObject } from '~/api/hydra'
 import PageModel from '~/components/page/PageModel.vue'
 import BlogArticleTemplate from '~/components/blog-article/BlogArticleTemplate.vue'
-import { pageStore } from '~/custom-store/PageStore'
+import { Page, pageStore } from '~/custom-store/PageStore'
 import { blogArticleStore } from '~/custom-store/BlogArticleStore'
 
 export default defineComponent({
@@ -55,9 +55,13 @@ export default defineComponent({
       articles.value = blogArticleStore.list.value
     })
 
+    const page = computed(() => {
+      return !pageStore.getState().isLoading ? pageStore.find('/api/pages/home') : null
+    })
+
     return {
       articles,
-      page: pageStore.find('/api/pages/home')
+      page
     }
   },
   head () {

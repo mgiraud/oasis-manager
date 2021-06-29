@@ -142,8 +142,10 @@
           <v-divider class="mb-5 mt-4" />
           <v-row>
             <v-col cols="12">
-              <h2>Quelle est ma raison d'être ? Quelles sont mes motivations pour rejoindre ce
-                projet ?</h2>
+              <h2>
+                Quelle est ma raison d'être ? Quelles sont mes motivations pour rejoindre ce
+                projet ?
+              </h2>
             </v-col>
           </v-row>
           <v-row>
@@ -371,12 +373,11 @@ import VuetifyDraggableTreeview from 'vuetify-draggable-treeview'
 import itemUpdate from '~/composable/itemUpdate'
 import Loading from '~/components/util/Loading.vue'
 import Toolbar from '~/components/form/Toolbar.vue'
-import ContactForm from '~/components/contact/Form.vue'
 import { surveyJoinStore } from '~/custom-store/SurveyJoinStore'
 
 export default defineComponent({
   components: {
-    Loading, Toolbar, ContactForm, VuetifyDraggableTreeview
+    Loading, Toolbar, VuetifyDraggableTreeview
   },
   middleware: 'hasPermissions',
   meta: {

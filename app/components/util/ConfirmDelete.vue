@@ -1,6 +1,6 @@
 <template>
   <v-dialog
-    v-model="visible"
+    v-model="show"
     persistent
     width="300"
   >
@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { computed, defineComponent } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   props: {
@@ -45,8 +45,11 @@ export default defineComponent({
       emit('close')
     }
 
+    const show = computed(() => props.visible)
+
     return {
-      setVisible
+      setVisible,
+      show
     }
   }
 })

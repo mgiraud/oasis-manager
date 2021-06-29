@@ -44,12 +44,11 @@ import { defineComponent, toRefs, useContext } from '@nuxtjs/composition-api'
 import itemUpdate from '~/composable/itemUpdate'
 import Loading from '~/components/util/Loading.vue'
 import Toolbar from '~/components/form/Toolbar.vue'
-import ContactForm from '~/components/contact/Form.vue'
 import { contactStore } from '~/custom-store/ContactStore'
 
 export default defineComponent({
   components: {
-    Loading, Toolbar, ContactForm
+    Loading, Toolbar
   },
   middleware: 'hasPermissions',
   meta: {

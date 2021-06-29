@@ -46,7 +46,7 @@ export class SecurityStore extends PersistentStore<SecurityState> {
   async login (credentials: LoginCredentials) {
     this.state.credentialError = false
     try {
-      const res = await this.context.$getRepository(this.storeName).call('login_check', {
+      const res = await this.context.$getRepository<Member>(this.storeName).call('login_check', {
         method: 'POST',
         body: JSON.stringify(credentials)
       })
@@ -62,7 +62,7 @@ export class SecurityStore extends PersistentStore<SecurityState> {
   }
 
   async logout () {
-    await this.context.$getRepository(this.storeName).call('logout', {})
+    await this.context.$getRepository<Member>(this.storeName).call('logout', {})
     this.reset()
   }
 
@@ -73,7 +73,7 @@ export class SecurityStore extends PersistentStore<SecurityState> {
 
   async fetchMember () {
     try {
-      const member: Member = await this.context.$getRepository(this.storeName).$find('me')
+      const member = await this.context.$getRepository<Member>(this.storeName).$find('me')
       this.state.member = member
       return member
     } catch (e) {

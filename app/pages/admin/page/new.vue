@@ -15,11 +15,11 @@
 </template>
 
 <script lang="ts">
+import { defineComponent, useContext, toRefs, reactive } from '@nuxtjs/composition-api'
 import Loading from '~/components/util/Loading.vue'
 import Toolbar from '~/components/form/Toolbar.vue'
 import Form from '~/components/admin/page/Form.vue'
 import itemCreate from '~/composable/ItemCreate'
-import { defineComponent, useContext, toRefs, reactive } from '@nuxtjs/composition-api'
 import { pageStore } from '~/custom-store/PageStore'
 
 export default defineComponent({

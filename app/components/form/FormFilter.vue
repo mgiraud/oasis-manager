@@ -60,10 +60,12 @@ export default defineComponent({
   },
   setup (props) {
     const onFilter = () => {
+      // @ts-ignore
       props.handleFilter()
     }
 
     const onCancel = () => {
+      // @ts-ignore
       props.handleReset()
     }
 

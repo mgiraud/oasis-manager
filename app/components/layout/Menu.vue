@@ -29,66 +29,70 @@ import { findIndex } from 'lodash'
 import { Route } from 'vue-router'
 import { MenuItem } from '~/custom-store/PageStore'
 import {
-  defineComponent, ref, useContext
+  defineComponent, onMounted, Ref, ref, useContext, useRoute, useRouter, watch
 } from '@nuxtjs/composition-api'
 import { pageStore } from '~/custom-store/PageStore'
 
 export default defineComponent({
   setup () {
     pageStore.setContext(useContext())
-    const tab = ref(undefined)
+    const router = useRouter()
+    const route = useRoute()
+    const tab = ref(undefined) as Ref<number | null | undefined>
 
-    return {
-      menuItems: pageStore.menuItems,
-      pageState: pageStore.getState(),
-      setActiveSlug: (slug: string | null) => pageStore.setActiveSlug(slug),
-      tab
-    }
-  },
-  methods: {
-    redirectOrToggleSubMenu (item: MenuItem) {
+    const redirectOrToggleSubMenu = (item: MenuItem) => {
       if (item.url) {
-        this.$router.push(item.url)
-        this.setActiveSlug(null)
-      } else if (this.pageState.activeSlug !== item.slug) {
-        this.setActiveSlug(item.slug)
+        router.push(item.url)
+        pageStore.setActiveSlug(null)
+      } else if (pageStore.getState().activeSlug !== item.slug) {
+        pageStore.setActiveSlug(item.slug)
       } else {
-        this.setActiveSlug(null)
+        pageStore.setActiveSlug(null)
       }
     }
-  },
-  watch: {
-    tab (tabIndex: number | undefined) {
-      if (tabIndex === undefined || !this.menuItems[tabIndex]) {
-        this.setActiveSlug(null)
-      } else {
-        this.redirectOrToggleSubMenu(this.menuItems[tabIndex])
+
+    onMounted(() => {
+      if (route.value.params.pathMatch) {
+        const index = findIndex(pageStore.menuItems.value, { url: route.value.params.pathMatch })
+        tab.value = index === -1 ? undefined : index
       }
-    },
-    $route (route: Route | null) {
+    })
+
+    // @ts-ignore
+    watch(tab, (tabIndex: number | undefined) => {
+      if (tabIndex === undefined || !pageStore.menuItems.value[tabIndex]) {
+        pageStore.setActiveSlug(null)
+      } else {
+        redirectOrToggleSubMenu(pageStore.menuItems.value[tabIndex])
+      }
+    })
+
+    watch(route, (route: Route | null) => {
       if (route === null) {
         return
       }
       // Check that static page is in menu
-      const staticPageInMenu = this.menuItems.find((menuItem: MenuItem) => {
+      const staticPageInMenu = pageStore.menuItems.value.find((menuItem: MenuItem) => {
         return menuItem.url === route.name
       })
 
       // Check that dynamic page is in menu
-      const dynamicPageIsInMenu = this.menuItems.find((menuItem: MenuItem) => {
+      const dynamicPageIsInMenu = pageStore.menuItems.value.find((menuItem: MenuItem) => {
         return menuItem.url === route.params.pathMatch
       })
 
       const isInMenu = staticPageInMenu || dynamicPageIsInMenu
       if (!isInMenu) {
-        this.tab = undefined
+        tab.value = undefined
       }
-    }
-  },
-  mounted () {
-    if (this.$route.params.pathMatch) {
-      const index = findIndex(this.menuItems, { url: this.$route.params.pathMatch })
-      this.tab = index === -1 ? undefined : index
+    })
+
+    return {
+      tab,
+      menuItems: pageStore.menuItems,
+      pageState: pageStore.getState(),
+      setActiveSlug: (slug: string | null) => pageStore.setActiveSlug(slug),
+      redirectOrToggleSubMenu
     }
   }
 })

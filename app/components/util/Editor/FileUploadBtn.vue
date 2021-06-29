@@ -55,15 +55,18 @@ export default defineComponent({
   },
   setup (props) {
     const dialog = ref(false)
-    const fileManager = ref(null) as Ref<FileManager | null>
+    const fileManager = ref(null) as Ref<typeof FileManager | null>
 
     const injectFilesAndCloseDialog = () => {
+      // @ts-ignore
       fileManager.value?.thumbnails.forEach((thumbnail: Thumbnail) => {
-        props.editor.chain().focus().setImage({ src: thumbnail.src }).run()
+        props.editor?.chain().focus().setImage({ src: thumbnail.src }).run()
       })
+      // @ts-ignore
       fileManager.value?.links.forEach((link: Link) => {
-        const node = props.editor.schema.text(link.name, [props.editor.schema.marks.link.create({ href: link.src })])
-        props.editor.view.dispatch(props.editor.state.tr.replaceSelectionWith(node, false))
+        const node = props.editor?.schema.text(link.name, [props?.editor.schema.marks.link.create({ href: link.src })])
+        // @ts-ignore
+        props.editor?.view.dispatch(props.editor?.state.tr.replaceSelectionWith(node, false))
       })
 
       dialog.value = false
@@ -71,6 +74,7 @@ export default defineComponent({
 
     watch(dialog, () => {
       nextTick(() => {
+        // @ts-ignore
         fileManager.value?.reset()
       })
     })

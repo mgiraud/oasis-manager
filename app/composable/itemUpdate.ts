@@ -27,7 +27,9 @@ const itemUpdate = <T, U extends HydraMemberObject> (store: PersistentApiStore<T
   }
 
   const reset = () => {
-    if (!updateForm.value) return
+    if (!updateForm.value) {
+      return
+    }
     updateForm.value.v$.$reset()
     store.resetUpdate()
     store.resetDelete()
@@ -35,7 +37,9 @@ const itemUpdate = <T, U extends HydraMemberObject> (store: PersistentApiStore<T
   }
 
   const onSendForm = () => {
-    if (!updateForm.value) return
+    if (!updateForm.value) {
+      return
+    }
     updateForm.value.v$.$touch()
 
     if (!updateForm.value.v$.$invalid) {
@@ -45,7 +49,9 @@ const itemUpdate = <T, U extends HydraMemberObject> (store: PersistentApiStore<T
   }
 
   const resetForm = () => {
-    if (!updateForm.value) return
+    if (!updateForm.value) {
+      return
+    }
     updateForm.value.v$.$reset()
     if (retrieved.value) {
       item.value = { ...retrieved.value }

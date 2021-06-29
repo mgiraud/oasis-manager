@@ -59,12 +59,14 @@ export default defineComponent({
     })
 
     const handleMouseDown = (e: MouseEvent) => {
+      // @ts-ignore
       const startWidth = parseFloat(props.node.attrs.width.match(/(.+)px/)[1])
       const startPosX = e.x
 
       const onMouseMove = (e: MouseEvent) => {
         const diffInPx = startPosX - e.pageX
         const width = `${startWidth - diffInPx}px`
+        // @ts-ignore
         props.updateAttributes({
           width
         })

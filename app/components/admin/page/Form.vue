@@ -177,9 +177,8 @@ import { formatRelative, parseISO } from 'date-fns'
 import { fr } from 'date-fns/locale'
 import has from 'lodash/has'
 import { FormErrors } from '~/api/repository'
-import EditorBtn from '~/components/util/Editor/EditorBtn.vue'
 import Editor from '~/components/util/Editor.vue'
-import { computed, defineComponent, onMounted, Ref, ref, useContext, watch } from '@nuxtjs/composition-api'
+import { computed, defineComponent, onMounted, Ref, ref, useContext } from '@nuxtjs/composition-api'
 import { PageLog } from '~/custom-store/PageLogStore'
 import { Page } from '~/custom-store/PageStore'
 import { mediaNodeStore } from '~/custom-store/MediaNodeStore'
@@ -187,12 +186,11 @@ import { pageCategoryStore } from '~/custom-store/PageCategoryStore'
 import { pageLogStore } from '~/custom-store/PageLogStore'
 import useVuelidate from '@vuelidate/core'
 
-const slug = (value: string) => value.match(/^[a-zA-Z0-9-]*$/)
+const slug = (value: any) => !!value.match(/^[a-zA-Z0-9-]*$/)
 
 export default defineComponent({
   components: {
     Editor,
-    EditorBtn
   },
   props: {
     pageLogs: {
@@ -215,7 +213,7 @@ export default defineComponent({
     pageLogStore.setContext(context)
     const dialog = ref(false)
     const selectedLog: Ref<string | null> = ref(null)
-    const editor: Ref<Editor | null> = ref(null)
+    const editor: Ref<typeof Editor | null> = ref(null)
     const item = computed(() => props.values)
     const validation = computed(() => ({
       title: {
@@ -280,6 +278,7 @@ export default defineComponent({
       if (selectedLog.value && pageLogStore.find(selectedLog.value) && editor.value) {
         const selectedLogObj = pageLogStore.find(selectedLog.value)
         if (selectedLogObj) {
+          // @ts-ignore
           editor.value.setContent(selectedLogObj.originalContent)
         }
         dialog.value = false

@@ -19,40 +19,38 @@
 
 <script lang="ts">
 import { findIndex } from 'lodash'
-import { defineComponent, useContext } from '@nuxtjs/composition-api'
+import { defineComponent, onMounted, Ref, ref, useContext, useRoute, useRouter, watch } from '@nuxtjs/composition-api'
 import { Page, pageStore } from '~/custom-store/PageStore'
 
 export default defineComponent({
   setup () {
+    const tab = ref(null) as Ref<number | null>
+    const router = useRouter()
+    const route = useRoute()
     pageStore.setContext(useContext())
 
-    return {
-      findByActiveSlug: pageStore.findByActiveSlug
-    }
-  },
-  data () {
-    return {
-      tab: undefined
-    }
-  },
-  methods: {
-    redirect (item: Page) {
+    const redirect = (item: Page) => {
       if (item && item.url) {
-        this.$router.push(item.url)
+        router.push(item.url)
       }
     }
-  },
-  watch: {
-    tab (tabIndex: number | undefined) {
-      if (tabIndex !== undefined && this.findByActiveSlug[tabIndex]) {
-        this.redirect(this.findByActiveSlug[tabIndex])
+
+    // @ts-ignore
+    watch(tab, (tabIndex: number) => {
+      if (pageStore.findByActiveSlug.value[tabIndex]) {
+        redirect(pageStore.findByActiveSlug.value[tabIndex])
       }
+    })
+
+    onMounted(() => {
+      tab.value = findIndex(pageStore.findByActiveSlug.value, { url: route.value.params.pathMatch })
+    })
+
+    return {
+      findByActiveSlug: pageStore.findByActiveSlug,
+      tab,
+      redirect
     }
   },
-  created () {
-    if (this.$route.params.pathMatch) {
-      this.tab = findIndex(this.findByActiveSlug, { url: this.$route.params.pathMatch })
-    }
-  }
 })
 </script>

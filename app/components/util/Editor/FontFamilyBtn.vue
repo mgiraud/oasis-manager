@@ -58,12 +58,12 @@ export default defineComponent({
     const dialog = ref(false)
 
     const selectFontFamily = (font: string) => {
-      props.editor.chain().focus().setFontFamily(font).run()
+      props.editor?.chain().focus().setFontFamily(font).run()
       dialog.value = false
     }
 
     const removeFontFamily = () => {
-      props.editor.chain().focus().unsetFontFamily().run()
+      props.editor?.chain().focus().unsetFontFamily().run()
       dialog.value = false
     }
 

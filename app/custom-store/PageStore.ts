@@ -120,7 +120,8 @@ class PageStore extends PersistentApiStore<PageState, Page> {
     this.state.activeSlug = slug
   }
 
-  findByActiveSlug = computed(() => filter(this.list.value, (page: Page) => {
+  findByActiveSlug = computed(() => filter(
+    this.list.value, (page: Page) => {
       return page.category && page.category.slug === this.state.activeSlug
     })
   )

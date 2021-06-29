@@ -2,6 +2,7 @@ import { Context } from '@nuxt/types'
 import { computed, defineNuxtPlugin } from '@nuxtjs/composition-api'
 import { Cookie } from './auth/cookie'
 import Token from './auth/token'
+import { Member } from '~/custom-store/MemberStore'
 import { Repository } from '~/api/repository'
 import { securityStore, SecurityStore, LoginCredentials, SecurityState } from '~/custom-store/SecurityStore'
 
@@ -25,7 +26,7 @@ class Auth {
   ctx: Context
   store: SecurityStore
   state: SecurityState
-  memberRepository: Repository
+  memberRepository: Repository<Member>
   cookie: Cookie
 
   token: Token | null = null

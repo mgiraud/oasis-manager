@@ -34,18 +34,22 @@ export default defineComponent({
     }))
 
     const v$ = useVuelidate(validation, item)
-    const violations = computed(() => contactNewsletterStore.getState().violations)
+    const violations = computed(() => {
+      return contactNewsletterStore.getState().violations
+    })
 
     const emailErrors = computed(() => {
       const errors: string[] = []
       if (!v$.value.email || !v$.value.email.$dirty) {
         return errors
       }
-      has(violations, 'email') && errors.push(violations.email)
+      // @ts-ignore
+      has(violations.value, 'email') && errors.push(violations.value.email)
       v$.value.email.$invalid && errors.push('Cet email n\'est pas valide')
       return errors
     })
 
+    // @ts-ignore
     watch(() => contactNewsletterStore.getState().created, (created: ContactNewsletter) => {
       if (!created) {
         return
@@ -60,7 +64,9 @@ export default defineComponent({
     })
 
     const sendForm = () => {
-      if (!v$.value) return
+      if (!v$.value) {
+        return
+      }
       v$.value.$touch()
       if (!v$.value.$invalid) {
         contactNewsletterStore.create(item)

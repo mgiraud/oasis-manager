@@ -7,8 +7,10 @@
     </v-row>
     <v-row v-if="thumbnails.length + links.length === 0">
       <v-col>
-        <p>Tu peux téleverser un fichier ou utiliser le navigateur pour sélectionner les fichiers à
-          insérer</p>
+        <p>
+          Tu peux téleverser un fichier ou utiliser le navigateur pour sélectionner les fichiers à
+          insérer
+        </p>
       </v-col>
     </v-row>
     <v-row

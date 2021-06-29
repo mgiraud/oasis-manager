@@ -1,20 +1,21 @@
 import { Context } from '@nuxt/types'
 import { Inject } from '@nuxt/types/app'
+import { HydraMemberObject } from '~/api/hydra'
 import createRepository, { Repository } from '~/api/repository'
 
 declare module 'vue/types/vue' {
   interface Vue {
-      $getRepository: (name: string) => Repository
+      $getRepository: <U extends HydraMemberObject>(name: string) => Repository<U>
   }
 }
 
 declare module '@nuxt/types' {
   interface NuxtAppOptions {
-      $getRepository: (name: string) => Repository
+      $getRepository: <U extends HydraMemberObject>(name: string) => Repository<U>
   }
 
   interface Context {
-      $getRepository: (name: string) => Repository
+      $getRepository: <U extends HydraMemberObject>(name: string) => Repository<U>
   }
 }
 
@@ -24,7 +25,7 @@ const createRepositories = (context: Context) => {
     'page_categories', 'member_groups', 'contacts', 'contact_newsletters', 'survey_joins', 'media_objects',
     'media_nodes', 'page_logs'
   ]
-  const repositories: {[name: string]: Repository} = {}
+  const repositories: {[name: string]: Repository<HydraMemberObject>} = {}
   resources.forEach((resource) => {
     repositories[resource] = createRepository(context, { resource })
   })

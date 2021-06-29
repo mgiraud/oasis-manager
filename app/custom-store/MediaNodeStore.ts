@@ -1,6 +1,6 @@
 import { computed } from '@nuxtjs/composition-api'
 import { RawLocation } from 'vue-router'
-import { HydraMemberObject } from '~/api/hydra'
+import { HydraGetAllResponse, HydraMemberObject } from '~/api/hydra'
 import { CrudState, PersistentApiStore } from '~/custom-store/AbstractStore'
 import { MediaObject } from '~/custom-store/MediaObjectStore'
 
@@ -100,13 +100,13 @@ class MediaNodeStore extends PersistentApiStore<MediaNodeState, MediaNode> {
     this.toggleTreeLoading()
 
     try {
-      const retrieved = await this.context.$getRepository(this.storeName).validateAndDecodeResponse('media_nodes/tree')
+      const retrieved = await this.context.$getRepository<MediaNode>(this.storeName).validateAndDecodeResponse('media_nodes/tree') as HydraGetAllResponse<MediaNode>
 
       if (this.state.resetTree) {
         this.resetTree()
       }
 
-      (retrieved['hydra:member'] as HydraMemberObject[]).forEach((item) => {
+      retrieved['hydra:member'].forEach((item) => {
         this.addTreeItem(item)
       })
 

@@ -10,7 +10,7 @@ export interface ItemCreateOptions<U> {
 }
 
 const itemCreate = <T, U extends HydraMemberObject> (store: PersistentApiStore<T, U>, options = {
-  admin: true,
+  admin: true
 } as ItemCreateOptions<U>) => {
   const router = useRouter()
   const createForm = ref(null) as Ref<Element & Validation | null>
@@ -38,7 +38,9 @@ const itemCreate = <T, U extends HydraMemberObject> (store: PersistentApiStore<T
   })
 
   const onSendForm = () => {
-    if (!createForm.value) return
+    if (!createForm.value) {
+      return
+    }
     createForm.value.v$.$touch()
     if (!createForm.value.v$.$invalid) {
       if (options.dataCallback) {
@@ -51,7 +53,9 @@ const itemCreate = <T, U extends HydraMemberObject> (store: PersistentApiStore<T
   }
 
   const resetForm = (item: Ref<Object>) => {
-    if (!createForm.value) return
+    if (!createForm.value) {
+      return
+    }
     createForm.value.v$.$reset()
     item.value = {}
   }

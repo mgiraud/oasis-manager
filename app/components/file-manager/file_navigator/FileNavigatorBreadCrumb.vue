@@ -32,6 +32,7 @@ export default defineComponent({
   },
   setup (props) {
     const handleCrumbClick = (crumb: breadcrumbItem) => {
+      // @ts-ignore
       props.mediaNodeClickHandler(crumb['@id'])
     }
 

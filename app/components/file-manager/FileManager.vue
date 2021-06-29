@@ -81,7 +81,7 @@ export default defineComponent({
     const links = ref([]) as Ref<Link[]>
     const thumbnails = ref([]) as Ref<Thumbnail[]>
     const currentMediaNode = ref(null) as Ref<MediaNode | null>
-    const fileNavigator = ref(null) as Ref<FileNavigator | null>
+    const fileNavigator = ref(null) as Ref<typeof FileNavigator | null>
     const context = useContext()
     provide('closeDetailPanel', () => {
       detailsPanel.value = false
@@ -141,7 +141,7 @@ export default defineComponent({
         const formData = new FormData()
         formData.append('file', file)
         formData.append('mediaNodeId', currentMediaNode.value.id.toString())
-        context.$getRepository('media_objects').$post('/api/media_objects', {
+        context.$getRepository<MediaObject>('media_objects').$post('/api/media_objects', {
           method: 'POST',
           body: formData
         }).then((res: MediaObject) => {
@@ -150,6 +150,7 @@ export default defineComponent({
           } else {
             selectLink(res)
           }
+          // @ts-ignore
           fileNavigator.value?.refresh()
         })
       }

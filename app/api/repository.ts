@@ -7,15 +7,15 @@ export type FormOptions = RequestInit & {
   params?: {[propertyPath: string]: string}
 }
 
-export interface Repository {
+export interface Repository<U extends HydraMemberObject> {
   call: (query: string, options: FormOptions) => Promise<Response>
   validateAndDecodeResponse : (url: string, options?: object) => Promise<any>
-  $findAll: (params: object) => Promise<HydraGetAllResponse>
-  $find: (id: string) => Promise<any>
-  $create: (payload: object) => Promise<HydraMemberObject>
-  $remove: (item: HydraMemberObject) => Promise<any>
-  $update: (item: HydraMemberObject) => Promise<any>
-  $post: (url: string, options: FormOptions) => Promise<any>
+  $findAll: (params: object) => Promise<HydraGetAllResponse<U>>
+  $find: (id: string) => Promise<U>
+  $create: (payload: object) => Promise<U>
+  $remove: (item: U) => Promise<any>
+  $update: (item: U) => Promise<U>
+  $post: (url: string, options: FormOptions) => Promise<U>
 }
 
 export interface FormViolation {
@@ -31,7 +31,7 @@ export interface FormErrors {
 const makeParamArray = (key: string, arr: string[]) =>
   arr.map(val => `${key}[]=${val}`).join('&')
 
-export default (context: Context, { resource }: { resource: string }): Repository => ({
+export default (context: Context, { resource }: { resource: string }): Repository<any> => ({
   async call (query, options = {}) {
     const jsonLdMimeType = 'application/ld+json'
     options.headers = options.headers as Record<string, string>

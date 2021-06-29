@@ -36,13 +36,13 @@ import ImagePreview from '~/components/util/ImagePreview.vue'
 import { formatDate } from '~/composable/helpers/formatDate'
 
 export default defineComponent({
+  components: { ImagePreview },
   props: {
     article: {
       type: Object as () => BlogArticle,
       required: true
     }
   },
-  components: { ImagePreview },
   setup () {
     return {
       formatDate

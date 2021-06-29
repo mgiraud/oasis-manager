@@ -279,7 +279,7 @@ export default defineComponent({
     }
 
     watch(value, (newValue) => {
-      const isSame = editor.value?.getHTML() === value
+      const isSame = editor.value?.getHTML() === newValue
 
       if (isSame) {
         return

@@ -56,13 +56,13 @@ import useVuelidate from '@vuelidate/core'
 import { minLength } from '@vuelidate/validators'
 import has from 'lodash/has'
 import { FormErrors } from '~/api/repository'
-import { Member } from '~/custom-store/MemberStore'
+import { MediaObject } from '~/custom-store/MediaObjectStore'
 import { securityStore } from '~/custom-store/SecurityStore'
 
 export default defineComponent({
   props: {
     values: {
-      type: Object as () => Member,
+      type: Object as () => MediaObject,
       required: true
     },
     errors: {

@@ -68,7 +68,7 @@ const itemList = <T, U extends HydraMemberObject> (store: PersistentApiStore<T, 
 
   const resetFilter = () => {
     for (const prop of Object.getOwnPropertyNames(filters)) {
-      filters[prop] = null;
+      filters[prop] = null
     }
     onSendFilter()
   }

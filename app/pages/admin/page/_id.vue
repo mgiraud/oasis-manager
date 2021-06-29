@@ -47,7 +47,7 @@ import Form from '~/components/admin/page/Form.vue'
 import itemSecurity from '~/composable/itemSecurity'
 import itemUpdate from '~/composable/itemUpdate'
 import { notificationStore } from '~/custom-store/NotificationStore'
-import { pageStore } from '~/custom-store/PageStore'
+import { Page, pageStore } from '~/custom-store/PageStore'
 import { pageLogStore } from '~/custom-store/PageLogStore'
 
 export default defineComponent({
@@ -67,7 +67,7 @@ export default defineComponent({
 
     let autoSaveInterval: number | null = null
 
-    watch(() => pageStore.getState().updated, (val: U | null) => {
+    watch(() => pageStore.getState().updated, (val: Page | null) => {
       if (val) {
         notificationStore.showMessage(pageStore.getUpdateMessage(val))
       }

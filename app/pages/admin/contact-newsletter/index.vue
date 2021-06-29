@@ -48,7 +48,6 @@
 
 <script lang="ts">
 import { defineComponent, toRefs, useContext } from '@nuxtjs/composition-api'
-import ActionCell from '~/components/table/ActionCell.vue'
 import ContactNewsletterFilter from '~/components/admin/contact-newsletter/ContactNewsletterFilter.vue'
 import FormFilter from '~/components/form/FormFilter.vue'
 import itemList from '~/composable/ItemList'
@@ -63,7 +62,7 @@ const headers = [
 
 export default defineComponent({
   components: {
-    ActionCell, ContactNewsletterFilter, FormFilter
+    ContactNewsletterFilter, FormFilter
   },
   layout: 'admin',
   middleware: 'hasPermissions',

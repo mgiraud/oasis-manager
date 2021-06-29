@@ -18,10 +18,10 @@
 </template>
 
 <script lang="ts">
+import { defineComponent, useContext, computed, useRoute } from '@nuxtjs/composition-api'
 import PageModel from '~/components/page/PageModel.vue'
 import Error404 from '~/components/error/404.vue'
-import { defineComponent, useContext, computed, useRoute } from '@nuxtjs/composition-api'
-import { pageStore } from '~/custom-store/PageStore'
+import { Page, pageStore } from '~/custom-store/PageStore'
 
 export default defineComponent({
   components: {
@@ -45,8 +45,9 @@ export default defineComponent({
     }
   },
   head () {
+    const page = this.page as Page
     return {
-      title: this.page ? this.page.title : 'Le vide intersidéral'
+      title: page ? page.title : 'Le vide intersidéral'
     }
   }
 })

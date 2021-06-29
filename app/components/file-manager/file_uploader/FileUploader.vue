@@ -33,12 +33,13 @@ export default defineComponent({
     const fileSelection = ref(null) as Ref<HTMLInputElement | null>
 
     const openFileSelection = () => {
-      fileSelection.value.click()
+      fileSelection.value?.click()
     }
 
     const onFileChange = () => {
-      const files = fileSelection.value.files
+      const files = fileSelection.value?.files
       if (files) {
+        // @ts-ignore
         props.handleUpload(files)
       }
     }

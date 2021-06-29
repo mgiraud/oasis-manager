@@ -33,8 +33,8 @@ export interface HydraObject extends HydraMemberObject {
   '@context': string
 }
 
-export interface HydraGetAllResponse extends HydraObject {
-  'hydra:member': HydraMemberObject[]
+export interface HydraGetAllResponse<U> extends HydraObject {
+  'hydra:member': U[]
   'hydra:totalItems': number
   'hydra:search': HydraSearch
   'hydra:view': HydraView

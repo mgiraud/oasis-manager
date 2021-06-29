@@ -203,8 +203,9 @@
       <v-divider class="mb-5 mt-4" />
       <v-row>
         <v-col cols="12">
-          <h2>Quelle est ma raison d'être ? Quelles sont mes motivations pour rejoindre ce projet
-            ?</h2>
+          <h2>
+            Quelle est ma raison d'être ? Quelles sont mes motivations pour rejoindre ce projet ?
+          </h2>
         </v-col>
       </v-row>
       <v-row>
@@ -501,16 +502,16 @@ export default defineComponent({
 
     const increment = (index: number) => {
       if (item.value.family[index].age === null) {
-        item.value.family[index].age = 0
+        item.value.family[index].age = (0).toString()
       }
-      item.value.family[index].age = parseInt(item.value.family[index].age, 10) + 1
+      item.value.family[index].age = (parseInt(item.value.family[index].age, 10) + 1).toString()
     }
 
     const decrement = (index: number) => {
       if (item.value.family[index].age === null) {
-        item.value.family[index].age = 0
+        item.value.family[index].age = (0).toString()
       }
-      item.value.family[index].age = parseInt(item.value.family[index].age, 10) - 1
+      item.value.family[index].age = (parseInt(item.value.family[index].age, 10) - 1).toString()
     }
 
     return {

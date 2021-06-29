@@ -133,6 +133,7 @@ export default defineComponent({
         name: newFolderName.value,
         parent: props.mediaNode['@id']
       })
+      // @ts-ignore
       await props.refresh()
     }
 

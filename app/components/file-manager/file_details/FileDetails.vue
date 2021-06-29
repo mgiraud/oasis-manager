@@ -42,11 +42,10 @@
 <script lang="ts">
 import { computed, defineComponent, inject, Ref, ref, useContext, useFetch, watch } from '@nuxtjs/composition-api'
 import { Validation } from '@vuelidate/core'
-import { mediaNodeStore } from '~/custom-store/MediaNodeStore'
-import { mediaObjectStore } from '~/custom-store/MediaObjectStore'
-import { notificationStore } from '~/custom-store/NotificationStore'
 import FileDetailsForm from './FileDetailsForm.vue'
-import { MediaObject } from '~/custom-store/media_object'
+import { mediaNodeStore } from '~/custom-store/MediaNodeStore'
+import { mediaObjectStore, MediaObject } from '~/custom-store/MediaObjectStore'
+import { notificationStore } from '~/custom-store/NotificationStore'
 import Toolbar from '~/components/form/Toolbar.vue'
 
 export default defineComponent({
@@ -65,7 +64,7 @@ export default defineComponent({
     mediaNodeStore.setContext(context)
     mediaObjectStore.setContext(context)
     const closeDetailPanel = inject('closeDetailPanel')
-    const item = computed(() => props.mediaObject) as MediaObject
+    const item = computed(() => props.mediaObject)
     const updateForm = ref(null) as Ref<Element & Validation | null>
 
     useFetch(async () => {

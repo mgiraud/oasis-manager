@@ -74,12 +74,12 @@
 
 <script lang="ts">
 import { defineComponent, useContext, inject, useFetch, nextTick, ref, Ref } from '@nuxtjs/composition-api'
-import { mediaNodeStore, MediaNode } from '~/custom-store/MediaNodeStore'
-import { mediaObjectStore } from '~/custom-store/MediaObjectStore'
 import FileNavigatorBreadCrumb from './FileNavigatorBreadCrumb.vue'
 import FileNavigatorFolders from './FileNavigatorFolders.vue'
 import FileNavigatorFiles from './FileNavigatorFiles.vue'
 import FileNavigatorContextMenu from './FileNavigatorContextMenu.vue'
+import { mediaNodeStore, MediaNode } from '~/custom-store/MediaNodeStore'
+import { mediaObjectStore } from '~/custom-store/MediaObjectStore'
 
 export default defineComponent({
   components: {
@@ -112,7 +112,7 @@ export default defineComponent({
     mediaObjectStore.setContext(context)
 
     const closeDetailPanel = inject<() => {}>('closeDetailPanel')
-    const fileNavigatorContextMenu = ref(null) as Ref<null | FileNavigatorContextMenu>
+    const fileNavigatorContextMenu = ref(null) as Ref<null | typeof FileNavigatorContextMenu>
 
     useFetch(() => {
       mediaNodeStore.fetchAll({
@@ -149,7 +149,8 @@ export default defineComponent({
     }
 
     const onRightClick = (e: MouseEvent) => {
-      fileNavigatorContextMenu.value && fileNavigatorContextMenu.value.showMenu(e)
+      // @ts-ignore
+      fileNavigatorContextMenu.value?.showMenu(e)
     }
 
     return {

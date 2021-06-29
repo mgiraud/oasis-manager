@@ -36,7 +36,6 @@ class BlogArticleStore extends PersistentApiStore<BlogArticleState, BlogArticle>
   deleteRole = 'USER_CAN_DELETE_BLOG_ARTICLES'
   editRole = 'USER_CAN_EDIT_BLOG_ARTICLES'
   listRole = 'USER_CAN_VIEW_BLOG_ARTICLES'
-
 }
 
 export const blogArticleStore = new BlogArticleStore('blog_articles')

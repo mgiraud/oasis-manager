@@ -129,7 +129,7 @@ export default defineComponent({
         return errors
       }
       has(violations.value, 'content') && errors.push(violations.value.content)
-      v$.value.content.slug.$invalid && errors.push('Le contenu doit faire au moins 2 caractères')
+      v$.value.content.minLength.$invalid && errors.push('Le contenu doit faire au moins 2 caractères')
       return errors
     })
 

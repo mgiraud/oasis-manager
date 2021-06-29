@@ -66,7 +66,6 @@
 
 <script lang="ts">
 import { defineComponent, ref } from '@nuxtjs/composition-api'
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import ConfirmDelete from '~/components/util/ConfirmDelete.vue'
 
 export default defineComponent({
@@ -112,30 +111,35 @@ export default defineComponent({
 
     const goBack = () => {
       if (props.handleBack) {
+        // @ts-ignore
         props.handleBack()
       }
     }
 
     const addItem = () => {
       if (props.handleAdd) {
+        // @ts-ignore
         props.handleAdd()
       }
     }
 
     const editItem = () => {
       if (props.handleEdit) {
+        // @ts-ignore
         props.handleEdit()
       }
     }
 
     const submitItem = () => {
       if (props.handleSubmit) {
+        // @ts-ignore
         props.handleSubmit()
       }
     }
 
     const resetItem = () => {
       if (props.handleReset) {
+        // @ts-ignore
         props.handleReset()
       }
     }

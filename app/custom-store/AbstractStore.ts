@@ -100,6 +100,7 @@ export abstract class PersistentApiStore<T, U extends HydraMemberObject> extends
     return this
   }
 
+  // @ts-ignore
   protected data (): CrudState<U> {
     return {
       allIds: [],
@@ -162,7 +163,7 @@ export abstract class PersistentApiStore<T, U extends HydraMemberObject> extends
   async fetchAll (params: HydraGetRequestFilter | Object = {}) {
     this.toggleLoading()
     try {
-      const retrieved = await this.context.$getRepository(this.storeName).$findAll({ params })
+      const retrieved = await this.context.$getRepository<U>(this.storeName).$findAll({ params })
       if (this.state.resetList) {
         this.resetList()
       }
@@ -180,7 +181,7 @@ export abstract class PersistentApiStore<T, U extends HydraMemberObject> extends
   }
 
   async create (values: Object) {
-    if (!this.context.$getRepository(this.storeName)) {
+    if (!this.context.$getRepository<U>(this.storeName)) {
       throw new Error(`Repository ${this.storeName} does not exist`)
     }
 
@@ -189,7 +190,7 @@ export abstract class PersistentApiStore<T, U extends HydraMemberObject> extends
     this.toggleLoading()
 
     try {
-      const item = await this.context.$getRepository(this.storeName).$create(values)
+      const item = await this.context.$getRepository<U>(this.storeName).$create(values)
       this.toggleLoading()
       this.addItem(item)
       this.state.created = item
@@ -200,14 +201,14 @@ export abstract class PersistentApiStore<T, U extends HydraMemberObject> extends
   }
 
   async del (item: U) {
-    if (!this.context.$getRepository(this.storeName)) {
+    if (!this.context.$getRepository<U>(this.storeName)) {
       throw new Error(`Repository ${this.storeName} does not exist`)
     }
 
     this.toggleLoading()
 
     try {
-      await this.context.$getRepository(this.storeName).$remove(item)
+      await this.context.$getRepository<U>(this.storeName).$remove(item)
       this.toggleLoading()
       this.state.deleted = item
     } catch (e) {
@@ -216,13 +217,13 @@ export abstract class PersistentApiStore<T, U extends HydraMemberObject> extends
   }
 
   async fetchSelectItems ({ params = { properties: ['@id', 'name'] } } = {}) {
-    if (!this.context.$getRepository(this.storeName)) {
+    if (!this.context.$getRepository<U>(this.storeName)) {
       throw new Error(`Repository ${this.storeName} does not exist`)
     }
     this.toggleLoading()
 
     try {
-      const retrieved = await this.context.$getRepository(this.storeName).$findAll({ params })
+      const retrieved = await this.context.$getRepository<U>(this.storeName).$findAll({ params })
       this.setSelectItems(retrieved['hydra:member'])
       return retrieved['hydra:member']
     } catch (e) {
@@ -231,13 +232,13 @@ export abstract class PersistentApiStore<T, U extends HydraMemberObject> extends
   }
 
   async load (id: string): Promise<U | undefined> {
-    if (!this.context.$getRepository(this.storeName)) {
+    if (!this.context.$getRepository<U>(this.storeName)) {
       throw new Error(`Repository ${this.storeName} does not exist`)
     }
 
     this.toggleLoading()
     try {
-      const item = await this.context.$getRepository(this.storeName).$find(id)
+      const item = await this.context.$getRepository<U>(this.storeName).$find(id)
       this.toggleLoading()
       this.addItem(item)
       return item
@@ -246,13 +247,13 @@ export abstract class PersistentApiStore<T, U extends HydraMemberObject> extends
     }
   }
 
-  async update (item: T) {
+  async update (item: U) {
     this.state.error = ''
     this.state.violations = null
     this.toggleLoading()
 
     try {
-      const data = await this.context.$getRepository(this.storeName).$update(item)
+      const data = await this.context.$getRepository<U>(this.storeName).$update(item)
       this.toggleLoading()
       this.state.updated = data
     } catch (e) {

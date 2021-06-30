@@ -16,9 +16,16 @@ export type BlogArticle = HydraMemberObject & {
 }
 
 interface BlogArticleState extends CrudState<BlogArticle> {
+  tags: string[]
 }
 
 class BlogArticleStore extends PersistentApiStore<BlogArticleState, BlogArticle> {
+  protected getAdditionalData (): Partial<BlogArticleState> {
+    return {
+      tags: []
+    }
+  }
+
   getAddLocation (): RawLocation {
     return { name: 'admin-blog-article-new' }
   }
@@ -31,6 +38,12 @@ class BlogArticleStore extends PersistentApiStore<BlogArticleState, BlogArticle>
 
   getListLocation (): RawLocation | null {
     return { name: 'admin-blog-article' }
+  }
+
+  async fetchTags () {
+    const retrieved = await this.context.$getRepository(this.storeName).validateAndDecodeResponse('/api/blog_articles/tags')
+    this.state.tags = retrieved['hydra:member']
+    return this.state.tags
   }
 
   deleteRole = 'USER_CAN_DELETE_BLOG_ARTICLES'

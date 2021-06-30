@@ -29,7 +29,6 @@ interface PageState extends CrudState<Page> {
 class PageStore extends PersistentApiStore<PageState, Page> {
   menuItems = computed(() => {
     const menu: MenuItem[] = []
-
     this.list.value.forEach((page: Page) => {
       if (!page || !page.showInMenu) {
         return

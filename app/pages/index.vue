@@ -31,7 +31,7 @@
 import {
   defineComponent,
   useFetch,
-  useContext, ref, Ref, computed
+  useContext, ref, Ref, computed, onMounted
 } from '@nuxtjs/composition-api'
 import { HydraMemberObject } from '~/api/hydra'
 import PageModel from '~/components/page/PageModel.vue'
@@ -48,11 +48,9 @@ export default defineComponent({
     const context = useContext()
     pageStore.setContext(context)
     blogArticleStore.setContext(context)
-    const articles = ref([]) as Ref<HydraMemberObject[]>
 
-    useFetch(async () => {
+    onMounted(async () => {
       await blogArticleStore.fetchAll({ 'order[createdAt]': 'desc' })
-      articles.value = blogArticleStore.list.value
     })
 
     const page = computed(() => {
@@ -60,7 +58,7 @@ export default defineComponent({
     })
 
     return {
-      articles,
+      articles: blogArticleStore.list,
       page
     }
   },

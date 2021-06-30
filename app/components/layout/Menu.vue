@@ -25,9 +25,7 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent, onMounted, Ref, ref, useContext, useRoute, useRouter, watch
-} from '@nuxtjs/composition-api'
+import { defineComponent, onMounted, Ref, ref, useContext, useFetch, useRoute, useRouter, watch } from '@nuxtjs/composition-api'
 import { findIndex } from 'lodash'
 import { Route } from 'vue-router'
 import { MenuItem, pageStore } from '~/custom-store/PageStore'

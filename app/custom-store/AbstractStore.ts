@@ -124,7 +124,7 @@ export abstract class PersistentApiStore<T, U extends HydraMemberObject> extends
     return this.state.byId[id] ?? null
   }
 
-  public list = computed(() => {
+  list = computed(() => {
     return this.state.allIds.map((id: string) => this.state.byId[id])
   })
 
@@ -178,6 +178,8 @@ export abstract class PersistentApiStore<T, U extends HydraMemberObject> extends
     } catch (e) {
       await this.handleError(e)
     }
+
+    return this.list
   }
 
   async create (values: Object) {

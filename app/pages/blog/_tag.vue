@@ -5,8 +5,8 @@
         <v-card>
           <v-container fluid>
             <v-row>
-              <v-col class="text-center">
-                <h2 class="primary--text">Articles dans la catégorie "{{ tag }}"</h2>
+              <v-col offset-lg="4" lg="4">
+                <tag-cloud />
               </v-col>
             </v-row>
             <v-row
@@ -25,12 +25,14 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref, useContext, useFetch, useRoute } from '@nuxtjs/composition-api'
+import { computed, defineComponent, onMounted, useContext, useFetch, useRoute } from '@nuxtjs/composition-api'
 import BlogArticleTemplate from '~/components/blog-article/BlogArticleTemplate.vue'
+import TagCloud from '~/components/blog-article/TagCloud.vue'
 import { BlogArticle, blogArticleStore } from '~/custom-store/BlogArticleStore'
 
 export default defineComponent({
   components: {
+    TagCloud,
     BlogArticleTemplate
   },
   setup () {
@@ -45,7 +47,7 @@ export default defineComponent({
       return blogArticleStore.list.value.filter((article: BlogArticle) => article.tags.includes(tag.value))
     })
 
-    onMounted(async () => {
+    useFetch(async () => {
       await blogArticleStore.fetchAll({ 'order[createdAt]': 'desc' })
     })
 

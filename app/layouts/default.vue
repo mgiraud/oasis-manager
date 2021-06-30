@@ -176,7 +176,7 @@
 
 <script lang="ts">
 import {
-  defineComponent, useContext, onMounted
+  defineComponent, useContext, onMounted, useFetch
 } from '@nuxtjs/composition-api'
 import Menu from '~/components/layout/Menu.vue'
 import SubMenu from '~/components/layout/SubMenu.vue'
@@ -196,15 +196,9 @@ export default defineComponent({
     pageStore.setContext(context)
     securityStore.setContext(context)
 
-    onMounted(async () => {
-      try {
-        await pageStore.fetchAll()
-      } catch (e) {
-        context.$auth.reset()
-      }
-    })
-
     usePermissions()
+
+    pageStore.fetchAll()
 
     return {
       pageState: pageStore.getState(),

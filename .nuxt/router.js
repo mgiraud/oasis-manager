@@ -27,11 +27,13 @@ const _11fb3786 = () => interopDefault(import('../app/pages/admin/page-category/
 const _23c33494 = () => interopDefault(import('../app/pages/admin/page/_id.vue' /* webpackChunkName: "pages/admin/page/_id" */))
 const _bc0d2804 = () => interopDefault(import('../app/pages/admin/survey-join/_id.vue' /* webpackChunkName: "pages/admin/survey-join/_id" */))
 const _8a46f616 = () => interopDefault(import('../app/pages/admin/_.vue' /* webpackChunkName: "pages/admin/_" */))
+const _1ae55b3f = () => interopDefault(import('../app/pages/blog/index.vue' /* webpackChunkName: "pages/blog/index" */))
 const _4667f21d = () => interopDefault(import('../app/pages/cahier-des-charges.vue' /* webpackChunkName: "pages/cahier-des-charges" */))
 const _18f20ef6 = () => interopDefault(import('../app/pages/contact.vue' /* webpackChunkName: "pages/contact" */))
 const _6fcdf582 = () => interopDefault(import('../app/pages/login.vue' /* webpackChunkName: "pages/login" */))
 const _0d1dbb6a = () => interopDefault(import('../app/pages/mentions_legales.vue' /* webpackChunkName: "pages/mentions_legales" */))
 const _600bd976 = () => interopDefault(import('../app/pages/survey_join.vue' /* webpackChunkName: "pages/survey_join" */))
+const _e524d704 = () => interopDefault(import('../app/pages/blog/_tag.vue' /* webpackChunkName: "pages/blog/_tag" */))
 const _031d3bb0 = () => interopDefault(import('../app/pages/index.vue' /* webpackChunkName: "pages/index" */))
 const _3d173a35 = () => interopDefault(import('../app/pages/_.vue' /* webpackChunkName: "pages/_" */))
 
@@ -140,6 +142,10 @@ export const routerOptions = {
       name: "admin-all"
     }]
   }, {
+    path: "/blog",
+    component: _1ae55b3f,
+    name: "blog"
+  }, {
     path: "/cahier-des-charges",
     component: _4667f21d,
     name: "cahier-des-charges"
@@ -159,6 +165,10 @@ export const routerOptions = {
     path: "/survey_join",
     component: _600bd976,
     name: "survey_join"
+  }, {
+    path: "/blog/:tag",
+    component: _e524d704,
+    name: "blog-tag"
   }, {
     path: "/",
     component: _031d3bb0,

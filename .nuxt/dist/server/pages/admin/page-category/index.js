@@ -3816,7 +3816,7 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_10__[/* default 
 
 "use strict";
 /* harmony import */ var _nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
-/* harmony import */ var lodash_isEmpty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(206);
+/* harmony import */ var lodash_isEmpty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(208);
 /* harmony import */ var lodash_isEmpty__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_isEmpty__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _custom_store_NotificationStore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(37);
 
@@ -4258,7 +4258,7 @@ installComponents_default()(component, {VBtn: VBtn["a" /* default */],VIcon: VIc
 
 /***/ }),
 
-/***/ 296:
+/***/ 297:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4301,13 +4301,13 @@ const pageCategoryStore = new PageCategoryStore('page_categories');
 
 /***/ }),
 
-/***/ 305:
+/***/ 308:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(306);
+var content = __webpack_require__(309);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -4315,7 +4315,7 @@ __webpack_require__(7).default("12a190a6", content, true)
 
 /***/ }),
 
-/***/ 306:
+/***/ 309:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -4329,7 +4329,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 307:
+/***/ 311:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4355,7 +4355,7 @@ const filterComponent = {
 
 /***/ }),
 
-/***/ 328:
+/***/ 334:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6515,11 +6515,11 @@ function searchTableItems(items, search, headersWithCustomFilters, headersWithou
 
 /***/ }),
 
-/***/ 350:
+/***/ 354:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _src_components_VCheckbox_VCheckbox_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(305);
+/* harmony import */ var _src_components_VCheckbox_VCheckbox_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(308);
 /* harmony import */ var _src_components_VCheckbox_VCheckbox_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VCheckbox_VCheckbox_sass__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(267);
 /* harmony import */ var _src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_src_styles_components_selection_controls_sass__WEBPACK_IMPORTED_MODULE_1__);
@@ -6631,7 +6631,7 @@ function searchTableItems(items, search, headersWithCustomFilters, headersWithou
 
 /***/ }),
 
-/***/ 397:
+/***/ 398:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6657,7 +6657,7 @@ var ItemList = __webpack_require__(276);
 var itemSecurity = __webpack_require__(270);
 
 // EXTERNAL MODULE: ./app/custom-store/PageCategoryStore.ts
-var PageCategoryStore = __webpack_require__(296);
+var PageCategoryStore = __webpack_require__(297);
 
 // EXTERNAL MODULE: ./app/components/table/ActionCell.vue + 4 modules
 var ActionCell = __webpack_require__(293);
@@ -6670,7 +6670,7 @@ var PageCategoryFiltervue_type_template_id_8f3b6a54_staticRenderFns = []
 // CONCATENATED MODULE: ./app/components/admin/page-category/PageCategoryFilter.vue?vue&type=template&id=8f3b6a54&
 
 // EXTERNAL MODULE: ./app/composable/filter/filterComponent.ts
-var filterComponent = __webpack_require__(307);
+var filterComponent = __webpack_require__(311);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--12-0!./node_modules/ts-loader??ref--12-1!./node_modules/vue-loader/lib??vue-loader-options!./app/components/admin/page-category/PageCategoryFilter.vue?vue&type=script&lang=ts&
 
@@ -6686,7 +6686,7 @@ var installComponents = __webpack_require__(14);
 var installComponents_default = /*#__PURE__*/__webpack_require__.n(installComponents);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VCheckbox/VCheckbox.js
-var VCheckbox = __webpack_require__(350);
+var VCheckbox = __webpack_require__(354);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VCol.js
 var VCol = __webpack_require__(231);
@@ -6782,7 +6782,7 @@ const headers = [{
 var VBtn = __webpack_require__(46);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDataTable/VDataTable.js + 13 modules
-var VDataTable = __webpack_require__(328);
+var VDataTable = __webpack_require__(334);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VSpacer.js
 var VSpacer = __webpack_require__(233);

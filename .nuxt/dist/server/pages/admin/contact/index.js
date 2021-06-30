@@ -3572,7 +3572,7 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_10__[/* default 
 
 "use strict";
 /* harmony import */ var _nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
-/* harmony import */ var lodash_isEmpty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(206);
+/* harmony import */ var lodash_isEmpty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(208);
 /* harmony import */ var lodash_isEmpty__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_isEmpty__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _custom_store_NotificationStore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(37);
 
@@ -4014,7 +4014,7 @@ installComponents_default()(component, {VBtn: VBtn["a" /* default */],VIcon: VIc
 
 /***/ }),
 
-/***/ 307:
+/***/ 311:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4040,7 +4040,7 @@ const filterComponent = {
 
 /***/ }),
 
-/***/ 328:
+/***/ 334:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6200,7 +6200,7 @@ function searchTableItems(items, search, headersWithCustomFilters, headersWithou
 
 /***/ }),
 
-/***/ 337:
+/***/ 340:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6245,7 +6245,7 @@ const contactStore = new ContactStore('contacts');
 
 /***/ }),
 
-/***/ 392:
+/***/ 393:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6265,10 +6265,10 @@ var staticRenderFns = []
 var runtime = __webpack_require__(3);
 
 // EXTERNAL MODULE: external "date-fns"
-var external_date_fns_ = __webpack_require__(208);
+var external_date_fns_ = __webpack_require__(206);
 
 // EXTERNAL MODULE: external "date-fns/locale"
-var locale_ = __webpack_require__(209);
+var locale_ = __webpack_require__(207);
 
 // EXTERNAL MODULE: ./app/components/table/ActionCell.vue + 4 modules
 var ActionCell = __webpack_require__(293);
@@ -6281,7 +6281,7 @@ var ContactFiltervue_type_template_id_6d4c7371_staticRenderFns = []
 // CONCATENATED MODULE: ./app/components/admin/contact/ContactFilter.vue?vue&type=template&id=6d4c7371&
 
 // EXTERNAL MODULE: ./app/composable/filter/filterComponent.ts
-var filterComponent = __webpack_require__(307);
+var filterComponent = __webpack_require__(311);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--12-0!./node_modules/ts-loader??ref--12-1!./node_modules/vue-loader/lib??vue-loader-options!./app/components/admin/contact/ContactFilter.vue?vue&type=script&lang=ts&
 
@@ -6347,7 +6347,7 @@ var ItemList = __webpack_require__(276);
 var itemSecurity = __webpack_require__(270);
 
 // EXTERNAL MODULE: ./app/custom-store/ContactStore.ts
-var ContactStore = __webpack_require__(337);
+var ContactStore = __webpack_require__(340);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--12-0!./node_modules/ts-loader??ref--12-1!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/admin/contact/index.vue?vue&type=script&lang=ts&
 
@@ -6412,7 +6412,7 @@ const headers = [{
 // CONCATENATED MODULE: ./app/pages/admin/contact/index.vue?vue&type=script&lang=ts&
  /* harmony default export */ var admin_contactvue_type_script_lang_ts_ = (contactvue_type_script_lang_ts_); 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VDataTable/VDataTable.js + 13 modules
-var VDataTable = __webpack_require__(328);
+var VDataTable = __webpack_require__(334);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VSpacer.js
 var VSpacer = __webpack_require__(233);

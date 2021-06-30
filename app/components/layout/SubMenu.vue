@@ -31,7 +31,7 @@ export default defineComponent({
 
     const redirect = (item: Page) => {
       if (item && item.url) {
-        router.push(item.url)
+        router.push('/' + item.url)
       }
     }
 

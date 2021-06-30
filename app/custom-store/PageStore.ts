@@ -29,6 +29,7 @@ interface PageState extends CrudState<Page> {
 class PageStore extends PersistentApiStore<PageState, Page> {
   menuItems = computed(() => {
     const menu: MenuItem[] = []
+
     this.list.value.forEach((page: Page) => {
       if (!page || !page.showInMenu) {
         return
@@ -53,12 +54,14 @@ class PageStore extends PersistentApiStore<PageState, Page> {
       }
     })
 
+    this.prependStaticPages(menu)
     this.appendStaticPages(menu)
     return menu
   })
 
   menu = computed(() => {
     const menu: MenuItem[] = []
+
     this.list.value.forEach((page: Page) => {
       if (!page || !page.showInMenu) {
         return
@@ -95,9 +98,21 @@ class PageStore extends PersistentApiStore<PageState, Page> {
       }
     })
 
+    this.prependStaticPages(menu)
     this.appendStaticPages(menu)
     return menu
   })
+
+  prependStaticPages (menu: MenuItem[]) {
+    if (menu.length === 0) {
+      return
+    }
+    menu.unshift({
+      name: 'Blog',
+      url: 'blog',
+      slug: null
+    })
+  }
 
   appendStaticPages (menu: MenuItem[]) {
     if (menu.length === 0) {

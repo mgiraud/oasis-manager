@@ -41,7 +41,7 @@ export default defineComponent({
 
     const redirectOrToggleSubMenu = (item: MenuItem) => {
       if (item.url) {
-        router.push(item.url)
+        router.push('/' + item.url)
         pageStore.setActiveSlug(null)
       } else if (pageStore.getState().activeSlug !== item.slug) {
         pageStore.setActiveSlug(item.slug)

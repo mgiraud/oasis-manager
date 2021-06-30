@@ -31,12 +31,12 @@
 import {
   defineComponent,
   useFetch,
-  useContext, ref, Ref, watch, computed
+  useContext, ref, Ref, computed
 } from '@nuxtjs/composition-api'
 import { HydraMemberObject } from '~/api/hydra'
 import PageModel from '~/components/page/PageModel.vue'
 import BlogArticleTemplate from '~/components/blog-article/BlogArticleTemplate.vue'
-import { Page, pageStore } from '~/custom-store/PageStore'
+import { pageStore } from '~/custom-store/PageStore'
 import { blogArticleStore } from '~/custom-store/BlogArticleStore'
 
 export default defineComponent({

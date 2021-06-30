@@ -163,6 +163,13 @@
     "_name": "_2fe0b625"
   },
   {
+    "name": "blog",
+    "path": "/blog",
+    "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/blog/index.vue",
+    "chunkName": "pages/blog/index",
+    "_name": "_1ae55b3f"
+  },
+  {
     "name": "cahier-des-charges",
     "path": "/cahier-des-charges",
     "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/cahier-des-charges.vue",
@@ -196,6 +203,13 @@
     "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/survey_join.vue",
     "chunkName": "pages/survey_join",
     "_name": "_600bd976"
+  },
+  {
+    "name": "blog-tag",
+    "path": "/blog/:tag",
+    "component": "/Users/m.giraudtelme/Code/oasis-manager/app/pages/blog/_tag.vue",
+    "chunkName": "pages/blog/_tag",
+    "_name": "_e524d704"
   },
   {
     "name": "index",

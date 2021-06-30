@@ -38,7 +38,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     }
  * )
  * @ORM\Entity(repositoryClass=BlogArticleRepository::class)
- * @ApiFilter(SearchFilter::class, properties={"title": "partial", "createdBy.nickname": "exact", "isPublished": "exact", "tags": "exact"})
+ * @ApiFilter(SearchFilter::class, properties={"title": "partial", "createdBy.nickname": "exact", "isPublished": "exact"})
  * @ApiFilter(DateFilter::class, properties={"createdAt": DateFilter::EXCLUDE_NULL})
  * @ApiFilter(OrderFilter::class, properties={"createdAt"})
  */

@@ -18,7 +18,7 @@
           v-for="(tag, i) in article.tags"
           :key="i"
         >
-          {{ tag.toUpperCase() }}
+          <nuxt-link :to="{name: 'blog-tag', params: {tag}}">{{ tag.toUpperCase() }}</nuxt-link>
           <span v-if="i < article.tags.length - 1"> / </span>
         </span>
         <span v-if="article.tags.length > 0"> -</span>

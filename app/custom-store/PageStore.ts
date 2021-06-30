@@ -103,7 +103,7 @@ class PageStore extends PersistentApiStore<PageState, Page> {
     return menu
   })
 
-  prependStaticPages(menu: MenuItem[]) {
+  prependStaticPages (menu: MenuItem[]) {
     if (menu.length === 0) {
       return
     }

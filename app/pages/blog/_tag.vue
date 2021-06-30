@@ -42,7 +42,7 @@ export default defineComponent({
     })
 
     const articles = computed(() => {
-      return blogArticleStore.list.value.filter((article: BlogArticle) => article.tags.indexOf(tag.value) !== -1)
+      return blogArticleStore.list.value.filter((article: BlogArticle) => article.tags.includes(tag.value))
     })
 
     onMounted(async () => {

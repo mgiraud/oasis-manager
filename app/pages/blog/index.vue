@@ -4,11 +4,6 @@
       <v-col>
         <v-card>
           <v-container fluid>
-            <v-row>
-              <v-col class="text-center">
-                <h2 class="primary--text">Blog</h2>
-              </v-col>
-            </v-row>
             <v-row
               v-for="article in articles"
               :key="article['@id']"

@@ -1,5 +1,5 @@
 import { Context } from '@nuxt/types'
-import { computed, defineNuxtPlugin } from '@nuxtjs/composition-api'
+import { computed, defineNuxtPlugin, ToRefs, toRefs } from '@nuxtjs/composition-api'
 import { Cookie } from './auth/cookie'
 import Token from './auth/token'
 import { Member } from '~/custom-store/MemberStore'
@@ -25,7 +25,7 @@ declare module '@nuxt/types' {
 class Auth {
   ctx: Context
   store: SecurityStore
-  state: SecurityState
+  state: ToRefs<SecurityState>
   memberRepository: Repository<Member>
   cookie: Cookie
 
@@ -36,7 +36,7 @@ class Auth {
     this.ctx = ctx
     this.store = securityStore
     this.store.setContext(ctx)
-    this.state = securityStore.getState()
+    this.state = toRefs(securityStore.getState())
     this.memberRepository = ctx.$getRepository('members')
     this.cookie = new Cookie(ctx)
   }
@@ -44,7 +44,7 @@ class Auth {
   loggedIn = computed(() => this.state.loggedIn)
   member = computed(() => this.state.member)
   isAdmin = computed(() => {
-    return this.state.member !== null && this.state.member.isAdmin
+    return this.state.member.value !== null && this.state.member.value.isAdmin
   })
 
   reset () {
@@ -105,15 +105,16 @@ class Auth {
   }
 }
 
-export default defineNuxtPlugin((ctx, inject) => {
+export default defineNuxtPlugin(async (ctx, inject) => {
   const $auth = new Auth(ctx)
   inject('auth', $auth)
   ctx.$auth = $auth
 
-  $auth.init()
-    .catch((error) => {
-      if (process.client) {
-        console.error('[ERROR] [AUTH]', error)
-      }
-    })
+  try {
+    await $auth.init()
+  } catch (error) {
+    if (process.client) {
+      console.error('[ERROR] [AUTH]', error)
+    }
+  }
 })

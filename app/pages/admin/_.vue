@@ -13,7 +13,6 @@ import { defineComponent } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   layout: 'admin',
-  middleware: ['isAdmin'],
   head () {
     return {
       title: 'Lost in Administration'

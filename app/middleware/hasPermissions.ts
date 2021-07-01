@@ -2,7 +2,7 @@ import { Middleware } from '@nuxt/types'
 import { securityStore } from '~/custom-store/SecurityStore'
 
 const hasPermissionMiddleWare: Middleware = ({ redirect, route, from, $auth }) => {
-  if (!$auth.loggedIn) {
+  if (!$auth.loggedIn.value) {
     return redirect({ name: 'login' })
   }
   if (!route.meta) {

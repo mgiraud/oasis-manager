@@ -1233,8 +1233,8 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_10__[/* default 
 
 
 const itemUpdate = store => {
-  const router = Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* useRouter */ "t"])();
-  const route = Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* useRoute */ "s"])();
+  const router = Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* useRouter */ "u"])();
+  const route = Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* useRoute */ "t"])();
   const item = Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* ref */ "m"])({});
   const retrieved = Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* ref */ "m"])(null);
   const updateForm = Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* ref */ "m"])(null);
@@ -1299,22 +1299,22 @@ const itemUpdate = store => {
     }
   };
 
-  Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "u"])(() => store.getState().deleted, deleted => {
+  Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "v"])(() => store.getState().deleted, deleted => {
     if (!deleted) {
       return;
     }
 
     back();
   });
-  Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "u"])(() => store.getState().error, message => {
+  Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "v"])(() => store.getState().error, message => {
     message && _custom_store_NotificationStore__WEBPACK_IMPORTED_MODULE_1__[/* notificationStore */ "a"].showError(message);
   });
-  Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "u"])(() => store.getState().updated, val => {
+  Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "v"])(() => store.getState().updated, val => {
     if (val) {
       _custom_store_NotificationStore__WEBPACK_IMPORTED_MODULE_1__[/* notificationStore */ "a"].showMessage(store.getUpdateMessage(val));
     }
   });
-  Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "u"])(() => retrieved.value, val => {
+  Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "v"])(() => retrieved.value, val => {
     if (val) {
       item.value = { ...val
       };
@@ -1475,8 +1475,8 @@ var ContactStore = __webpack_require__(342);
   },
 
   setup() {
-    ContactStore["a" /* contactStore */].setContext(Object(runtime["q" /* useContext */])());
-    return { ...Object(runtime["p" /* toRefs */])(Object(itemUpdate["a" /* default */])(ContactStore["a" /* contactStore */]))
+    ContactStore["a" /* contactStore */].setContext(Object(runtime["r" /* useContext */])());
+    return { ...Object(runtime["q" /* toRefs */])(Object(itemUpdate["a" /* default */])(ContactStore["a" /* contactStore */]))
     };
   }
 

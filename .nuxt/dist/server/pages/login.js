@@ -328,7 +328,7 @@ var SecurityStore = __webpack_require__(12);
 
 /* harmony default export */ var loginvue_type_script_lang_ts_ = (Object(runtime["b" /* defineComponent */])({
   setup() {
-    SecurityStore["a" /* securityStore */].setContext(Object(runtime["q" /* useContext */])());
+    SecurityStore["a" /* securityStore */].setContext(Object(runtime["r" /* useContext */])());
     return {
       credentialError: SecurityStore["a" /* securityStore */].getState().credentialError
     };

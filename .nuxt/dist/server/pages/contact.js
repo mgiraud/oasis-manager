@@ -1235,7 +1235,7 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_10__[/* default 
 const itemCreate = (store, options = {
   admin: true
 }) => {
-  const router = Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* useRouter */ "t"])();
+  const router = Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* useRouter */ "u"])();
   const createForm = Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* ref */ "m"])(null);
 
   const onCreated = item => {
@@ -1251,14 +1251,14 @@ const itemCreate = (store, options = {
     }
   };
 
-  Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "u"])(() => store.getState().created, created => {
+  Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "v"])(() => store.getState().created, created => {
     if (!created) {
       return;
     }
 
     onCreated(created);
   });
-  Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "u"])(() => store.getState().error, message => {
+  Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "v"])(() => store.getState().error, message => {
     message && _custom_store_NotificationStore__WEBPACK_IMPORTED_MODULE_1__[/* notificationStore */ "a"].showError(message);
   });
 
@@ -2426,7 +2426,7 @@ var PageStore = __webpack_require__(10);
   },
 
   setup() {
-    const context = Object(runtime["q" /* useContext */])();
+    const context = Object(runtime["r" /* useContext */])();
     ContactStore["a" /* contactStore */].setContext(context);
     PageStore["a" /* pageStore */].setContext(context);
     const item = Object(runtime["m" /* ref */])({
@@ -2435,7 +2435,7 @@ var PageStore = __webpack_require__(10);
     return {
       item,
       page: PageStore["a" /* pageStore */].find('/api/pages/contact'),
-      ...Object(runtime["p" /* toRefs */])(Object(ItemCreate["a" /* default */])(ContactStore["a" /* contactStore */], {
+      ...Object(runtime["q" /* toRefs */])(Object(ItemCreate["a" /* default */])(ContactStore["a" /* contactStore */], {
         admin: false
       }))
     };

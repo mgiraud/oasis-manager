@@ -764,8 +764,8 @@ var PageStore = __webpack_require__(10);
   },
 
   setup() {
-    PageStore["a" /* pageStore */].setContext(Object(runtime["q" /* useContext */])());
-    const route = Object(runtime["s" /* useRoute */])();
+    PageStore["a" /* pageStore */].setContext(Object(runtime["r" /* useContext */])());
+    const route = Object(runtime["t" /* useRoute */])();
     const url = Object(runtime["a" /* computed */])(() => {
       return route.value.params ? route.value.params.pathMatch : null;
     });

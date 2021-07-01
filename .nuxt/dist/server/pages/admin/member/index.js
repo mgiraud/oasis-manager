@@ -3590,7 +3590,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 
 const itemList = (store, additionalOptions) => {
-  const router = Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* useRouter */ "t"])();
+  const router = Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* useRouter */ "u"])();
   const selected = Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* ref */ "m"])([]);
   const options = {
     sortBy: [],
@@ -3606,13 +3606,13 @@ const itemList = (store, additionalOptions) => {
 
   const filterOptions = options;
   const filters = {};
-  Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "u"])(() => store.getState().deleted, item => {
+  Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "v"])(() => store.getState().deleted, item => {
     item && _custom_store_NotificationStore__WEBPACK_IMPORTED_MODULE_2__[/* notificationStore */ "a"].showMessage(`${item['@id']} deleted.`);
   });
-  Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "u"])(() => store.getState().error, message => {
+  Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "v"])(() => store.getState().error, message => {
     message && _custom_store_NotificationStore__WEBPACK_IMPORTED_MODULE_2__[/* notificationStore */ "a"].showError(message);
   });
-  Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "u"])(() => store.getState().totalItems, totalItems => {
+  Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "v"])(() => store.getState().totalItems, totalItems => {
     filterOptions.totalItems = totalItems;
   });
 
@@ -6962,7 +6962,7 @@ var MemberGroupStore = __webpack_require__(298);
 
   setup(props) {
     const item = Object(runtime["m" /* ref */])(props.values);
-    MemberGroupStore["a" /* memberGroupStore */].setContext(Object(runtime["q" /* useContext */])());
+    MemberGroupStore["a" /* memberGroupStore */].setContext(Object(runtime["r" /* useContext */])());
     Object(runtime["h" /* onMounted */])(() => {
       MemberGroupStore["a" /* memberGroupStore */].fetchSelectItems();
     });
@@ -7059,9 +7059,9 @@ const headers = [{
   middleware: 'hasPermissions',
 
   setup() {
-    const context = Object(runtime["q" /* useContext */])();
+    const context = Object(runtime["r" /* useContext */])();
     MemberStore["a" /* memberStore */].setContext(context);
-    Object(runtime["r" /* useFetch */])(async () => {
+    Object(runtime["s" /* useFetch */])(async () => {
       await MemberStore["a" /* memberStore */].fetchAll();
     });
     const itemListHelper = Object(ItemList["a" /* default */])(MemberStore["a" /* memberStore */]);
@@ -7072,8 +7072,8 @@ const headers = [{
 
       return itemListHelper.items.filter(item => !item.isAdmin);
     });
-    return { ...Object(runtime["p" /* toRefs */])(itemListHelper),
-      ...Object(runtime["p" /* toRefs */])(Object(itemSecurity["a" /* default */])(MemberStore["a" /* memberStore */])),
+    return { ...Object(runtime["q" /* toRefs */])(itemListHelper),
+      ...Object(runtime["q" /* toRefs */])(Object(itemSecurity["a" /* default */])(MemberStore["a" /* memberStore */])),
       headers,
       filteredItems
     };

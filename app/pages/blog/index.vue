@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, useContext } from '@nuxtjs/composition-api'
+import { defineComponent, useContext, useFetch, toRef } from '@nuxtjs/composition-api'
 import BlogArticleTemplate from '~/components/blog-article/BlogArticleTemplate.vue'
 import TagCloud from '~/components/blog-article/TagCloud.vue'
 import { blogArticleStore } from '~/custom-store/BlogArticleStore'
@@ -37,12 +37,13 @@ export default defineComponent({
   },
   setup () {
     blogArticleStore.setContext(useContext())
-    onMounted(async () => {
+
+    useFetch(async () => {
       await blogArticleStore.fetchAll({ 'order[createdAt]': 'desc' })
     })
 
     return {
-      articles: blogArticleStore.list
+      articles: toRef(blogArticleStore.getState(), 'byId')
     }
   },
   head () {

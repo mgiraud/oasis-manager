@@ -2205,7 +2205,7 @@ const mediaObjectStore = new MediaObjectStore_MediaObjectStore('media_objects');
   },
 
   setup(props) {
-    const context = Object(runtime["q" /* useContext */])();
+    const context = Object(runtime["r" /* useContext */])();
     const selectionEnabled = Object(runtime["e" /* inject */])('selectionEnabled');
     mediaObjectStore.setContext(context);
 
@@ -2220,7 +2220,7 @@ const mediaObjectStore = new MediaObjectStore_MediaObjectStore('media_objects');
     Object(runtime["h" /* onMounted */])(() => {
       loadObjects();
     });
-    Object(runtime["u" /* watch */])(() => props.mediaNode, mediaNode => {
+    Object(runtime["v" /* watch */])(() => props.mediaNode, mediaNode => {
       loadObjects();
     });
     return {
@@ -2304,7 +2304,7 @@ var MediaNodeStore = __webpack_require__(273);
   },
 
   setup(props) {
-    const context = Object(runtime["q" /* useContext */])();
+    const context = Object(runtime["r" /* useContext */])();
     const contextMenu = Object(runtime["m" /* ref */])(null);
     const dialog = Object(runtime["m" /* ref */])(false);
     const newFolderName = Object(runtime["m" /* ref */])(null);
@@ -2490,12 +2490,12 @@ installComponents_default()(FileNavigatorContextMenu_component, {VBtn: VBtn["a" 
   setup(props, {
     emit
   }) {
-    const context = Object(runtime["q" /* useContext */])();
+    const context = Object(runtime["r" /* useContext */])();
     MediaNodeStore["a" /* mediaNodeStore */].setContext(context);
     mediaObjectStore.setContext(context);
     const closeDetailPanel = Object(runtime["e" /* inject */])('closeDetailPanel');
     const fileNavigatorContextMenu = Object(runtime["m" /* ref */])(null);
-    Object(runtime["r" /* useFetch */])(() => {
+    Object(runtime["s" /* useFetch */])(() => {
       MediaNodeStore["a" /* mediaNodeStore */].fetchAll({
         'exists[parent]': 'false'
       });
@@ -3527,13 +3527,13 @@ var Toolbar = __webpack_require__(256);
   },
 
   setup(props) {
-    const context = Object(runtime["q" /* useContext */])();
+    const context = Object(runtime["r" /* useContext */])();
     MediaNodeStore["a" /* mediaNodeStore */].setContext(context);
     mediaObjectStore.setContext(context);
     const closeDetailPanel = Object(runtime["e" /* inject */])('closeDetailPanel');
     const item = Object(runtime["a" /* computed */])(() => props.mediaObject);
     const updateForm = Object(runtime["m" /* ref */])(null);
-    Object(runtime["r" /* useFetch */])(async () => {
+    Object(runtime["s" /* useFetch */])(async () => {
       if (MediaNodeStore["a" /* mediaNodeStore */].tree.value.length === 0) {
         await MediaNodeStore["a" /* mediaNodeStore */].fetchTree();
       }
@@ -3551,7 +3551,7 @@ var Toolbar = __webpack_require__(256);
       }
     };
 
-    Object(runtime["u" /* watch */])(() => mediaObjectStore.getState().updated, created => {
+    Object(runtime["v" /* watch */])(() => mediaObjectStore.getState().updated, created => {
       if (!created) {
         return;
       }
@@ -3628,7 +3628,7 @@ installComponents_default()(FileDetails_component, {VBtn: VBtn["a" /* default */
     const thumbnails = Object(runtime["m" /* ref */])([]);
     const currentMediaNode = Object(runtime["m" /* ref */])(null);
     const fileNavigator = Object(runtime["m" /* ref */])(null);
-    const context = Object(runtime["q" /* useContext */])();
+    const context = Object(runtime["r" /* useContext */])();
     Object(runtime["j" /* provide */])('closeDetailPanel', () => {
       detailsPanel.value = false;
       selectedMediaObject.value = null;

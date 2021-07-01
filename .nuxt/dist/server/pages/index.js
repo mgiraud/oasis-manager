@@ -923,7 +923,7 @@ var BlogArticleStore = __webpack_require__(291);
   },
 
   setup() {
-    const context = Object(runtime["q" /* useContext */])();
+    const context = Object(runtime["r" /* useContext */])();
     PageStore["a" /* pageStore */].setContext(context);
     BlogArticleStore["a" /* blogArticleStore */].setContext(context);
     Object(runtime["h" /* onMounted */])(async () => {

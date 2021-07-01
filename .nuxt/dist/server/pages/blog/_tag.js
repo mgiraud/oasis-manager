@@ -1028,8 +1028,8 @@ var BlogArticleStore = __webpack_require__(291);
 
 /* harmony default export */ var TagCloudvue_type_script_lang_ts_ = (Object(runtime["b" /* defineComponent */])({
   setup() {
-    BlogArticleStore["a" /* blogArticleStore */].setContext(Object(runtime["q" /* useContext */])());
-    Object(runtime["r" /* useFetch */])(async () => {
+    BlogArticleStore["a" /* blogArticleStore */].setContext(Object(runtime["r" /* useContext */])());
+    Object(runtime["s" /* useFetch */])(async () => {
       await BlogArticleStore["a" /* blogArticleStore */].fetchTags();
     });
     return {
@@ -1162,12 +1162,12 @@ installComponents_default()(component, {VChip: VChip["a" /* default */],VChipGro
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/blog/_tag.vue?vue&type=template&id=79ef570b&
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/pages/blog/_tag.vue?vue&type=template&id=887f2c08&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-container',{attrs:{"fill-height":""}},[_c('v-row',[_c('v-col',[_c('v-card',[_c('v-container',{attrs:{"fluid":""}},[_c('v-row',[_c('v-col',{attrs:{"offset-lg":"4","lg":"4"}},[_c('tag-cloud')],1)],1),_vm._v(" "),_vm._l((_vm.articles),function(article){return _c('v-row',{key:article['@id']},[_c('v-col',[_c('blog-article-template',{attrs:{"article":article}})],1)],1)})],2)],1)],1)],1)],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./app/pages/blog/_tag.vue?vue&type=template&id=79ef570b&
+// CONCATENATED MODULE: ./app/pages/blog/_tag.vue?vue&type=template&id=887f2c08&
 
 // EXTERNAL MODULE: ./node_modules/@nuxtjs/composition-api/dist/runtime/index.mjs + 1 modules
 var runtime = __webpack_require__(3);
@@ -1193,15 +1193,15 @@ var BlogArticleStore = __webpack_require__(291);
   },
 
   setup() {
-    BlogArticleStore["a" /* blogArticleStore */].setContext(Object(runtime["q" /* useContext */])());
-    const route = Object(runtime["s" /* useRoute */])();
+    BlogArticleStore["a" /* blogArticleStore */].setContext(Object(runtime["r" /* useContext */])());
+    const route = Object(runtime["t" /* useRoute */])();
     const tag = Object(runtime["a" /* computed */])(() => {
       return route.value.params.tag;
     });
     const articles = Object(runtime["a" /* computed */])(() => {
       return BlogArticleStore["a" /* blogArticleStore */].list.value.filter(article => article.tags.includes(tag.value));
     });
-    Object(runtime["r" /* useFetch */])(async () => {
+    Object(runtime["h" /* onMounted */])(async () => {
       await BlogArticleStore["a" /* blogArticleStore */].fetchAll({
         'order[createdAt]': 'desc'
       });

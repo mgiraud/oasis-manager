@@ -610,19 +610,20 @@ __webpack_require__.d(__webpack_exports__, "j", function() { return /* reexport 
 __webpack_require__.d(__webpack_exports__, "k", function() { return /* reexport */ composition_api_["reactive"]; });
 __webpack_require__.d(__webpack_exports__, "l", function() { return /* reexport */ composition_api_["readonly"]; });
 __webpack_require__.d(__webpack_exports__, "m", function() { return /* reexport */ composition_api_["ref"]; });
-__webpack_require__.d(__webpack_exports__, "p", function() { return /* reexport */ composition_api_["toRefs"]; });
-__webpack_require__.d(__webpack_exports__, "u", function() { return /* reexport */ composition_api_["watch"]; });
+__webpack_require__.d(__webpack_exports__, "p", function() { return /* reexport */ composition_api_["toRef"]; });
+__webpack_require__.d(__webpack_exports__, "q", function() { return /* reexport */ composition_api_["toRefs"]; });
+__webpack_require__.d(__webpack_exports__, "v", function() { return /* reexport */ composition_api_["watch"]; });
 __webpack_require__.d(__webpack_exports__, "b", function() { return /* binding */ defineComponent; });
 __webpack_require__.d(__webpack_exports__, "c", function() { return /* binding */ defineNuxtPlugin; });
 __webpack_require__.d(__webpack_exports__, "d", function() { return /* binding */ globalPlugin; });
 __webpack_require__.d(__webpack_exports__, "n", function() { return /* binding */ setMetaPlugin; });
 __webpack_require__.d(__webpack_exports__, "o", function() { return /* binding */ ssrRef; });
-__webpack_require__.d(__webpack_exports__, "q", function() { return /* binding */ useContext; });
-__webpack_require__.d(__webpack_exports__, "r", function() { return /* binding */ useFetch; });
-__webpack_require__.d(__webpack_exports__, "s", function() { return /* binding */ useRoute; });
-__webpack_require__.d(__webpack_exports__, "t", function() { return /* binding */ useRouter; });
+__webpack_require__.d(__webpack_exports__, "r", function() { return /* binding */ useContext; });
+__webpack_require__.d(__webpack_exports__, "s", function() { return /* binding */ useFetch; });
+__webpack_require__.d(__webpack_exports__, "t", function() { return /* binding */ useRoute; });
+__webpack_require__.d(__webpack_exports__, "u", function() { return /* binding */ useRouter; });
 
-// UNUSED EXPORTS: createApp, createRef, customRef, defineAsyncComponent, del, getCurrentInstance, h, isRaw, isReactive, isReadonly, isRef, markRaw, onActivated, onBeforeMount, onBeforeUpdate, onDeactivated, onErrorCaptured, onUnmounted, onUpdated, proxyRefs, set, shallowReactive, shallowReadonly, shallowRef, toRaw, toRef, triggerRef, unref, useCSSModule, useCssModule, version, warn, watchEffect, defineNuxtMiddleware, onGlobalSetup, reqRef, reqSsrRef, setSSRContext, shallowSsrRef, ssrPromise, useAsync, useMeta, useStatic, useStore, withContext, wrapProperty
+// UNUSED EXPORTS: createApp, createRef, customRef, defineAsyncComponent, del, getCurrentInstance, h, isRaw, isReactive, isReadonly, isRef, markRaw, onActivated, onBeforeMount, onBeforeUpdate, onDeactivated, onErrorCaptured, onUnmounted, onUpdated, proxyRefs, set, shallowReactive, shallowReadonly, shallowRef, toRaw, triggerRef, unref, useCSSModule, useCssModule, version, warn, watchEffect, defineNuxtMiddleware, onGlobalSetup, reqRef, reqSsrRef, setSSRContext, shallowSsrRef, ssrPromise, useAsync, useMeta, useStatic, useStore, withContext, wrapProperty
 
 // EXTERNAL MODULE: external "vue"
 var external_vue_ = __webpack_require__(1);
@@ -4329,7 +4330,7 @@ class PersistentStore extends Store {
         Object.assign(this.state, JSON.parse(stateFromIndexedDB));
       }
 
-      Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "u"])(() => this.state, val => Object(idb_keyval__WEBPACK_IMPORTED_MODULE_1__["set"])(this.storeName, JSON.stringify(val)), {
+      Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "v"])(() => this.state, val => Object(idb_keyval__WEBPACK_IMPORTED_MODULE_1__["set"])(this.storeName, JSON.stringify(val)), {
         deep: true
       });
       this.isInitialized.value = true;
@@ -13753,7 +13754,7 @@ const pageItems = [['ri-article-line', 'Pages', 'admin-page', 'USER_CAN_ACCESS_P
 const memberItems = [['ri-user-line', 'Gérer les membres', 'admin-member', 'USER_CAN_ACCESS_MEMBERS'], ['ri-group-line', 'Gérer les groupes', 'admin-member-group', 'USER_CAN_ACCESS_MEMBER_GROUPS'], ['ri-contacts-line', 'Prises de contact', 'admin-contact', 'USER_CAN_VIEW_CONTACT'], ['ri-mail-line', 'Inscriptions à la newsletter', 'admin-contact-newsletter', 'USER_CAN_VIEW_CONTACT_NEWSLETTER'], ['ri-survey-line', 'Réponses au questionnaire', 'admin-survey-join', 'USER_CAN_VIEW_SURVEY_JOIN']];
 /* harmony default export */ var MenuDrawervue_type_script_lang_ts_ = (Object(runtime["b" /* defineComponent */])({
   setup() {
-    const context = Object(runtime["q" /* useContext */])();
+    const context = Object(runtime["r" /* useContext */])();
     const drawer = Object(runtime["m" /* ref */])(null);
     const member = Object(runtime["a" /* computed */])(() => {
       var _a;
@@ -14778,9 +14779,9 @@ var PageStore = __webpack_require__(10);
 
 /* harmony default export */ var Menuvue_type_script_lang_ts_ = (Object(runtime["b" /* defineComponent */])({
   setup() {
-    PageStore["a" /* pageStore */].setContext(Object(runtime["q" /* useContext */])());
-    const router = Object(runtime["t" /* useRouter */])();
-    const route = Object(runtime["s" /* useRoute */])();
+    PageStore["a" /* pageStore */].setContext(Object(runtime["r" /* useContext */])());
+    const router = Object(runtime["u" /* useRouter */])();
+    const route = Object(runtime["t" /* useRoute */])();
     const tab = Object(runtime["m" /* ref */])(undefined);
 
     const redirectOrToggleSubMenu = item => {
@@ -14803,14 +14804,14 @@ var PageStore = __webpack_require__(10);
       }
     }); // @ts-ignore
 
-    Object(runtime["u" /* watch */])(tab, tabIndex => {
+    Object(runtime["v" /* watch */])(tab, tabIndex => {
       if (tabIndex === undefined || !PageStore["a" /* pageStore */].menuItems.value[tabIndex]) {
         PageStore["a" /* pageStore */].setActiveSlug(null);
       } else {
         redirectOrToggleSubMenu(PageStore["a" /* pageStore */].menuItems.value[tabIndex]);
       }
     });
-    Object(runtime["u" /* watch */])(route, route => {
+    Object(runtime["v" /* watch */])(route, route => {
       if (route === null) {
         return;
       } // Check that static page is in menu
@@ -15419,9 +15420,9 @@ var SubMenuvue_type_template_id_3aa7923f_staticRenderFns = []
 /* harmony default export */ var SubMenuvue_type_script_lang_ts_ = (Object(runtime["b" /* defineComponent */])({
   setup() {
     const tab = Object(runtime["m" /* ref */])(null);
-    const router = Object(runtime["t" /* useRouter */])();
-    const route = Object(runtime["s" /* useRoute */])();
-    PageStore["a" /* pageStore */].setContext(Object(runtime["q" /* useContext */])());
+    const router = Object(runtime["u" /* useRouter */])();
+    const route = Object(runtime["t" /* useRoute */])();
+    PageStore["a" /* pageStore */].setContext(Object(runtime["r" /* useContext */])());
 
     const redirect = item => {
       if (item && item.url) {
@@ -15430,7 +15431,7 @@ var SubMenuvue_type_template_id_3aa7923f_staticRenderFns = []
     }; // @ts-ignore
 
 
-    Object(runtime["u" /* watch */])(tab, tabIndex => {
+    Object(runtime["v" /* watch */])(tab, tabIndex => {
       if (PageStore["a" /* pageStore */].findByActiveSlug.value[tabIndex]) {
         redirect(PageStore["a" /* pageStore */].findByActiveSlug.value[tabIndex]);
       }
@@ -15489,7 +15490,7 @@ var SideMenuvue_type_template_id_006fe1cc_staticRenderFns = []
 
 /* harmony default export */ var SideMenuvue_type_script_lang_ts_ = (Object(runtime["b" /* defineComponent */])({
   setup() {
-    PageStore["a" /* pageStore */].setContext(Object(runtime["q" /* useContext */])());
+    PageStore["a" /* pageStore */].setContext(Object(runtime["r" /* useContext */])());
     return {
       menu: PageStore["a" /* pageStore */].menu
     };
@@ -15558,7 +15559,7 @@ var ContactNewsletterStore = __webpack_require__(36);
 
 /* harmony default export */ var Formvue_type_script_lang_ts_ = (Object(runtime["b" /* defineComponent */])({
   setup() {
-    ContactNewsletterStore["a" /* contactNewsletterStore */].setContext(Object(runtime["q" /* useContext */])());
+    ContactNewsletterStore["a" /* contactNewsletterStore */].setContext(Object(runtime["r" /* useContext */])());
     const item = Object(runtime["k" /* reactive */])({
       email: null
     });
@@ -15584,7 +15585,7 @@ var ContactNewsletterStore = __webpack_require__(36);
       return errors;
     }); // @ts-ignore
 
-    Object(runtime["u" /* watch */])(() => ContactNewsletterStore["a" /* contactNewsletterStore */].getState().created, created => {
+    Object(runtime["v" /* watch */])(() => ContactNewsletterStore["a" /* contactNewsletterStore */].getState().created, created => {
       if (!created) {
         return;
       }
@@ -15592,7 +15593,7 @@ var ContactNewsletterStore = __webpack_require__(36);
       item.email = null;
       NotificationStore["a" /* notificationStore */].showMessage('Tu es maintenant inscrit à la newsletter !');
     });
-    Object(runtime["u" /* watch */])(() => ContactNewsletterStore["a" /* contactNewsletterStore */].getState().error, message => {
+    Object(runtime["v" /* watch */])(() => ContactNewsletterStore["a" /* contactNewsletterStore */].getState().error, message => {
       message && NotificationStore["a" /* notificationStore */].showError(message);
     });
 
@@ -15678,7 +15679,7 @@ installComponents_default()(Form_component, {VForm: VForm["a" /* default */],VTe
   },
 
   setup() {
-    const context = Object(runtime["q" /* useContext */])();
+    const context = Object(runtime["r" /* useContext */])();
     PageStore["a" /* pageStore */].setContext(context);
     SecurityStore["a" /* securityStore */].setContext(context);
     Object(usePermissions["a" /* default */])();

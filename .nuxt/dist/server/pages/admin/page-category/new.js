@@ -1500,7 +1500,7 @@ const baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_10__[/* default 
 const itemCreate = (store, options = {
   admin: true
 }) => {
-  const router = Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* useRouter */ "t"])();
+  const router = Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* useRouter */ "u"])();
   const createForm = Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* ref */ "m"])(null);
 
   const onCreated = item => {
@@ -1516,14 +1516,14 @@ const itemCreate = (store, options = {
     }
   };
 
-  Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "u"])(() => store.getState().created, created => {
+  Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "v"])(() => store.getState().created, created => {
     if (!created) {
       return;
     }
 
     onCreated(created);
   });
-  Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "u"])(() => store.getState().error, message => {
+  Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "v"])(() => store.getState().error, message => {
     message && _custom_store_NotificationStore__WEBPACK_IMPORTED_MODULE_1__[/* notificationStore */ "a"].showError(message);
   });
 
@@ -1959,10 +1959,10 @@ var PageCategoryStore = __webpack_require__(299);
     const item = Object(runtime["k" /* reactive */])({
       content: null
     });
-    PageCategoryStore["a" /* pageCategoryStore */].setContext(Object(runtime["q" /* useContext */])());
+    PageCategoryStore["a" /* pageCategoryStore */].setContext(Object(runtime["r" /* useContext */])());
     return {
       item,
-      ...Object(runtime["p" /* toRefs */])(Object(ItemCreate["a" /* default */])(PageCategoryStore["a" /* pageCategoryStore */]))
+      ...Object(runtime["q" /* toRefs */])(Object(ItemCreate["a" /* default */])(PageCategoryStore["a" /* pageCategoryStore */]))
     };
   }
 

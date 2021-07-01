@@ -4261,8 +4261,8 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 
 const itemUpdate = store => {
-  const router = Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* useRouter */ "t"])();
-  const route = Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* useRoute */ "s"])();
+  const router = Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* useRouter */ "u"])();
+  const route = Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* useRoute */ "t"])();
   const item = Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* ref */ "m"])({});
   const retrieved = Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* ref */ "m"])(null);
   const updateForm = Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* ref */ "m"])(null);
@@ -4327,22 +4327,22 @@ const itemUpdate = store => {
     }
   };
 
-  Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "u"])(() => store.getState().deleted, deleted => {
+  Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "v"])(() => store.getState().deleted, deleted => {
     if (!deleted) {
       return;
     }
 
     back();
   });
-  Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "u"])(() => store.getState().error, message => {
+  Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "v"])(() => store.getState().error, message => {
     message && _custom_store_NotificationStore__WEBPACK_IMPORTED_MODULE_1__[/* notificationStore */ "a"].showError(message);
   });
-  Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "u"])(() => store.getState().updated, val => {
+  Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "v"])(() => store.getState().updated, val => {
     if (val) {
       _custom_store_NotificationStore__WEBPACK_IMPORTED_MODULE_1__[/* notificationStore */ "a"].showMessage(store.getUpdateMessage(val));
     }
   });
-  Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "u"])(() => retrieved.value, val => {
+  Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* watch */ "v"])(() => retrieved.value, val => {
     if (val) {
       item.value = { ...val
       };
@@ -5656,7 +5656,7 @@ const mediaObjectStore = new MediaObjectStore_MediaObjectStore('media_objects');
   },
 
   setup(props) {
-    const context = Object(runtime["q" /* useContext */])();
+    const context = Object(runtime["r" /* useContext */])();
     const selectionEnabled = Object(runtime["e" /* inject */])('selectionEnabled');
     mediaObjectStore.setContext(context);
 
@@ -5671,7 +5671,7 @@ const mediaObjectStore = new MediaObjectStore_MediaObjectStore('media_objects');
     Object(runtime["h" /* onMounted */])(() => {
       loadObjects();
     });
-    Object(runtime["u" /* watch */])(() => props.mediaNode, mediaNode => {
+    Object(runtime["v" /* watch */])(() => props.mediaNode, mediaNode => {
       loadObjects();
     });
     return {
@@ -5755,7 +5755,7 @@ var MediaNodeStore = __webpack_require__(273);
   },
 
   setup(props) {
-    const context = Object(runtime["q" /* useContext */])();
+    const context = Object(runtime["r" /* useContext */])();
     const contextMenu = Object(runtime["m" /* ref */])(null);
     const dialog = Object(runtime["m" /* ref */])(false);
     const newFolderName = Object(runtime["m" /* ref */])(null);
@@ -5941,12 +5941,12 @@ installComponents_default()(FileNavigatorContextMenu_component, {VBtn: VBtn["a" 
   setup(props, {
     emit
   }) {
-    const context = Object(runtime["q" /* useContext */])();
+    const context = Object(runtime["r" /* useContext */])();
     MediaNodeStore["a" /* mediaNodeStore */].setContext(context);
     mediaObjectStore.setContext(context);
     const closeDetailPanel = Object(runtime["e" /* inject */])('closeDetailPanel');
     const fileNavigatorContextMenu = Object(runtime["m" /* ref */])(null);
-    Object(runtime["r" /* useFetch */])(() => {
+    Object(runtime["s" /* useFetch */])(() => {
       MediaNodeStore["a" /* mediaNodeStore */].fetchAll({
         'exists[parent]': 'false'
       });
@@ -6978,13 +6978,13 @@ var Toolbar = __webpack_require__(256);
   },
 
   setup(props) {
-    const context = Object(runtime["q" /* useContext */])();
+    const context = Object(runtime["r" /* useContext */])();
     MediaNodeStore["a" /* mediaNodeStore */].setContext(context);
     mediaObjectStore.setContext(context);
     const closeDetailPanel = Object(runtime["e" /* inject */])('closeDetailPanel');
     const item = Object(runtime["a" /* computed */])(() => props.mediaObject);
     const updateForm = Object(runtime["m" /* ref */])(null);
-    Object(runtime["r" /* useFetch */])(async () => {
+    Object(runtime["s" /* useFetch */])(async () => {
       if (MediaNodeStore["a" /* mediaNodeStore */].tree.value.length === 0) {
         await MediaNodeStore["a" /* mediaNodeStore */].fetchTree();
       }
@@ -7002,7 +7002,7 @@ var Toolbar = __webpack_require__(256);
       }
     };
 
-    Object(runtime["u" /* watch */])(() => mediaObjectStore.getState().updated, created => {
+    Object(runtime["v" /* watch */])(() => mediaObjectStore.getState().updated, created => {
       if (!created) {
         return;
       }
@@ -7079,7 +7079,7 @@ installComponents_default()(FileDetails_component, {VBtn: VBtn["a" /* default */
     const thumbnails = Object(runtime["m" /* ref */])([]);
     const currentMediaNode = Object(runtime["m" /* ref */])(null);
     const fileNavigator = Object(runtime["m" /* ref */])(null);
-    const context = Object(runtime["q" /* useContext */])();
+    const context = Object(runtime["r" /* useContext */])();
     Object(runtime["j" /* provide */])('closeDetailPanel', () => {
       detailsPanel.value = false;
       selectedMediaObject.value = null;
@@ -7447,7 +7447,7 @@ var FileManager = __webpack_require__(326);
       dialog.value = false;
     };
 
-    Object(runtime["u" /* watch */])(dialog, () => {
+    Object(runtime["v" /* watch */])(dialog, () => {
       Object(runtime["f" /* nextTick */])(() => {
         var _a; // @ts-ignore
 
@@ -8119,7 +8119,7 @@ installComponents_default()(FontFamilyBtn_component, {VBtn: VBtn["a" /* default 
     const editor = Object(runtime["m" /* ref */])(null);
     const {
       value
-    } = Object(runtime["p" /* toRefs */])(props);
+    } = Object(runtime["q" /* toRefs */])(props);
     Object(runtime["h" /* onMounted */])(() => {
       editor.value = new vue_2_["Editor"]({
         content: value.value,
@@ -8177,7 +8177,7 @@ installComponents_default()(FontFamilyBtn_component, {VBtn: VBtn["a" /* default 
       (_a = editor.value) === null || _a === void 0 ? void 0 : _a.commands.setContent(content, false);
     };
 
-    Object(runtime["u" /* watch */])(value, newValue => {
+    Object(runtime["v" /* watch */])(value, newValue => {
       var _a;
 
       const isSame = ((_a = editor.value) === null || _a === void 0 ? void 0 : _a.getHTML()) === newValue;
@@ -9153,7 +9153,7 @@ const slug = value => !!value.match(/^[a-zA-Z0-9-]*$/);
   },
 
   setup(props) {
-    const context = Object(runtime["q" /* useContext */])();
+    const context = Object(runtime["r" /* useContext */])();
     MediaNodeStore["a" /* mediaNodeStore */].setContext(context);
     PageCategoryStore["a" /* pageCategoryStore */].setContext(context);
     PageLogStore["a" /* pageLogStore */].setContext(context);
@@ -9428,17 +9428,17 @@ var PageLogStore = __webpack_require__(339);
   },
 
   setup() {
-    const context = Object(runtime["q" /* useContext */])();
+    const context = Object(runtime["r" /* useContext */])();
     PageStore["a" /* pageStore */].setContext(context);
     PageLogStore["a" /* pageLogStore */].setContext(context);
     const itemUpdateHelper = Object(itemUpdate["a" /* default */])(PageStore["a" /* pageStore */]);
     let autoSaveInterval = null;
-    Object(runtime["u" /* watch */])(() => PageStore["a" /* pageStore */].getState().updated, val => {
+    Object(runtime["v" /* watch */])(() => PageStore["a" /* pageStore */].getState().updated, val => {
       if (val) {
         NotificationStore["a" /* notificationStore */].showMessage(PageStore["a" /* pageStore */].getUpdateMessage(val));
       }
     });
-    Object(runtime["u" /* watch */])(() => itemUpdateHelper.retrieved, val => {
+    Object(runtime["v" /* watch */])(() => itemUpdateHelper.retrieved, val => {
       if (val) {
         loadLogs();
       }
@@ -9474,8 +9474,8 @@ var PageLogStore = __webpack_require__(339);
       });
     };
 
-    return { ...Object(runtime["p" /* toRefs */])(itemUpdateHelper),
-      ...Object(runtime["p" /* toRefs */])(Object(itemSecurity["a" /* default */])(PageStore["a" /* pageStore */])),
+    return { ...Object(runtime["q" /* toRefs */])(itemUpdateHelper),
+      ...Object(runtime["q" /* toRefs */])(Object(itemSecurity["a" /* default */])(PageStore["a" /* pageStore */])),
       pageLogs: PageLogStore["a" /* pageLogStore */].list
     };
   },

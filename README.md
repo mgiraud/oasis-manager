@@ -12,12 +12,12 @@ Voici la liste, sans doute non exhaustive, des fonctionnalités prévues à term
 | Fonctionnalité | TODO | En cours de développement | Fonctionnel/Fonctionnalité incomplète | Achevé |
 | ------------- | ------------- | --------- | --------- | --------- |
 | Création/Edition de page | | ✓ | ✓ | |
-| Blog/Actualités | ✓ | | | |
+| Blog/Actualités | | | ✓ | |
 | Gestion de fichiers | ✓ | | | |
-| Gestion de membres | ✓ | ✓ | | |
-| Sécurité (login/logout/permissions) | ✓ | | ✓ | |
+| Gestion de membres | | | ✓ | |
+| Sécurité (login/logout/permissions) | | | ✓ | |
 | Calendrier et aide aux réunions | ✓ | | | |
-| Mails automatiques | ✓ | | | |
+| Mails automatiques | | | ✓ | |
 
 ## Contributions
 

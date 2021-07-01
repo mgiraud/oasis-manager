@@ -5,10 +5,10 @@ export interface TextBackgroundColorOptions {
 }
 
 declare module '@tiptap/core' {
-    interface Commands {
+    interface Commands<ReturnType> {
       'text-background-color': {
-        setBackgroundColor: (backGroundColor: string) => Command,
-        removeBackgroundColor: () => Command,
+        setBackgroundColor: (backGroundColor: string) => ReturnType,
+        removeBackgroundColor: () => ReturnType,
       }
     }
   }

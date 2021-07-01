@@ -5,10 +5,10 @@ export interface TextColorOptions {
 }
 
 declare module '@tiptap/core' {
-    interface Commands {
+    interface Commands<ReturnType> {
       'text-color': {
-         setColor: (color: string) => Command,
-         removeColor: () => Command,
+         setColor: (color: string) => ReturnType,
+         removeColor: () => ReturnType,
       }
     }
   }

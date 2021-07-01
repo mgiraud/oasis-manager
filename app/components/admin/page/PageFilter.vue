@@ -93,10 +93,6 @@ export default defineComponent({
   setup (props) {
     const item = computed(() => props.values)
 
-    watch(props.values, (data) => {
-      console.log(data)
-    }, { deep: true })
-
     pageCategoryStore.setContext(useContext())
     useFetch(async () => {
       await pageCategoryStore.fetchSelectItems()

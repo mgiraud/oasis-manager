@@ -184,7 +184,7 @@
 import { defineComponent, onBeforeUnmount, onMounted, Ref, ref, toRefs, watch } from '@nuxtjs/composition-api'
 // import the component and the necessary extensions
 import { Editor, EditorContent } from '@tiptap/vue-2'
-import { defaultExtensions } from '@tiptap/starter-kit'
+import Starterkit from '@tiptap/starter-kit'
 import TextAlign from '@tiptap/extension-text-align'
 import EditorBtn from '@/components/util/Editor/EditorBtn.vue'
 import Gapcursor from '@tiptap/extension-gapcursor'
@@ -228,7 +228,7 @@ export default defineComponent({
       editor.value = new Editor({
         content: value.value,
         extensions: [
-          ...defaultExtensions(),
+          Starterkit,
           TextAlign,
           Gapcursor,
           Typography,

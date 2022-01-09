@@ -12,12 +12,12 @@ import { setContext, getLocation, getRouteData, normalizeError } from './utils'
 
 /* Plugins */
 
-import nuxt_plugin_plugin_f7c66008 from 'nuxt_plugin_plugin_f7c66008' // Source: ./vuetify/plugin.js (mode: 'all')
-import nuxt_plugin_plugin_293ec6cc from 'nuxt_plugin_plugin_293ec6cc' // Source: ./composition-api/plugin.mjs (mode: 'all')
+import nuxt_plugin_plugin_a891266e from 'nuxt_plugin_plugin_a891266e' // Source: ./vuetify/plugin.js (mode: 'all')
+import nuxt_plugin_plugin_10c5166d from 'nuxt_plugin_plugin_10c5166d' // Source: ./composition-api/plugin.mjs (mode: 'all')
 import nuxt_plugin_repository_02bac980 from 'nuxt_plugin_repository_02bac980' // Source: ../app/plugins/repository (mode: 'all')
 import nuxt_plugin_capitalize_f5d14914 from 'nuxt_plugin_capitalize_f5d14914' // Source: ../app/plugins/filters/capitalize (mode: 'all')
 import nuxt_plugin_auth_7f755f62 from 'nuxt_plugin_auth_7f755f62' // Source: ../app/plugins/auth.ts (mode: 'all')
-import nuxt_plugin_meta_121ad62c from 'nuxt_plugin_meta_121ad62c' // Source: ./composition-api/meta.mjs (mode: 'all')
+import nuxt_plugin_meta_6fe9a8bf from 'nuxt_plugin_meta_6fe9a8bf' // Source: ./composition-api/meta.mjs (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -181,12 +181,12 @@ async function createApp(ssrContext, config = {}) {
   }
   // Plugin execution
 
-  if (typeof nuxt_plugin_plugin_f7c66008 === 'function') {
-    await nuxt_plugin_plugin_f7c66008(app.context, inject)
+  if (typeof nuxt_plugin_plugin_a891266e === 'function') {
+    await nuxt_plugin_plugin_a891266e(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_plugin_293ec6cc === 'function') {
-    await nuxt_plugin_plugin_293ec6cc(app.context, inject)
+  if (typeof nuxt_plugin_plugin_10c5166d === 'function') {
+    await nuxt_plugin_plugin_10c5166d(app.context, inject)
   }
 
   if (typeof nuxt_plugin_repository_02bac980 === 'function') {
@@ -201,8 +201,8 @@ async function createApp(ssrContext, config = {}) {
     await nuxt_plugin_auth_7f755f62(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_meta_121ad62c === 'function') {
-    await nuxt_plugin_meta_121ad62c(app.context, inject)
+  if (typeof nuxt_plugin_meta_6fe9a8bf === 'function') {
+    await nuxt_plugin_meta_6fe9a8bf(app.context, inject)
   }
 
   // Lock enablePreview in context

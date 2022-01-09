@@ -219,7 +219,7 @@ export default defineComponent({
     },
 
     redirectToHelloAsso () {
-      window.open('https://www.helloasso.com/associations/les-transalpins/adhesions/adhesion-a-l-association-les-translapins', '_')
+      window.open('https://www.helloasso.com/associations/les-transalpins/adhesions/adhesion-2022', '_')
     }
   }
 })

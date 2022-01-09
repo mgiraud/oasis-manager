@@ -200,7 +200,7 @@ export async function setContext (app, context) {
       payload: context.payload,
       error: context.error,
       base: app.router.options.base,
-      env: {"apiBaseUrl":"http://localhost:8000/api"}
+      env: {"apiBaseUrl":"https://api.lestransalpins.org/api"}
     }
     // Only set once
 

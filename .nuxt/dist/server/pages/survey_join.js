@@ -635,7 +635,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "4b80d673"
+  "32d78dca"
   
 )
 
@@ -799,7 +799,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "309e0725"
+  "a06a6888"
   
 )
 
@@ -912,7 +912,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "5fd2eab8"
+  "4f434f3b"
   
 )
 
@@ -2184,7 +2184,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   null,
-  "3899f48b"
+  "141495a2"
   
 )
 
@@ -2285,7 +2285,7 @@ const initialItem = {
     });
     return {
       item,
-      downloadPdfUrl: "https://api.lestransalpins.org/api" + (((_a = "https://api.lestransalpins.org/api") === null || _a === void 0 ? void 0 : _a.endsWith('/')) ? '' : '/') + '../app-assets/files/questionnaire_transalpins_v1.pdf',
+      downloadPdfUrl: "http://localhost:8000/api" + (((_a = "http://localhost:8000/api") === null || _a === void 0 ? void 0 : _a.endsWith('/')) ? '' : '/') + '../app-assets/files/questionnaire_transalpins_v1.pdf',
       page: PageStore["a" /* pageStore */].find('/api/pages/survey-join'),
       ...Object(runtime["q" /* toRefs */])(Object(ItemCreate["a" /* default */])(SurveyJoinStore["a" /* surveyJoinStore */], {
         admin: false,
@@ -2332,7 +2332,7 @@ var survey_join_component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "5d6ca340"
+  "5fa11f92"
   
 )
 

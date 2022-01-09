@@ -639,7 +639,7 @@ var composition_api_ = __webpack_require__(2);
 
 // CONCATENATED MODULE: ./.nuxt/composition-api/globals.mjs
 const isFullStatic = false;
-const staticPath = "/Users/m.giraudtelme/Code/oasis-manager/.nuxt/static-json";
+const staticPath = "/Users/m.giraudtelme/Code/apps/oasis-manager/.nuxt/static-json";
 const publicPath = "/";
 const globalContext = "__NUXT__";
 const globalNuxt = "$nuxt";
@@ -7992,7 +7992,7 @@ module.exports = require("lodash/has");
 
 
 const usePermissions = () => {
-  const permissions = Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* ssrRef */ "o"])([], "89+d+xwSSzYIFzfxaKND7A==");
+  const permissions = Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* ssrRef */ "o"])([], "1K6lk5qfN99qDtgB3VEzrA==");
   Object(_nuxtjs_composition_api__WEBPACK_IMPORTED_MODULE_0__[/* onServerPrefetch */ "i"])(() => {
     permissions.value = _custom_store_SecurityStore__WEBPACK_IMPORTED_MODULE_1__[/* securityStore */ "a"].loadPermissions();
   });
@@ -11046,7 +11046,7 @@ const makeParamArray = (key, arr) => arr.map(val => `${key}[]=${val}`).join('&')
       options.body = JSON.stringify(Object(_hydra__WEBPACK_IMPORTED_MODULE_0__[/* normalize */ "a"])(payload));
     }
 
-    const entryPoint = "https://api.lestransalpins.org/api" + (((_a = "https://api.lestransalpins.org/api") === null || _a === void 0 ? void 0 : _a.endsWith('/')) ? '' : '/');
+    const entryPoint = "http://localhost:8000/api" + (((_a = "http://localhost:8000/api") === null || _a === void 0 ? void 0 : _a.endsWith('/')) ? '' : '/');
     return await fetch(new URL(query, entryPoint).toString(), options);
   },
 
@@ -12605,7 +12605,7 @@ async function setContext(app, context) {
       error: context.error,
       base: app.router.options.base,
       env: {
-        "apiBaseUrl": "https://api.lestransalpins.org/api"
+        "apiBaseUrl": "http://localhost:8000/api"
       }
     }; // Only set once
 
@@ -13184,69 +13184,69 @@ function shouldScrollToTop(route) {
 
 
 
-const _2fe0b625 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin */ 2).then(__webpack_require__.bind(null, 410)));
+const _1dbbc172 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin */ 2).then(__webpack_require__.bind(null, 410)));
 
-const _7ea4d568 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/blog-article/index */ 5).then(__webpack_require__.bind(null, 399)));
+const _74cd64fb = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/blog-article/index */ 5).then(__webpack_require__.bind(null, 399)));
 
-const _5c242fb9 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/contact/index */ 9).then(__webpack_require__.bind(null, 400)));
+const _39621f74 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/contact/index */ 9).then(__webpack_require__.bind(null, 400)));
 
-const _773fee3a = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/contact-newsletter/index */ 7).then(__webpack_require__.bind(null, 401)));
+const _77d55e36 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/contact-newsletter/index */ 7).then(__webpack_require__.bind(null, 401)));
 
-const _c7cea72a = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/gallery/index */ 10).then(__webpack_require__.bind(null, 411)));
+const _23436cf8 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/gallery/index */ 10).then(__webpack_require__.bind(null, 411)));
 
-const _10a524f7 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/member/index */ 15).then(__webpack_require__.bind(null, 402)));
+const _36099eca = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/member/index */ 15).then(__webpack_require__.bind(null, 402)));
 
-const _3947182e = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/member-group/index */ 12).then(__webpack_require__.bind(null, 403)));
+const _4cf5f908 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/member-group/index */ 12).then(__webpack_require__.bind(null, 403)));
 
-const _6fb1572c = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/page/index */ 21).then(__webpack_require__.bind(null, 404)));
+const _64ffac82 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/page/index */ 21).then(__webpack_require__.bind(null, 404)));
 
-const _6fe34095 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/page-category/index */ 18).then(__webpack_require__.bind(null, 405)));
+const _3ecca362 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/page-category/index */ 18).then(__webpack_require__.bind(null, 405)));
 
-const _39375c16 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/survey-join/index */ 24).then(__webpack_require__.bind(null, 406)));
+const _9675e3ba = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/survey-join/index */ 24).then(__webpack_require__.bind(null, 406)));
 
-const _a7223294 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/blog-article/new */ 6).then(__webpack_require__.bind(null, 412)));
+const _348c3f09 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/blog-article/new */ 6).then(__webpack_require__.bind(null, 412)));
 
-const _6bce3177 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/member-group/new */ 13).then(__webpack_require__.bind(null, 413)));
+const _1828ec6c = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/member-group/new */ 13).then(__webpack_require__.bind(null, 413)));
 
-const _320bce05 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/member/new */ 16).then(__webpack_require__.bind(null, 414)));
+const _e04abed0 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/member/new */ 16).then(__webpack_require__.bind(null, 414)));
 
-const _0ab83923 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/page-category/new */ 19).then(__webpack_require__.bind(null, 415)));
+const _f37429a0 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/page-category/new */ 19).then(__webpack_require__.bind(null, 415)));
 
-const _3779097a = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/page/new */ 22).then(__webpack_require__.bind(null, 416)));
+const _51f164cd = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/page/new */ 22).then(__webpack_require__.bind(null, 416)));
 
-const _ce8ddc60 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/blog-article/_id */ 4).then(__webpack_require__.bind(null, 417)));
+const _20d66a23 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/blog-article/_id */ 4).then(__webpack_require__.bind(null, 417)));
 
-const _483ccc61 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/contact/_id */ 8).then(__webpack_require__.bind(null, 418)));
+const _b76f67a4 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/contact/_id */ 8).then(__webpack_require__.bind(null, 418)));
 
-const _58185c91 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/member-group/_id */ 11).then(__webpack_require__.bind(null, 419)));
+const _3f949638 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/member-group/_id */ 11).then(__webpack_require__.bind(null, 419)));
 
-const _1e55f91f = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/member/_id */ 14).then(__webpack_require__.bind(null, 420)));
+const _7c24cbb2 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/member/_id */ 14).then(__webpack_require__.bind(null, 420)));
 
-const _11fb3786 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/page-category/_id */ 17).then(__webpack_require__.bind(null, 421)));
+const _7290164a = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/page-category/_id */ 17).then(__webpack_require__.bind(null, 421)));
 
-const _23c33494 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/page/_id */ 20).then(__webpack_require__.bind(null, 422)));
+const _3e3b8fe7 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/page/_id */ 20).then(__webpack_require__.bind(null, 422)));
 
-const _bc0d2804 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/survey-join/_id */ 23).then(__webpack_require__.bind(null, 423)));
+const _09763d4b = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/survey-join/_id */ 23).then(__webpack_require__.bind(null, 423)));
 
-const _8a46f616 = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/_ */ 3).then(__webpack_require__.bind(null, 424)));
+const _c3bc1dfc = () => interopDefault(__webpack_require__.e(/* import() | pages/admin/_ */ 3).then(__webpack_require__.bind(null, 424)));
 
-const _1ae55b3f = () => interopDefault(__webpack_require__.e(/* import() | pages/blog/index */ 26).then(__webpack_require__.bind(null, 425)));
+const _32c34fdc = () => interopDefault(__webpack_require__.e(/* import() | pages/blog/index */ 26).then(__webpack_require__.bind(null, 425)));
 
-const _4667f21d = () => interopDefault(__webpack_require__.e(/* import() | pages/cahier-des-charges */ 27).then(__webpack_require__.bind(null, 426)));
+const _6bcc6bf0 = () => interopDefault(__webpack_require__.e(/* import() | pages/cahier-des-charges */ 27).then(__webpack_require__.bind(null, 426)));
 
-const _18f20ef6 = () => interopDefault(__webpack_require__.e(/* import() | pages/contact */ 28).then(__webpack_require__.bind(null, 407)));
+const _079109fa = () => interopDefault(__webpack_require__.e(/* import() | pages/contact */ 28).then(__webpack_require__.bind(null, 407)));
 
-const _6fcdf582 = () => interopDefault(__webpack_require__.e(/* import() | pages/login */ 30).then(__webpack_require__.bind(null, 427)));
+const _9417dee8 = () => interopDefault(__webpack_require__.e(/* import() | pages/login */ 30).then(__webpack_require__.bind(null, 427)));
 
-const _0d1dbb6a = () => interopDefault(__webpack_require__.e(/* import() | pages/mentions_legales */ 31).then(__webpack_require__.bind(null, 428)));
+const _573ff4de = () => interopDefault(__webpack_require__.e(/* import() | pages/mentions_legales */ 31).then(__webpack_require__.bind(null, 428)));
 
-const _600bd976 = () => interopDefault(__webpack_require__.e(/* import() | pages/survey_join */ 32).then(__webpack_require__.bind(null, 408)));
+const _7b60b0d2 = () => interopDefault(__webpack_require__.e(/* import() | pages/survey_join */ 32).then(__webpack_require__.bind(null, 408)));
 
-const _e524d704 = () => interopDefault(__webpack_require__.e(/* import() | pages/blog/_tag */ 25).then(__webpack_require__.bind(null, 429)));
+const _95ef9d6a = () => interopDefault(__webpack_require__.e(/* import() | pages/blog/_tag */ 25).then(__webpack_require__.bind(null, 429)));
 
-const _031d3bb0 = () => interopDefault(__webpack_require__.e(/* import() | pages/index */ 29).then(__webpack_require__.bind(null, 430)));
+const _27672516 = () => interopDefault(__webpack_require__.e(/* import() | pages/index */ 29).then(__webpack_require__.bind(null, 430)));
 
-const _3d173a35 = () => interopDefault(__webpack_require__.e(/* import() | pages/_ */ 1).then(__webpack_require__.bind(null, 409)));
+const _2badf402 = () => interopDefault(__webpack_require__.e(/* import() | pages/_ */ 1).then(__webpack_require__.bind(null, 409)));
 
 const emptyFn = () => {};
 
@@ -13259,132 +13259,132 @@ const routerOptions = {
   scrollBehavior: router_scrollBehavior,
   routes: [{
     path: "/admin",
-    component: _2fe0b625,
+    component: _1dbbc172,
     name: "admin",
     children: [{
       path: "blog-article",
-      component: _7ea4d568,
+      component: _74cd64fb,
       name: "admin-blog-article"
     }, {
       path: "contact",
-      component: _5c242fb9,
+      component: _39621f74,
       name: "admin-contact"
     }, {
       path: "contact-newsletter",
-      component: _773fee3a,
+      component: _77d55e36,
       name: "admin-contact-newsletter"
     }, {
       path: "gallery",
-      component: _c7cea72a,
+      component: _23436cf8,
       name: "admin-gallery"
     }, {
       path: "member",
-      component: _10a524f7,
+      component: _36099eca,
       name: "admin-member"
     }, {
       path: "member-group",
-      component: _3947182e,
+      component: _4cf5f908,
       name: "admin-member-group"
     }, {
       path: "page",
-      component: _6fb1572c,
+      component: _64ffac82,
       name: "admin-page"
     }, {
       path: "page-category",
-      component: _6fe34095,
+      component: _3ecca362,
       name: "admin-page-category"
     }, {
       path: "survey-join",
-      component: _39375c16,
+      component: _9675e3ba,
       name: "admin-survey-join"
     }, {
       path: "blog-article/new",
-      component: _a7223294,
+      component: _348c3f09,
       name: "admin-blog-article-new"
     }, {
       path: "member-group/new",
-      component: _6bce3177,
+      component: _1828ec6c,
       name: "admin-member-group-new"
     }, {
       path: "member/new",
-      component: _320bce05,
+      component: _e04abed0,
       name: "admin-member-new"
     }, {
       path: "page-category/new",
-      component: _0ab83923,
+      component: _f37429a0,
       name: "admin-page-category-new"
     }, {
       path: "page/new",
-      component: _3779097a,
+      component: _51f164cd,
       name: "admin-page-new"
     }, {
       path: "blog-article/:id?",
-      component: _ce8ddc60,
+      component: _20d66a23,
       name: "admin-blog-article-id"
     }, {
       path: "contact/:id",
-      component: _483ccc61,
+      component: _b76f67a4,
       name: "admin-contact-id"
     }, {
       path: "member-group/:id",
-      component: _58185c91,
+      component: _3f949638,
       name: "admin-member-group-id"
     }, {
       path: "member/:id",
-      component: _1e55f91f,
+      component: _7c24cbb2,
       name: "admin-member-id"
     }, {
       path: "page-category/:id",
-      component: _11fb3786,
+      component: _7290164a,
       name: "admin-page-category-id"
     }, {
       path: "page/:id",
-      component: _23c33494,
+      component: _3e3b8fe7,
       name: "admin-page-id"
     }, {
       path: "survey-join/:id?",
-      component: _bc0d2804,
+      component: _09763d4b,
       name: "admin-survey-join-id"
     }, {
       path: "*",
-      component: _8a46f616,
+      component: _c3bc1dfc,
       name: "admin-all"
     }]
   }, {
     path: "/blog",
-    component: _1ae55b3f,
+    component: _32c34fdc,
     name: "blog"
   }, {
     path: "/cahier-des-charges",
-    component: _4667f21d,
+    component: _6bcc6bf0,
     name: "cahier-des-charges"
   }, {
     path: "/contact",
-    component: _18f20ef6,
+    component: _079109fa,
     name: "contact"
   }, {
     path: "/login",
-    component: _6fcdf582,
+    component: _9417dee8,
     name: "login"
   }, {
     path: "/mentions_legales",
-    component: _0d1dbb6a,
+    component: _573ff4de,
     name: "mentions_legales"
   }, {
     path: "/survey_join",
-    component: _600bd976,
+    component: _7b60b0d2,
     name: "survey_join"
   }, {
     path: "/blog/:tag",
-    component: _e524d704,
+    component: _95ef9d6a,
     name: "blog-tag"
   }, {
     path: "/",
-    component: _031d3bb0,
+    component: _27672516,
     name: "index"
   }, {
     path: "/*",
-    component: _3d173a35,
+    component: _2badf402,
     name: "all"
   }],
   fallback: false
@@ -13582,7 +13582,7 @@ var nuxt_error_component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   null,
-  "4a2e06a3"
+  "6d4a698c"
   
 )
 
@@ -13886,7 +13886,7 @@ var nuxt_loading_component = Object(componentNormalizer["a" /* default */])(
   false,
   nuxt_loading_injectStyles,
   null,
-  "25c431d2"
+  "542be1ee"
   
 )
 
@@ -14529,7 +14529,7 @@ var MenuDrawer_component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "123921a5"
+  "24987a88"
   
 )
 
@@ -14799,7 +14799,7 @@ var Alert_component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "3155d278"
+  "d16fd5ca"
   
 )
 
@@ -14918,7 +14918,7 @@ var admin_component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "2e529df6"
+  "2cc61348"
   
 )
 
@@ -14930,14 +14930,14 @@ var admin_component = Object(componentNormalizer["a" /* default */])(
 
 installComponents_default()(admin_component, {VApp: VApp_VApp,VMain: VMain["a" /* default */]})
 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/layouts/default.vue?vue&type=template&id=315fde7e&
-var defaultvue_type_template_id_315fde7e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-app',[_c('v-app-bar',{attrs:{"src":"/images/vercors.jpg","color":"primary","flat":"","shrink-on-scroll":"","fade-img-on-scroll":"","app":"","dark":""},scopedSlots:_vm._u([{key:"img",fn:function(ref){
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/layouts/default.vue?vue&type=template&id=e5b8f118&
+var defaultvue_type_template_id_e5b8f118_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-app',[_c('v-app-bar',{attrs:{"src":"/images/vercors.jpg","color":"primary","flat":"","shrink-on-scroll":"","fade-img-on-scroll":"","app":"","dark":""},scopedSlots:_vm._u([{key:"img",fn:function(ref){
 var props = ref.props;
 return [_c('v-img',_vm._b({},'v-img',props,false))]}},(!_vm.$vuetify.breakpoint.mobile && !_vm.$vuetify.breakpoint.xs)?{key:"extension",fn:function(){return [_c('v-container',{staticClass:"header-extension-container",attrs:{"fluid":""}},[_c('v-row',{attrs:{"no-gutters":""}},[_c('Menu')],1),_vm._v(" "),_c('v-row',{staticClass:"header-extension-row-submenu",attrs:{"no-gutters":""}},[(_vm.pageState.activeSlug !== null)?_c('SubMenu'):_vm._e()],1)],1)]},proxy:true}:null],null,true)},[(_vm.$vuetify.breakpoint.mobile || _vm.$vuetify.breakpoint.xs)?_c('v-app-bar-nav-icon',{on:{"click":function($event){$event.stopPropagation();_vm.drawer = !_vm.drawer}}},[_c('v-icon',{staticClass:"text--darken-4",attrs:{"color":"primary"}},[_vm._v("\n        ri-menu-line\n      ")])],1):_vm._e(),_vm._v(" "),_vm._v(" "),_c('v-toolbar-title',[_c('NuxtLink',{staticClass:"header-link",attrs:{"to":"/"}},[_vm._v("\n        Les transalpins\n      ")])],1),_vm._v(" "),_c('v-spacer'),_vm._v(" "),(_vm.isAdmin)?_c('v-btn',{attrs:{"icon":"","color":"primary darken-4"},on:{"click":_vm.redirectToAdmin}},[_vm._v("\n      Admin\n    ")]):_vm._e(),_vm._v(" "),(_vm.loggedIn)?_c('v-btn',{attrs:{"icon":"","color":"primary darken-4"},on:{"click":_vm.logout}},[_c('v-icon',[_vm._v("ri-logout-box-line")])],1):_c('v-btn',{attrs:{"icon":"","to":"/login"}},[_c('v-icon',{attrs:{"color":"primary darken-4"}},[_vm._v("\n        ri-login-box-line\n      ")])],1)],1),_vm._v(" "),(_vm.$vuetify.breakpoint.mobile || _vm.$vuetify.breakpoint.xs)?_c('v-navigation-drawer',{attrs:{"app":"","width":"auto","temporary":"","color":"primary darken-3"},model:{value:(_vm.drawer),callback:function ($$v) {_vm.drawer=$$v},expression:"drawer"}},[_c('side-menu')],1):_vm._e(),_vm._v(" "),_c('v-main',{staticClass:"secondary lighten-3"},[_c('v-card',{directives:[{name:"show",rawName:"v-show",value:(_vm.showSubHeader),expression:"showSubHeader"}],staticClass:"card-newsletter pb-1"},[_c('v-card-text',[_c('v-container',{attrs:{"fluid":"","ma-0":"","pa-0":"","fill-height":""}},[_c('v-row',{attrs:{"no-gutters":"","align":"center","justify":"center"}},[_c('v-col',{attrs:{"lg":"4","md":"5","sm":"6","cols":"12"}},[_c('newsletter-form')],1),_vm._v(" "),_c('v-col',{attrs:{"lg":"3","md":"4","sm":"6","cols":"12"}},[(!_vm.$vuetify.breakpoint.mobile)?_c('span',[_vm._v("ET  ")]):_vm._e(),_vm._v(" "),_c('v-btn',{attrs:{"color":"primary"},on:{"click":_vm.redirectToHelloAsso}},[_vm._v("\n                Adhère à l'association !\n              ")])],1)],1)],1)],1)],1),_vm._v(" "),_c('Nuxt'),_vm._v(" "),_c('alert')],1),_vm._v(" "),_c('v-footer',{attrs:{"color":"primary","padless":"","app":""}},[_c('v-card',{staticClass:"text-center",attrs:{"flat":"","tile":"","color":"primary","width":"100%"}},[_c('v-card-text',{staticClass:"my-0 py-0"},_vm._l(([{label: 'Mentions légales', url: 'mentions_legales'}]),function(link){return _c('v-btn',{key:link.label,staticClass:"my-2",attrs:{"to":link.url,"color":"white","text":"","rounded":"","small":""}},[_vm._v("\n          "+_vm._s(link.label)+"\n        ")])}),1),_vm._v(" "),_c('v-divider'),_vm._v(" "),_c('v-card-text',{staticClass:"py-1"},[_vm._v("\n        2020-"+_vm._s(new Date().getFullYear())+" — "),_c('strong',[_vm._v("Les transalpins")])])],1)],1)],1)}
-var defaultvue_type_template_id_315fde7e_staticRenderFns = []
+var defaultvue_type_template_id_e5b8f118_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./app/layouts/default.vue?vue&type=template&id=315fde7e&
+// CONCATENATED MODULE: ./app/layouts/default.vue?vue&type=template&id=e5b8f118&
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./app/components/layout/Menu.vue?vue&type=template&id=7b9eca24&
 var Menuvue_type_template_id_7b9eca24_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-tabs',{attrs:{"fixed-tabs":"","optional":"","light":"","background-color":"info","slider-color":"primary darken-4","show-arrows":""},model:{value:(_vm.tab),callback:function ($$v) {_vm.tab=$$v},expression:"tab"}},_vm._l((_vm.menuItems),function(item){return _c('v-tab',{key:item.name,staticClass:"primary--text text--darken-4"},[_vm._v("\n    "+_vm._s(item.name)+"\n    "),(!item.url && _vm.pageState.activeSlug !== item.slug)?_c('v-icon',[_vm._v("\n      ri-arrow-drop-down-fill\n    ")]):_vm._e(),_vm._v(" "),(!item.url && _vm.pageState.activeSlug === item.slug)?_c('v-icon',[_vm._v("\n      ri-arrow-drop-up-fill\n    ")]):_vm._e()],1)}),1)}
@@ -15572,7 +15572,7 @@ var Menu_component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "a0003a82"
+  "0326a170"
   
 )
 
@@ -15645,7 +15645,7 @@ var SubMenu_component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "25fb7b8f"
+  "e5ed1334"
   
 )
 
@@ -15693,7 +15693,7 @@ var SideMenu_component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "674b0d94"
+  "470bd93f"
   
 )
 
@@ -15826,7 +15826,7 @@ var Form_component = Object(componentNormalizer["a" /* default */])(
   false,
   Form_injectStyles,
   "10db6610",
-  "7005a570"
+  "3c93175e"
   
 )
 
@@ -15886,7 +15886,7 @@ installComponents_default()(Form_component, {VForm: VForm["a" /* default */],VTe
     },
 
     redirectToHelloAsso() {
-      window.open('https://www.helloasso.com/associations/les-transalpins/adhesions/adhesion-a-l-association-les-translapins', '_');
+      window.open('https://www.helloasso.com/associations/les-transalpins/adhesions/adhesion-2022', '_');
     }
 
   }
@@ -16436,12 +16436,12 @@ if (style0.__inject__) style0.__inject__(context)
 
 var default_component = Object(componentNormalizer["a" /* default */])(
   layouts_defaultvue_type_script_lang_ts_,
-  defaultvue_type_template_id_315fde7e_render,
-  defaultvue_type_template_id_315fde7e_staticRenderFns,
+  defaultvue_type_template_id_e5b8f118_render,
+  defaultvue_type_template_id_e5b8f118_staticRenderFns,
   false,
   default_injectStyles,
   null,
-  "4fd98b77"
+  "3823d70e"
   
 )
 

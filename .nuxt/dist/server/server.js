@@ -11046,7 +11046,7 @@ const makeParamArray = (key, arr) => arr.map(val => `${key}[]=${val}`).join('&')
       options.body = JSON.stringify(Object(_hydra__WEBPACK_IMPORTED_MODULE_0__[/* normalize */ "a"])(payload));
     }
 
-    const entryPoint = "http://localhost:8000/api" + (((_a = "http://localhost:8000/api") === null || _a === void 0 ? void 0 : _a.endsWith('/')) ? '' : '/');
+    const entryPoint = "https://api.lestransalpins.org/api" + (((_a = "https://api.lestransalpins.org/api") === null || _a === void 0 ? void 0 : _a.endsWith('/')) ? '' : '/');
     return await fetch(new URL(query, entryPoint).toString(), options);
   },
 
@@ -12605,7 +12605,7 @@ async function setContext(app, context) {
       error: context.error,
       base: app.router.options.base,
       env: {
-        "apiBaseUrl": "http://localhost:8000/api"
+        "apiBaseUrl": "https://api.lestransalpins.org/api"
       }
     }; // Only set once
 

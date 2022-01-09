@@ -2285,7 +2285,7 @@ const initialItem = {
     });
     return {
       item,
-      downloadPdfUrl: "http://localhost:8000/api" + (((_a = "http://localhost:8000/api") === null || _a === void 0 ? void 0 : _a.endsWith('/')) ? '' : '/') + '../app-assets/files/questionnaire_transalpins_v1.pdf',
+      downloadPdfUrl: "https://api.lestransalpins.org/api" + (((_a = "https://api.lestransalpins.org/api") === null || _a === void 0 ? void 0 : _a.endsWith('/')) ? '' : '/') + '../app-assets/files/questionnaire_transalpins_v1.pdf',
       page: PageStore["a" /* pageStore */].find('/api/pages/survey-join'),
       ...Object(runtime["q" /* toRefs */])(Object(ItemCreate["a" /* default */])(SurveyJoinStore["a" /* surveyJoinStore */], {
         admin: false,

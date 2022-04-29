@@ -1,71 +1,33 @@
 <template>
-  <v-container fluid>
-    <v-row>
-      <v-col cols="12">
-        <v-card>
-          <PageModel
-            v-if="page"
-            :page="page"
-          />
-          <v-card-text v-else>
-            Tu peux retrouver sur ce site toutes les informations relatives au projet de création
-            d'un habitat partagé
-          </v-card-text>
-          <v-container fluid>
-            <v-row
-              v-for="article in articles"
-              :key="article['@id']"
-            >
-              <v-col>
-                <blog-article-template :article="article" />
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+  <div>
+    <h1>COUCOU</h1>
+    <FormKit
+      label="I have a validation error"
+      type="text"
+      help="I must equal 'foo'"
+      value="bar"
+      validation="required|is:foo"
+      validation-visibility="live"
+      validation-label="Input"
+    />
+    <FormKit
+      label="I am a disabled input"
+      type="text"
+      value="I'm so faded"
+      help="I cannot be interacted with"
+      :disabled="true"
+    />
+  </div>
 </template>
 
-<script lang="ts">
-import {
-  defineComponent,
-  useFetch,
-  useContext, ref, Ref, computed, onMounted
-} from '@nuxtjs/composition-api'
-import { HydraMemberObject } from '~/api/hydra'
-import PageModel from '~/components/page/PageModel.vue'
-import BlogArticleTemplate from '~/components/blog-article/BlogArticleTemplate.vue'
-import { pageStore } from '~/custom-store/PageStore'
-import { blogArticleStore } from '~/custom-store/BlogArticleStore'
+<script setup lang="ts">
+import { useAuthStore } from '~/store/auth'
 
-export default defineComponent({
-  components: {
-    PageModel,
-    BlogArticleTemplate
-  },
-  setup () {
-    const context = useContext()
-    pageStore.setContext(context)
-    blogArticleStore.setContext(context)
-
-    onMounted(async () => {
-      await blogArticleStore.fetchAll({ 'order[createdAt]': 'desc' })
-    })
-
-    const page = computed(() => {
-      return !pageStore.getState().isLoading ? pageStore.find('/api/pages/home') : null
-    })
-
-    return {
-      articles: blogArticleStore.list,
-      page
-    }
-  },
-  head () {
-    return {
-      title: 'Accueil'
-    }
-  }
-})
+const store = useAuthStore();
+// const inputTypes = ['button', 'checkbox', 'color', 'date', 'datetime-local', 'email', 'file', 'month', 'number', 'password', 'radio', 'range', 'search', 'select', 'submit', 'tel', 'text', 'textarea', 'time', 'url', 'week']
+// const inputOptions = {
+//   checkbox: ['I like Tailwind', 'I also like FormKit', 'I like other things too'],
+//   radio: ['I like Tailwind', 'I like FormKit', 'I like everything'],
+//   select: ['I like Tailwind', 'I like FormKit', 'I like everything'],
+// }
 </script>

@@ -28,3 +28,9 @@ yarn-error.log
 
 .idea/
 .vscode/
+node_modules
+*.log*
+.nuxt
+.nitro
+.cache
+.output

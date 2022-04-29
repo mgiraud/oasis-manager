@@ -1,68 +1,75 @@
 import { defineStore } from 'pinia'
+import { HydraMemberObject } from '~/types/hydra'
 
-interface AuthPayload {
-  accessToken: string,
-  refreshToken: string
+export interface Credentials {
+  email: string,
+  password: string
 }
 
 interface AuthStore {
-  accessToken: string|null,
-  refreshToken: string|null,
-  user: string|null,
+  user: Member|null,
   credentialError: boolean,
+}
+
+export interface Member extends HydraMemberObject {
+  id: number
+  email: string
+  nickname: string
+  permissions: string[]
+  memberPermissions: string[]
+  groupPermissionsOverrideType: number
+  groups: Member[]
+  isAdmin: boolean
 }
 
 export const useAuthStore = defineStore('main', {
   state: (): AuthStore => {
     return {
-      accessToken: null,
-      refreshToken: null,
       user: null,
       credentialError: false,
     }
   },
-  actions: {
-    async login (email: string, password: string) {
-      this.credentialError = false
-      try {
-        const res = await this.$axios.$post('/login_check', {
-          email,
-          password
-        })
-        this.accessToken = res.accessToken
-        this.refreshToken = res.refreshToken
-
-        this.getUser()
-
-      } catch (e) {
-        this.credentialError = true
-      }
+  getters: {
+    isLogged(state): boolean {
+      return state.user !== null
     },
-    async register (email: string, password: string) {
-      const res = await this.$axios.$post('/auth/register', {
-        email,
-        password
+    isAdmin(state): boolean {
+      return state.user && state.user.isAdmin
+    }
+  },
+  actions: {
+    async login (credentials: Credentials) {
+      this.credentialError = false
+      await this.$nuxt.$apiFetch('/login_check', {
+        method: 'POST',
+        body: credentials
+      }).catch(() => {
+        this.credentialError = true
       })
 
-      this.setTokens(res)
-      this.getUser()
+      await this.getUser()
+    },
+    async register (credentials: Credentials) {
+      await this.$nuxt.$apiFetch('/auth/register', {
+        method: 'POST',
+        body: credentials
+      })
+
+      await this.getUser()
     },
     async getUser () {
-      const res = await this.$axios.$get('/auth/user')
-
-      this.user = res
+      this.user = await this.$nuxt.$apiFetch('/me')
     },
     async refresh () {
-      const res = await this.$axios.$post('/auth/refresh', {
-        refreshToken: this.refreshToken
-      })
+      try {
+        await this.$nuxt.$apiFetch('/refresh', {
+          method: 'POST',
+        })
 
-      this.accessToken = res.accessToken
-      this.refreshToken = res.refreshToken
+        await this.getUser()
+      } catch (e) {
+
+      }
     },
-    setTokens (res: AuthPayload) {
-      this.accessToken = res.accessToken
-      this.refreshToken = res.refreshToken
-    }
   }
 })

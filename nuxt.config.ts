@@ -4,8 +4,10 @@ import { defineNuxtConfig } from 'nuxt'
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   srcDir: 'app/',
-  env: {
-    apiBaseUrl: process.env.API_BASE_URL || 'http://localhost:8000/api'
+  runtimeConfig: {
+    public: {
+      API_BASE_URL: process.env.API_BASE_URL || 'https://127.0.0.1:8000/api'
+    }
   },
   modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt', '@formkit/nuxt'],
   formkit: {

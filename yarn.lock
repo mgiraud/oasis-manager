@@ -370,6 +370,11 @@
   resolved "https://registry.yarnpkg.com/@headlessui/vue/-/vue-1.6.0.tgz#e8242a0fb43fa2f7a0a82f1673c2ca221575a48d"
   integrity sha512-oB3R1G8BDDcTwaLqkr9G2swJlu62IaC6900fzsFglLVKG25jKOwOrlWKwjFNOMzmSQe/vCvoWJENWfeH10D4AA==
 
+"@heroicons/vue@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@heroicons/vue/-/vue-1.0.6.tgz#d8b90734b436eb5a87f40cc300b64a0fb0031f7f"
+  integrity sha512-ng2YcCQrdoQWEFpw+ipFl2rZo8mZ56v0T5+MyfQQvNqfKChwgP6DMloZLW+rl17GEcHkE3H82UTAMKBKZr4+WA==
+
 "@jridgewell/gen-mapping@^0.1.0":
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/@jridgewell/gen-mapping/-/gen-mapping-0.1.1.tgz#e5d2e450306a9491e3bd77e323e38d7aff315996"

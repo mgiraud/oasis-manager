@@ -6,9 +6,11 @@ export interface Credentials {
   password: string
 }
 
-interface AuthStore {
+interface AuthState {
   user: Member|null,
   credentialError: boolean,
+  refreshError: boolean,
+  loading: boolean,
 }
 
 export interface Member extends HydraMemberObject {
@@ -23,10 +25,12 @@ export interface Member extends HydraMemberObject {
 }
 
 export const useAuthStore = defineStore('main', {
-  state: (): AuthStore => {
+  state: (): AuthState => {
     return {
       user: null,
       credentialError: false,
+      refreshError: true,
+      loading: false,
     }
   },
   getters: {
@@ -34,20 +38,24 @@ export const useAuthStore = defineStore('main', {
       return state.user !== null
     },
     isAdmin(state): boolean {
-      return state.user && state.user.isAdmin
+      return state.user !== null && state.user.isAdmin
     }
   },
   actions: {
     async login (credentials: Credentials) {
       this.credentialError = false
+      this.loading = true
       await this.$nuxt.$apiFetch('/login_check', {
         method: 'POST',
         body: credentials
       }).catch(() => {
         this.credentialError = true
       })
+      this.loading = false;
 
-      await this.getUser()
+      if (!this.credentialError) {
+        await this.getUser()
+      }
     },
     async register (credentials: Credentials) {
       await this.$nuxt.$apiFetch('/auth/register', {
@@ -61,15 +69,21 @@ export const useAuthStore = defineStore('main', {
       this.user = await this.$nuxt.$apiFetch('/me')
     },
     async refresh () {
-      try {
-        await this.$nuxt.$apiFetch('/refresh', {
-          method: 'POST',
-        })
+      this.refreshError = false
+      await this.$nuxt.$apiFetch('/refresh', {
+        method: 'POST',
+      }).catch(() => {
+        this.refreshError = true
+      })
 
+      if (!this.refreshError) {
         await this.getUser()
-      } catch (e) {
-
       }
+    },
+    async logout () {
+      await this.$nuxt.$apiFetch('/logout')
+      this.user = null
+      console.log(this.user)
     },
   }
 })

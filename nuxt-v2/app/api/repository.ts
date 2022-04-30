@@ -2,11 +2,6 @@ import { Context } from '@nuxt/types'
 import { HydraGetAllResponse, HydraMemberObject, normalize } from './hydra'
 import SubmissionError from '../error/SubmissionError'
 
-// eslint-disable-next-line no-undef
-export type FormOptions = RequestInit & {
-  params?: {[propertyPath: string]: string}
-}
-
 export interface Repository<U extends HydraMemberObject> {
   call: (query: string, options: FormOptions) => Promise<Response>
   validateAndDecodeResponse : (url: string, options?: object) => Promise<any>

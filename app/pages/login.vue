@@ -22,7 +22,6 @@
         validation="required"
       />
     </FormKit>
-    <pre wrap>{{ credentials }}</pre>
   </div>
 </template>
 
@@ -32,6 +31,7 @@
 >
 import { Credentials, useAuthStore } from '~/store/auth'
 
+const route = useRoute();
 const store = useAuthStore()
 const credentials = reactive({
   email: '',
@@ -39,7 +39,9 @@ const credentials = reactive({
 })
 
 const submitHandler = (credentials: Credentials) => {
-  store.login(credentials)
+  store.login(credentials).then(() => {
+    navigateTo('/')
+  })
 }
 
 </script>

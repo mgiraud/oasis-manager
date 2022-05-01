@@ -59,7 +59,7 @@
         </div>
       </div>
     </div>
-    <div class="flex grow-1 shrink-0 p-2">
+    <div class="flex grow-1 shrink-0 flex-col p-2">
       <slot />
     </div>
   </div>
@@ -67,6 +67,7 @@
 
 <script setup lang="ts">
   import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
+  import { onUnmounted } from '@vue/runtime-core'
   import { storeToRefs } from 'pinia'
   import { useAuthStore } from '~/store/auth'
   import { usePageStore } from '~/store/page'
@@ -90,8 +91,6 @@
   }
 
   const menuItems = {'ITEM 1': ['SUB_ITEM 1', 'SUB_ITEM 2', 'SUB_ITEM 3'], 'ITEM 2': [], 'ITEM 3': []}
-  const scrolledFromTop = ref(false)
-  const $nuxt = useNuxtApp()
   const scrollY = ref(0)
 
   function onScroll() {
@@ -100,5 +99,9 @@
 
   onMounted(() => {
     window.addEventListener("scroll", onScroll);
+  })
+
+  onUnmounted(() => {
+    window.removeEventListener("scroll", onScroll);
   })
 </script>

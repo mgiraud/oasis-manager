@@ -6,12 +6,13 @@
 </template>
 
 <script setup lang="ts">
-import { PropType } from '@vue/runtime-core'
 import { Page } from '~/store/page'
 
-const props = withDefaults(defineProps({
-  page: Object as PropType<Page> | null
-}), {
+interface PageProps {
+  page: Page | null
+}
+
+const props = withDefaults(defineProps<PageProps>(), {
   page: null
 })
 </script>

@@ -65,7 +65,6 @@ export const usePageStore = defineStore('page', {
       if (mode !== CRUD_MODE.EDITION && mode !== CRUD_MODE.CREATION) {
         return;
       }
-      this.toggleLoading(mode)
 
       if (e instanceof SubmissionError) {
         this[mode].violations = e.errors
@@ -78,6 +77,66 @@ export const usePageStore = defineStore('page', {
       return Promise.reject(e)
     },
 
+    async load (id: string) {
+      this.toggleLoading(CRUD_MODE.EDITION)
+      this[CRUD_MODE.EDITION].retrieved = await this.$nuxt.$apiFetch(`/pages/${id}`).catch(async (e: Error) => {
+        await this.handleError(CRUD_MODE.EDITION, e)
+      }).finally(() => {
+        this.toggleLoading(CRUD_MODE.EDITION)
+      })
+    },
+
+    async update (item: Page) {
+      this[CRUD_MODE.EDITION].error = ''
+      this[CRUD_MODE.EDITION].violations = null
+      this.toggleLoading(CRUD_MODE.EDITION)
+
+      return await this.$nuxt.$apiFetch(`/pages/${item['url']}`, {
+        method: 'PUT',
+        body: item
+      }).catch(async (e: Error) => {
+        await this.handleError(CRUD_MODE.EDITION, e)
+      }).finally(() => {
+        this.toggleLoading(CRUD_MODE.EDITION)
+      })
+    },
+
+    async create (values: Object) {
+      this[CRUD_MODE.CREATION].error = ''
+      this[CRUD_MODE.CREATION].violations = null
+      this.toggleLoading(CRUD_MODE.CREATION)
+
+      this[CRUD_MODE.CREATION].created = await this.$nuxt.$apiFetch(`/pages`, {
+        method: 'POST',
+        body: values
+      }).catch(async (e: Error) => {
+        await this.handleError(CRUD_MODE.CREATION, e)
+      }).finally(() => {
+        this.toggleLoading(CRUD_MODE.CREATION)
+      })
+    },
+
+    async del (item: Page) {
+      this.toggleLoading(CRUD_MODE.DELETION)
+      this[CRUD_MODE.DELETION].deleted = await this.$nuxt.$apiFetch(`/pages/${item['url']}`, {
+        method: 'DELETE',
+      }).catch(async (e: Error) => {
+        await this.handleError(CRUD_MODE.DELETION, e)
+      }).finally(() => {
+        this.toggleLoading(CRUD_MODE.DELETION)
+      })
+    },
+
+    async fetchSelectItems (resource: string, { params = { properties: ['@id', 'name'] } } = {}) {
+      this.toggleLoading(CRUD_MODE.SELECTION)
+      this[CRUD_MODE.SELECTION].selectItems = await this.$nuxt.$apiFetch(resource, {
+        params
+      }).catch(async (e: Error) => {
+        await this.handleError(CRUD_MODE.SELECTION, e)
+      }).finally(() => {
+        this.toggleLoading(CRUD_MODE.SELECTION)
+      })
+    },
     //-----------------------------------------------------------------//
     findBySlug(slug: string) {
       return this.list.find((page: Page) => page.url === slug)

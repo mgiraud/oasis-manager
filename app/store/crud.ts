@@ -31,6 +31,7 @@ export interface CrudState<U extends HydraMemberObject> {
     violations: FormErrors | null;
     error: string;
     activeSlug: string | null;
+    retrieved: U
   },
   [CRUD_MODE.DELETION]: {
     deleted: U | null;
@@ -65,7 +66,8 @@ export const crudState: CrudState<any> = {
     edited: null,
     violations: null,
     error: '',
-    activeSlug: null
+    activeSlug: null,
+    retrieved: null
   },
   [CRUD_MODE.DELETION]: {
     deleted: null,

@@ -31,6 +31,7 @@ export default defineNuxtConfig({
             'primary-dark': '#06705e',
             primary: '#84DCC6',
             secondary: '#FFA69E',
+            'secondary-light': 'rgb(255, 251, 241)',
             accent: '#FF686B',
             info: '#A5FFD6'
           },

@@ -1,7 +1,7 @@
 import * as https from 'https'
 import { $fetch } from 'ohmyfetch'
 import { useAuthStore } from '~/store/auth'
-import { HydraMemberObject, normalize } from '~/types/hydra'
+import { normalize } from '~/types/hydra'
 import { FormErrors, FormViolation } from '~~/nuxt-v2/app/api/repository'
 import SubmissionError from '~~/nuxt-v2/app/error/SubmissionError'
 
@@ -55,7 +55,7 @@ export default defineNuxtPlugin(() => {
         return
       }
 
-      if (response.status === 401 && route.name !== 'login') {
+      if (response.status === 401 && route.name !== 'login' && !request.url.contains('/refresh')) {
         await authStore.logout()
         navigateTo({ path: 'login' })
       }

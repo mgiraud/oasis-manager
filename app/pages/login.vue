@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>COUCOU</h1>
     <FormKit
       type="form"
       v-model="credentials"
@@ -42,6 +41,10 @@ const submitHandler = (credentials: Credentials) => {
   store.login(credentials).then(() => {
     navigateTo('/')
   })
+}
+
+if (store.isLogged) {
+  navigateTo('/')
 }
 
 </script>

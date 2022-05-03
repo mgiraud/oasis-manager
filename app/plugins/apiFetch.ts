@@ -24,7 +24,7 @@ export default defineNuxtPlugin(() => {
     credentials: 'include',
     async onRequest({ request, options }) {
       if (request.body !== null) {
-        options.headers['Content-Type'] = jsonLdMimeType;
+        options.headers['Content-Type'] = jsonLdMimeType
       }
 
       if (process.server && process.env.NODE_ENV === 'development') {
@@ -50,7 +50,6 @@ export default defineNuxtPlugin(() => {
       console.log('[fetch request error]', request, error)
     },
     async onResponse({ request, response, options }) {
-
       if (response.ok) {
         return
       }

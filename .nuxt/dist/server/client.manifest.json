@@ -4,17 +4,23 @@
     "@vite/client",
     "entry.mjs",
     "@fs/Users/m.giraudtelme/Code/apps/oasis-manager/node_modules/@nuxtjs/tailwindcss/dist/runtime/tailwind.css",
+    "components/util/Editor/resizable-image/ResizableImageNode.vue?vue&type=style&index=0&lang.css",
+    "components/util/Editor.vue?vue&type=style&index=0&scoped=true&lang.css",
     "@fs/Users/m.giraudtelme/Code/apps/oasis-manager/node_modules/@nuxt/ui-templates/dist/templates/error-404.vue?vue&type=style&index=0&scoped=true&lang.css",
     "@fs/Users/m.giraudtelme/Code/apps/oasis-manager/node_modules/@nuxt/ui-templates/dist/templates/error-500.vue?vue&type=style&index=0&scoped=true&lang.css",
-    "@fs/Users/m.giraudtelme/Code/apps/oasis-manager/node_modules/@nuxt/ui-templates/dist/templates/error-dev.vue?vue&type=style&index=0&scoped=true&lang.css"
+    "@fs/Users/m.giraudtelme/Code/apps/oasis-manager/node_modules/@nuxt/ui-templates/dist/templates/error-dev.vue?vue&type=style&index=0&scoped=true&lang.css",
+    "layouts/default.vue?vue&type=style&index=0&lang.css"
   ],
   "initial": [
     "@vite/client",
     "entry.mjs",
     "@fs/Users/m.giraudtelme/Code/apps/oasis-manager/node_modules/@nuxtjs/tailwindcss/dist/runtime/tailwind.css",
+    "components/util/Editor/resizable-image/ResizableImageNode.vue?vue&type=style&index=0&lang.css",
+    "components/util/Editor.vue?vue&type=style&index=0&scoped=true&lang.css",
     "@fs/Users/m.giraudtelme/Code/apps/oasis-manager/node_modules/@nuxt/ui-templates/dist/templates/error-404.vue?vue&type=style&index=0&scoped=true&lang.css",
     "@fs/Users/m.giraudtelme/Code/apps/oasis-manager/node_modules/@nuxt/ui-templates/dist/templates/error-500.vue?vue&type=style&index=0&scoped=true&lang.css",
-    "@fs/Users/m.giraudtelme/Code/apps/oasis-manager/node_modules/@nuxt/ui-templates/dist/templates/error-dev.vue?vue&type=style&index=0&scoped=true&lang.css"
+    "@fs/Users/m.giraudtelme/Code/apps/oasis-manager/node_modules/@nuxt/ui-templates/dist/templates/error-dev.vue?vue&type=style&index=0&scoped=true&lang.css",
+    "layouts/default.vue?vue&type=style&index=0&lang.css"
   ],
   "async": [],
   "modules": {}

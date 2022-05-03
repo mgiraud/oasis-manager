@@ -1,5 +1,5 @@
 <template>
-  <div class="p-3 bg-white rounded-sm flex flex-col">
+  <div class="p-3 rounded-sm flex flex-col">
     <div class="text-lg text-primary-dark font-marker py-3">{{page.title}}</div>
     <div class="" v-html="page.content"></div>
   </div>

@@ -7,7 +7,7 @@
       <div class="h-36 flex items-start transition-all duration-200" :class="{ 'h-10': scrollY >= 50}">
         <div @click="redirectToHome" class="self-end z-40 font-marker text-lg text-white px-4 py-2">Les transalpins</div>
         <div class="grow"></div>
-        <div v-if="isAdmin" class="items-center text-primary-dark z-40  mr-1 inline-flex whitespace-nowrap uppercase tracking-wider text-sm py-2 h-10">ADMIN</div>
+        <div v-if="isAdmin" class="items-center text-primary-dark z-40  mr-1 inline-flex whitespace-nowrap uppercase tracking-wider text-sm py-2 h-10 cursor-pointer">ADMIN</div>
         <div class="h-10 inline-flex items-center pt-1 pb-2">
           <LoginIcon v-if="!isLogged" @click="redirectToLogin" class="h-5 w-5 z-40 text-primary-dark mr-1 cursor-pointer"/>
           <LogoutIcon v-if="isLogged" @click="logout" class="h-5 w-5 z-40 text-primary-dark mr-1 cursor-pointer"/>
@@ -39,7 +39,7 @@
       </div>
     </header>
     <div class="pt-48 bg-white" :class="{ 'pt-20': scrollY >= 50}">
-      <div class="shadow-md flex flex-row justify-center items-center">
+      <div class="shadow-md flex flex-row justify-center items-center flex-auto">
         <FormKit
           type="email"
           validation="required|email"
@@ -59,15 +59,33 @@
         </div>
       </div>
     </div>
-    <div class="flex grow-1 shrink-0 flex-col p-2">
-      <slot />
+    <div class="flex flex-col p-2 flex-auto">
+      <div class="flex bg-white flex-auto">
+        <slot />
+      </div>
     </div>
   </div>
 </template>
 
+<style>
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply text-2xl font-marker text-primary-dark;
+  }
+  h2 {
+    @apply text-xl font-marker text-primary;
+  }
+}
+</style>
+
 <script setup lang="ts">
+  import { useAsyncData } from '#app'
   import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
-  import { onUnmounted } from '@vue/runtime-core'
+  import { onMounted, onUnmounted } from '@vue/runtime-core'
   import { storeToRefs } from 'pinia'
   import { useAuthStore } from '~/store/auth'
   import { usePageStore } from '~/store/page'
@@ -77,7 +95,6 @@
   const { isLogged, isAdmin } = storeToRefs(authStore)
   const pageStore = usePageStore();
   await useAsyncData('pages', () => pageStore.fetchAll())
-
   const redirectToLogin = () => {
     navigateTo('/login')
   }

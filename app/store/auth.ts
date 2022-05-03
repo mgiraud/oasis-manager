@@ -83,7 +83,6 @@ export const useAuthStore = defineStore('main', {
     async logout () {
       await this.$nuxt.$apiFetch('/logout')
       this.user = null
-      console.log(this.user)
     },
   }
 })

@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia'
-import { CRUD_MODE, crudState } from '~/store/crud'
-import { HydraGetRequestFilter, HydraMemberObject } from '~/types/hydra'
+import { crudState } from '~/store/crud'
+import { PageCategory } from '~/store/page-category'
+import { HydraMemberObject } from '~/types/hydra'
 import { MediaNode } from '~~/nuxt-v2/app/custom-store/MediaNodeStore'
-import { PageCategory } from '~~/nuxt-v2/app/custom-store/PageCategoryStore'
 
-export type Page = HydraMemberObject & {
+export interface Page extends HydraMemberObject {
   url: string,
   title: string,
   content: string,

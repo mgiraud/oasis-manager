@@ -1,176 +1,174 @@
 <template>
-  <div class="flex  border border-2 border-black">
-    <div class="editor">
-      <div v-if="editor">
-        <editor-btn
-          label="Gras"
-          :btn-class="{ 'grey darken-3': editor.isActive('bold') }"
-          :click-handler="() => editor.chain().focus().toggleBold().run()"
-          icon-component="ChevronDownIcon"
-        />
-        <editor-btn
-          label="Italique"
-          :btn-class="{ 'grey darken-3': editor.isActive('italic') }"
-          :click-handler="() => editor.chain().focus().toggleItalic().run()"
-          icon-component="ChevronDownIcon"
-        />
-        <editor-btn
-          label="Barrer"
-          :btn-class="{ 'grey darken-3': editor.isActive('strike') }"
-          :click-handler="() => editor.chain().focus().toggleStrike().run()"
-          icon-component="ri-strikethrough"
-        />
-        <text-color-btn :editor="editor" />
-        <text-background-color-btn :editor="editor" />
-        <font-family-btn :editor="editor" />
-        <editor-btn
-          label="Supprimer le style de la sélection"
-          :click-handler="() => editor.chain().focus().unsetAllMarks().run()"
-          icon-component="ri-format-clear"
-        />
-        <editor-btn
-          label="Supprimer le style du bloc"
-          :click-handler="() => editor.chain().focus().clearNodes().run()"
-          icon-component="ri-eraser-line"
-        />
-        <editor-btn
-          label="Paragraphe"
-          :btn-class="{ 'grey darken-3': editor.isActive('paragraph') }"
-          :click-handler="() => editor.chain().focus().setParagraph().run()"
-          icon-component="ri-paragraph"
-        />
-        <editor-btn
-          label="Taille xxl"
-          :btn-class="{ 'grey darken-3': editor.isActive('heading', { level: 1 }) }"
-          :click-handler="() => editor.chain().focus().toggleHeading({ level: 1 }).run()"
-          icon-component="ri-h-1"
-        />
-        <editor-btn
-          label="Taille xl"
-          :btn-class="{ 'grey darken-3': editor.isActive('heading', { level: 2 }) }"
-          :click-handler="() => editor.chain().focus().toggleHeading({ level: 2 }).run()"
-          icon-component="ri-h-2"
-        />
-        <editor-btn
-          label="Taille l"
-          :btn-class="{ 'grey darken-3': editor.isActive('heading', { level: 3 }) }"
-          :click-handler="() => editor.chain().focus().toggleHeading({ level: 3 }).run()"
-          icon-component="ri-h-3"
-        />
-        <editor-btn
-          label="Taille m"
-          :btn-class="{ 'grey darken-3': editor.isActive('heading', { level: 4 }) }"
-          :click-handler="() => editor.chain().focus().toggleHeading({ level: 4 }).run()"
-          icon-component="ri-h-4"
-        />
-        <editor-btn
-          label="Taille s"
-          :btn-class="{ 'grey darken-3': editor.isActive('heading', { level: 5 }) }"
-          :click-handler="() => editor.chain().focus().toggleHeading({ level: 5 }).run()"
-          icon-component="ri-h-5"
-        />
-        <editor-btn
-          label="Taille xs"
-          :btn-class="{ 'grey darken-3': editor.isActive('heading', { level: 6 }) }"
-          :click-handler="() => editor.chain().focus().toggleHeading({ level: 6 }).run()"
-          icon-component="ri-h-6"
-        />
-        <editor-btn
-          label="Liste"
-          :btn-class="{ 'grey darken-3': editor.isActive('bulletList') }"
-          :click-handler="() => editor.chain().focus().toggleBulletList().run()"
-          icon-component="ri-list-unordered"
-        />
-        <editor-btn
-          label="Liste numérotée"
-          :btn-class="{ 'grey darken-3': editor.isActive('orderedList') }"
-          :click-handler="() => editor.chain().focus().toggleOrderedList().run()"
-          icon-component="ri-list-ordered"
-        />
-        <editor-btn
-          label="Bloc de code"
-          :btn-class="{ 'grey darken-3': editor.isActive('codeBlock') }"
-          :click-handler="() => editor.chain().focus().toggleCodeBlock().run()"
-          icon-component="ri-code-line"
-        />
-        <editor-btn
-          label="Citation"
-          :btn-class="{ 'grey darken-3': editor.isActive('blockquote') }"
-          :click-handler="() => editor.chain().focus().toggleCodeBlock().run()"
-          icon-component="ri-double-quotes-l"
-        />
-        <editor-btn
-          label="Séparateur horizontal"
-          :click-handler="() => editor.chain().focus().setHorizontalRule().run()"
-          icon-component="ri-separator"
-        />
-        <editor-btn
-          label="Undo"
-          :click-handler="() => editor.chain().focus().undo().run()"
-          icon-component="ri-arrow-go-back-line"
-        />
-        <editor-btn
-          label="Redo"
-          :click-handler="() => editor.chain().focus().redo().run()"
-          icon-component="ri-arrow-go-forward-line"
-        />
-        <editor-btn
-          label="Aligner à gauche"
-          :btn-class="{ 'grey darken-3': editor.isActive({ textAlign: 'left' }) }"
-          :click-handler="() => editor.chain().focus().setTextAlign('left').run()"
-          icon-component="ri-align-left"
-        />
-        <editor-btn
-          label="Centrer"
-          :btn-class="{ 'grey darken-3': editor.isActive({ textAlign: 'center' }) }"
-          :click-handler="() => editor.chain().focus().setTextAlign('center').run()"
-          icon-component="ri-align-center"
-        />
-        <editor-btn
-          label="Aligner à droite"
-          :btn-class="{ 'grey darken-3': editor.isActive({ textAlign: 'right' }) }"
-          :click-handler="() => editor.chain().focus().setTextAlign('right').run()"
-          icon-component="ri-align-right"
-        />
-        <editor-btn
-          label="Justifier"
-          :btn-class="{ 'grey darken-3': editor.isActive({ textAlign: 'justify' }) }"
-          :click-handler="() => editor.chain().focus().setTextAlign('justify').run()"
-          icon-component="ri-align-justify"
-        />
-        <editor-btn
-          label="Ajouter une image"
-          :btn-class="null"
-          :click-handler="addImage"
-          icon-component="ri-image-line"
-        />
-<!--&lt;!&ndash;        <file-upload-btn :editor="editor" />&ndash;&gt;-->
-        <editor-btn
-          label="Ajouter un lien"
-          :click-handler="setLink"
-          :btn-class="{ 'is-active': editor.isActive('link') }"
-          icon-component="ri-link"
-        />
-        <editor-btn
-          v-if="editor.isActive('link')"
-          label="Supprimer le lien"
-          icon-component="ri-link-unlink"
-          :click-handler="() => editor.chain().focus().unsetLink().run()"
-        />
-        <slot name="supplemental_btns" />
-        <div class="actions inline-flex">
-          <button class="" @click="clearContent">
-            Clear Content
-          </button>
-        </div>
-      </div>
-      <editor-content
-        class="editor__content"
-        :editor="editor"
+  <div class="flex flex-col border border-2 border-black">
+    <div class="editor flex flex-wrap" v-if="editor">
+      <editor-btn
+        label="Gras"
+        :btn-class="{ 'fill-stone-400': editor.isActive('bold') }"
+        :click-handler="() => editor.chain().focus().toggleBold().run()"
+        icon-component="ri-bold"
+      />
+      <editor-btn
+        label="Italique"
+        :btn-class="{ 'fill-stone-400': editor.isActive('italic') }"
+        :click-handler="() => editor.chain().focus().toggleItalic().run()"
+        icon-component="ri-italic"
+      />
+      <editor-btn
+        label="Barrer"
+        :btn-class="{ 'grey darken-3': editor.isActive('strike') }"
+        :click-handler="() => editor.chain().focus().toggleStrike().run()"
+        icon-component="ri-strikethrough"
+      />
+      <text-color-btn :editor="editor" />
+      <text-background-color-btn :editor="editor" />
+      <font-family-btn :editor="editor" />
+      <editor-btn
+        label="Supprimer le style de la sélection"
+        :click-handler="() => editor.chain().focus().unsetAllMarks().run()"
+        icon-component="ri-format-clear"
+      />
+      <editor-btn
+        label="Supprimer le style du bloc"
+        :click-handler="() => editor.chain().focus().clearNodes().run()"
+        icon-component="ri-eraser-line"
+      />
+      <editor-btn
+        label="Paragraphe"
+        :btn-class="{ 'grey darken-3': editor.isActive('paragraph') }"
+        :click-handler="() => editor.chain().focus().setParagraph().run()"
+        icon-component="ri-paragraph"
+      />
+      <editor-btn
+        label="Taille xxl"
+        :btn-class="{ 'grey darken-3': editor.isActive('heading', { level: 1 }) }"
+        :click-handler="() => editor.chain().focus().toggleHeading({ level: 1 }).run()"
+        icon-component="ri-h-1"
+      />
+      <editor-btn
+        label="Taille xl"
+        :btn-class="{ 'grey darken-3': editor.isActive('heading', { level: 2 }) }"
+        :click-handler="() => editor.chain().focus().toggleHeading({ level: 2 }).run()"
+        icon-component="ri-h-2"
+      />
+      <editor-btn
+        label="Taille l"
+        :btn-class="{ 'grey darken-3': editor.isActive('heading', { level: 3 }) }"
+        :click-handler="() => editor.chain().focus().toggleHeading({ level: 3 }).run()"
+        icon-component="ri-h-3"
+      />
+      <editor-btn
+        label="Taille m"
+        :btn-class="{ 'grey darken-3': editor.isActive('heading', { level: 4 }) }"
+        :click-handler="() => editor.chain().focus().toggleHeading({ level: 4 }).run()"
+        icon-component="ri-h-4"
+      />
+      <editor-btn
+        label="Taille s"
+        :btn-class="{ 'grey darken-3': editor.isActive('heading', { level: 5 }) }"
+        :click-handler="() => editor.chain().focus().toggleHeading({ level: 5 }).run()"
+        icon-component="ri-h-5"
+      />
+      <editor-btn
+        label="Taille xs"
+        :btn-class="{ 'grey darken-3': editor.isActive('heading', { level: 6 }) }"
+        :click-handler="() => editor.chain().focus().toggleHeading({ level: 6 }).run()"
+        icon-component="ri-h-6"
+      />
+      <editor-btn
+        label="Liste"
+        :btn-class="{ 'grey darken-3': editor.isActive('bulletList') }"
+        :click-handler="() => editor.chain().focus().toggleBulletList().run()"
+        icon-component="ri-list-unordered"
+      />
+      <editor-btn
+        label="Liste numérotée"
+        :btn-class="{ 'grey darken-3': editor.isActive('orderedList') }"
+        :click-handler="() => editor.chain().focus().toggleOrderedList().run()"
+        icon-component="ri-list-ordered"
+      />
+      <editor-btn
+        label="Bloc de code"
+        :btn-class="{ 'grey darken-3': editor.isActive('codeBlock') }"
+        :click-handler="() => editor.chain().focus().toggleCodeBlock().run()"
+        icon-component="ri-code-line"
+      />
+      <editor-btn
+        label="Citation"
+        :btn-class="{ 'grey darken-3': editor.isActive('blockquote') }"
+        :click-handler="() => editor.chain().focus().toggleCodeBlock().run()"
+        icon-component="ri-double-quotes-l"
+      />
+      <editor-btn
+        label="Séparateur horizontal"
+        :click-handler="() => editor.chain().focus().setHorizontalRule().run()"
+        icon-component="ri-separator"
+      />
+      <editor-btn
+        label="Undo"
+        :click-handler="() => editor.chain().focus().undo().run()"
+        icon-component="ri-arrow-go-back-line"
+      />
+      <editor-btn
+        label="Redo"
+        :click-handler="() => editor.chain().focus().redo().run()"
+        icon-component="ri-arrow-go-forward-line"
+      />
+      <editor-btn
+        label="Aligner à gauche"
+        :btn-class="{ 'grey darken-3': editor.isActive({ textAlign: 'left' }) }"
+        :click-handler="() => editor.chain().focus().setTextAlign('left').run()"
+        icon-component="ri-align-left"
+      />
+      <editor-btn
+        label="Centrer"
+        :btn-class="{ 'grey darken-3': editor.isActive({ textAlign: 'center' }) }"
+        :click-handler="() => editor.chain().focus().setTextAlign('center').run()"
+        icon-component="ri-align-center"
+      />
+      <editor-btn
+        label="Aligner à droite"
+        :btn-class="{ 'grey darken-3': editor.isActive({ textAlign: 'right' }) }"
+        :click-handler="() => editor.chain().focus().setTextAlign('right').run()"
+        icon-component="ri-align-right"
+      />
+      <editor-btn
+        label="Justifier"
+        :btn-class="{ 'grey darken-3': editor.isActive({ textAlign: 'justify' }) }"
+        :click-handler="() => editor.chain().focus().setTextAlign('justify').run()"
+        icon-component="ri-align-justify"
+      />
+      <editor-btn
+        label="Ajouter une image"
+        :btn-class="null"
+        :click-handler="addImage"
+        icon-component="ri-image-line"
+      />
+      <file-upload-btn :editor="editor" />
+      <editor-btn
+        label="Ajouter un lien"
+        :click-handler="setLink"
+        :btn-class="{ 'is-active': editor.isActive('link') }"
+        icon-component="ri-link"
+      />
+      <editor-btn
+        v-if="editor.isActive('link')"
+        label="Supprimer le lien"
+        icon-component="ri-link-unlink"
+        :click-handler="() => editor.chain().focus().unsetLink().run()"
+      />
+      <slot name="supplemental_btns" />
+      <editor-btn
+        label="Supprimer le contenu"
+        icon-component="ri-delete-bin-2-line"
+        :click-handler="clearContent"
       />
     </div>
-
+    <editor-content
+      class="editor__content"
+      :editor="editor"
+    />
   </div>
+
 </template>
 
 <script lang="ts" setup>
@@ -184,7 +182,7 @@ import Table from '@tiptap/extension-table'
 import TableRow from '@tiptap/extension-table-row'
 import TableCell from '@tiptap/extension-table-cell'
 import TableHeader from '@tiptap/extension-table-header'
-// import FileUploadBtn from './Editor/FileUploadBtn.vue'
+import FileUploadBtn from './Editor/FileUploadBtn.vue'
 import Link from '@tiptap/extension-link'
 import TextStyle from '@tiptap/extension-text-style'
 import FontFamily from '@tiptap/extension-font-family'
@@ -232,8 +230,7 @@ onBeforeUnmount(() => {
   editor.value?.destroy()
 })
 
-const clearContent = (e) => {
-  e.preventDefault()
+const clearContent = (e: Event) => {
   setContent('')
 }
 

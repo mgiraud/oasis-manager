@@ -1,7 +1,7 @@
 <template>
-  <Popover class="relative bg-black inline-flex p-2">
-    <PopoverButton class="text-white" @click="dialog = true">
-      Police de caractère
+  <Popover class="relative bg-black flex-auto inline-flex p-2" v-slot="{ open }">
+    <PopoverButton class="text-white" @click="dialog = true" @mouseover="open = true" @mouseout="open = false">
+      <Icon icon="ri-font-size" class="h-6 w-6 fill-white" />
     </PopoverButton>
 
     <PopoverPanel class="absolute z-10">
@@ -77,6 +77,7 @@ import { Editor } from '@tiptap/core'
 import { Popover, PopoverButton, PopoverPanel, TransitionRoot,
   TransitionChild, Dialog, DialogPanel, DialogTitle,
   Listbox, ListboxOptions, ListboxOption } from '@headlessui/vue'
+import Icon from '~/components/util/Icon'
 
 const fonts = [
   'Permanent Marker',

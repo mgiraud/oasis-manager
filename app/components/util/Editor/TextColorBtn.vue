@@ -1,7 +1,7 @@
 <template>
-  <Popover class="relative bg-black inline-flex p-2">
+  <Popover class="relative bg-black flex-auto inline-flex p-2">
     <PopoverButton class="text-white" :class="props.btnClass" @click="dialog = true">
-      Couleur
+      <Icon icon="ri-font-color" class="h-6 w-6 fill-white" />
     </PopoverButton>
 
     <PopoverPanel class="absolute z-10">
@@ -78,6 +78,7 @@ import { EditorColor, editorColors } from './colors'
 import { Popover, PopoverButton, PopoverPanel, TransitionRoot,
   TransitionChild, Dialog, DialogPanel, DialogTitle,
   Listbox, ListboxOptions, ListboxOption } from '@headlessui/vue'
+import Icon from '~/components/util/Icon'
 
 interface TextColorBtnProps {
   editor: Editor|null,

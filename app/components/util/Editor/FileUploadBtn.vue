@@ -1,11 +1,11 @@
 <template>
-  <Popover class="relative bg-black flex-auto inline-flex p-2">
-    <PopoverButton class="text-white" :class="props.btnClass" @click="dialog = true">
-      <Icon icon="ri-paint-fill" class="h-6 w-6 fill-white" />
+  <Popover class="relative bg-black flex-auto inline-flex p-2" v-slot="{ open }">
+    <PopoverButton class="text-white" @click="dialog = true" @mouseover="open = true" @mouseout="open = false">
+      <Icon icon="ri-file-transfer-line" class="h-6 w-6 fill-white" />
     </PopoverButton>
 
     <PopoverPanel class="absolute z-10">
-      Couleur de fond
+      Téléverser un fichier
     </PopoverPanel>
   </Popover>
 
@@ -43,27 +43,15 @@
                 as="h3"
                 class="text-lg font-medium leading-6 text-gray-900"
               >
-                Sélectionne une couleur
+                Téléverser un fichier
               </DialogTitle>
-              <Listbox v-model="selectedColor">
-                <ListboxOptions static>
-                  <ListboxOption
-                    v-for="(color, index) in colors"
-                    :key="index"
-                    @click="chooseBackgroundColor(color)"
-                    class="cursor-pointer"
-                    :class="color.background"
-                  >
-                     
-                  </ListboxOption>
-                  <ListboxOption
-                    @click="removeBackgroundColor"
-                    class="cursor-pointer"
-                  >
-                    Aucune couleur
-                  </ListboxOption>
-                </ListboxOptions>
-              </Listbox>
+<!--              <file-manager ref="fileManager" />-->
+              <button
+                class="bg-primary"
+                @click.prevent="injectFilesAndCloseDialog"
+              >
+                Insérer
+              </button>
             </DialogPanel>
           </TransitionChild>
         </div>
@@ -74,28 +62,39 @@
 
 <script setup lang="ts">
 import { Editor } from '@tiptap/core'
-import { EditorColor, editorColors } from './colors'
+import { Ref } from '@vue/reactivity'
+// import FileManager, { Link, Thumbnail } from '../../file-manager/FileManager.vue'
 import { Popover, PopoverButton, PopoverPanel, TransitionRoot,
-  TransitionChild, Dialog, DialogPanel, DialogTitle,
-  Listbox, ListboxOptions, ListboxOption } from '@headlessui/vue'
+  TransitionChild, Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
 import Icon from '~/components/util/Icon'
 
-interface TextColorBtnProps {
+interface FontFamilyBtnProps {
   editor: Editor|null,
 }
 
-const props = defineProps<TextColorBtnProps>()
+const props = defineProps<FontFamilyBtnProps>()
 const dialog = ref(false)
-const colors = editorColors
-const selectedColor = ref(null)
+const fileManager = ref(null) as Ref<typeof FileManager | null>
 
-const chooseBackgroundColor = (backgroundColor: EditorColor) => {
-  props.editor?.chain().focus().setBackgroundColor(backgroundColor.background).run()
+const injectFilesAndCloseDialog = () => {
+  // @ts-ignore
+  fileManager.value?.thumbnails.forEach((thumbnail: Thumbnail) => {
+    props.editor?.chain().focus().setImage({ src: thumbnail.src }).run()
+  })
+  // @ts-ignore
+  fileManager.value?.links.forEach((link: Link) => {
+    const node = props.editor?.schema.text(link.name, [props?.editor.schema.marks.link.create({ href: link.src })])
+    // @ts-ignore
+    props.editor?.view.dispatch(props.editor?.state.tr.replaceSelectionWith(node, false))
+  })
+
   dialog.value = false
 }
 
-const removeBackgroundColor = () => {
-  props.editor?.chain().focus().removeBackgroundColor().run()
-  dialog.value = false
-}
+watch(dialog, () => {
+  nextTick(() => {
+    // @ts-ignore
+    fileManager.value?.reset()
+  })
+})
 </script>

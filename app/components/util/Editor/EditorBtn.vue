@@ -1,5 +1,5 @@
 <template>
-  <Popover class="relative bg-black">
+  <Popover class="relative bg-black inline-flex p-2">
     <PopoverButton class="text-white" :class="props.btnClass" @click="props.clickHandler">
       <component :is="props.iconComponent" />
       {{ props.label }}

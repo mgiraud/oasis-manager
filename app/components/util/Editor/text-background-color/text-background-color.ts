@@ -1,4 +1,4 @@
-import { Command, Extension } from '@tiptap/core'
+import { Extension } from '@tiptap/core'
 
 export interface TextBackgroundColorOptions {
   backGroundColor: string
@@ -34,11 +34,14 @@ export default Extension.create<TextBackgroundColorOptions>({
               'data-background-color': attributes.backGroundColor
             }
           },
-          parseHTML (element: HTMLElement) {
+          addAttributes() {
             return {
-              backGroundColor: element.getAttribute('data-background-color')
+              color: {
+                // Set the color attribute according to the value of the `data-color` attribute
+                parseHTML: (element: HTMLElement) => element.getAttribute('data-background-color'),
+              }
             }
-          }
+          },
         }
       }
     }]

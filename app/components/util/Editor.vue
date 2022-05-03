@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="flex  border border-2 border-black">
     <div class="editor">
       <div v-if="editor">
         <editor-btn
@@ -20,9 +20,9 @@
           :click-handler="() => editor.chain().focus().toggleStrike().run()"
           icon-component="ri-strikethrough"
         />
-<!--&lt;!&ndash;        <text-color-btn :editor="editor" />&ndash;&gt;-->
-<!--&lt;!&ndash;        <text-background-color-btn :editor="editor" />&ndash;&gt;-->
-<!--&lt;!&ndash;        <font-family-btn :editor="editor" />&ndash;&gt;-->
+        <text-color-btn :editor="editor" />
+        <text-background-color-btn :editor="editor" />
+        <font-family-btn :editor="editor" />
         <editor-btn
           label="Supprimer le style de la sélection"
           :click-handler="() => editor.chain().focus().unsetAllMarks().run()"
@@ -158,6 +158,11 @@
           :click-handler="() => editor.chain().focus().unsetLink().run()"
         />
         <slot name="supplemental_btns" />
+        <div class="actions inline-flex">
+          <button class="" @click="clearContent">
+            Clear Content
+          </button>
+        </div>
       </div>
       <editor-content
         class="editor__content"
@@ -165,11 +170,6 @@
       />
     </div>
 
-    <div class="actions">
-      <button class="" @click="clearContent">
-        Clear Content
-      </button>
-    </div>
   </div>
 </template>
 
@@ -178,7 +178,6 @@ import { Editor, EditorContent } from '@tiptap/vue-3'
 import Starterkit from '@tiptap/starter-kit'
 import TextAlign from '@tiptap/extension-text-align'
 import { Ref } from '@vue/reactivity'
-import { Page } from '~/store/page'
 import EditorBtn from './Editor/EditorBtn.vue'
 import Typography from '@tiptap/extension-typography'
 import Table from '@tiptap/extension-table'
@@ -190,12 +189,11 @@ import Link from '@tiptap/extension-link'
 import TextStyle from '@tiptap/extension-text-style'
 import FontFamily from '@tiptap/extension-font-family'
 import ResizableImage from './Editor/resizable-image/resizableImage'
-import TextColor from './Editor/text-color/text-color'
-import TextBackgroundColor from './Editor/text-background-color/text-background-color'
-// import TextColorBtn from './Editor/TextColorBtn.vue'
-// import TextBackgroundColorBtn from './Editor/TextBackgroundColorBtn.vue'
-// import FontFamilyBtn from './Editor/FontFamilyBtn.vue'
-import {ChevronDownIcon, ArrowDownIcon} from '@heroicons/vue/solid'
+import TextColor from '~/components/util/Editor/text-color/text-color'
+import TextBackgroundColor from '~/components/util/Editor/text-background-color/text-background-color'
+import TextColorBtn from './Editor/TextColorBtn.vue'
+import TextBackgroundColorBtn from './Editor/TextBackgroundColorBtn.vue'
+import FontFamilyBtn from './Editor/FontFamilyBtn.vue'
 
 const editor = ref(null) as Ref<Editor | null>
 const props = defineProps<{modelValue: string|null}>()
@@ -234,7 +232,8 @@ onBeforeUnmount(() => {
   editor.value?.destroy()
 })
 
-const clearContent = () => {
+const clearContent = (e) => {
+  e.preventDefault()
   setContent('')
 }
 
@@ -267,19 +266,3 @@ watch(() => props.modelValue, (newValue) => {
 })
 
 </script>
-
-<style scoped>
-/*.editor__content:deep .ProseMirror {*/
-/*  min-height: 100px;*/
-/*  border: 1px solid #212121;*/
-/*  padding: 10px;*/
-/*}*/
-
-/*.editor__content:deep .ProseMirror > p {*/
-/*  margin-bottom: 0;*/
-/*}*/
-
-/*.editor__content:deep .ProseMirror > a {*/
-/*  color: #68CEF8;*/
-/*}*/
-</style>

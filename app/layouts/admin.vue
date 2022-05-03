@@ -8,6 +8,21 @@
   </v-app>
 </template>
 
+<style>
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply text-2xl font-marker text-primary-dark;
+  }
+  h2 {
+    @apply text-xl font-marker text-primary;
+  }
+}
+</style>
+
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
 import MenuDrawer from '../components/admin/MenuDrawer.vue'

@@ -68,11 +68,11 @@ import { Popover, PopoverButton, PopoverPanel, TransitionRoot,
   TransitionChild, Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
 import Icon from '~/components/util/Icon'
 
-interface FontFamilyBtnProps {
+interface FileUploadProps {
   editor: Editor|null,
 }
 
-const props = defineProps<FontFamilyBtnProps>()
+const props = defineProps<FileUploadProps>()
 const dialog = ref(false)
 const fileManager = ref(null) as Ref<typeof FileManager | null>
 

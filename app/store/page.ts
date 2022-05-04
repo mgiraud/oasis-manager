@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { crudState } from '~/store/crud'
+import { CrudState, crudState } from '~/store/crud'
 import { PageCategory } from '~/store/page-category'
 import { HydraMemberObject } from '~/types/hydra'
 import { MediaNode } from '~~/nuxt-v2/app/custom-store/MediaNodeStore'
@@ -14,7 +14,7 @@ export interface Page extends HydraMemberObject {
   mediaNode: MediaNode | null,
 }
 
-interface PageState {
+interface PageState extends CrudState<Page>{
   resource: string
 }
 

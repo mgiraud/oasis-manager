@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { crudState } from '~/store/crud'
+import { CrudState, crudState } from '~/store/crud'
 import { Page } from '~/store/page'
 import { HydraMemberObject } from '~/types/hydra'
 
@@ -12,11 +12,11 @@ export interface PageCategory extends HydraMemberObject {
   isPublished: boolean
 }
 
-interface PageCategoryState {
+interface PageCategoryState extends CrudState<PageCategory> {
   resource: string
 }
 
-export const usePageStore = defineStore('page', {
+export const usePageStore = defineStore('page_category', {
   state: (): PageCategoryState => {
     return {
       resource: '/page_categories',

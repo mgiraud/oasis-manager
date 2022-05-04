@@ -16,7 +16,7 @@ interface PageCategoryState extends CrudState<PageCategory> {
   resource: string
 }
 
-export const usePageStore = defineStore('page_category', {
+export const usePageCategoryStore = defineStore('page_category', {
   state: (): PageCategoryState => {
     return {
       resource: '/page_categories',

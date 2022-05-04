@@ -9,33 +9,12 @@
         <div class="grow"></div>
         <div v-if="isAdmin" class="items-center text-primary-dark z-40  mr-1 inline-flex whitespace-nowrap uppercase tracking-wider text-sm py-2 h-10 cursor-pointer">ADMIN</div>
         <div class="h-10 inline-flex items-center pt-1 pb-2">
-          <LoginIcon v-if="!isLogged" @click="redirectToLogin" class="h-5 w-5 z-40 text-primary-dark mr-1 cursor-pointer"/>
-          <LogoutIcon v-if="isLogged" @click="logout" class="h-5 w-5 z-40 text-primary-dark mr-1 cursor-pointer"/>
+          <Icon icon="ri-login-box-line" v-if="!isLogged" @click="redirectToLogin" class="h-5 w-5 z-40 fill-primary-dark mr-1 cursor-pointer"/>
+          <Icon icon="ri-logout-box-line" v-if="isLogged" @click="logout" class="h-5 w-5 z-40 fill-primary-dark mr-1 cursor-pointer"/>
         </div>
       </div>
-      <div class="flex flex-row whitespace-nowrap h-10 bg-info">
-        <Menu v-slot="{ open }" as="div" class="shadow-sm relative inline-block text-left items-stretch flex flex-auto" v-for="(subMenuItems, menuItem) in menuItems">
-          <MenuButton class="w-full text-primary-dark text-center before:absolute before:top-0 tracking-widest text-sm uppercase">
-            {{menuItem}}
-            <ChevronRightIcon v-if="subMenuItems.length > 0 && !open" class="h-3 w-3 inline-flex"></ChevronRightIcon>
-            <ChevronUpIcon v-if="subMenuItems.length > 0 && open" class="h-3 w-3 inline-flex"></ChevronUpIcon>
-          </MenuButton>
-          <transition
-            v-if="subMenuItems.length > 0"
-            enter-active-class="transition duration-100 ease-out"
-            enter-from-class="transform scale-95 opacity-0"
-            enter-to-class="transform scale-100 opacity-100"
-            leave-active-class="transition duration-75 ease-in"
-            leave-from-class="transform scale-100 opacity-100"
-            leave-to-class="transform scale-95 opacity-0"
-          >
-            <MenuItems class="flex flex-col flex-auto absolute left-0 top-full w-full bg-primary text-white">
-              <MenuItem as="div" v-slot="{ active }" class="h-10 uppercase" v-for="subMenuItem in subMenuItems">
-                <NuxtLink to="subMenuItem" class="w-full p-2 block">{{ subMenuItem }}</NuxtLink>
-              </MenuItem>
-            </MenuItems>
-          </transition>
-        </Menu>
+      <div class="flex flex-row bg-info flex-wrap">
+        <LayoutDefaultMenu />
       </div>
     </header>
     <div class="pt-48 bg-white" :class="{ 'pt-20': scrollY >= 50}">
@@ -84,12 +63,12 @@
 
 <script setup lang="ts">
   import { useAsyncData } from '#app'
-  import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
   import { onMounted, onUnmounted } from '@vue/runtime-core'
   import { storeToRefs } from 'pinia'
   import { useAuthStore } from '~/store/auth'
   import { usePageStore } from '~/store/page'
-  import { LoginIcon, LogoutIcon, ChevronRightIcon, ChevronUpIcon } from '@heroicons/vue/solid'
+  import LayoutDefaultMenu from '~/components/layout/default/Menu'
+  import Icon from '~/components/util/Icon'
 
   const authStore = useAuthStore();
   const { isLogged, isAdmin } = storeToRefs(authStore)

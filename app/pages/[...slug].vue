@@ -1,9 +1,10 @@
 <template>
-  <div>{{page}}</div>
+  <PageComponent :page="page"/>
 </template>
 
 <script setup lang="ts">
 import { usePageStore } from '~/store/page'
+import PageComponent from '~/components/front/PageComponent'
 
 const route = useRoute()
 const pageStore = usePageStore()

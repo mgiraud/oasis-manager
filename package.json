@@ -14,7 +14,6 @@
     "@formkit/nuxt": "^1.0.0-beta.6",
     "@formkit/tailwindcss": "^1.0.0-beta.6",
     "@headlessui/vue": "^1.6.0",
-    "@heroicons/vue": "^1.0.6",
     "@pinia/nuxt": "^0.1.8",
     "@tiptap/extension-font-family": "^2.0.0-beta.21",
     "@tiptap/extension-gapcursor": "^2.0.0-beta.34",

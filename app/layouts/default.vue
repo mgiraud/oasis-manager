@@ -62,7 +62,6 @@
 </style>
 
 <script setup lang="ts">
-  import { useAsyncData } from '#app'
   import { onMounted, onUnmounted } from '@vue/runtime-core'
   import { storeToRefs } from 'pinia'
   import { useAuthStore } from '~/store/auth'
@@ -73,7 +72,10 @@
   const authStore = useAuthStore();
   const { isLogged, isAdmin } = storeToRefs(authStore)
   const pageStore = usePageStore();
-  await useAsyncData('pages', () => pageStore.fetchAll())
+  await useAsyncData('pages', () => {
+    return pageStore.fetchAll()
+  })
+
   const redirectToLogin = () => {
     navigateTo('/login')
   }

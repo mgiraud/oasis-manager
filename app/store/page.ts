@@ -45,10 +45,11 @@ export const usePageStore = defineStore('page', {
     },
   },
   getters: {
-    findByActiveSlug: (state) => this.list.filter((page: Page) => page.category && page.category.slug === state.activeSlug),
+    findByActiveSlug(state) {
+      return this.list.filter((page: Page) => page.category && page.category.slug === state.activeSlug)
+    },
     menu() {
       const menu: MenuItem[] = []
-
       this.list.forEach((page: Page) => {
         if (!page || !page.showInMenu) {
           return

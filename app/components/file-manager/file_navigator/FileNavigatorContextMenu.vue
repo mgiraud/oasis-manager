@@ -141,7 +141,6 @@ const onFolderCreate = async () => {
 
 <style
   scoped
-  lang="scss"
 >
 .context-menu {
   top: 0;
@@ -152,8 +151,8 @@ const onFolderCreate = async () => {
   position: fixed;
   z-index: 1000000;
 
-  &--active {
-    display: block;
-  }
+  /*&--active {*/
+  /*  display: block;*/
+  /*}*/
 }
 </style>

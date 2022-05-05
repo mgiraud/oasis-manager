@@ -5,6 +5,7 @@ namespace App\Serializer;
 
 
 use App\Entity\MediaObject;
+use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -60,9 +61,13 @@ class MediaObjectSerializer implements ContextAwareNormalizerInterface, Cacheabl
             return false;
         }
 
-        $file = new File($filePath);
+        try {
+            $file = new File($filePath);
 
-        return strpos($file->getMimeType(), 'image/') !== false;
+            return strpos($file->getMimeType(), 'image/') !== false;
+        } catch (FileNotFoundException $e) {
+            return false;
+        }
     }
 
     public function hasCacheableSupportsMethod(): bool

@@ -9,36 +9,36 @@ declare module 'pinia' {
   }
 }
 
-function piniaApiPlugin({ store, app }: PiniaPluginContext) {
+function piniaApiPlugin({ store }: PiniaPluginContext) {
   store.load = async (id: string) => {
     store.toggleLoading(CRUD_MODE.EDITION)
-    store[CRUD_MODE.EDITION].retrieved = await app.$nuxt.$apiFetch(`${store.resource}/${id}`).catch(async (e: Error) => {
+    store[CRUD_MODE.EDITION].retrieved = await store.$nuxt.$apiFetch(`${store.resource}/${id}`).catch(async (e: Error) => {
       await store.handleError(CRUD_MODE.EDITION, e)
     }).finally(() => {
       store.toggleLoading(CRUD_MODE.EDITION)
     })
   }
 
-  store.fetchAll = async (params: HydraGetRequestFilter | Object = {}, reset: boolean = false) => {
+  store.fetchAll = async (params: HydraGetRequestFilter | Object = {}, reset: boolean = true) => {
+    store[CRUD_MODE.LIST] = Object.assign({
+      ...store[CRUD_MODE.LIST],
+    })
     store.toggleLoading(CRUD_MODE.LIST)
     if (reset) {
       store.resetList()
     }
-    const pages = await app.$nuxt.$apiFetch(store.resource).catch(async (e: Error) => {
+    const data = await store.$nuxt.$apiFetch(store.resource).catch(async (e: Error) => {
       await store.handleError(CRUD_MODE.LIST, e)
     })
-    if (!pages) {
+    if (!data) {
       return;
     }
-    store.resetList()
-
-    pages['hydra:member'].forEach((item: Page) => {
-      store.addItem(item)
+    data['hydra:member'].forEach((item: Page) => {
+      store.addItem(item, store)
     })
-    store[CRUD_MODE.LIST].totalItems = pages['hydra:totalItems']
-    store[CRUD_MODE.LIST].view = pages['hydra:view']
-    store.$state[CRUD_MODE.LIST].totalItems = pages['hydra:totalItems']
-    store.$state[CRUD_MODE.LIST].view = pages['hydra:view']
+
+    store[CRUD_MODE.LIST].totalItems = data['hydra:totalItems']
+    store[CRUD_MODE.LIST].view = data['hydra:view']
     store.toggleLoading(CRUD_MODE.LIST)
 
     return store.list
@@ -47,13 +47,9 @@ function piniaApiPlugin({ store, app }: PiniaPluginContext) {
   store.resetList = () => {
     store[CRUD_MODE.LIST].allIds = []
     store[CRUD_MODE.LIST].byId = {}
-    store.$state[CRUD_MODE.LIST].allIds = []
-    store.$state[CRUD_MODE.LIST].byId = {}
   }
 
   store.addItem = (item: Page) => {
-    store.$state[CRUD_MODE.LIST].allIds.push(item['@id'])
-    store.$state[CRUD_MODE.LIST].byId[item['@id']] = item
     store[CRUD_MODE.LIST].allIds.push(item['@id'])
     store[CRUD_MODE.LIST].byId[item['@id']] = item
   }
@@ -64,7 +60,6 @@ function piniaApiPlugin({ store, app }: PiniaPluginContext) {
 
   store.toggleLoading = (mode: CRUD_MODE) => {
     store[mode].isLoading = !store[mode].isLoading;
-    store.$state[mode].isLoading = !store[mode].isLoading;
   }
 
   store.handleError = (mode: CRUD_MODE, e: Error) => {
@@ -75,13 +70,10 @@ function piniaApiPlugin({ store, app }: PiniaPluginContext) {
     if (e instanceof SubmissionError) {
       store[mode].violations = e.errors
       store[mode].error = e.errors._error
-      store.$state[mode].violations = e.errors
-      store.$state[mode].error = e.errors._error
 
       return Promise.reject(e)
     }
     store[mode].error = e.message
-    store.$state[mode].error = e.message
 
     return Promise.reject(e)
   }
@@ -91,7 +83,7 @@ function piniaApiPlugin({ store, app }: PiniaPluginContext) {
     store[CRUD_MODE.EDITION].violations = null
     store.toggleLoading(CRUD_MODE.EDITION)
 
-    return await app.$nuxt.$apiFetch(`/pages/${item['url']}`, {
+    return await store.$nuxt.$apiFetch(`/pages/${item['url']}`, {
       method: 'PUT',
       body: item
     }).catch(async (e: Error) => {
@@ -106,7 +98,7 @@ function piniaApiPlugin({ store, app }: PiniaPluginContext) {
     store[CRUD_MODE.CREATION].violations = null
     store.toggleLoading(CRUD_MODE.CREATION)
 
-    store[CRUD_MODE.CREATION].created = await app.$nuxt.$apiFetch(`/pages`, {
+    store[CRUD_MODE.CREATION].created = await store.$nuxt.$apiFetch(`/pages`, {
       method: 'POST',
       body: values
     }).catch(async (e: Error) => {
@@ -118,7 +110,7 @@ function piniaApiPlugin({ store, app }: PiniaPluginContext) {
 
   store.del = async (item: Page) => {
     store.toggleLoading(CRUD_MODE.DELETION)
-    store[CRUD_MODE.DELETION].deleted = await app.$nuxt.$apiFetch(`/pages/${item['url']}`, {
+    store[CRUD_MODE.DELETION].deleted = await store.$nuxt.$apiFetch(`/pages/${item['url']}`, {
       method: 'DELETE',
     }).catch(async (e: Error) => {
       await store.handleError(CRUD_MODE.DELETION, e)
@@ -129,7 +121,7 @@ function piniaApiPlugin({ store, app }: PiniaPluginContext) {
 
   store.fetchSelectItems = async (resource: string, { params = { properties: ['@id', 'name'] } } = {}) => {
     store.toggleLoading(CRUD_MODE.SELECTION)
-    store[CRUD_MODE.SELECTION].selectItems = await app.$nuxt.$apiFetch(resource, {
+    store[CRUD_MODE.SELECTION].selectItems = await store.$nuxt.$apiFetch(resource, {
       params
     }).catch(async (e: Error) => {
       await store.handleError(CRUD_MODE.SELECTION, e)
@@ -143,6 +135,6 @@ function piniaApiPlugin({ store, app }: PiniaPluginContext) {
   })
 }
 
-export default defineNuxtPlugin((nuxtApp) => {
-  nuxtApp.pinia.use(piniaApiPlugin)
+export default defineNuxtPlugin(({$pinia}) => {
+  $pinia.use(piniaApiPlugin)
 })

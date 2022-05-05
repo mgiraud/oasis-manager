@@ -22,11 +22,11 @@ interface BlogArticleState extends CrudState<BlogArticle> {
 }
 
 export const useBlogArticleStore = defineStore('blog_articles', {
-  state: ():BlogArticleState => {
+  state: (): BlogArticleState => {
     return {
       resource: '/blog_articles',
       tag: [],
       ...crudState
     }
-  }
+  },
 })

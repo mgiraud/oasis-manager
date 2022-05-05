@@ -29,7 +29,6 @@ export default Extension.create<TextColorOptions>({
             if (!attributes.color) {
               return {}
             }
-            console.log(attributes);
             return {
               class: `${attributes.color}`,
               'data-color': attributes.color

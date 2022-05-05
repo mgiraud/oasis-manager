@@ -13,7 +13,7 @@ interface NotificationState {
   timeout: number
 }
 
-export const useNotificationStore = defineStore('media_nodes', {
+export const useNotificationStore = defineStore('notification', {
   state: (): NotificationState => {
     return {
       show: false,

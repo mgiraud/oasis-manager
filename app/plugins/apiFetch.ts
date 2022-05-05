@@ -53,8 +53,8 @@ export default defineNuxtPlugin(() => {
       if (response.ok) {
         return
       }
-
-      if (response.status === 401 && route.name !== 'login' && !request.url.contains('/refresh')) {
+console.log(request)
+      if (response.status === 401 && route.name !== 'login' && !request.includes('/refresh')) {
         await authStore.logout()
         navigateTo({ path: 'login' })
       }

@@ -1,5 +1,7 @@
 <template>
-  <PageComponent :page="page" v-if="page"/>
+  <div class="flex bg-white flex-auto flex-col">
+    <PageComponent :page="page" v-if="page"/>
+  </div>
 </template>
 
 <script setup lang="ts">

@@ -29,4 +29,9 @@ export const useBlogArticleStore = defineStore('blog_articles', {
       ...crudState
     }
   },
+  actions: {
+    findBySlug (slug: string): BlogArticle | null {
+      return this.list.find((page: BlogArticle) => page.url === slug)
+    },
+  }
 })

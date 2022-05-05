@@ -59,6 +59,12 @@ class BlogArticle
     private $title;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     * @Groups({"blog_article:read", "blog_article:write"})
+     */
+    private $preview;
+
+    /**
      * @ORM\Column(type="text")
      * @Groups({"blog_article:read", "blog_article:write"})
      */
@@ -187,6 +193,18 @@ class BlogArticle
     public function setMediaNode(?MediaNode $mediaNode): self
     {
         $this->mediaNode = $mediaNode;
+
+        return $this;
+    }
+
+    public function getPreview(): ?string
+    {
+        return $this->preview;
+    }
+
+    public function setPreview(?string $preview): self
+    {
+        $this->preview = $preview;
 
         return $this;
     }

@@ -1,8 +1,7 @@
 <template>
   <Menu v-slot="{ open }" as="div" class="shadow-sm relativetext-left flex flex-auto h-10" v-for="(menuItem) in menu">
-    <MenuButton class="w-full text-primary-dark text-center before:absolute before:top-0 tracking-widest text-sm uppercase">
-      <NuxtLink v-if="menuItem.children.length === 0" :to="menuItem.url">{{menuItem.name}}</NuxtLink>
-      <span v-else>{{menuItem.name}}</span>
+    <MenuButton @click="redirectTo(menuItem.children.length === 0 ? menuItem.url : null)" class="w-full text-primary-dark text-center before:absolute before:top-0 tracking-widest text-sm uppercase">
+      {{menuItem.name}}
       <Icon icon="ri-arrow-right-s-fill" v-if="menuItem.children.length > 0 && !open" class="h-3 w-3 inline-flex fill-primary-dark"></Icon>
       <Icon icon="ri-arrow-down-s-fill" v-if="menuItem.children.length > 0 && open" class="h-3 w-3 inline-flex fill-primary-dark"></Icon>
     </MenuButton>
@@ -16,8 +15,8 @@
       leave-to-class="transform scale-95 opacity-0"
     >
       <MenuItems class="flex flex-col flex-auto absolute left-0 top-full w-full bg-primary text-white">
-        <MenuItem as="div" v-slot="{ active }" class="h-10 uppercase" v-for="subMenuItem in menuItem.children">
-          <NuxtLink :to="subMenuItem.url" class="w-full p-2 block">{{ subMenuItem.name }}</NuxtLink>
+        <MenuItem @click="redirectTo(subMenuItem.url)" as="div" v-slot="{ active }" class="hover:bg-primary-dark h-10 uppercase flex-auto flex items-center cursor-pointer" v-for="subMenuItem in menuItem.children">
+          <div class="pl-2">{{ subMenuItem.name }}</div>
         </MenuItem>
       </MenuItems>
     </transition>
@@ -34,4 +33,10 @@
   const route = useRoute()
   const pageStore = usePageStore()
   const { menu } = storeToRefs(pageStore)
+
+  const redirectTo = (url: string | null) => {
+    if (url !== null) {
+      navigateTo(url)
+    }
+  }
 </script>

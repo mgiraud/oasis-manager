@@ -28,13 +28,16 @@ class MediaObjectController extends AbstractController
         $media = $manager->getRepository(MediaObject::class)->findOneBy([
             'uniqueId' => $mediaId
         ]);
-
         if (!$media instanceof MediaObject) {
-            return $this->createNotFoundException();
+            throw $this->createNotFoundException();
         }
 
         $inline = $request->query->has('inline');
 
-        return $downloadHandler->downloadObject($media, 'file', $objectClass = null, $fileName = null, !$inline);
+        try {
+            return $downloadHandler->downloadObject($media, 'file', $objectClass = null, $fileName = null, !$inline);
+        } catch (\Exception $e) {
+            throw $this->createNotFoundException();
+        }
     }
 }

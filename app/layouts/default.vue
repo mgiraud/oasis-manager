@@ -20,15 +20,40 @@
     <div class="pt-48 bg-white" :class="{ 'pt-20': scrollY >= 50}">
       <div class="shadow-md flex flex-row justify-center items-center flex-auto">
         <FormKit
-          type="email"
-          validation="required|email"
-          placeholder="Inscris-toi à la newsletter"
-          :classes="{
-            outer: '$reset p-2 min-w-[400px]',
-            inner: '$reset max-w-md border-b border-b-1 border-gray-500 formkit-invalid:border-red-500 mb-1 overflow-hidden focus-within:border-blue-500',
-            input: '$reset w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400'
+          type="form"
+          id="newsletter"
+          :actions="false"
+          @submit="submitNewsletter"
+          :incomplete-message="false"
+          #default="{ state: { valid } }"
+          :config="{
+            classes: {
+              form: 'flex'
+            }
           }"
         >
+          <button class="cursor-default">
+            <Icon icon="ri-mail-line" class="h-5 w-5 fill-gray-500"/>
+          </button>
+          <FormKit
+            type="email"
+            name="email"
+            validation="required|email"
+            placeholder="Inscris-toi à la newsletter"
+            :validation-messages="{
+              email: 'Tu dois rentrer une adresse email valide',
+              required: false,
+            }"
+            :classes="{
+              outer: '$reset p-2 min-w-[400px]',
+              inner: '$reset max-w-md border-b border-b-1 border-gray-500 formkit-invalid:border-red-500 mb-1 overflow-hidden focus-within:border-primary',
+              input: '$reset w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400',
+            }"
+          >
+          </FormKit>
+          <button>
+            <Icon icon="ri-send-plane-fill" class="h-5 w-5" :class="{'fill-primary': valid, 'fill-gray-500': !valid}" @click="submitNewsletterForm"/>
+          </button>
         </FormKit>
         <div class="mx-3 text-gray-800 text-sm">ET</div>
         <div>
@@ -60,6 +85,7 @@
 </style>
 
 <script setup lang="ts">
+  import { getNode } from '@formkit/core'
   import { onMounted, onUnmounted } from '@vue/runtime-core'
   import { storeToRefs } from 'pinia'
   import { useAuthStore } from '~/store/auth'
@@ -86,7 +112,14 @@
     authStore.logout()
   }
 
-  const menuItems = {'ITEM 1': ['SUB_ITEM 1', 'SUB_ITEM 2', 'SUB_ITEM 3'], 'ITEM 2': [], 'ITEM 3': []}
+  const submitNewsletterForm = () => {
+    getNode('newsletter').submit()
+  }
+
+  const submitNewsletter = (data) => {
+    console.log(data)
+  }
+
   const scrollY = ref(0)
 
   function onScroll() {

@@ -4,10 +4,10 @@ const textClassification = {
     max-w-md
     border
     border-gray-400
-    formkit-invalid:border-red-500
+    formkit-invalid:border-error
     rounded-lg mb-1
     overflow-hidden
-    focus-within:border-blue-500
+    focus-within:border-primary
   `,
   input: 'w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400',
 }

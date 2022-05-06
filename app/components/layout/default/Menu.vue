@@ -1,6 +1,6 @@
 <template>
   <Menu v-slot="{ open }" as="div" class="shadow-sm relativetext-left flex flex-auto h-10" v-for="(menuItem) in menu">
-    <MenuButton @click="redirectTo(menuItem.children.length === 0 ? menuItem.url : null)" class="w-full text-primary-dark text-center before:absolute before:top-0 tracking-widest text-sm uppercase">
+    <MenuButton @click="redirectTo(menuItem.children.length === 0 ? menuItem.url : null)" class="w-full text-primary-dark text-center before:absolute before:top-0 tracking-widest text-xs uppercase">
       {{menuItem.name}}
       <Icon icon="ri-arrow-right-s-fill" v-if="menuItem.children.length > 0 && !open" class="h-3 w-3 inline-flex fill-primary-dark"></Icon>
       <Icon icon="ri-arrow-down-s-fill" v-if="menuItem.children.length > 0 && open" class="h-3 w-3 inline-flex fill-primary-dark"></Icon>
@@ -16,7 +16,7 @@
     >
       <MenuItems class="flex flex-col flex-auto absolute left-0 top-full w-full bg-primary text-white">
         <MenuItem @click="redirectTo(subMenuItem.url)" as="div" v-slot="{ active }" class="hover:bg-primary-dark h-10 uppercase flex-auto flex items-center cursor-pointer" v-for="subMenuItem in menuItem.children">
-          <div class="pl-2">{{ subMenuItem.name }}</div>
+          <div class="pl-2 text-xs">{{ subMenuItem.name }}</div>
         </MenuItem>
       </MenuItems>
     </transition>

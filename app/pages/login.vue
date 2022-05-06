@@ -19,6 +19,7 @@
         type="password"
         name="password"
         validation="required"
+        autocomplete="autocomplete"
       />
     </FormKit>
   </div>
@@ -37,10 +38,11 @@ const credentials = reactive({
   password: ''
 })
 
-const submitHandler = (credentials: Credentials) => {
-  store.login(credentials).then(() => {
+const submitHandler = async (credentials: Credentials) => {
+  await store.login(credentials)
+  if (!store.credentialError) {
     navigateTo('/')
-  })
+  }
 }
 
 if (store.isLogged) {

@@ -41,8 +41,7 @@
             validation="required|email"
             placeholder="Inscris-toi à la newsletter"
             :validation-messages="{
-              email: 'Tu dois rentrer une adresse email valide',
-              required: false,
+              email: 'Email invalide',
             }"
             :classes="{
               outer: '$reset p-2 min-w-[400px]',

@@ -1,6 +1,6 @@
 <template>
-  <div class="p-3 rounded-sm flex flex-col">
-    <div class="text-lg text-primary-dark font-marker py-3">{{page.title}}</div>
+  <div class="p-3 rounded-sm flex flex-col md:w-4/5 self-center">
+    <div class="text-xl text-primary-dark font-marker py-3">{{page.title}}</div>
     <div class="" v-html="page.content"></div>
   </div>
 </template>

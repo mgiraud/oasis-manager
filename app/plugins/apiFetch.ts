@@ -43,7 +43,7 @@ export default defineNuxtPlugin(() => {
               : `${key}=${params[key]}`
           )
           .join('&')
-        request.url = `${request.url}?${queryString}`
+        request = `${request}?${queryString}`
       }
     },
     async onRequestError({ request, options, error }) {

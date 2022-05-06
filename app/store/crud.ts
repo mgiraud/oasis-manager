@@ -39,7 +39,7 @@ export interface CrudState<U extends HydraMemberObject> {
     error: string;
   },
   [CRUD_MODE.SELECTION]: {
-    selectItems: U[] | null;
+    selectItems: U[];
     isLoading: boolean;
     error: string;
   }
@@ -75,7 +75,7 @@ export const crudState: CrudState<any> = {
     error: ''
   },
   [CRUD_MODE.SELECTION]: {
-    selectItems: null,
+    selectItems: [],
     isLoading: false,
     error: ''
   }

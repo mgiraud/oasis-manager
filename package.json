@@ -11,7 +11,7 @@
     "nuxt": "3.0.0-rc.1"
   },
   "dependencies": {
-    "@formkit/nuxt": "^1.0.0-beta.6",
+    "@formkit/nuxt": "^1.0.0-beta.7-ffbc354",
     "@formkit/tailwindcss": "^1.0.0-beta.6",
     "@headlessui/vue": "^1.6.0",
     "@pinia/nuxt": "^0.1.8",

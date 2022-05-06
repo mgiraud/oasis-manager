@@ -10,13 +10,15 @@ declare module 'pinia' {
 }
 
 function piniaApiPlugin({ store }: PiniaPluginContext) {
-  store.load = async (id: string) => {
+  store.load = async (id: string, params = {}) => {
     store.$state[CRUD_MODE.EDITION] = Object.assign({
       ...store.$state[CRUD_MODE.EDITION],
     })
     store.toggleLoading(CRUD_MODE.EDITION)
     console.log(`${store.resource}/${id}`)
-    store.$state[CRUD_MODE.EDITION].retrieved = await store.$nuxt.$apiFetch(`${store.resource}/${id}`).catch(async (e: Error) => {
+    store.$state[CRUD_MODE.EDITION].retrieved = await store.$nuxt.$apiFetch(`${store.resource}/${id}`, {
+      params
+    }).catch(async (e: Error) => {
       await store.handleError(CRUD_MODE.EDITION, e)
     }).finally(() => {
       store.toggleLoading(CRUD_MODE.EDITION)
@@ -82,12 +84,12 @@ function piniaApiPlugin({ store }: PiniaPluginContext) {
     return Promise.reject(e)
   }
 
-  store.update = async (item: Page) => {
+  store.update = async (id: string | number, item: Page) => {
     store.$state[CRUD_MODE.EDITION].error = ''
     store.$state[CRUD_MODE.EDITION].violations = null
     store.toggleLoading(CRUD_MODE.EDITION)
 
-    return await store.$nuxt.$apiFetch(`/pages/${item['url']}`, {
+    return await store.$nuxt.$apiFetch(`${store.resource}/${id}`, {
       method: 'PUT',
       body: item
     }).catch(async (e: Error) => {
@@ -102,7 +104,7 @@ function piniaApiPlugin({ store }: PiniaPluginContext) {
     store.$state[CRUD_MODE.CREATION].violations = null
     store.toggleLoading(CRUD_MODE.CREATION)
 
-    store.$state[CRUD_MODE.CREATION].created = await store.$nuxt.$apiFetch(`/pages`, {
+    store.$state[CRUD_MODE.CREATION].created = await store.$nuxt.$apiFetch(`${store.resource}`, {
       method: 'POST',
       body: values
     }).catch(async (e: Error) => {
@@ -114,7 +116,7 @@ function piniaApiPlugin({ store }: PiniaPluginContext) {
 
   store.del = async (item: Page) => {
     store.toggleLoading(CRUD_MODE.DELETION)
-    store.$state[CRUD_MODE.DELETION].deleted = await store.$nuxt.$apiFetch(`/pages/${item['url']}`, {
+    store.$state[CRUD_MODE.DELETION].deleted = await store.$nuxt.$apiFetch(`${store.resource}/${item['url']}`, {
       method: 'DELETE',
     }).catch(async (e: Error) => {
       await store.handleError(CRUD_MODE.DELETION, e)
@@ -123,16 +125,40 @@ function piniaApiPlugin({ store }: PiniaPluginContext) {
     })
   }
 
-  store.fetchSelectItems = async (resource: string, { params = { properties: ['@id', 'name'] } } = {}) => {
+  store.fetchSelectItems = async ({ params = { 'properties[]': ['name'] } } = {}) => {
+    store.$state[CRUD_MODE.SELECTION] = Object.assign({
+      ...store.$state[CRUD_MODE.SELECTION],
+    })
     store.toggleLoading(CRUD_MODE.SELECTION)
-    store.$state[CRUD_MODE.SELECTION].selectItems = await store.$nuxt.$apiFetch(resource, {
+    const res = await store.$nuxt.$apiFetch(store.resource, {
       params
     }).catch(async (e: Error) => {
       await store.handleError(CRUD_MODE.SELECTION, e)
     }).finally(() => {
       store.toggleLoading(CRUD_MODE.SELECTION)
     })
+    if (!res) {
+      return;
+    }
+    store.$state[CRUD_MODE.SELECTION].selectItems = res['hydra:member']
   }
+
+  store.selectItemList = computed(() =>
+    (valueExpr = '@id', labelExpr = 'name') => {
+      const items = store.$state[CRUD_MODE.SELECTION].selectItems.map(item => {
+        return {
+          value: item[valueExpr],
+          label: item[labelExpr]
+        }
+      })
+      items.unshift({
+        value: null,
+        label: 'Aucune catégorie'
+      })
+
+      return items
+    }
+  )
 
   store.list = computed(() => {
     return store.$state[CRUD_MODE.LIST].allIds.map((id: string) => store.$state[CRUD_MODE.LIST].byId[id])

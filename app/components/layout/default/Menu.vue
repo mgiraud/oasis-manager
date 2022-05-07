@@ -1,5 +1,5 @@
 <template>
-  <Menu v-slot="{ open }" as="div" class="shadow-sm relativetext-left flex flex-auto h-10" v-for="(menuItem) in menu">
+  <Menu v-slot="{ open }" as="div" class="shadow-sm md:relative flex flex-auto h-10" v-for="(menuItem) in menu">
     <MenuButton @click="redirectTo(menuItem.children.length === 0 ? menuItem.url : null)" class="w-full text-primary-dark text-center before:absolute before:top-0 tracking-widest text-xs uppercase">
       {{menuItem.name}}
       <Icon icon="ri-arrow-right-s-fill" v-if="menuItem.children.length > 0 && !open" class="h-3 w-3 inline-flex fill-primary-dark"></Icon>

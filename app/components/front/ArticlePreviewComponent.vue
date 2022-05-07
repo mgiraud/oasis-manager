@@ -26,7 +26,7 @@
         <div
           v-for="(tag, i) in props.article.tags"
           :key="i"
-          class="bg-primary-dark text-white uppercase p-1 rounded-tl-lg rounded-br-lg mx-1 text-xs"
+          class="bg-primary-dark text-white uppercase px-2 py-1 rounded-tl-lg rounded-br-lg mx-1 text-xs"
         >
           {{ tag }}
         </div>

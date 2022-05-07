@@ -18,7 +18,7 @@
       </div>
     </header>
     <div class="pt-48 bg-white" :class="{ 'pt-20': scrollY >= 50}">
-      <div class="shadow-md flex flex-row justify-center items-center flex-auto">
+      <div class="shadow-sm flex flex-row justify-center items-center flex-auto">
         <FormKit
           type="form"
           id="newsletter"
@@ -62,9 +62,10 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-col p-2 flex-auto">
+    <div class="flex flex-col sm:px-6 md:px-10 sm:pt-3 flex-auto custom-shadow">
       <slot />
     </div>
+    <Footer />
   </div>
 </template>
 
@@ -81,12 +82,17 @@
     @apply text-xl font-marker text-primary;
   }
 }
+
+.custom-shadow {
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2),0 5px 8px 0 rgba(0,0,0,.14),0 1px 14px 0 rgba(0,0,0,.12) !important;
+}
 </style>
 
 <script setup lang="ts">
   import { getNode } from '@formkit/core'
   import { onMounted, onUnmounted } from '@vue/runtime-core'
   import { storeToRefs } from 'pinia'
+  import Footer from '~/components/layout/default/Footer.vue'
   import { useAuthStore } from '~/store/auth'
   import { usePageStore } from '~/store/page'
   import LayoutDefaultMenu from '~/components/layout/default/Menu.vue'

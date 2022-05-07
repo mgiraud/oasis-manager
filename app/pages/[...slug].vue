@@ -1,5 +1,5 @@
 <template>
-  <div class="flex bg-white flex-auto flex-col">
+  <div class="flex bg-white flex-auto flex-col p-3">
     <PageComponent :page="page" v-if="page"/>
   </div>
 </template>

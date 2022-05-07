@@ -19,7 +19,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "denormalization_context"={"groups"={"blog_article:write"}},
  *     },
  *     collectionOperations={
- *         "get"={},
+ *         "get"={"pagination_client_items_per_page"=true},
  *         "post"={"security"="is_granted('USER_CAN_EDIT_BLOG_ARTICLES')"},
  *         "get_tags"={
  *             "method"="GET",

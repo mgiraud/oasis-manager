@@ -33,7 +33,9 @@ function piniaApiPlugin({ store }: PiniaPluginContext) {
     if (reset) {
       store.resetList()
     }
-    const data = await store.$nuxt.$apiFetch(store.resource).catch(async (e: Error) => {
+    const data = await store.$nuxt.$apiFetch(store.resource, {
+      params
+    }).catch(async (e: Error) => {
       await store.handleError(CRUD_MODE.LIST, e)
     })
     if (!data) {

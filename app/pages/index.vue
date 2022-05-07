@@ -15,7 +15,7 @@ import ArticlePreviewComponent from '~/components/front/ArticlePreviewComponent.
 
 const blogArticleStore = useBlogArticleStore()
 const pageStore = usePageStore()
-await useAsyncData('articles', () => blogArticleStore.fetchAll({ 'order[createdAt]': 'desc' }))
+await useAsyncData('articles', () => blogArticleStore.fetchAll({ 'order[createdAt]': 'desc', 'itemsPerPage': 8 }))
 const homePage = pageStore.findBySlug('home')
 const articles = blogArticleStore.list
 

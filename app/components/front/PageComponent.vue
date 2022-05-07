@@ -1,7 +1,7 @@
 <template>
   <div class="p-3 rounded-sm flex flex-col md:w-4/5 self-center">
     <div class="text-xl text-primary-dark font-marker py-3">{{page.title}}</div>
-    <div class="" v-html="page.content"></div>
+    <div class="js-content" v-html="page.content"></div>
   </div>
 </template>
 
@@ -16,3 +16,9 @@ const props = withDefaults(defineProps<PageProps>(), {
   page: null
 })
 </script>
+
+<style>
+.js-content img {
+  display: inline-block;
+}
+</style>

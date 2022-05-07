@@ -1,8 +1,7 @@
 <template>
-  <div>
-    <p>{{ $route.params.slug }}</p>
+  <div class="flex flex-col flex-auto p-3">
+    <h1>Édition d'une page</h1>
     <FormComponent :page="{...data}" :submit-handler="submit"/>
-    {{data}}
   </div>
 </template>
 

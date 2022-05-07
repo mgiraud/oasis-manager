@@ -11,6 +11,10 @@ import FormComponent from '~/components/front/Page/FormComponent.vue'
 import { CRUD_MODE } from '~/store/crud'
 import { Page, usePageStore } from '~/store/page'
 
+definePageMeta({
+  layout: 'admin'
+})
+
 const pageStore = usePageStore()
 const route = useRoute()
 const { data } = await useAsyncData('page-update', async () => {

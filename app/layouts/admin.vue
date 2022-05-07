@@ -1,11 +1,8 @@
 <template>
-  <v-app>
-    <MenuDrawer />
-    <v-main>
-      <Nuxt />
-      <Alert />
-    </v-main>
-  </v-app>
+  <div class="flex">
+    <Menu class="w-80"/>
+    <slot />
+  </div>
 </template>
 
 <style>
@@ -23,23 +20,6 @@
 }
 </style>
 
-<script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
-import MenuDrawer from '../components/admin/MenuDrawer.vue'
-import Alert from '../components/util/Alert.vue'
-import usePermissions from '../composable/usePermissions'
-
-export default defineComponent({
-  components: {
-    MenuDrawer, Alert
-  },
-  middleware: ['isAdmin'],
-  setup () {
-    const { permissions } = usePermissions()
-
-    return {
-      permissions
-    }
-  }
-})
+<script setup lang="ts">
+import Menu from '~/components/layout/admin/Menu.vue'
 </script>

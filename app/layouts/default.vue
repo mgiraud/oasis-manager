@@ -7,7 +7,7 @@
       <div class="flex items-start transition-all duration-200" :class="{ 'h-10': scrollY >= 50, 'h-36': scrollY < 50}">
         <div @click="redirectToHome" class="self-end z-40 font-marker text-lg text-white px-4 py-2">Les transalpins</div>
         <div class="grow"></div>
-        <div v-if="isAdmin" class="items-center text-primary-dark z-40  mr-1 inline-flex whitespace-nowrap uppercase tracking-wider text-sm py-2 h-10 cursor-pointer">ADMIN</div>
+        <div v-if="isAdmin" class="items-center text-primary-dark z-40  mr-1 inline-flex whitespace-nowrap uppercase tracking-wider text-sm py-2 h-10 cursor-pointer" @click="redirectToAdmin">ADMIN</div>
         <div class="h-10 inline-flex items-center pt-1 pb-2">
           <Icon icon="ri-login-box-line" v-if="!isLogged" @click="redirectToLogin" class="h-5 w-5 z-40 fill-primary-dark mr-1 cursor-pointer"/>
           <Icon icon="ri-logout-box-line" v-if="isLogged" @click="logout" class="h-5 w-5 z-40 fill-primary-dark mr-1 cursor-pointer"/>
@@ -105,6 +105,10 @@
 
   const redirectToHome = () => {
     navigateTo('/')
+  }
+
+  const redirectToAdmin = () => {
+    navigateTo('/admin')
   }
 
   const logout = () => {

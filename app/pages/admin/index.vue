@@ -1,9 +1,14 @@
 <template>
   <div>
-    ADMIN
+    <h1>Administration</h1>
+    <div>
+      <p>Utiliser le menu pour naviguer</p>
+    </div>
   </div>
 </template>
 
-<script setup lang="ts">
-
+<script lang="ts">
+definePageMeta({
+  layout: 'admin'
+})
 </script>

@@ -57,15 +57,14 @@ export default defineNuxtPlugin(() => {
         await authStore.logout()
         navigateTo({ path: 'login' })
       }
-
       const error =
-        response.body['hydra:description'] ||
-        response.body['hydra:title'] ||
+        response._data['hydra:description'] ||
+        response._data['hydra:title'] ||
         'An error occurred.'
-      if (!response.body.violations) { throw new Error(error) }
+      if (!response._data.violations) { throw new Error(error) }
 
       const errors: FormErrors = { _error: error }
-      response.body.violations.forEach((violation: FormViolation) =>
+      response._data.violations.forEach((violation: FormViolation) =>
         errors[violation.propertyPath]
           ? (errors[violation.propertyPath] +=
             '\n' + errors[violation.propertyPath])
@@ -75,7 +74,7 @@ export default defineNuxtPlugin(() => {
     },
     async onResponseError({ request, response, options }) {
       // Log error
-      console.log('[fetch response error]', request, response.status, response.body)
+      console.log('[fetch response error]', request, response.status, response._data)
     }
   })
 

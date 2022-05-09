@@ -1,68 +1,69 @@
-<template xmlns="http://www.w3.org/1999/html">
+<template>
     <FormKit
       type="form"
-      v-model="page"
-      @submit="props.submitHandler"
+      v-model="item"
+      @submit="submitHandler"
     >
-  <div class="flex flex-col">
-    <div class="flex items-stretch">
-      <FormKit
-        name="title"
-        type="text"
-        label="Title"
-        validation="required"
-        outer-class="w-full md:w-1/2"
-      />
-      <FormKit
-        name="url"
-        type="text"
-        label="Url"
-        validation="required"
-        outer-class="w-full md:w-1/2"
-      />
-    </div>
-    <div class="flex items-stretch">
-      <FormKit
-        name="isPublished"
-        type="checkbox"
-        label="Publier"
-        outer-class="w-full md:w-1/2"
-      />
-      <FormKit
-        name="showInMenu"
-        type="checkbox"
-        label="Afficher dans le menu"
-        outer-class="w-full md:w-1/2"
-      />
-    </div>
-    <div class="flex items-stretch">
-      <FormKit
-        type="select"
-        label="Catégorie"
-        name="category"
-        :options="categories"
-        outer-class="w-full md:w-1/2"
-      />
+      <div class="flex flex-col">
+        <div class="flex items-stretch">
+          <FormKit
+            name="title"
+            type="text"
+            label="Title"
+            validation=""
+            outer-class="w-full md:w-1/2"
+            :errors="errors ? [errors.title] : []"
+          />
+          <FormKit
+            name="url"
+            type="text"
+            label="Url"
+            validation="required"
+            outer-class="w-full md:w-1/2"
+          />
+        </div>
+        <div class="flex items-stretch">
+          <FormKit
+            name="isPublished"
+            type="checkbox"
+            label="Publier"
+            outer-class="w-full md:w-1/2"
+          />
+          <FormKit
+            name="showInMenu"
+            type="checkbox"
+            label="Afficher dans le menu"
+            outer-class="w-full md:w-1/2"
+          />
+        </div>
+        <div class="flex items-stretch">
+          <FormKit
+            type="select"
+            label="Catégorie"
+            name="category"
+            :options="categories"
+            outer-class="w-full md:w-1/2"
+          />
 
-      <FormKit
-        type="select"
-        label="Gallerie"
-        name="mediaNode"
-        :options="mediaNodes"
-        outer-class="w-full md:w-1/2"
-      />
-    </div>
+          <FormKit
+            type="select"
+            label="Gallerie"
+            name="mediaNode"
+            :options="mediaNodes"
+            outer-class="w-full md:w-1/2"
+          />
+        </div>
 
-      <ClientOnly>
-        <Editor
-          v-if="page.content !== undefined"
-          ref="editor"
-          v-model="page.content"
-          class="bg-white"
-        >
-        </Editor>
-      </ClientOnly>
-  </div>
+          <ClientOnly>
+            <Editor
+              v-if="item.content !== undefined"
+              ref="editor"
+              v-model="item.content"
+              class="bg-white"
+            >
+            </Editor>
+          </ClientOnly>
+      </div>
     </FormKit>
 </template>
 
@@ -71,11 +72,23 @@ import { useMediaNodeStore } from '~/store/media-node'
 import { Page } from '~/store/page'
 import Editor from '~/components/util/Editor.vue'
 import { usePageCategoryStore } from '~/store/page-category'
-
+import { FormErrors, FormViolation } from '~/types/form'
 const props = defineProps<{
   page: Page,
-  submitHandler: Function
+  submitHandler: Function,
+  errors: FormErrors | null
 }>()
+const emit = defineEmits(['update:page']);
+
+const item = computed({
+  get() {
+    return props.page
+  },
+  set(value) {
+    emit('update:page', value)
+  }
+})
+
 const pageCategoryStore = usePageCategoryStore()
 const mediaNodeStore = useMediaNodeStore()
 await useAsyncData('page-category-items', () => pageCategoryStore.fetchSelectItems())

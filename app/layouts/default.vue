@@ -1,10 +1,10 @@
 <template>
-  <div class="flex flex-col bg-secondary-light min-h-screen text-sm">
-    <header class="fixed top-0 left-0 right-0 block">
-      <div class="bg-primary absolute top-0 left-0 w-full transition-all duration-200" :class="{ 'h-10': scrollY >= 50, 'h-36': scrollY < 50}">
+  <div class="flex flex-col bg-secondary-light min-h-screen text-sm order-first">
+    <header class="fixed top-0 left-0 right-0 block z-40 bg-primary">
+      <div class="bg-primary hidden md:block absolute top-0 left-0 w-full transition-all duration-200" :class="{ 'h-10': scrollY >= 50, 'h-36': scrollY < 50}">
         <div class="h-full bg-[url('/images/vercors.jpg')] bg-center bg-cover bg-no-repeat" :class="{'opacity-0': scrollY >= 50}"></div>
       </div>
-      <div class="flex items-start transition-all duration-200" :class="{ 'h-10': scrollY >= 50, 'h-36': scrollY < 50}">
+      <div class="flex items-start transition-all duration-200" :class="{ 'h-10': scrollY >= 50, 'h-10 md:h-36': scrollY < 50}">
         <div @click="redirectToHome" class="self-end z-40 font-marker text-lg text-white px-4 py-2">Les transalpins</div>
         <div class="grow"></div>
         <div v-if="isAdmin" class="items-center text-primary-dark z-40  mr-1 inline-flex whitespace-nowrap uppercase tracking-wider text-sm py-2 h-10 cursor-pointer" @click="redirectToAdmin">ADMIN</div>
@@ -17,8 +17,8 @@
         <LayoutDefaultMenu />
       </div>
     </header>
-    <div class="pt-48 bg-white" :class="{ 'pt-20': scrollY >= 50}">
-      <div class="shadow-sm flex flex-row justify-center items-center flex-auto">
+    <div class="bg-white" :class="{ 'mt-20': scrollY >= 50, 'mt-48': scrollY < 50}">
+      <div class="shadow-md flex flex-row justify-center items-center flex-auto">
         <FormKit
           type="form"
           id="newsletter"
@@ -62,7 +62,7 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-col sm:px-6 md:px-10 sm:pt-3 flex-auto custom-shadow">
+    <div class="flex flex-col sm:pt-3 flex-auto shadow-md mb-4">
       <slot />
     </div>
     <Footer />
@@ -81,10 +81,9 @@
   h2 {
     @apply text-xl font-marker text-primary;
   }
-}
-
-.custom-shadow {
-  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2),0 5px 8px 0 rgba(0,0,0,.14),0 1px 14px 0 rgba(0,0,0,.12) !important;
+  h3 {
+    @apply text-lg font-marker text-primary-dark;
+  }
 }
 </style>
 

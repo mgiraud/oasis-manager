@@ -17,6 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\String\Slugger\AsciiSlugger;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
@@ -78,12 +79,14 @@ class Page
     /**
      * @ORM\Column(type="text")
      * @Groups({"page:read", "page_category:read", "page:write", "page:read:edition"})
+     * @Assert\NotBlank()
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
      * @Groups({"page:read", "page:write", "page:read:edition"})
+     * @Assert\NotBlank()
      */
     private $content;
 

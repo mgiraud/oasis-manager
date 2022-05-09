@@ -23,9 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import FormComponent from '~/components/front/Page/FormComponent.vue'
-import { CRUD_MODE } from '~/store/crud'
-import { Page, usePageStore } from '~/store/page'
+import { usePageStore } from '~/store/page'
 import Icon from '~/components/util/Icon.vue'
 
 definePageMeta({

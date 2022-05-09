@@ -1,9 +1,4 @@
 import { defineStore } from 'pinia'
-import { CRUD_MODE, crudState } from '~/store/crud'
-import { Page } from '~/store/page'
-import { HydraMemberObject } from '~/types/hydra'
-import { breadcrumbItem, MediaNodeItem } from '~~/nuxt-v2/app/custom-store/MediaNodeStore'
-import { MediaObject } from '~~/nuxt-v2/app/custom-store/MediaObjectStore'
 
 interface NotificationState {
   show: boolean
@@ -17,7 +12,7 @@ export const useNotificationStore = defineStore('notification', {
   state: (): NotificationState => {
     return {
       show: false,
-      color: 'error',
+      color: 'accent',
       text: 'An error occurred',
       subText: '',
       timeout: 10000

@@ -2,6 +2,7 @@
   <div class="flex">
     <Menu class="w-80"/>
     <slot />
+    <Notification />
   </div>
 </template>
 
@@ -22,4 +23,5 @@
 
 <script setup lang="ts">
 import Menu from '~/components/layout/admin/Menu.vue'
+import Notification from '~/components/layout/Notification.vue'
 </script>

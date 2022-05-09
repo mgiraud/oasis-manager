@@ -49,6 +49,7 @@ const items = [
     label: 'Acueil',
     icon: 'ri-home-line',
     children: [],
+    url: 'admin'
   }, {
     label: 'Gérer les fichiers',
     icon: 'ri-folder-open-line',

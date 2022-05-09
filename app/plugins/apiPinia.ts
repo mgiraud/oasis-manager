@@ -1,5 +1,5 @@
 import { PiniaPluginContext } from 'pinia'
-import { CRUD_MODE, CrudState, crudState } from '~/store/crud'
+import { CRUD_MODE, CrudState } from '~/store/crud'
 import { Page } from '~/store/page'
 import { HydraGetRequestFilter, HydraMemberObject } from '~/types/hydra'
 import SubmissionError from '~~/nuxt-v2/app/error/SubmissionError'
@@ -15,7 +15,6 @@ function piniaApiPlugin({ store }: PiniaPluginContext) {
       ...store.$state[CRUD_MODE.EDITION],
     })
     store.toggleLoading(CRUD_MODE.EDITION)
-    console.log(`${store.resource}/${id}`)
     store.$state[CRUD_MODE.EDITION].retrieved = await store.$nuxt.$apiFetch(`${store.resource}/${id}`, {
       params
     }).catch(async (e: Error) => {
@@ -87,6 +86,9 @@ function piniaApiPlugin({ store }: PiniaPluginContext) {
   }
 
   store.update = async (id: string | number, item: Page) => {
+    store.$state[CRUD_MODE.EDITION] = Object.assign({
+      ...store.$state[CRUD_MODE.EDITION],
+    })
     store.$state[CRUD_MODE.EDITION].error = ''
     store.$state[CRUD_MODE.EDITION].violations = null
     store.toggleLoading(CRUD_MODE.EDITION)

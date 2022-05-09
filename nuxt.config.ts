@@ -40,7 +40,10 @@ export default defineNuxtConfig({
             sans: ['Helvetica'],
           },
         }
-      }
+      },
+      safelist: [
+        { pattern: /order-\d+/ },
+      ]
     },
   },
   typescript: {

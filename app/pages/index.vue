@@ -1,7 +1,7 @@
 <template>
   <div class="flex bg-white flex-auto flex-col">
     <Carrousel :media-node="homePage.mediaNode" v-if="homePage !== null && homePage.mediaNode !== null"/>
-    <PageComponent :page="homePage" v-if="homePage" class="md:w-4/5 self-center"/>
+    <PageComponent :page="homePage" v-if="homePage" class="md:w-4/5"/>
     <div class="flex flex-wrap md:w-4/5 lg:w-3/4 self-center">
       <ArticlePreviewComponent v-for="article in articles" :article="article" class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4"/>
     </div>

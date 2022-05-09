@@ -5,7 +5,7 @@
         <div class="h-full bg-[url('/images/vercors.jpg')] bg-center bg-cover bg-no-repeat" :class="{'opacity-0': scrollY >= 50}"></div>
       </div>
       <div class="flex items-start transition-all duration-200" :class="{ 'h-10': scrollY >= 50, 'h-10 md:h-36': scrollY < 50}">
-        <div @click="redirectToHome" class="self-end z-40 font-marker text-lg text-white px-4 py-2">Les transalpins</div>
+        <div @click="redirectToHome" class="self-end z-40 font-marker text-lg text-white px-4 py-2 cursor-pointer">Les transalpins</div>
         <div class="grow"></div>
         <div v-if="isAdmin" class="items-center text-primary-dark z-40  mr-1 inline-flex whitespace-nowrap uppercase tracking-wider text-sm py-2 h-10 cursor-pointer" @click="redirectToAdmin">ADMIN</div>
         <div class="h-10 inline-flex items-center pt-1 pb-2">
@@ -16,53 +16,53 @@
       <div class="flex flex-row bg-info flex-wrap">
         <LayoutDefaultMenu />
       </div>
-    </header>
-    <div class="bg-white" :class="{ 'mt-20': scrollY >= 50, 'mt-48': scrollY < 50}">
-      <div class="shadow-md flex flex-row justify-center items-center flex-auto">
-        <FormKit
-          type="form"
-          id="newsletter"
-          :actions="false"
-          @submit="submitNewsletter"
-          :incomplete-message="false"
-          #default="{ state: { valid } }"
-          :config="{
-            classes: {
-              form: 'flex'
-            }
-          }"
-        >
-          <button class="cursor-default">
-            <Icon icon="ri-mail-line" class="h-5 w-5 fill-gray-500"/>
-          </button>
+      <div class="bg-white">
+        <div class="shadow-md flex flex-row justify-center items-center flex-auto flex-wrap">
           <FormKit
-            type="email"
-            name="email"
-            validation="required|email"
-            placeholder="Inscris-toi à la newsletter"
-            :validation-messages="{
-              email: 'Email invalide',
-            }"
-            :classes="{
-              outer: '$reset p-2 min-w-[400px]',
-              inner: '$reset max-w-md border-b border-b-1 border-gray-500 formkit-invalid:border-red-500 mb-1 overflow-hidden focus-within:border-primary',
-              input: '$reset w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400',
+            type="form"
+            id="newsletter"
+            :actions="false"
+            @submit="submitNewsletter"
+            :incomplete-message="false"
+            #default="{ state: { valid } }"
+            :config="{
+              classes: {
+                form: 'flex grow md:grow-0'
+              }
             }"
           >
+            <button class="cursor-default">
+              <Icon icon="ri-mail-line" class="h-5 w-5 fill-gray-500"/>
+            </button>
+            <FormKit
+              type="email"
+              name="email"
+              validation="required|email"
+              placeholder="Inscris-toi à la newsletter"
+              :validation-messages="{
+                email: 'Email invalide',
+              }"
+              :classes="{
+                outer: '$reset p-2 min-w-[400px]',
+                inner: '$reset max-w-md border-b border-b-1 border-gray-500 formkit-invalid:border-red-500 mb-1 overflow-hidden focus-within:border-primary',
+                input: '$reset w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400',
+              }"
+            >
+            </FormKit>
+            <button>
+              <Icon icon="ri-send-plane-fill" class="h-5 w-5" :class="{'fill-primary': valid, 'fill-gray-500': !valid}" @click="submitNewsletterForm"/>
+            </button>
           </FormKit>
-          <button>
-            <Icon icon="ri-send-plane-fill" class="h-5 w-5" :class="{'fill-primary': valid, 'fill-gray-500': !valid}" @click="submitNewsletterForm"/>
-          </button>
-        </FormKit>
-        <div class="mx-3 text-gray-800 text-sm">ET</div>
-        <div>
-          <button class="bg-primary text-white text-sm px-3 py-1.5 shadow-md rounded-sm">
-            <span class="uppercase tracking-wider font-light">Adhère à l'association</span>
-          </button>
+          <div class="mx-3 text-gray-800 text-sm">ET</div>
+          <div class="grow md:grow-0">
+            <button class="bg-primary text-white text-sm px-3 py-1.5 shadow-md rounded-sm">
+              <span class="uppercase tracking-wider font-light">Adhère à l'association</span>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="flex flex-col sm:pt-3 flex-auto shadow-md mb-4">
+    </header>
+    <div class="flex flex-col pt-48 md:pt-56 flex-auto shadow-md mb-4">
       <slot />
     </div>
     <Footer />

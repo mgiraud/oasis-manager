@@ -22,6 +22,7 @@ export interface MediaNodeItem {
 export interface BreadcrumbItem {
   '@id': string
   name: string
+  id: string | number
   type: 'item' | 'gallery'
 }
 

@@ -1,14 +1,6 @@
 <template>
-  <div
-    id="fileNavigatorContextMenu"
-    class="context-menu flex flex-col"
-  >
-    <div @click="dialog = true">
-      Ajouter un dossier
-    </div>
-  </div>
-  <TransitionRoot appear :show="dialog" as="template" v-if="mediaNode">
-    <Dialog as="div" @close="dialog = false" class="relative z-10">
+  <TransitionRoot appear :show="show" as="template">
+    <Dialog as="div" :open="show" @close="show = false" class="relative z-10">
       <TransitionChild
         as="template"
         enter="duration-300 ease-out"
@@ -43,16 +35,23 @@
               >
                 Ajouter un dossier
               </DialogTitle>
-<!--              <v-form>-->
-<!--                <v-text-field-->
-<!--                  v-model="newFolderName"-->
-<!--                  label="Nom du dossier"-->
-<!--                  required-->
-<!--                />-->
-<!--              </v-form>-->
+              <FormKit
+                type="form"
+                @submit="onFolderCreate"
+                :actions="false"
+                id="folder"
+              >
+                <FormKit
+                  name="name"
+                  type="text"
+                  label="Nom du dossier"
+                  validation="length:3"
+                  outer-class="w-full"
+                />
+              </FormKit>
               <button
                 class="bg-primary"
-                @click.prevent="onFolderCreate"
+                @click.prevent="submitForm"
               >
                 Insérer
               </button>
@@ -66,12 +65,14 @@
 
 <script setup lang="ts">
 
+import { getNode } from '@formkit/core'
 import { Ref } from '@vue/reactivity'
 import { MediaNode, useMediaNodeStore } from '~/store/media-node'
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
 
 interface FileNavigatorProps {
   mediaNode?: MediaNode | null,
+  dialog: boolean
   refresh: Function
 }
 
@@ -79,80 +80,34 @@ const props = withDefaults(defineProps<FileNavigatorProps>(), {
   mediaNode: null
 })
 
-const contextMenu: Ref<HTMLElement | null> = ref(null)
-const dialog = ref(false)
+const emit = defineEmits(['update:dialog']);
+
+const show = computed({
+  get() {
+    return props.dialog
+  },
+  set(value) {
+    emit('update:dialog', value)
+  }
+})
+
+const submitForm = () => {
+  getNode('folder').submit()
+}
+
 const newFolderName = ref(null) as Ref<null | string>
 const mediaNodeStore = useMediaNodeStore()
 
-onMounted(() => {
-  contextMenu.value = document.getElementById('fileNavigatorContextMenu') as HTMLElement
-  document.addEventListener(document.ontouchstart !== null ? 'click' : 'touchstart', onClick, false)
-})
-
-const showMenu = (event: MouseEvent) => {
-  if (!contextMenu.value) {
-    return
-  }
-  if ((contextMenu.value.offsetWidth + event.pageX) >= window.innerWidth) {
-    contextMenu.value.style.left = (event.pageX - contextMenu.value.offsetWidth + 2) + 'px'
-  } else {
-    contextMenu.value.style.left = (event.pageX - 2) + 'px'
-  }
-  if ((contextMenu.value.offsetHeight + event.pageY) >= window.innerHeight) {
-    contextMenu.value.style.top = (event.pageY - contextMenu.value.offsetHeight + 2) + 'px'
-  } else {
-    contextMenu.value.style.top = (event.pageY - 2) + 'px'
-  }
-  contextMenu.value.classList.add('context-menu--active')
-}
-
-const hideMenu = () => {
-  if (!contextMenu.value) {
-    return
-  }
-
-  contextMenu.value.style.left = '0px'
-  contextMenu.value.style.top = '0px'
-  contextMenu.value.classList.remove('context-menu--active')
-}
-
-const onClick = (e: MouseEvent | TouchEvent) => {
-  if (!e.target || !contextMenu.value) {
-    return
-  }
-  if (!contextMenu.value.contains(e.target as Node)) {
-    hideMenu()
-  }
-}
-
-const onFolderCreate = async () => {
-  dialog.value = false
-  if (!newFolderName || !props.mediaNode) {
+const onFolderCreate = async (data: {name: string}) => {
+  show.value = false
+  if (!data.name) {
     return
   }
   await mediaNodeStore.create({
-    name: newFolderName.value,
-    parent: props.mediaNode['@id']
+    name: data.name,
+    parent: props.mediaNode?.['@id']
   })
   // @ts-ignore
   await props.refresh()
 }
 </script>
-
-<style
-  scoped
->
-.context-menu {
-  top: 0;
-  left: 0;
-  margin: 0;
-  padding: 0;
-  display: none;
-  position: fixed;
-  z-index: 1000000;
-
-  /*&--active {*/
-  /*  display: block;*/
-  /*}*/
-}
-</style>

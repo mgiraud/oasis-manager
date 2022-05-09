@@ -18,13 +18,25 @@ export default defineNuxtPlugin(() => {
   const fetch = $fetch.create({
     baseURL: entryPoint,
     headers: {
-      Accept: jsonLdMimeType,
       ...useRequestHeaders(['cookie'])
     },
     credentials: 'include',
     async onRequest({ request, options }) {
+      let isFile = false
+      if (process.client) {
+        isFile = (options.body instanceof FormData)
+      }
+      if (!isFile) {
+        options.headers['Accept'] = jsonLdMimeType
+      } else {
+        delete options.headers['Accept']
+      }
       if (request.body !== null) {
-        options.headers['Content-Type'] = jsonLdMimeType
+        if (!isFile) {
+          options.headers['Content-Type'] = jsonLdMimeType
+        } else {
+          delete options.headers['Content-Type']
+        }
       }
 
       if (process.server && process.env.NODE_ENV === 'development') {

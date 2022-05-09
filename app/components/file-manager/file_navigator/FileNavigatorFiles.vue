@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-row">
       <div
-        v-for="item in mediaObjects"
+        v-for="item in mediaObjectStore.list"
         :key="item['@id']"
       >
         <div>
@@ -75,7 +75,7 @@ const mediaObjectStore = useMediaObjectStore()
 const loadObjects = () => {
   if (props.mediaNode) {
     mediaObjectStore.fetchAll({
-      mediaNodes: props.mediaNode['@id']
+      mediaNodes: props.mediaNode.id
     })
   }
 }

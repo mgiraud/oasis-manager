@@ -116,6 +116,8 @@ function piniaApiPlugin({ store }: PiniaPluginContext) {
     }).finally(() => {
       store.toggleLoading(CRUD_MODE.CREATION)
     })
+
+    return store.$state[CRUD_MODE.CREATION].created
   }
 
   store.del = async (item: Page) => {

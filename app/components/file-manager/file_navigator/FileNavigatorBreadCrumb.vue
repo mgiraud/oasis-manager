@@ -1,27 +1,27 @@
 <template>
   <div
     v-if="mediaNode"
-    class="cursor-pointer"
+    class="flex flex-row w-full"
   >
-    <span
+    <Icon icon="ri-home-fill" class="h-6 w-6 cursor-pointer fill-primary" @click="handleRootClick"/>
+    <div
       v-for="crumb in mediaNode.breadcrumb"
       :key="crumb['@id']"
       @click="handleCrumbClick(crumb)"
-    >&nbsp;<v-icon>ri-arrow-right-s-line</v-icon>&nbsp;<v-btn
-      rounded
-      depressed
-      small
-    >{{ crumb.name }}</v-btn></span>
+      class="inline-flex items-center cursor-pointer"
+    >&nbsp;<Icon icon="ri-arrow-right-s-line" class="h-6 w-6"/><div class="cursor-pointer text-primary">{{ crumb.name }}</div></div>
   </div>
 </template>
 
 <script setup lang="ts">
 
 import { BreadcrumbItem, MediaNode } from '~/store/media-node'
+import Icon from '~/components/util/Icon.vue'
 
 interface FileNavigatorProps {
   mediaNode?: MediaNode | null,
-  mediaNodeClickHandler: Function
+  mediaNodeClickHandler: Function,
+  handleRootClick: Function
 }
 
 const props = withDefaults(defineProps<FileNavigatorProps>(), {
@@ -30,6 +30,6 @@ const props = withDefaults(defineProps<FileNavigatorProps>(), {
 
 const handleCrumbClick = (crumb: BreadcrumbItem) => {
   // @ts-ignore
-  props.mediaNodeClickHandler(crumb['@id'])
+  props.mediaNodeClickHandler(crumb.id)
 }
 </script>

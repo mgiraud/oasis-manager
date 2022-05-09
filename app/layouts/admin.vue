@@ -1,7 +1,7 @@
 <template>
-  <div class="flex">
+  <div class="flex min-h-screen">
     <Menu class="w-80"/>
-    <slot />
+    <slot/>
     <Notification />
   </div>
 </template>
@@ -17,6 +17,9 @@
   }
   h2 {
     @apply text-xl font-marker text-primary;
+  }
+  h3 {
+    @apply text-lg font-marker text-primary-dark;
   }
 }
 </style>

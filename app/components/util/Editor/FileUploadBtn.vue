@@ -37,7 +37,7 @@
             leave-to="opacity-0 scale-95"
           >
             <DialogPanel
-              class="w-full max-w-md transform overflow-hidden rounded-2xl p-6 text-left align-middle shadow-xl transition-all bg-sky-100"
+              class="w-4/5 transform overflow-hidden rounded-2xl p-6 text-left align-middle shadow-xl transition-all bg-sky-100"
             >
               <DialogTitle
                 as="h3"
@@ -45,7 +45,7 @@
               >
                 Téléverser un fichier
               </DialogTitle>
-<!--              <file-manager ref="fileManager" />-->
+              <FileManager ref="fileManager" />
               <button
                 class="bg-primary"
                 @click.prevent="injectFilesAndCloseDialog"
@@ -67,6 +67,7 @@ import { Ref } from '@vue/reactivity'
 import { Popover, PopoverButton, PopoverPanel, TransitionRoot,
   TransitionChild, Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
 import Icon from '~/components/util/Icon.vue'
+import FileManager from '~/components/file-manager/FileManager.vue'
 
 interface FileUploadProps {
   editor: Editor|null,

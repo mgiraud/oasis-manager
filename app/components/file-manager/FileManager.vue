@@ -1,31 +1,24 @@
 <template>
   <div class="flex flex-row">
-      <div class="flex flex-auto">
-        <div class="flex flex-col flex-auto">
-          <div v-if="showSelection" class="flex-auto">
-            <FileSelection
-              :thumbnails="thumbnails"
-              :links="links"
-              :remove-link="removeLink"
-              :remove-thumbnail="removeThumbnail"
-            />
-        </div>
-        <div class="flex-auto">
-            <FileNavigator
-              ref="fileNavigator"
-              :select-click-handler="selectMediaObject"
-              :current-media-node.sync="currentMediaNode"
-              :edit-click-handler="editMediaObject"
-              :show-selection="showSelection"
-            />
-        </div>
-        <div class="flex-auto" v-if="currentMediaNode">
-            <FileUploader :handle-upload="handleUpload" />
-        </div>
-      </div>
-      <div v-if="detailsPanel" class="flex flex-auto">
-        <FileDetails :media-object="selectedMediaObject" />
-      </div>
+    <div class="flex flex-col flex-auto">
+      <FileSelection
+        v-if="showSelection"
+        :thumbnails="thumbnails"
+        :links="links"
+        :remove-link="removeLink"
+        :remove-thumbnail="removeThumbnail"
+      />
+      <FileNavigator
+        ref="fileNavigator"
+        :select-click-handler="selectMediaObject"
+        :edit-click-handler="editMediaObject"
+        :show-selection="showSelection"
+        v-model="currentMediaNode"
+      />
+      <FileUploader :handle-upload="handleUpload" v-if="currentMediaNode" />
+    </div>
+    <div v-if="detailsPanel" class="flex w-1/3">
+      <FileDetails :media-object="selectedMediaObject" />
     </div>
   </div>
 </template>
@@ -49,11 +42,11 @@ export interface Link {
 }
 
 interface FileManagerProps {
-  showSelection: boolean,
+  showSelection?: boolean,
 }
 
 const props = withDefaults(defineProps<FileManagerProps>(), {
-  'showSelection': true
+  showSelection: true
 })
 
 const mediaObjectStore = useMediaObjectStore()
@@ -138,4 +131,10 @@ const editMediaObject = (mediaObject: MediaObject) => {
   detailsPanel.value = true
   selectedMediaObject.value = mediaObject
 }
+
+defineExpose({
+  links,
+  thumbnails,
+  reset
+})
 </script>

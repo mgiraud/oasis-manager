@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col">
+  <div class="flex flex-col bg-gray-100">
     <Menu v-slot="{ open }" as="div" class="text-left flex flex-wrap" v-for="item in items">
       <MenuButton @click="item.onClick ? item.onClick : redirectTo(item.url)" class="p-3 grow shrink basis-full text-primary-dark text-left before:absolute before:top-0 tracking-widest text-xs uppercase flex items-center">
         <Icon :icon="item.icon" v-if="item.icon" class="h-3 w-3 inline-flex fill-primary-dark" />
@@ -54,6 +54,7 @@ const items = [
     label: 'Gérer les fichiers',
     icon: 'ri-folder-open-line',
     children: [],
+    url: 'admin-media'
   },
   {
     label: 'Blog',

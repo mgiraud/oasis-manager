@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col">
+  <div class="flex flex-col mt-6">
         <input
           id="fileElem"
           ref="fileSelection"
@@ -9,8 +9,8 @@
           style="display:none"
           @change="onFileChange"
         >
-        <button @click="openFileSelection">
-          Sélectionner des fichiers à téléverser
+        <button @click="openFileSelection" class="bg-primary text-white py-3 px-6 rounded-md w-fit">
+          Téléverser des fichiers
         </button>
   </div>
 </template>
@@ -20,7 +20,7 @@
 import { Ref } from '@vue/reactivity'
 
 interface FileUploaderProps {
-  handleUpload: boolean,
+  handleUpload: Function,
 }
 
 const props = defineProps<FileUploaderProps>()

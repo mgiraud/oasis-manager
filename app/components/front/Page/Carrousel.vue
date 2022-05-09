@@ -32,11 +32,7 @@ import { MediaObject } from '~/store/media-object'
 const props = defineProps<{
   mediaNode: MediaNode
 }>()
-const indexToOrder: Ref<{[index: number]: number }>  = ref({
-  0: 1,
-  1: 2,
-  2: 3
-})
+const indexToOrder: Ref<{[index: number]: number }>  = ref({})
 const indexTosize: Ref<{[index: number]: string }>  = ref({
   0: '2500x600',
   1: '340x260',
@@ -44,6 +40,7 @@ const indexTosize: Ref<{[index: number]: string }>  = ref({
 })
 props.mediaNode.mediaObjects.forEach((mediaObject: MediaObject, index: number) => {
   mediaObject.index = index
+  indexToOrder.value[index] = index + 1
 })
 
 const current = ref(0)
@@ -78,7 +75,6 @@ const updateOrder = () => {
     indexToOrder.value[i] = order
     order++;
   }
-console.log(indexToOrder.value)
   showTransition.value = 0;
 }
 </script>

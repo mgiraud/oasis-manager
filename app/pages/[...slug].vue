@@ -1,12 +1,14 @@
 <template>
-  <div class="flex bg-white flex-auto flex-col p-3">
-    <PageComponent :page="page" v-if="page"/>
+  <div class="flex bg-white flex-auto flex-col">
+    <Carrousel :media-node="page.mediaNode" v-if="page !== null && page.mediaNode !== null"/>
+    <PageComponent :page="page" v-if="page" class="p-3"/>
   </div>
 </template>
 
 <script setup lang="ts">
 import { usePageStore } from '~/store/page'
-import PageComponent from '~/components/front/PageComponent'
+import PageComponent from '~/components/front/PageComponent.vue'
+import Carrousel from '~/components/front/Page/Carrousel.vue'
 
 const route = useRoute()
 const pageStore = usePageStore()

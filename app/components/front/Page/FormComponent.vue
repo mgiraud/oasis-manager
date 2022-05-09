@@ -61,6 +61,9 @@
               v-model="item.content"
               class="bg-white"
             >
+              <template v-slot:supplemental_btns>
+                <OldVersionBtn :url="item.url" :set-content="setContent"/>
+              </template>
             </Editor>
           </ClientOnly>
       </div>
@@ -68,6 +71,8 @@
 </template>
 
 <script setup lang="ts">
+import { Ref } from '@vue/reactivity'
+import OldVersionBtn from '~/components/admin/page/OldVersionBtn.vue'
 import { useMediaNodeStore } from '~/store/media-node'
 import { Page } from '~/store/page'
 import Editor from '~/components/util/Editor.vue'
@@ -95,4 +100,9 @@ await useAsyncData('page-category-items', () => pageCategoryStore.fetchSelectIte
 await useAsyncData('media-node-items', () => mediaNodeStore.fetchSelectItems())
 const categories = pageCategoryStore.selectItemList()
 const mediaNodes = mediaNodeStore.selectItemList()
+
+const editor: Ref<InstanceType<typeof Editor>> = ref(null);
+const setContent = (content: string) => {
+    editor.value?.setContent(content)
+}
 </script>

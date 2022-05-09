@@ -262,4 +262,5 @@ watch(() => props.modelValue, (newValue) => {
   setContent(newValue || '')
 })
 
+defineExpose({setContent})
 </script>

@@ -13,7 +13,7 @@
 <script setup lang="ts">
 
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
-import Icon from '~/components/util/Icon'
+import Icon from '~/components/util/Icon.vue'
 
 interface EditorBtnProps {
   btnClass?: object|null,

@@ -11,6 +11,7 @@ import FormComponent from '~/components/front/Page/FormComponent.vue'
 import { CRUD_MODE } from '~/store/crud'
 import { useNotificationStore } from '~/store/notification'
 import { Page, usePageStore } from '~/store/page'
+import { usePageLogStore } from '~/store/page-logs'
 
 definePageMeta({
   layout: 'admin'
@@ -20,6 +21,8 @@ const pageStore = usePageStore()
 const route = useRoute()
 const app = useNuxtApp()
 const pageEdition: Ref<Page | null> = useState('page-edition', () => null)
+const pageLogStore = usePageLogStore()
+
 await useAsyncData('async-page-edition', async () => {
   await pageStore.load(route.params.slug as string, {
     'groups[]': 'page:read:edition'
@@ -37,4 +40,26 @@ const submit = async (data: Page) => {
   }
 }
 
+let autoSaveInterval: number | null = null
+
+const autoSave = () => {
+  pageLogStore.create({
+    originalContent: pageEdition.value?.content,
+    draft: true,
+    page: pageEdition.value?.['@id']
+  })
+}
+
+onMounted(() => {
+  if (process.client) {
+    autoSaveInterval = window.setInterval(autoSave, 120000)
+  }
+})
+
+onBeforeUnmount(() => {
+  if (autoSaveInterval) {
+    clearInterval(autoSaveInterval)
+  }
+  autoSaveInterval = null
+})
 </script>

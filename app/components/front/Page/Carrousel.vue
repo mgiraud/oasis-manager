@@ -17,7 +17,7 @@
         <img :src="`http://via.placeholder.com/${indexTosize[imageObject.index]}`" class="w-auto max-h-96 object-scale-down"/>
       </div>
     </div>
-    <div @click="next" class="cursor-pointer grow-0 w-0 flex z-10 items-center">
+    <div @click="next" class="cursor-pointer grow-0 w-0 flex z-10 items-center" v-if="mediaNode.mediaObjects.length > 1">
       <div class="w-fit -translate-x-[150%]"><Icon icon="ri-arrow-right-s-fill" class="fill-white bg-primary rounded-full h-12 w-12 shadow-xs"/></div>
     </div>
   </div>

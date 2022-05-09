@@ -66,7 +66,7 @@ import { Ref } from '@vue/reactivity'
 // import FileManager, { Link, Thumbnail } from '../../file-manager/FileManager.vue'
 import { Popover, PopoverButton, PopoverPanel, TransitionRoot,
   TransitionChild, Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
-import Icon from '~/components/util/Icon'
+import Icon from '~/components/util/Icon.vue'
 
 interface FileUploadProps {
   editor: Editor|null,

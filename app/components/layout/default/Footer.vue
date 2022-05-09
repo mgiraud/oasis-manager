@@ -10,7 +10,7 @@
           {{ link.label }}
         </div>
     </div>
-    <div class="w-full text-center text-gray-600">
+    <div class="w-full text-center text-gray-600 pb-2">
       2020-{{ new Date().getFullYear() }} — <strong>Les transalpins</strong>
     </div>
   </div>

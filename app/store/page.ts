@@ -37,7 +37,7 @@ export const usePageStore = defineStore('page', {
   },
   actions: {
     findBySlug(slug: string): Page|null {
-      return this.list.find((page: Page) => page.url === slug)
+      return this.list.find((page: Page) => page.url === slug) ?? null
     },
 
     setActiveSlug (slug: string | null) {

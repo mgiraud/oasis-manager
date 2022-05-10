@@ -1,7 +1,3 @@
-import get from 'lodash/get'
-import has from 'lodash/has'
-import mapValues from 'lodash/mapValues'
-
 export interface HydraView {
   '@id': string;
   '@type': string;

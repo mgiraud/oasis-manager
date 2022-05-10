@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col pl-3 pt-3">
+  <div class="flex flex-col">
     <div>
       <h1 class="navigator-title">Navigateur de fichier</h1>
     </div>

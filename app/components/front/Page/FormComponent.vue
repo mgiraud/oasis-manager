@@ -77,7 +77,7 @@ import { useMediaNodeStore } from '~/store/media-node'
 import { Page } from '~/store/page'
 import Editor from '~/components/util/Editor.vue'
 import { usePageCategoryStore } from '~/store/page-category'
-import { FormErrors, FormViolation } from '~/types/form'
+import { FormErrors } from '~/types/form'
 const props = defineProps<{
   page: Page,
   submitHandler: Function,

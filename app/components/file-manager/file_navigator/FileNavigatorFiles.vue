@@ -1,61 +1,35 @@
 <template>
   <div class="flex flex-row">
-      <div
-        v-for="item in mediaObjectStore.list"
-        :key="item['@id']"
-      >
-        <div>
-          <img
-            v-if="item.isImage"
-            :src="item.contentUrl"
-            class="file-navigator-object max-h-80"
-          />
-          <span
-            v-else
-            class="file-navigator-object"
-          >{{ item.filePath }}</span>
-          <div>
-            <span v-if="item.customName">{{ item.customName }}</span>
-            <small v-else>Titre non défini</small>
-          </div>
-          <div>
-<!--            <v-spacer />-->
-<!--            <v-tooltip-->
-<!--              v-if="selectionEnabled"-->
-<!--              top-->
-<!--            >-->
-<!--              <template #activator="{ on, attrs }">-->
-<!--                <v-btn-->
-<!--                  v-bind="attrs"-->
-<!--                  icon-->
-<!--                  v-on="on"-->
-<!--                  @click="props.selectClickHandler(item)"-->
-<!--                >-->
-<!--                  <v-icon>ri-arrow-left-up-line</v-icon>-->
-<!--                </v-btn>-->
-<!--              </template>-->
-<!--              <span>Sélectionner l'image</span>-->
-<!--            </v-tooltip>-->
-<!--            <v-tooltip top>-->
-<!--              <template #activator="{ on, attrs }">-->
-<!--                <v-btn-->
-<!--                  v-bind="attrs"-->
-<!--                  icon-->
-<!--                  v-on="on"-->
-<!--                  @click="props.editClickHandler(item)"-->
-<!--                >-->
-<!--                  <v-icon>ri-pencil-line</v-icon>-->
-<!--                </v-btn>-->
-<!--              </template>-->
-<!--              <span>Editer les propriétés de l'image</span>-->
-<!--            </v-tooltip>-->
-          </div>
-        </div>
+    <div
+      v-for="item in mediaObjectStore.list"
+      :key="item['@id']"
+      class="flex flex-col"
+    >
+      <div>
+        <img
+          v-if="item.isImage"
+          :src="item.contentUrl"
+          class="file-navigator-object max-h-80"
+        />
+        <div
+          v-else
+          class="px-3 py-3 border border-primary"
+        >{{ item.filePath }}</div>
       </div>
+      <div>
+        <span v-if="item.customName">{{ item.customName }}</span>
+        <small v-else>Titre non défini</small>
+      </div>
+      <div class="flex flex-row">
+        <Icon v-if="selectionEnabled" icon="ri-arrow-left-up-line" @click="selectClickHandler(item)" class="fill-primary h-8 w-8 cursor-pointer"/>
+        <Icon icon="ri-pencil-line" @click="editClickHandler(item)" class="fill-primary-dark h-8 w-8 cursor-pointer"/>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import Icon from '~/components/util/Icon.vue'
 import { MediaNode } from '~/store/media-node'
 import { useMediaObjectStore } from '~/store/media-object'
 

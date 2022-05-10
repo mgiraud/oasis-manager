@@ -15,6 +15,7 @@ export interface MediaNode extends HydraMemberObject {
 
 export interface MediaNodeItem {
   '@id': string
+  id: string | number
   name: string
   children: MediaNodeItem[]
 }
@@ -77,20 +78,20 @@ export const useMediaNodeStore = defineStore('media_nodes', {
     async fetchTree () {
       this.toggleTreeLoading()
 
-      const tree = await this.$nuxt.$apiFetch(this.resource).catch(async (e: Error) => {
+      const retrieved = await this.$nuxt.$apiFetch(`${this.resource}/tree`).catch(async (e: Error) => {
         await this.handleTreeError(e)
       }).finally(() => {
         this.toggleTreeLoading()
       })
 
-      if (!tree) {
+      if (!retrieved) {
         return
       }
       if (this.resetTree) {
         this.resetTree()
       }
 
-      tree['hydra:member'].forEach((item: MediaNode) => {
+      retrieved['hydra:member'].forEach((item: MediaNode) => {
         this.addTreeItem(item)
       })
     },
@@ -103,6 +104,7 @@ export const useMediaNodeStore = defineStore('media_nodes', {
         const node = this.findTree(id)
         tree.push({
           '@id': node['@id'],
+          id: node.id,
           children: node.children,
           name: node.name
         })

@@ -29,12 +29,7 @@
             <DialogPanel
               class="w-full max-w-md transform overflow-hidden rounded-2xl p-6 text-left align-middle shadow-xl transition-all bg-sky-100"
             >
-              <DialogTitle
-                as="h3"
-                class="text-lg font-medium leading-6 text-gray-900"
-              >
-                Ajouter un dossier
-              </DialogTitle>
+              <DialogTitle as="h3">Ajouter un dossier</DialogTitle>
               <FormKit
                 type="form"
                 @submit="onFolderCreate"
@@ -50,10 +45,10 @@
                 />
               </FormKit>
               <button
-                class="bg-primary"
+                class="bg-primary text-white py-3 px-5 text-sm uppercase rounded-md hover:bg-primary-dark"
                 @click.prevent="submitForm"
               >
-                Insérer
+                Créer le dossier
               </button>
             </DialogPanel>
           </TransitionChild>

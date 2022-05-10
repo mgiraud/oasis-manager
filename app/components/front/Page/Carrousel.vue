@@ -1,5 +1,6 @@
 <template>
-  <div class="overflow-hidden hidden md:flex flex-no-wrap flex-row bg-white">
+  COUCOU
+  <div class="overflow-hidden hidden md:flex flex-no-wrap flex-row bg-white" v-if="mediaNode.mediaObjects.length > 0">
 <!--    <div @click="previous" class="cursor-pointer grow-0 w-0 flex z-10 items-center">-->
 <!--      <div class="w-fit translate-x-1/2"><Icon icon="ri-arrow-left-s-fill" class="fill-white bg-primary rounded-full h-12 w-12 shadow-xs"/></div>-->
 <!--    </div>-->
@@ -14,7 +15,7 @@
            class="w-full shrink-0 flex items-center justify-center"
            :class="`order-${order(imageObject)}`"
       >
-        <img :src="`http://via.placeholder.com/${indexTosize[imageObject.index]}`" class="w-auto max-h-96 object-scale-down"/>
+        <img :src="imageObject.contentUrl" class="w-auto max-h-96 object-scale-down"/>
       </div>
     </div>
     <div @click="next" class="cursor-pointer grow-0 w-0 flex z-10 items-center" v-if="mediaNode.mediaObjects.length > 1">
@@ -27,17 +28,13 @@
 import { Ref } from '@vue/reactivity'
 import Icon from '~/components/util/Icon.vue'
 import { MediaNode } from '~/store/media-node'
-import { MediaObject } from '~/store/media-object'
+import { MediaObject, useMediaObjectStore } from '~/store/media-object'
 
 const props = defineProps<{
   mediaNode: MediaNode
 }>()
 const indexToOrder: Ref<{[index: number]: number }>  = ref({})
-const indexTosize: Ref<{[index: number]: string }>  = ref({
-  0: '2500x600',
-  1: '340x260',
-  2: '1080x260',
-})
+const mediaObjectStore = useMediaObjectStore();
 props.mediaNode.mediaObjects.forEach((mediaObject: MediaObject, index: number) => {
   mediaObject.index = index
   indexToOrder.value[index] = index + 1

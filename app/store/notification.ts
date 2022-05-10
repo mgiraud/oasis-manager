@@ -15,7 +15,7 @@ export const useNotificationStore = defineStore('notification', {
       color: 'accent',
       text: 'An error occurred',
       subText: '',
-      timeout: 10000
+      timeout: 5000
     }
   },
   actions: {
@@ -50,7 +50,7 @@ export const useNotificationStore = defineStore('notification', {
       this.showMessage(error, 'accent')
     },
 
-    showMessage (message: string, color: string = 'success') {
+    showMessage (message: string, color: string = 'primary') {
       this.setShow(true)
       this.setColor(color)
       this.setText(message)

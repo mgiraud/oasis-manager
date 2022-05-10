@@ -54,7 +54,7 @@
 <script setup lang="ts">
 
 import { MediaObject } from '~/store/media-object'
-import Icon from '~/components/util/Icon'
+import Icon from '~/components/util/Icon.vue'
 
 interface FileSelectionProps {
   thumbnails: Array<MediaObject>,

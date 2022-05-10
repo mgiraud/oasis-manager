@@ -89,11 +89,12 @@ function piniaApiPlugin({ store }: PiniaPluginContext) {
     store.$state[CRUD_MODE.EDITION] = Object.assign({
       ...store.$state[CRUD_MODE.EDITION],
     })
+    store.$state[CRUD_MODE.EDITION].edited = null
     store.$state[CRUD_MODE.EDITION].error = ''
     store.$state[CRUD_MODE.EDITION].violations = null
     store.toggleLoading(CRUD_MODE.EDITION)
 
-    return await store.$nuxt.$apiFetch(`${store.resource}/${id}`, {
+    store.$state[CRUD_MODE.EDITION].edited = await store.$nuxt.$apiFetch(`${store.resource}/${id}`, {
       method: 'PUT',
       body: item
     }).catch(async (e: Error) => {
@@ -101,9 +102,15 @@ function piniaApiPlugin({ store }: PiniaPluginContext) {
     }).finally(() => {
       store.toggleLoading(CRUD_MODE.EDITION)
     })
+
+    return store.$state[CRUD_MODE.EDITION].edited
   }
 
   store.create = async(values: Object) => {
+    store.$state[CRUD_MODE.CREATION] = Object.assign({
+      ...store.$state[CRUD_MODE.CREATION],
+    })
+    store.$state[CRUD_MODE.CREATION].created = null
     store.$state[CRUD_MODE.CREATION].error = ''
     store.$state[CRUD_MODE.CREATION].violations = null
     store.toggleLoading(CRUD_MODE.CREATION)

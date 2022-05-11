@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed bottom-0 left-1/2 -translate-x-1/2" id="COUCOU">
+  <div class="fixed bottom-0 left-1/2 -translate-x-1/2">
     <TransitionRoot
       :show="show"
       enter="transition ease-in-out duration-3000 transform"

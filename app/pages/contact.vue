@@ -1,5 +1,5 @@
 <template>
-  <div class="flex bg-white flex-auto flex-col">
+  <div class="flex bg-white flex-auto flex-col py-3">
     <PageComponent v-if="page" :page="page"  />
     <div v-else>
       <p>
@@ -101,14 +101,8 @@
                class="w-full w-full border p-2 outline-none"
                :class="{'border-accent': !!errors.content, 'border-primary': !!values.content && !errors.content, 'border-gray-500': !values.content}"/>
       </div>
-      <!-- print form values -->
-      <div class="w-full">
-        <pre>{{ values }}</pre>
-      </div>
-      <div class="w-full">
-        <pre>{{ errors }}</pre>
-      </div>
-      <button type="submit">Envoyer</button>
+      <button type="submit" class="py-3 px-4 bg-primary text-white shadow-md uppercase hover:bg-primary-dark">Envoyer</button>
+      <button type="reset" class="py-3 px-4 bg-secondary text-white shadow-md uppercase hover:bg-accent">Réinitialiser</button>
     </Form>
   </div>
 </template>

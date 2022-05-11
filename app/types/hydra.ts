@@ -46,17 +46,18 @@ export type HydraGetRequestFilter = {
 }
 
 export function normalize (data: any) {
-  if (has(data, 'hydra:member')) {
+  if (!!data['hydra:member']) {
     // Normalize items in collections
     data['hydra:member'] = (data['hydra:member'] as HydraMemberObject[]).map(item => normalize(item))
 
     return data
   }
 
+  return data;
   // Flatten nested documents
-  return mapValues(data, (value: any) =>
-    Array.isArray(value)
-      ? value.map(v => get(v, '@id', v))
-      : get(value, '@id', value)
-  )
+  // return mapValues(data, (value: any) =>
+  //   Array.isArray(value)
+  //     ? value.map(v => get(v, '@id', v))
+  //     : get(value, '@id', value)
+  // )
 }

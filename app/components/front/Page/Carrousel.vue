@@ -1,5 +1,4 @@
 <template>
-  COUCOU
   <div class="overflow-hidden hidden md:flex flex-no-wrap flex-row bg-white" v-if="mediaNode.mediaObjects.length > 0">
 <!--    <div @click="previous" class="cursor-pointer grow-0 w-0 flex z-10 items-center">-->
 <!--      <div class="w-fit translate-x-1/2"><Icon icon="ri-arrow-left-s-fill" class="fill-white bg-primary rounded-full h-12 w-12 shadow-xs"/></div>-->

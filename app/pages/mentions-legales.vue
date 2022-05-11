@@ -1,5 +1,5 @@
 <template>
-  <div class="p-3 rounded-sm flex flex-col md:w-4/5 self-center">
+  <div class="bg-white min-h-screen p-3">
     <div class="text-xl text-primary-dark font-marker py-3">Mentions légales</div>
     <div>
         <p>

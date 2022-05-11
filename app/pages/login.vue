@@ -1,27 +1,32 @@
 <template>
-  <div>
-    <FormKit
-      type="form"
-      v-model="credentials"
-      submit-label="Se connecter"
-      @submit="submitHandler"
-    >
+  <div class="flex justify-center items-center bg-white min-h-screen">
+    <div class="w-fit">
+      <h2>Connexion</h2>
       <FormKit
-        label="Email"
-        type="text"
-        name="email"
-        validation="required|email"
-        validation-visibility="live"
-        validation-label="Input"
-      />
-      <FormKit
-        label="Mot de passe"
-        type="password"
-        name="password"
-        validation="required"
-        autocomplete="autocomplete"
-      />
-    </FormKit>
+        type="form"
+        v-model="credentials"
+        submit-label="Se connecter"
+        @submit="submitHandler"
+      >
+        <FormKit
+          label="Email"
+          type="text"
+          name="email"
+          validation="required|email"
+          validation-visibility="live"
+          validation-label="Input"
+          outer-class="w-96"
+        />
+        <FormKit
+          label="Mot de passe"
+          type="password"
+          name="password"
+          validation="required"
+          autocomplete="autocomplete"
+          outer-class="w-96"
+        />
+      </FormKit>
+    </div>
   </div>
 </template>
 

@@ -1,8 +1,8 @@
 import { PiniaPluginContext } from 'pinia'
+import SubmissionError from '~/error/SubmissionError'
 import { CRUD_MODE, CrudState } from '~/store/crud'
 import { Page } from '~/store/page'
 import { HydraGetRequestFilter, HydraMemberObject } from '~/types/hydra'
-import SubmissionError from '~~/nuxt-v2/app/error/SubmissionError'
 
 declare module 'pinia' {
   export interface PiniaCustomStateProperties<S> extends CrudState<HydraMemberObject>{

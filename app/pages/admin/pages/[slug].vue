@@ -34,7 +34,7 @@ const notificationStore = useNotificationStore();
 const submit = async (data: Page) => {
   try {
     await pageStore.update(data.url, data)
-    notificationStore.showMessage('success', 'Page correctement éditée')
+    notificationStore.showMessage('Page correctement éditée')
   } catch (e) {
     notificationStore.showError('Erreur dans la sauvegarde la page, vérifie le formulaire')
   }

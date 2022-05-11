@@ -94,7 +94,7 @@ export const usePageStore = defineStore('page', {
         }
         menu.unshift({
           name: 'Blog',
-          url: 'blog',
+          url: '/blog',
           slug: null,
           children: []
         })
@@ -106,14 +106,14 @@ export const usePageStore = defineStore('page', {
         }
         menu.push({
           name: 'Contacte-nous !',
-          url: 'contact',
+          url: '/contact',
           slug: null,
           children: []
         })
 
         menu.push({
           name: 'Rejoindre le groupe fondateur',
-          url: 'survey_join',
+          url: '/nous-rejoindre',
           slug: null,
           children: []
         })

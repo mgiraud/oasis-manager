@@ -1,9 +1,9 @@
 import * as https from 'https'
 import { $fetch } from 'ohmyfetch'
 import { useAuthStore } from '~/store/auth'
+import { FormErrors, FormViolation } from '~/types/form'
 import { normalize } from '~/types/hydra'
-import { FormErrors, FormViolation } from '~~/nuxt-v2/app/api/repository'
-import SubmissionError from '~~/nuxt-v2/app/error/SubmissionError'
+import SubmissionError from '~/error/SubmissionError'
 
 const makeParamArray = (key: string, arr: string[]) =>
   arr.map(val => `${key}[]=${val}`).join('&')
@@ -67,7 +67,7 @@ export default defineNuxtPlugin(() => {
       }
       if (response.status === 401 && route.name !== 'login' && !request.includes('/refresh')) {
         await authStore.logout()
-        navigateTo({ path: 'login' })
+        navigateTo({ path: '/login' })
       }
       const error =
         response._data['hydra:description'] ||

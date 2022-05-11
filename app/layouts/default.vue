@@ -62,10 +62,11 @@
         </div>
       </div>
     </header>
-    <div class="flex flex-col pt-48 md:pt-56 flex-auto shadow-md mb-4">
+    <div class="flex flex-col pt-48 sm:pt-64 flex-auto shadow-md mb-4">
       <slot />
     </div>
     <Footer />
+    <Notification />
   </div>
 </template>
 
@@ -96,6 +97,7 @@
   import { usePageStore } from '~/store/page'
   import LayoutDefaultMenu from '~/components/layout/default/Menu.vue'
   import Icon from '~/components/util/Icon.vue'
+  import Notification from '~/components/layout/Notification.vue'
 
   const authStore = useAuthStore();
   const { isLogged, isAdmin } = storeToRefs(authStore)

@@ -19,6 +19,6 @@ interface TooltipProps {
 
 const props = withDefaults(defineProps<TooltipProps>(), {
   icon: 'ri-error-warning-fill',
-  iconClass: 'fill-accent h-8 w-8'
+  iconClass: 'fill-accent h-6 w-6'
 })
 </script>

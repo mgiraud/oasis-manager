@@ -28,7 +28,7 @@
           <label for="email"
            :class="{'h-1/2 -translate-y-full pl-0': !!values.email, 'text-accent': !!errors.email, 'text-primary': !!values.email && !errors.email}"
            class="transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full
-          ">Email</label>
+          ">Email <Tooltip v-if="errors.email">{{errors.email}}</Tooltip></label>
           <div
             :class="{'border-accent': !!errors.email, 'border-primary': !!values.email && !errors.email, 'border-gray-500': !values.email}"
             class="absolute bottom-0 -ml-8 w-[calc(100%_+_2rem)] border-b "
@@ -42,7 +42,7 @@
           <label for="phoneNumber"
                  :class="{'h-1/2 -translate-y-full pl-0': !!values.phoneNumber, 'text-accent': !!errors.phoneNumber, 'text-primary': !!values.phoneNumber && !errors.phoneNumber}"
                  class="transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full
-          ">Numéro de téléphone</label>
+          ">Numéro de téléphone <Tooltip v-if="errors.phoneNumber">{{errors.phoneNumber}}</Tooltip></label>
           <div
             :class="{'border-accent': !!errors.phoneNumber, 'border-primary': !!values.phoneNumber && !errors.phoneNumber, 'border-gray-500': !values.phoneNumber}"
             class="absolute bottom-0 w-full border-b "
@@ -56,7 +56,7 @@
           <label for="firstName"
                  :class="{'h-1/2 -translate-y-full pl-0': !!values.firstName, 'text-accent': !!errors.firstName, 'text-primary': !!values.firstName && !errors.firstName}"
                  class="transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full
-          ">Prénom</label>
+          ">Prénom <Tooltip v-if="errors.firstName">{{errors.firstName}}</Tooltip></label>
           <div
             :class="{'border-accent': !!errors.firstName, 'border-primary': !!values.firstName && !errors.firstName, 'border-gray-500': !values.firstName}"
             class="absolute bottom-0 w-full border-b "
@@ -70,7 +70,7 @@
           <label for="lastName"
                  :class="{'h-1/2 -translate-y-full pl-0': !!values.lastName, 'text-accent': !!errors.lastName, 'text-primary': !!values.lastName && !errors.lastName}"
                  class="transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full
-          ">Nom</label>
+          ">Nom <Tooltip v-if="errors.lastName">{{errors.lastName}}</Tooltip></label>
           <div
             :class="{'border-accent': !!errors.lastName, 'border-primary': !!values.lastName && !errors.lastName, 'border-gray-500': !values.lastName}"
             class="absolute bottom-0 w-full border-b "
@@ -84,7 +84,7 @@
           <label for="subject"
                  :class="{'h-1/2 -translate-y-full pl-0': !!values.subject, 'text-accent': !!errors.subject, 'text-primary': !!values.subject && !errors.subject}"
                  class="transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full
-          ">Sujet</label>
+          ">Sujet <Tooltip v-if="errors.subject">{{errors.subject}}</Tooltip></label>
           <div
             :class="{'border-accent': !!errors.subject, 'border-primary': !!values.subject && !errors.subject, 'border-gray-500': !values.subject}"
             class="absolute bottom-0 w-full border-b "

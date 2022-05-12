@@ -1,5 +1,5 @@
 import { formatRelative, parseISO, format } from 'date-fns'
-import { fr } from 'date-fns/locale'
+import fr from 'date-fns/locale/fr/index.js'
 
 export function useDateHelper() {
   const formatRDate = (rawDate: string) => {

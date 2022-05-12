@@ -11,8 +11,8 @@
         <option v-for="option in options" :value="option.value" :selected="option.value === value">{{option.label}}</option>
       </Field>
       <label :for="name"
-             :class="{'h-1/2 -translate-y-full pl-0': !!value, 'text-accent': !!error, 'text-primary': !!value && !error}"
-             class="transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full
+             :class="{'text-accent': !!error, 'text-primary': !!value && !error}"
+             class="h-1/2 -translate-y-full pl-0 transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full
           ">{{ label }} <Tooltip v-if="error">{{error}}</Tooltip></label>
       <div
         :class="{

@@ -1,5 +1,9 @@
 <template>
   <div class="flex flex-col">
+    <div :class="{'text-accent': !!errorMessage, 'text-primary': !!value && !errorMessage}" class="flex">
+      {{ label }}
+      <Tooltip v-if="errorMessage">{{errorMessage}}</Tooltip>
+    </div>
     <div class="editor flex flex-wrap" v-if="editor">
       <editor-btn
         label="Gras"
@@ -192,11 +196,13 @@ import TextBackgroundColor from '~/components/util/Editor/text-background-color/
 import TextColorBtn from './Editor/TextColorBtn.vue'
 import TextBackgroundColorBtn from './Editor/TextBackgroundColorBtn.vue'
 import FontFamilyBtn from './Editor/FontFamilyBtn.vue'
+import Tooltip from '~/components/util/Tooltip.vue'
 
 const editor = ref(null) as Ref<Editor | null>
 const props = defineProps<{
   name: string,
-  value: string
+  value: string,
+  label: string
 }>()
 
 const name = toRef(props, "name");
@@ -225,7 +231,7 @@ onMounted(() => {
       TableRow,
       TableHeader,
       TableCell,
-      ResizableImage.configure({ inline: true }),
+      // ResizableImage.configure({ inline: true }),
       Link.configure({ openOnClick: true }),
       TextStyle,
       TextColor,
@@ -275,3 +281,9 @@ watch(() => props.modelValue, (newValue) => {
 
 defineExpose({setContent})
 </script>
+
+<style>
+.ProseMirror {
+  min-height: 200px;
+}
+</style>

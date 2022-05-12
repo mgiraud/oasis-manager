@@ -18,10 +18,11 @@
         name="content"
         ref="editor"
         class="bg-white w-full my-3 px-3"
+        label="Contenu de la page"
         :value="item.content"
       >
         <template v-slot:supplemental_btns>
-          <OldVersionBtn :url="item.url" :set-content="setContent"/>
+          <OldVersionBtn v-if="item.url" :url="item.url" :set-content="setContent"/>
         </template>
       </Editor>
     </ClientOnly>

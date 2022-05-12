@@ -5,6 +5,7 @@ import fr from '@vee-validate/i18n/dist/locale/fr.json';
 
 export default defineNuxtPlugin(async () => {
   Object.keys(AllRules).forEach(rule => {
+    if (rule === 'default') { return; }
     defineRule(rule, AllRules[rule]);
   });
   configure({

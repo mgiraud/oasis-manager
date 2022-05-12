@@ -14,7 +14,7 @@
       leave-from-class="transform scale-100 opacity-100"
       leave-to-class="transform scale-95 opacity-0"
     >
-      <MenuItems class="flex flex-col flex-auto absolute left-0 top-full w-full bg-primary text-white">
+      <MenuItems class="flex flex-col flex-auto absolute left-0 top-full w-full bg-primary text-white z-10">
         <MenuItem @click="redirectTo(subMenuItem.url)" as="div" v-slot="{ active }" class="hover:bg-primary-dark h-10 uppercase flex-auto flex items-center cursor-pointer" v-for="subMenuItem in menuItem.children">
           <div class="pl-2 text-xs">{{ subMenuItem.name }}</div>
         </MenuItem>

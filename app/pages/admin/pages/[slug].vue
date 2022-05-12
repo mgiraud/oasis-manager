@@ -31,7 +31,7 @@ await useAsyncData('async-page-edition', async () => {
 });
 
 const notificationStore = useNotificationStore();
-const submit = async (data: Page) => {
+const submit = async (data: Page, actions) => {
   if (data.isPublished === 'true') {
     data.isPublished = false
   }
@@ -43,6 +43,7 @@ const submit = async (data: Page) => {
     notificationStore.showMessage('Page correctement éditée')
   } catch (e) {
     notificationStore.showError('Erreur dans la sauvegarde la page, vérifie le formulaire')
+    actions.setErrors(pageStore[CRUD_MODE.Edition].violations)
   }
 }
 

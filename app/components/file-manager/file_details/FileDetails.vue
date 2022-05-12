@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col">
     <div class="flex flex-row">
-        <h2>Détail du fichier</h2>
+        <h2 class="mb-3">Détail du fichier</h2>
         <Icon icon="ri-close-line" class="h-6 w-6 rounded-md fill-primary justify-self-end" @click="closeDetailPanel"/>
     </div>
     <div>

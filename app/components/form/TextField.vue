@@ -4,19 +4,17 @@
       v-if="icon"
       :icon="icon"
       class="h-8 w-10 group-focus-within:stroke-2"
-      :class="{'fill-accent': !!error, 'fill-primary': !!value && !error, 'fill-gray-500': !value}"
+      :class="[`fill-${getColor()}`]"
     />
     <div class="relative w-full">
-      <Field :as="as" :id="name" :name="name" :type="type" class="peer w-full outline-none h-8" v-bind="fieldAttrs"/>
+      <Field :as="as" :id="name" :name="name" :type="type" class="peer w-full outline-none h-8" :class="{[`text-${disabledColor}`]: isDisabled}" v-bind="fieldAttrs"/>
       <label :for="name"
-             :class="{'h-1/2 -translate-y-full pl-0': !!value, 'text-accent': !!error, 'text-primary': !!value && !error}"
+             :class="{'h-1/2 -translate-y-full pl-0': !!value, [`text-${getColor()}`]: true}"
              class="transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full
           ">{{ label }} <Tooltip v-if="error">{{error}}</Tooltip></label>
       <div
         :class="{
-        'border-accent': !!error,
-        'border-primary': !!value && !error,
-        'border-gray-500': !value,
+        [`border-${getColor()}`]: true,
         '-ml-8 w-[calc(100%_+_2rem)]': !!icon,
         'w-full': !icon
       }"
@@ -30,6 +28,7 @@
 import { Field } from 'vee-validate';
 import Tooltip from '~/components/util/Tooltip.vue'
 import Icon from '~/components/util/Icon.vue'
+import { useFieldHelper } from '~/composables/useFieldHelper'
 
 interface CustomFieldProps {
   name: string,
@@ -49,4 +48,6 @@ const props = withDefaults(defineProps<CustomFieldProps>(), {
   },
   as: 'input'
 })
+
+const { isDisabled, disabledColor, getColor } = useFieldHelper(props)
 </script>

@@ -42,7 +42,7 @@
               </div>
             </div>
             <button type="submit">
-              <Icon icon="ri-send-plane-fill" class="h-5 w-5" :class="{'fill-primary hover:fill-primary-dark': !errors.email && !!values.email, 'fill-gray-500': !!errors.email}" @click="submitNewsletterForm"/>
+              <Icon icon="ri-send-plane-fill" class="h-5 w-5" :class="{'fill-primary hover:fill-primary-dark': !errors.email && !!values.email, 'fill-gray-500': !!errors.email}"/>
             </button>
           </Form>
           <div class="mx-3 text-gray-800 text-sm">ET</div>
@@ -81,7 +81,6 @@
 </style>
 
 <script setup lang="ts">
-  import { getNode } from '@formkit/core'
   import { onMounted, onUnmounted } from '@vue/runtime-core'
   import { storeToRefs } from 'pinia'
   import Footer from '~/components/layout/default/Footer.vue'
@@ -118,10 +117,6 @@
 
   const logout = () => {
     authStore.logout()
-  }
-
-  const submitNewsletterForm = () => {
-    getNode('newsletter').submit()
   }
 
   const submitNewsletter = (data) => {

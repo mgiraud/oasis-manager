@@ -1,5 +1,5 @@
 <template>
-  <div :class="`pl-${level}`">
+  <div :class="`pl-${level * 2}`">
     <input type="checkbox" :value="item['@id']" @change="onChange" v-model="isChecked" class="ring-primary text-primary border-0 rounded-md focus:ring-0">
     {{ item.name }}
     <FileTreeViewItem

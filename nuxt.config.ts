@@ -1,4 +1,3 @@
-import FormKitPlugin from '@formkit/tailwindcss'
 import { defineNuxtConfig } from 'nuxt'
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
@@ -9,10 +8,7 @@ export default defineNuxtConfig({
       API_BASE_URL: process.env.API_BASE_URL || 'https://127.0.0.1:8000/api'
     }
   },
-  modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt', '@formkit/nuxt'],
-  formkit: {
-    configFile: './app/config/formkit.config',
-  },
+  modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt'],
   tailwindcss: {
     config: {
       content: [
@@ -21,9 +17,6 @@ export default defineNuxtConfig({
         "./app/config/**/*.ts",
         "./app/pages/**/*.vue",
         "./app/plugins/**/*.{js,ts}",
-      ],
-      plugins: [
-        FormKitPlugin
       ],
       theme: {
         extend: {
@@ -43,6 +36,8 @@ export default defineNuxtConfig({
       },
       safelist: [
         { pattern: /order-\d+/ },
+        { pattern: /text-gray-\d+/ },
+        { pattern: /pl-\d+/ },
       ]
     },
   },

@@ -30,26 +30,15 @@
               class="w-full max-w-md transform overflow-hidden rounded-2xl p-6 text-left align-middle shadow-xl transition-all bg-sky-100"
             >
               <DialogTitle as="h3">Ajouter un dossier</DialogTitle>
-              <FormKit
-                type="form"
+              <Form
+                v-slot="{ values, errors }"
                 @submit="onFolderCreate"
-                :actions="false"
-                id="folder"
+                class="flex flex-row flex-wrap"
+                :validation-schema="{name: 'min:3'}"
               >
-                <FormKit
-                  name="name"
-                  type="text"
-                  label="Nom du dossier"
-                  validation="length:3"
-                  outer-class="w-full"
-                />
-              </FormKit>
-              <button
-                class="bg-primary text-white py-3 px-5 text-sm uppercase rounded-md hover:bg-primary-dark"
-                @click.prevent="submitForm"
-              >
-                Créer le dossier
-              </button>
+                <TextField name="name" :error="errors.name" :value="values.name" label="Nom du dossier" class="w-full" />
+                <button type="submit" class="py-3 px-4 bg-primary text-white shadow-md uppercase hover:bg-primary-dark">Créer le dossier</button>
+              </Form>
             </DialogPanel>
           </TransitionChild>
         </div>
@@ -60,10 +49,10 @@
 
 <script setup lang="ts">
 
-import { getNode } from '@formkit/core'
-import { Ref } from '@vue/reactivity'
 import { MediaNode, useMediaNodeStore } from '~/store/media-node'
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
+import { Form } from 'vee-validate';
+import TextField from '~/components/form/TextField.vue'
 
 interface FileNavigatorProps {
   mediaNode?: MediaNode | null,
@@ -86,11 +75,6 @@ const show = computed({
   }
 })
 
-const submitForm = () => {
-  getNode('folder').submit()
-}
-
-const newFolderName = ref(null) as Ref<null | string>
 const mediaNodeStore = useMediaNodeStore()
 
 const onFolderCreate = async (data: {name: string}) => {

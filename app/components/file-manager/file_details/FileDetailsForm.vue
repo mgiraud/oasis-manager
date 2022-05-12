@@ -1,43 +1,24 @@
 <template>
-  <FormKit
-    type="form"
-    v-model="item"
+  <Form
+    v-slot="{ values, errors }"
     @submit="handleSubmit"
+    class="flex flex-row flex-wrap"
+    :initial-values="item"
   >
-    <FormKit
-      name="uniqueId"
-      type="text"
-      label="Identifiant unique"
-      disabled="disabled"
-      validation=""
-      outer-class="w-full"
-      :errors="errors ? [errors.uniqueId] : []"
-    />
-    <FormKit
-      name="customName"
-      type="text"
-      label="Nom personnalisé"
-      validation=""
-      outer-class="w-full"
-      :errors="errors ? [errors.customName] : []"
-    />
-    <FormKit
-      name="mediaNodes"
-      :type="fileTreeView"
-      label="Appartient aux catégories..."
-      outer-class="w-full"
-      :errors="errors ? [errors.mediaNodes] : []"
-      :tree="tree"
-    />
-  </FormKit>
+    <TextField name="uniqueId" :error="errors.uniqueId" :value="values.uniqueId" label="Identifiant unique" class="w-full" :field-attrs="{disabled: 'disabled'}"/>
+    <TextField name="customName" :error="errors.customName" :value="values.customName" label="Nom personnalisé" class="w-full"/>
+    <FileTreeView :tree="tree" name="mediaNodes" :value="values.mediaNodes"/>
+    <button type="submit" class="py-3 px-4 bg-primary text-white shadow-md uppercase hover:bg-primary-dark">Mettre à jour</button>
+  </Form>
 </template>
 
 <script setup lang="ts">
-import { createInput } from '@formkit/vue'
 import { MediaNodeItem } from '~/store/media-node'
 import { MediaObject } from '~/store/media-object'
 import { FormErrors } from '~/types/form'
 import FileTreeView from '~/components/file-manager/file_details/FileTreeView.vue'
+import { Form } from 'vee-validate';
+import TextField from '~/components/form/TextField.vue'
 
 interface FileDetailsFormProps {
   mediaObject: MediaObject,
@@ -57,7 +38,7 @@ const item = computed({
   }
 })
 
-const fileTreeView = createInput(FileTreeView, {
-  props: ['tree']
-})
+// const fileTreeView = createInput(FileTreeView, {
+//   props: ['tree']
+// })
 </script>

@@ -1,24 +1,39 @@
 <template>
-  <FileTreeViewItem
-    v-for="item in items"
-    :item="item"
-    :level="1"
-    v-model="choices"
-  />
+  <div class="flex flex-col w-full">
+    <FileTreeViewItem
+      v-for="item in tree"
+      :item="item"
+      :level="1"
+      v-model="choices"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
-import { FormKitFrameworkContext } from '@formkit/core'
+import { useField } from 'vee-validate'
 import FileTreeViewItem from '~/components/file-manager/file_details/FileTreeViewItem.vue'
+import { MediaNodeItem } from '~/store/media-node'
 
 const props = defineProps<{
-  context: FormKitFrameworkContext,
+  name: string,
+  tree: MediaNodeItem[],
+  value: string[]
 }>()
 
-const items = computed(() => props.context.tree)
-const choices = ref(props.context._value ? [...props.context._value] : [])
+const {
+  value: inputValue,
+  errorMessage,
+  handleBlur,
+  handleChange,
+  meta,
+} = useField(props.name, undefined, {
+  initialValue: props.value,
+});
+
+const choices = ref(props.value ? [...props.value] : [])
 
 watch(choices, (newChoices) => {
-  props.context.node.input(newChoices)
+  inputValue.value = newChoices
+  // props.context.node.input(newChoices)
 })
 </script>

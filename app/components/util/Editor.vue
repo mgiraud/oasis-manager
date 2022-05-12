@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col border border-2 border-black">
+  <div class="flex flex-col">
     <div class="editor flex flex-wrap" v-if="editor">
       <editor-btn
         label="Gras"
@@ -164,11 +164,10 @@
       />
     </div>
     <editor-content
-      class="editor__content"
+      class="border border-2 border-black"
       :editor="editor"
     />
   </div>
-
 </template>
 
 <script lang="ts" setup>
@@ -176,6 +175,7 @@ import { Editor, EditorContent } from '@tiptap/vue-3'
 import Starterkit from '@tiptap/starter-kit'
 import TextAlign from '@tiptap/extension-text-align'
 import { Ref } from '@vue/reactivity'
+import { useField } from 'vee-validate'
 import EditorBtn from './Editor/EditorBtn.vue'
 import Typography from '@tiptap/extension-typography'
 import Table from '@tiptap/extension-table'
@@ -194,14 +194,25 @@ import TextBackgroundColorBtn from './Editor/TextBackgroundColorBtn.vue'
 import FontFamilyBtn from './Editor/FontFamilyBtn.vue'
 
 const editor = ref(null) as Ref<Editor | null>
-const props = defineProps<{modelValue: string|null}>()
-const emit = defineEmits<{
-  (e: 'update:modelValue', value: string | null | undefined): void
+const props = defineProps<{
+  name: string,
+  value: string
 }>()
+
+const name = toRef(props, "name");
+const {
+  value: inputValue,
+  errorMessage,
+  handleBlur,
+  handleChange,
+  meta,
+} = useField(name, undefined, {
+  initialValue: props.value,
+});
 
 onMounted(() => {
   editor.value = new Editor({
-    content: props.modelValue,
+    content: inputValue.value,
     extensions: [
       Starterkit,
       TextAlign.configure({
@@ -222,7 +233,7 @@ onMounted(() => {
       FontFamily
     ],
     onUpdate: ({editor}) => {
-      emit('update:modelValue', editor.getHTML())
+      inputValue.value = editor.getHTML()
     }
   })
 })

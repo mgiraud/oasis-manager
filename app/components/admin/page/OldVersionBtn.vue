@@ -45,21 +45,9 @@
               >
                 Récupérer une ancienne version
               </DialogTitle>
-              <FormKit
-                type="form"
-                :actions="false"
-                id="log"
-                @submit="submitHandler"
-              >
-                <FormKit
-                  type="select"
-                  label="Choisis une version"
-                  name="log"
-                  :options="logs"
-                  outer-class="w-full"
-                  @change="onLogSelect"
-                />
-              </FormKit>
+              <select class="peer w-full outline-none h-8" @change="submitHandler(selectedLog)" v-model="selectedLog">
+                <option v-for="log in logs" :value="log.value"  :selected="log.value === selectedLog">{{log.label}}</option>
+              </select>
             </DialogPanel>
           </TransitionChild>
         </div>
@@ -70,7 +58,6 @@
 
 <script setup lang="ts">
 import { useAsyncData } from '#app'
-import { getNode } from '@formkit/core'
 import { Popover, PopoverButton, PopoverPanel, TransitionRoot,
   TransitionChild, Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
 import Icon from '~/components/util/Icon.vue'
@@ -84,7 +71,8 @@ const props = defineProps<{
 const dialog = ref(false)
 const mouseOn = ref(false)
 const pageLogStore = usePageLogStore()
-const { formatRDate } = useDateHelper();
+const { formatRDate } = useDateHelper()
+const selectedLog = ref(null)
 
 const { refresh } = useAsyncData('page-log-stores', async () => {
   await pageLogStore.fetchAll({
@@ -100,11 +88,9 @@ const logs = computed(() => {
     }
   })
 })
-const onLogSelect = () => {
-  getNode('log')?.submit()
-}
-const submitHandler = (data: {log: string}) => {
-  const pageLog: PageLog | undefined = pageLogStore.find(data.log);
+
+const submitHandler = (log: string) => {
+  const pageLog: PageLog | undefined = pageLogStore.find(log);
   if (pageLog) {
     props.setContent(pageLog.originalContent)
   }

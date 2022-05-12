@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col flex-auto p-3">
-    <h1>Édition d'une page</h1>
+    <h1 class="mb-4">Édition d'une page</h1>
     <FormComponent v-model:page="pageEdition" :submit-handler="submit" v-if="pageEdition" :errors="pageStore[CRUD_MODE.EDITION].violations"/>
   </div>
 </template>
@@ -32,6 +32,12 @@ await useAsyncData('async-page-edition', async () => {
 
 const notificationStore = useNotificationStore();
 const submit = async (data: Page) => {
+  if (data.isPublished === 'true') {
+    data.isPublished = false
+  }
+  if (data.showInMenu === 'true') {
+    data.showInMenu = false
+  }
   try {
     await pageStore.update(data.url, data)
     notificationStore.showMessage('Page correctement éditée')

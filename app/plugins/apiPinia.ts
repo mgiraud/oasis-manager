@@ -166,7 +166,7 @@ function piniaApiPlugin({ store }: PiniaPluginContext) {
       })
       items.unshift({
         value: null,
-        label: 'Aucune catégorie'
+        label: 'Selectionne un élément...'
       })
 
       return items

@@ -4,7 +4,7 @@
     <TagCloud />
     <div v-for="(article, i) in articles" class="w-full flex flex-row py-2">
       <div :class="{'order-1': i % 2 === 1}" class="px-3 w-40">
-        <PreviewImage :media-object="blogArticleStore.getRandomImage(article)" class="h-20"/>
+        <PreviewImage :media-object="blogArticleStore.getRandomImage(article)" class="h-20 before:text-[6px]"/>
       </div>
       <div :class="{'text-right': i % 2 === 1}" class="flex flex-col">
         <p class="w-full">{{article.preview }}</p>

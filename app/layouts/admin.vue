@@ -27,4 +27,8 @@
 <script setup lang="ts">
 import Menu from '~/components/layout/admin/Menu.vue'
 import Notification from '~/components/layout/Notification.vue'
+
+definePageMeta({
+  middleware: 'is-admin',
+})
 </script>

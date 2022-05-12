@@ -8,7 +8,7 @@
 <script setup lang="ts">
 import { Ref } from '@vue/reactivity'
 import { FormActions } from 'vee-validate'
-import FormComponent from '~/components/front/Page/FormComponent.vue'
+import FormComponent from '~/components/admin/pages/FormComponent.vue'
 import { CRUD_MODE } from '~/store/crud'
 import { useNotificationStore } from '~/store/notification'
 import { Page, usePageStore } from '~/store/page'
@@ -22,7 +22,9 @@ const pageStore = usePageStore()
 const route = useRoute()
 const app = useNuxtApp()
 const pageCreation: Ref<Page | {}> = useState('page-creation', () => { return {
-  content: ''
+  content: '',
+  isPublished: false,
+  showInMenu: false
 }})
 const pageLogStore = usePageLogStore()
 const notificationStore = useNotificationStore();

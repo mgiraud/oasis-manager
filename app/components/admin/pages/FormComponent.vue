@@ -35,7 +35,7 @@
 
 <script setup lang="ts">
 import { Ref } from '@vue/reactivity'
-import OldVersionBtn from '~/components/admin/page/OldVersionBtn.vue'
+import OldVersionBtn from '~/components/admin/pages/OldVersionBtn.vue'
 import CheckboxField from '~/components/form/CheckboxField.vue'
 import SelectField from '~/components/form/SelectField.vue'
 import TextField from '~/components/form/TextField.vue'

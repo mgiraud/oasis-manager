@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 import { Ref } from '@vue/reactivity'
-import FormComponent from '~/components/front/Page/FormComponent.vue'
+import FormComponent from '~/components/admin/pages/FormComponent.vue'
 import { CRUD_MODE } from '~/store/crud'
 import { useNotificationStore } from '~/store/notification'
 import { Page, usePageStore } from '~/store/page'

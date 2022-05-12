@@ -1,5 +1,6 @@
 <template>
   <div class="flex flex-auto justify-center items-center bg-white">
+    <Title>Connexion</Title>
     <div class="w-fit">
       <h2>Connexion</h2>
       <Form

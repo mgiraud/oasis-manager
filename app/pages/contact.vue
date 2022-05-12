@@ -1,5 +1,6 @@
 <template>
   <div class="flex bg-white flex-auto flex-col py-3">
+    <Title>Contacte-nous</Title>
     <PageComponent v-if="page" :page="page"  />
     <div v-else>
       <p>
@@ -140,8 +141,4 @@ const onSubmit = async (data) => {
     notificationStore.showError(contactStore[CRUD_MODE.CREATION].error)
   }
 }
-
-definePageMeta({
-  title: 'Contacte-nous'
-})
 </script>

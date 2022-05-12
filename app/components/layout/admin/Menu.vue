@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col bg-gray-100">
     <Menu v-slot="{ open }" as="div" class="text-left flex flex-wrap" v-for="item in items">
-      <MenuButton @click="item.onClick ? item.onClick : redirectTo(item.url)" class="p-3 grow shrink basis-full text-primary-dark text-left before:absolute before:top-0 tracking-widest text-xs uppercase flex items-center">
+      <MenuButton @click="item.onClick ? item.onClick() : redirectTo(item.url)" class="p-3 grow shrink basis-full text-primary-dark text-left before:absolute before:top-0 tracking-widest text-xs uppercase flex items-center">
         <Icon :icon="item.icon" v-if="item.icon" class="h-3 w-3 inline-flex fill-primary-dark" />
         <div class="flex-auto" :class="{'pl-3': item.icon, 'pl-6': !item.icon}">{{item.label}}</div>
         <Icon icon="ri-arrow-right-s-fill" v-if="item.children.length > 0 && !open" class="h-3 w-3 inline-flex fill-primary-dark"/>
@@ -34,6 +34,7 @@ import { useAuthStore } from '~/store/auth'
 const authStore = useAuthStore()
 
 const logout = () => {
+  console.log('pouet')
   authStore.logout()
   navigateTo({ name: 'index' })
 }
@@ -65,13 +66,13 @@ const items = [
     label: 'Pages',
     children: [
       {icon: 'ri-article-line', label: 'Pages', url: 'admin-pages', permission: 'USER_CAN_ACCESS_PAGES'},
-      {icon: 'ri-folder-line', label: 'Categories', url: 'admin-page-category', permission: 'USER_CAN_ACCESS_PAGE_CATEGORIES'},
+      {icon: 'ri-folder-line', label: 'Categories', url: 'admin-categories', permission: 'USER_CAN_ACCESS_PAGE_CATEGORIES'},
     ]
   }, {
     label: 'Membres',
     children: [
-      {icon: 'ri-user-line', label: 'Gérer les membres', url: 'admin-member', permission: 'USER_CAN_ACCESS_MEMBERS'},
-      {icon: 'ri-group-line', label: 'Gérer les groupes', url: 'admin-member-group', permission: 'USER_CAN_ACCESS_MEMBER_GROUPS'},
+      // {icon: 'ri-user-line', label: 'Gérer les membres', url: 'admin-member', permission: 'USER_CAN_ACCESS_MEMBERS'},
+      // {icon: 'ri-group-line', label: 'Gérer les groupes', url: 'admin-member-group', permission: 'USER_CAN_ACCESS_MEMBER_GROUPS'},
       {icon: 'ri-contacts-line', label: 'Prises de contact', url: 'admin-contact', permission: 'USER_CAN_VIEW_CONTACT'},
       {icon: 'ri-mail-line', label: 'Inscriptions à la newsletter', url: 'admin-contact-newsletter', permission: 'USER_CAN_VIEW_CONTACT_NEWSLETTER'},
       {icon: 'ri-survey-line', label: 'Réponses au questionnaire', url: 'admin-survey-join', permission: 'USER_CAN_VIEW_SURVEY_JOIN'},

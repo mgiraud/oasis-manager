@@ -11,7 +11,7 @@
     >
       <div
         :class="`bg-${color}`"
-        class="px-3 pt-3 pb-1 text-white rounded-tl-lg rounded-tr-lg"
+        class="px-3 pt-3 pb-1 text-white rounded-tl-lg rounded-tr-lg shadow-[0_-5px_4px_0px_rgba(0,0,0,0.3)]"
       >
         {{ text }}
       </div>

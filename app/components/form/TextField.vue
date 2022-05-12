@@ -9,8 +9,8 @@
     <div class="relative w-full">
       <Field :as="as" :id="name" :name="name" :type="type" class="peer w-full outline-none h-8" :class="{[`text-${disabledColor}`]: isDisabled}" v-bind="fieldAttrs"/>
       <label :for="name"
-             :class="{'h-1/2 -translate-y-full pl-0': !!value, [`text-${getColor()}`]: true}"
-             class="transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full
+             :class="{'-top-6 pl-0': !!value, [`text-${getColor()}`]: true}"
+             class="transform transition-all absolute top-0 left-0 h-fit flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:-top-6
           ">{{ label }} <Tooltip v-if="error">{{error}}</Tooltip></label>
       <div
         :class="{

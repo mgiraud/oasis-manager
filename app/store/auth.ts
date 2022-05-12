@@ -84,5 +84,11 @@ export const useAuthStore = defineStore('main', {
       await this.$nuxt.$apiFetch('/logout')
       this.user = null
     },
+
+    // unused for now
+    loadPermissions (): string[] {
+      // const data = fs.readFileSync(path.resolve('app/security/permissions.json'), { encoding: 'utf8', flag: 'r' })
+      // return JSON.parse(data)
+    }
   }
 })

@@ -1,5 +1,6 @@
 <template>
   <div class="flex bg-white flex-auto flex-col">
+    LOL
     <Title>{{article ? 'Article - ' + article.title : 'Habitat participatif situé vers la région grenobloise'}}</Title>
     {{article}}
     <ArticleComponent :article="article" v-if="article"/>

@@ -38,6 +38,7 @@ export default defineNuxtConfig({
         { pattern: /order-\d+/ },
         { pattern: /text-gray-\d+/ },
         { pattern: /pl-\d+/ },
+        { pattern: /h-\d+/ },
       ]
     },
   },

@@ -34,7 +34,6 @@ import { useAuthStore } from '~/store/auth'
 const authStore = useAuthStore()
 
 const logout = () => {
-  console.log('pouet')
   authStore.logout()
   navigateTo({ name: 'index' })
 }

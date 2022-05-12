@@ -124,7 +124,6 @@ const schema = {
 };
 
 watch(family, (newFamily) => {
-  console.log(newFamily)
   familyInputValue.value = newFamily
 }, { deep: true })
 

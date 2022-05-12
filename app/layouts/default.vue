@@ -85,6 +85,9 @@
   import { storeToRefs } from 'pinia'
   import Footer from '~/components/layout/default/Footer.vue'
   import { useAuthStore } from '~/store/auth'
+  import { useContactNewsletterStore } from '~/store/contact-newsletter'
+  import { CRUD_MODE } from '~/store/crud'
+  import { useNotificationStore } from '~/store/notification'
   import { usePageStore } from '~/store/page'
   import LayoutDefaultMenu from '~/components/layout/default/Menu.vue'
   import Icon from '~/components/util/Icon.vue'
@@ -100,7 +103,7 @@
   })
 
   const schema = {
-    email: 'email',
+    email: 'required|email',
   };
 
   const redirectToLogin = () => {
@@ -119,8 +122,17 @@
     authStore.logout()
   }
 
-  const submitNewsletter = (data) => {
-    console.log(data)
+  const newsletterStore = useContactNewsletterStore()
+  const notificationStore = useNotificationStore()
+
+  const submitNewsletter = async (data, actions) => {
+    try {
+      await newsletterStore.create(data)
+      notificationStore.showMessage('Je suis maintenant inscris à la newsletter')
+    } catch (e) {
+      notificationStore.showError(newsletterStore[CRUD_MODE.CREATION].error)
+      actions.setErrors(newsletterStore[CRUD_MODE.CREATION].violations)
+    }
   }
 
   const scrollY = ref(0)

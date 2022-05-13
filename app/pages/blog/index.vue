@@ -6,8 +6,8 @@
       <div :class="{'order-1': i % 2 === 1}" class="px-3 w-40">
         <PreviewImage :media-object="blogArticleStore.getRandomImage(article)" class="h-20 before:text-[6px]"/>
       </div>
-      <div :class="{'text-right': i % 2 === 1}" class="flex flex-col">
-        <p class="w-full">{{article.preview }}</p>
+      <div :class="{'text-right': i % 2 === 1}" class="flex flex-col w-full">
+        <p class="w-full"><b>{{article.title }}</b> | {{article.preview }}</p>
         <div :class="{'self-end': i % 2 === 1}" class="pt-2 text-primary-dark fill-primary-dark flex uppercase text-xs items-center">
           <div
             v-for="(tag, i) in article.tags"

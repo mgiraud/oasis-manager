@@ -69,13 +69,13 @@
 
 @layer base {
   h1 {
-    @apply text-2xl font-marker text-primary-dark;
+    @apply text-4xl font-marker text-primary-dark;
   }
   h2 {
-    @apply text-xl font-marker text-primary;
+    @apply text-3xl font-marker text-primary;
   }
   h3 {
-    @apply text-lg font-marker text-primary-dark;
+    @apply text-2xl font-marker text-primary-dark;
   }
 }
 </style>

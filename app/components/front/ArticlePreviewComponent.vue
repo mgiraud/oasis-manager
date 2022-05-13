@@ -22,7 +22,7 @@
         <div
           v-for="(tag, i) in article.tags"
           :key="i"
-          class="bg-primary-dark text-white uppercase px-2 py-1 rounded-tl-lg rounded-br-lg mx-1 text-xs cursor-pointer"
+          class="bg-primary-dark text-white uppercase px-2 py-1 rounded-tl-lg rounded-br-lg mx-1 mb-1 text-xs cursor-pointer"
           @click="setActiveTag(tag)"
         >
           {{ tag }}

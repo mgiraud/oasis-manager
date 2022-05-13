@@ -7,7 +7,7 @@
       :class="[`fill-${getColor()}`]"
     />
     <div class="relative w-full">
-      <Field :as="as" :id="name" :name="name" :type="type" class="peer w-full outline-none h-8" :class="{[`text-${disabledColor}`]: isDisabled}" v-bind="fieldAttrs"/>
+      <Field :as="as" :id="name" :name="name" :type="type" class="peer w-full outline-none h-fit" :class="{[`text-${disabledColor}`]: isDisabled}" v-bind="fieldAttrs"/>
       <label :for="name"
              :class="{'-top-6 pl-0': !!value, [`text-${getColor()}`]: true}"
              class="transform transition-all absolute top-0 left-0 h-fit flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:-top-6

@@ -231,7 +231,7 @@ onMounted(() => {
       TableRow,
       TableHeader,
       TableCell,
-      // ResizableImage.configure({ inline: true }),
+      ResizableImage.configure({ inline: true }),
       Link.configure({ openOnClick: true }),
       TextStyle,
       TextColor,

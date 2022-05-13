@@ -52,9 +52,11 @@ const tags = computed(() => [
   ...storeTags.value,
   ...additionalTags.value
 ])
-await useAsyncData('blog-tags', () => articleStore.fetchTags())
+await useAsyncData('blog-tags', async () => {
+  await articleStore.fetchTags()
+})
 
-const selectedTags = ref([])
+const selectedTags = ref(props.initialTags)
 
 const addTag = (e: Event) => {
   const tag = e.target.value
@@ -62,8 +64,8 @@ const addTag = (e: Event) => {
     additionalTags.value.push(tag)
     selectedTags.value.push(tag)
   }
+  e.target.value = ''
 }
-
 const {
   value: inputValue,
 } = useField('tags', undefined, {
@@ -72,6 +74,5 @@ const {
 
 watch(() => selectedTags, (newSelectedTags) => {
   inputValue.value = newSelectedTags.value
-  console.log(inputValue.value)
 }, { deep: true })
 </script>

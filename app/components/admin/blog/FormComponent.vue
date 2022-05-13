@@ -10,7 +10,7 @@
     <CheckboxField name="isPublished" :error="errors.isPublished" label="Publier" class="w-1/2" />
     <SelectField name="mediaNode" :options="mediaNodes" :error="errors.mediaNode" :value="values.mediaNode" label="Gallerie" class="w-1/2"/>
     <FormTags class="w-1/2" :initial-tags="item.tags ?? []"/>
-    <TextField as="textarea" type="textarea" name="preview" :error="errors.preview" :value="values.preview" label="Titre" class="w-full" />
+    <TextField as="textarea" type="textarea" name="preview" :error="errors.preview" :value="values.preview" label="Preview" class="w-full" />
     <input type="hidden" name="tags" />
     <ClientOnly>
       <Editor
@@ -22,7 +22,6 @@
         :value="item.content"
       />
     </ClientOnly>
-    {{values}}
     <div class="flex w-full justify-end px-3">
       <button type="submit" class="py-3 px-4 bg-primary text-white shadow-md uppercase hover:bg-primary-dark">Sauvegarder</button>
       <button type="reset" class="py-3 px-4 bg-secondary text-white shadow-md uppercase hover:bg-accent">Réinitialiser</button>

@@ -1,5 +1,6 @@
 <template>
   <div class="flex flex-col bg-secondary-light min-h-screen text-sm order-first">
+    <Body class="bg-primary" />
     <header class="fixed top-0 left-0 right-0 block z-40 bg-primary">
       <div class="bg-primary hidden md:block absolute top-0 left-0 w-full transition-all duration-200" :class="{ 'h-10': scrollY >= 50, 'h-36': scrollY < 50}">
         <div class="h-full bg-[url('/images/vercors.jpg')] bg-center bg-cover bg-no-repeat" :class="{'opacity-0': scrollY >= 50}"></div>
@@ -24,30 +25,14 @@
             class="flex flex-row"
             :validation-schema="schema"
           >
-            <div class="flex flex-row w-full group py-4 px-3">
-              <Icon icon="ri-mail-line"
-                    class="h-8 w-10 group-focus-within:stroke-2"
-                    :class="{'fill-accent': !!errors.email, 'fill-primary': !!values.email && !errors.email, 'fill-gray-500': !values.email}"
-              />
-              <div class="relative w-96">
-                <Field id="email" name="email" type="email" required autocomplete="off" class="peer w-full outline-none h-8" :validateOnInput="true"/>
-                <label for="email"
-                       :class="{'h-1/2 -translate-y-full pl-0': !!values.email, 'text-accent': !!errors.email, 'text-primary': !!values.email && !errors.email}"
-                       class="transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full
-          ">Email <Tooltip v-if="errors.email">{{errors.email}}</Tooltip></label>
-                <div
-                  :class="{'border-accent': !!errors.email, 'border-primary': !!values.email && !errors.email, 'border-gray-500': !values.email}"
-                  class="absolute bottom-0 -ml-8 w-[calc(100%_+_2rem)] border-b "
-                ></div>
-              </div>
-            </div>
-            <button type="submit">
-              <Icon icon="ri-send-plane-fill" class="h-5 w-5" :class="{'fill-primary hover:fill-primary-dark': !errors.email && !!values.email, 'fill-gray-500': !!errors.email}"/>
+            <TextField icon="ri-mail-line" type="email" name="email" :error="errors.email" :value="values.email" label="Email" class="w-96 py-4 px-3"/>
+            <button :type="!errors.email && !!values.email ? 'submit': 'button'">
+              <Icon icon="ri-send-plane-fill" class="h-5 w-5" :class="{'fill-primary hover:fill-primary-dark': !errors.email && !!values.email, 'fill-gray-500': !values.email, 'fill-accent': !!errors.email}"/>
             </button>
           </Form>
           <div class="mx-3 text-gray-800 text-sm">ET</div>
           <div class="grow md:grow-0">
-            <button class="bg-primary hover:bg-primary-dark text-white text-sm px-3 py-1.5 shadow-md rounded-sm">
+            <button @click="redirectToHelloAsso" class="bg-primary hover:bg-primary-dark text-white text-sm px-3 py-1.5 shadow-md rounded-sm">
               <span class="uppercase tracking-wider font-light">Adhère à l'association</span>
             </button>
           </div>
@@ -83,6 +68,7 @@
 <script setup lang="ts">
   import { onMounted, onUnmounted } from '@vue/runtime-core'
   import { storeToRefs } from 'pinia'
+  import TextField from '~/components/form/TextField.vue'
   import Footer from '~/components/layout/default/Footer.vue'
   import { useAuthStore } from '~/store/auth'
   import { useContactNewsletterStore } from '~/store/contact-newsletter'
@@ -103,7 +89,7 @@
   })
 
   const schema = {
-    email: 'required|email',
+    email: 'email',
   };
 
   const redirectToLogin = () => {
@@ -148,4 +134,8 @@
   onUnmounted(() => {
     window.removeEventListener("scroll", onScroll);
   })
+
+  function redirectToHelloAsso () {
+    window.open('https://www.helloasso.com/associations/les-transalpins/adhesions/adhesion-2022', '_')
+  }
 </script>

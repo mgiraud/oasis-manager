@@ -22,7 +22,7 @@
           {{ tag }}
         </li>
       </ListboxOption>
-      <li class="p-3">
+      <li class="p-3 w-full">
         <input @keyup.enter="addTag" type="text p-2 w-full" placeholder="Ajoute un tag (avec entrée)"/>
       </li>
     </ListboxOptions>

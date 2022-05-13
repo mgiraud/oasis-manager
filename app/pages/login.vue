@@ -2,7 +2,7 @@
   <div class="flex flex-auto justify-center items-center bg-white">
     <Title>Connexion</Title>
     <div class="w-fit">
-      <h2>Connexion</h2>
+      <h2 class="py-3">Connexion</h2>
       <Form
         ref="form"
         v-slot="{ values, errors }"

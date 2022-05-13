@@ -1,6 +1,6 @@
 <template>
   <div class="flex min-h-screen">
-    <Menu class="w-80"/>
+    <Menu class="w-80 shrink-0"/>
     <slot/>
     <Notification />
   </div>

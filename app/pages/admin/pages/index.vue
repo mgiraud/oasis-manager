@@ -4,9 +4,19 @@
       <Icon icon="ri-add-line" class="fill-white w-8 h-8"></Icon>
       <div class="pl-2">Créer une page</div>
     </NuxtLink>
+    <div class="flex flex-row flex-wrap items-center justify-between hover:bg-gray-100 h-9 border-b-2 font-bold">
+      <div class="w-full md:w-1/5 flex-1 md:pl-2">Titre</div>
+      <div class="w-full md:w-1/6 flex-initial">Url</div>
+      <div class="w-full md:w-1/6 flex-initial">Auteur</div>
+      <div class="w-full md:w-1/5 flex-1">Catégorie</div>
+      <div class="w-full md:w-1/12 flex-initial">Est publié ?</div>
+      <div class="w-full md:w-1/12 flex-initial">Menu</div>
+      <div class="w-full md:w-1/12 flex-initial">Actions</div>
+    </div>
     <div class="flex flex-row flex-wrap items-center justify-between hover:bg-gray-100 hover:text-primary-dark h-9" v-for="page in data">
       <div class="w-full md:w-1/5 flex-1 md:pl-2">{{ page.title }}</div>
-      <div class="w-full md:w-1/6 flex-initial">{{ page.createdBy }}</div>
+      <div class="w-full md:w-1/6 flex-initial">/{{ page.url }}</div>
+      <div class="w-full md:w-1/6 flex-initial">{{ page.createdBy.nickname }}</div>
       <div class="w-full md:w-1/5 flex-1">{{ page.category ? page.category.name : 'N/A' }}</div>
       <div class="w-full md:w-1/12 flex-initial">{{ page.isPublished }}</div>
       <div class="w-full md:w-1/12 flex-initial">{{ page.showInMenu }}</div>

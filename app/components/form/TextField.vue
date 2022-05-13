@@ -7,11 +7,11 @@
       :class="[`fill-${getColor()}`]"
     />
     <div class="relative w-full">
-      <Field :as="as" :id="name" :name="name" :type="type" class="peer w-full outline-none h-fit" :class="{[`text-${disabledColor}`]: isDisabled}" v-bind="fieldAttrs"/>
+      <Field :as="as" :id="name" :name="name" :type="type" class="peer w-full outline-none h-full min-h-[32px]" :class="{[`text-${disabledColor}`]: isDisabled}" v-bind="fieldAttrs"/>
       <label :for="name"
-             :class="{'-top-6 pl-0': !!value, [`text-${getColor()}`]: true}"
-             class="transform transition-all absolute top-0 left-0 h-fit flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:-top-6
-          ">{{ label }} <Tooltip v-if="error">{{error}}</Tooltip></label>
+             :class="{'-top-5 pl-0': !!value, 'top-2': !value, [`text-${getColor()}`]: true}"
+             class="transform transition-all absolute left-0 h-fit flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:-top-4
+          ">{{ label }} <Tooltip v-if="error && (!!value || !isRequired)">{{error}}</Tooltip></label>
       <div
         :class="{
         [`border-${getColor()}`]: true,
@@ -49,5 +49,5 @@ const props = withDefaults(defineProps<CustomFieldProps>(), {
   as: 'input'
 })
 
-const { isDisabled, disabledColor, getColor } = useFieldHelper(props)
+const { isDisabled, isRequired, disabledColor, getColor } = useFieldHelper(props)
 </script>

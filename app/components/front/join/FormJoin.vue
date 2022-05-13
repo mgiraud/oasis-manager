@@ -76,16 +76,8 @@
 </template>
 
 <script setup lang="ts">
-import { Ref } from '@vue/reactivity'
-import OldVersionBtn from '~/components/admin/pages/OldVersionBtn.vue'
 import CheckboxField from '~/components/form/CheckboxField.vue'
-import SelectField from '~/components/form/SelectField.vue'
 import TextField from '~/components/form/TextField.vue'
-import { useMediaNodeStore } from '~/store/media-node'
-import { Page } from '~/store/page'
-import Editor from '~/components/util/Editor.vue'
-import { usePageCategoryStore } from '~/store/page-category'
-import { FormErrors } from '~/types/form'
 import { Form, useField } from 'vee-validate'
 import Icon from '~/components/util/Icon.vue'
 
@@ -97,13 +89,7 @@ const family = ref([
   {firstName: null, age: null}
 ])
 
-const {
-  value: familyInputValue,
-  errorMessage,
-  handleBlur,
-  handleChange,
-  meta,
-} = useField('family', undefined);
+const { value: familyInputValue } = useField('family', undefined);
 
 const addMember = () => {
   family.value.push({firstName: null, age: null})

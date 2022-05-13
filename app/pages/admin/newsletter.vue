@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col flex-auto p-3">
-    <div class="flex flex-row flex-wrap items-center justify-between hover:bg-gray-100 hover:text-primary-dark h-9">
+    <div class="flex flex-row flex-wrap items-center justify-between h-9 border-b-2 font-bold">
       <div class="w-full md:w-1/5 flex-1">Email</div>
       <div class="w-full md:w-1/12 flex-initial">Ip</div>
       <div class="w-full md:w-1/12 flex-initial">Créé le</div>

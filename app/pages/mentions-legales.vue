@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white min-h-screen p-3">
+  <div class="bg-white flex-auto p-3">
     <Title>Mentions légales</Title>
     <div class="text-xl text-primary-dark font-marker py-3">Mentions légales</div>
     <div>

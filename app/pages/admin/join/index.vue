@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col flex-auto p-3">
-    <div class="flex flex-row flex-wrap items-center justify-between hover:bg-gray-100 hover:text-primary-dark h-9">
+    <div class="flex flex-row flex-wrap items-center justify-between border-b-2 font-bold h-9">
       <div class="w-full md:w-1/5 flex-1">Email</div>
       <div class="w-full md:w-2/12 flex-initial">Prénom</div>
       <div class="w-full md:w-2/12 flex-initial">Nom</div>

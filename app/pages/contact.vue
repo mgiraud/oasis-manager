@@ -19,65 +19,69 @@
       class="flex flex-row flex-wrap w-full sm:w-3/4 md:wd-1/2 lg:wd-1/3 justify-center self-center text-gray-500"
       :validation-schema="schema"
     >
-      <div class="flex flex-row w-1/2 group py-4 px-3">
-        <Icon icon="ri-mail-line"
-              class="h-8 w-10 group-focus-within:stroke-2"
-              :class="{'fill-accent': !!errors.email, 'fill-primary': !!values.email && !errors.email, 'fill-gray-500': !values.email}"
-        />
-        <div class="relative w-full">
-          <Field id="email" name="email" type="email" required autocomplete="off" class="peer w-full outline-none h-8" :validateOnInput="true"/>
-          <label for="email"
-           :class="{'h-1/2 -translate-y-full pl-0': !!values.email, 'text-accent': !!errors.email, 'text-primary': !!values.email && !errors.email}"
-           class="transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full
-          ">Email <Tooltip v-if="errors.email">{{errors.email}}</Tooltip></label>
-          <div
-            :class="{'border-accent': !!errors.email, 'border-primary': !!values.email && !errors.email, 'border-gray-500': !values.email}"
-            class="absolute bottom-0 -ml-8 w-[calc(100%_+_2rem)] border-b "
-          ></div>
-        </div>
-      </div>
+      <TextField icon="ri-mail-line" type="email" name="email" :error="errors.email" :value="values.email" label="Email" class="w-full md:w-1/2" />
+      <TextField icon="ri-phone-line" type="phoneNumber" name="phoneNumber" :error="errors.phoneNumber" :value="values.phoneNumber" label="Numéro de téléphone" class="w-full md:w-1/2" />
+      <TextField type="firstName" name="firstName" :error="errors.firstName" :value="values.firstName" label="Prénom" class="w-full md:w-1/2" />
+      <TextField type="lastName" name="lastName" :error="errors.lastName" :value="values.lastName" label="Nom" class="w-full md:w-1/2" />
+<!--      <div class="flex flex-row w-1/2 group py-4 px-3">-->
+<!--        <Icon icon="ri-mail-line"-->
+<!--              class="h-8 w-10 group-focus-within:stroke-2"-->
+<!--              :class="{'fill-accent': !!errors.email, 'fill-primary': !!values.email && !errors.email, 'fill-gray-500': !values.email}"-->
+<!--        />-->
+<!--        <div class="relative w-full">-->
+<!--          <Field id="email" name="email" type="email" required autocomplete="off" class="peer w-full outline-none h-8" :validateOnInput="true"/>-->
+<!--          <label for="email"-->
+<!--           :class="{'h-1/2 -translate-y-full pl-0': !!values.email, 'text-accent': !!errors.email, 'text-primary': !!values.email && !errors.email}"-->
+<!--           class="transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full-->
+<!--          ">Email <Tooltip v-if="errors.email">{{errors.email}}</Tooltip></label>-->
+<!--          <div-->
+<!--            :class="{'border-accent': !!errors.email, 'border-primary': !!values.email && !errors.email, 'border-gray-500': !values.email}"-->
+<!--            class="absolute bottom-0 -ml-8 w-[calc(100%_+_2rem)] border-b "-->
+<!--          ></div>-->
+<!--        </div>-->
+<!--      </div>-->
 
-      <div class="flex flex-row w-1/2 group py-4 px-3">
-        <div class="relative w-full">
-          <Field id="phoneNumber" name="phoneNumber" autocomplete="off" type="tel" format="0[0-9]{9}" class="peer w-full outline-none h-8" :validateOnInput="true"/>
-          <label for="phoneNumber"
-                 :class="{'h-1/2 -translate-y-full pl-0': !!values.phoneNumber, 'text-accent': !!errors.phoneNumber, 'text-primary': !!values.phoneNumber && !errors.phoneNumber}"
-                 class="transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full
-          ">Numéro de téléphone <Tooltip v-if="errors.phoneNumber">{{errors.phoneNumber}}</Tooltip></label>
-          <div
-            :class="{'border-accent': !!errors.phoneNumber, 'border-primary': !!values.phoneNumber && !errors.phoneNumber, 'border-gray-500': !values.phoneNumber}"
-            class="absolute bottom-0 w-full border-b "
-          ></div>
-        </div>
-      </div>
+<!--      <div class="flex flex-row w-1/2 group py-4 px-3">-->
+<!--        <div class="relative w-full">-->
+<!--          <Field id="phoneNumber" name="phoneNumber" autocomplete="off" type="tel" format="0[0-9]{9}" class="peer w-full outline-none h-8" :validateOnInput="true"/>-->
+<!--          <label for="phoneNumber"-->
+<!--                 :class="{'h-1/2 -translate-y-full pl-0': !!values.phoneNumber, 'text-accent': !!errors.phoneNumber, 'text-primary': !!values.phoneNumber && !errors.phoneNumber}"-->
+<!--                 class="transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full-->
+<!--          ">Numéro de téléphone <Tooltip v-if="errors.phoneNumber">{{errors.phoneNumber}}</Tooltip></label>-->
+<!--          <div-->
+<!--            :class="{'border-accent': !!errors.phoneNumber, 'border-primary': !!values.phoneNumber && !errors.phoneNumber, 'border-gray-500': !values.phoneNumber}"-->
+<!--            class="absolute bottom-0 w-full border-b "-->
+<!--          ></div>-->
+<!--        </div>-->
+<!--      </div>-->
 
-      <div class="flex flex-row w-1/2 group py-4 px-3">
-        <div class="relative w-full">
-          <Field id="firstName" name="firstName" autocomplete="off" type="text" format="0[0-9]{9}" class="peer w-full outline-none h-8" :validateOnInput="true"/>
-          <label for="firstName"
-                 :class="{'h-1/2 -translate-y-full pl-0': !!values.firstName, 'text-accent': !!errors.firstName, 'text-primary': !!values.firstName && !errors.firstName}"
-                 class="transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full
-          ">Prénom <Tooltip v-if="errors.firstName">{{errors.firstName}}</Tooltip></label>
-          <div
-            :class="{'border-accent': !!errors.firstName, 'border-primary': !!values.firstName && !errors.firstName, 'border-gray-500': !values.firstName}"
-            class="absolute bottom-0 w-full border-b "
-          ></div>
-        </div>
-      </div>
+<!--      <div class="flex flex-row w-1/2 group py-4 px-3">-->
+<!--        <div class="relative w-full">-->
+<!--          <Field id="firstName" name="firstName" autocomplete="off" type="text" format="0[0-9]{9}" class="peer w-full outline-none h-8" :validateOnInput="true"/>-->
+<!--          <label for="firstName"-->
+<!--                 :class="{'h-1/2 -translate-y-full pl-0': !!values.firstName, 'text-accent': !!errors.firstName, 'text-primary': !!values.firstName && !errors.firstName}"-->
+<!--                 class="transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full-->
+<!--          ">Prénom <Tooltip v-if="errors.firstName">{{errors.firstName}}</Tooltip></label>-->
+<!--          <div-->
+<!--            :class="{'border-accent': !!errors.firstName, 'border-primary': !!values.firstName && !errors.firstName, 'border-gray-500': !values.firstName}"-->
+<!--            class="absolute bottom-0 w-full border-b "-->
+<!--          ></div>-->
+<!--        </div>-->
+<!--      </div>-->
 
-      <div class="flex flex-row w-1/2 group py-4 px-3">
-        <div class="relative w-full">
-          <Field id="lastName" name="lastName" autocomplete="off" type="text" format="0[0-9]{9}" class="peer w-full outline-none h-8" :validateOnInput="true"/>
-          <label for="lastName"
-                 :class="{'h-1/2 -translate-y-full pl-0': !!values.lastName, 'text-accent': !!errors.lastName, 'text-primary': !!values.lastName && !errors.lastName}"
-                 class="transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full
-          ">Nom <Tooltip v-if="errors.lastName">{{errors.lastName}}</Tooltip></label>
-          <div
-            :class="{'border-accent': !!errors.lastName, 'border-primary': !!values.lastName && !errors.lastName, 'border-gray-500': !values.lastName}"
-            class="absolute bottom-0 w-full border-b "
-          ></div>
-        </div>
-      </div>
+<!--      <div class="flex flex-row w-1/2 group py-4 px-3">-->
+<!--        <div class="relative w-full">-->
+<!--          <Field id="lastName" name="lastName" autocomplete="off" type="text" format="0[0-9]{9}" class="peer w-full outline-none h-8" :validateOnInput="true"/>-->
+<!--          <label for="lastName"-->
+<!--                 :class="{'h-1/2 -translate-y-full pl-0': !!values.lastName, 'text-accent': !!errors.lastName, 'text-primary': !!values.lastName && !errors.lastName}"-->
+<!--                 class="transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full-->
+<!--          ">Nom <Tooltip v-if="errors.lastName">{{errors.lastName}}</Tooltip></label>-->
+<!--          <div-->
+<!--            :class="{'border-accent': !!errors.lastName, 'border-primary': !!values.lastName && !errors.lastName, 'border-gray-500': !values.lastName}"-->
+<!--            class="absolute bottom-0 w-full border-b "-->
+<!--          ></div>-->
+<!--        </div>-->
+<!--      </div>-->
 
       <div class="flex flex-row w-full group py-4 px-3">
         <div class="relative w-full">
@@ -118,6 +122,7 @@ import { useNotificationStore } from '~/store/notification'
 import { usePageStore } from '~/store/page'
 import Icon from '~/components/util/Icon.vue'
 import { Form, Field } from 'vee-validate';
+import TextField from '~/components/form/TextField.vue'
 
 const pageStore = usePageStore()
 const page = pageStore.find('/api/pages/contact')

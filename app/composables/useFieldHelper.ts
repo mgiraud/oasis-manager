@@ -7,6 +7,7 @@ interface BaseFieldProps {
 
 export function useFieldHelper(props: BaseFieldProps) {
   const isDisabled = props.fieldAttrs && props.fieldAttrs.disabled === 'disabled'
+  const isRequired = props.fieldAttrs && props.fieldAttrs.required === true
 
   const disabledColor = 'gray-300'
 
@@ -27,6 +28,7 @@ export function useFieldHelper(props: BaseFieldProps) {
   }
 
   return {
+    isRequired,
     isDisabled,
     disabledColor,
     getColor

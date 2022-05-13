@@ -4,8 +4,8 @@
       <MenuButton @click="item.onClick ? item.onClick() : redirectTo(item.url)" class="p-3 grow shrink basis-full text-primary-dark text-left before:absolute before:top-0 tracking-widest text-xs uppercase flex items-center">
         <Icon :icon="item.icon" v-if="item.icon" class="h-3 w-3 inline-flex fill-primary-dark" />
         <div class="flex-auto" :class="{'pl-3': item.icon, 'pl-6': !item.icon}">{{item.label}}</div>
-        <Icon icon="ri-arrow-right-s-fill" v-if="item.children.length > 0 && !open" class="h-3 w-3 inline-flex fill-primary-dark"/>
-        <Icon icon="ri-arrow-down-s-fill" v-if="item.children.length > 0 && open" class="h-3 w-3 inline-flex fill-primary-dark"/>
+<!--        <Icon icon="ri-arrow-right-s-fill" v-if="item.children.length > 0 && !open" class="h-3 w-3 inline-flex fill-primary-dark"/>-->
+<!--        <Icon icon="ri-arrow-down-s-fill" v-if="item.children.length > 0 && open" class="h-3 w-3 inline-flex fill-primary-dark"/>-->
       </MenuButton>
       <transition
         enter-active-class="transition duration-100 ease-out"
@@ -15,7 +15,7 @@
         leave-from-class="transform scale-100 opacity-100"
         leave-to-class="transform scale-95 opacity-0"
       >
-        <MenuItems class="flex flex-col flex-auto w-full text-primary pl-6">
+        <MenuItems class="flex flex-col flex-auto w-full text-primary pl-6" static>
           <MenuItem @click="redirectTo(subItem.url)" as="div" v-slot="{ active }" class="p-3 hover:bg-primary-dark h-10 uppercase flex-auto flex items-center cursor-pointer" v-for="subItem in item.children">
             <div class="pl-2 text-xs flex-auto">{{ subItem.label }}</div>
             <Icon :icon="subItem.icon" v-if="subItem.icon" class="h-3 w-3 inline-flex" :class="{'fill-primary-dark' : !open, 'fill-primary': open}" />
@@ -73,8 +73,8 @@ const items = [
       // {icon: 'ri-user-line', label: 'Gérer les membres', url: 'admin-member', permission: 'USER_CAN_ACCESS_MEMBERS'},
       // {icon: 'ri-group-line', label: 'Gérer les groupes', url: 'admin-member-group', permission: 'USER_CAN_ACCESS_MEMBER_GROUPS'},
       {icon: 'ri-contacts-line', label: 'Prises de contact', url: 'admin-contact', permission: 'USER_CAN_VIEW_CONTACT'},
-      {icon: 'ri-mail-line', label: 'Inscriptions à la newsletter', url: 'admin-contact-newsletter', permission: 'USER_CAN_VIEW_CONTACT_NEWSLETTER'},
-      {icon: 'ri-survey-line', label: 'Réponses au questionnaire', url: 'admin-survey-join', permission: 'USER_CAN_VIEW_SURVEY_JOIN'},
+      {icon: 'ri-mail-line', label: 'Inscriptions à la newsletter', url: 'admin-newsletter', permission: 'USER_CAN_VIEW_CONTACT_NEWSLETTER'},
+      {icon: 'ri-survey-line', label: 'Réponses au questionnaire', url: 'admin-join', permission: 'USER_CAN_VIEW_SURVEY_JOIN'},
     ]
   }, {
     label: 'Retour au site',

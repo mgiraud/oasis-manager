@@ -1,18 +1,17 @@
 <template>
   <div class="flex bg-white flex-auto flex-col py-3">
     <Title>Nous rejoindre</Title>
-    <h1>
-      Tu souhaites nous rejoindre ?
-    </h1>
     <PageComponent v-if="page" :page="page"  />
-    <div>
+    <h1 v-else class="px-3">J'ai envie de vous rejoindre !</h1>
+    <div class="py-4 px-3">
       <p>
-        Tu peux remplir ce questionnaire en ligne ou bien <a
-        href="~/assets/files/questionnaire_transalpins_v1.pdf"
+        Je peux remplir ce questionnaire en ligne ou bien <a
+        href="/files/questionnaire_transalpins_v1.pdf"
         title="Télécharger le formulaire"
         target="_blank"
-      >Télécharger le PDF</a> pour le remplir numériquement ou manuellement et nous
-        l'envoyer à l'addresse suivante : <a
+        class="text-primary text-underline"
+      >Télécharger le PDF</a> pour le remplir numériquement ou manuellement et
+        l'envoyer  eux transalpins à l'addresse suivante : <a
         href="mailto:contact@lestransalpins.org"
         title="Contacter les transalpins"
       >contact@lestransalpins.org</a>

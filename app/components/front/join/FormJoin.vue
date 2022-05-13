@@ -14,7 +14,7 @@
     <TextField name="city" :error="errors.city" :value="values.city" label="Ville actuelle" class="w-full md:w-1/2" />
     <TextField name="origin" :error="errors.origin" :value="values.origin" label="Comment j'ai connu les transalpins ?" class="w-full md:w-1/2" />
     <div>
-      <p>De combien de personnes est composé ton foyer, prénom et âge des membres du foyer ?</p>
+      <p>De combien de personnes est composé mon foyer, prénom et leur âge ?</p>
     </div>
     <div class="w-full flex flex-col">
       <div v-for="(member, i) in family" class="flex w-full md:w-1/2 py-2">

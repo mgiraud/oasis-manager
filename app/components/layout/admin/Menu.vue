@@ -59,7 +59,7 @@ const items = [
   {
     label: 'Blog',
     children: [
-      {icon: 'ri-article-line', label: 'Article', url: 'admin-blog-article', permission: 'USER_CAN_ACCESS_BLOG_ARTICLES'},
+      {icon: 'ri-article-line', label: 'Article', url: 'admin-blog', permission: 'USER_CAN_ACCESS_BLOG_ARTICLES'},
     ]
   }, {
     label: 'Pages',

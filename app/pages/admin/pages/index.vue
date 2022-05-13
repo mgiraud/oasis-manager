@@ -17,17 +17,21 @@
           </NuxtLink>
         </div>
         <div class="bg-accent flex-auto flex items-stretch justify-center">
-          <div @click="" class="w-full flex items-center justify-center cursor-pointer">
+          <div @click="deletePage(page)" class="w-full flex items-center justify-center cursor-pointer">
               <Icon icon="ri-delete-bin-line" class="fill-white w-4 h-4"/>
           </div>
         </div>
       </div>
     </div>
+    <ConfirmationDeleteModal v-model:open="dialog" :handle-remove="handleDelete" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { usePageStore } from '~/store/page'
+import { Ref } from '@vue/reactivity'
+import ConfirmationDeleteModal from '~/components/admin/ConfirmationDeleteModal.vue'
+import { useNotificationStore } from '~/store/notification'
+import { Page, usePageStore } from '~/store/page'
 import Icon from '~/components/util/Icon.vue'
 
 definePageMeta({
@@ -35,9 +39,31 @@ definePageMeta({
 })
 
 const pageStore = usePageStore()
+const notificationStore = useNotificationStore()
 const route = useRoute()
-const { data } = await useAsyncData('page-list', async () => {
+const { data, refresh } = await useAsyncData('page-list', async () => {
   await pageStore.fetchAll()
   return pageStore.list
 });
+const dialog = ref(false)
+const pageToDelete: Ref<Page | null> = ref(null)
+
+const deletePage = (page: Page) => {
+  pageToDelete.value = page
+  dialog.value = true
+}
+
+const handleDelete = async () => {
+  if (!pageToDelete.value) {
+    return
+  }
+  try {
+    await pageStore.remove(pageToDelete.value.url)
+    refresh()
+    notificationStore.showMessage('Page correctement supprimée')
+  } catch (e) {
+    notificationStore.showError('Erreur dans la suppression de la page')
+  }
+  dialog.value = false
+}
 </script>

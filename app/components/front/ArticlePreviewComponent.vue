@@ -1,7 +1,7 @@
 <template>
   <article class="flex flex-col p-8">
     <div>
-      <PreviewImage :media-object="blogArticleStore.getRandomImage(article)" class="max-h-44 object-cover" max-height="44" />
+      <PreviewImage :media-object="blogArticleStore.getRandomImage(article)" class="max-h-44 object-contain" max-height="44" />
     </div>
     <div class="text-xs mt-2">
       <div class="text-secondary">{{ capitalize(props.article.createdBy.nickname) }}</div>

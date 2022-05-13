@@ -70,7 +70,7 @@ function piniaApiPlugin({ store }: PiniaPluginContext) {
   }
 
   store.handleError = (mode: CRUD_MODE, e: Error) => {
-    if (mode !== CRUD_MODE.EDITION && mode !== CRUD_MODE.CREATION) {
+    if (mode !== CRUD_MODE.EDITION && mode !== CRUD_MODE.CREATION && mode !== CRUD_MODE.DELETION) {
       return;
     }
 
@@ -127,9 +127,12 @@ function piniaApiPlugin({ store }: PiniaPluginContext) {
     return store.$state[CRUD_MODE.CREATION].created
   }
 
-  store.del = async (item: Page) => {
+  store.remove = async (identifier: string) => {
+    store.$state[CRUD_MODE.DELETION] = Object.assign({
+      ...store.$state[CRUD_MODE.DELETION],
+    })
     store.toggleLoading(CRUD_MODE.DELETION)
-    store.$state[CRUD_MODE.DELETION].deleted = await store.$nuxt.$apiFetch(`${store.resource}/${item['url']}`, {
+    store.$state[CRUD_MODE.DELETION].deleted = await store.$nuxt.$apiFetch(`${store.resource}/${identifier}`, {
       method: 'DELETE',
     }).catch(async (e: Error) => {
       await store.handleError(CRUD_MODE.DELETION, e)

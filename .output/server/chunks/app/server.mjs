@@ -1,13 +1,13 @@
 import { v as vue_cjs_prod, s as serverRenderer, r as require$$0 } from '../handlers/renderer.mjs';
 import { $fetch } from 'ohmyfetch';
 import { hasProtocol, isEqual } from 'ufo';
-import { formatRelative, parseISO, format } from 'date-fns';
-import fr$1 from 'date-fns/locale/fr/index.js';
-import { defineRule, configure, useField, Field, Form } from 'vee-validate';
 import { defineStore, storeToRefs, createPinia, setActivePinia } from 'pinia/dist/pinia.mjs';
+import { defineRule, configure, useField, Field, Form } from 'vee-validate';
 import { getContext, executeAsync } from 'unctx';
 import { localize, setLocale } from '@vee-validate/i18n';
 import AllRules from '@vee-validate/rules';
+import { formatRelative, parseISO, format } from 'date-fns';
+import fr$1 from 'date-fns/locale/fr/index.js';
 import { VueNodeViewRenderer, NodeViewWrapper, Editor, EditorContent } from '@tiptap/vue-3';
 import Starterkit from '@tiptap/starter-kit';
 import TextAlign from '@tiptap/extension-text-align';
@@ -3877,14 +3877,14 @@ const useBlogArticleStore = defineStore("blog_articles", {
     }
   },
   getters: {
-    listWithActiveTags: (state) => vue_cjs_prod.computed(() => {
+    listWithActiveTags: (state) => {
       const list = state[CRUD_MODE.LIST].allIds.map((id) => state[CRUD_MODE.LIST].byId[id]);
       if (state.activeTags.length === 0) {
         return list;
       } else {
         return list.filter((article) => article.tags.some((tag) => state.activeTags.includes(tag)));
       }
-    })
+    }
   }
 });
 const _sfc_main$1s = /* @__PURE__ */ vue_cjs_prod.defineComponent({
@@ -3975,7 +3975,7 @@ const _sfc_main$1s = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                       _: 2
                     }, _parent3, _scopeId2));
                   });
-                  _push3(`<!--]--><li class="p-3"${_scopeId2}><input type="text p-2 w-full" placeholder="Ajoute un tag (avec entr\xE9e)"${_scopeId2}></li>`);
+                  _push3(`<!--]--><li class="p-3 w-full"${_scopeId2}><input type="text p-2 w-full" placeholder="Ajoute un tag (avec entr\xE9e)"${_scopeId2}></li>`);
                 } else {
                   return [
                     (vue_cjs_prod.openBlock(true), vue_cjs_prod.createBlock(vue_cjs_prod.Fragment, null, vue_cjs_prod.renderList(vue_cjs_prod.unref(tags), (tag, i) => {
@@ -3995,7 +3995,7 @@ const _sfc_main$1s = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                         _: 2
                       }, 1032, ["value"]);
                     }), 128)),
-                    vue_cjs_prod.createVNode("li", { class: "p-3" }, [
+                    vue_cjs_prod.createVNode("li", { class: "p-3 w-full" }, [
                       vue_cjs_prod.createVNode("input", {
                         onKeyup: vue_cjs_prod.withKeys(addTag, ["enter"]),
                         type: "text p-2 w-full",
@@ -4036,7 +4036,7 @@ const _sfc_main$1s = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                         _: 2
                       }, 1032, ["value"]);
                     }), 128)),
-                    vue_cjs_prod.createVNode("li", { class: "p-3" }, [
+                    vue_cjs_prod.createVNode("li", { class: "p-3 w-full" }, [
                       vue_cjs_prod.createVNode("input", {
                         onKeyup: vue_cjs_prod.withKeys(addTag, ["enter"]),
                         type: "text p-2 w-full",
@@ -4221,6 +4221,7 @@ _sfc_main$1p.setup = (props, ctx) => {
 };
 function useFieldHelper(props) {
   const isDisabled = props.fieldAttrs && props.fieldAttrs.disabled === "disabled";
+  const isRequired = props.fieldAttrs && props.fieldAttrs.required === true;
   const disabledColor = "gray-300";
   const getColor = () => {
     if (isDisabled) {
@@ -4238,6 +4239,7 @@ function useFieldHelper(props) {
     return "gray-500";
   };
   return {
+    isRequired,
     isDisabled,
     disabledColor,
     getColor
@@ -4260,7 +4262,7 @@ const _sfc_main$1o = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   },
   setup(__props) {
     const props = __props;
-    const { isDisabled, disabledColor, getColor } = useFieldHelper(props);
+    const { isDisabled, isRequired, disabledColor, getColor } = useFieldHelper(props);
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex flex-row group py-4 px-3" }, _attrs))}>`);
       if (__props.icon) {
@@ -4277,10 +4279,10 @@ const _sfc_main$1o = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         id: __props.name,
         name: __props.name,
         type: __props.type,
-        class: ["peer w-full outline-none h-fit", { [`text-${vue_cjs_prod.unref(disabledColor)}`]: vue_cjs_prod.unref(isDisabled) }]
+        class: ["peer w-full outline-none h-full min-h-[32px]", { [`text-${vue_cjs_prod.unref(disabledColor)}`]: vue_cjs_prod.unref(isDisabled) }]
       }, __props.fieldAttrs), null, _parent));
-      _push(`<label${serverRenderer.exports.ssrRenderAttr("for", __props.name)} class="${serverRenderer.exports.ssrRenderClass([{ "-top-6 pl-0": !!__props.value, [`text-${vue_cjs_prod.unref(getColor)()}`]: true }, "transform transition-all absolute top-0 left-0 h-fit flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:-top-6"])}">${serverRenderer.exports.ssrInterpolate(__props.label)} `);
-      if (__props.error) {
+      _push(`<label${serverRenderer.exports.ssrRenderAttr("for", __props.name)} class="${serverRenderer.exports.ssrRenderClass([{ "-top-5 pl-0": !!__props.value, "top-2": !__props.value, [`text-${vue_cjs_prod.unref(getColor)()}`]: true }, "transform transition-all absolute left-0 h-fit flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:-top-4"])}">${serverRenderer.exports.ssrInterpolate(__props.label)} `);
+      if (__props.error && (!!__props.value || !vue_cjs_prod.unref(isRequired))) {
         _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1r, null, {
           default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
@@ -8518,9 +8520,9 @@ const _sfc_main$10 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`<!--[-->`);
+      _push(`<div class="flex flex-row flex-wrap items-center justify-between h-9 border-b-2 font-bold"><div class="w-full md:w-1/5 flex-1 md:pl-2">Titre</div><div class="w-full md:w-1/6 flex-1">Tags</div><div class="w-full md:w-1/6 flex-initial">Auteur</div><div class="w-full md:w-1/12 flex-initial">Est publi\xE9 ?</div><div class="w-full md:w-1/12 flex-initial">Actions</div></div><!--[-->`);
       serverRenderer.exports.ssrRenderList(vue_cjs_prod.unref(data), (article) => {
-        _push(`<div class="flex flex-row flex-wrap items-center justify-between hover:bg-gray-100 hover:text-primary-dark h-9"><div class="w-full md:w-1/5 flex-1 md:pl-2">${serverRenderer.exports.ssrInterpolate(article.title)}</div><div class="w-full md:w-1/6 flex-initial">${serverRenderer.exports.ssrInterpolate(article.createdBy.nickname)}</div><div class="w-full md:w-1/12 flex-initial">${serverRenderer.exports.ssrInterpolate(article.isPublished)}</div><div class="w-full md:w-1/12 flex-initial">${serverRenderer.exports.ssrInterpolate(article.showInMenu)}</div><div class="w-full md:w-1/12 flex-initial flex self-stretch items-stretch"><div class="bg-primary flex-auto flex items-stretch justify-center">`);
+        _push(`<div class="flex flex-row flex-wrap items-center justify-between hover:bg-gray-100 hover:text-primary-dark h-9"><div class="w-full md:w-1/5 flex-1 md:pl-2">${serverRenderer.exports.ssrInterpolate(article.title)}</div><div class="w-full md:w-1/6 flex-1">${serverRenderer.exports.ssrInterpolate(article.tags ? article.tags.join(", ") : "")}</div><div class="w-full md:w-1/6 flex-initial">${serverRenderer.exports.ssrInterpolate(article.createdBy.nickname)}</div><div class="w-full md:w-1/12 flex-initial">${serverRenderer.exports.ssrInterpolate(article.isPublished)}</div><div class="w-full md:w-1/12 flex-initial flex self-stretch items-stretch"><div class="bg-primary flex-auto flex items-stretch justify-center">`);
         _push(serverRenderer.exports.ssrRenderComponent(_component_NuxtLink, {
           to: { name: "admin-blog-id", params: { id: article.id } },
           class: "w-full flex items-center justify-center"
@@ -8815,9 +8817,9 @@ const _sfc_main$Y = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`<!--[-->`);
+      _push(`<div class="flex flex-row flex-wrap items-center justify-between h-9 border-b-2 font-bold"><div class="w-full md:w-1/5 flex-1">Nom</div><div class="w-full md:w-1/12 flex-initial">Est publi\xE9 ?</div><div class="w-full md:w-1/12 flex-initial">Menu</div><div class="w-full md:w-1/12 flex-initial flex self-stretch items-stretch">Actions</div></div><!--[-->`);
       serverRenderer.exports.ssrRenderList(vue_cjs_prod.unref(data), (category) => {
-        _push(`<div class="flex flex-row flex-wrap items-center justify-between hover:bg-gray-100 hover:text-primary-dark h-9"><div class="w-full md:w-1/5 flex-1">${serverRenderer.exports.ssrInterpolate(category.name)}</div><div class="w-full md:w-1/12 flex-initial">${serverRenderer.exports.ssrInterpolate(category.isPublished)}</div><div class="w-full md:w-1/12 flex-initial">${serverRenderer.exports.ssrInterpolate(category.showInMenu)}</div><div class="w-full md:w-1/12 flex-initial flex self-stretch items-stretch"><div class="bg-primary flex-auto flex items-stretch justify-center">`);
+        _push(`<div class="flex flex-row flex-wrap items-center justify-between hover:bg-gray-100 hover:text-primary-dark h-9"><div class="w-full md:w-1/5 flex-1">${serverRenderer.exports.ssrInterpolate(category.name)}</div><div class="w-full md:w-1/12 flex-initial">${serverRenderer.exports.ssrInterpolate(category.isPublished)}</div><div class="w-full md:w-1/12 flex-initial">${serverRenderer.exports.ssrInterpolate(category.showInMenu)}</div><div class="w-full md:w-1/12 flex-initial flex self-stretch items-stretch"><div class="bg-primary hover:bg-primary-dark flex-auto flex items-stretch justify-center">`);
         _push(serverRenderer.exports.ssrRenderComponent(_component_NuxtLink, {
           to: { name: "admin-categories-slug", params: { slug: category.slug } },
           class: "w-full flex items-center justify-center"
@@ -8839,7 +8841,7 @@ const _sfc_main$Y = /* @__PURE__ */ vue_cjs_prod.defineComponent({
           }),
           _: 2
         }, _parent));
-        _push(`</div><div class="bg-accent flex-auto flex items-stretch justify-center"><div class="w-full flex items-center justify-center cursor-pointer">`);
+        _push(`</div><div class="bg-secondary hover:bg-accent flex-auto flex items-stretch justify-center"><div class="w-full flex items-center justify-center cursor-pointer">`);
         _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
           icon: "ri-delete-bin-line",
           class: "fill-white w-4 h-4"
@@ -8921,7 +8923,7 @@ const _sfc_main$W = /* @__PURE__ */ vue_cjs_prod.defineComponent({
     })), __temp = await __temp, __restore(), __temp);
     return (_ctx, _push, _parent, _attrs) => {
       const _component_NuxtLink = __nuxt_component_0$2;
-      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex flex-col flex-auto p-3" }, _attrs))}><div class="flex flex-row flex-wrap items-center justify-between hover:bg-gray-100 hover:text-primary-dark h-9"><div class="w-full md:w-1/5 flex-1">Email</div><div class="w-full md:w-2/12 flex-initial">Pr\xE9nom</div><div class="w-full md:w-2/12 flex-initial">Nom</div><div class="w-full md:w-2/12 flex-initial">Num\xE9ro</div><div class="w-full md:w-2/12 flex-initial">Nous a contact\xE9 le</div><div class="w-full md:w-2/12 flex-initial">Actions</div></div><!--[-->`);
+      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex flex-col flex-auto p-3" }, _attrs))}><div class="flex flex-row flex-wrap items-center justify-between border-b-2 font-bold h-9"><div class="w-full md:w-1/5 flex-1">Email</div><div class="w-full md:w-2/12 flex-initial">Pr\xE9nom</div><div class="w-full md:w-2/12 flex-initial">Nom</div><div class="w-full md:w-2/12 flex-initial">Num\xE9ro</div><div class="w-full md:w-2/12 flex-initial">Nous a contact\xE9 le</div><div class="w-full md:w-2/12 flex-initial">Actions</div></div><!--[-->`);
       serverRenderer.exports.ssrRenderList(vue_cjs_prod.unref(data), (contact2) => {
         _push(`<div class="flex flex-row flex-wrap items-center justify-between hover:bg-gray-100 hover:text-primary-dark h-9"><div class="w-full md:w-1/5 flex-1">${serverRenderer.exports.ssrInterpolate(contact2.email)}</div><div class="w-full md:w-2/12 flex-initial">${serverRenderer.exports.ssrInterpolate(contact2.firstName)}</div><div class="w-full md:w-2/12 flex-initial">${serverRenderer.exports.ssrInterpolate(contact2.lastName)}</div><div class="w-full md:w-2/12 flex-initial">${serverRenderer.exports.ssrInterpolate(contact2.phoneNumber)}</div><div class="w-full md:w-2/12 flex-initial">${serverRenderer.exports.ssrInterpolate(vue_cjs_prod.unref(formatDate)(contact2.createdAt))}</div><div class="w-full md:w-2/12 flex-initial"><div class="bg-primary flex-auto flex items-stretch justify-center">`);
         _push(serverRenderer.exports.ssrRenderComponent(_component_NuxtLink, {
@@ -9034,7 +9036,7 @@ const _sfc_main$T = /* @__PURE__ */ vue_cjs_prod.defineComponent({
     })), __temp = await __temp, __restore(), __temp);
     return (_ctx, _push, _parent, _attrs) => {
       const _component_NuxtLink = __nuxt_component_0$2;
-      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex flex-col flex-auto p-3" }, _attrs))}><div class="flex flex-row flex-wrap items-center justify-between hover:bg-gray-100 hover:text-primary-dark h-9"><div class="w-full md:w-1/5 flex-1">Email</div><div class="w-full md:w-2/12 flex-initial">Pr\xE9nom</div><div class="w-full md:w-2/12 flex-initial">Nom</div><div class="w-full md:w-2/12 flex-initial">A rempli le formulaire le</div><div class="w-full md:w-2/12 flex-initial">Actions</div></div><!--[-->`);
+      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex flex-col flex-auto p-3" }, _attrs))}><div class="flex flex-row flex-wrap items-center justify-between border-b-2 font-bold h-9"><div class="w-full md:w-1/5 flex-1">Email</div><div class="w-full md:w-2/12 flex-initial">Pr\xE9nom</div><div class="w-full md:w-2/12 flex-initial">Nom</div><div class="w-full md:w-2/12 flex-initial">A rempli le formulaire le</div><div class="w-full md:w-2/12 flex-initial">Actions</div></div><!--[-->`);
       serverRenderer.exports.ssrRenderList(vue_cjs_prod.unref(data), (join) => {
         _push(`<div class="flex flex-row flex-wrap items-center justify-between hover:bg-gray-100 hover:text-primary-dark h-9"><div class="w-full md:w-1/5 flex-1">${serverRenderer.exports.ssrInterpolate(join.email)}</div><div class="w-full md:w-2/12 flex-initial">${serverRenderer.exports.ssrInterpolate(join.firstName)}</div><div class="w-full md:w-2/12 flex-initial">${serverRenderer.exports.ssrInterpolate(join.lastName)}</div><div class="w-full md:w-2/12 flex-initial">${serverRenderer.exports.ssrInterpolate(vue_cjs_prod.unref(formatDate)(join.createdAt))}</div><div class="w-full md:w-2/12 flex-initial"><div class="bg-primary flex-auto flex items-stretch justify-center">`);
         _push(serverRenderer.exports.ssrRenderComponent(_component_NuxtLink, {
@@ -9114,7 +9116,7 @@ const _sfc_main$R = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       return contactNewsetterStore.list;
     })), __temp = await __temp, __restore(), __temp);
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex flex-col flex-auto p-3" }, _attrs))}><div class="flex flex-row flex-wrap items-center justify-between hover:bg-gray-100 hover:text-primary-dark h-9"><div class="w-full md:w-1/5 flex-1">Email</div><div class="w-full md:w-1/12 flex-initial">Ip</div><div class="w-full md:w-1/12 flex-initial">Cr\xE9\xE9 le</div></div><!--[-->`);
+      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex flex-col flex-auto p-3" }, _attrs))}><div class="flex flex-row flex-wrap items-center justify-between h-9 border-b-2 font-bold"><div class="w-full md:w-1/5 flex-1">Email</div><div class="w-full md:w-1/12 flex-initial">Ip</div><div class="w-full md:w-1/12 flex-initial">Cr\xE9\xE9 le</div></div><!--[-->`);
       serverRenderer.exports.ssrRenderList(vue_cjs_prod.unref(data), (contact2) => {
         _push(`<div class="flex flex-row flex-wrap items-center justify-between hover:bg-gray-100 hover:text-primary-dark h-9"><div class="w-full md:w-1/5 flex-1">${serverRenderer.exports.ssrInterpolate(contact2.email)}</div><div class="w-full md:w-1/12 flex-initial">${serverRenderer.exports.ssrInterpolate(contact2.ip)}</div><div class="w-full md:w-1/12 flex-initial">${serverRenderer.exports.ssrInterpolate(vue_cjs_prod.unref(formatDate)(contact2.createdAt))}</div></div>`);
       });
@@ -9943,9 +9945,9 @@ const _sfc_main$M = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`<!--[-->`);
+      _push(`<div class="flex flex-row flex-wrap items-center justify-between hover:bg-gray-100 h-9 border-b-2 font-bold"><div class="w-full md:w-1/5 flex-1 md:pl-2">Titre</div><div class="w-full md:w-1/6 flex-initial">Url</div><div class="w-full md:w-1/6 flex-initial">Auteur</div><div class="w-full md:w-1/5 flex-1">Cat\xE9gorie</div><div class="w-full md:w-1/12 flex-initial">Est publi\xE9 ?</div><div class="w-full md:w-1/12 flex-initial">Menu</div><div class="w-full md:w-1/12 flex-initial">Actions</div></div><!--[-->`);
       serverRenderer.exports.ssrRenderList(vue_cjs_prod.unref(data), (page) => {
-        _push(`<div class="flex flex-row flex-wrap items-center justify-between hover:bg-gray-100 hover:text-primary-dark h-9"><div class="w-full md:w-1/5 flex-1 md:pl-2">${serverRenderer.exports.ssrInterpolate(page.title)}</div><div class="w-full md:w-1/6 flex-initial">${serverRenderer.exports.ssrInterpolate(page.createdBy)}</div><div class="w-full md:w-1/5 flex-1">${serverRenderer.exports.ssrInterpolate(page.category ? page.category.name : "N/A")}</div><div class="w-full md:w-1/12 flex-initial">${serverRenderer.exports.ssrInterpolate(page.isPublished)}</div><div class="w-full md:w-1/12 flex-initial">${serverRenderer.exports.ssrInterpolate(page.showInMenu)}</div><div class="w-full md:w-1/12 flex-initial flex self-stretch items-stretch"><div class="bg-primary flex-auto flex items-stretch justify-center">`);
+        _push(`<div class="flex flex-row flex-wrap items-center justify-between hover:bg-gray-100 hover:text-primary-dark h-9"><div class="w-full md:w-1/5 flex-1 md:pl-2">${serverRenderer.exports.ssrInterpolate(page.title)}</div><div class="w-full md:w-1/6 flex-initial">/${serverRenderer.exports.ssrInterpolate(page.url)}</div><div class="w-full md:w-1/6 flex-initial">${serverRenderer.exports.ssrInterpolate(page.createdBy.nickname)}</div><div class="w-full md:w-1/5 flex-1">${serverRenderer.exports.ssrInterpolate(page.category ? page.category.name : "N/A")}</div><div class="w-full md:w-1/12 flex-initial">${serverRenderer.exports.ssrInterpolate(page.isPublished)}</div><div class="w-full md:w-1/12 flex-initial">${serverRenderer.exports.ssrInterpolate(page.showInMenu)}</div><div class="w-full md:w-1/12 flex-initial flex self-stretch items-stretch"><div class="bg-primary flex-auto flex items-stretch justify-center">`);
         _push(serverRenderer.exports.ssrRenderComponent(_component_NuxtLink, {
           to: { name: "admin-pages-slug", params: { slug: page.url } },
           class: "w-full flex items-center justify-center"
@@ -10132,7 +10134,7 @@ const _sfc_main$H = /* @__PURE__ */ vue_cjs_prod.defineComponent({
     useRoute();
     const blogArticleStore = useBlogArticleStore();
     [__temp, __restore] = vue_cjs_prod.withAsyncContext(() => useAsyncData("blog-articles-index", () => blogArticleStore.fetchAll({ "order[createdAt]": "desc", "itemsPerPage": 50 }))), await __temp, __restore();
-    const articles = blogArticleStore.listWithActiveTags;
+    const { listWithActiveTags: articles } = storeToRefs(blogArticleStore);
     return (_ctx, _push, _parent, _attrs) => {
       const _component_Title = vue_cjs_prod.resolveComponent("Title");
       const _component_NuxtLink = __nuxt_component_0$2;
@@ -10152,12 +10154,12 @@ const _sfc_main$H = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$I, null, null, _parent));
       _push(`<!--[-->`);
       serverRenderer.exports.ssrRenderList(vue_cjs_prod.unref(articles), (article, i) => {
-        _push(`<div class="w-full flex flex-row py-2"><div class="${serverRenderer.exports.ssrRenderClass([{ "order-1": i % 2 === 1 }, "px-3 w-40"])}">`);
+        _push(`<div class="w-full flex flex-col py-2"><div class="flex flex-row"><div class="${serverRenderer.exports.ssrRenderClass([{ "order-1": i % 2 === 1 }, "px-3 w-40"])}">`);
         _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$J, {
           "media-object": vue_cjs_prod.unref(blogArticleStore).getRandomImage(article),
           class: "h-20 before:text-[6px]"
         }, null, _parent));
-        _push(`</div><div class="${serverRenderer.exports.ssrRenderClass([{ "text-right": i % 2 === 1 }, "flex flex-col w-full"])}"><p class="w-full"><b>${serverRenderer.exports.ssrInterpolate(article.title)}</b> | ${serverRenderer.exports.ssrInterpolate(article.preview)}</p><div class="${serverRenderer.exports.ssrRenderClass([{ "self-end": i % 2 === 1 }, "pt-2 text-primary-dark fill-primary-dark flex uppercase text-xs items-center"])}"><!--[-->`);
+        _push(`</div><div class="${serverRenderer.exports.ssrRenderClass([{ "text-right": i % 2 === 1 }, "flex flex-col w-full justify-center"])}"><p class="w-full"><b class="text-lg">${serverRenderer.exports.ssrInterpolate(article.title)}</b> | ${serverRenderer.exports.ssrInterpolate(article.preview)}</p><div class="${serverRenderer.exports.ssrRenderClass([{ "self-end": i % 2 === 1 }, "pt-2 text-primary-dark fill-primary-dark flex uppercase text-xs items-center"])}"><!--[-->`);
         serverRenderer.exports.ssrRenderList(article.tags, (tag, i2) => {
           _push(`<div class="bg-primary-dark text-white uppercase px-2 py-1 rounded-tl-lg rounded-br-lg mx-1 text-xs cursor-pointer">${serverRenderer.exports.ssrInterpolate(tag)}</div>`);
         });
@@ -10180,7 +10182,7 @@ const _sfc_main$H = /* @__PURE__ */ vue_cjs_prod.defineComponent({
           }),
           _: 2
         }, _parent));
-        _push(`</div></div></div>`);
+        _push(`</div></div></div><div class="h-2 w-1/2 border-b self-center"></div></div>`);
       });
       _push(`<!--]--></div>`);
     };
@@ -10234,120 +10236,41 @@ const _sfc_main$G = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       }, {
         default: vue_cjs_prod.withCtx(({ values, errors }, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="flex flex-row w-1/2 group py-4 px-3"${_scopeId}>`);
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
               icon: "ri-mail-line",
-              class: ["h-8 w-10 group-focus-within:stroke-2", { "fill-accent": !!errors.email, "fill-primary": !!values.email && !errors.email, "fill-gray-500": !values.email }]
-            }, null, _parent2, _scopeId));
-            _push2(`<div class="relative w-full"${_scopeId}>`);
-            _push2(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(Field), {
-              id: "email",
-              name: "email",
               type: "email",
-              required: "",
-              autocomplete: "off",
-              class: "peer w-full outline-none h-8",
-              validateOnInput: true
+              name: "email",
+              error: errors.email,
+              value: values.email,
+              label: "Email",
+              class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(`<label for="email" class="${serverRenderer.exports.ssrRenderClass([{ "h-1/2 -translate-y-full pl-0": !!values.email, "text-accent": !!errors.email, "text-primary": !!values.email && !errors.email }, "transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full"])}"${_scopeId}>Email `);
-            if (errors.email) {
-              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1r, null, {
-                default: vue_cjs_prod.withCtx((_, _push3, _parent3, _scopeId2) => {
-                  if (_push3) {
-                    _push3(`${serverRenderer.exports.ssrInterpolate(errors.email)}`);
-                  } else {
-                    return [
-                      vue_cjs_prod.createTextVNode(vue_cjs_prod.toDisplayString(errors.email), 1)
-                    ];
-                  }
-                }),
-                _: 2
-              }, _parent2, _scopeId));
-            } else {
-              _push2(`<!---->`);
-            }
-            _push2(`</label><div class="${serverRenderer.exports.ssrRenderClass([{ "border-accent": !!errors.email, "border-primary": !!values.email && !errors.email, "border-gray-500": !values.email }, "absolute bottom-0 -ml-8 w-[calc(100%_+_2rem)] border-b"])}"${_scopeId}></div></div></div><div class="flex flex-row w-1/2 group py-4 px-3"${_scopeId}><div class="relative w-full"${_scopeId}>`);
-            _push2(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(Field), {
-              id: "phoneNumber",
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+              icon: "ri-phone-line",
+              type: "phoneNumber",
               name: "phoneNumber",
-              autocomplete: "off",
-              type: "tel",
-              format: "0[0-9]{9}",
-              class: "peer w-full outline-none h-8",
-              validateOnInput: true
+              error: errors.phoneNumber,
+              value: values.phoneNumber,
+              label: "Num\xE9ro de t\xE9l\xE9phone",
+              class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(`<label for="phoneNumber" class="${serverRenderer.exports.ssrRenderClass([{ "h-1/2 -translate-y-full pl-0": !!values.phoneNumber, "text-accent": !!errors.phoneNumber, "text-primary": !!values.phoneNumber && !errors.phoneNumber }, "transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full"])}"${_scopeId}>Num\xE9ro de t\xE9l\xE9phone `);
-            if (errors.phoneNumber) {
-              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1r, null, {
-                default: vue_cjs_prod.withCtx((_, _push3, _parent3, _scopeId2) => {
-                  if (_push3) {
-                    _push3(`${serverRenderer.exports.ssrInterpolate(errors.phoneNumber)}`);
-                  } else {
-                    return [
-                      vue_cjs_prod.createTextVNode(vue_cjs_prod.toDisplayString(errors.phoneNumber), 1)
-                    ];
-                  }
-                }),
-                _: 2
-              }, _parent2, _scopeId));
-            } else {
-              _push2(`<!---->`);
-            }
-            _push2(`</label><div class="${serverRenderer.exports.ssrRenderClass([{ "border-accent": !!errors.phoneNumber, "border-primary": !!values.phoneNumber && !errors.phoneNumber, "border-gray-500": !values.phoneNumber }, "absolute bottom-0 w-full border-b"])}"${_scopeId}></div></div></div><div class="flex flex-row w-1/2 group py-4 px-3"${_scopeId}><div class="relative w-full"${_scopeId}>`);
-            _push2(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(Field), {
-              id: "firstName",
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+              type: "firstName",
               name: "firstName",
-              autocomplete: "off",
-              type: "text",
-              format: "0[0-9]{9}",
-              class: "peer w-full outline-none h-8",
-              validateOnInput: true
+              error: errors.firstName,
+              value: values.firstName,
+              label: "Pr\xE9nom",
+              class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(`<label for="firstName" class="${serverRenderer.exports.ssrRenderClass([{ "h-1/2 -translate-y-full pl-0": !!values.firstName, "text-accent": !!errors.firstName, "text-primary": !!values.firstName && !errors.firstName }, "transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full"])}"${_scopeId}>Pr\xE9nom `);
-            if (errors.firstName) {
-              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1r, null, {
-                default: vue_cjs_prod.withCtx((_, _push3, _parent3, _scopeId2) => {
-                  if (_push3) {
-                    _push3(`${serverRenderer.exports.ssrInterpolate(errors.firstName)}`);
-                  } else {
-                    return [
-                      vue_cjs_prod.createTextVNode(vue_cjs_prod.toDisplayString(errors.firstName), 1)
-                    ];
-                  }
-                }),
-                _: 2
-              }, _parent2, _scopeId));
-            } else {
-              _push2(`<!---->`);
-            }
-            _push2(`</label><div class="${serverRenderer.exports.ssrRenderClass([{ "border-accent": !!errors.firstName, "border-primary": !!values.firstName && !errors.firstName, "border-gray-500": !values.firstName }, "absolute bottom-0 w-full border-b"])}"${_scopeId}></div></div></div><div class="flex flex-row w-1/2 group py-4 px-3"${_scopeId}><div class="relative w-full"${_scopeId}>`);
-            _push2(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(Field), {
-              id: "lastName",
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+              type: "lastName",
               name: "lastName",
-              autocomplete: "off",
-              type: "text",
-              format: "0[0-9]{9}",
-              class: "peer w-full outline-none h-8",
-              validateOnInput: true
+              error: errors.lastName,
+              value: values.lastName,
+              label: "Nom",
+              class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(`<label for="lastName" class="${serverRenderer.exports.ssrRenderClass([{ "h-1/2 -translate-y-full pl-0": !!values.lastName, "text-accent": !!errors.lastName, "text-primary": !!values.lastName && !errors.lastName }, "transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full"])}"${_scopeId}>Nom `);
-            if (errors.lastName) {
-              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1r, null, {
-                default: vue_cjs_prod.withCtx((_, _push3, _parent3, _scopeId2) => {
-                  if (_push3) {
-                    _push3(`${serverRenderer.exports.ssrInterpolate(errors.lastName)}`);
-                  } else {
-                    return [
-                      vue_cjs_prod.createTextVNode(vue_cjs_prod.toDisplayString(errors.lastName), 1)
-                    ];
-                  }
-                }),
-                _: 2
-              }, _parent2, _scopeId));
-            } else {
-              _push2(`<!---->`);
-            }
-            _push2(`</label><div class="${serverRenderer.exports.ssrRenderClass([{ "border-accent": !!errors.lastName, "border-primary": !!values.lastName && !errors.lastName, "border-gray-500": !values.lastName }, "absolute bottom-0 w-full border-b"])}"${_scopeId}></div></div></div><div class="flex flex-row w-full group py-4 px-3"${_scopeId}><div class="relative w-full"${_scopeId}>`);
+            _push2(`<div class="flex flex-row w-full group py-4 px-3"${_scopeId}><div class="relative w-full"${_scopeId}>`);
             _push2(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(Field), {
               id: "subject",
               name: "subject",
@@ -10405,122 +10328,40 @@ const _sfc_main$G = /* @__PURE__ */ vue_cjs_prod.defineComponent({
             _push2(`</div><button type="submit" class="py-3 px-4 bg-primary text-white shadow-md uppercase hover:bg-primary-dark"${_scopeId}>Envoyer</button><button type="reset" class="py-3 px-4 bg-secondary text-white shadow-md uppercase hover:bg-accent"${_scopeId}>R\xE9initialiser</button>`);
           } else {
             return [
-              vue_cjs_prod.createVNode("div", { class: "flex flex-row w-1/2 group py-4 px-3" }, [
-                vue_cjs_prod.createVNode(_sfc_main$1v, {
-                  icon: "ri-mail-line",
-                  class: ["h-8 w-10 group-focus-within:stroke-2", { "fill-accent": !!errors.email, "fill-primary": !!values.email && !errors.email, "fill-gray-500": !values.email }]
-                }, null, 8, ["class"]),
-                vue_cjs_prod.createVNode("div", { class: "relative w-full" }, [
-                  vue_cjs_prod.createVNode(vue_cjs_prod.unref(Field), {
-                    id: "email",
-                    name: "email",
-                    type: "email",
-                    required: "",
-                    autocomplete: "off",
-                    class: "peer w-full outline-none h-8",
-                    validateOnInput: true
-                  }),
-                  vue_cjs_prod.createVNode("label", {
-                    for: "email",
-                    class: [{ "h-1/2 -translate-y-full pl-0": !!values.email, "text-accent": !!errors.email, "text-primary": !!values.email && !errors.email }, "transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full"]
-                  }, [
-                    vue_cjs_prod.createTextVNode("Email "),
-                    errors.email ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(_sfc_main$1r, { key: 0 }, {
-                      default: vue_cjs_prod.withCtx(() => [
-                        vue_cjs_prod.createTextVNode(vue_cjs_prod.toDisplayString(errors.email), 1)
-                      ]),
-                      _: 2
-                    }, 1024)) : vue_cjs_prod.createCommentVNode("", true)
-                  ], 2),
-                  vue_cjs_prod.createVNode("div", {
-                    class: [{ "border-accent": !!errors.email, "border-primary": !!values.email && !errors.email, "border-gray-500": !values.email }, "absolute bottom-0 -ml-8 w-[calc(100%_+_2rem)] border-b"]
-                  }, null, 2)
-                ])
-              ]),
-              vue_cjs_prod.createVNode("div", { class: "flex flex-row w-1/2 group py-4 px-3" }, [
-                vue_cjs_prod.createVNode("div", { class: "relative w-full" }, [
-                  vue_cjs_prod.createVNode(vue_cjs_prod.unref(Field), {
-                    id: "phoneNumber",
-                    name: "phoneNumber",
-                    autocomplete: "off",
-                    type: "tel",
-                    format: "0[0-9]{9}",
-                    class: "peer w-full outline-none h-8",
-                    validateOnInput: true
-                  }),
-                  vue_cjs_prod.createVNode("label", {
-                    for: "phoneNumber",
-                    class: [{ "h-1/2 -translate-y-full pl-0": !!values.phoneNumber, "text-accent": !!errors.phoneNumber, "text-primary": !!values.phoneNumber && !errors.phoneNumber }, "transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full"]
-                  }, [
-                    vue_cjs_prod.createTextVNode("Num\xE9ro de t\xE9l\xE9phone "),
-                    errors.phoneNumber ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(_sfc_main$1r, { key: 0 }, {
-                      default: vue_cjs_prod.withCtx(() => [
-                        vue_cjs_prod.createTextVNode(vue_cjs_prod.toDisplayString(errors.phoneNumber), 1)
-                      ]),
-                      _: 2
-                    }, 1024)) : vue_cjs_prod.createCommentVNode("", true)
-                  ], 2),
-                  vue_cjs_prod.createVNode("div", {
-                    class: [{ "border-accent": !!errors.phoneNumber, "border-primary": !!values.phoneNumber && !errors.phoneNumber, "border-gray-500": !values.phoneNumber }, "absolute bottom-0 w-full border-b"]
-                  }, null, 2)
-                ])
-              ]),
-              vue_cjs_prod.createVNode("div", { class: "flex flex-row w-1/2 group py-4 px-3" }, [
-                vue_cjs_prod.createVNode("div", { class: "relative w-full" }, [
-                  vue_cjs_prod.createVNode(vue_cjs_prod.unref(Field), {
-                    id: "firstName",
-                    name: "firstName",
-                    autocomplete: "off",
-                    type: "text",
-                    format: "0[0-9]{9}",
-                    class: "peer w-full outline-none h-8",
-                    validateOnInput: true
-                  }),
-                  vue_cjs_prod.createVNode("label", {
-                    for: "firstName",
-                    class: [{ "h-1/2 -translate-y-full pl-0": !!values.firstName, "text-accent": !!errors.firstName, "text-primary": !!values.firstName && !errors.firstName }, "transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full"]
-                  }, [
-                    vue_cjs_prod.createTextVNode("Pr\xE9nom "),
-                    errors.firstName ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(_sfc_main$1r, { key: 0 }, {
-                      default: vue_cjs_prod.withCtx(() => [
-                        vue_cjs_prod.createTextVNode(vue_cjs_prod.toDisplayString(errors.firstName), 1)
-                      ]),
-                      _: 2
-                    }, 1024)) : vue_cjs_prod.createCommentVNode("", true)
-                  ], 2),
-                  vue_cjs_prod.createVNode("div", {
-                    class: [{ "border-accent": !!errors.firstName, "border-primary": !!values.firstName && !errors.firstName, "border-gray-500": !values.firstName }, "absolute bottom-0 w-full border-b"]
-                  }, null, 2)
-                ])
-              ]),
-              vue_cjs_prod.createVNode("div", { class: "flex flex-row w-1/2 group py-4 px-3" }, [
-                vue_cjs_prod.createVNode("div", { class: "relative w-full" }, [
-                  vue_cjs_prod.createVNode(vue_cjs_prod.unref(Field), {
-                    id: "lastName",
-                    name: "lastName",
-                    autocomplete: "off",
-                    type: "text",
-                    format: "0[0-9]{9}",
-                    class: "peer w-full outline-none h-8",
-                    validateOnInput: true
-                  }),
-                  vue_cjs_prod.createVNode("label", {
-                    for: "lastName",
-                    class: [{ "h-1/2 -translate-y-full pl-0": !!values.lastName, "text-accent": !!errors.lastName, "text-primary": !!values.lastName && !errors.lastName }, "transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full"]
-                  }, [
-                    vue_cjs_prod.createTextVNode("Nom "),
-                    errors.lastName ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(_sfc_main$1r, { key: 0 }, {
-                      default: vue_cjs_prod.withCtx(() => [
-                        vue_cjs_prod.createTextVNode(vue_cjs_prod.toDisplayString(errors.lastName), 1)
-                      ]),
-                      _: 2
-                    }, 1024)) : vue_cjs_prod.createCommentVNode("", true)
-                  ], 2),
-                  vue_cjs_prod.createVNode("div", {
-                    class: [{ "border-accent": !!errors.lastName, "border-primary": !!values.lastName && !errors.lastName, "border-gray-500": !values.lastName }, "absolute bottom-0 w-full border-b"]
-                  }, null, 2)
-                ])
-              ]),
+              vue_cjs_prod.createVNode(_sfc_main$1o, {
+                icon: "ri-mail-line",
+                type: "email",
+                name: "email",
+                error: errors.email,
+                value: values.email,
+                label: "Email",
+                class: "w-full md:w-1/2"
+              }, null, 8, ["error", "value"]),
+              vue_cjs_prod.createVNode(_sfc_main$1o, {
+                icon: "ri-phone-line",
+                type: "phoneNumber",
+                name: "phoneNumber",
+                error: errors.phoneNumber,
+                value: values.phoneNumber,
+                label: "Num\xE9ro de t\xE9l\xE9phone",
+                class: "w-full md:w-1/2"
+              }, null, 8, ["error", "value"]),
+              vue_cjs_prod.createVNode(_sfc_main$1o, {
+                type: "firstName",
+                name: "firstName",
+                error: errors.firstName,
+                value: values.firstName,
+                label: "Pr\xE9nom",
+                class: "w-full md:w-1/2"
+              }, null, 8, ["error", "value"]),
+              vue_cjs_prod.createVNode(_sfc_main$1o, {
+                type: "lastName",
+                name: "lastName",
+                error: errors.lastName,
+                value: values.lastName,
+                label: "Nom",
+                class: "w-full md:w-1/2"
+              }, null, 8, ["error", "value"]),
               vue_cjs_prod.createVNode("div", { class: "flex flex-row w-full group py-4 px-3" }, [
                 vue_cjs_prod.createVNode("div", { class: "relative w-full" }, [
                   vue_cjs_prod.createVNode(vue_cjs_prod.unref(Field), {
@@ -10798,7 +10639,7 @@ const _sfc_main$D = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`<div class="w-fit"><h2>Connexion</h2>`);
+      _push(`<div class="w-fit"><h2 class="py-3">Connexion</h2>`);
       _push(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(Form), {
         ref_key: "form",
         ref: form,
@@ -10917,7 +10758,7 @@ const _sfc_main$C = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
       const _component_Title = vue_cjs_prod.resolveComponent("Title");
-      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "bg-white min-h-screen p-3" }, _attrs))}>`);
+      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "bg-white flex-auto p-3" }, _attrs))}>`);
       _push(serverRenderer.exports.ssrRenderComponent(_component_Title, null, {
         default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -10952,13 +10793,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
     const family = vue_cjs_prod.ref([
       { firstName: null, age: null }
     ]);
-    const {
-      value: familyInputValue,
-      errorMessage,
-      handleBlur,
-      handleChange,
-      meta: meta2
-    } = useField("family", void 0);
+    const { value: familyInputValue } = useField("family", void 0);
     const addMember = () => {
       family.value.push({ firstName: null, age: null });
     };
@@ -12736,9 +12571,9 @@ const _sfc_main$q = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`<!--[-->`);
+      _push(`<div class="flex flex-row flex-wrap items-center justify-between h-9 border-b-2 font-bold"><div class="w-full md:w-1/5 flex-1 md:pl-2">Titre</div><div class="w-full md:w-1/6 flex-1">Tags</div><div class="w-full md:w-1/6 flex-initial">Auteur</div><div class="w-full md:w-1/12 flex-initial">Est publi\xE9 ?</div><div class="w-full md:w-1/12 flex-initial">Actions</div></div><!--[-->`);
       serverRenderer.exports.ssrRenderList(vue_cjs_prod.unref(data), (article) => {
-        _push(`<div class="flex flex-row flex-wrap items-center justify-between hover:bg-gray-100 hover:text-primary-dark h-9"><div class="w-full md:w-1/5 flex-1 md:pl-2">${serverRenderer.exports.ssrInterpolate(article.title)}</div><div class="w-full md:w-1/6 flex-initial">${serverRenderer.exports.ssrInterpolate(article.createdBy.nickname)}</div><div class="w-full md:w-1/12 flex-initial">${serverRenderer.exports.ssrInterpolate(article.isPublished)}</div><div class="w-full md:w-1/12 flex-initial">${serverRenderer.exports.ssrInterpolate(article.showInMenu)}</div><div class="w-full md:w-1/12 flex-initial flex self-stretch items-stretch"><div class="bg-primary flex-auto flex items-stretch justify-center">`);
+        _push(`<div class="flex flex-row flex-wrap items-center justify-between hover:bg-gray-100 hover:text-primary-dark h-9"><div class="w-full md:w-1/5 flex-1 md:pl-2">${serverRenderer.exports.ssrInterpolate(article.title)}</div><div class="w-full md:w-1/6 flex-1">${serverRenderer.exports.ssrInterpolate(article.tags ? article.tags.join(", ") : "")}</div><div class="w-full md:w-1/6 flex-initial">${serverRenderer.exports.ssrInterpolate(article.createdBy.nickname)}</div><div class="w-full md:w-1/12 flex-initial">${serverRenderer.exports.ssrInterpolate(article.isPublished)}</div><div class="w-full md:w-1/12 flex-initial flex self-stretch items-stretch"><div class="bg-primary flex-auto flex items-stretch justify-center">`);
         _push(serverRenderer.exports.ssrRenderComponent(_component_NuxtLink, {
           to: { name: "admin-blog-id", params: { id: article.id } },
           class: "w-full flex items-center justify-center"
@@ -12927,9 +12762,9 @@ const _sfc_main$n = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`<!--[-->`);
+      _push(`<div class="flex flex-row flex-wrap items-center justify-between h-9 border-b-2 font-bold"><div class="w-full md:w-1/5 flex-1">Nom</div><div class="w-full md:w-1/12 flex-initial">Est publi\xE9 ?</div><div class="w-full md:w-1/12 flex-initial">Menu</div><div class="w-full md:w-1/12 flex-initial flex self-stretch items-stretch">Actions</div></div><!--[-->`);
       serverRenderer.exports.ssrRenderList(vue_cjs_prod.unref(data), (category) => {
-        _push(`<div class="flex flex-row flex-wrap items-center justify-between hover:bg-gray-100 hover:text-primary-dark h-9"><div class="w-full md:w-1/5 flex-1">${serverRenderer.exports.ssrInterpolate(category.name)}</div><div class="w-full md:w-1/12 flex-initial">${serverRenderer.exports.ssrInterpolate(category.isPublished)}</div><div class="w-full md:w-1/12 flex-initial">${serverRenderer.exports.ssrInterpolate(category.showInMenu)}</div><div class="w-full md:w-1/12 flex-initial flex self-stretch items-stretch"><div class="bg-primary flex-auto flex items-stretch justify-center">`);
+        _push(`<div class="flex flex-row flex-wrap items-center justify-between hover:bg-gray-100 hover:text-primary-dark h-9"><div class="w-full md:w-1/5 flex-1">${serverRenderer.exports.ssrInterpolate(category.name)}</div><div class="w-full md:w-1/12 flex-initial">${serverRenderer.exports.ssrInterpolate(category.isPublished)}</div><div class="w-full md:w-1/12 flex-initial">${serverRenderer.exports.ssrInterpolate(category.showInMenu)}</div><div class="w-full md:w-1/12 flex-initial flex self-stretch items-stretch"><div class="bg-primary hover:bg-primary-dark flex-auto flex items-stretch justify-center">`);
         _push(serverRenderer.exports.ssrRenderComponent(_component_NuxtLink, {
           to: { name: "admin-categories-slug", params: { slug: category.slug } },
           class: "w-full flex items-center justify-center"
@@ -12951,7 +12786,7 @@ const _sfc_main$n = /* @__PURE__ */ vue_cjs_prod.defineComponent({
           }),
           _: 2
         }, _parent));
-        _push(`</div><div class="bg-accent flex-auto flex items-stretch justify-center"><div class="w-full flex items-center justify-center cursor-pointer">`);
+        _push(`</div><div class="bg-secondary hover:bg-accent flex-auto flex items-stretch justify-center"><div class="w-full flex items-center justify-center cursor-pointer">`);
         _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
           icon: "ri-delete-bin-line",
           class: "fill-white w-4 h-4"
@@ -13016,7 +12851,7 @@ const _sfc_main$l = /* @__PURE__ */ vue_cjs_prod.defineComponent({
     })), __temp = await __temp, __restore(), __temp);
     return (_ctx, _push, _parent, _attrs) => {
       const _component_NuxtLink = __nuxt_component_0$2;
-      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex flex-col flex-auto p-3" }, _attrs))}><div class="flex flex-row flex-wrap items-center justify-between hover:bg-gray-100 hover:text-primary-dark h-9"><div class="w-full md:w-1/5 flex-1">Email</div><div class="w-full md:w-2/12 flex-initial">Pr\xE9nom</div><div class="w-full md:w-2/12 flex-initial">Nom</div><div class="w-full md:w-2/12 flex-initial">Num\xE9ro</div><div class="w-full md:w-2/12 flex-initial">Nous a contact\xE9 le</div><div class="w-full md:w-2/12 flex-initial">Actions</div></div><!--[-->`);
+      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex flex-col flex-auto p-3" }, _attrs))}><div class="flex flex-row flex-wrap items-center justify-between border-b-2 font-bold h-9"><div class="w-full md:w-1/5 flex-1">Email</div><div class="w-full md:w-2/12 flex-initial">Pr\xE9nom</div><div class="w-full md:w-2/12 flex-initial">Nom</div><div class="w-full md:w-2/12 flex-initial">Num\xE9ro</div><div class="w-full md:w-2/12 flex-initial">Nous a contact\xE9 le</div><div class="w-full md:w-2/12 flex-initial">Actions</div></div><!--[-->`);
       serverRenderer.exports.ssrRenderList(vue_cjs_prod.unref(data), (contact2) => {
         _push(`<div class="flex flex-row flex-wrap items-center justify-between hover:bg-gray-100 hover:text-primary-dark h-9"><div class="w-full md:w-1/5 flex-1">${serverRenderer.exports.ssrInterpolate(contact2.email)}</div><div class="w-full md:w-2/12 flex-initial">${serverRenderer.exports.ssrInterpolate(contact2.firstName)}</div><div class="w-full md:w-2/12 flex-initial">${serverRenderer.exports.ssrInterpolate(contact2.lastName)}</div><div class="w-full md:w-2/12 flex-initial">${serverRenderer.exports.ssrInterpolate(contact2.phoneNumber)}</div><div class="w-full md:w-2/12 flex-initial">${serverRenderer.exports.ssrInterpolate(vue_cjs_prod.unref(formatDate)(contact2.createdAt))}</div><div class="w-full md:w-2/12 flex-initial"><div class="bg-primary flex-auto flex items-stretch justify-center">`);
         _push(serverRenderer.exports.ssrRenderComponent(_component_NuxtLink, {
@@ -13124,7 +12959,7 @@ const _sfc_main$i = /* @__PURE__ */ vue_cjs_prod.defineComponent({
     })), __temp = await __temp, __restore(), __temp);
     return (_ctx, _push, _parent, _attrs) => {
       const _component_NuxtLink = __nuxt_component_0$2;
-      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex flex-col flex-auto p-3" }, _attrs))}><div class="flex flex-row flex-wrap items-center justify-between hover:bg-gray-100 hover:text-primary-dark h-9"><div class="w-full md:w-1/5 flex-1">Email</div><div class="w-full md:w-2/12 flex-initial">Pr\xE9nom</div><div class="w-full md:w-2/12 flex-initial">Nom</div><div class="w-full md:w-2/12 flex-initial">A rempli le formulaire le</div><div class="w-full md:w-2/12 flex-initial">Actions</div></div><!--[-->`);
+      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex flex-col flex-auto p-3" }, _attrs))}><div class="flex flex-row flex-wrap items-center justify-between border-b-2 font-bold h-9"><div class="w-full md:w-1/5 flex-1">Email</div><div class="w-full md:w-2/12 flex-initial">Pr\xE9nom</div><div class="w-full md:w-2/12 flex-initial">Nom</div><div class="w-full md:w-2/12 flex-initial">A rempli le formulaire le</div><div class="w-full md:w-2/12 flex-initial">Actions</div></div><!--[-->`);
       serverRenderer.exports.ssrRenderList(vue_cjs_prod.unref(data), (join) => {
         _push(`<div class="flex flex-row flex-wrap items-center justify-between hover:bg-gray-100 hover:text-primary-dark h-9"><div class="w-full md:w-1/5 flex-1">${serverRenderer.exports.ssrInterpolate(join.email)}</div><div class="w-full md:w-2/12 flex-initial">${serverRenderer.exports.ssrInterpolate(join.firstName)}</div><div class="w-full md:w-2/12 flex-initial">${serverRenderer.exports.ssrInterpolate(join.lastName)}</div><div class="w-full md:w-2/12 flex-initial">${serverRenderer.exports.ssrInterpolate(vue_cjs_prod.unref(formatDate)(join.createdAt))}</div><div class="w-full md:w-2/12 flex-initial"><div class="bg-primary flex-auto flex items-stretch justify-center">`);
         _push(serverRenderer.exports.ssrRenderComponent(_component_NuxtLink, {
@@ -13199,7 +13034,7 @@ const _sfc_main$g = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       return contactNewsetterStore.list;
     })), __temp = await __temp, __restore(), __temp);
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex flex-col flex-auto p-3" }, _attrs))}><div class="flex flex-row flex-wrap items-center justify-between hover:bg-gray-100 hover:text-primary-dark h-9"><div class="w-full md:w-1/5 flex-1">Email</div><div class="w-full md:w-1/12 flex-initial">Ip</div><div class="w-full md:w-1/12 flex-initial">Cr\xE9\xE9 le</div></div><!--[-->`);
+      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex flex-col flex-auto p-3" }, _attrs))}><div class="flex flex-row flex-wrap items-center justify-between h-9 border-b-2 font-bold"><div class="w-full md:w-1/5 flex-1">Email</div><div class="w-full md:w-1/12 flex-initial">Ip</div><div class="w-full md:w-1/12 flex-initial">Cr\xE9\xE9 le</div></div><!--[-->`);
       serverRenderer.exports.ssrRenderList(vue_cjs_prod.unref(data), (contact2) => {
         _push(`<div class="flex flex-row flex-wrap items-center justify-between hover:bg-gray-100 hover:text-primary-dark h-9"><div class="w-full md:w-1/5 flex-1">${serverRenderer.exports.ssrInterpolate(contact2.email)}</div><div class="w-full md:w-1/12 flex-initial">${serverRenderer.exports.ssrInterpolate(contact2.ip)}</div><div class="w-full md:w-1/12 flex-initial">${serverRenderer.exports.ssrInterpolate(vue_cjs_prod.unref(formatDate)(contact2.createdAt))}</div></div>`);
       });
@@ -13388,9 +13223,9 @@ const _sfc_main$d = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`<!--[-->`);
+      _push(`<div class="flex flex-row flex-wrap items-center justify-between hover:bg-gray-100 h-9 border-b-2 font-bold"><div class="w-full md:w-1/5 flex-1 md:pl-2">Titre</div><div class="w-full md:w-1/6 flex-initial">Url</div><div class="w-full md:w-1/6 flex-initial">Auteur</div><div class="w-full md:w-1/5 flex-1">Cat\xE9gorie</div><div class="w-full md:w-1/12 flex-initial">Est publi\xE9 ?</div><div class="w-full md:w-1/12 flex-initial">Menu</div><div class="w-full md:w-1/12 flex-initial">Actions</div></div><!--[-->`);
       serverRenderer.exports.ssrRenderList(vue_cjs_prod.unref(data), (page) => {
-        _push(`<div class="flex flex-row flex-wrap items-center justify-between hover:bg-gray-100 hover:text-primary-dark h-9"><div class="w-full md:w-1/5 flex-1 md:pl-2">${serverRenderer.exports.ssrInterpolate(page.title)}</div><div class="w-full md:w-1/6 flex-initial">${serverRenderer.exports.ssrInterpolate(page.createdBy)}</div><div class="w-full md:w-1/5 flex-1">${serverRenderer.exports.ssrInterpolate(page.category ? page.category.name : "N/A")}</div><div class="w-full md:w-1/12 flex-initial">${serverRenderer.exports.ssrInterpolate(page.isPublished)}</div><div class="w-full md:w-1/12 flex-initial">${serverRenderer.exports.ssrInterpolate(page.showInMenu)}</div><div class="w-full md:w-1/12 flex-initial flex self-stretch items-stretch"><div class="bg-primary flex-auto flex items-stretch justify-center">`);
+        _push(`<div class="flex flex-row flex-wrap items-center justify-between hover:bg-gray-100 hover:text-primary-dark h-9"><div class="w-full md:w-1/5 flex-1 md:pl-2">${serverRenderer.exports.ssrInterpolate(page.title)}</div><div class="w-full md:w-1/6 flex-initial">/${serverRenderer.exports.ssrInterpolate(page.url)}</div><div class="w-full md:w-1/6 flex-initial">${serverRenderer.exports.ssrInterpolate(page.createdBy.nickname)}</div><div class="w-full md:w-1/5 flex-1">${serverRenderer.exports.ssrInterpolate(page.category ? page.category.name : "N/A")}</div><div class="w-full md:w-1/12 flex-initial">${serverRenderer.exports.ssrInterpolate(page.isPublished)}</div><div class="w-full md:w-1/12 flex-initial">${serverRenderer.exports.ssrInterpolate(page.showInMenu)}</div><div class="w-full md:w-1/12 flex-initial flex self-stretch items-stretch"><div class="bg-primary flex-auto flex items-stretch justify-center">`);
         _push(serverRenderer.exports.ssrRenderComponent(_component_NuxtLink, {
           to: { name: "admin-pages-slug", params: { slug: page.url } },
           class: "w-full flex items-center justify-center"
@@ -13495,7 +13330,7 @@ const _sfc_main$b = /* @__PURE__ */ vue_cjs_prod.defineComponent({
     useRoute();
     const blogArticleStore = useBlogArticleStore();
     [__temp, __restore] = vue_cjs_prod.withAsyncContext(() => useAsyncData("blog-articles-index", () => blogArticleStore.fetchAll({ "order[createdAt]": "desc", "itemsPerPage": 50 }))), await __temp, __restore();
-    const articles = blogArticleStore.listWithActiveTags;
+    const { listWithActiveTags: articles } = storeToRefs(blogArticleStore);
     return (_ctx, _push, _parent, _attrs) => {
       const _component_Title = vue_cjs_prod.resolveComponent("Title");
       const _component_NuxtLink = __nuxt_component_0$2;
@@ -13515,12 +13350,12 @@ const _sfc_main$b = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$I, null, null, _parent));
       _push(`<!--[-->`);
       serverRenderer.exports.ssrRenderList(vue_cjs_prod.unref(articles), (article, i) => {
-        _push(`<div class="w-full flex flex-row py-2"><div class="${serverRenderer.exports.ssrRenderClass([{ "order-1": i % 2 === 1 }, "px-3 w-40"])}">`);
+        _push(`<div class="w-full flex flex-col py-2"><div class="flex flex-row"><div class="${serverRenderer.exports.ssrRenderClass([{ "order-1": i % 2 === 1 }, "px-3 w-40"])}">`);
         _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$J, {
           "media-object": vue_cjs_prod.unref(blogArticleStore).getRandomImage(article),
           class: "h-20 before:text-[6px]"
         }, null, _parent));
-        _push(`</div><div class="${serverRenderer.exports.ssrRenderClass([{ "text-right": i % 2 === 1 }, "flex flex-col w-full"])}"><p class="w-full"><b>${serverRenderer.exports.ssrInterpolate(article.title)}</b> | ${serverRenderer.exports.ssrInterpolate(article.preview)}</p><div class="${serverRenderer.exports.ssrRenderClass([{ "self-end": i % 2 === 1 }, "pt-2 text-primary-dark fill-primary-dark flex uppercase text-xs items-center"])}"><!--[-->`);
+        _push(`</div><div class="${serverRenderer.exports.ssrRenderClass([{ "text-right": i % 2 === 1 }, "flex flex-col w-full justify-center"])}"><p class="w-full"><b class="text-lg">${serverRenderer.exports.ssrInterpolate(article.title)}</b> | ${serverRenderer.exports.ssrInterpolate(article.preview)}</p><div class="${serverRenderer.exports.ssrRenderClass([{ "self-end": i % 2 === 1 }, "pt-2 text-primary-dark fill-primary-dark flex uppercase text-xs items-center"])}"><!--[-->`);
         serverRenderer.exports.ssrRenderList(article.tags, (tag, i2) => {
           _push(`<div class="bg-primary-dark text-white uppercase px-2 py-1 rounded-tl-lg rounded-br-lg mx-1 text-xs cursor-pointer">${serverRenderer.exports.ssrInterpolate(tag)}</div>`);
         });
@@ -13543,7 +13378,7 @@ const _sfc_main$b = /* @__PURE__ */ vue_cjs_prod.defineComponent({
           }),
           _: 2
         }, _parent));
-        _push(`</div></div></div>`);
+        _push(`</div></div></div><div class="h-2 w-1/2 border-b self-center"></div></div>`);
       });
       _push(`<!--]--></div>`);
     };
@@ -13600,120 +13435,41 @@ const _sfc_main$a = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       }, {
         default: vue_cjs_prod.withCtx(({ values, errors }, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="flex flex-row w-1/2 group py-4 px-3"${_scopeId}>`);
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
               icon: "ri-mail-line",
-              class: ["h-8 w-10 group-focus-within:stroke-2", { "fill-accent": !!errors.email, "fill-primary": !!values.email && !errors.email, "fill-gray-500": !values.email }]
-            }, null, _parent2, _scopeId));
-            _push2(`<div class="relative w-full"${_scopeId}>`);
-            _push2(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(Field), {
-              id: "email",
-              name: "email",
               type: "email",
-              required: "",
-              autocomplete: "off",
-              class: "peer w-full outline-none h-8",
-              validateOnInput: true
+              name: "email",
+              error: errors.email,
+              value: values.email,
+              label: "Email",
+              class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(`<label for="email" class="${serverRenderer.exports.ssrRenderClass([{ "h-1/2 -translate-y-full pl-0": !!values.email, "text-accent": !!errors.email, "text-primary": !!values.email && !errors.email }, "transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full"])}"${_scopeId}>Email `);
-            if (errors.email) {
-              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1r, null, {
-                default: vue_cjs_prod.withCtx((_, _push3, _parent3, _scopeId2) => {
-                  if (_push3) {
-                    _push3(`${serverRenderer.exports.ssrInterpolate(errors.email)}`);
-                  } else {
-                    return [
-                      vue_cjs_prod.createTextVNode(vue_cjs_prod.toDisplayString(errors.email), 1)
-                    ];
-                  }
-                }),
-                _: 2
-              }, _parent2, _scopeId));
-            } else {
-              _push2(`<!---->`);
-            }
-            _push2(`</label><div class="${serverRenderer.exports.ssrRenderClass([{ "border-accent": !!errors.email, "border-primary": !!values.email && !errors.email, "border-gray-500": !values.email }, "absolute bottom-0 -ml-8 w-[calc(100%_+_2rem)] border-b"])}"${_scopeId}></div></div></div><div class="flex flex-row w-1/2 group py-4 px-3"${_scopeId}><div class="relative w-full"${_scopeId}>`);
-            _push2(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(Field), {
-              id: "phoneNumber",
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+              icon: "ri-phone-line",
+              type: "phoneNumber",
               name: "phoneNumber",
-              autocomplete: "off",
-              type: "tel",
-              format: "0[0-9]{9}",
-              class: "peer w-full outline-none h-8",
-              validateOnInput: true
+              error: errors.phoneNumber,
+              value: values.phoneNumber,
+              label: "Num\xE9ro de t\xE9l\xE9phone",
+              class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(`<label for="phoneNumber" class="${serverRenderer.exports.ssrRenderClass([{ "h-1/2 -translate-y-full pl-0": !!values.phoneNumber, "text-accent": !!errors.phoneNumber, "text-primary": !!values.phoneNumber && !errors.phoneNumber }, "transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full"])}"${_scopeId}>Num\xE9ro de t\xE9l\xE9phone `);
-            if (errors.phoneNumber) {
-              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1r, null, {
-                default: vue_cjs_prod.withCtx((_, _push3, _parent3, _scopeId2) => {
-                  if (_push3) {
-                    _push3(`${serverRenderer.exports.ssrInterpolate(errors.phoneNumber)}`);
-                  } else {
-                    return [
-                      vue_cjs_prod.createTextVNode(vue_cjs_prod.toDisplayString(errors.phoneNumber), 1)
-                    ];
-                  }
-                }),
-                _: 2
-              }, _parent2, _scopeId));
-            } else {
-              _push2(`<!---->`);
-            }
-            _push2(`</label><div class="${serverRenderer.exports.ssrRenderClass([{ "border-accent": !!errors.phoneNumber, "border-primary": !!values.phoneNumber && !errors.phoneNumber, "border-gray-500": !values.phoneNumber }, "absolute bottom-0 w-full border-b"])}"${_scopeId}></div></div></div><div class="flex flex-row w-1/2 group py-4 px-3"${_scopeId}><div class="relative w-full"${_scopeId}>`);
-            _push2(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(Field), {
-              id: "firstName",
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+              type: "firstName",
               name: "firstName",
-              autocomplete: "off",
-              type: "text",
-              format: "0[0-9]{9}",
-              class: "peer w-full outline-none h-8",
-              validateOnInput: true
+              error: errors.firstName,
+              value: values.firstName,
+              label: "Pr\xE9nom",
+              class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(`<label for="firstName" class="${serverRenderer.exports.ssrRenderClass([{ "h-1/2 -translate-y-full pl-0": !!values.firstName, "text-accent": !!errors.firstName, "text-primary": !!values.firstName && !errors.firstName }, "transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full"])}"${_scopeId}>Pr\xE9nom `);
-            if (errors.firstName) {
-              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1r, null, {
-                default: vue_cjs_prod.withCtx((_, _push3, _parent3, _scopeId2) => {
-                  if (_push3) {
-                    _push3(`${serverRenderer.exports.ssrInterpolate(errors.firstName)}`);
-                  } else {
-                    return [
-                      vue_cjs_prod.createTextVNode(vue_cjs_prod.toDisplayString(errors.firstName), 1)
-                    ];
-                  }
-                }),
-                _: 2
-              }, _parent2, _scopeId));
-            } else {
-              _push2(`<!---->`);
-            }
-            _push2(`</label><div class="${serverRenderer.exports.ssrRenderClass([{ "border-accent": !!errors.firstName, "border-primary": !!values.firstName && !errors.firstName, "border-gray-500": !values.firstName }, "absolute bottom-0 w-full border-b"])}"${_scopeId}></div></div></div><div class="flex flex-row w-1/2 group py-4 px-3"${_scopeId}><div class="relative w-full"${_scopeId}>`);
-            _push2(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(Field), {
-              id: "lastName",
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+              type: "lastName",
               name: "lastName",
-              autocomplete: "off",
-              type: "text",
-              format: "0[0-9]{9}",
-              class: "peer w-full outline-none h-8",
-              validateOnInput: true
+              error: errors.lastName,
+              value: values.lastName,
+              label: "Nom",
+              class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(`<label for="lastName" class="${serverRenderer.exports.ssrRenderClass([{ "h-1/2 -translate-y-full pl-0": !!values.lastName, "text-accent": !!errors.lastName, "text-primary": !!values.lastName && !errors.lastName }, "transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full"])}"${_scopeId}>Nom `);
-            if (errors.lastName) {
-              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1r, null, {
-                default: vue_cjs_prod.withCtx((_, _push3, _parent3, _scopeId2) => {
-                  if (_push3) {
-                    _push3(`${serverRenderer.exports.ssrInterpolate(errors.lastName)}`);
-                  } else {
-                    return [
-                      vue_cjs_prod.createTextVNode(vue_cjs_prod.toDisplayString(errors.lastName), 1)
-                    ];
-                  }
-                }),
-                _: 2
-              }, _parent2, _scopeId));
-            } else {
-              _push2(`<!---->`);
-            }
-            _push2(`</label><div class="${serverRenderer.exports.ssrRenderClass([{ "border-accent": !!errors.lastName, "border-primary": !!values.lastName && !errors.lastName, "border-gray-500": !values.lastName }, "absolute bottom-0 w-full border-b"])}"${_scopeId}></div></div></div><div class="flex flex-row w-full group py-4 px-3"${_scopeId}><div class="relative w-full"${_scopeId}>`);
+            _push2(`<div class="flex flex-row w-full group py-4 px-3"${_scopeId}><div class="relative w-full"${_scopeId}>`);
             _push2(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(Field), {
               id: "subject",
               name: "subject",
@@ -13771,122 +13527,40 @@ const _sfc_main$a = /* @__PURE__ */ vue_cjs_prod.defineComponent({
             _push2(`</div><button type="submit" class="py-3 px-4 bg-primary text-white shadow-md uppercase hover:bg-primary-dark"${_scopeId}>Envoyer</button><button type="reset" class="py-3 px-4 bg-secondary text-white shadow-md uppercase hover:bg-accent"${_scopeId}>R\xE9initialiser</button>`);
           } else {
             return [
-              vue_cjs_prod.createVNode("div", { class: "flex flex-row w-1/2 group py-4 px-3" }, [
-                vue_cjs_prod.createVNode(_sfc_main$1v, {
-                  icon: "ri-mail-line",
-                  class: ["h-8 w-10 group-focus-within:stroke-2", { "fill-accent": !!errors.email, "fill-primary": !!values.email && !errors.email, "fill-gray-500": !values.email }]
-                }, null, 8, ["class"]),
-                vue_cjs_prod.createVNode("div", { class: "relative w-full" }, [
-                  vue_cjs_prod.createVNode(vue_cjs_prod.unref(Field), {
-                    id: "email",
-                    name: "email",
-                    type: "email",
-                    required: "",
-                    autocomplete: "off",
-                    class: "peer w-full outline-none h-8",
-                    validateOnInput: true
-                  }),
-                  vue_cjs_prod.createVNode("label", {
-                    for: "email",
-                    class: [{ "h-1/2 -translate-y-full pl-0": !!values.email, "text-accent": !!errors.email, "text-primary": !!values.email && !errors.email }, "transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full"]
-                  }, [
-                    vue_cjs_prod.createTextVNode("Email "),
-                    errors.email ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(_sfc_main$1r, { key: 0 }, {
-                      default: vue_cjs_prod.withCtx(() => [
-                        vue_cjs_prod.createTextVNode(vue_cjs_prod.toDisplayString(errors.email), 1)
-                      ]),
-                      _: 2
-                    }, 1024)) : vue_cjs_prod.createCommentVNode("", true)
-                  ], 2),
-                  vue_cjs_prod.createVNode("div", {
-                    class: [{ "border-accent": !!errors.email, "border-primary": !!values.email && !errors.email, "border-gray-500": !values.email }, "absolute bottom-0 -ml-8 w-[calc(100%_+_2rem)] border-b"]
-                  }, null, 2)
-                ])
-              ]),
-              vue_cjs_prod.createVNode("div", { class: "flex flex-row w-1/2 group py-4 px-3" }, [
-                vue_cjs_prod.createVNode("div", { class: "relative w-full" }, [
-                  vue_cjs_prod.createVNode(vue_cjs_prod.unref(Field), {
-                    id: "phoneNumber",
-                    name: "phoneNumber",
-                    autocomplete: "off",
-                    type: "tel",
-                    format: "0[0-9]{9}",
-                    class: "peer w-full outline-none h-8",
-                    validateOnInput: true
-                  }),
-                  vue_cjs_prod.createVNode("label", {
-                    for: "phoneNumber",
-                    class: [{ "h-1/2 -translate-y-full pl-0": !!values.phoneNumber, "text-accent": !!errors.phoneNumber, "text-primary": !!values.phoneNumber && !errors.phoneNumber }, "transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full"]
-                  }, [
-                    vue_cjs_prod.createTextVNode("Num\xE9ro de t\xE9l\xE9phone "),
-                    errors.phoneNumber ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(_sfc_main$1r, { key: 0 }, {
-                      default: vue_cjs_prod.withCtx(() => [
-                        vue_cjs_prod.createTextVNode(vue_cjs_prod.toDisplayString(errors.phoneNumber), 1)
-                      ]),
-                      _: 2
-                    }, 1024)) : vue_cjs_prod.createCommentVNode("", true)
-                  ], 2),
-                  vue_cjs_prod.createVNode("div", {
-                    class: [{ "border-accent": !!errors.phoneNumber, "border-primary": !!values.phoneNumber && !errors.phoneNumber, "border-gray-500": !values.phoneNumber }, "absolute bottom-0 w-full border-b"]
-                  }, null, 2)
-                ])
-              ]),
-              vue_cjs_prod.createVNode("div", { class: "flex flex-row w-1/2 group py-4 px-3" }, [
-                vue_cjs_prod.createVNode("div", { class: "relative w-full" }, [
-                  vue_cjs_prod.createVNode(vue_cjs_prod.unref(Field), {
-                    id: "firstName",
-                    name: "firstName",
-                    autocomplete: "off",
-                    type: "text",
-                    format: "0[0-9]{9}",
-                    class: "peer w-full outline-none h-8",
-                    validateOnInput: true
-                  }),
-                  vue_cjs_prod.createVNode("label", {
-                    for: "firstName",
-                    class: [{ "h-1/2 -translate-y-full pl-0": !!values.firstName, "text-accent": !!errors.firstName, "text-primary": !!values.firstName && !errors.firstName }, "transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full"]
-                  }, [
-                    vue_cjs_prod.createTextVNode("Pr\xE9nom "),
-                    errors.firstName ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(_sfc_main$1r, { key: 0 }, {
-                      default: vue_cjs_prod.withCtx(() => [
-                        vue_cjs_prod.createTextVNode(vue_cjs_prod.toDisplayString(errors.firstName), 1)
-                      ]),
-                      _: 2
-                    }, 1024)) : vue_cjs_prod.createCommentVNode("", true)
-                  ], 2),
-                  vue_cjs_prod.createVNode("div", {
-                    class: [{ "border-accent": !!errors.firstName, "border-primary": !!values.firstName && !errors.firstName, "border-gray-500": !values.firstName }, "absolute bottom-0 w-full border-b"]
-                  }, null, 2)
-                ])
-              ]),
-              vue_cjs_prod.createVNode("div", { class: "flex flex-row w-1/2 group py-4 px-3" }, [
-                vue_cjs_prod.createVNode("div", { class: "relative w-full" }, [
-                  vue_cjs_prod.createVNode(vue_cjs_prod.unref(Field), {
-                    id: "lastName",
-                    name: "lastName",
-                    autocomplete: "off",
-                    type: "text",
-                    format: "0[0-9]{9}",
-                    class: "peer w-full outline-none h-8",
-                    validateOnInput: true
-                  }),
-                  vue_cjs_prod.createVNode("label", {
-                    for: "lastName",
-                    class: [{ "h-1/2 -translate-y-full pl-0": !!values.lastName, "text-accent": !!errors.lastName, "text-primary": !!values.lastName && !errors.lastName }, "transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full"]
-                  }, [
-                    vue_cjs_prod.createTextVNode("Nom "),
-                    errors.lastName ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(_sfc_main$1r, { key: 0 }, {
-                      default: vue_cjs_prod.withCtx(() => [
-                        vue_cjs_prod.createTextVNode(vue_cjs_prod.toDisplayString(errors.lastName), 1)
-                      ]),
-                      _: 2
-                    }, 1024)) : vue_cjs_prod.createCommentVNode("", true)
-                  ], 2),
-                  vue_cjs_prod.createVNode("div", {
-                    class: [{ "border-accent": !!errors.lastName, "border-primary": !!values.lastName && !errors.lastName, "border-gray-500": !values.lastName }, "absolute bottom-0 w-full border-b"]
-                  }, null, 2)
-                ])
-              ]),
+              vue_cjs_prod.createVNode(_sfc_main$1o, {
+                icon: "ri-mail-line",
+                type: "email",
+                name: "email",
+                error: errors.email,
+                value: values.email,
+                label: "Email",
+                class: "w-full md:w-1/2"
+              }, null, 8, ["error", "value"]),
+              vue_cjs_prod.createVNode(_sfc_main$1o, {
+                icon: "ri-phone-line",
+                type: "phoneNumber",
+                name: "phoneNumber",
+                error: errors.phoneNumber,
+                value: values.phoneNumber,
+                label: "Num\xE9ro de t\xE9l\xE9phone",
+                class: "w-full md:w-1/2"
+              }, null, 8, ["error", "value"]),
+              vue_cjs_prod.createVNode(_sfc_main$1o, {
+                type: "firstName",
+                name: "firstName",
+                error: errors.firstName,
+                value: values.firstName,
+                label: "Pr\xE9nom",
+                class: "w-full md:w-1/2"
+              }, null, 8, ["error", "value"]),
+              vue_cjs_prod.createVNode(_sfc_main$1o, {
+                type: "lastName",
+                name: "lastName",
+                error: errors.lastName,
+                value: values.lastName,
+                label: "Nom",
+                class: "w-full md:w-1/2"
+              }, null, 8, ["error", "value"]),
               vue_cjs_prod.createVNode("div", { class: "flex flex-row w-full group py-4 px-3" }, [
                 vue_cjs_prod.createVNode("div", { class: "relative w-full" }, [
                   vue_cjs_prod.createVNode(vue_cjs_prod.unref(Field), {
@@ -14058,7 +13732,7 @@ const _sfc_main$8 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`<div class="w-fit"><h2>Connexion</h2>`);
+      _push(`<div class="w-fit"><h2 class="py-3">Connexion</h2>`);
       _push(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(Form), {
         ref_key: "form",
         ref: form,
@@ -14180,7 +13854,7 @@ const _sfc_main$7 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
       const _component_Title = vue_cjs_prod.resolveComponent("Title");
-      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "bg-white min-h-screen p-3" }, _attrs))}>`);
+      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "bg-white flex-auto p-3" }, _attrs))}>`);
       _push(serverRenderer.exports.ssrRenderComponent(_component_Title, null, {
         default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -14541,7 +14215,7 @@ const _sfc_main$3 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex min-h-screen" }, _attrs))}>`);
-      _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$5, { class: "w-80" }, null, _parent));
+      _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$5, { class: "w-80 shrink-0" }, null, _parent));
       serverRenderer.exports.ssrRenderSlot(_ctx.$slots, "default", {}, null, _push, _parent);
       _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$4, null, null, _parent));
       _push(`</div>`);
@@ -15873,7 +15547,7 @@ const _sfc_main = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       return pageStore.fetchAll();
     })), await __temp, __restore();
     const schema = {
-      email: "required|email"
+      email: "email"
     };
     useContactNewsletterStore();
     useNotificationStore();
@@ -15888,7 +15562,10 @@ const _sfc_main = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       window.removeEventListener("scroll", onScroll);
     });
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex flex-col bg-secondary-light min-h-screen text-sm order-first" }, _attrs))}><header class="fixed top-0 left-0 right-0 block z-40 bg-primary"><div class="${serverRenderer.exports.ssrRenderClass([{ "h-10": scrollY.value >= 50, "h-36": scrollY.value < 50 }, "bg-primary hidden md:block absolute top-0 left-0 w-full transition-all duration-200"])}"><div class="${serverRenderer.exports.ssrRenderClass([{ "opacity-0": scrollY.value >= 50 }, "h-full bg-[url('/images/vercors.jpg')] bg-center bg-cover bg-no-repeat"])}"></div></div><div class="${serverRenderer.exports.ssrRenderClass([{ "h-10": scrollY.value >= 50, "h-10 md:h-36": scrollY.value < 50 }, "flex items-start transition-all duration-200"])}"><div class="self-end z-40 font-marker text-lg text-white px-4 py-2 cursor-pointer">Les transalpins</div><div class="grow"></div>`);
+      const _component_Body = vue_cjs_prod.resolveComponent("Body");
+      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex flex-col bg-secondary-light min-h-screen text-sm order-first" }, _attrs))}>`);
+      _push(serverRenderer.exports.ssrRenderComponent(_component_Body, { class: "bg-primary" }, null, _parent));
+      _push(`<header class="fixed top-0 left-0 right-0 block z-40 bg-primary"><div class="${serverRenderer.exports.ssrRenderClass([{ "h-10": scrollY.value >= 50, "h-36": scrollY.value < 50 }, "bg-primary hidden md:block absolute top-0 left-0 w-full transition-all duration-200"])}"><div class="${serverRenderer.exports.ssrRenderClass([{ "opacity-0": scrollY.value >= 50 }, "h-full bg-[url('/images/vercors.jpg')] bg-center bg-cover bg-no-repeat"])}"></div></div><div class="${serverRenderer.exports.ssrRenderClass([{ "h-10": scrollY.value >= 50, "h-10 md:h-36": scrollY.value < 50 }, "flex items-start transition-all duration-200"])}"><div class="self-end z-40 font-marker text-lg text-white px-4 py-2 cursor-pointer">Les transalpins</div><div class="grow"></div>`);
       if (vue_cjs_prod.unref(isAdmin2)) {
         _push(`<div class="items-center text-primary-dark z-40 mr-1 inline-flex whitespace-nowrap uppercase tracking-wider text-sm py-2 h-10 cursor-pointer">ADMIN</div>`);
       } else {
@@ -15920,84 +15597,40 @@ const _sfc_main = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       }, {
         default: vue_cjs_prod.withCtx(({ values, errors }, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="flex flex-row w-full group py-4 px-3"${_scopeId}>`);
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
               icon: "ri-mail-line",
-              class: ["h-8 w-10 group-focus-within:stroke-2", { "fill-accent": !!errors.email, "fill-primary": !!values.email && !errors.email, "fill-gray-500": !values.email }]
-            }, null, _parent2, _scopeId));
-            _push2(`<div class="relative w-96"${_scopeId}>`);
-            _push2(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(Field), {
-              id: "email",
-              name: "email",
               type: "email",
-              required: "",
-              autocomplete: "off",
-              class: "peer w-full outline-none h-8",
-              validateOnInput: true
+              name: "email",
+              error: errors.email,
+              value: values.email,
+              label: "Email",
+              class: "w-96 py-4 px-3"
             }, null, _parent2, _scopeId));
-            _push2(`<label for="email" class="${serverRenderer.exports.ssrRenderClass([{ "h-1/2 -translate-y-full pl-0": !!values.email, "text-accent": !!errors.email, "text-primary": !!values.email && !errors.email }, "transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full"])}"${_scopeId}>Email `);
-            if (errors.email) {
-              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1r, null, {
-                default: vue_cjs_prod.withCtx((_, _push3, _parent3, _scopeId2) => {
-                  if (_push3) {
-                    _push3(`${serverRenderer.exports.ssrInterpolate(errors.email)}`);
-                  } else {
-                    return [
-                      vue_cjs_prod.createTextVNode(vue_cjs_prod.toDisplayString(errors.email), 1)
-                    ];
-                  }
-                }),
-                _: 2
-              }, _parent2, _scopeId));
-            } else {
-              _push2(`<!---->`);
-            }
-            _push2(`</label><div class="${serverRenderer.exports.ssrRenderClass([{ "border-accent": !!errors.email, "border-primary": !!values.email && !errors.email, "border-gray-500": !values.email }, "absolute bottom-0 -ml-8 w-[calc(100%_+_2rem)] border-b"])}"${_scopeId}></div></div></div><button type="submit"${_scopeId}>`);
+            _push2(`<button${serverRenderer.exports.ssrRenderAttr("type", !errors.email && !!values.email ? "submit" : "button")}${_scopeId}>`);
             _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
               icon: "ri-send-plane-fill",
-              class: ["h-5 w-5", { "fill-primary hover:fill-primary-dark": !errors.email && !!values.email, "fill-gray-500": !!errors.email }]
+              class: ["h-5 w-5", { "fill-primary hover:fill-primary-dark": !errors.email && !!values.email, "fill-gray-500": !values.email, "fill-accent": !!errors.email }]
             }, null, _parent2, _scopeId));
             _push2(`</button>`);
           } else {
             return [
-              vue_cjs_prod.createVNode("div", { class: "flex flex-row w-full group py-4 px-3" }, [
-                vue_cjs_prod.createVNode(_sfc_main$1v, {
-                  icon: "ri-mail-line",
-                  class: ["h-8 w-10 group-focus-within:stroke-2", { "fill-accent": !!errors.email, "fill-primary": !!values.email && !errors.email, "fill-gray-500": !values.email }]
-                }, null, 8, ["class"]),
-                vue_cjs_prod.createVNode("div", { class: "relative w-96" }, [
-                  vue_cjs_prod.createVNode(vue_cjs_prod.unref(Field), {
-                    id: "email",
-                    name: "email",
-                    type: "email",
-                    required: "",
-                    autocomplete: "off",
-                    class: "peer w-full outline-none h-8",
-                    validateOnInput: true
-                  }),
-                  vue_cjs_prod.createVNode("label", {
-                    for: "email",
-                    class: [{ "h-1/2 -translate-y-full pl-0": !!values.email, "text-accent": !!errors.email, "text-primary": !!values.email && !errors.email }, "transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full"]
-                  }, [
-                    vue_cjs_prod.createTextVNode("Email "),
-                    errors.email ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(_sfc_main$1r, { key: 0 }, {
-                      default: vue_cjs_prod.withCtx(() => [
-                        vue_cjs_prod.createTextVNode(vue_cjs_prod.toDisplayString(errors.email), 1)
-                      ]),
-                      _: 2
-                    }, 1024)) : vue_cjs_prod.createCommentVNode("", true)
-                  ], 2),
-                  vue_cjs_prod.createVNode("div", {
-                    class: [{ "border-accent": !!errors.email, "border-primary": !!values.email && !errors.email, "border-gray-500": !values.email }, "absolute bottom-0 -ml-8 w-[calc(100%_+_2rem)] border-b"]
-                  }, null, 2)
-                ])
-              ]),
-              vue_cjs_prod.createVNode("button", { type: "submit" }, [
+              vue_cjs_prod.createVNode(_sfc_main$1o, {
+                icon: "ri-mail-line",
+                type: "email",
+                name: "email",
+                error: errors.email,
+                value: values.email,
+                label: "Email",
+                class: "w-96 py-4 px-3"
+              }, null, 8, ["error", "value"]),
+              vue_cjs_prod.createVNode("button", {
+                type: !errors.email && !!values.email ? "submit" : "button"
+              }, [
                 vue_cjs_prod.createVNode(_sfc_main$1v, {
                   icon: "ri-send-plane-fill",
-                  class: ["h-5 w-5", { "fill-primary hover:fill-primary-dark": !errors.email && !!values.email, "fill-gray-500": !!errors.email }]
+                  class: ["h-5 w-5", { "fill-primary hover:fill-primary-dark": !errors.email && !!values.email, "fill-gray-500": !values.email, "fill-accent": !!errors.email }]
                 }, null, 8, ["class"])
-              ])
+              ], 8, ["type"])
             ];
           }
         }),

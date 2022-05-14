@@ -53,13 +53,13 @@ export const useBlogArticleStore = defineStore('blog_articles', {
     }
   },
   getters: {
-    listWithActiveTags: (state) => computed(() => {
+    listWithActiveTags: (state) => {
       const list = state[CRUD_MODE.LIST].allIds.map((id: string) => state[CRUD_MODE.LIST].byId[id]);
       if (state.activeTags.length === 0) {
         return list
       } else {
         return list.filter((article: BlogArticle) => article.tags.some(tag => state.activeTags.includes(tag)))
       }
-    })
+    }
   }
 })

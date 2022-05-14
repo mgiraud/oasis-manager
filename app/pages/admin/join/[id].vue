@@ -91,7 +91,6 @@ definePageMeta({
   layout: 'admin'
 })
 
-const { formatDate } = useDateHelper()
 const joinStore = useJoinStore()
 const route = useRoute()
 const join: Ref<BlogArticle | null> = useState('join-view', () => null)

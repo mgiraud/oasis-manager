@@ -5,13 +5,13 @@ export type EditorColor = {
 }
 
 export const editorColors: EditorColor[] = [
-  { name: 'Titre', text: 'text--darken-4 primary', background: 'darken-4 primary' },
-  { name: 'Primaire', text: 'primary', background: 'primary' },
-  { name: 'Info', text: 'info', background: 'info' },
-  { name: 'Erreur', text: 'error', background: 'error' },
-  { name: 'Accent', text: 'accent', background: 'accent' },
-  { name: 'Secondaire', text: 'text--darken-1 secondary', background: 'darken-1 secondary' },
-  { name: 'Light secondaire', text: 'text--lighten-3 secondary', background: 'lighten-3 secondary' },
-  { name: 'Noir', text: 'black', background: 'black' },
-  { name: 'Blanc', text: 'white', background: 'white' }
+  { name: 'Titre', text: 'text-primary-dark', background: 'bg-primary-dark' },
+  { name: 'Primaire', text: 'text-primary', background: 'bg-primary' },
+  { name: 'Info', text: 'text-info', background: 'bg-info' },
+  { name: 'Erreur', text: 'text-error', background: 'bg-error' },
+  { name: 'Accent', text: 'text-accent', background: 'bg-accent' },
+  { name: 'Secondaire', text: 'text-secondary', background: 'bg-secondary' },
+  { name: 'Light secondaire', text: 'text-secondary-light', background: 'bg-secondary-light' },
+  { name: 'Noir', text: 'text-black', background: 'bg-black' },
+  { name: 'Blanc', text: 'text-white', background: 'bg-white' }
 ]

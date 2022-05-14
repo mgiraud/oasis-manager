@@ -1,44 +1,83 @@
 <template>
-  <v-dialog
-    v-model="dialog"
-    width="300"
-  >
-    <template #activator="{ on: onDropdown, attrs: attrsDropdown }">
-      <v-tooltip top>
-        <template #activator="{ on: onTooltip, attrs: attrsTooltip }">
-          <v-btn
-            small
-            v-bind="{...attrsDropdown, ...attrsTooltip}"
-            v-on="{...onDropdown, ...onTooltip}"
+  <Popover class="relative bg-black flex-auto inline-flex p-2" v-slot="{ open }">
+    <PopoverButton class="text-white" @click="dialog = true" @mouseover="open = true" @mouseout="open = false">
+      <Icon icon="ri-font-size" class="h-6 w-6 fill-white" />
+    </PopoverButton>
+
+    <PopoverPanel class="absolute z-10">
+      Police de caractère
+    </PopoverPanel>
+  </Popover>
+
+  <TransitionRoot appear :show="dialog" as="template">
+    <Dialog as="div" @close="dialog = false" class="relative z-10">
+      <TransitionChild
+        as="template"
+        enter="duration-300 ease-out"
+        enter-from="opacity-0"
+        enter-to="opacity-100"
+        leave="duration-200 ease-in"
+        leave-from="opacity-100"
+        leave-to="opacity-0"
+      >
+        <div class="fixed inset-0 bg-black bg-opacity-25" />
+      </TransitionChild>
+
+      <div class="fixed inset-0 overflow-y-auto">
+        <div
+          class="flex min-h-full items-center justify-center p-4 text-center"
+        >
+          <TransitionChild
+            as="template"
+            enter="duration-300 ease-out"
+            enter-from="opacity-0 scale-95"
+            enter-to="opacity-100 scale-100"
+            leave="duration-200 ease-in"
+            leave-from="opacity-100 scale-100"
+            leave-to="opacity-0 scale-95"
           >
-            <v-icon>ri-font-size</v-icon>
-          </v-btn>
-        </template>
-        <span>Police de caractère</span>
-      </v-tooltip>
-    </template>
-    <v-list>
-      <v-list-item
-        v-for="(font, index) in fonts"
-        :key="index"
-        @click="selectFontFamily(font)"
-      >
-        <v-list-item-title :style="'font-family: ' + font">
-          {{ font }}
-        </v-list-item-title>
-      </v-list-item>
-      <v-list-item
-        @click="removeFontFamily"
-      >
-        <v-list-item-title>Par défaut</v-list-item-title>
-      </v-list-item>
-    </v-list>
-  </v-dialog>
+            <DialogPanel
+              class="w-full max-w-md transform overflow-hidden rounded-2xl p-6 text-left align-middle shadow-xl transition-all bg-sky-100"
+            >
+              <DialogTitle
+                as="h3"
+                class="text-lg font-medium leading-6 text-gray-900"
+              >
+                Sélectionne une couleur
+              </DialogTitle>
+              <Listbox v-model="selectedFont">
+                <ListboxOptions static>
+                  <ListboxOption
+                    v-for="(font, index) in fonts"
+                    :key="index"
+                    @click="selectFontFamily(font)"
+                    class="cursor-pointer"
+                    :style="'font-family: ' + font"
+                  >
+                    {{ font }}
+                  </ListboxOption>
+                  <ListboxOption
+                    @click="removeFontFamily"
+                    class="cursor-pointer"
+                  >
+                    Police par défaut
+                  </ListboxOption>
+                </ListboxOptions>
+              </Listbox>
+            </DialogPanel>
+          </TransitionChild>
+        </div>
+      </div>
+    </Dialog>
+  </TransitionRoot>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from '@nuxtjs/composition-api'
+<script setup lang="ts">
 import { Editor } from '@tiptap/core'
+import { Popover, PopoverButton, PopoverPanel, TransitionRoot,
+  TransitionChild, Dialog, DialogPanel, DialogTitle,
+  Listbox, ListboxOptions, ListboxOption } from '@headlessui/vue'
+import Icon from '~/components/util/Icon'
 
 const fonts = [
   'Permanent Marker',
@@ -47,32 +86,21 @@ const fonts = [
   'Helvetica'
 ]
 
-export default defineComponent({
-  props: {
-    editor: {
-      type: Object as () => Editor | null,
-      required: true
-    }
-  },
-  setup (props) {
-    const dialog = ref(false)
+interface FontFamilyBtnProps {
+  editor: Editor|null,
+}
 
-    const selectFontFamily = (font: string) => {
-      props.editor?.chain().focus().setFontFamily(font).run()
-      dialog.value = false
-    }
+const props = defineProps<FontFamilyBtnProps>()
+const dialog = ref(false)
+const selectedFont = ref(null)
 
-    const removeFontFamily = () => {
-      props.editor?.chain().focus().unsetFontFamily().run()
-      dialog.value = false
-    }
+const selectFontFamily = (font: string) => {
+  props.editor?.chain().focus().setFontFamily(font).run()
+  dialog.value = false
+}
 
-    return {
-      dialog,
-      fonts,
-      selectFontFamily,
-      removeFontFamily
-    }
-  }
-})
+const removeFontFamily = () => {
+  props.editor?.chain().focus().unsetFontFamily().run()
+  dialog.value = false
+}
 </script>

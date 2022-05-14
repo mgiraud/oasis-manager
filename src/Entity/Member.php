@@ -95,7 +95,7 @@ class Member implements UserInterface
      *
      * @ORM\Column(name="nickname", type="text", unique=true)
      * @Assert\Length(min="3")
-     * @Groups({"member:read", "member:write", "blog_article:read", "page_log:read"})
+     * @Groups({"member:read", "member:write", "blog_article:read", "page_log:read", "page:read"})
      */
     public $nickname;
 

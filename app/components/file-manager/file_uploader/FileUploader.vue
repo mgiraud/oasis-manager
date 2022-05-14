@@ -1,7 +1,5 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col>
+  <div class="flex flex-col mt-6">
         <input
           id="fileElem"
           ref="fileSelection"
@@ -11,44 +9,32 @@
           style="display:none"
           @change="onFileChange"
         >
-        <v-btn @click="openFileSelection">
-          Sélectionner des fichiers à téléverser
-        </v-btn>
-      </v-col>
-    </v-row>
-  </v-container>
+        <button @click="openFileSelection" class="bg-primary text-white py-3 px-6 rounded-md w-fit">
+          Téléverser des fichiers
+        </button>
+  </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, Ref, ref } from '@nuxtjs/composition-api'
+<script setup lang="ts">
 
-export default defineComponent({
-  props: {
-    handleUpload: {
-      type: Function,
-      required: true
-    }
-  },
-  setup (props) {
-    const fileSelection = ref(null) as Ref<HTMLInputElement | null>
+import { Ref } from '@vue/reactivity'
 
-    const openFileSelection = () => {
-      fileSelection.value?.click()
-    }
+interface FileUploaderProps {
+  handleUpload: Function,
+}
 
-    const onFileChange = () => {
-      const files = fileSelection.value?.files
-      if (files) {
-        // @ts-ignore
-        props.handleUpload(files)
-      }
-    }
+const props = defineProps<FileUploaderProps>()
+const fileSelection = ref(null) as Ref<HTMLInputElement | null>
 
-    return {
-      fileSelection,
-      openFileSelection,
-      onFileChange
-    }
+const openFileSelection = () => {
+  fileSelection.value?.click()
+}
+
+const onFileChange = () => {
+  const files = fileSelection.value?.files
+  if (files) {
+    // @ts-ignore
+    props.handleUpload(files)
   }
-})
+}
 </script>

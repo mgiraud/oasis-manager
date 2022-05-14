@@ -1,71 +1,25 @@
 <template>
-  <v-container fluid>
-    <v-row>
-      <v-col cols="12">
-        <v-card>
-          <PageModel
-            v-if="page"
-            :page="page"
-          />
-          <v-card-text v-else>
-            Tu peux retrouver sur ce site toutes les informations relatives au projet de création
-            d'un habitat partagé
-          </v-card-text>
-          <v-container fluid>
-            <v-row
-              v-for="article in articles"
-              :key="article['@id']"
-            >
-              <v-col>
-                <blog-article-template :article="article" />
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+  <div class="flex bg-white flex-auto flex-col">
+    <Carrousel :media-node="homePage.mediaNode" v-if="homePage !== null && homePage.mediaNode !== null"/>
+    <PageComponent :page="homePage" v-if="homePage" class="md:w-4/5"/>
+    <h2 class="p-3 w-full md:w-4/5 self-center">Les {{ articles.length }} derniers articles</h2>
+    <div class="flex flex-wrap md:w-4/5 lg:w-3/4 self-center">
+      <ArticlePreviewComponent v-for="article in articles" :article="article" class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4"/>
+    </div>
+    <Title>Habitat participatif situé vers la région grenobloise</Title>
+  </div>
 </template>
 
-<script lang="ts">
-import {
-  defineComponent,
-  useFetch,
-  useContext, ref, Ref, computed, onMounted
-} from '@nuxtjs/composition-api'
-import { HydraMemberObject } from '~/api/hydra'
-import PageModel from '~/components/page/PageModel.vue'
-import BlogArticleTemplate from '~/components/blog-article/BlogArticleTemplate.vue'
-import { pageStore } from '~/custom-store/PageStore'
-import { blogArticleStore } from '~/custom-store/BlogArticleStore'
+<script setup lang="ts">
+import Carrousel from '~/components/front/Page/Carrousel.vue'
+import PageComponent from '~/components/front/PageComponent.vue'
+import { useBlogArticleStore } from '~/store/blog-article'
+import { usePageStore } from '~/store/page'
+import ArticlePreviewComponent from '~/components/front/ArticlePreviewComponent.vue'
 
-export default defineComponent({
-  components: {
-    PageModel,
-    BlogArticleTemplate
-  },
-  setup () {
-    const context = useContext()
-    pageStore.setContext(context)
-    blogArticleStore.setContext(context)
-
-    onMounted(async () => {
-      await blogArticleStore.fetchAll({ 'order[createdAt]': 'desc' })
-    })
-
-    const page = computed(() => {
-      return !pageStore.getState().isLoading ? pageStore.find('/api/pages/home') : null
-    })
-
-    return {
-      articles: blogArticleStore.list,
-      page
-    }
-  },
-  head () {
-    return {
-      title: 'Accueil'
-    }
-  }
-})
+const blogArticleStore = useBlogArticleStore()
+const pageStore = usePageStore()
+await useAsyncData('articles', () => blogArticleStore.fetchAll({ 'order[createdAt]': 'desc', 'itemsPerPage': 8 }))
+const homePage = pageStore.findBySlug('home')
+const articles = blogArticleStore.list
 </script>

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
@@ -62,6 +63,7 @@ class PageCategory
      * @ORM\GeneratedValue
      * @Groups({"page_category:read", "page:read"})
      * @ORM\Column(type="integer")
+     * @ApiProperty(identifier=false)
      */
     private $id;
 
@@ -86,8 +88,9 @@ class PageCategory
     private $pages;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", unique=true)
      * @Groups({"page_category:read", "page:read", "page_category:write"})
+     * @ApiProperty(identifier=true)
      */
     private $slug;
 

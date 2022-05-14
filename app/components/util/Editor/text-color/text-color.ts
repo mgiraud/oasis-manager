@@ -30,15 +30,24 @@ export default Extension.create<TextColorOptions>({
               return {}
             }
             return {
-              class: `${attributes.color}--text`,
+              class: `${attributes.color}`,
               'data-color': attributes.color
             }
           },
-          parseHTML (element: HTMLElement) {
+          addAttributes() {
             return {
-              color: element.getAttribute('data-color')
+              color: {
+                // Set the color attribute according to the value of the `data-color` attribute
+                parseHTML: (element: HTMLElement) => element.getAttribute('data-color'),
+              }
             }
-          }
+          },
+          // parseHTML (element: HTMLElement) {
+          //   console.log(element.getAttribute('data-color'))
+          //   return {
+          //     color: element.getAttribute('data-color')
+          //   }
+          // }
         }
       }
     }]

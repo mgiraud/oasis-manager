@@ -7,6 +7,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Serializer\Filter\GroupFilter;
 use App\Controller\Page\PublishAction;
 use App\Controller\Page\UnpublishAction;
 use App\Repository\PageRepository;
@@ -16,6 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\String\Slugger\AsciiSlugger;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
@@ -53,6 +55,7 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
  * )
  * @ApiFilter(SearchFilter::class, properties={"url": "partial", "title": "partial", "createdBy.nickname": "exact", "showInMenu": "exact", "isPublished": "exact", "category": "exact"})
  * @ApiFilter(DateFilter::class, properties={"createdAt": DateFilter::EXCLUDE_NULL})
+ * @ApiFilter(GroupFilter::class, arguments={"overrideDefaultGroups": true, "whitelist": {"page:read:edition"}})
  * @ORM\Entity(repositoryClass=PageRepository::class)
  * @UniqueEntity(fields={"url"})
  */
@@ -69,19 +72,21 @@ class Page
     /**
      * @ORM\Column(type="text", unique=true)
      * @ApiProperty(identifier=true)
-     * @Groups({"page:read", "page_category:read", "page:write"})
+     * @Groups({"page:read", "page_category:read", "page:write", "page:read:edition"})
      */
     private $url;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"page:read", "page_category:read", "page:write"})
+     * @Groups({"page:read", "page_category:read", "page:write", "page:read:edition"})
+     * @Assert\NotBlank()
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"page:read", "page:write"})
+     * @Groups({"page:read", "page:write", "page:read:edition"})
+     * @Assert\NotBlank()
      */
     private $content;
 
@@ -105,19 +110,19 @@ class Page
 
     /**
      * @ORM\Column(type="boolean", options={"default": false})
-     * @Groups({"page:read", "page_category:read", "page:write"})
+     * @Groups({"page:read", "page_category:read", "page:write", "page:read:edition"})
      */
     private $isPublished;
 
     /**
      * @ORM\ManyToOne(targetEntity=PageCategory::class, inversedBy="pages")
-     * @Groups({"page:read", "page:write"})
+     * @Groups({"page:read", "page:write", "page:read:edition"})
      */
     private $category;
 
     /**
      * @ORM\Column(type="boolean", options={"default":true})
-     * @Groups({"page:read", "page_category:read", "page:write"})
+     * @Groups({"page:read", "page_category:read", "page:write", "page:read:edition"})
      */
     private $showInMenu;
 
@@ -136,7 +141,7 @@ class Page
 
     /**
      * @ORM\ManyToOne(targetEntity=MediaNode::class)
-     * @Groups({"page:read", "page:write"})
+     * @Groups({"page:read", "page:write", "page:read:edition"})
      */
     private $mediaNode;
 

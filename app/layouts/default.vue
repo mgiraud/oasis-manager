@@ -1,267 +1,141 @@
 <template>
-  <v-app>
-    <v-app-bar
-      src="/images/vercors.jpg"
-      color="primary"
-      flat
-      shrink-on-scroll
-      fade-img-on-scroll
-      app
-      dark
-    >
-      <v-app-bar-nav-icon
-        v-if="$vuetify.breakpoint.mobile || $vuetify.breakpoint.xs"
-        @click.stop="drawer = !drawer"
-      >
-        <v-icon
-          color="primary"
-          class="text--darken-4"
-        >
-          ri-menu-line
-        </v-icon>
-      </v-app-bar-nav-icon>
-
-      <template #img="{ props }">
-        <v-img
-          v-bind="props"
-        />
-      </template>
-
-      <v-toolbar-title>
-        <NuxtLink
-          to="/"
-          class="header-link"
-        >
-          Les transalpins
-        </NuxtLink>
-      </v-toolbar-title>
-      <v-spacer />
-      <v-btn
-        v-if="isAdmin"
-        icon
-        color="primary darken-4"
-        @click="redirectToAdmin"
-      >
-        Admin
-      </v-btn>
-      <v-btn
-        v-if="loggedIn"
-        icon
-        color="primary darken-4"
-        @click="logout"
-      >
-        <v-icon>ri-logout-box-line</v-icon>
-      </v-btn>
-      <v-btn
-        v-else
-        icon
-        to="/login"
-      >
-        <v-icon color="primary darken-4">
-          ri-login-box-line
-        </v-icon>
-      </v-btn>
-      <template
-        v-if="!$vuetify.breakpoint.mobile && !$vuetify.breakpoint.xs"
-        #extension
-      >
-        <v-container
-          fluid
-          class="header-extension-container"
-        >
-          <v-row no-gutters>
-            <Menu />
-          </v-row>
-          <v-row
-            no-gutters
-            class="header-extension-row-submenu"
+  <div class="flex flex-col bg-secondary-light min-h-screen text-sm order-first">
+    <Body class="bg-primary" />
+    <header class="fixed top-0 left-0 right-0 block z-40 bg-primary">
+      <div class="bg-primary hidden md:block absolute top-0 left-0 w-full transition-all duration-200" :class="{ 'h-10': scrollY >= 50, 'h-36': scrollY < 50}">
+        <div class="h-full bg-[url('/images/vercors.jpg')] bg-center bg-cover bg-no-repeat" :class="{'opacity-0': scrollY >= 50}"></div>
+      </div>
+      <div class="flex items-start transition-all duration-200" :class="{ 'h-10': scrollY >= 50, 'h-10 md:h-36': scrollY < 50}">
+        <div @click="redirectToHome" class="self-end z-40 font-marker text-lg text-white px-4 py-2 cursor-pointer">Les transalpins</div>
+        <div class="grow"></div>
+        <div v-if="isAdmin" class="items-center text-primary-dark z-40  mr-1 inline-flex whitespace-nowrap uppercase tracking-wider text-sm py-2 h-10 cursor-pointer" @click="redirectToAdmin">ADMIN</div>
+        <div class="h-10 inline-flex items-center pt-1 pb-2">
+          <Icon icon="ri-login-box-line" v-if="!isLogged" @click="redirectToLogin" class="h-5 w-5 z-40 fill-primary-dark mr-1 cursor-pointer"/>
+          <Icon icon="ri-logout-box-line" v-if="isLogged" @click="logout" class="h-5 w-5 z-40 fill-primary-dark mr-1 cursor-pointer"/>
+        </div>
+      </div>
+      <div class="flex flex-row bg-info flex-wrap">
+        <LayoutDefaultMenu />
+      </div>
+      <div class="bg-white">
+        <div class="shadow-md flex flex-row justify-center items-center flex-auto flex-wrap">
+          <Form
+            v-slot="{ values, errors }"
+            @submit="submitNewsletter"
+            class="flex flex-row"
+            :validation-schema="schema"
           >
-            <SubMenu v-if="pageState.activeSlug !== null" />
-          </v-row>
-        </v-container>
-      </template>
-    </v-app-bar>
-
-    <v-navigation-drawer
-      v-if="$vuetify.breakpoint.mobile || $vuetify.breakpoint.xs"
-      v-model="drawer"
-      app
-      width="auto"
-      temporary
-      color="primary darken-3"
-    >
-      <side-menu />
-    </v-navigation-drawer>
-
-    <v-main class="secondary lighten-3">
-      <v-card
-        v-show="showSubHeader"
-        class="card-newsletter pb-1"
-      >
-        <v-card-text>
-          <v-container
-            fluid
-            ma-0
-            pa-0
-            fill-height
-          >
-            <v-row
-              no-gutters
-              align="center"
-              justify="center"
-            >
-              <v-col
-                lg="4"
-                md="5"
-                sm="6"
-                cols="12"
-              >
-                <newsletter-form />
-              </v-col>
-              <v-col
-                lg="3"
-                md="4"
-                sm="6"
-                cols="12"
-              >
-                <span v-if="!$vuetify.breakpoint.mobile">ET&nbsp;&nbsp;</span>
-                <v-btn
-                  color="primary"
-                  @click="redirectToHelloAsso"
-                >
-                  Adhère à l'association !
-                </v-btn>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-card-text>
-      </v-card>
-      <Nuxt />
-      <alert />
-    </v-main>
-    <v-footer
-      color="primary"
-      padless
-      app
-    >
-      <v-card
-        flat
-        tile
-        color="primary"
-        width="100%"
-        class="text-center"
-      >
-        <v-card-text class="my-0 py-0">
-          <v-btn
-            v-for="link in [{label: 'Mentions légales', url: 'mentions_legales'}]"
-            :key="link.label"
-            :to="link.url"
-            color="white"
-            text
-            rounded
-            class="my-2"
-            small
-          >
-            {{ link.label }}
-          </v-btn>
-        </v-card-text>
-        <v-divider />
-        <v-card-text class="py-1">
-          2020-{{ new Date().getFullYear() }} — <strong>Les transalpins</strong>
-        </v-card-text>
-      </v-card>
-    </v-footer>
-  </v-app>
+            <TextField icon="ri-mail-line" type="email" name="email" :error="errors.email" :value="values.email" label="Email" class="w-96 py-4 px-3"/>
+            <button :type="!errors.email && !!values.email ? 'submit': 'button'">
+              <Icon icon="ri-send-plane-fill" class="h-5 w-5" :class="{'fill-primary hover:fill-primary-dark': !errors.email && !!values.email, 'fill-gray-500': !values.email, 'fill-accent': !!errors.email}"/>
+            </button>
+          </Form>
+          <div class="mx-3 text-gray-800 text-sm">ET</div>
+          <div class="grow md:grow-0">
+            <button @click="redirectToHelloAsso" class="bg-primary hover:bg-primary-dark text-white text-sm px-3 py-1.5 shadow-md rounded-sm">
+              <span class="uppercase tracking-wider font-light">Adhère à l'association</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="flex flex-col pt-48 sm:pt-64 flex-auto shadow-md mb-4">
+      <slot />
+    </div>
+    <Footer />
+    <Notification />
+  </div>
 </template>
 
-<script lang="ts">
-import {
-  defineComponent, useContext, onMounted, useFetch
-} from '@nuxtjs/composition-api'
-import Menu from '~/components/layout/Menu.vue'
-import SubMenu from '~/components/layout/SubMenu.vue'
-import SideMenu from '~/components/layout/SideMenu.vue'
-import NewsletterForm from '~/components/contact-newsletter/Form.vue'
-import Alert from '~/components/util/Alert.vue'
-import usePermissions from '~/composable/usePermissions'
-import { securityStore } from '~/custom-store/SecurityStore'
-import { pageStore } from '~/custom-store/PageStore'
-
-export default defineComponent({
-  components: {
-    Menu, SubMenu, NewsletterForm, Alert, SideMenu
-  },
-  setup () {
-    const context = useContext()
-    pageStore.setContext(context)
-    securityStore.setContext(context)
-
-    usePermissions()
-
-    pageStore.fetchAll()
-
-    return {
-      pageState: pageStore.getState(),
-      logout: () => securityStore.logout(),
-      loggedIn: context.$auth.loggedIn,
-      isAdmin: context.$auth.isAdmin
-    }
-  },
-  data () {
-    return {
-      showSubHeader: true,
-      drawer: false
-    }
-  },
-  methods: {
-    redirectToAdmin () {
-      this.$router.push({ path: 'admin' })
-    },
-
-    redirectToHelloAsso () {
-      window.open('https://www.helloasso.com/associations/les-transalpins/adhesions/adhesion-2022', '_')
-    }
-  }
-})
-</script>
-
 <style>
-.container.header-extension-container {
-  padding: 0;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-.container.header-extension-container > .row {
-  margin-left: -16px;
-  margin-right: -16px;
-}
-
-.header-extension-row-submenu {
-  position: absolute;
-  min-width: 100%;
-  box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.1);
-}
-
-.v-application a.header-link {
-  text-decoration: none;
-  text-transform: capitalize;
-  color: white;
-  font-family: 'Permanent Marker', serif;
-}
-
-.v-application li > p {
-  margin-bottom: 0;
-}
-
-.card-newsletter > .v-card__text {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
-.card-newsletter > .v-card__text > .v-form {
-  padding-top: 0;
-}
-
-.card-newsletter > .v-card__text > .v-form > .v-text-field {
-  margin-top: 0;
+@layer base {
+  h1 {
+    @apply text-4xl font-marker text-primary-dark;
+  }
+  h2 {
+    @apply text-3xl font-marker text-primary;
+  }
+  h3 {
+    @apply text-2xl font-marker text-primary-dark;
+  }
 }
 </style>
+
+<script setup lang="ts">
+  import { onMounted, onUnmounted } from '@vue/runtime-core'
+  import { storeToRefs } from 'pinia'
+  import TextField from '~/components/form/TextField.vue'
+  import Footer from '~/components/layout/default/Footer.vue'
+  import { useAuthStore } from '~/store/auth'
+  import { useContactNewsletterStore } from '~/store/contact-newsletter'
+  import { CRUD_MODE } from '~/store/crud'
+  import { useNotificationStore } from '~/store/notification'
+  import { usePageStore } from '~/store/page'
+  import LayoutDefaultMenu from '~/components/layout/default/Menu.vue'
+  import Icon from '~/components/util/Icon.vue'
+  import Notification from '~/components/layout/Notification.vue'
+  import { Form, Field } from 'vee-validate';
+  import Tooltip from '~/components/util/Tooltip.vue'
+
+  const authStore = useAuthStore();
+  const { isLogged, isAdmin } = storeToRefs(authStore)
+  const pageStore = usePageStore();
+  await useAsyncData('pages', () => {
+    return pageStore.fetchAll()
+  })
+
+  const schema = {
+    email: 'email',
+  };
+
+  const redirectToLogin = () => {
+    navigateTo('/login')
+  }
+
+  const redirectToHome = () => {
+    navigateTo('/')
+  }
+
+  const redirectToAdmin = () => {
+    navigateTo('/admin')
+  }
+
+  const logout = () => {
+    authStore.logout()
+  }
+
+  const newsletterStore = useContactNewsletterStore()
+  const notificationStore = useNotificationStore()
+
+  const submitNewsletter = async (data, actions) => {
+    try {
+      await newsletterStore.create(data)
+      notificationStore.showMessage('Je suis maintenant inscris à la newsletter')
+    } catch (e) {
+      notificationStore.showError(newsletterStore[CRUD_MODE.CREATION].error)
+      actions.setErrors(newsletterStore[CRUD_MODE.CREATION].violations)
+    }
+  }
+
+  const scrollY = ref(0)
+
+  function onScroll() {
+    scrollY.value = window.scrollY
+  }
+
+  onMounted(() => {
+    window.addEventListener("scroll", onScroll);
+  })
+
+  onUnmounted(() => {
+    window.removeEventListener("scroll", onScroll);
+  })
+
+  function redirectToHelloAsso () {
+    window.open('https://www.helloasso.com/associations/les-transalpins/adhesions/adhesion-2022', '_')
+  }
+</script>

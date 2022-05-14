@@ -7,6 +7,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Serializer\Filter\GroupFilter;
 use App\Repository\BlogArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
 use App\Controller\BlogArticle\GetTagsAction;
@@ -19,7 +20,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "denormalization_context"={"groups"={"blog_article:write"}},
  *     },
  *     collectionOperations={
- *         "get"={},
+ *         "get"={"pagination_client_items_per_page"=true},
  *         "post"={"security"="is_granted('USER_CAN_EDIT_BLOG_ARTICLES')"},
  *         "get_tags"={
  *             "method"="GET",
@@ -41,6 +42,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiFilter(SearchFilter::class, properties={"title": "partial", "createdBy.nickname": "exact", "isPublished": "exact"})
  * @ApiFilter(DateFilter::class, properties={"createdAt": DateFilter::EXCLUDE_NULL})
  * @ApiFilter(OrderFilter::class, properties={"createdAt"})
+ * @ApiFilter(GroupFilter::class, arguments={"overrideDefaultGroups": true, "whitelist": {"blog_article:read:edition"}})
  */
 class BlogArticle
 {
@@ -48,50 +50,56 @@ class BlogArticle
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"blog_article:read"})
+     * @Groups({"blog_article:read", "blog_article:read:edition"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"blog_article:read", "blog_article:write"})
+     * @Groups({"blog_article:read", "blog_article:write", "blog_article:read:edition"})
      */
     private $title;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     * @Groups({"blog_article:read", "blog_article:write", "blog_article:read:edition"})
+     */
+    private $preview;
+
+    /**
      * @ORM\Column(type="text")
-     * @Groups({"blog_article:read", "blog_article:write"})
+     * @Groups({"blog_article:read", "blog_article:write", "blog_article:read:edition"})
      */
     private $content;
 
     /**
      * @ORM\Column(type="datetimetz")
-     * @Groups({"blog_article:read"})
+     * @Groups({"blog_article:read", "blog_article:read:edition"})
      */
     private $createdAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Member::class)
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"blog_article:read"})
+     * @Groups({"blog_article:read", "blog_article:read:edition"})
      */
     private $createdBy;
 
     /**
      * @ORM\Column(type="json")
-     * @Groups({"blog_article:read", "blog_article:write"})
+     * @Groups({"blog_article:read", "blog_article:write", "blog_article:read:edition"})
      */
     private $tags;
 
     /**
      * @ORM\Column(type="boolean")
-     * @Groups({"blog_article:read", "blog_article:write"})
+     * @Groups({"blog_article:read", "blog_article:write", "blog_article:read:edition"})
      */
     private $isPublished;
 
     /**
      * @ORM\ManyToOne(targetEntity=MediaNode::class)
-     * @Groups({"blog_article:read", "blog_article:write"})
+     * @Groups({"blog_article:read", "blog_article:write", "blog_article:read:edition"})
      */
     private $mediaNode;
 
@@ -187,6 +195,18 @@ class BlogArticle
     public function setMediaNode(?MediaNode $mediaNode): self
     {
         $this->mediaNode = $mediaNode;
+
+        return $this;
+    }
+
+    public function getPreview(): ?string
+    {
+        return $this->preview;
+    }
+
+    public function setPreview(?string $preview): self
+    {
+        $this->preview = $preview;
 
         return $this;
     }

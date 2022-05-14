@@ -24,29 +24,17 @@
   </node-view-wrapper>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, ref } from '@nuxtjs/composition-api'
-import { NodeViewWrapper, Node } from '@tiptap/vue-2'
+<script setup lang="ts">
+import { NodeViewWrapper, NodeViewContent } from '@tiptap/vue-3'
 
-export default defineComponent({
-  components: {
-    NodeViewWrapper
-  },
-  props: {
-    node: {
-      type: Object as () => Node,
-      required: true
-    },
-    extension: {
-      type: Object as () => Node,
-      required: true
-    },
-    updateAttributes: {
-      type: Function,
-      required: true
-    }
-  },
-  setup (props) {
+interface EditorBtnProps {
+  node: typeof NodeViewContent,
+  extension: typeof NodeViewContent,
+  updateAttributes: Function,
+}
+
+const props = defineProps<EditorBtnProps>()
+
     const isActive = ref(false)
     // const imgContainer = ref(null) as Ref<HTMLElement | null>
 
@@ -78,17 +66,9 @@ export default defineComponent({
       document.addEventListener('mousemove', onMouseMove)
       document.addEventListener('mouseup', onMouseUp)
     }
-
-    return {
-      isActive,
-      nodeDisplay,
-      handleMouseDown
-    }
-  }
-})
 </script>
 
-<style lang="scss">
+<style>
 
 .img-container {
   position: relative;

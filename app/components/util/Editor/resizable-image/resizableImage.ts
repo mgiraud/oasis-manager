@@ -1,6 +1,6 @@
 // 1. Import the extension
-import Image from '@tiptap/extension-image'
-import { VueNodeViewRenderer } from '@tiptap/vue-2'
+import { Image } from '@tiptap/extension-image'
+import { VueNodeViewRenderer } from '@tiptap/vue-3'
 import ResizableImageNode from './ResizableImageNode.vue'
 
 // 2. Overwrite the keyboard shortcuts

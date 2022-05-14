@@ -1,41 +1,27 @@
 <template>
-  <v-tooltip top>
-    <template #activator="{ on, attrs }">
-      <v-btn
-        small
-        :class="btnClass"
-        v-bind="attrs"
-        @click="clickHandler"
-        v-on="on"
-      >
-        <v-icon>{{ icon }}</v-icon>
-      </v-btn>
-    </template>
-    <span>{{ label }}</span>
-  </v-tooltip>
+  <Popover class="relative bg-black inline-flex p-2 flex-auto">
+    <PopoverButton @click.prevent="props.clickHandler" >
+      <Icon :icon="props.iconComponent" :class="props.btnClass" class="h-6 w-6 fill-white"  @mouseenter="mouseOn = true" @mouseleave="mouseOn = false"/>
+    </PopoverButton>
+
+    <PopoverPanel class="absolute z-10 bg-sky-500 w-24 bottom-10 left-2" v-show="mouseOn" static>
+      {{ props.label }}
+    </PopoverPanel>
+  </Popover>
 </template>
 
-<script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+<script setup lang="ts">
 
-export default defineComponent({
-  props: {
-    btnClass: {
-      type: Object,
-      default: null
-    },
-    clickHandler: {
-      type: Function,
-      required: true
-    },
-    icon: {
-      type: String,
-      required: true
-    },
-    label: {
-      type: String,
-      required: true
-    }
-  }
-})
+import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
+import Icon from '~/components/util/Icon.vue'
+
+interface EditorBtnProps {
+  btnClass?: object|null,
+  clickHandler: Function,
+  iconComponent: string,
+  label: string
+}
+
+const props = defineProps<EditorBtnProps>()
+const mouseOn = ref(false)
 </script>

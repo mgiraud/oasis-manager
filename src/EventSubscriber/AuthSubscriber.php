@@ -59,7 +59,7 @@ class AuthSubscriber implements EventSubscriberInterface
             if ($refreshToken->isValid()) {
                 $event->getResponse()->headers->setCookie(
                     (new Cookie(RefreshToken::REFRESH_TOKEN_PARAM_NAME, $refreshTokenString, 0, '/', $this->domain))
-                        ->withSecure($this->env !== 'dev')
+                        ->withSecure()
                 );
                 return;
             } else {
@@ -77,7 +77,7 @@ class AuthSubscriber implements EventSubscriberInterface
 
         $event->getResponse()->headers->setCookie(
             (new Cookie(RefreshToken::REFRESH_TOKEN_PARAM_NAME, $refreshToken->getRefreshToken(), 0, '/', $this->domain))
-                ->withSecure($this->env !== 'dev')
+                ->withSecure()
         );
     }
 }

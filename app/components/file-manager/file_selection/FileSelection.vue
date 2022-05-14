@@ -1,100 +1,67 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col>
+  <div class="flex flex-col">
+    <div class="flex-auto">
         <h3>Fichiers sélectionnés</h3>
-      </v-col>
-    </v-row>
-    <v-row v-if="thumbnails.length + links.length === 0">
-      <v-col>
-        <p>
-          Tu peux téleverser un fichier ou utiliser le navigateur pour sélectionner les fichiers à
-          insérer
-        </p>
-      </v-col>
-    </v-row>
-    <v-row
+    </div>
+    <div class="flex-auto" v-if="thumbnails.length + links.length === 0">
+      <p>
+        Tu peux téleverser un fichier ou utiliser le navigateur pour sélectionner les fichiers à
+        insérer
+      </p>
+    </div>
+    <div class="flex flex-auto"
       v-else
-      no-gutters
     >
-      <v-col>
-        <v-container>
-          <v-row no-gutters>
-            <v-col
+        <div class="flex flex-col">
+          <div class="flex flex-auto">
+            <div class="self-center flex-auto"
               v-for="(thumbnail, i) in thumbnails"
               :key="i"
-              cols="4"
-              align-self="center"
             >
-              <v-card>
-                <v-img
-                  :src="thumbnail.src"
-                  max-height="200"
-                  contain
-                />
-                <v-card-actions>
-                  <v-btn
-                    class="btn-remove-thumbnail"
-                    fab
-                    dark
-                    x-small
-                    color="error"
+              <div>
+                <img :src="thumbnail.src" class="max-h-52" />
+                <div>
+                  <button
+                    class="btn-remove-thumbnail bg-error h-6 w-16 rounded-lg"
                     @click="removeThumbnail(i)"
                   >
-                    <v-icon dark>
-                      ri-close-line
-                    </v-icon>
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col
+                    <Icon icon="ri-close-line" class="h-6 w-6"/>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-auto">
+            <div class="flex-auto"
               v-for="(link, i) in links"
               :key="i"
             >
-              <span>{{ link.name }}<v-btn
-                class="btn-remove-thumbnail"
-                fab
-                dark
-                x-small
-                color="error"
-                @click="removeLink(i)"
-              >
-                <v-icon dark>
-                  ri-close-line
-                </v-icon>
-              </v-btn></span>
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-col>
-    </v-row>
-  </v-container>
+              <span>{{ link.name }}
+                <button
+                  class="btn-remove-thumbnail bg-error h-6 w-16 rounded-lg"
+                  @click="removeLink(i)"
+                >
+                  <Icon icon="ri-close-line" class="h-6 w-6"/>
+                </button>
+              </span>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+<script setup lang="ts">
 
-export default defineComponent({
-  props: {
-    thumbnails: {
-      type: Array,
-      required: true
-    },
-    links: {
-      type: Array,
-      required: true
-    },
-    removeThumbnail: {
-      type: Function,
-      required: true
-    },
-    removeLink: {
-      type: Function,
-      required: true
-    }
-  }
-})
+import { MediaObject } from '~/store/media-object'
+import Icon from '~/components/util/Icon.vue'
+
+interface FileSelectionProps {
+  thumbnails: Array<MediaObject>,
+  links: Array<MediaObject>,
+  removeThumbnail: Function,
+  removeLink: Function
+}
+
+const props = defineProps<FileSelectionProps>()
 </script>

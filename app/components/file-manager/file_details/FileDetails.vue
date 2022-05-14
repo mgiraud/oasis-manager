@@ -1,104 +1,52 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col>
-        <h3>
-          Détail du fichier
-          <v-btn
-            rounded
-            right
-            fixed
-            small
-            color="error"
-            @click="closeDetailPanel"
-          >
-            <v-icon>
-              ri-close-line
-            </v-icon>
-          </v-btn>
-        </h3>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
-        <file-details-form
-          ref="updateForm"
-          :tree="tree"
-          :values="item"
-          :errors="state.violations"
-        />
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="12">
-        <Toolbar
+  <div class="flex flex-col">
+    <div class="flex flex-row">
+        <h2 class="mb-3">Détail du fichier</h2>
+        <Icon icon="ri-close-line" class="h-6 w-6 rounded-md fill-primary justify-self-end" @click="closeDetailPanel"/>
+    </div>
+    <div>
+        <FileDetailsForm
+          :tree="mediaNodeStore.tree"
+          v-model:mediaObject="item"
           :handle-submit="onSendForm"
+          :errors="mediaObjectStore[CRUD_MODE.EDITION].violations"
         />
-      </v-col>
-    </v-row>
-  </v-container>
+    </div>
+  </div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, inject, Ref, ref, useContext, useFetch, watch } from '@nuxtjs/composition-api'
-import { Validation } from '@vuelidate/core'
+<script setup lang="ts">
+import { useAsyncData } from '#app'
+import { useMediaNodeStore } from '~/store/media-node'
+import { MediaObject, useMediaObjectStore } from '~/store/media-object'
+import { useNotificationStore } from '~/store/notification'
 import FileDetailsForm from './FileDetailsForm.vue'
-import { mediaNodeStore } from '~/custom-store/MediaNodeStore'
-import { mediaObjectStore, MediaObject } from '~/custom-store/MediaObjectStore'
-import { notificationStore } from '~/custom-store/NotificationStore'
-import Toolbar from '~/components/form/Toolbar.vue'
+import Icon from '~/components/util/Icon.vue'
+import { CRUD_MODE } from '~/store/crud'
 
-export default defineComponent({
-  components: {
-    Toolbar,
-    FileDetailsForm
-  },
-  props: {
-    mediaObject: {
-      type: Object as () => MediaObject,
-      required: true
-    }
-  },
-  setup (props) {
-    const context = useContext()
-    mediaNodeStore.setContext(context)
-    mediaObjectStore.setContext(context)
-    const closeDetailPanel = inject('closeDetailPanel')
-    const item = computed(() => props.mediaObject)
-    const updateForm = ref(null) as Ref<Element & Validation | null>
+interface FileDetailsProps {
+  mediaObject: MediaObject,
+}
 
-    useFetch(async () => {
-      if (mediaNodeStore.tree.value.length === 0) {
-        await mediaNodeStore.fetchTree()
-      }
-    })
+const props = defineProps<FileDetailsProps>()
+const closeDetailPanel = inject('closeDetailPanel')
+const item = {...props.mediaObject}
+const mediaNodeStore = useMediaNodeStore()
+const mediaObjectStore = useMediaObjectStore()
+const notificationStore = useNotificationStore()
 
-    const onSendForm = () => {
-      if (!updateForm.value) {
-        return
-      }
-      updateForm.value.v$.$touch()
+await useAsyncData('media-node-tree', async () => {
+    await mediaNodeStore.fetchTree()
+})
 
-      if (!updateForm.value.v$.$invalid) {
-        mediaObjectStore.update(item.value)
-      }
-    }
+const onSendForm = async (data: MediaObject) => {
+  await mediaObjectStore.update(data.uniqueId, data)
+}
 
-    watch(() => mediaObjectStore.getState().updated, (created: MediaObject | null) => {
-      if (!created) {
-        return
-      }
-      notificationStore.showMessage('Fichier mis à jour')
-    })
-
-    return {
-      item,
-      state: mediaObjectStore.getState(),
-      tree: mediaNodeStore.tree,
-      closeDetailPanel,
-      updateForm,
-      onSendForm
-    }
+watch(() => mediaObjectStore[CRUD_MODE.EDITION].edited, (edited: MediaObject | null) => {
+  if (!edited) {
+    return
   }
+  notificationStore.showMessage('Fichier mis à jour')
 })
 </script>

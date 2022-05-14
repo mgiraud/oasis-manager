@@ -1,31 +1,26 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col
+  <div class="flex flex-row py-3">
+      <div
         v-for="child in mediaNode.children"
         :key="child['@id']"
+        class="w-fit p-3 bg-primary-dark text-white ml-2 first:ml-0 rounded-md hover:bg-primary"
       >
-        <v-btn @click="handleClick(child['@id'])">
+        <button @click="props.handleClick(child.id)">
           {{ child.name }}
-        </v-btn>
-      </v-col>
-    </v-row>
-  </v-container>
+        </button>
+      </div>
+  </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+<script setup lang="ts">
+import { MediaNode } from '~/store/media-node'
 
-export default defineComponent({
-  props: {
-    mediaNode: {
-      type: Object,
-      required: true
-    },
-    handleClick: {
-      type: Function,
-      required: true
-    }
-  }
+interface FileNavigatorProps {
+  mediaNode?: MediaNode | null,
+  handleClick: Function,
+}
+
+const props = withDefaults(defineProps<FileNavigatorProps>(), {
+  mediaNode: null
 })
 </script>

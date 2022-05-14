@@ -73,7 +73,7 @@ class PageLog
 
     /**
      * @ORM\ManyToOne(targetEntity=Page::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      * @Groups({"page_log:read", "page_log:write"})
      */
     private $page;

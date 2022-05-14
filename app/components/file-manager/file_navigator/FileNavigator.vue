@@ -1,175 +1,131 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col>
-        <h3
-          class="navigator-title"
-          @click="handleRootClick"
-        >
-          <v-btn
-            rounded
-            depressed
-            small
-          >
-            Navigateur de fichier
-          </v-btn>
-        </h3>
-        <file-navigator-bread-crumb
-          :media-node="currentMediaNode"
+  <div class="flex flex-col">
+    <div>
+      <h1 class="navigator-title">Navigateur de fichier</h1>
+    </div>
+    <div class="flex-auto py-2">
+        <FileNavigatorBreadCrumb
+          :media-node="props.modelValue"
           :media-node-click-handler="handleMediaNodeClick"
+          :handle-root-click="handleRootClick"
         />
-      </v-col>
-    </v-row>
-    <v-row
+    </div>
+    <div
+      class="flex-auto flex flex-col"
       v-if="currentMediaNode"
-      @contextmenu.prevent="onRightClick"
     >
-      <v-col cols="12">
-        <h4>Dossiers</h4>
-      </v-col>
-      <v-col cols="12">
-        <file-navigator-folders
-          v-if="currentMediaNode.children.length > 0"
+      <div class="flex flex-row h-16 items-center gap-x-2">
+        <h2>Dossiers</h2>
+        <Icon icon="ri-folder-add-line" class="fill-primary h-8 w-8 cursor-pointer" @click="folderDialog = true"/>
+      </div>
+      <FileNavigatorFolders
+        v-if="currentMediaNode.children.length > 0"
+        :media-node="currentMediaNode"
+        :handle-click="handleMediaNodeClick"
+      />
+      <p v-else>
+        Aucun dossier
+      </p>
+    </div>
+    <div class="flex-auto" v-if="currentMediaNode && currentMediaNode.mediaObjects.length > 0">
+      <div>
+        <h2>Fichiers</h2>
+      </div>
+      <div>
+        <FileNavigatorFiles
+          :select-click-handler="props.selectClickHandler"
+          :edit-click-handler="props.editClickHandler"
           :media-node="currentMediaNode"
-          :handle-click="handleMediaNodeClick"
         />
-        <p v-else>
-          Aucun dossier
-        </p>
-      </v-col>
-    </v-row>
-    <v-row v-if="currentMediaNode && currentMediaNode.mediaObjects.length > 0">
-      <v-col cols="12">
-        <h4>Fichiers</h4>
-      </v-col>
-      <v-col>
-        <file-navigator-files
-          :select-click-handler="selectClickHandler"
-          :edit-click-handler="editClickHandler"
-          :media-node="currentMediaNode"
-        />
-      </v-col>
-    </v-row>
-    <v-row v-if="!currentMediaNode">
-      <v-col cols="12">
-        <h4>Sélectionner un dossier</h4>
-      </v-col>
-      <v-col
-        v-for="node in rootMediaNodes"
-        :key="node['@id']"
-        cols="3"
-      >
-        <v-btn @click="handleMediaNodeClick(node['@id'])">
+      </div>
+    </div>
+    <div class="flex-auto flex flex-col" v-if="!currentMediaNode">
+      <div class="flex flex-row h-16 items-center gap-x-2">
+        <h2>Sélectionner un dossier</h2>
+        <Icon icon="ri-folder-add-line" class="fill-primary h-8 w-8 cursor-pointer" @click="folderDialog = true"/>
+      </div>
+      <div class="flex flex-row">
+        <div
+          v-for="node in mediaNodeStore.list"
+          :key="node['@id']"
+          class="w-fit p-3 bg-primary-dark text-white ml-2 first:ml-0 rounded-md hover:bg-primary cursor-pointer"
+          @click="handleMediaNodeClick(node.id)"
+        >
           {{ node.name }}
-        </v-btn>
-      </v-col>
-    </v-row>
-    <file-navigator-context-menu
-      ref="fileNavigatorContextMenu"
-      :media-node="currentMediaNode"
+        </div>
+      </div>
+    </div>
+    <FileNavigatorContextMenu
+      :media-node="props.modelValue"
       :refresh="refresh"
+      v-model:dialog="folderDialog"
     />
-  </v-container>
+  </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, useContext, inject, useFetch, nextTick, ref, Ref } from '@nuxtjs/composition-api'
+<script setup lang="ts">
+import { useAsyncData } from '#app'
+import { CRUD_MODE } from '~/store/crud'
+import { MediaNode, useMediaNodeStore } from '~/store/media-node'
+import { useMediaObjectStore } from '~/store/media-object'
 import FileNavigatorBreadCrumb from './FileNavigatorBreadCrumb.vue'
 import FileNavigatorFolders from './FileNavigatorFolders.vue'
 import FileNavigatorFiles from './FileNavigatorFiles.vue'
 import FileNavigatorContextMenu from './FileNavigatorContextMenu.vue'
-import { mediaNodeStore, MediaNode } from '~/custom-store/MediaNodeStore'
-import { mediaObjectStore } from '~/custom-store/MediaObjectStore'
+import Icon from '~/components/util/Icon.vue'
 
-export default defineComponent({
-  components: {
-    FileNavigatorBreadCrumb,
-    FileNavigatorFolders,
-    FileNavigatorFiles,
-    FileNavigatorContextMenu
+interface FileNavigatorProps {
+  editClickHandler: Function,
+  selectClickHandler: Function
+  modelValue: MediaNode | null
+  rootName?: string | null
+}
+
+const props = withDefaults(defineProps<FileNavigatorProps>(), {
+  rootName: null
+})
+const emit = defineEmits(['update:modelValue'])
+const folderDialog = ref(false)
+const currentMediaNode = computed({
+  get() {
+    return props.modelValue
   },
-  props: {
-    editClickHandler: {
-      type: Function,
-      required: true
-    },
-    selectClickHandler: {
-      type: Function,
-      required: true
-    },
-    currentMediaNode: {
-      type: Object as () => MediaNode | undefined,
-      default: null
-    },
-    rootName: {
-      type: String,
-      default: null
-    }
-  },
-  setup (props, { emit }) {
-    const context = useContext()
-    mediaNodeStore.setContext(context)
-    mediaObjectStore.setContext(context)
-
-    const closeDetailPanel = inject<() => {}>('closeDetailPanel')
-    const fileNavigatorContextMenu = ref(null) as Ref<null | typeof FileNavigatorContextMenu>
-
-    useFetch(() => {
-      mediaNodeStore.fetchAll({
-        'exists[parent]': 'false'
-      })
-    })
-
-    const handleMediaNodeClick = async (id: string) => {
-      mediaObjectStore.resetList()
-      emit('update:current-media-node', await mediaNodeStore.load(id))
-    }
-
-    const handleRootClick = () => {
-      emit('update:current-media-node', undefined)
-      closeDetailPanel && closeDetailPanel()
-    }
-
-    const refresh = async () => {
-      if (!props.currentMediaNode) {
-        return
-      }
-      emit('update:current-media-node', await mediaNodeStore.load(props.currentMediaNode['@id']))
-      nextTick(() => {
-        reload()
-      })
-    }
-
-    const reload = () => {
-      const savedMediaNode = props.currentMediaNode
-      emit('update:current-media-node', undefined)
-      nextTick(() => {
-        emit('update:current-media-node', savedMediaNode)
-      })
-    }
-
-    const onRightClick = (e: MouseEvent) => {
-      // @ts-ignore
-      fileNavigatorContextMenu.value?.showMenu(e)
-    }
-
-    return {
-      closeDetailPanel,
-      fileNavigatorContextMenu,
-      rootMediaNodes: mediaNodeStore.rootNodes,
-      handleMediaNodeClick,
-      handleRootClick,
-      refresh,
-      reload,
-      onRightClick
-    }
+  set(value) {
+    emit('update:modelValue', value)
   }
 })
-</script>
 
-<style scoped>
-h3.navigator-title {
-  display: inline-block;
-  cursor: pointer;
+const mediaNodeStore = useMediaNodeStore()
+const mediaObjectStore = useMediaObjectStore()
+const closeDetailPanel = inject<() => {}>('closeDetailPanel')
+
+const { refresh: getRoots } = await useAsyncData('root-media-nodes', async () => {
+  await mediaNodeStore.fetchAll({
+    'exists[parent]': 'false'
+  })
+})
+
+const handleMediaNodeClick = async (id: string) => {
+  mediaObjectStore.resetList()
+  await mediaNodeStore.load(id)
+  currentMediaNode.value = mediaNodeStore[CRUD_MODE.EDITION].retrieved as MediaNode
 }
-</style>
+
+const handleRootClick = () => {
+  currentMediaNode.value = null
+  closeDetailPanel && closeDetailPanel()
+}
+
+const refresh = async () => {
+  if (!currentMediaNode.value) {
+    getRoots()
+  } else {
+    await mediaNodeStore.load(currentMediaNode.value.id)
+    currentMediaNode.value = mediaNodeStore[CRUD_MODE.EDITION].retrieved as MediaNode
+  }
+}
+
+defineExpose({
+  refresh
+})
+</script>

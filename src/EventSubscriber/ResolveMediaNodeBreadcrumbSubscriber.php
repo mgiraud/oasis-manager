@@ -26,6 +26,7 @@ class ResolveMediaNodeBreadcrumbSubscriber implements EventSubscriberInterface
         $breadcrumb = [];
         while ($item->getParent()) {
             array_unshift($breadcrumb, [
+                'id' => $item->getId(),
                 '@id' => '/api/media_nodes/' . $item->getId(),
                 'name' => $item->getName(),
                 'type' => 'item'
@@ -33,6 +34,7 @@ class ResolveMediaNodeBreadcrumbSubscriber implements EventSubscriberInterface
             $item = $item->getParent();
         }
         array_unshift($breadcrumb, [
+            'id' => $item->getId(),
             '@id' => '/api/media_nodes/' . $item->getId(),
             'name' => $item->getName(),
             'type' => 'item'

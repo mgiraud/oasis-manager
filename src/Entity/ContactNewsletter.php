@@ -60,6 +60,7 @@ class ContactNewsletter
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"contact_newsletter:read"})
      */
     private $ip;
 

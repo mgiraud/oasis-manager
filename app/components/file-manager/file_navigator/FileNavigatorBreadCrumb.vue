@@ -1,51 +1,35 @@
 <template>
   <div
     v-if="mediaNode"
-    class="file-navigator-breadcrumb-container"
+    class="flex flex-row w-full"
   >
-    <span
+    <Icon icon="ri-home-fill" class="h-6 w-6 cursor-pointer fill-primary" @click="handleRootClick"/>
+    <div
       v-for="crumb in mediaNode.breadcrumb"
       :key="crumb['@id']"
       @click="handleCrumbClick(crumb)"
-    >&nbsp;<v-icon>ri-arrow-right-s-line</v-icon>&nbsp;<v-btn
-      rounded
-      depressed
-      small
-    >{{ crumb.name }}</v-btn></span>
+      class="inline-flex items-center cursor-pointer"
+    >&nbsp;<Icon icon="ri-arrow-right-s-line" class="h-6 w-6"/><div class="cursor-pointer text-primary">{{ crumb.name }}</div></div>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
-import { breadcrumbItem } from '~/custom-store/MediaNodeStore'
+<script setup lang="ts">
 
-export default defineComponent({
-  props: {
-    mediaNode: {
-      type: Object,
-      default: null
-    },
-    mediaNodeClickHandler: {
-      type: Function,
-      required: true
-    }
-  },
-  setup (props) {
-    const handleCrumbClick = (crumb: breadcrumbItem) => {
-      // @ts-ignore
-      props.mediaNodeClickHandler(crumb['@id'])
-    }
+import { BreadcrumbItem, MediaNode } from '~/store/media-node'
+import Icon from '~/components/util/Icon.vue'
 
-    return {
-      handleCrumbClick
-    }
-  }
-})
-</script>
-
-<style scoped>
-.file-navigator-breadcrumb-container {
-  display: inline-block;
-  cursor: pointer;
+interface FileNavigatorProps {
+  mediaNode?: MediaNode | null,
+  mediaNodeClickHandler: Function,
+  handleRootClick: Function
 }
-</style>
+
+const props = withDefaults(defineProps<FileNavigatorProps>(), {
+  mediaNode: null
+})
+
+const handleCrumbClick = (crumb: BreadcrumbItem) => {
+  // @ts-ignore
+  props.mediaNodeClickHandler(crumb.id)
+}
+</script>

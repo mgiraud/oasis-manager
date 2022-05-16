@@ -38,6 +38,7 @@ import 'unstorage';
 import 'fs';
 import 'pathe';
 import 'url';
+import 'redirect-ssl';
 
 function u$3(r,n,...a){if(r in n){let e=n[r];return typeof e=="function"?e(...a):e}let t=new Error(`Tried to handle "${r}" but there is no handler defined. Only defined handlers are: ${Object.keys(n).map(e=>`"${e}"`).join(", ")}.`);throw Error.captureStackTrace&&Error.captureStackTrace(t,u$3),t}
 
@@ -3718,13 +3719,6 @@ _sfc_main$1v.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/util/Icon.vue");
   return _sfc_setup$1v ? _sfc_setup$1v(props, ctx) : void 0;
 };
-const useMediaObjectStore = defineStore("media_objects", {
-  state: () => {
-    return __spreadValues({
-      resource: "/media_objects"
-    }, crudState);
-  }
-});
 const _sfc_main$1u = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __ssrInlineRender: true,
   props: {
@@ -3733,7 +3727,6 @@ const _sfc_main$1u = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   setup(__props) {
     const props = __props;
     const indexToOrder = vue_cjs_prod.ref({});
-    useMediaObjectStore();
     props.mediaNode.mediaObjects.forEach((mediaObject, index2) => {
       mediaObject.index = index2;
       indexToOrder.value[index2] = index2 + 1;
@@ -3750,9 +3743,9 @@ const _sfc_main$1u = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "overflow-hidden hidden md:flex flex-no-wrap flex-row bg-white" }, _attrs))}><div class="${serverRenderer.exports.ssrRenderClass([{
           "translate-x-0": !showTransition.value,
           "transition ease-in duration-700 -translate-x-full": showTransition.value
-        }, "flex flex-row flex-nowrap h-96 flex-auto"])}"><!--[-->`);
+        }, "flex flex-row flex-nowrap h-96 flex-auto bg-primary"])}"><!--[-->`);
         serverRenderer.exports.ssrRenderList(__props.mediaNode.mediaObjects, (imageObject) => {
-          _push(`<div class="${serverRenderer.exports.ssrRenderClass([`order-${vue_cjs_prod.unref(order)(imageObject)}`, "w-full shrink-0 flex items-center justify-center"])}"><img${serverRenderer.exports.ssrRenderAttr("src", imageObject.contentUrl)} class="w-auto max-h-96 object-scale-down"></div>`);
+          _push(`<div class="${serverRenderer.exports.ssrRenderClass([`order-${vue_cjs_prod.unref(order)(imageObject)}`, "w-full shrink-0 flex items-center justify-center h-96 group"])}"><img${serverRenderer.exports.ssrRenderAttr("src", imageObject.contentUrl)} class="w-auto object-cover"></div>`);
         });
         _push(`<!--]--></div>`);
         if (__props.mediaNode.mediaObjects.length > 1) {
@@ -4474,6 +4467,13 @@ _sfc_main$1n.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/util/Editor/EditorBtn.vue");
   return _sfc_setup$1n ? _sfc_setup$1n(props, ctx) : void 0;
 };
+const useMediaObjectStore = defineStore("media_objects", {
+  state: () => {
+    return __spreadValues({
+      resource: "/media_objects"
+    }, crudState);
+  }
+});
 const useNotificationStore = defineStore("notification", {
   state: () => {
     return {
@@ -10156,9 +10156,14 @@ const _sfc_main$I = /* @__PURE__ */ vue_cjs_prod.defineComponent({
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex bg-white flex-row flex-wrap px-3 justify-center h-fit" }, _attrs))}><!--[-->`);
       serverRenderer.exports.ssrRenderList(vue_cjs_prod.unref(tags), (tag, i) => {
-        _push(`<div class="${serverRenderer.exports.ssrRenderClass([{ "bg-primary-dark": vue_cjs_prod.unref(activeTags).indexOf(tag) !== -1, "bg-primary": vue_cjs_prod.unref(activeTags).indexOf(tag) === -1 }, "text-white uppercase px-2 py-1 rounded-tl-lg rounded-br-lg mx-1 text-xs cursor-pointer w-fit h-fit"])}">${serverRenderer.exports.ssrInterpolate(tag)}</div>`);
+        _push(`<div class="${serverRenderer.exports.ssrRenderClass([{ "bg-primary-dark": vue_cjs_prod.unref(activeTags).indexOf(tag) !== -1, "bg-primary": vue_cjs_prod.unref(activeTags).indexOf(tag) === -1 }, "text-white uppercase px-2 py-1 rounded-tl-lg rounded-br-lg mx-1 text-xs cursor-pointer w-fit h-fit hover:bg-primary-dark"])}">${serverRenderer.exports.ssrInterpolate(tag)}</div>`);
       });
-      _push(`<!--]--></div>`);
+      _push(`<!--]--><div class="${serverRenderer.exports.ssrRenderClass([{ "bg-primary-dark": vue_cjs_prod.unref(activeTags).length === 0, "bg-primary": vue_cjs_prod.unref(activeTags).length > 0 }, "fill-white uppercase px-2 py-1 rounded-tl-lg rounded-br-lg mx-1 text-xs cursor-pointer w-fit h-fit hover:bg-primary-dark"])}">`);
+      _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+        icon: "ri-close-circle-line",
+        class: "h-4 w-4"
+      }, null, _parent));
+      _push(`</div></div>`);
     };
   }
 });

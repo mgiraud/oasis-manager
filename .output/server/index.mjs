@@ -15,4 +15,5 @@ import 'ufo';
 import 'fs';
 import 'pathe';
 import 'url';
+import 'redirect-ssl';
 //# sourceMappingURL=index.mjs.map

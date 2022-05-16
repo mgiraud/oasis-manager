@@ -7,6 +7,7 @@ namespace App\EventSubscriber;
 use ApiPlatform\Core\EventListener\EventPriorities;
 use ApiPlatform\Core\Util\RequestAttributesExtractor;
 use App\Entity\MediaNode;
+use App\Entity\MediaObject;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
@@ -65,7 +66,9 @@ class ResolveMediaNodeBreadcrumbSubscriber implements EventSubscriberInterface
         }
 
         foreach ($objects as $object) {
-            $object->breadcrumb = $this->getBreadcrumbForMediaNode($object);
+            if ($object instanceof MediaObject) {
+                $object->breadcrumb = $this->getBreadcrumbForMediaNode($object);
+            }
         }
     }
 }

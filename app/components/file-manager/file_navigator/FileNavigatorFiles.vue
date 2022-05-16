@@ -22,7 +22,8 @@
       </div>
       <div class="flex flex-row">
         <Icon v-if="selectionEnabled" icon="ri-arrow-left-up-line" @click="selectClickHandler(item)" class="fill-primary h-8 w-8 cursor-pointer"/>
-        <Icon icon="ri-pencil-line" @click="editClickHandler(item)" class="fill-primary-dark h-8 w-8 cursor-pointer"/>
+        <Icon icon="ri-pencil-line" @click="editClickHandler(item)" class="fill-primary hover:fill-primary-dark h-8 w-8 cursor-pointer"/>
+        <Icon icon="ri-delete-bin-line" @click="removeClickHandler(item)" class="fill-secondary hover:fill-accent h-8 w-8 cursor-pointer"/>
       </div>
     </div>
   </div>
@@ -36,7 +37,8 @@ import { useMediaObjectStore } from '~/store/media-object'
 interface FileNavigatorProps {
   mediaNode?: MediaNode | null,
   selectClickHandler: Function,
-  editClickHandler: Function
+  editClickHandler: Function,
+  removeClickHandler: Function,
 }
 
 const props = withDefaults(defineProps<FileNavigatorProps>(), {

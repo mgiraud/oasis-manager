@@ -17,6 +17,7 @@
       <div class="flex flex-row h-16 items-center gap-x-2">
         <h2>Dossiers</h2>
         <Icon icon="ri-folder-add-line" class="fill-primary h-8 w-8 cursor-pointer" @click="folderDialog = true"/>
+        <Icon icon="ri-delete-bin-line" class="fill-secondary hover:fill-accent h-8 w-8 cursor-pointer" @click="removeFolderClickHandler(currentMediaNode)"/>
       </div>
       <FileNavigatorFolders
         v-if="currentMediaNode.children.length > 0"
@@ -35,6 +36,7 @@
         <FileNavigatorFiles
           :select-click-handler="props.selectClickHandler"
           :edit-click-handler="props.editClickHandler"
+          :remove-click-handler="props.removeClickHandler"
           :media-node="currentMediaNode"
         />
       </div>
@@ -76,7 +78,9 @@ import Icon from '~/components/util/Icon.vue'
 
 interface FileNavigatorProps {
   editClickHandler: Function,
-  selectClickHandler: Function
+  selectClickHandler: Function,
+  removeClickHandler: Function,
+  removeFolderClickHandler: Function,
   modelValue: MediaNode | null
   rootName?: string | null
 }
@@ -116,11 +120,15 @@ const handleRootClick = () => {
   closeDetailPanel && closeDetailPanel()
 }
 
-const refresh = async () => {
-  if (!currentMediaNode.value) {
+const refresh = async (mediaNode ?: MediaNode | null) => {
+  if (!currentMediaNode.value || mediaNode === null) {
     getRoots()
   } else {
-    await mediaNodeStore.load(currentMediaNode.value.id)
+    if (!!mediaNode) {
+      await mediaNodeStore.load(mediaNode.id)
+    } else {
+      await mediaNodeStore.load(currentMediaNode.value.id)
+    }
     currentMediaNode.value = mediaNodeStore[CRUD_MODE.EDITION].retrieved as MediaNode
   }
 }

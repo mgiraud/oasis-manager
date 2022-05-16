@@ -142,6 +142,7 @@ class Page
     /**
      * @ORM\ManyToOne(targetEntity=MediaNode::class)
      * @Groups({"page:read", "page:write", "page:read:edition"})
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $mediaNode;
 

@@ -100,6 +100,7 @@ class BlogArticle
     /**
      * @ORM\ManyToOne(targetEntity=MediaNode::class)
      * @Groups({"blog_article:read", "blog_article:write", "blog_article:read:edition"})
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $mediaNode;
 

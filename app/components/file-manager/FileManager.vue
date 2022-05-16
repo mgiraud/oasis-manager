@@ -12,6 +12,8 @@
         ref="fileNavigator"
         :select-click-handler="selectMediaObject"
         :edit-click-handler="editMediaObject"
+        :remove-click-handler="removeMediaObject"
+        :remove-folder-click-handler="removeFolderClickHandler"
         :show-selection="showSelection"
         v-model="currentMediaNode"
       />
@@ -25,8 +27,9 @@
 
 <script setup lang="ts">
 import { Ref } from '@vue/reactivity'
-import { MediaNode } from '~/store/media-node'
+import { MediaNode, useMediaNodeStore } from '~/store/media-node'
 import { MediaObject, useMediaObjectStore } from '~/store/media-object'
+import { useNotificationStore } from '~/store/notification'
 import FileSelection from './file_selection/FileSelection.vue'
 import FileUploader from './file_uploader/FileUploader.vue'
 import FileNavigator from './file_navigator/FileNavigator.vue'
@@ -49,7 +52,9 @@ const props = withDefaults(defineProps<FileManagerProps>(), {
   showSelection: true
 })
 
+const notificationStore = useNotificationStore()
 const mediaObjectStore = useMediaObjectStore()
+const mediaNodeStore = useMediaNodeStore()
 const detailsPanel = ref(false)
 const selectedMediaObject = ref(null) as Ref<null | MediaObject>
 const links = ref([]) as Ref<Link[]>
@@ -130,6 +135,27 @@ const handleUpload = (files: FileList) => {
 const editMediaObject = (mediaObject: MediaObject) => {
   detailsPanel.value = true
   selectedMediaObject.value = mediaObject
+}
+
+const removeMediaObject = async (mediaObject: MediaObject) => {
+  try {
+    await mediaObjectStore.remove(mediaObject.uniqueId)
+    fileNavigator.value?.refresh()
+    notificationStore.showMessage('Media correctement supprimé')
+  } catch (e) {
+    notificationStore.showError('Erreur dans la suppression du média')
+  }
+}
+
+const removeFolderClickHandler = async (mediaNode: MediaNode) => {
+  try {
+    await mediaNodeStore.remove(mediaNode.id)
+    currentMediaNode.value = null
+    fileNavigator.value?.refresh(currentMediaNode.value)
+    notificationStore.showMessage('Dossier correctement supprimé')
+  } catch (e) {
+    notificationStore.showError('Erreur dans la suppression du dossier')
+  }
 }
 
 defineExpose({

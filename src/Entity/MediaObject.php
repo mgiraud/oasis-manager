@@ -56,7 +56,8 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *     },
  *     itemOperations={
  *         "get",
- *         "put"={"security"="is_granted('USER_CAN_EDIT_MEDIA_OBJECTS')"}
+ *         "put"={"security"="is_granted('USER_CAN_EDIT_MEDIA_OBJECTS')"},
+ *         "delete"={"security"="is_granted('USER_CAN_EDIT_MEDIA_OBJECTS')"}
  *     }
  * )
  * @Vich\Uploadable

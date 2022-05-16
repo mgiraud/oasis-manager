@@ -4474,6 +4474,49 @@ _sfc_main$1n.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/util/Editor/EditorBtn.vue");
   return _sfc_setup$1n ? _sfc_setup$1n(props, ctx) : void 0;
 };
+const useNotificationStore = defineStore("notification", {
+  state: () => {
+    return {
+      show: false,
+      color: "accent",
+      text: "An error occurred",
+      subText: "",
+      timeout: 5e3
+    };
+  },
+  actions: {
+    setShow(show) {
+      this.show = show;
+    },
+    setColor(color) {
+      this.color = color;
+    },
+    setText(text) {
+      this.text = text;
+    },
+    setSubText(subText) {
+      this.subText = subText;
+    },
+    setTimeout(timeout) {
+      this.timeout = timeout;
+    },
+    cleanState() {
+      const that = this;
+      setTimeout(() => {
+        that.setShow(false);
+      }, this.timeout);
+    },
+    showError(error) {
+      this.showMessage(error, "accent");
+    },
+    showMessage(message, color = "primary") {
+      this.setShow(true);
+      this.setColor(color);
+      this.setText(message);
+      this.cleanState();
+    }
+  }
+});
 const _sfc_main$1m = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __ssrInlineRender: true,
   props: {
@@ -4600,7 +4643,8 @@ const _sfc_main$1i = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   props: {
     mediaNode: { default: null },
     selectClickHandler: null,
-    editClickHandler: null
+    editClickHandler: null,
+    removeClickHandler: null
   },
   setup(__props) {
     const props = __props;
@@ -4645,7 +4689,11 @@ const _sfc_main$1i = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         }
         _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
           icon: "ri-pencil-line",
-          class: "fill-primary-dark h-8 w-8 cursor-pointer"
+          class: "fill-primary hover:fill-primary-dark h-8 w-8 cursor-pointer"
+        }, null, _parent));
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+          icon: "ri-delete-bin-line",
+          class: "fill-secondary hover:fill-accent h-8 w-8 cursor-pointer"
         }, null, _parent));
         _push(`</div></div>`);
       });
@@ -5018,6 +5066,8 @@ const _sfc_main$1g = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   props: {
     editClickHandler: null,
     selectClickHandler: null,
+    removeClickHandler: null,
+    removeFolderClickHandler: null,
     modelValue: null,
     rootName: { default: null }
   },
@@ -5051,11 +5101,15 @@ const _sfc_main$1g = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       currentMediaNode.value = null;
       closeDetailPanel && closeDetailPanel();
     };
-    const refresh = async () => {
-      if (!currentMediaNode.value) {
+    const refresh = async (mediaNode) => {
+      if (!currentMediaNode.value || mediaNode === null) {
         getRoots();
       } else {
-        await mediaNodeStore.load(currentMediaNode.value.id);
+        if (!!mediaNode) {
+          await mediaNodeStore.load(mediaNode.id);
+        } else {
+          await mediaNodeStore.load(currentMediaNode.value.id);
+        }
         currentMediaNode.value = mediaNodeStore[CRUD_MODE.EDITION].retrieved;
       }
     };
@@ -5076,6 +5130,10 @@ const _sfc_main$1g = /* @__PURE__ */ vue_cjs_prod.defineComponent({
           icon: "ri-folder-add-line",
           class: "fill-primary h-8 w-8 cursor-pointer"
         }, null, _parent));
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+          icon: "ri-delete-bin-line",
+          class: "fill-secondary hover:fill-accent h-8 w-8 cursor-pointer"
+        }, null, _parent));
         _push(`</div>`);
         if (vue_cjs_prod.unref(currentMediaNode).children.length > 0) {
           _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1j, {
@@ -5094,6 +5152,7 @@ const _sfc_main$1g = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1i, {
           "select-click-handler": props.selectClickHandler,
           "edit-click-handler": props.editClickHandler,
+          "remove-click-handler": props.removeClickHandler,
           "media-node": vue_cjs_prod.unref(currentMediaNode)
         }, null, _parent));
         _push(`</div></div>`);
@@ -5130,49 +5189,6 @@ _sfc_main$1g.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/file-manager/file_navigator/FileNavigator.vue");
   return _sfc_setup$1g ? _sfc_setup$1g(props, ctx) : void 0;
 };
-const useNotificationStore = defineStore("notification", {
-  state: () => {
-    return {
-      show: false,
-      color: "accent",
-      text: "An error occurred",
-      subText: "",
-      timeout: 5e3
-    };
-  },
-  actions: {
-    setShow(show) {
-      this.show = show;
-    },
-    setColor(color) {
-      this.color = color;
-    },
-    setText(text) {
-      this.text = text;
-    },
-    setSubText(subText) {
-      this.subText = subText;
-    },
-    setTimeout(timeout) {
-      this.timeout = timeout;
-    },
-    cleanState() {
-      const that = this;
-      setTimeout(() => {
-        that.setShow(false);
-      }, this.timeout);
-    },
-    showError(error) {
-      this.showMessage(error, "accent");
-    },
-    showMessage(message, color = "primary") {
-      this.setShow(true);
-      this.setColor(color);
-      this.setText(message);
-      this.cleanState();
-    }
-  }
-});
 const _sfc_main$1f = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __ssrInlineRender: true,
   props: {
@@ -5409,7 +5425,9 @@ const _sfc_main$1b = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   },
   setup(__props, { expose }) {
     const props = __props;
+    const notificationStore = useNotificationStore();
     const mediaObjectStore = useMediaObjectStore();
+    const mediaNodeStore = useMediaNodeStore();
     const detailsPanel = vue_cjs_prod.ref(false);
     const selectedMediaObject = vue_cjs_prod.ref(null);
     const links = vue_cjs_prod.ref([]);
@@ -5473,6 +5491,27 @@ const _sfc_main$1b = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       detailsPanel.value = true;
       selectedMediaObject.value = mediaObject;
     };
+    const removeMediaObject = async (mediaObject) => {
+      var _a2;
+      try {
+        await mediaObjectStore.remove(mediaObject.uniqueId);
+        (_a2 = fileNavigator.value) == null ? void 0 : _a2.refresh();
+        notificationStore.showMessage("Media correctement supprim\xE9");
+      } catch (e) {
+        notificationStore.showError("Erreur dans la suppression du m\xE9dia");
+      }
+    };
+    const removeFolderClickHandler = async (mediaNode) => {
+      var _a2;
+      try {
+        await mediaNodeStore.remove(mediaNode.id);
+        currentMediaNode.value = null;
+        (_a2 = fileNavigator.value) == null ? void 0 : _a2.refresh(currentMediaNode.value);
+        notificationStore.showMessage("Dossier correctement supprim\xE9");
+      } catch (e) {
+        notificationStore.showError("Erreur dans la suppression du dossier");
+      }
+    };
     expose({
       links,
       thumbnails,
@@ -5495,6 +5534,8 @@ const _sfc_main$1b = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         ref: fileNavigator,
         "select-click-handler": selectMediaObject,
         "edit-click-handler": editMediaObject,
+        "remove-click-handler": removeMediaObject,
+        "remove-folder-click-handler": removeFolderClickHandler,
         "show-selection": __props.showSelection,
         modelValue: vue_cjs_prod.unref(currentMediaNode),
         "onUpdate:modelValue": ($event) => vue_cjs_prod.isRef(currentMediaNode) ? currentMediaNode.value = $event : null

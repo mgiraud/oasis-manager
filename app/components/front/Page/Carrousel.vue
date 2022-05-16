@@ -3,7 +3,7 @@
 <!--    <div @click="previous" class="cursor-pointer grow-0 w-0 flex z-10 items-center">-->
 <!--      <div class="w-fit translate-x-1/2"><Icon icon="ri-arrow-left-s-fill" class="fill-white bg-primary rounded-full h-12 w-12 shadow-xs"/></div>-->
 <!--    </div>-->
-    <div class="flex flex-row flex-nowrap h-96 flex-auto"
+    <div class="flex flex-row flex-nowrap h-96 flex-auto bg-primary"
          :class="{
             'translate-x-0': !showTransition,
             'transition ease-in duration-700 -translate-x-full': showTransition
@@ -11,10 +11,10 @@
          @transitionend="updateOrder"
     >
       <div v-for="imageObject in mediaNode.mediaObjects"
-           class="w-full shrink-0 flex items-center justify-center"
+           class="w-full shrink-0 flex items-center justify-center h-96 group"
            :class="`order-${order(imageObject)}`"
       >
-        <img :src="imageObject.contentUrl" class="w-auto max-h-96 object-scale-down"/>
+        <img :src="imageObject.contentUrl" class="w-auto object-cover"/>
       </div>
     </div>
     <div @click="next" class="cursor-pointer grow-0 w-0 flex z-10 items-center" v-if="mediaNode.mediaObjects.length > 1">
@@ -33,7 +33,6 @@ const props = defineProps<{
   mediaNode: MediaNode
 }>()
 const indexToOrder: Ref<{[index: number]: number }>  = ref({})
-const mediaObjectStore = useMediaObjectStore();
 props.mediaNode.mediaObjects.forEach((mediaObject: MediaObject, index: number) => {
   mediaObject.index = index
   indexToOrder.value[index] = index + 1
@@ -55,6 +54,9 @@ const previous = () => {
 }
 
 const updateOrder = () => {
+  if (showTransition.value !== 1) {
+    return
+  }
   if (current.value === (nbItems - 1)) {
     current.value = 0
   } else {

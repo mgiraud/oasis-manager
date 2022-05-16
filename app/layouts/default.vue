@@ -62,6 +62,9 @@
   h3 {
     @apply text-2xl font-marker text-primary-dark;
   }
+  p {
+    @apply mt-1 mb-1
+  }
 }
 </style>
 

@@ -29,7 +29,7 @@
       </p>
     </div>
     <div class="flex-auto" v-if="currentMediaNode && currentMediaNode.mediaObjects.length > 0">
-      <div>
+      <div class="py-2">
         <h2>Fichiers</h2>
       </div>
       <div>

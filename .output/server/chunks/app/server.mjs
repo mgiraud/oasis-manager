@@ -3727,28 +3727,29 @@ const _sfc_main$1u = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   setup(__props) {
     const props = __props;
     const indexToOrder = vue_cjs_prod.ref({});
-    props.mediaNode.mediaObjects.forEach((mediaObject, index2) => {
+    const mediaObjects = vue_cjs_prod.computed(() => props.mediaNode.mediaObjects.filter((mediaObject) => mediaObject.original === null).map((mediaObject, index2) => {
       mediaObject.index = index2;
       indexToOrder.value[index2] = index2 + 1;
-    });
+      return mediaObject;
+    }));
     vue_cjs_prod.ref(0);
-    props.mediaNode.mediaObjects.length;
+    mediaObjects.value.length;
     const showTransition = vue_cjs_prod.ref(0);
     const order = vue_cjs_prod.computed(() => (mediaObject) => {
       var _a2;
       return indexToOrder.value[(_a2 = mediaObject.index) != null ? _a2 : 0];
     });
     return (_ctx, _push, _parent, _attrs) => {
-      if (__props.mediaNode.mediaObjects.length > 0) {
+      if (vue_cjs_prod.unref(mediaObjects).length > 0) {
         _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "overflow-hidden hidden md:flex flex-no-wrap flex-row bg-white" }, _attrs))}><div class="${serverRenderer.exports.ssrRenderClass([{
           "translate-x-0": !showTransition.value,
           "transition ease-in duration-700 -translate-x-full": showTransition.value
         }, "flex flex-row flex-nowrap h-96 flex-auto bg-primary"])}"><!--[-->`);
-        serverRenderer.exports.ssrRenderList(__props.mediaNode.mediaObjects, (imageObject) => {
+        serverRenderer.exports.ssrRenderList(vue_cjs_prod.unref(mediaObjects), (imageObject) => {
           _push(`<div class="${serverRenderer.exports.ssrRenderClass([`order-${vue_cjs_prod.unref(order)(imageObject)}`, "w-full shrink-0 flex items-center justify-center h-96 group"])}"><img${serverRenderer.exports.ssrRenderAttr("src", imageObject.contentUrl)} class="w-auto object-cover"></div>`);
         });
         _push(`<!--]--></div>`);
-        if (__props.mediaNode.mediaObjects.length > 1) {
+        if (vue_cjs_prod.unref(mediaObjects).length > 1) {
           _push(`<div class="cursor-pointer grow-0 w-0 flex z-10 items-center"><div class="w-fit -translate-x-[150%]">`);
           _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
             icon: "ri-arrow-right-s-fill",
@@ -4472,6 +4473,16 @@ const useMediaObjectStore = defineStore("media_objects", {
     return __spreadValues({
       resource: "/media_objects"
     }, crudState);
+  },
+  actions: {
+    async generateThumbnails(mediaObject) {
+      return await this.$nuxt.$apiFetch(`${this.resource}/${mediaObject.uniqueId}/thumbnail`, {
+        method: "POST",
+        body: {}
+      }).catch(async (e) => {
+        await this.handleError(e);
+      });
+    }
   }
 });
 const useNotificationStore = defineStore("notification", {
@@ -4653,7 +4664,8 @@ const _sfc_main$1i = /* @__PURE__ */ vue_cjs_prod.defineComponent({
     const loadObjects = () => {
       if (props.mediaNode) {
         mediaObjectStore.fetchAll({
-          mediaNodes: props.mediaNode.id
+          mediaNodes: props.mediaNode.id,
+          "exists[original]": false
         });
       }
     };
@@ -4664,7 +4676,7 @@ const _sfc_main$1i = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       loadObjects();
     });
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex flex-row" }, _attrs))}><!--[-->`);
+      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex flex-row flex-wrap gap-1" }, _attrs))}><!--[-->`);
       serverRenderer.exports.ssrRenderList(vue_cjs_prod.unref(mediaObjectStore).list, (item) => {
         _push(`<div class="flex flex-col"><div>`);
         if (item.isImage) {
@@ -4672,18 +4684,82 @@ const _sfc_main$1i = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         } else {
           _push(`<div class="px-3 py-3 border border-primary">${serverRenderer.exports.ssrInterpolate(item.filePath)}</div>`);
         }
-        _push(`</div><div>`);
+        _push(`</div><div class="bg-gray-100 p-1">`);
         if (item.customName) {
-          _push(`<span>${serverRenderer.exports.ssrInterpolate(item.customName)}</span>`);
+          _push(`<small>${serverRenderer.exports.ssrInterpolate(item.customName)}</small>`);
         } else {
           _push(`<small>Titre non d\xE9fini</small>`);
         }
-        _push(`</div><div class="flex flex-row">`);
+        _push(`</div><div class="flex flex-row bg-gray-100 pb-1">`);
         if (vue_cjs_prod.unref(selectionEnabled)) {
-          _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
-            icon: "ri-arrow-left-up-line",
-            class: "fill-primary h-8 w-8 cursor-pointer"
-          }, null, _parent));
+          _push(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(pe), { class: "relative" }, {
+            default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
+              if (_push2) {
+                _push2(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(xe), { class: "rounded-lg text-sm text-white bg-primary hover:bg-primary-dark h-fit w-fit cursor-pointer py-2 px-3 uppercase" }, {
+                  default: vue_cjs_prod.withCtx((_2, _push3, _parent3, _scopeId2) => {
+                    if (_push3) {
+                      _push3(` Ajouter... `);
+                    } else {
+                      return [
+                        vue_cjs_prod.createTextVNode(" Ajouter... ")
+                      ];
+                    }
+                  }),
+                  _: 2
+                }, _parent2, _scopeId));
+                _push2(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(we), { class: "absolute z-10 bg-primary bottom-10 left-2 text-white rounded-lg" }, {
+                  default: vue_cjs_prod.withCtx((_2, _push3, _parent3, _scopeId2) => {
+                    if (_push3) {
+                      _push3(`<div class="w-full cursor-pointer hover:bg-primary-dark px-3 py-2"${_scopeId2}>Original</div><!--[-->`);
+                      serverRenderer.exports.ssrRenderList(item.thumbnails, (thumbnail) => {
+                        _push3(`<div class="w-full cursor-pointer hover:bg-primary-dark px-3 py-2"${_scopeId2}>${serverRenderer.exports.ssrInterpolate(thumbnail.size)}</div>`);
+                      });
+                      _push3(`<!--]-->`);
+                    } else {
+                      return [
+                        vue_cjs_prod.createVNode("div", {
+                          class: "w-full cursor-pointer hover:bg-primary-dark px-3 py-2",
+                          onClick: ($event) => __props.selectClickHandler(item)
+                        }, "Original", 8, ["onClick"]),
+                        (vue_cjs_prod.openBlock(true), vue_cjs_prod.createBlock(vue_cjs_prod.Fragment, null, vue_cjs_prod.renderList(item.thumbnails, (thumbnail) => {
+                          return vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock("div", {
+                            class: "w-full cursor-pointer hover:bg-primary-dark px-3 py-2",
+                            onClick: ($event) => __props.selectClickHandler(thumbnail)
+                          }, vue_cjs_prod.toDisplayString(thumbnail.size), 9, ["onClick"]);
+                        }), 256))
+                      ];
+                    }
+                  }),
+                  _: 2
+                }, _parent2, _scopeId));
+              } else {
+                return [
+                  vue_cjs_prod.createVNode(vue_cjs_prod.unref(xe), { class: "rounded-lg text-sm text-white bg-primary hover:bg-primary-dark h-fit w-fit cursor-pointer py-2 px-3 uppercase" }, {
+                    default: vue_cjs_prod.withCtx(() => [
+                      vue_cjs_prod.createTextVNode(" Ajouter... ")
+                    ]),
+                    _: 1
+                  }),
+                  vue_cjs_prod.createVNode(vue_cjs_prod.unref(we), { class: "absolute z-10 bg-primary bottom-10 left-2 text-white rounded-lg" }, {
+                    default: vue_cjs_prod.withCtx(() => [
+                      vue_cjs_prod.createVNode("div", {
+                        class: "w-full cursor-pointer hover:bg-primary-dark px-3 py-2",
+                        onClick: ($event) => __props.selectClickHandler(item)
+                      }, "Original", 8, ["onClick"]),
+                      (vue_cjs_prod.openBlock(true), vue_cjs_prod.createBlock(vue_cjs_prod.Fragment, null, vue_cjs_prod.renderList(item.thumbnails, (thumbnail) => {
+                        return vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock("div", {
+                          class: "w-full cursor-pointer hover:bg-primary-dark px-3 py-2",
+                          onClick: ($event) => __props.selectClickHandler(thumbnail)
+                        }, vue_cjs_prod.toDisplayString(thumbnail.size), 9, ["onClick"]);
+                      }), 256))
+                    ]),
+                    _: 2
+                  }, 1024)
+                ];
+              }
+            }),
+            _: 2
+          }, _parent));
         } else {
           _push(`<!---->`);
         }
@@ -5148,7 +5224,7 @@ const _sfc_main$1g = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         _push(`<!---->`);
       }
       if (vue_cjs_prod.unref(currentMediaNode) && vue_cjs_prod.unref(currentMediaNode).mediaObjects.length > 0) {
-        _push(`<div class="flex-auto"><div><h2>Fichiers</h2></div><div>`);
+        _push(`<div class="flex-auto"><div class="py-2"><h2>Fichiers</h2></div><div>`);
         _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1i, {
           "select-click-handler": props.selectClickHandler,
           "edit-click-handler": props.editClickHandler,
@@ -5372,13 +5448,14 @@ _sfc_main$1d.setup = (props, ctx) => {
 const _sfc_main$1c = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __ssrInlineRender: true,
   props: {
-    mediaObject: null
+    mediaObject: null,
+    removeClickHandler: null
   },
   async setup(__props) {
     let __temp, __restore;
     const props = __props;
     vue_cjs_prod.inject("closeDetailPanel");
-    const item = __spreadValues({}, props.mediaObject);
+    const item = vue_cjs_prod.ref(__spreadValues({}, props.mediaObject));
     const mediaNodeStore = useMediaNodeStore();
     const mediaObjectStore = useMediaObjectStore();
     const notificationStore = useNotificationStore();
@@ -5386,13 +5463,17 @@ const _sfc_main$1c = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       await mediaNodeStore.fetchTree();
     })), await __temp, __restore();
     const onSendForm = async (data) => {
-      await mediaObjectStore.update(data.uniqueId, data);
-    };
-    vue_cjs_prod.watch(() => mediaObjectStore[CRUD_MODE.EDITION].edited, (edited) => {
-      if (!edited) {
-        return;
+      try {
+        await mediaObjectStore.update(data.uniqueId, data);
+        notificationStore.showMessage("Fichier mis \xE0 jour");
+      } catch (e) {
+        notificationStore.showError("Probl\xE8me lors de la mise \xE0 jour du fichier");
       }
-      notificationStore.showMessage("Fichier mis \xE0 jour");
+    };
+    vue_cjs_prod.watch(() => props.mediaObject, (mediaObject) => {
+      if (mediaObject) {
+        item.value = __spreadValues({}, mediaObject);
+      }
     });
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex flex-col" }, _attrs))}><div class="flex flex-row"><h2 class="mb-3">D\xE9tail du fichier</h2>`);
@@ -5403,12 +5484,27 @@ const _sfc_main$1c = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       _push(`</div><div>`);
       _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1d, {
         tree: vue_cjs_prod.unref(mediaNodeStore).tree,
-        mediaObject: item,
-        "onUpdate:mediaObject": ($event) => item = $event,
+        mediaObject: item.value,
+        "onUpdate:mediaObject": ($event) => item.value = $event,
         "handle-submit": onSendForm,
         errors: vue_cjs_prod.unref(mediaObjectStore)[vue_cjs_prod.unref(CRUD_MODE).EDITION].violations
       }, null, _parent));
-      _push(`</div></div>`);
+      _push(`</div><div class="flex flex-col px-2"><h2 class="py-2">Miniatures</h2>`);
+      if (item.value.thumbnails.length > 0) {
+        _push(`<!--[-->`);
+        serverRenderer.exports.ssrRenderList(item.value.thumbnails, (thumbnail) => {
+          _push(`<div class="flex flex-col"><img${serverRenderer.exports.ssrRenderAttr("src", thumbnail.contentUrl)}${serverRenderer.exports.ssrRenderAttr("alt", thumbnail.customName || thumbnail.uniqueId)} class="w-fit h-auto object-scale-down">`);
+          _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+            icon: "ri-delete-bin-line",
+            class: "fill-secondary hover:fill-accent h-8 w-8 cursor-pointer"
+          }, null, _parent));
+          _push(`</div>`);
+        });
+        _push(`<!--]-->`);
+      } else {
+        _push(`<div><p>Aucune miniature</p></div>`);
+      }
+      _push(`<div class="py-3 px-4 bg-primary text-white shadow-md uppercase hover:bg-primary-dark cursor-pointer text-center">G\xE9n\xE9rer les miniatures</div></div></div>`);
     };
   }
 });
@@ -5428,14 +5524,12 @@ const _sfc_main$1b = /* @__PURE__ */ vue_cjs_prod.defineComponent({
     const notificationStore = useNotificationStore();
     const mediaObjectStore = useMediaObjectStore();
     const mediaNodeStore = useMediaNodeStore();
-    const detailsPanel = vue_cjs_prod.ref(false);
     const selectedMediaObject = vue_cjs_prod.ref(null);
     const links = vue_cjs_prod.ref([]);
     const thumbnails = vue_cjs_prod.ref([]);
     const currentMediaNode = vue_cjs_prod.ref(null);
     const fileNavigator = vue_cjs_prod.ref(null);
     vue_cjs_prod.provide("closeDetailPanel", () => {
-      detailsPanel.value = false;
       selectedMediaObject.value = null;
     });
     vue_cjs_prod.provide("selectionEnabled", props.showSelection);
@@ -5451,8 +5545,10 @@ const _sfc_main$1b = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       }
     };
     const selectImage = (res) => {
+      var _a2;
       thumbnails.value.push({
-        src: res.contentUrl
+        src: res.contentUrl,
+        alt: (_a2 = res.customName) != null ? _a2 : res.uniqueId
       });
     };
     const selectLink = (res) => {
@@ -5488,14 +5584,14 @@ const _sfc_main$1b = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       }
     };
     const editMediaObject = (mediaObject) => {
-      detailsPanel.value = true;
       selectedMediaObject.value = mediaObject;
     };
-    const removeMediaObject = async (mediaObject) => {
+    const removeMediaObject = async (mediaObject, isThumbnail = false) => {
       var _a2;
       try {
         await mediaObjectStore.remove(mediaObject.uniqueId);
         (_a2 = fileNavigator.value) == null ? void 0 : _a2.refresh();
+        selectedMediaObject.value = null;
         notificationStore.showMessage("Media correctement supprim\xE9");
       } catch (e) {
         notificationStore.showError("Erreur dans la suppression du m\xE9dia");
@@ -5518,17 +5614,7 @@ const _sfc_main$1b = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       reset
     });
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex flex-row" }, _attrs))}><div class="flex flex-col flex-auto">`);
-      if (__props.showSelection) {
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1m, {
-          thumbnails: vue_cjs_prod.unref(thumbnails),
-          links: vue_cjs_prod.unref(links),
-          "remove-link": removeLink,
-          "remove-thumbnail": removeThumbnail
-        }, null, _parent));
-      } else {
-        _push(`<!---->`);
-      }
+      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex flex-row" }, _attrs))}><div class="flex flex-col flex-auto w-2/3">`);
       _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1g, {
         ref_key: "fileNavigator",
         ref: fileNavigator,
@@ -5545,10 +5631,23 @@ const _sfc_main$1b = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       } else {
         _push(`<!---->`);
       }
+      if (__props.showSelection) {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1m, {
+          thumbnails: vue_cjs_prod.unref(thumbnails),
+          links: vue_cjs_prod.unref(links),
+          "remove-link": removeLink,
+          "remove-thumbnail": removeThumbnail
+        }, null, _parent));
+      } else {
+        _push(`<!---->`);
+      }
       _push(`</div>`);
-      if (detailsPanel.value) {
+      if (vue_cjs_prod.unref(selectedMediaObject)) {
         _push(`<div class="flex w-1/3">`);
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1c, { "media-object": vue_cjs_prod.unref(selectedMediaObject) }, null, _parent));
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1c, {
+          "media-object": vue_cjs_prod.unref(selectedMediaObject),
+          "remove-click-handler": removeMediaObject
+        }, null, _parent));
         _push(`</div>`);
       } else {
         _push(`<!---->`);
@@ -5576,11 +5675,11 @@ const _sfc_main$1a = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       var _a2, _b;
       (_a2 = fileManager.value) == null ? void 0 : _a2.thumbnails.forEach((thumbnail) => {
         var _a3;
-        (_a3 = props.editor) == null ? void 0 : _a3.chain().focus().setImage({ src: thumbnail.src }).run();
+        (_a3 = props.editor) == null ? void 0 : _a3.chain().focus().setImage({ src: thumbnail.src, alt: thumbnail.alt }).run();
       });
       (_b = fileManager.value) == null ? void 0 : _b.links.forEach((link) => {
         var _a3, _b2, _c;
-        const node = (_a3 = props.editor) == null ? void 0 : _a3.schema.text(link.name, [props == null ? void 0 : props.editor.schema.marks.link.create({ href: link.src })]);
+        const node = (_a3 = props.editor) == null ? void 0 : _a3.schema.text(link.name, [props == null ? void 0 : props.editor.schema.marks.link.create({ href: link.src, title: link.name })]);
         (_c = props.editor) == null ? void 0 : _c.view.dispatch((_b2 = props.editor) == null ? void 0 : _b2.state.tr.replaceSelectionWith(node, false));
       });
       dialog.value = false;
@@ -5720,7 +5819,7 @@ const _sfc_main$1a = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                                 ref_key: "fileManager",
                                 ref: fileManager
                               }, null, _parent5, _scopeId4));
-                              _push5(`<button class="bg-primary"${_scopeId4}> Ins\xE9rer </button>`);
+                              _push5(`<div class="w-full h-1 m-2 border-b"${_scopeId4}></div><button class="bg-primary p-3 text-white uppercase"${_scopeId4}> Ins\xE9rer </button>`);
                             } else {
                               return [
                                 vue_cjs_prod.createVNode(vue_cjs_prod.unref(Ae), {
@@ -5736,8 +5835,9 @@ const _sfc_main$1a = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                                   ref_key: "fileManager",
                                   ref: fileManager
                                 }, null, 512),
+                                vue_cjs_prod.createVNode("div", { class: "w-full h-1 m-2 border-b" }),
                                 vue_cjs_prod.createVNode("button", {
-                                  class: "bg-primary",
+                                  class: "bg-primary p-3 text-white uppercase",
                                   onClick: vue_cjs_prod.withModifiers(injectFilesAndCloseDialog, ["prevent"])
                                 }, " Ins\xE9rer ", 8, ["onClick"])
                               ];
@@ -5762,8 +5862,9 @@ const _sfc_main$1a = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                                 ref_key: "fileManager",
                                 ref: fileManager
                               }, null, 512),
+                              vue_cjs_prod.createVNode("div", { class: "w-full h-1 m-2 border-b" }),
                               vue_cjs_prod.createVNode("button", {
-                                class: "bg-primary",
+                                class: "bg-primary p-3 text-white uppercase",
                                 onClick: vue_cjs_prod.withModifiers(injectFilesAndCloseDialog, ["prevent"])
                               }, " Ins\xE9rer ", 8, ["onClick"])
                             ]),
@@ -5818,8 +5919,9 @@ const _sfc_main$1a = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                                   ref_key: "fileManager",
                                   ref: fileManager
                                 }, null, 512),
+                                vue_cjs_prod.createVNode("div", { class: "w-full h-1 m-2 border-b" }),
                                 vue_cjs_prod.createVNode("button", {
-                                  class: "bg-primary",
+                                  class: "bg-primary p-3 text-white uppercase",
                                   onClick: vue_cjs_prod.withModifiers(injectFilesAndCloseDialog, ["prevent"])
                                 }, " Ins\xE9rer ", 8, ["onClick"])
                               ]),
@@ -5884,8 +5986,9 @@ const _sfc_main$1a = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                                 ref_key: "fileManager",
                                 ref: fileManager
                               }, null, 512),
+                              vue_cjs_prod.createVNode("div", { class: "w-full h-1 m-2 border-b" }),
                               vue_cjs_prod.createVNode("button", {
-                                class: "bg-primary",
+                                class: "bg-primary p-3 text-white uppercase",
                                 onClick: vue_cjs_prod.withModifiers(injectFilesAndCloseDialog, ["prevent"])
                               }, " Ins\xE9rer ", 8, ["onClick"])
                             ]),
@@ -9610,7 +9713,7 @@ const _sfc_main$P = /* @__PURE__ */ vue_cjs_prod.defineComponent({
     const schema = {
       title: "required|min:3|max:60",
       url: "required|min:3|max:60",
-      content: "required|min:10|max:1000"
+      content: "required|min:10|max:20000"
     };
     return (_ctx, _push, _parent, _attrs) => {
       const _component_ClientOnly = __nuxt_component_0$1;
@@ -10122,13 +10225,14 @@ const _sfc_main$J = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __ssrInlineRender: true,
   props: {
     mediaObject: null,
+    size: { default: "original" },
     maxHeight: null
   },
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
       if (__props.mediaObject) {
         _push(`<img${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({
-          src: __props.mediaObject.contentUrl,
+          src: `${__props.mediaObject.contentUrl}?size=${__props.size}`,
           alt: __props.mediaObject.customName,
           class: "h-full w-full object-contain rounded-sm"
         }, _attrs))}>`);
@@ -10203,7 +10307,8 @@ const _sfc_main$H = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         _push(`<div class="w-full flex flex-col py-2"><div class="flex flex-row"><div class="${serverRenderer.exports.ssrRenderClass([{ "order-1": i % 2 === 1 }, "px-3 w-40"])}">`);
         _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$J, {
           "media-object": vue_cjs_prod.unref(blogArticleStore).getRandomImage(article),
-          class: "h-20 before:text-[6px]"
+          class: "h-20 before:text-[6px]",
+          size: "sm"
         }, null, _parent));
         _push(`</div><div class="${serverRenderer.exports.ssrRenderClass([{ "text-right": i % 2 === 1 }, "flex flex-col w-full justify-center"])}"><p class="w-full"><b class="text-lg">${serverRenderer.exports.ssrInterpolate(article.title)}</b> | ${serverRenderer.exports.ssrInterpolate(article.preview)}</p><div class="${serverRenderer.exports.ssrRenderClass([{ "self-end": i % 2 === 1 }, "pt-2 text-primary-dark fill-primary-dark flex uppercase text-xs items-center"])}"><!--[-->`);
         serverRenderer.exports.ssrRenderList(article.tags, (tag, i2) => {
@@ -10500,7 +10605,8 @@ const _sfc_main$F = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$J, {
         "media-object": vue_cjs_prod.unref(blogArticleStore).getRandomImage(__props.article),
         class: "max-h-44 object-contain",
-        "max-height": "44"
+        "max-height": "44",
+        size: "md"
       }, null, _parent));
       _push(`</div><div class="text-xs mt-2"><div class="text-secondary">${serverRenderer.exports.ssrInterpolate(vue_cjs_prod.unref(capitalize2)(props.article.createdBy.nickname))}</div></div><div><time${serverRenderer.exports.ssrRenderAttr("datetime", __props.article.createdAt)} class="text-xs uppercase tracking-wider">${serverRenderer.exports.ssrInterpolate(vue_cjs_prod.unref(formatDate)(__props.article.createdAt))}</time></div><header class="py-4"><h2>${serverRenderer.exports.ssrInterpolate(__props.article.title)}</h2></header><section class="max-h-64 text-ellipsis overflow-hidden"><p>${serverRenderer.exports.ssrInterpolate(__props.article.preview)}</p></section><footer><div class="flex flex-wrap mt-4"><!--[-->`);
       serverRenderer.exports.ssrRenderList(__props.article.tags, (tag, i) => {
@@ -13399,7 +13505,8 @@ const _sfc_main$b = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         _push(`<div class="w-full flex flex-col py-2"><div class="flex flex-row"><div class="${serverRenderer.exports.ssrRenderClass([{ "order-1": i % 2 === 1 }, "px-3 w-40"])}">`);
         _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$J, {
           "media-object": vue_cjs_prod.unref(blogArticleStore).getRandomImage(article),
-          class: "h-20 before:text-[6px]"
+          class: "h-20 before:text-[6px]",
+          size: "sm"
         }, null, _parent));
         _push(`</div><div class="${serverRenderer.exports.ssrRenderClass([{ "text-right": i % 2 === 1 }, "flex flex-col w-full justify-center"])}"><p class="w-full"><b class="text-lg">${serverRenderer.exports.ssrInterpolate(article.title)}</b> | ${serverRenderer.exports.ssrInterpolate(article.preview)}</p><div class="${serverRenderer.exports.ssrRenderClass([{ "self-end": i % 2 === 1 }, "pt-2 text-primary-dark fill-primary-dark flex uppercase text-xs items-center"])}"><!--[-->`);
         serverRenderer.exports.ssrRenderList(article.tags, (tag, i2) => {

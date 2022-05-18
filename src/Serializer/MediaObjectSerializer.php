@@ -40,6 +40,16 @@ class MediaObjectSerializer implements ContextAwareNormalizerInterface, Cacheabl
         ], UrlGeneratorInterface::ABSOLUTE_URL);
 
         $object->isImage = $this->checkFileIsImage($object);
+
+        if ($object->isImage) {
+            foreach ($object->thumbnails as $thumbnail) {
+                $thumbnail->contentUrl = $this->router->generate('app_media_mediaobject_download', [
+                    'mediaId' => $thumbnail->uniqueId,
+                    'inline' => '1'
+                ], UrlGeneratorInterface::ABSOLUTE_URL);
+                $thumbnail->isImage = true;
+            }
+        }
         $context[self::ALREADY_CALLED] = true;
 
         return $this->normalizer->normalize($object, $format, $context);

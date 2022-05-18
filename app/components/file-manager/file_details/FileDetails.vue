@@ -12,6 +12,14 @@
           :errors="mediaObjectStore[CRUD_MODE.EDITION].violations"
         />
     </div>
+    <div class="flex flex-col px-2">
+      <h2 class="py-2">Miniatures</h2>
+      <div v-if="item.thumbnails.length > 0" v-for="thumbnail in item.thumbnails" class="flex flex-col">
+        <img :src="thumbnail.contentUrl" :alt="thumbnail.customName || thumbnail.uniqueId" class="w-fit h-auto object-scale-down"/>
+        <Icon icon="ri-delete-bin-line" @click="removeClickHandler(thumbnail)" class="fill-secondary hover:fill-accent h-8 w-8 cursor-pointer"/>
+      </div>
+      <p v-else><small>Aucune miniature</small></p>
+    </div>
   </div>
 </template>
 
@@ -26,6 +34,7 @@ import { CRUD_MODE } from '~/store/crud'
 
 interface FileDetailsProps {
   mediaObject: MediaObject,
+  removeClickHandler: Function
 }
 
 const props = defineProps<FileDetailsProps>()

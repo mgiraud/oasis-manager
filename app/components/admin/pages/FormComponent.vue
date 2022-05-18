@@ -77,6 +77,6 @@ const setContent = (content: string) => {
 const schema = {
   title: 'required|min:3|max:60',
   url: 'required|min:3|max:60',
-  content: 'required|min:10|max:1000'
+  content: 'required|min:10|max:20000'
 };
 </script>

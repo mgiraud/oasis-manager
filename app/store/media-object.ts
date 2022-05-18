@@ -10,9 +10,10 @@ export interface MediaObject extends HydraMemberObject {
   uniqueId: string
   isImage: boolean,
   customName?: string,
+  thumbnails: MediaObject[],
   // Next are used for carrousel
   index?: number,
-  order?: number
+  order?: number,
 }
 
 interface MediaObjectState extends CrudState<MediaObject>{

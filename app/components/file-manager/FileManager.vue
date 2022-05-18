@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-row">
-    <div class="flex flex-col flex-auto">
+    <div class="flex flex-col flex-auto w-2/3">
       <FileSelection
         v-if="showSelection"
         :thumbnails="thumbnails"
@@ -20,7 +20,7 @@
       <FileUploader :handle-upload="handleUpload" v-if="currentMediaNode" />
     </div>
     <div v-if="detailsPanel" class="flex w-1/3">
-      <FileDetails :media-object="selectedMediaObject" />
+      <FileDetails :media-object="selectedMediaObject" :remove-click-handler="removeMediaObject"/>
     </div>
   </div>
 </template>
@@ -141,6 +141,7 @@ const removeMediaObject = async (mediaObject: MediaObject) => {
   try {
     await mediaObjectStore.remove(mediaObject.uniqueId)
     fileNavigator.value?.refresh()
+    selectedMediaObject.value = null
     notificationStore.showMessage('Media correctement supprimé')
   } catch (e) {
     notificationStore.showError('Erreur dans la suppression du média')

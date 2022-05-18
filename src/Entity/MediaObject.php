@@ -6,6 +6,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\ExistsFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Controller\Media\CreateMediaObjectAction;
 use App\Validation\MediaNodeCount;
@@ -57,15 +58,30 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *     itemOperations={
  *         "get",
  *         "put"={"security"="is_granted('USER_CAN_EDIT_MEDIA_OBJECTS')"},
- *         "delete"={"security"="is_granted('USER_CAN_EDIT_MEDIA_OBJECTS')"}
+ *         "delete"={"security"="is_granted('USER_CAN_EDIT_MEDIA_OBJECTS')"},
+ *         "thumbnail"={
+ *              "method": "POST",
+ *              "path": "/media_objects/{uniqueId}/thumbnail",
+ *              "controller": "App\Controller\Media\GenerateThumbnail",
+ *              "normalizationContext": {"groups"={"media_object:read"}},
+ *              "denormalizationContext": {"groups"={"media_object:thumbnail"}}
+ *         }
  *     }
  * )
  * @Vich\Uploadable
  * @ApiFilter(SearchFilter::class, properties={"mediaNodes": "exact"})
+ * @ApiFilter(ExistsFilter::class, properties={"original"})
  * @ORM\HasLifecycleCallbacks()
  */
 class MediaObject
 {
+    const IMG_SIZE = [
+        'lg' => 600,
+        'md' => 400,
+        'sm' => 200
+    ];
+    const IMG_SIZE_ORIGINAL = 'original';
+
     /**
      * @var int|null
      *
@@ -131,9 +147,33 @@ class MediaObject
      */
     private $mediaNodes;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=MediaObject::class, inversedBy="thumbnails")
+     * @Groups({"media_object:write", "media_object:read", "media_node_tree:read"})
+     * @ApiProperty(readableLink=false)
+     */
+    public ?MediaObject $original;
+
+    /**
+     * @ORM\OneToMany(targetEntity=MediaObject::class, mappedBy="original", cascade={"remove"})
+     * @Groups({"media_object:read"})
+     * @ApiProperty(readableLink=true)
+     */
+    public $thumbnails;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="text", options={"default":self::IMG_SIZE_ORIGINAL})
+     * @Groups({"media_object:read", "page:read", "blog_article:read"})
+     */
+    public string $size;
+
     public function __construct()
     {
         $this->mediaNodes = new ArrayCollection();
+        $this->thumbnails = new ArrayCollection();
+        $this->size = self::IMG_SIZE_ORIGINAL;
     }
 
     public function getId(): ?int

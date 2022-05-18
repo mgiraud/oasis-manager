@@ -1,13 +1,6 @@
 <template>
   <div class="flex flex-row">
     <div class="flex flex-col flex-auto w-2/3">
-      <FileSelection
-        v-if="showSelection"
-        :thumbnails="thumbnails"
-        :links="links"
-        :remove-link="removeLink"
-        :remove-thumbnail="removeThumbnail"
-      />
       <FileNavigator
         ref="fileNavigator"
         :select-click-handler="selectMediaObject"
@@ -18,6 +11,13 @@
         v-model="currentMediaNode"
       />
       <FileUploader :handle-upload="handleUpload" v-if="currentMediaNode" />
+      <FileSelection
+        v-if="showSelection"
+        :thumbnails="thumbnails"
+        :links="links"
+        :remove-link="removeLink"
+        :remove-thumbnail="removeThumbnail"
+      />
     </div>
     <div v-if="selectedMediaObject" class="flex w-1/3">
       <FileDetails :media-object="selectedMediaObject" :remove-click-handler="removeMediaObject"/>
@@ -36,7 +36,8 @@ import FileNavigator from './file_navigator/FileNavigator.vue'
 import FileDetails from './file_details/FileDetails.vue'
 
 export interface Thumbnail {
-  src: string
+  src: string,
+  alt: string
 }
 
 export interface Link {
@@ -60,7 +61,6 @@ const links = ref([]) as Ref<Link[]>
 const thumbnails = ref([]) as Ref<Thumbnail[]>
 const currentMediaNode = ref(null) as Ref<MediaNode | null>
 const fileNavigator = ref(null) as Ref<typeof FileNavigator | null>
-import { CRUD_MODE } from '~/store/crud'
 
 provide('closeDetailPanel', () => {
   selectedMediaObject.value = null
@@ -82,7 +82,8 @@ const selectMediaObject = (mediaObject: MediaObject) => {
 
 const selectImage = (res: MediaObject) => {
   thumbnails.value.push({
-    src: res.contentUrl
+    src: res.contentUrl,
+    alt: res.customName ?? res.uniqueId
   })
 }
 

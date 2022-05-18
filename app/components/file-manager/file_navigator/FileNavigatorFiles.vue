@@ -20,8 +20,19 @@
         <small v-if="item.customName">{{ item.customName }}</small>
         <small v-else>Titre non défini</small>
       </div>
+<!--      {{item}}-->
       <div class="flex flex-row bg-gray-100 pb-1">
-        <Icon v-if="selectionEnabled" icon="ri-arrow-left-up-line" @click="selectClickHandler(item)" class="fill-primary h-8 w-8 cursor-pointer"/>
+        <Popover v-if="selectionEnabled" class="relative">
+          <PopoverButton class="rounded-lg text-sm text-white bg-primary hover:bg-primary-dark h-fit w-fit cursor-pointer py-2 px-3 uppercase">
+            Ajouter...
+          </PopoverButton>
+
+          <PopoverPanel class="absolute z-10 bg-primary bottom-10 left-2 text-white rounded-lg">
+            <div class="w-full cursor-pointer hover:bg-primary-dark px-3 py-2" @click="selectClickHandler(item)">Original</div>
+            <div v-for="thumbnail in item.thumbnails" class="w-full cursor-pointer hover:bg-primary-dark  px-3 py-2" @click="selectClickHandler(thumbnail)">{{ thumbnail.size }}</div>
+          </PopoverPanel>
+        </Popover>
+
         <Icon icon="ri-pencil-line" @click="editClickHandler(item)" class="fill-primary hover:fill-primary-dark h-8 w-8 cursor-pointer"/>
         <Icon icon="ri-delete-bin-line" @click="removeClickHandler(item)" class="fill-secondary hover:fill-accent h-8 w-8 cursor-pointer"/>
       </div>
@@ -33,6 +44,7 @@
 import Icon from '~/components/util/Icon.vue'
 import { MediaNode } from '~/store/media-node'
 import { useMediaObjectStore } from '~/store/media-object'
+import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 
 interface FileNavigatorProps {
   mediaNode?: MediaNode | null,

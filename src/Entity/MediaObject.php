@@ -149,7 +149,7 @@ class MediaObject
 
     /**
      * @ORM\ManyToOne(targetEntity=MediaObject::class, inversedBy="thumbnails")
-     * @Groups({"media_object:write", "media_object:read", "media_node_tree:read"})
+     * @Groups({"media_object:write", "media_object:read", "media_node_tree:read", "page:read", "blog_article:read"})
      * @ApiProperty(readableLink=false)
      */
     public ?MediaObject $original;

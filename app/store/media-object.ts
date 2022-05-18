@@ -11,6 +11,7 @@ export interface MediaObject extends HydraMemberObject {
   isImage: boolean,
   customName?: string,
   thumbnails: MediaObject[],
+  original: MediaObject | null,
   // Next are used for carrousel
   index?: number,
   order?: number,
@@ -27,4 +28,14 @@ export const useMediaObjectStore = defineStore('media_objects', {
       ...crudState
     }
   },
+  actions: {
+    async generateThumbnails (mediaObject: MediaObject) {
+      return await this.$nuxt.$apiFetch(`${this.resource}/${mediaObject.uniqueId}/thumbnail`, {
+        method: 'POST',
+        body: {}
+      }).catch(async (e: Error) => {
+        await this.handleError(e)
+      })
+    },
+  }
 })

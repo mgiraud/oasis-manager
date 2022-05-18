@@ -26,10 +26,20 @@ class MediaObjectController extends AbstractController
         string $mediaId
     ) {
         $media = $manager->getRepository(MediaObject::class)->findOneBy([
-            'uniqueId' => $mediaId
+            'uniqueId' => $mediaId,
         ]);
         if (!$media instanceof MediaObject) {
             throw $this->createNotFoundException();
+        }
+
+        $size = $request->query->get('size', 'original');
+        if (in_array($size, array_keys(MediaObject::IMG_SIZE))) {
+            /** @var MediaObject $thumbnail */
+            foreach ($media->thumbnails as $thumbnail) {
+                if ($thumbnail->size === $size) {
+                    $media = $thumbnail;
+                }
+            }
         }
 
         $inline = $request->query->has('inline');

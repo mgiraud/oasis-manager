@@ -16,9 +16,12 @@
       <h2 class="py-2">Miniatures</h2>
       <div v-if="item.thumbnails.length > 0" v-for="thumbnail in item.thumbnails" class="flex flex-col">
         <img :src="thumbnail.contentUrl" :alt="thumbnail.customName || thumbnail.uniqueId" class="w-fit h-auto object-scale-down"/>
-        <Icon icon="ri-delete-bin-line" @click="removeClickHandler(thumbnail)" class="fill-secondary hover:fill-accent h-8 w-8 cursor-pointer"/>
+        <Icon icon="ri-delete-bin-line" @click="removeClickHandler(thumbnail, true)" class="fill-secondary hover:fill-accent h-8 w-8 cursor-pointer"/>
       </div>
-      <p v-else><small>Aucune miniature</small></p>
+      <div v-else>
+        <p>Aucune miniature</p>
+      </div>
+      <div class="py-3 px-4 bg-primary text-white shadow-md uppercase hover:bg-primary-dark cursor-pointer text-center" @click="generateThumbnails(item)">Générer les miniatures</div>
     </div>
   </div>
 </template>
@@ -39,7 +42,7 @@ interface FileDetailsProps {
 
 const props = defineProps<FileDetailsProps>()
 const closeDetailPanel = inject('closeDetailPanel')
-const item = {...props.mediaObject}
+const item = ref({...props.mediaObject})
 const mediaNodeStore = useMediaNodeStore()
 const mediaObjectStore = useMediaObjectStore()
 const notificationStore = useNotificationStore()
@@ -49,13 +52,22 @@ await useAsyncData('media-node-tree', async () => {
 })
 
 const onSendForm = async (data: MediaObject) => {
-  await mediaObjectStore.update(data.uniqueId, data)
+  try {
+    await mediaObjectStore.update(data.uniqueId, data)
+    notificationStore.showMessage('Fichier mis à jour')
+  } catch (e) {
+    notificationStore.showError('Problème lors de la mise à jour du fichier')
+  }
 }
 
-watch(() => mediaObjectStore[CRUD_MODE.EDITION].edited, (edited: MediaObject | null) => {
-  if (!edited) {
-    return
+const generateThumbnails = async (mediaObject: MediaObject) => {
+  const res = await mediaObjectStore.generateThumbnails(mediaObject)
+  item.value = res
+}
+
+watch(() => props.mediaObject, (mediaObject) => {
+  if (mediaObject) {
+    item.value = {...mediaObject}
   }
-  notificationStore.showMessage('Fichier mis à jour')
 })
 </script>

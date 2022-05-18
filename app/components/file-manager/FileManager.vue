@@ -19,7 +19,7 @@
       />
       <FileUploader :handle-upload="handleUpload" v-if="currentMediaNode" />
     </div>
-    <div v-if="detailsPanel" class="flex w-1/3">
+    <div v-if="selectedMediaObject" class="flex w-1/3">
       <FileDetails :media-object="selectedMediaObject" :remove-click-handler="removeMediaObject"/>
     </div>
   </div>
@@ -55,15 +55,14 @@ const props = withDefaults(defineProps<FileManagerProps>(), {
 const notificationStore = useNotificationStore()
 const mediaObjectStore = useMediaObjectStore()
 const mediaNodeStore = useMediaNodeStore()
-const detailsPanel = ref(false)
 const selectedMediaObject = ref(null) as Ref<null | MediaObject>
 const links = ref([]) as Ref<Link[]>
 const thumbnails = ref([]) as Ref<Thumbnail[]>
 const currentMediaNode = ref(null) as Ref<MediaNode | null>
 const fileNavigator = ref(null) as Ref<typeof FileNavigator | null>
+import { CRUD_MODE } from '~/store/crud'
 
 provide('closeDetailPanel', () => {
-  detailsPanel.value = false
   selectedMediaObject.value = null
 })
 provide('selectionEnabled', props.showSelection)
@@ -133,11 +132,10 @@ const handleUpload = (files: FileList) => {
 }
 
 const editMediaObject = (mediaObject: MediaObject) => {
-  detailsPanel.value = true
   selectedMediaObject.value = mediaObject
 }
 
-const removeMediaObject = async (mediaObject: MediaObject) => {
+const removeMediaObject = async (mediaObject: MediaObject, isThumbnail = false) => {
   try {
     await mediaObjectStore.remove(mediaObject.uniqueId)
     fileNavigator.value?.refresh()

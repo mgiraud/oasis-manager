@@ -4,7 +4,7 @@
       {{ label }}
       <Tooltip v-if="errorMessage">{{errorMessage}}</Tooltip>
     </div>
-    <div class="editor flex flex-wrap" v-if="editor">
+    <div class="editor flex flex-wrap sticky top-0 z-10" v-if="editor">
       <editor-btn
         label="Gras"
         :btn-class="{ 'fill-stone-400': editor.isActive('bold') }"
@@ -22,6 +22,12 @@
         :btn-class="{ 'grey darken-3': editor.isActive('strike') }"
         :click-handler="() => editor.chain().focus().toggleStrike().run()"
         icon-component="ri-strikethrough"
+      />
+      <editor-btn
+        label="Souligner"
+        :btn-class="{ 'grey darken-3': editor.isActive('strike') }"
+        :click-handler="() => editor.commands.toggleUnderline()"
+        icon-component="ri-underline"
       />
       <text-color-btn :editor="editor" />
       <text-background-color-btn :editor="editor" />
@@ -175,6 +181,7 @@
 </template>
 
 <script lang="ts" setup>
+import { Underline } from '@tiptap/extension-underline'
 import { Editor, EditorContent } from '@tiptap/vue-3'
 import Starterkit from '@tiptap/starter-kit'
 import TextAlign from '@tiptap/extension-text-align'
@@ -220,7 +227,18 @@ onMounted(() => {
   editor.value = new Editor({
     content: inputValue.value,
     extensions: [
-      Starterkit,
+      Starterkit.configure({
+        bulletList: {
+          HTMLAttributes: {
+            class: 'list-disc ml-4'
+          }
+        },
+        orderedList: {
+          HTMLAttributes: {
+            class: 'list-decimal ml-4'
+          }
+        }
+      }),
       TextAlign.configure({
         types: ['heading', 'paragraph'],
       }),
@@ -228,6 +246,7 @@ onMounted(() => {
       Table.configure({
         resizable: true
       }),
+      Underline,
       TableRow,
       TableHeader,
       TableCell,

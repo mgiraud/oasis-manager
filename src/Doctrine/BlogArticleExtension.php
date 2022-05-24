@@ -30,10 +30,9 @@ class BlogArticleExtension implements QueryCollectionExtensionInterface
         if (BlogArticle::class !== $resourceClass || $this->security->isGranted('ROLE_ADMIN')) {
             return;
         }
-
         if (null === ($user = $this->security->getUser())
             || !$user instanceof Member
-            || !$user->hasPermission(Permissions::USER_CAN_EDIT_BLOG_ARTICLES))
+            || !$user->hasPermission('USER_CAN_EDIT_BLOG_ARTICLES'))
         {
             $rootAlias = $queryBuilder->getRootAliases()[0];
             $queryBuilder->andWhere(sprintf('%s.isPublished = TRUE', $rootAlias));

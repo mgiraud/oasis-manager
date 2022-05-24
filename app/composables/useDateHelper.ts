@@ -7,7 +7,7 @@ export function useDateHelper() {
   }
 
   const formatDate = (rawDate: string) => {
-    return format(parseISO(rawDate), 'ii LLLL yy', { locale: fr })
+    return format(parseISO(rawDate), 'dd LLLL yy', { locale: fr })
   }
 
   return {

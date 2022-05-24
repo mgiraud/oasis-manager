@@ -63,7 +63,7 @@
     @apply text-2xl font-marker text-primary-dark;
   }
   p {
-    @apply mt-1 mb-1
+    @apply mt-2 mb-2
   }
 }
 </style>

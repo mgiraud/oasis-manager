@@ -833,6 +833,11 @@
   resolved "https://registry.yarnpkg.com/@tiptap/extension-typography/-/extension-typography-2.0.0-beta.20.tgz#6a721d5222e250aff6d4996acd0f6bc0e183eecc"
   integrity sha512-rDgl5ssuM/UKTZHHN1QgF5lZTqNI/q7hxpsk7SZhGjuTSbo2mJ38shaKWEsLmofer/xE6+lWtYo8IVkuv998QA==
 
+"@tiptap/extension-underline@^2.0.0-beta.23":
+  version "2.0.0-beta.23"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-underline/-/extension-underline-2.0.0-beta.23.tgz#050a31ac55b7ad63e8abf57ac941c62e255f57b8"
+  integrity sha512-pMjFH/NpFWLd2XQQa5rG9rGVQ9mu3ygdtu6VGfJ3aAjzBiyLXDKhE4biIFWyFsr8zLpp7DjwbrmLV0UGvbG1WQ==
+
 "@tiptap/starter-kit@^2.0.0-beta.184":
   version "2.0.0-beta.184"
   resolved "https://registry.yarnpkg.com/@tiptap/starter-kit/-/starter-kit-2.0.0-beta.184.tgz#c621d51d9cb8a1b18cbec7af6080ce8288bdce72"

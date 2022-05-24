@@ -8,6 +8,7 @@ import { localize, setLocale } from '@vee-validate/i18n';
 import AllRules from '@vee-validate/rules';
 import { formatRelative, parseISO, format } from 'date-fns';
 import fr$1 from 'date-fns/locale/fr/index.js';
+import { Underline } from '@tiptap/extension-underline';
 import { VueNodeViewRenderer, NodeViewWrapper, Editor, EditorContent } from '@tiptap/vue-3';
 import Starterkit from '@tiptap/starter-kit';
 import TextAlign from '@tiptap/extension-text-align';
@@ -7878,7 +7879,18 @@ const _sfc_main$15 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       editor.value = new Editor({
         content: inputValue.value,
         extensions: [
-          Starterkit,
+          Starterkit.configure({
+            bulletList: {
+              HTMLAttributes: {
+                class: "list-disc ml-4"
+              }
+            },
+            orderedList: {
+              HTMLAttributes: {
+                class: "list-decimal ml-4"
+              }
+            }
+          }),
           TextAlign.configure({
             types: ["heading", "paragraph"]
           }),
@@ -7886,6 +7898,7 @@ const _sfc_main$15 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
           Table.configure({
             resizable: true
           }),
+          Underline,
           TableRow,
           TableHeader,
           TableCell,
@@ -7955,7 +7968,7 @@ const _sfc_main$15 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       }
       _push(`</div>`);
       if (vue_cjs_prod.unref(editor)) {
-        _push(`<div class="editor flex flex-wrap">`);
+        _push(`<div class="editor flex flex-wrap sticky top-0 z-10">`);
         _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
           label: "Gras",
           "btn-class": { "fill-stone-400": vue_cjs_prod.unref(editor).isActive("bold") },
@@ -7973,6 +7986,12 @@ const _sfc_main$15 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
           "btn-class": { "grey darken-3": vue_cjs_prod.unref(editor).isActive("strike") },
           "click-handler": () => vue_cjs_prod.unref(editor).chain().focus().toggleStrike().run(),
           "icon-component": "ri-strikethrough"
+        }, null, _parent));
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
+          label: "Souligner",
+          "btn-class": { "grey darken-3": vue_cjs_prod.unref(editor).isActive("strike") },
+          "click-handler": () => vue_cjs_prod.unref(editor).commands.toggleUnderline(),
+          "icon-component": "ri-underline"
         }, null, _parent));
         _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$18, { editor: vue_cjs_prod.unref(editor) }, null, _parent));
         _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$17, { editor: vue_cjs_prod.unref(editor) }, null, _parent));
@@ -9010,7 +9029,7 @@ function useDateHelper() {
     return formatRelative(parseISO(rawDate), new Date(), { locale: fr$1 });
   };
   const formatDate = (rawDate) => {
-    return format(parseISO(rawDate), "ii LLLL yy", { locale: fr$1 });
+    return format(parseISO(rawDate), "dd LLLL yy", { locale: fr$1 });
   };
   return {
     formatDate,

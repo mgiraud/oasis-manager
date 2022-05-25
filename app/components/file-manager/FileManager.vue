@@ -1,12 +1,14 @@
 <template>
   <div class="flex flex-row">
-    <div class="flex flex-col flex-auto w-2/3">
+    <FileArbo ref="fileArbo" class="flex w-1/6" :click-handler="onTreeItemClick"/>
+    <div class="flex flex-col flex-auto w-1/2">
       <FileNavigator
         ref="fileNavigator"
         :select-click-handler="selectMediaObject"
         :edit-click-handler="editMediaObject"
         :remove-click-handler="removeMediaObject"
         :remove-folder-click-handler="removeFolderClickHandler"
+        :refresh-handler="refreshAll"
         :show-selection="showSelection"
         v-model="currentMediaNode"
       />
@@ -19,15 +21,19 @@
         :remove-thumbnail="removeThumbnail"
       />
     </div>
-    <div v-if="selectedMediaObject" class="flex w-1/3">
-      <FileDetails :media-object="selectedMediaObject" :remove-click-handler="removeMediaObject"/>
-    </div>
+    <FileDetails
+      v-if="selectedMediaObject"
+      class="flex w-1/3"
+      :media-object="selectedMediaObject"
+      :remove-click-handler="removeMediaObject"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import { Ref } from '@vue/reactivity'
-import { MediaNode, useMediaNodeStore } from '~/store/media-node'
+import FileArbo from '~/components/file-manager/file_arbo/FileArbo.vue'
+import { MediaNode, MediaNodeItem, useMediaNodeStore } from '~/store/media-node'
 import { MediaObject, useMediaObjectStore } from '~/store/media-object'
 import { useNotificationStore } from '~/store/notification'
 import FileSelection from './file_selection/FileSelection.vue'
@@ -61,6 +67,7 @@ const links = ref([]) as Ref<Link[]>
 const thumbnails = ref([]) as Ref<Thumbnail[]>
 const currentMediaNode = ref(null) as Ref<MediaNode | null>
 const fileNavigator = ref(null) as Ref<typeof FileNavigator | null>
+const fileArbo = ref(null) as Ref<typeof FileArbo | null>
 
 provide('closeDetailPanel', () => {
   selectedMediaObject.value = null
@@ -102,6 +109,19 @@ const removeLink = (index: number) => {
   links.value.splice(index, 1)
 }
 
+const refreshAll = (mediaNode: MediaNode | null = null) => {
+  fileNavigator.value?.refresh(mediaNode)
+  fileArbo.value?.refresh()
+}
+
+const refreshNavigator = (mediaNode: MediaNode | null = null) => {
+  fileNavigator.value?.refresh(mediaNode)
+}
+
+const refreshArbo = () => {
+  fileArbo.value?.refresh()
+}
+
 const handleUpload = (files: FileList) => {
   if (!currentMediaNode.value) {
     return
@@ -126,8 +146,7 @@ const handleUpload = (files: FileList) => {
       } else {
         selectLink(res)
       }
-      // @ts-ignore
-      fileNavigator.value?.refresh()
+      refreshNavigator()
     })
   }
 }
@@ -136,10 +155,10 @@ const editMediaObject = (mediaObject: MediaObject) => {
   selectedMediaObject.value = mediaObject
 }
 
-const removeMediaObject = async (mediaObject: MediaObject, isThumbnail = false) => {
+const removeMediaObject = async (mediaObject: MediaObject) => {
   try {
     await mediaObjectStore.remove(mediaObject.uniqueId)
-    fileNavigator.value?.refresh()
+    refreshNavigator()
     selectedMediaObject.value = null
     notificationStore.showMessage('Media correctement supprimé')
   } catch (e) {
@@ -151,11 +170,15 @@ const removeFolderClickHandler = async (mediaNode: MediaNode) => {
   try {
     await mediaNodeStore.remove(mediaNode.id)
     currentMediaNode.value = null
-    fileNavigator.value?.refresh(currentMediaNode.value)
+    refreshAll()
     notificationStore.showMessage('Dossier correctement supprimé')
   } catch (e) {
     notificationStore.showError('Erreur dans la suppression du dossier')
   }
+}
+
+const onTreeItemClick = async (item: MediaNodeItem) => {
+  await fileNavigator.value?.refresh(item)
 }
 
 defineExpose({

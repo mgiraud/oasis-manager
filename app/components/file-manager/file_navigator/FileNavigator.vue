@@ -59,7 +59,7 @@
     </div>
     <FileNavigatorContextMenu
       :media-node="props.modelValue"
-      :refresh="refresh"
+      :refresh="refreshHandler"
       v-model:dialog="folderDialog"
     />
   </div>
@@ -81,6 +81,7 @@ interface FileNavigatorProps {
   selectClickHandler: Function,
   removeClickHandler: Function,
   removeFolderClickHandler: Function,
+  refreshHandler: Function,
   modelValue: MediaNode | null
   rootName?: string | null
 }
@@ -121,7 +122,7 @@ const handleRootClick = () => {
 }
 
 const refresh = async (mediaNode ?: MediaNode | null) => {
-  if (!currentMediaNode.value || mediaNode === null) {
+  if (!currentMediaNode.value && mediaNode === null) {
     getRoots()
   } else {
     if (!!mediaNode) {

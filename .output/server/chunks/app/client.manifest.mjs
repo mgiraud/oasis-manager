@@ -1,6 +1,6 @@
 const client_manifest = {
   "../node_modules/nuxt/dist/app/entry.mjs": {
-    "file": "entry-63f3c6e5.mjs",
+    "file": "entry-bbf0cde0.mjs",
     "src": "../node_modules/nuxt/dist/app/entry.mjs",
     "isEntry": true,
     "dynamicImports": [
@@ -33,103 +33,103 @@ const client_manifest = {
       "layouts/default.vue"
     ],
     "css": [
-      "entry.a8f8b96d.css"
+      "entry.bc86936c.css"
     ]
   },
   "pages/[...slug].vue": {
-    "file": "_...slug_-2d8c40ad.mjs",
+    "file": "_...slug_-de2c190e.mjs",
     "src": "pages/[...slug].vue",
     "isDynamicEntry": true,
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_PageComponent-09f24025.mjs",
-      "_Carrousel-ada483ff.mjs",
-      "_Icon-6e6283c1.mjs"
+      "_PageComponent-4e97cdd6.mjs",
+      "_Carrousel-309543ab.mjs",
+      "_Icon-ca36084c.mjs"
     ]
   },
-  "_PageComponent-09f24025.mjs": {
-    "file": "PageComponent-09f24025.mjs",
+  "_PageComponent-4e97cdd6.mjs": {
+    "file": "PageComponent-4e97cdd6.mjs",
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs"
     ]
   },
-  "_Carrousel-ada483ff.mjs": {
-    "file": "Carrousel-ada483ff.mjs",
+  "_Carrousel-309543ab.mjs": {
+    "file": "Carrousel-309543ab.mjs",
     "imports": [
-      "_Icon-6e6283c1.mjs",
+      "_Icon-ca36084c.mjs",
       "../node_modules/nuxt/dist/app/entry.mjs"
     ]
   },
-  "_Icon-6e6283c1.mjs": {
-    "file": "Icon-6e6283c1.mjs",
+  "_Icon-ca36084c.mjs": {
+    "file": "Icon-ca36084c.mjs",
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs"
     ]
   },
   "pages/admin/blog/[id].vue": {
-    "file": "_id_-3f34af43.mjs",
+    "file": "_id_-5597c6ad.mjs",
     "src": "pages/admin/blog/[id].vue",
     "isDynamicEntry": true,
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_asyncData-2ab7c675.mjs",
-      "_FormComponent-5c0176e0.mjs",
-      "_Editor-bea37c24.mjs",
-      "_TextField-69fdc5c3.mjs",
-      "_Icon-6e6283c1.mjs",
-      "_FileManager-d5b0634a.mjs",
-      "_use-outside-click-aa42c4c8.mjs",
-      "_transition-25b36fbb.mjs",
-      "_dialog-c1d3e695.mjs",
+      "_asyncData-ab30f611.mjs",
+      "_FormComponent-e366fe50.mjs",
+      "_Editor-e4ccd61e.mjs",
+      "_TextField-52f43e27.mjs",
+      "_Icon-ca36084c.mjs",
+      "_FileManager-c1dc257e.mjs",
+      "_use-outside-click-545a1624.mjs",
+      "_transition-b8498542.mjs",
+      "_dialog-082ab9cf.mjs",
       "_calculate-active-index-130b59fd.mjs",
-      "_CheckboxField-23418cc9.mjs"
+      "_CheckboxField-6dd604a6.mjs"
     ]
   },
-  "_asyncData-2ab7c675.mjs": {
-    "file": "asyncData-2ab7c675.mjs",
+  "_asyncData-ab30f611.mjs": {
+    "file": "asyncData-ab30f611.mjs",
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs"
     ]
   },
-  "_FormComponent-5c0176e0.mjs": {
-    "file": "FormComponent-5c0176e0.mjs",
+  "_FormComponent-e366fe50.mjs": {
+    "file": "FormComponent-e366fe50.mjs",
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_asyncData-2ab7c675.mjs",
-      "_Editor-bea37c24.mjs",
-      "_CheckboxField-23418cc9.mjs",
-      "_TextField-69fdc5c3.mjs"
+      "_asyncData-ab30f611.mjs",
+      "_Editor-e4ccd61e.mjs",
+      "_CheckboxField-6dd604a6.mjs",
+      "_TextField-52f43e27.mjs"
     ]
   },
-  "_CheckboxField-23418cc9.mjs": {
-    "file": "CheckboxField-23418cc9.mjs",
+  "_CheckboxField-6dd604a6.mjs": {
+    "file": "CheckboxField-6dd604a6.mjs",
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_TextField-69fdc5c3.mjs"
+      "_TextField-52f43e27.mjs"
     ]
   },
-  "_Editor-bea37c24.mjs": {
-    "file": "Editor-bea37c24.mjs",
+  "_Editor-e4ccd61e.mjs": {
+    "file": "Editor-e4ccd61e.mjs",
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_TextField-69fdc5c3.mjs",
-      "_Icon-6e6283c1.mjs",
-      "_FileManager-d5b0634a.mjs",
-      "_transition-25b36fbb.mjs",
-      "_dialog-c1d3e695.mjs",
-      "_use-outside-click-aa42c4c8.mjs",
+      "_TextField-52f43e27.mjs",
+      "_Icon-ca36084c.mjs",
+      "_FileManager-c1dc257e.mjs",
+      "_transition-b8498542.mjs",
+      "_dialog-082ab9cf.mjs",
+      "_use-outside-click-545a1624.mjs",
       "_calculate-active-index-130b59fd.mjs"
     ]
   },
-  "_TextField-69fdc5c3.mjs": {
-    "file": "TextField-69fdc5c3.mjs",
+  "_TextField-52f43e27.mjs": {
+    "file": "TextField-52f43e27.mjs",
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_Icon-6e6283c1.mjs"
+      "_Icon-ca36084c.mjs"
     ]
   },
-  "_use-outside-click-aa42c4c8.mjs": {
-    "file": "use-outside-click-aa42c4c8.mjs",
+  "_use-outside-click-545a1624.mjs": {
+    "file": "use-outside-click-545a1624.mjs",
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs"
     ]
@@ -137,123 +137,123 @@ const client_manifest = {
   "_calculate-active-index-130b59fd.mjs": {
     "file": "calculate-active-index-130b59fd.mjs"
   },
-  "_transition-25b36fbb.mjs": {
-    "file": "transition-25b36fbb.mjs",
+  "_transition-b8498542.mjs": {
+    "file": "transition-b8498542.mjs",
     "imports": [
-      "_use-outside-click-aa42c4c8.mjs",
+      "_use-outside-click-545a1624.mjs",
       "../node_modules/nuxt/dist/app/entry.mjs"
     ]
   },
-  "_FileManager-d5b0634a.mjs": {
-    "file": "FileManager-d5b0634a.mjs",
+  "_FileManager-c1dc257e.mjs": {
+    "file": "FileManager-c1dc257e.mjs",
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_Icon-6e6283c1.mjs",
-      "_asyncData-2ab7c675.mjs",
-      "_use-outside-click-aa42c4c8.mjs",
-      "_transition-25b36fbb.mjs",
-      "_dialog-c1d3e695.mjs",
-      "_TextField-69fdc5c3.mjs"
+      "_asyncData-ab30f611.mjs",
+      "_Icon-ca36084c.mjs",
+      "_use-outside-click-545a1624.mjs",
+      "_transition-b8498542.mjs",
+      "_dialog-082ab9cf.mjs",
+      "_TextField-52f43e27.mjs"
     ]
   },
-  "_dialog-c1d3e695.mjs": {
-    "file": "dialog-c1d3e695.mjs",
+  "_dialog-082ab9cf.mjs": {
+    "file": "dialog-082ab9cf.mjs",
     "imports": [
-      "_use-outside-click-aa42c4c8.mjs",
+      "_use-outside-click-545a1624.mjs",
       "../node_modules/nuxt/dist/app/entry.mjs"
     ]
   },
   "pages/admin/blog/add.vue": {
-    "file": "add-3f8d8893.mjs",
+    "file": "add-5e7834a7.mjs",
     "src": "pages/admin/blog/add.vue",
     "isDynamicEntry": true,
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_FormComponent-5c0176e0.mjs",
-      "_asyncData-2ab7c675.mjs",
-      "_Editor-bea37c24.mjs",
-      "_TextField-69fdc5c3.mjs",
-      "_Icon-6e6283c1.mjs",
-      "_FileManager-d5b0634a.mjs",
-      "_use-outside-click-aa42c4c8.mjs",
-      "_transition-25b36fbb.mjs",
-      "_dialog-c1d3e695.mjs",
+      "_FormComponent-e366fe50.mjs",
+      "_asyncData-ab30f611.mjs",
+      "_Editor-e4ccd61e.mjs",
+      "_TextField-52f43e27.mjs",
+      "_Icon-ca36084c.mjs",
+      "_FileManager-c1dc257e.mjs",
+      "_use-outside-click-545a1624.mjs",
+      "_transition-b8498542.mjs",
+      "_dialog-082ab9cf.mjs",
       "_calculate-active-index-130b59fd.mjs",
-      "_CheckboxField-23418cc9.mjs"
+      "_CheckboxField-6dd604a6.mjs"
     ]
   },
   "pages/admin/blog/index.vue": {
-    "file": "index-e443d17f.mjs",
+    "file": "index-286eb539.mjs",
     "src": "pages/admin/blog/index.vue",
     "isDynamicEntry": true,
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_asyncData-2ab7c675.mjs",
-      "_ConfirmationDeleteModal-cd61dbe7.mjs",
-      "_Icon-6e6283c1.mjs",
-      "_dialog-c1d3e695.mjs",
-      "_use-outside-click-aa42c4c8.mjs"
+      "_asyncData-ab30f611.mjs",
+      "_ConfirmationDeleteModal-5747b9be.mjs",
+      "_Icon-ca36084c.mjs",
+      "_dialog-082ab9cf.mjs",
+      "_use-outside-click-545a1624.mjs"
     ]
   },
-  "_ConfirmationDeleteModal-cd61dbe7.mjs": {
-    "file": "ConfirmationDeleteModal-cd61dbe7.mjs",
+  "_ConfirmationDeleteModal-5747b9be.mjs": {
+    "file": "ConfirmationDeleteModal-5747b9be.mjs",
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_dialog-c1d3e695.mjs"
+      "_dialog-082ab9cf.mjs"
     ]
   },
   "pages/admin/categories/[slug].vue": {
-    "file": "_slug_-71bbf816.mjs",
+    "file": "_slug_-45e86ae1.mjs",
     "src": "pages/admin/categories/[slug].vue",
     "isDynamicEntry": true,
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_asyncData-2ab7c675.mjs",
-      "_FormComponent-369f4d89.mjs",
-      "_CheckboxField-23418cc9.mjs",
-      "_TextField-69fdc5c3.mjs",
-      "_Icon-6e6283c1.mjs"
+      "_asyncData-ab30f611.mjs",
+      "_FormComponent-d35e75f4.mjs",
+      "_CheckboxField-6dd604a6.mjs",
+      "_TextField-52f43e27.mjs",
+      "_Icon-ca36084c.mjs"
     ]
   },
-  "_FormComponent-369f4d89.mjs": {
-    "file": "FormComponent-369f4d89.mjs",
+  "_FormComponent-d35e75f4.mjs": {
+    "file": "FormComponent-d35e75f4.mjs",
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_asyncData-2ab7c675.mjs",
-      "_CheckboxField-23418cc9.mjs",
-      "_TextField-69fdc5c3.mjs"
+      "_asyncData-ab30f611.mjs",
+      "_CheckboxField-6dd604a6.mjs",
+      "_TextField-52f43e27.mjs"
     ]
   },
   "pages/admin/categories/add.vue": {
-    "file": "add-9e635004.mjs",
+    "file": "add-5ed2bc58.mjs",
     "src": "pages/admin/categories/add.vue",
     "isDynamicEntry": true,
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_FormComponent-369f4d89.mjs",
-      "_asyncData-2ab7c675.mjs",
-      "_CheckboxField-23418cc9.mjs",
-      "_TextField-69fdc5c3.mjs",
-      "_Icon-6e6283c1.mjs"
+      "_FormComponent-d35e75f4.mjs",
+      "_asyncData-ab30f611.mjs",
+      "_CheckboxField-6dd604a6.mjs",
+      "_TextField-52f43e27.mjs",
+      "_Icon-ca36084c.mjs"
     ]
   },
   "pages/admin/categories/index.vue": {
-    "file": "index-43cde7da.mjs",
+    "file": "index-e6c44643.mjs",
     "src": "pages/admin/categories/index.vue",
     "isDynamicEntry": true,
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_asyncData-2ab7c675.mjs",
-      "_Icon-6e6283c1.mjs"
+      "_asyncData-ab30f611.mjs",
+      "_Icon-ca36084c.mjs"
     ]
   },
   "pages/admin/contact/[id].vue": {
-    "file": "_id_-b06914bb.mjs",
+    "file": "_id_-3c93ed12.mjs",
     "src": "pages/admin/contact/[id].vue",
     "isDynamicEntry": true,
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_asyncData-2ab7c675.mjs",
+      "_asyncData-ab30f611.mjs",
       "_useDateHelper-c6a748de.mjs"
     ]
   },
@@ -261,18 +261,18 @@ const client_manifest = {
     "file": "useDateHelper-c6a748de.mjs"
   },
   "pages/admin/contact/index.vue": {
-    "file": "index-112f8fb9.mjs",
+    "file": "index-3fd56f7b.mjs",
     "src": "pages/admin/contact/index.vue",
     "isDynamicEntry": true,
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_asyncData-2ab7c675.mjs",
+      "_asyncData-ab30f611.mjs",
       "_useDateHelper-c6a748de.mjs",
-      "_Icon-6e6283c1.mjs"
+      "_Icon-ca36084c.mjs"
     ]
   },
   "pages/admin/index.vue": {
-    "file": "index-f11fffb1.mjs",
+    "file": "index-ea08bc75.mjs",
     "src": "pages/admin/index.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -280,188 +280,188 @@ const client_manifest = {
     ]
   },
   "pages/admin/join/[id].vue": {
-    "file": "_id_-5cd3be64.mjs",
+    "file": "_id_-ed23e792.mjs",
     "src": "pages/admin/join/[id].vue",
     "isDynamicEntry": true,
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_asyncData-2ab7c675.mjs"
+      "_asyncData-ab30f611.mjs"
     ]
   },
   "pages/admin/join/index.vue": {
-    "file": "index-f45167c9.mjs",
+    "file": "index-7d88ef4f.mjs",
     "src": "pages/admin/join/index.vue",
     "isDynamicEntry": true,
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_asyncData-2ab7c675.mjs",
+      "_asyncData-ab30f611.mjs",
       "_useDateHelper-c6a748de.mjs",
-      "_Icon-6e6283c1.mjs"
+      "_Icon-ca36084c.mjs"
     ]
   },
   "pages/admin/media.vue": {
-    "file": "media-40cfbf71.mjs",
+    "file": "media-bcb4ecaa.mjs",
     "src": "pages/admin/media.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_FileManager-d5b0634a.mjs",
+      "_FileManager-c1dc257e.mjs",
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_Icon-6e6283c1.mjs",
-      "_asyncData-2ab7c675.mjs",
-      "_use-outside-click-aa42c4c8.mjs",
-      "_transition-25b36fbb.mjs",
-      "_dialog-c1d3e695.mjs",
-      "_TextField-69fdc5c3.mjs"
+      "_asyncData-ab30f611.mjs",
+      "_Icon-ca36084c.mjs",
+      "_use-outside-click-545a1624.mjs",
+      "_transition-b8498542.mjs",
+      "_dialog-082ab9cf.mjs",
+      "_TextField-52f43e27.mjs"
     ]
   },
   "pages/admin/newsletter.vue": {
-    "file": "newsletter-28d89864.mjs",
+    "file": "newsletter-8dc19302.mjs",
     "src": "pages/admin/newsletter.vue",
     "isDynamicEntry": true,
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_asyncData-2ab7c675.mjs",
+      "_asyncData-ab30f611.mjs",
       "_useDateHelper-c6a748de.mjs"
     ]
   },
   "pages/admin/pages/[slug].vue": {
-    "file": "_slug_-ca2daf09.mjs",
+    "file": "_slug_-819a4190.mjs",
     "src": "pages/admin/pages/[slug].vue",
     "isDynamicEntry": true,
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_asyncData-2ab7c675.mjs",
-      "_FormComponent-5b78e617.mjs",
-      "_Icon-6e6283c1.mjs",
+      "_asyncData-ab30f611.mjs",
+      "_FormComponent-0cada11f.mjs",
+      "_Icon-ca36084c.mjs",
       "_useDateHelper-c6a748de.mjs",
-      "_FileManager-d5b0634a.mjs",
-      "_use-outside-click-aa42c4c8.mjs",
-      "_transition-25b36fbb.mjs",
-      "_dialog-c1d3e695.mjs",
-      "_TextField-69fdc5c3.mjs",
-      "_CheckboxField-23418cc9.mjs",
-      "_Editor-bea37c24.mjs",
+      "_FileManager-c1dc257e.mjs",
+      "_use-outside-click-545a1624.mjs",
+      "_transition-b8498542.mjs",
+      "_dialog-082ab9cf.mjs",
+      "_TextField-52f43e27.mjs",
+      "_CheckboxField-6dd604a6.mjs",
+      "_Editor-e4ccd61e.mjs",
       "_calculate-active-index-130b59fd.mjs"
     ]
   },
-  "_FormComponent-5b78e617.mjs": {
-    "file": "FormComponent-5b78e617.mjs",
+  "_FormComponent-0cada11f.mjs": {
+    "file": "FormComponent-0cada11f.mjs",
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_asyncData-2ab7c675.mjs",
-      "_Icon-6e6283c1.mjs",
+      "_asyncData-ab30f611.mjs",
+      "_Icon-ca36084c.mjs",
       "_useDateHelper-c6a748de.mjs",
-      "_FileManager-d5b0634a.mjs",
-      "_transition-25b36fbb.mjs",
-      "_dialog-c1d3e695.mjs",
-      "_CheckboxField-23418cc9.mjs",
-      "_Editor-bea37c24.mjs",
-      "_TextField-69fdc5c3.mjs"
+      "_FileManager-c1dc257e.mjs",
+      "_transition-b8498542.mjs",
+      "_dialog-082ab9cf.mjs",
+      "_CheckboxField-6dd604a6.mjs",
+      "_Editor-e4ccd61e.mjs",
+      "_TextField-52f43e27.mjs"
     ]
   },
   "pages/admin/pages/add.vue": {
-    "file": "add-0ea43859.mjs",
+    "file": "add-3e53fa55.mjs",
     "src": "pages/admin/pages/add.vue",
     "isDynamicEntry": true,
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_FormComponent-5b78e617.mjs",
-      "_asyncData-2ab7c675.mjs",
-      "_Icon-6e6283c1.mjs",
+      "_FormComponent-0cada11f.mjs",
+      "_asyncData-ab30f611.mjs",
+      "_Icon-ca36084c.mjs",
       "_useDateHelper-c6a748de.mjs",
-      "_FileManager-d5b0634a.mjs",
-      "_use-outside-click-aa42c4c8.mjs",
-      "_transition-25b36fbb.mjs",
-      "_dialog-c1d3e695.mjs",
-      "_TextField-69fdc5c3.mjs",
-      "_CheckboxField-23418cc9.mjs",
-      "_Editor-bea37c24.mjs",
+      "_FileManager-c1dc257e.mjs",
+      "_use-outside-click-545a1624.mjs",
+      "_transition-b8498542.mjs",
+      "_dialog-082ab9cf.mjs",
+      "_TextField-52f43e27.mjs",
+      "_CheckboxField-6dd604a6.mjs",
+      "_Editor-e4ccd61e.mjs",
       "_calculate-active-index-130b59fd.mjs"
     ]
   },
   "pages/admin/pages/index.vue": {
-    "file": "index-9ac6c904.mjs",
+    "file": "index-77dec0a7.mjs",
     "src": "pages/admin/pages/index.vue",
     "isDynamicEntry": true,
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_asyncData-2ab7c675.mjs",
-      "_ConfirmationDeleteModal-cd61dbe7.mjs",
-      "_Icon-6e6283c1.mjs",
-      "_dialog-c1d3e695.mjs",
-      "_use-outside-click-aa42c4c8.mjs"
+      "_asyncData-ab30f611.mjs",
+      "_ConfirmationDeleteModal-5747b9be.mjs",
+      "_Icon-ca36084c.mjs",
+      "_dialog-082ab9cf.mjs",
+      "_use-outside-click-545a1624.mjs"
     ]
   },
   "pages/blog/[id].vue": {
-    "file": "_id_-4d669a5d.mjs",
+    "file": "_id_-0888b310.mjs",
     "src": "pages/blog/[id].vue",
     "isDynamicEntry": true,
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_asyncData-2ab7c675.mjs",
+      "_asyncData-ab30f611.mjs",
       "_useDateHelper-c6a748de.mjs",
       "_useStringHelper-b0dd0f5e.mjs",
-      "_Carrousel-ada483ff.mjs",
-      "_Icon-6e6283c1.mjs"
+      "_Carrousel-309543ab.mjs",
+      "_Icon-ca36084c.mjs"
     ]
   },
   "_useStringHelper-b0dd0f5e.mjs": {
     "file": "useStringHelper-b0dd0f5e.mjs"
   },
   "pages/blog/index.vue": {
-    "file": "index-6c0fd05a.mjs",
+    "file": "index-a2408624.mjs",
     "src": "pages/blog/index.vue",
     "isDynamicEntry": true,
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_asyncData-2ab7c675.mjs",
-      "_PreviewImage-d94dd697.mjs",
-      "_Icon-6e6283c1.mjs"
+      "_asyncData-ab30f611.mjs",
+      "_PreviewImage-417f085c.mjs",
+      "_Icon-ca36084c.mjs"
     ]
   },
-  "_PreviewImage-d94dd697.mjs": {
-    "file": "PreviewImage-d94dd697.mjs",
+  "_PreviewImage-417f085c.mjs": {
+    "file": "PreviewImage-417f085c.mjs",
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs"
     ]
   },
   "pages/contact.vue": {
-    "file": "contact-8c602b3d.mjs",
+    "file": "contact-2d30c5c8.mjs",
     "src": "pages/contact.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_PageComponent-09f24025.mjs",
-      "_TextField-69fdc5c3.mjs",
+      "_PageComponent-4e97cdd6.mjs",
+      "_TextField-52f43e27.mjs",
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_Icon-6e6283c1.mjs"
+      "_Icon-ca36084c.mjs"
     ]
   },
   "pages/index.vue": {
-    "file": "index-56789aa7.mjs",
+    "file": "index-50c188f0.mjs",
     "src": "pages/index.vue",
     "isDynamicEntry": true,
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_asyncData-2ab7c675.mjs",
-      "_Carrousel-ada483ff.mjs",
-      "_PageComponent-09f24025.mjs",
-      "_PreviewImage-d94dd697.mjs",
+      "_asyncData-ab30f611.mjs",
+      "_Carrousel-309543ab.mjs",
+      "_PageComponent-4e97cdd6.mjs",
+      "_PreviewImage-417f085c.mjs",
       "_useDateHelper-c6a748de.mjs",
       "_useStringHelper-b0dd0f5e.mjs",
-      "_Icon-6e6283c1.mjs"
+      "_Icon-ca36084c.mjs"
     ]
   },
   "pages/login.vue": {
-    "file": "login-39fda719.mjs",
+    "file": "login-266bef4f.mjs",
     "src": "pages/login.vue",
     "isDynamicEntry": true,
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_Icon-6e6283c1.mjs"
+      "_Icon-ca36084c.mjs"
     ]
   },
   "pages/mentions-legales.vue": {
-    "file": "mentions-legales-fba05e55.mjs",
+    "file": "mentions-legales-bdc506d5.mjs",
     "src": "pages/mentions-legales.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -469,19 +469,19 @@ const client_manifest = {
     ]
   },
   "pages/nous-rejoindre.vue": {
-    "file": "nous-rejoindre-bce7e0ea.mjs",
+    "file": "nous-rejoindre-b5dde035.mjs",
     "src": "pages/nous-rejoindre.vue",
     "isDynamicEntry": true,
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_PageComponent-09f24025.mjs",
-      "_CheckboxField-23418cc9.mjs",
-      "_TextField-69fdc5c3.mjs",
-      "_Icon-6e6283c1.mjs"
+      "_PageComponent-4e97cdd6.mjs",
+      "_CheckboxField-6dd604a6.mjs",
+      "_TextField-52f43e27.mjs",
+      "_Icon-ca36084c.mjs"
     ]
   },
   "middleware/is-admin.ts": {
-    "file": "is-admin-2ae1b30a.mjs",
+    "file": "is-admin-4f1a584c.mjs",
     "src": "middleware/is-admin.ts",
     "isDynamicEntry": true,
     "imports": [
@@ -489,46 +489,46 @@ const client_manifest = {
     ]
   },
   "layouts/admin.vue": {
-    "file": "admin-5ba75640.mjs",
+    "file": "admin-ed6c4022.mjs",
     "src": "layouts/admin.vue",
     "isDynamicEntry": true,
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_Icon-6e6283c1.mjs",
-      "_Notification-e0e3f108.mjs",
-      "_use-outside-click-aa42c4c8.mjs",
+      "_Icon-ca36084c.mjs",
+      "_Notification-cae11ef6.mjs",
+      "_use-outside-click-545a1624.mjs",
       "_calculate-active-index-130b59fd.mjs",
-      "_transition-25b36fbb.mjs"
+      "_transition-b8498542.mjs"
     ],
     "css": [
-      "admin.5494c02b.css"
+      "admin.1ceb919f.css"
     ]
   },
-  "_Notification-e0e3f108.mjs": {
-    "file": "Notification-e0e3f108.mjs",
+  "_Notification-cae11ef6.mjs": {
+    "file": "Notification-cae11ef6.mjs",
     "imports": [
-      "_use-outside-click-aa42c4c8.mjs",
+      "_use-outside-click-545a1624.mjs",
       "_calculate-active-index-130b59fd.mjs",
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_transition-25b36fbb.mjs"
+      "_transition-b8498542.mjs"
     ]
   },
   "layouts/default.vue": {
-    "file": "default-9398f778.mjs",
+    "file": "default-30565eab.mjs",
     "src": "layouts/default.vue",
     "isDynamicEntry": true,
     "imports": [
       "../node_modules/nuxt/dist/app/entry.mjs",
-      "_asyncData-2ab7c675.mjs",
-      "_TextField-69fdc5c3.mjs",
-      "_Icon-6e6283c1.mjs",
-      "_Notification-e0e3f108.mjs",
-      "_use-outside-click-aa42c4c8.mjs",
+      "_asyncData-ab30f611.mjs",
+      "_TextField-52f43e27.mjs",
+      "_Icon-ca36084c.mjs",
+      "_Notification-cae11ef6.mjs",
+      "_use-outside-click-545a1624.mjs",
       "_calculate-active-index-130b59fd.mjs",
-      "_transition-25b36fbb.mjs"
+      "_transition-b8498542.mjs"
     ],
     "css": [
-      "default.ea0f13f1.css"
+      "default.c6aa8202.css"
     ]
   }
 };

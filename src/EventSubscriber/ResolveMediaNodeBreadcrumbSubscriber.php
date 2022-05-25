@@ -48,12 +48,11 @@ class ResolveMediaNodeBreadcrumbSubscriber implements EventSubscriberInterface
         $controllerResult = $event->getControllerResult();
         $request = $event->getRequest();
 
-        if ($controllerResult instanceof Response || !$request->attributes->getBoolean('_api_respond',
-                true
-            )) {
+        if ($controllerResult instanceof Response
+            || $request->attributes->get('_api_item_operation_name') !== 'get'
+        ) {
             return;
         }
-
         if (!($attributes = RequestAttributesExtractor::extractAttributes($request
             )) || !\is_a($attributes['resource_class'], MediaNode::class, true)) {
             return;
@@ -66,7 +65,7 @@ class ResolveMediaNodeBreadcrumbSubscriber implements EventSubscriberInterface
         }
 
         foreach ($objects as $object) {
-            if ($object instanceof MediaObject) {
+            if ($object instanceof MediaNode) {
                 $object->breadcrumb = $this->getBreadcrumbForMediaNode($object);
             }
         }

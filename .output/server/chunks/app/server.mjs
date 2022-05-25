@@ -3673,7 +3673,7 @@ const usePageStore = defineStore("page", {
     }
   }
 });
-const _sfc_main$1w = /* @__PURE__ */ vue_cjs_prod.defineComponent({
+const _sfc_main$1y = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __ssrInlineRender: true,
   props: {
     page: { default: null }
@@ -3695,13 +3695,13 @@ const _sfc_main$1w = /* @__PURE__ */ vue_cjs_prod.defineComponent({
     };
   }
 });
-const _sfc_setup$1w = _sfc_main$1w.setup;
-_sfc_main$1w.setup = (props, ctx) => {
+const _sfc_setup$1y = _sfc_main$1y.setup;
+_sfc_main$1y.setup = (props, ctx) => {
   const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/front/PageComponent.vue");
-  return _sfc_setup$1w ? _sfc_setup$1w(props, ctx) : void 0;
+  return _sfc_setup$1y ? _sfc_setup$1y(props, ctx) : void 0;
 };
-const _sfc_main$1v = /* @__PURE__ */ vue_cjs_prod.defineComponent({
+const _sfc_main$1x = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __ssrInlineRender: true,
   props: {
     icon: null
@@ -3714,13 +3714,13 @@ const _sfc_main$1v = /* @__PURE__ */ vue_cjs_prod.defineComponent({
     };
   }
 });
-const _sfc_setup$1v = _sfc_main$1v.setup;
-_sfc_main$1v.setup = (props, ctx) => {
+const _sfc_setup$1x = _sfc_main$1x.setup;
+_sfc_main$1x.setup = (props, ctx) => {
   const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/util/Icon.vue");
-  return _sfc_setup$1v ? _sfc_setup$1v(props, ctx) : void 0;
+  return _sfc_setup$1x ? _sfc_setup$1x(props, ctx) : void 0;
 };
-const _sfc_main$1u = /* @__PURE__ */ vue_cjs_prod.defineComponent({
+const _sfc_main$1w = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __ssrInlineRender: true,
   props: {
     mediaNode: null
@@ -3752,7 +3752,7 @@ const _sfc_main$1u = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         _push(`<!--]--></div>`);
         if (vue_cjs_prod.unref(mediaObjects).length > 1) {
           _push(`<div class="cursor-pointer grow-0 w-0 flex z-10 items-center"><div class="w-fit -translate-x-[150%]">`);
-          _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+          _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
             icon: "ri-arrow-right-s-fill",
             class: "fill-white bg-primary rounded-full h-12 w-12 shadow-xs"
           }, null, _parent));
@@ -3767,13 +3767,13 @@ const _sfc_main$1u = /* @__PURE__ */ vue_cjs_prod.defineComponent({
     };
   }
 });
-const _sfc_setup$1u = _sfc_main$1u.setup;
-_sfc_main$1u.setup = (props, ctx) => {
+const _sfc_setup$1w = _sfc_main$1w.setup;
+_sfc_main$1w.setup = (props, ctx) => {
   const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/front/Page/Carrousel.vue");
-  return _sfc_setup$1u ? _sfc_setup$1u(props, ctx) : void 0;
+  return _sfc_setup$1w ? _sfc_setup$1w(props, ctx) : void 0;
 };
-const _sfc_main$1t = /* @__PURE__ */ vue_cjs_prod.defineComponent({
+const _sfc_main$1v = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __ssrInlineRender: true,
   setup(__props) {
     const route = useRoute();
@@ -3795,14 +3795,14 @@ const _sfc_main$1t = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         _: 1
       }, _parent));
       if (vue_cjs_prod.unref(page) !== null && vue_cjs_prod.unref(page).mediaNode !== null) {
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1u, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1w, {
           "media-node": vue_cjs_prod.unref(page).mediaNode
         }, null, _parent));
       } else {
         _push(`<!---->`);
       }
       if (vue_cjs_prod.unref(page)) {
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1w, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1y, {
           page: vue_cjs_prod.unref(page),
           class: "p-3"
         }, null, _parent));
@@ -3813,11 +3813,11 @@ const _sfc_main$1t = /* @__PURE__ */ vue_cjs_prod.defineComponent({
     };
   }
 });
-const _sfc_setup$1t = _sfc_main$1t.setup;
-_sfc_main$1t.setup = (props, ctx) => {
+const _sfc_setup$1v = _sfc_main$1v.setup;
+_sfc_main$1v.setup = (props, ctx) => {
   const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/[...slug].vue");
-  return _sfc_setup$1t ? _sfc_setup$1t(props, ctx) : void 0;
+  return _sfc_setup$1v ? _sfc_setup$1v(props, ctx) : void 0;
 };
 const meta$n = void 0;
 const __nuxt_component_0$1 = vue_cjs_prod.defineComponent({
@@ -3882,7 +3882,7 @@ const useBlogArticleStore = defineStore("blog_articles", {
     }
   }
 });
-const _sfc_main$1s = /* @__PURE__ */ vue_cjs_prod.defineComponent({
+const _sfc_main$1u = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __ssrInlineRender: true,
   props: {
     initialTags: null
@@ -4050,13 +4050,13 @@ const _sfc_main$1s = /* @__PURE__ */ vue_cjs_prod.defineComponent({
     };
   }
 });
-const _sfc_setup$1s = _sfc_main$1s.setup;
-_sfc_main$1s.setup = (props, ctx) => {
+const _sfc_setup$1u = _sfc_main$1u.setup;
+_sfc_main$1u.setup = (props, ctx) => {
   const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/admin/blog/FormTags.vue");
-  return _sfc_setup$1s ? _sfc_setup$1s(props, ctx) : void 0;
+  return _sfc_setup$1u ? _sfc_setup$1u(props, ctx) : void 0;
 };
-const _sfc_main$1r = /* @__PURE__ */ vue_cjs_prod.defineComponent({
+const _sfc_main$1t = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __ssrInlineRender: true,
   props: {
     icon: { default: "ri-error-warning-fill" },
@@ -4065,7 +4065,7 @@ const _sfc_main$1r = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "relative flex flex-col items-center group" }, _attrs))}>`);
-      _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+      _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
         icon: __props.icon,
         class: __props.iconClass
       }, null, _parent));
@@ -4075,13 +4075,13 @@ const _sfc_main$1r = /* @__PURE__ */ vue_cjs_prod.defineComponent({
     };
   }
 });
-const _sfc_setup$1r = _sfc_main$1r.setup;
-_sfc_main$1r.setup = (props, ctx) => {
+const _sfc_setup$1t = _sfc_main$1t.setup;
+_sfc_main$1t.setup = (props, ctx) => {
   const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/util/Tooltip.vue");
-  return _sfc_setup$1r ? _sfc_setup$1r(props, ctx) : void 0;
+  return _sfc_setup$1t ? _sfc_setup$1t(props, ctx) : void 0;
 };
-const _sfc_main$1q = /* @__PURE__ */ vue_cjs_prod.defineComponent({
+const _sfc_main$1s = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __ssrInlineRender: true,
   props: {
     name: null,
@@ -4104,7 +4104,7 @@ const _sfc_main$1q = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       }), null, _parent));
       _push(`<label${serverRenderer.exports.ssrRenderAttr("for", __props.name)}>${serverRenderer.exports.ssrInterpolate(__props.label)} `);
       if (__props.error) {
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1r, null, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1t, null, {
           default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
               _push2(`${serverRenderer.exports.ssrInterpolate(__props.error)}`);
@@ -4123,13 +4123,13 @@ const _sfc_main$1q = /* @__PURE__ */ vue_cjs_prod.defineComponent({
     };
   }
 });
-const _sfc_setup$1q = _sfc_main$1q.setup;
-_sfc_main$1q.setup = (props, ctx) => {
+const _sfc_setup$1s = _sfc_main$1s.setup;
+_sfc_main$1s.setup = (props, ctx) => {
   const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/form/CheckboxField.vue");
-  return _sfc_setup$1q ? _sfc_setup$1q(props, ctx) : void 0;
+  return _sfc_setup$1s ? _sfc_setup$1s(props, ctx) : void 0;
 };
-const _sfc_main$1p = /* @__PURE__ */ vue_cjs_prod.defineComponent({
+const _sfc_main$1r = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __ssrInlineRender: true,
   props: {
     name: null,
@@ -4147,7 +4147,7 @@ const _sfc_main$1p = /* @__PURE__ */ vue_cjs_prod.defineComponent({
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex flex-row group py-4 px-3" }, _attrs))}>`);
       if (__props.icon) {
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
           icon: __props.icon,
           class: ["h-8 w-10 group-focus-within:stroke-2", { "fill-accent": !!__props.error, "fill-primary": !!__props.value && !__props.error, "fill-gray-500": !__props.value }]
         }, null, _parent));
@@ -4183,7 +4183,7 @@ const _sfc_main$1p = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       }, _parent));
       _push(`<label${serverRenderer.exports.ssrRenderAttr("for", __props.name)} class="${serverRenderer.exports.ssrRenderClass([{ "text-accent": !!__props.error, "text-primary": !!__props.value && !__props.error }, "h-1/2 -translate-y-full pl-0 transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full"])}">${serverRenderer.exports.ssrInterpolate(__props.label)} `);
       if (__props.error) {
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1r, null, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1t, null, {
           default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
               _push2(`${serverRenderer.exports.ssrInterpolate(__props.error)}`);
@@ -4208,11 +4208,11 @@ const _sfc_main$1p = /* @__PURE__ */ vue_cjs_prod.defineComponent({
     };
   }
 });
-const _sfc_setup$1p = _sfc_main$1p.setup;
-_sfc_main$1p.setup = (props, ctx) => {
+const _sfc_setup$1r = _sfc_main$1r.setup;
+_sfc_main$1r.setup = (props, ctx) => {
   const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/form/SelectField.vue");
-  return _sfc_setup$1p ? _sfc_setup$1p(props, ctx) : void 0;
+  return _sfc_setup$1r ? _sfc_setup$1r(props, ctx) : void 0;
 };
 function useFieldHelper(props) {
   const isDisabled = props.fieldAttrs && props.fieldAttrs.disabled === "disabled";
@@ -4240,7 +4240,7 @@ function useFieldHelper(props) {
     getColor
   };
 }
-const _sfc_main$1o = /* @__PURE__ */ vue_cjs_prod.defineComponent({
+const _sfc_main$1q = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __ssrInlineRender: true,
   props: {
     name: null,
@@ -4261,7 +4261,7 @@ const _sfc_main$1o = /* @__PURE__ */ vue_cjs_prod.defineComponent({
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex flex-row group py-4 px-3" }, _attrs))}>`);
       if (__props.icon) {
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
           icon: __props.icon,
           class: ["h-8 w-10 group-focus-within:stroke-2", [`fill-${vue_cjs_prod.unref(getColor)()}`]]
         }, null, _parent));
@@ -4278,7 +4278,7 @@ const _sfc_main$1o = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       }, __props.fieldAttrs), null, _parent));
       _push(`<label${serverRenderer.exports.ssrRenderAttr("for", __props.name)} class="${serverRenderer.exports.ssrRenderClass([{ "-top-5 pl-0": !!__props.value, "top-2": !__props.value, [`text-${vue_cjs_prod.unref(getColor)()}`]: true }, "transform transition-all absolute left-0 h-fit flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:-top-4"])}">${serverRenderer.exports.ssrInterpolate(__props.label)} `);
       if (__props.error && (!!__props.value || !vue_cjs_prod.unref(isRequired))) {
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1r, null, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1t, null, {
           default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
               _push2(`${serverRenderer.exports.ssrInterpolate(__props.error)}`);
@@ -4301,11 +4301,11 @@ const _sfc_main$1o = /* @__PURE__ */ vue_cjs_prod.defineComponent({
     };
   }
 });
-const _sfc_setup$1o = _sfc_main$1o.setup;
-_sfc_main$1o.setup = (props, ctx) => {
+const _sfc_setup$1q = _sfc_main$1q.setup;
+_sfc_main$1q.setup = (props, ctx) => {
   const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/form/TextField.vue");
-  return _sfc_setup$1o ? _sfc_setup$1o(props, ctx) : void 0;
+  return _sfc_setup$1q ? _sfc_setup$1q(props, ctx) : void 0;
 };
 const useMediaNodeStore = defineStore("media_nodes", {
   state: () => {
@@ -4378,7 +4378,7 @@ const useMediaNodeStore = defineStore("media_nodes", {
     rootNodes: (state) => state.list.value.filter((mediaNode) => !mediaNode.parent)
   }
 });
-const _sfc_main$1n = /* @__PURE__ */ vue_cjs_prod.defineComponent({
+const _sfc_main$1p = /* @__PURE__ */ vue_cjs_prod.defineComponent({
   __ssrInlineRender: true,
   props: {
     btnClass: null,
@@ -4396,13 +4396,13 @@ const _sfc_main$1n = /* @__PURE__ */ vue_cjs_prod.defineComponent({
             _push2(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(xe), null, {
               default: vue_cjs_prod.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+                  _push3(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
                     icon: props.iconComponent,
                     class: [props.btnClass, "h-6 w-6 fill-white"]
                   }, null, _parent3, _scopeId2));
                 } else {
                   return [
-                    vue_cjs_prod.createVNode(_sfc_main$1v, {
+                    vue_cjs_prod.createVNode(_sfc_main$1x, {
                       icon: props.iconComponent,
                       class: [props.btnClass, "h-6 w-6 fill-white"],
                       onMouseenter: ($event) => mouseOn.value = true,
@@ -4435,7 +4435,7 @@ const _sfc_main$1n = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 onClick: vue_cjs_prod.withModifiers(props.clickHandler, ["prevent"])
               }, {
                 default: vue_cjs_prod.withCtx(() => [
-                  vue_cjs_prod.createVNode(_sfc_main$1v, {
+                  vue_cjs_prod.createVNode(_sfc_main$1x, {
                     icon: props.iconComponent,
                     class: [props.btnClass, "h-6 w-6 fill-white"],
                     onMouseenter: ($event) => mouseOn.value = true,
@@ -4463,10 +4463,69 @@ const _sfc_main$1n = /* @__PURE__ */ vue_cjs_prod.defineComponent({
     };
   }
 });
+const _sfc_setup$1p = _sfc_main$1p.setup;
+_sfc_main$1p.setup = (props, ctx) => {
+  const ssrContext = vue_cjs_prod.useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/util/Editor/EditorBtn.vue");
+  return _sfc_setup$1p ? _sfc_setup$1p(props, ctx) : void 0;
+};
+const _sfc_main$1o = /* @__PURE__ */ vue_cjs_prod.defineComponent({
+  __ssrInlineRender: true,
+  props: {
+    item: null,
+    clickHandler: null
+  },
+  setup(__props) {
+    return (_ctx, _push, _parent, _attrs) => {
+      const _component_FileLeaf = vue_cjs_prod.resolveComponent("FileLeaf", true);
+      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex flex-col w-full pl-3 py-1" }, _attrs))}><div class="cursor-pointer hover:text-primary">${serverRenderer.exports.ssrInterpolate(__props.item.name)}</div><!--[-->`);
+      serverRenderer.exports.ssrRenderList(__props.item.children, (child) => {
+        _push(serverRenderer.exports.ssrRenderComponent(_component_FileLeaf, {
+          item: child,
+          "click-handler": __props.clickHandler
+        }, null, _parent));
+      });
+      _push(`<!--]--></div>`);
+    };
+  }
+});
+const _sfc_setup$1o = _sfc_main$1o.setup;
+_sfc_main$1o.setup = (props, ctx) => {
+  const ssrContext = vue_cjs_prod.useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/file-manager/file_arbo/FileLeaf.vue");
+  return _sfc_setup$1o ? _sfc_setup$1o(props, ctx) : void 0;
+};
+const _sfc_main$1n = /* @__PURE__ */ vue_cjs_prod.defineComponent({
+  __ssrInlineRender: true,
+  props: {
+    clickHandler: null
+  },
+  async setup(__props, { expose }) {
+    let __temp, __restore;
+    const mediaNodeStore = useMediaNodeStore();
+    const { refresh } = ([__temp, __restore] = vue_cjs_prod.withAsyncContext(async () => useAsyncData("root-media-tree", async () => {
+      await mediaNodeStore.fetchTree();
+    })), __temp = await __temp, __restore(), __temp);
+    const { tree } = storeToRefs(mediaNodeStore);
+    expose({
+      refresh
+    });
+    return (_ctx, _push, _parent, _attrs) => {
+      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex flex-col" }, _attrs))}><h2 class="mb-2">Arborescence</h2><!--[-->`);
+      serverRenderer.exports.ssrRenderList(vue_cjs_prod.unref(tree), (root) => {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+          item: root,
+          "click-handler": __props.clickHandler
+        }, null, _parent));
+      });
+      _push(`<!--]--></div>`);
+    };
+  }
+});
 const _sfc_setup$1n = _sfc_main$1n.setup;
 _sfc_main$1n.setup = (props, ctx) => {
   const ssrContext = vue_cjs_prod.useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/util/Editor/EditorBtn.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/file-manager/file_arbo/FileArbo.vue");
   return _sfc_setup$1n ? _sfc_setup$1n(props, ctx) : void 0;
 };
 const useMediaObjectStore = defineStore("media_objects", {
@@ -4546,7 +4605,7 @@ const _sfc_main$1m = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         _push(`<div class="flex flex-auto"><div class="flex flex-col"><div class="flex flex-auto"><!--[-->`);
         serverRenderer.exports.ssrRenderList(__props.thumbnails, (thumbnail, i) => {
           _push(`<div class="self-center flex-auto"><div><img${serverRenderer.exports.ssrRenderAttr("src", thumbnail.src)} class="max-h-52"><div><button class="btn-remove-thumbnail bg-error h-6 w-16 rounded-lg">`);
-          _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+          _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
             icon: "ri-close-line",
             class: "h-6 w-6"
           }, null, _parent));
@@ -4555,7 +4614,7 @@ const _sfc_main$1m = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         _push(`<!--]--></div><div class="flex flex-auto"><!--[-->`);
         serverRenderer.exports.ssrRenderList(__props.links, (link, i) => {
           _push(`<div class="flex-auto"><span>${serverRenderer.exports.ssrInterpolate(link.name)} <button class="btn-remove-thumbnail bg-error h-6 w-16 rounded-lg">`);
-          _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+          _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
             icon: "ri-close-line",
             class: "h-6 w-6"
           }, null, _parent));
@@ -4602,14 +4661,14 @@ const _sfc_main$1k = /* @__PURE__ */ vue_cjs_prod.defineComponent({
     return (_ctx, _push, _parent, _attrs) => {
       if (__props.mediaNode) {
         _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex flex-row w-full" }, _attrs))}>`);
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
           icon: "ri-home-fill",
           class: "h-6 w-6 cursor-pointer fill-primary"
         }, null, _parent));
         _push(`<!--[-->`);
         serverRenderer.exports.ssrRenderList(__props.mediaNode.breadcrumb, (crumb) => {
           _push(`<div class="inline-flex items-center cursor-pointer">\xA0`);
-          _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+          _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
             icon: "ri-arrow-right-s-line",
             class: "h-6 w-6"
           }, null, _parent));
@@ -4764,11 +4823,11 @@ const _sfc_main$1i = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         } else {
           _push(`<!---->`);
         }
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
           icon: "ri-pencil-line",
           class: "fill-primary hover:fill-primary-dark h-8 w-8 cursor-pointer"
         }, null, _parent));
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
           icon: "ri-delete-bin-line",
           class: "fill-secondary hover:fill-accent h-8 w-8 cursor-pointer"
         }, null, _parent));
@@ -4883,7 +4942,7 @@ const _sfc_main$1h = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                               }, {
                                 default: vue_cjs_prod.withCtx(({ values, errors }, _push6, _parent6, _scopeId5) => {
                                   if (_push6) {
-                                    _push6(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+                                    _push6(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
                                       name: "name",
                                       error: errors.name,
                                       value: values.name,
@@ -4893,7 +4952,7 @@ const _sfc_main$1h = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                                     _push6(`<button type="submit" class="py-3 px-4 bg-primary text-white shadow-md uppercase hover:bg-primary-dark"${_scopeId5}>Cr\xE9er le dossier</button>`);
                                   } else {
                                     return [
-                                      vue_cjs_prod.createVNode(_sfc_main$1o, {
+                                      vue_cjs_prod.createVNode(_sfc_main$1q, {
                                         name: "name",
                                         error: errors.name,
                                         value: values.name,
@@ -4923,7 +4982,7 @@ const _sfc_main$1h = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                                   "validation-schema": { name: "min:3" }
                                 }, {
                                   default: vue_cjs_prod.withCtx(({ values, errors }) => [
-                                    vue_cjs_prod.createVNode(_sfc_main$1o, {
+                                    vue_cjs_prod.createVNode(_sfc_main$1q, {
                                       name: "name",
                                       error: errors.name,
                                       value: values.name,
@@ -4958,7 +5017,7 @@ const _sfc_main$1h = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                                 "validation-schema": { name: "min:3" }
                               }, {
                                 default: vue_cjs_prod.withCtx(({ values, errors }) => [
-                                  vue_cjs_prod.createVNode(_sfc_main$1o, {
+                                  vue_cjs_prod.createVNode(_sfc_main$1q, {
                                     name: "name",
                                     error: errors.name,
                                     value: values.name,
@@ -5023,7 +5082,7 @@ const _sfc_main$1h = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                                   "validation-schema": { name: "min:3" }
                                 }, {
                                   default: vue_cjs_prod.withCtx(({ values, errors }) => [
-                                    vue_cjs_prod.createVNode(_sfc_main$1o, {
+                                    vue_cjs_prod.createVNode(_sfc_main$1q, {
                                       name: "name",
                                       error: errors.name,
                                       value: values.name,
@@ -5099,7 +5158,7 @@ const _sfc_main$1h = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                                 "validation-schema": { name: "min:3" }
                               }, {
                                 default: vue_cjs_prod.withCtx(({ values, errors }) => [
-                                  vue_cjs_prod.createVNode(_sfc_main$1o, {
+                                  vue_cjs_prod.createVNode(_sfc_main$1q, {
                                     name: "name",
                                     error: errors.name,
                                     value: values.name,
@@ -5145,6 +5204,7 @@ const _sfc_main$1g = /* @__PURE__ */ vue_cjs_prod.defineComponent({
     selectClickHandler: null,
     removeClickHandler: null,
     removeFolderClickHandler: null,
+    refreshHandler: null,
     modelValue: null,
     rootName: { default: null }
   },
@@ -5179,7 +5239,7 @@ const _sfc_main$1g = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       closeDetailPanel && closeDetailPanel();
     };
     const refresh = async (mediaNode) => {
-      if (!currentMediaNode.value || mediaNode === null) {
+      if (!currentMediaNode.value && mediaNode === null) {
         getRoots();
       } else {
         if (!!mediaNode) {
@@ -5203,11 +5263,11 @@ const _sfc_main$1g = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       _push(`</div>`);
       if (vue_cjs_prod.unref(currentMediaNode)) {
         _push(`<div class="flex-auto flex flex-col"><div class="flex flex-row h-16 items-center gap-x-2"><h2>Dossiers</h2>`);
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
           icon: "ri-folder-add-line",
           class: "fill-primary h-8 w-8 cursor-pointer"
         }, null, _parent));
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
           icon: "ri-delete-bin-line",
           class: "fill-secondary hover:fill-accent h-8 w-8 cursor-pointer"
         }, null, _parent));
@@ -5238,7 +5298,7 @@ const _sfc_main$1g = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       }
       if (!vue_cjs_prod.unref(currentMediaNode)) {
         _push(`<div class="flex-auto flex flex-col"><div class="flex flex-row h-16 items-center gap-x-2"><h2>S\xE9lectionner un dossier</h2>`);
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
           icon: "ri-folder-add-line",
           class: "fill-primary h-8 w-8 cursor-pointer"
         }, null, _parent));
@@ -5252,7 +5312,7 @@ const _sfc_main$1g = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       }
       _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1h, {
         "media-node": props.modelValue,
-        refresh,
+        refresh: __props.refreshHandler,
         dialog: folderDialog.value,
         "onUpdate:dialog": ($event) => folderDialog.value = $event
       }, null, _parent));
@@ -5385,7 +5445,7 @@ const _sfc_main$1d = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       }, _attrs), {
         default: vue_cjs_prod.withCtx(({ values, errors }, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               name: "uniqueId",
               error: errors.uniqueId,
               value: values.uniqueId,
@@ -5393,7 +5453,7 @@ const _sfc_main$1d = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               class: "w-full",
               "field-attrs": { disabled: "disabled" }
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               name: "customName",
               error: errors.customName,
               value: values.customName,
@@ -5408,7 +5468,7 @@ const _sfc_main$1d = /* @__PURE__ */ vue_cjs_prod.defineComponent({
             _push2(`<button type="submit" class="py-3 px-4 bg-primary text-white shadow-md uppercase hover:bg-primary-dark"${_scopeId}>Mettre \xE0 jour</button>`);
           } else {
             return [
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 name: "uniqueId",
                 error: errors.uniqueId,
                 value: values.uniqueId,
@@ -5416,7 +5476,7 @@ const _sfc_main$1d = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 class: "w-full",
                 "field-attrs": { disabled: "disabled" }
               }, null, 8, ["error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 name: "customName",
                 error: errors.customName,
                 value: values.customName,
@@ -5478,7 +5538,7 @@ const _sfc_main$1c = /* @__PURE__ */ vue_cjs_prod.defineComponent({
     });
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex flex-col" }, _attrs))}><div class="flex flex-row"><h2 class="mb-3">D\xE9tail du fichier</h2>`);
-      _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+      _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
         icon: "ri-close-line",
         class: "h-6 w-6 rounded-md fill-primary justify-self-end"
       }, null, _parent));
@@ -5495,7 +5555,7 @@ const _sfc_main$1c = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         _push(`<!--[-->`);
         serverRenderer.exports.ssrRenderList(item.value.thumbnails, (thumbnail) => {
           _push(`<div class="flex flex-col"><img${serverRenderer.exports.ssrRenderAttr("src", thumbnail.contentUrl)}${serverRenderer.exports.ssrRenderAttr("alt", thumbnail.customName || thumbnail.uniqueId)} class="w-fit h-auto object-scale-down">`);
-          _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+          _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
             icon: "ri-delete-bin-line",
             class: "fill-secondary hover:fill-accent h-8 w-8 cursor-pointer"
           }, null, _parent));
@@ -5530,6 +5590,7 @@ const _sfc_main$1b = /* @__PURE__ */ vue_cjs_prod.defineComponent({
     const thumbnails = vue_cjs_prod.ref([]);
     const currentMediaNode = vue_cjs_prod.ref(null);
     const fileNavigator = vue_cjs_prod.ref(null);
+    const fileArbo = vue_cjs_prod.ref(null);
     vue_cjs_prod.provide("closeDetailPanel", () => {
       selectedMediaObject.value = null;
     });
@@ -5564,6 +5625,15 @@ const _sfc_main$1b = /* @__PURE__ */ vue_cjs_prod.defineComponent({
     const removeLink = (index2) => {
       links.value.splice(index2, 1);
     };
+    const refreshAll = (mediaNode = null) => {
+      var _a2, _b;
+      (_a2 = fileNavigator.value) == null ? void 0 : _a2.refresh(mediaNode);
+      (_b = fileArbo.value) == null ? void 0 : _b.refresh();
+    };
+    const refreshNavigator = (mediaNode = null) => {
+      var _a2;
+      (_a2 = fileNavigator.value) == null ? void 0 : _a2.refresh(mediaNode);
+    };
     const handleUpload = (files) => {
       if (!currentMediaNode.value) {
         return;
@@ -5574,24 +5644,22 @@ const _sfc_main$1b = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         formData.append("file", file);
         formData.append("mediaNodeId", currentMediaNode.value.id.toString());
         mediaObjectStore.create(formData).then((res) => {
-          var _a2;
           if (res.isImage) {
             selectImage(res);
           } else {
             selectLink(res);
           }
-          (_a2 = fileNavigator.value) == null ? void 0 : _a2.refresh();
+          refreshNavigator();
         });
       }
     };
     const editMediaObject = (mediaObject) => {
       selectedMediaObject.value = mediaObject;
     };
-    const removeMediaObject = async (mediaObject, isThumbnail = false) => {
-      var _a2;
+    const removeMediaObject = async (mediaObject) => {
       try {
         await mediaObjectStore.remove(mediaObject.uniqueId);
-        (_a2 = fileNavigator.value) == null ? void 0 : _a2.refresh();
+        refreshNavigator();
         selectedMediaObject.value = null;
         notificationStore.showMessage("Media correctement supprim\xE9");
       } catch (e) {
@@ -5599,15 +5667,18 @@ const _sfc_main$1b = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       }
     };
     const removeFolderClickHandler = async (mediaNode) => {
-      var _a2;
       try {
         await mediaNodeStore.remove(mediaNode.id);
         currentMediaNode.value = null;
-        (_a2 = fileNavigator.value) == null ? void 0 : _a2.refresh(currentMediaNode.value);
+        refreshAll();
         notificationStore.showMessage("Dossier correctement supprim\xE9");
       } catch (e) {
         notificationStore.showError("Erreur dans la suppression du dossier");
       }
+    };
+    const onTreeItemClick = async (item) => {
+      var _a2;
+      await ((_a2 = fileNavigator.value) == null ? void 0 : _a2.refresh(item));
     };
     expose({
       links,
@@ -5615,7 +5686,14 @@ const _sfc_main$1b = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       reset
     });
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex flex-row" }, _attrs))}><div class="flex flex-col flex-auto w-2/3">`);
+      _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex flex-row" }, _attrs))}>`);
+      _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
+        ref_key: "fileArbo",
+        ref: fileArbo,
+        class: "flex w-1/6",
+        "click-handler": onTreeItemClick
+      }, null, _parent));
+      _push(`<div class="flex flex-col flex-auto w-1/2">`);
       _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1g, {
         ref_key: "fileNavigator",
         ref: fileNavigator,
@@ -5623,6 +5701,7 @@ const _sfc_main$1b = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         "edit-click-handler": editMediaObject,
         "remove-click-handler": removeMediaObject,
         "remove-folder-click-handler": removeFolderClickHandler,
+        "refresh-handler": refreshAll,
         "show-selection": __props.showSelection,
         modelValue: vue_cjs_prod.unref(currentMediaNode),
         "onUpdate:modelValue": ($event) => vue_cjs_prod.isRef(currentMediaNode) ? currentMediaNode.value = $event : null
@@ -5644,12 +5723,11 @@ const _sfc_main$1b = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       }
       _push(`</div>`);
       if (vue_cjs_prod.unref(selectedMediaObject)) {
-        _push(`<div class="flex w-1/3">`);
         _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1c, {
+          class: "flex w-1/3",
           "media-object": vue_cjs_prod.unref(selectedMediaObject),
           "remove-click-handler": removeMediaObject
         }, null, _parent));
-        _push(`</div>`);
       } else {
         _push(`<!---->`);
       }
@@ -5699,13 +5777,13 @@ const _sfc_main$1a = /* @__PURE__ */ vue_cjs_prod.defineComponent({
             _push2(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(xe), { class: "text-white" }, {
               default: vue_cjs_prod.withCtx((_, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+                  _push3(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
                     icon: "ri-file-transfer-line",
                     class: "h-6 w-6 fill-white"
                   }, null, _parent3, _scopeId2));
                 } else {
                   return [
-                    vue_cjs_prod.createVNode(_sfc_main$1v, {
+                    vue_cjs_prod.createVNode(_sfc_main$1x, {
                       icon: "ri-file-transfer-line",
                       class: "h-6 w-6 fill-white"
                     })
@@ -5735,7 +5813,7 @@ const _sfc_main$1a = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 onMouseout: ($event) => open = false
               }, {
                 default: vue_cjs_prod.withCtx(() => [
-                  vue_cjs_prod.createVNode(_sfc_main$1v, {
+                  vue_cjs_prod.createVNode(_sfc_main$1x, {
                     icon: "ri-file-transfer-line",
                     class: "h-6 w-6 fill-white"
                   })
@@ -6244,13 +6322,13 @@ const _sfc_main$18 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
             }, {
               default: vue_cjs_prod.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(_sfc_main$1v), {
+                  _push3(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(_sfc_main$1x), {
                     icon: "ri-font-color",
                     class: "h-6 w-6 fill-white"
                   }, null, _parent3, _scopeId2));
                 } else {
                   return [
-                    vue_cjs_prod.createVNode(vue_cjs_prod.unref(_sfc_main$1v), {
+                    vue_cjs_prod.createVNode(vue_cjs_prod.unref(_sfc_main$1x), {
                       icon: "ri-font-color",
                       class: "h-6 w-6 fill-white"
                     })
@@ -6278,7 +6356,7 @@ const _sfc_main$18 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 onClick: ($event) => dialog.value = true
               }, {
                 default: vue_cjs_prod.withCtx(() => [
-                  vue_cjs_prod.createVNode(vue_cjs_prod.unref(_sfc_main$1v), {
+                  vue_cjs_prod.createVNode(vue_cjs_prod.unref(_sfc_main$1x), {
                     icon: "ri-font-color",
                     class: "h-6 w-6 fill-white"
                   })
@@ -6787,13 +6865,13 @@ const _sfc_main$17 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
             }, {
               default: vue_cjs_prod.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(_sfc_main$1v), {
+                  _push3(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(_sfc_main$1x), {
                     icon: "ri-paint-fill",
                     class: "h-6 w-6 fill-white"
                   }, null, _parent3, _scopeId2));
                 } else {
                   return [
-                    vue_cjs_prod.createVNode(vue_cjs_prod.unref(_sfc_main$1v), {
+                    vue_cjs_prod.createVNode(vue_cjs_prod.unref(_sfc_main$1x), {
                       icon: "ri-paint-fill",
                       class: "h-6 w-6 fill-white"
                     })
@@ -6821,7 +6899,7 @@ const _sfc_main$17 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 onClick: ($event) => dialog.value = true
               }, {
                 default: vue_cjs_prod.withCtx(() => [
-                  vue_cjs_prod.createVNode(vue_cjs_prod.unref(_sfc_main$1v), {
+                  vue_cjs_prod.createVNode(vue_cjs_prod.unref(_sfc_main$1x), {
                     icon: "ri-paint-fill",
                     class: "h-6 w-6 fill-white"
                   })
@@ -7333,13 +7411,13 @@ const _sfc_main$16 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
             _push2(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(xe), { class: "text-white" }, {
               default: vue_cjs_prod.withCtx((_, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(_sfc_main$1v), {
+                  _push3(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(_sfc_main$1x), {
                     icon: "ri-font-size",
                     class: "h-6 w-6 fill-white"
                   }, null, _parent3, _scopeId2));
                 } else {
                   return [
-                    vue_cjs_prod.createVNode(vue_cjs_prod.unref(_sfc_main$1v), {
+                    vue_cjs_prod.createVNode(vue_cjs_prod.unref(_sfc_main$1x), {
                       icon: "ri-font-size",
                       class: "h-6 w-6 fill-white"
                     })
@@ -7369,7 +7447,7 @@ const _sfc_main$16 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 onMouseout: ($event) => open = false
               }, {
                 default: vue_cjs_prod.withCtx(() => [
-                  vue_cjs_prod.createVNode(vue_cjs_prod.unref(_sfc_main$1v), {
+                  vue_cjs_prod.createVNode(vue_cjs_prod.unref(_sfc_main$1x), {
                     icon: "ri-font-size",
                     class: "h-6 w-6 fill-white"
                   })
@@ -7951,7 +8029,7 @@ const _sfc_main$15 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex flex-col" }, _attrs))}><div class="${serverRenderer.exports.ssrRenderClass([{ "text-accent": !!vue_cjs_prod.unref(errorMessage), "text-primary": !!__props.value && !vue_cjs_prod.unref(errorMessage) }, "flex"])}">${serverRenderer.exports.ssrInterpolate(__props.label)} `);
       if (vue_cjs_prod.unref(errorMessage)) {
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1r, null, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1t, null, {
           default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
               _push2(`${serverRenderer.exports.ssrInterpolate(vue_cjs_prod.unref(errorMessage))}`);
@@ -7969,25 +8047,25 @@ const _sfc_main$15 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       _push(`</div>`);
       if (vue_cjs_prod.unref(editor)) {
         _push(`<div class="editor flex flex-wrap sticky top-0 z-10">`);
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
           label: "Gras",
           "btn-class": { "fill-stone-400": vue_cjs_prod.unref(editor).isActive("bold") },
           "click-handler": () => vue_cjs_prod.unref(editor).chain().focus().toggleBold().run(),
           "icon-component": "ri-bold"
         }, null, _parent));
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
           label: "Italique",
           "btn-class": { "fill-stone-400": vue_cjs_prod.unref(editor).isActive("italic") },
           "click-handler": () => vue_cjs_prod.unref(editor).chain().focus().toggleItalic().run(),
           "icon-component": "ri-italic"
         }, null, _parent));
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
           label: "Barrer",
           "btn-class": { "grey darken-3": vue_cjs_prod.unref(editor).isActive("strike") },
           "click-handler": () => vue_cjs_prod.unref(editor).chain().focus().toggleStrike().run(),
           "icon-component": "ri-strikethrough"
         }, null, _parent));
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
           label: "Souligner",
           "btn-class": { "grey darken-3": vue_cjs_prod.unref(editor).isActive("strike") },
           "click-handler": () => vue_cjs_prod.unref(editor).commands.toggleUnderline(),
@@ -7996,136 +8074,136 @@ const _sfc_main$15 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$18, { editor: vue_cjs_prod.unref(editor) }, null, _parent));
         _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$17, { editor: vue_cjs_prod.unref(editor) }, null, _parent));
         _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$16, { editor: vue_cjs_prod.unref(editor) }, null, _parent));
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
           label: "Supprimer le style de la s\xE9lection",
           "click-handler": () => vue_cjs_prod.unref(editor).chain().focus().unsetAllMarks().run(),
           "icon-component": "ri-format-clear"
         }, null, _parent));
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
           label: "Supprimer le style du bloc",
           "click-handler": () => vue_cjs_prod.unref(editor).chain().focus().clearNodes().run(),
           "icon-component": "ri-eraser-line"
         }, null, _parent));
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
           label: "Paragraphe",
           "btn-class": { "grey darken-3": vue_cjs_prod.unref(editor).isActive("paragraph") },
           "click-handler": () => vue_cjs_prod.unref(editor).chain().focus().setParagraph().run(),
           "icon-component": "ri-paragraph"
         }, null, _parent));
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
           label: "Taille xxl",
           "btn-class": { "grey darken-3": vue_cjs_prod.unref(editor).isActive("heading", { level: 1 }) },
           "click-handler": () => vue_cjs_prod.unref(editor).chain().focus().toggleHeading({ level: 1 }).run(),
           "icon-component": "ri-h-1"
         }, null, _parent));
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
           label: "Taille xl",
           "btn-class": { "grey darken-3": vue_cjs_prod.unref(editor).isActive("heading", { level: 2 }) },
           "click-handler": () => vue_cjs_prod.unref(editor).chain().focus().toggleHeading({ level: 2 }).run(),
           "icon-component": "ri-h-2"
         }, null, _parent));
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
           label: "Taille l",
           "btn-class": { "grey darken-3": vue_cjs_prod.unref(editor).isActive("heading", { level: 3 }) },
           "click-handler": () => vue_cjs_prod.unref(editor).chain().focus().toggleHeading({ level: 3 }).run(),
           "icon-component": "ri-h-3"
         }, null, _parent));
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
           label: "Taille m",
           "btn-class": { "grey darken-3": vue_cjs_prod.unref(editor).isActive("heading", { level: 4 }) },
           "click-handler": () => vue_cjs_prod.unref(editor).chain().focus().toggleHeading({ level: 4 }).run(),
           "icon-component": "ri-h-4"
         }, null, _parent));
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
           label: "Taille s",
           "btn-class": { "grey darken-3": vue_cjs_prod.unref(editor).isActive("heading", { level: 5 }) },
           "click-handler": () => vue_cjs_prod.unref(editor).chain().focus().toggleHeading({ level: 5 }).run(),
           "icon-component": "ri-h-5"
         }, null, _parent));
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
           label: "Taille xs",
           "btn-class": { "grey darken-3": vue_cjs_prod.unref(editor).isActive("heading", { level: 6 }) },
           "click-handler": () => vue_cjs_prod.unref(editor).chain().focus().toggleHeading({ level: 6 }).run(),
           "icon-component": "ri-h-6"
         }, null, _parent));
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
           label: "Liste",
           "btn-class": { "grey darken-3": vue_cjs_prod.unref(editor).isActive("bulletList") },
           "click-handler": () => vue_cjs_prod.unref(editor).chain().focus().toggleBulletList().run(),
           "icon-component": "ri-list-unordered"
         }, null, _parent));
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
           label: "Liste num\xE9rot\xE9e",
           "btn-class": { "grey darken-3": vue_cjs_prod.unref(editor).isActive("orderedList") },
           "click-handler": () => vue_cjs_prod.unref(editor).chain().focus().toggleOrderedList().run(),
           "icon-component": "ri-list-ordered"
         }, null, _parent));
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
           label: "Bloc de code",
           "btn-class": { "grey darken-3": vue_cjs_prod.unref(editor).isActive("codeBlock") },
           "click-handler": () => vue_cjs_prod.unref(editor).chain().focus().toggleCodeBlock().run(),
           "icon-component": "ri-code-line"
         }, null, _parent));
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
           label: "Citation",
           "btn-class": { "grey darken-3": vue_cjs_prod.unref(editor).isActive("blockquote") },
           "click-handler": () => vue_cjs_prod.unref(editor).chain().focus().toggleCodeBlock().run(),
           "icon-component": "ri-double-quotes-l"
         }, null, _parent));
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
           label: "S\xE9parateur horizontal",
           "click-handler": () => vue_cjs_prod.unref(editor).chain().focus().setHorizontalRule().run(),
           "icon-component": "ri-separator"
         }, null, _parent));
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
           label: "Undo",
           "click-handler": () => vue_cjs_prod.unref(editor).chain().focus().undo().run(),
           "icon-component": "ri-arrow-go-back-line"
         }, null, _parent));
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
           label: "Redo",
           "click-handler": () => vue_cjs_prod.unref(editor).chain().focus().redo().run(),
           "icon-component": "ri-arrow-go-forward-line"
         }, null, _parent));
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
           label: "Aligner \xE0 gauche",
           "btn-class": { "grey darken-3": vue_cjs_prod.unref(editor).isActive({ textAlign: "left" }) },
           "click-handler": () => vue_cjs_prod.unref(editor).chain().focus().setTextAlign("left").run(),
           "icon-component": "ri-align-left"
         }, null, _parent));
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
           label: "Centrer",
           "btn-class": { "grey darken-3": vue_cjs_prod.unref(editor).isActive({ textAlign: "center" }) },
           "click-handler": () => vue_cjs_prod.unref(editor).chain().focus().setTextAlign("center").run(),
           "icon-component": "ri-align-center"
         }, null, _parent));
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
           label: "Aligner \xE0 droite",
           "btn-class": { "grey darken-3": vue_cjs_prod.unref(editor).isActive({ textAlign: "right" }) },
           "click-handler": () => vue_cjs_prod.unref(editor).chain().focus().setTextAlign("right").run(),
           "icon-component": "ri-align-right"
         }, null, _parent));
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
           label: "Justifier",
           "btn-class": { "grey darken-3": vue_cjs_prod.unref(editor).isActive({ textAlign: "justify" }) },
           "click-handler": () => vue_cjs_prod.unref(editor).chain().focus().setTextAlign("justify").run(),
           "icon-component": "ri-align-justify"
         }, null, _parent));
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
           label: "Ajouter une image",
           "btn-class": null,
           "click-handler": addImage,
           "icon-component": "ri-image-line"
         }, null, _parent));
         _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1a, { editor: vue_cjs_prod.unref(editor) }, null, _parent));
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
           label: "Ajouter un lien",
           "click-handler": setLink,
           "btn-class": { "is-active": vue_cjs_prod.unref(editor).isActive("link") },
           "icon-component": "ri-link"
         }, null, _parent));
         if (vue_cjs_prod.unref(editor).isActive("link")) {
-          _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
+          _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
             label: "Supprimer le lien",
             "icon-component": "ri-link-unlink",
             "click-handler": () => vue_cjs_prod.unref(editor).chain().focus().unsetLink().run()
@@ -8134,7 +8212,7 @@ const _sfc_main$15 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
           _push(`<!---->`);
         }
         serverRenderer.exports.ssrRenderSlot(_ctx.$slots, "supplemental_btns", {}, null, _push, _parent);
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1n, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
           label: "Supprimer le contenu",
           "icon-component": "ri-delete-bin-2-line",
           "click-handler": clearContent
@@ -8194,20 +8272,20 @@ const _sfc_main$14 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         default: vue_cjs_prod.withCtx(({ values, errors }, _push2, _parent2, _scopeId) => {
           var _a2, _b;
           if (_push2) {
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               name: "title",
               error: errors.title,
               value: values.title,
               label: "Titre",
               class: "w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1s, {
               name: "isPublished",
               error: errors.isPublished,
               label: "Publier",
               class: "w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1r, {
               name: "mediaNode",
               options: vue_cjs_prod.unref(mediaNodes),
               error: errors.mediaNode,
@@ -8215,11 +8293,11 @@ const _sfc_main$14 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               label: "Gallerie",
               class: "w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1s, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1u, {
               class: "w-1/2",
               "initial-tags": (_a2 = vue_cjs_prod.unref(item).tags) != null ? _a2 : []
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               as: "textarea",
               type: "textarea",
               name: "preview",
@@ -8261,20 +8339,20 @@ const _sfc_main$14 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
             _push2(`<div class="flex w-full justify-end px-3"${_scopeId}><button type="submit" class="py-3 px-4 bg-primary text-white shadow-md uppercase hover:bg-primary-dark"${_scopeId}>Sauvegarder</button><button type="reset" class="py-3 px-4 bg-secondary text-white shadow-md uppercase hover:bg-accent"${_scopeId}>R\xE9initialiser</button></div>`);
           } else {
             return [
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 name: "title",
                 error: errors.title,
                 value: values.title,
                 label: "Titre",
                 class: "w-1/2"
               }, null, 8, ["error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1q, {
+              vue_cjs_prod.createVNode(_sfc_main$1s, {
                 name: "isPublished",
                 error: errors.isPublished,
                 label: "Publier",
                 class: "w-1/2"
               }, null, 8, ["error"]),
-              vue_cjs_prod.createVNode(_sfc_main$1p, {
+              vue_cjs_prod.createVNode(_sfc_main$1r, {
                 name: "mediaNode",
                 options: vue_cjs_prod.unref(mediaNodes),
                 error: errors.mediaNode,
@@ -8282,11 +8360,11 @@ const _sfc_main$14 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 label: "Gallerie",
                 class: "w-1/2"
               }, null, 8, ["options", "error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1s, {
+              vue_cjs_prod.createVNode(_sfc_main$1u, {
                 class: "w-1/2",
                 "initial-tags": (_b = vue_cjs_prod.unref(item).tags) != null ? _b : []
               }, null, 8, ["initial-tags"]),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 as: "textarea",
                 type: "textarea",
                 name: "preview",
@@ -8666,14 +8744,14 @@ const _sfc_main$10 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       }, {
         default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
               icon: "ri-add-line",
               class: "fill-white w-8 h-8"
             }, null, _parent2, _scopeId));
             _push2(`<div class="pl-2"${_scopeId}>Cr\xE9er un article de blog</div>`);
           } else {
             return [
-              vue_cjs_prod.createVNode(_sfc_main$1v, {
+              vue_cjs_prod.createVNode(_sfc_main$1x, {
                 icon: "ri-add-line",
                 class: "fill-white w-8 h-8"
               }),
@@ -8692,13 +8770,13 @@ const _sfc_main$10 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         }, {
           default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
                 icon: "ri-edit-line",
                 class: "fill-white w-4 h-4"
               }, null, _parent2, _scopeId));
             } else {
               return [
-                vue_cjs_prod.createVNode(_sfc_main$1v, {
+                vue_cjs_prod.createVNode(_sfc_main$1x, {
                   icon: "ri-edit-line",
                   class: "fill-white w-4 h-4"
                 })
@@ -8708,7 +8786,7 @@ const _sfc_main$10 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
           _: 2
         }, _parent));
         _push(`</div><div class="bg-accent flex-auto flex items-stretch justify-center"><div class="w-full flex items-center justify-center cursor-pointer">`);
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
           icon: "ri-delete-bin-line",
           class: "fill-white w-4 h-4"
         }, null, _parent));
@@ -8777,20 +8855,20 @@ const _sfc_main$$ = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       }, _attrs), {
         default: vue_cjs_prod.withCtx(({ values, errors }, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               name: "name",
               error: errors.name,
               value: values.name,
               label: "Titre",
               class: "w-full"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1s, {
               name: "isPublished",
               error: errors.isPublished,
               label: "Publier",
               class: "w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1s, {
               name: "showInMenu",
               error: errors.showInMenu,
               label: "Afficher dans le menu",
@@ -8799,20 +8877,20 @@ const _sfc_main$$ = /* @__PURE__ */ vue_cjs_prod.defineComponent({
             _push2(`<div class="flex w-full justify-end px-3"${_scopeId}><button type="submit" class="py-3 px-4 bg-primary text-white shadow-md uppercase hover:bg-primary-dark"${_scopeId}>Sauvegarder</button><button type="reset" class="py-3 px-4 bg-secondary text-white shadow-md uppercase hover:bg-accent"${_scopeId}>R\xE9initialiser</button></div>`);
           } else {
             return [
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 name: "name",
                 error: errors.name,
                 value: values.name,
                 label: "Titre",
                 class: "w-full"
               }, null, 8, ["error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1q, {
+              vue_cjs_prod.createVNode(_sfc_main$1s, {
                 name: "isPublished",
                 error: errors.isPublished,
                 label: "Publier",
                 class: "w-1/2"
               }, null, 8, ["error"]),
-              vue_cjs_prod.createVNode(_sfc_main$1q, {
+              vue_cjs_prod.createVNode(_sfc_main$1s, {
                 name: "showInMenu",
                 error: errors.showInMenu,
                 label: "Afficher dans le menu",
@@ -8963,14 +9041,14 @@ const _sfc_main$Y = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       }, {
         default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
               icon: "ri-add-line",
               class: "fill-white w-8 h-8"
             }, null, _parent2, _scopeId));
             _push2(`<div class="pl-2"${_scopeId}>Cr\xE9er une cat\xE9gorie</div>`);
           } else {
             return [
-              vue_cjs_prod.createVNode(_sfc_main$1v, {
+              vue_cjs_prod.createVNode(_sfc_main$1x, {
                 icon: "ri-add-line",
                 class: "fill-white w-8 h-8"
               }),
@@ -8989,13 +9067,13 @@ const _sfc_main$Y = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         }, {
           default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
                 icon: "ri-edit-line",
                 class: "fill-white w-4 h-4"
               }, null, _parent2, _scopeId));
             } else {
               return [
-                vue_cjs_prod.createVNode(_sfc_main$1v, {
+                vue_cjs_prod.createVNode(_sfc_main$1x, {
                   icon: "ri-edit-line",
                   class: "fill-white w-4 h-4"
                 })
@@ -9005,7 +9083,7 @@ const _sfc_main$Y = /* @__PURE__ */ vue_cjs_prod.defineComponent({
           _: 2
         }, _parent));
         _push(`</div><div class="bg-secondary hover:bg-accent flex-auto flex items-stretch justify-center"><div class="w-full flex items-center justify-center cursor-pointer">`);
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
           icon: "ri-delete-bin-line",
           class: "fill-white w-4 h-4"
         }, null, _parent));
@@ -9095,13 +9173,13 @@ const _sfc_main$W = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         }, {
           default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
                 icon: "ri-eye-fill",
                 class: "fill-white w-8 h-8"
               }, null, _parent2, _scopeId));
             } else {
               return [
-                vue_cjs_prod.createVNode(_sfc_main$1v, {
+                vue_cjs_prod.createVNode(_sfc_main$1x, {
                   icon: "ri-eye-fill",
                   class: "fill-white w-8 h-8"
                 })
@@ -9208,13 +9286,13 @@ const _sfc_main$T = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         }, {
           default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
                 icon: "ri-eye-fill",
                 class: "fill-white w-8 h-8"
               }, null, _parent2, _scopeId));
             } else {
               return [
-                vue_cjs_prod.createVNode(_sfc_main$1v, {
+                vue_cjs_prod.createVNode(_sfc_main$1x, {
                   icon: "ri-eye-fill",
                   class: "fill-white w-8 h-8"
                 })
@@ -9350,13 +9428,13 @@ const _sfc_main$Q = /* @__PURE__ */ vue_cjs_prod.defineComponent({
             _push2(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(xe), null, {
               default: vue_cjs_prod.withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+                  _push3(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
                     icon: "ri-download-cloud-line",
                     class: "h-6 w-6 fill-white"
                   }, null, _parent3, _scopeId2));
                 } else {
                   return [
-                    vue_cjs_prod.createVNode(_sfc_main$1v, {
+                    vue_cjs_prod.createVNode(_sfc_main$1x, {
                       icon: "ri-download-cloud-line",
                       class: "h-6 w-6 fill-white",
                       onMouseenter: ($event) => mouseOn.value = true,
@@ -9389,7 +9467,7 @@ const _sfc_main$Q = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 onClick: vue_cjs_prod.withModifiers(($event) => dialog.value = true, ["prevent"])
               }, {
                 default: vue_cjs_prod.withCtx(() => [
-                  vue_cjs_prod.createVNode(_sfc_main$1v, {
+                  vue_cjs_prod.createVNode(_sfc_main$1x, {
                     icon: "ri-download-cloud-line",
                     class: "h-6 w-6 fill-white",
                     onMouseenter: ($event) => mouseOn.value = true,
@@ -9743,33 +9821,33 @@ const _sfc_main$P = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       }, _attrs), {
         default: vue_cjs_prod.withCtx(({ values, errors }, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               name: "title",
               error: errors.title,
               value: values.title,
               label: "Titre",
               class: "w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               name: "url",
               error: errors.url,
               value: values.url,
               label: "URL",
               class: "w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1s, {
               name: "isPublished",
               error: errors.isPublished,
               label: "Publier",
               class: "w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1s, {
               name: "showInMenu",
               error: errors.showInMenu,
               label: "Afficher dans le menu",
               class: "w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1r, {
               name: "category",
               options: vue_cjs_prod.unref(categories),
               error: errors.category,
@@ -9777,7 +9855,7 @@ const _sfc_main$P = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               label: "Cat\xE9gorie",
               class: "w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1p, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1r, {
               name: "mediaNode",
               options: vue_cjs_prod.unref(mediaNodes),
               error: errors.mediaNode,
@@ -9850,33 +9928,33 @@ const _sfc_main$P = /* @__PURE__ */ vue_cjs_prod.defineComponent({
             _push2(`<div class="flex w-full justify-end px-3"${_scopeId}><button type="submit" class="py-3 px-4 bg-primary text-white shadow-md uppercase hover:bg-primary-dark"${_scopeId}>Sauvegarder</button><button type="reset" class="py-3 px-4 bg-secondary text-white shadow-md uppercase hover:bg-accent"${_scopeId}>R\xE9initialiser</button></div>`);
           } else {
             return [
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 name: "title",
                 error: errors.title,
                 value: values.title,
                 label: "Titre",
                 class: "w-1/2"
               }, null, 8, ["error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 name: "url",
                 error: errors.url,
                 value: values.url,
                 label: "URL",
                 class: "w-1/2"
               }, null, 8, ["error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1q, {
+              vue_cjs_prod.createVNode(_sfc_main$1s, {
                 name: "isPublished",
                 error: errors.isPublished,
                 label: "Publier",
                 class: "w-1/2"
               }, null, 8, ["error"]),
-              vue_cjs_prod.createVNode(_sfc_main$1q, {
+              vue_cjs_prod.createVNode(_sfc_main$1s, {
                 name: "showInMenu",
                 error: errors.showInMenu,
                 label: "Afficher dans le menu",
                 class: "w-1/2"
               }, null, 8, ["error"]),
-              vue_cjs_prod.createVNode(_sfc_main$1p, {
+              vue_cjs_prod.createVNode(_sfc_main$1r, {
                 name: "category",
                 options: vue_cjs_prod.unref(categories),
                 error: errors.category,
@@ -9884,7 +9962,7 @@ const _sfc_main$P = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 label: "Cat\xE9gorie",
                 class: "w-1/2"
               }, null, 8, ["options", "error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1p, {
+              vue_cjs_prod.createVNode(_sfc_main$1r, {
                 name: "mediaNode",
                 options: vue_cjs_prod.unref(mediaNodes),
                 error: errors.mediaNode,
@@ -10091,14 +10169,14 @@ const _sfc_main$M = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       }, {
         default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
               icon: "ri-add-line",
               class: "fill-white w-8 h-8"
             }, null, _parent2, _scopeId));
             _push2(`<div class="pl-2"${_scopeId}>Cr\xE9er une page</div>`);
           } else {
             return [
-              vue_cjs_prod.createVNode(_sfc_main$1v, {
+              vue_cjs_prod.createVNode(_sfc_main$1x, {
                 icon: "ri-add-line",
                 class: "fill-white w-8 h-8"
               }),
@@ -10117,13 +10195,13 @@ const _sfc_main$M = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         }, {
           default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
                 icon: "ri-edit-line",
                 class: "fill-white w-4 h-4"
               }, null, _parent2, _scopeId));
             } else {
               return [
-                vue_cjs_prod.createVNode(_sfc_main$1v, {
+                vue_cjs_prod.createVNode(_sfc_main$1x, {
                   icon: "ri-edit-line",
                   class: "fill-white w-4 h-4"
                 })
@@ -10133,7 +10211,7 @@ const _sfc_main$M = /* @__PURE__ */ vue_cjs_prod.defineComponent({
           _: 2
         }, _parent));
         _push(`</div><div class="bg-accent flex-auto flex items-stretch justify-center"><div class="w-full flex items-center justify-center cursor-pointer">`);
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
           icon: "ri-delete-bin-line",
           class: "fill-white w-4 h-4"
         }, null, _parent));
@@ -10218,7 +10296,7 @@ const _sfc_main$K = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         _: 1
       }, _parent));
       if (vue_cjs_prod.unref(article) !== null && vue_cjs_prod.unref(article).mediaNode !== null) {
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1u, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1w, {
           "media-node": vue_cjs_prod.unref(article).mediaNode
         }, null, _parent));
       } else {
@@ -10282,7 +10360,7 @@ const _sfc_main$I = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         _push(`<div class="${serverRenderer.exports.ssrRenderClass([{ "bg-primary-dark": vue_cjs_prod.unref(activeTags).indexOf(tag) !== -1, "bg-primary": vue_cjs_prod.unref(activeTags).indexOf(tag) === -1 }, "text-white uppercase px-2 py-1 rounded-tl-lg rounded-br-lg mx-1 text-xs cursor-pointer w-fit h-fit hover:bg-primary-dark"])}">${serverRenderer.exports.ssrInterpolate(tag)}</div>`);
       });
       _push(`<!--]--><div class="${serverRenderer.exports.ssrRenderClass([{ "bg-primary-dark": vue_cjs_prod.unref(activeTags).length === 0, "bg-primary": vue_cjs_prod.unref(activeTags).length > 0 }, "fill-white uppercase px-2 py-1 rounded-tl-lg rounded-br-lg mx-1 text-xs cursor-pointer w-fit h-fit hover:bg-primary-dark"])}">`);
-      _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+      _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
         icon: "ri-close-circle-line",
         class: "h-4 w-4"
       }, null, _parent));
@@ -10334,7 +10412,7 @@ const _sfc_main$H = /* @__PURE__ */ vue_cjs_prod.defineComponent({
           _push(`<div class="bg-primary-dark text-white uppercase px-2 py-1 rounded-tl-lg rounded-br-lg mx-1 text-xs cursor-pointer">${serverRenderer.exports.ssrInterpolate(tag)}</div>`);
         });
         _push(`<!--]-->`);
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
           icon: "ri-arrow-right-s-line",
           class: "h-4 w-4"
         }, null, _parent));
@@ -10396,7 +10474,7 @@ const _sfc_main$G = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         _: 1
       }, _parent));
       if (vue_cjs_prod.unref(page)) {
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1w, { page: vue_cjs_prod.unref(page) }, null, _parent));
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1y, { page: vue_cjs_prod.unref(page) }, null, _parent));
       } else {
         _push(`<div><p> Pour nous contacter tu peux nous envoyer un email \xE0 <a href="mailto:contact@lestransalpins.org" title="Envoyer un email aux transalpins">contact@lestransalpins.org</a> ou bien remplir le formulaire suivant.</p><p> Dans ce cas tu recevras un email de confirmation ou bien regarde dans tes spams si ce n&#39;est pas le cas. </p></div>`);
       }
@@ -10406,7 +10484,7 @@ const _sfc_main$G = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       }, {
         default: vue_cjs_prod.withCtx(({ values, errors }, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               icon: "ri-mail-line",
               type: "email",
               name: "email",
@@ -10415,7 +10493,7 @@ const _sfc_main$G = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               label: "Email",
               class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               icon: "ri-phone-line",
               type: "phoneNumber",
               name: "phoneNumber",
@@ -10424,7 +10502,7 @@ const _sfc_main$G = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               label: "Num\xE9ro de t\xE9l\xE9phone",
               class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               type: "firstName",
               name: "firstName",
               error: errors.firstName,
@@ -10432,7 +10510,7 @@ const _sfc_main$G = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               label: "Pr\xE9nom",
               class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               type: "lastName",
               name: "lastName",
               error: errors.lastName,
@@ -10452,7 +10530,7 @@ const _sfc_main$G = /* @__PURE__ */ vue_cjs_prod.defineComponent({
             }, null, _parent2, _scopeId));
             _push2(`<label for="subject" class="${serverRenderer.exports.ssrRenderClass([{ "h-1/2 -translate-y-full pl-0": !!values.subject, "text-accent": !!errors.subject, "text-primary": !!values.subject && !errors.subject }, "transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full"])}"${_scopeId}>Sujet `);
             if (errors.subject) {
-              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1r, null, {
+              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1t, null, {
                 default: vue_cjs_prod.withCtx((_, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
                     _push3(`${serverRenderer.exports.ssrInterpolate(errors.subject)}`);
@@ -10469,7 +10547,7 @@ const _sfc_main$G = /* @__PURE__ */ vue_cjs_prod.defineComponent({
             }
             _push2(`</label><div class="${serverRenderer.exports.ssrRenderClass([{ "border-accent": !!errors.subject, "border-primary": !!values.subject && !errors.subject, "border-gray-500": !values.subject }, "absolute bottom-0 w-full border-b"])}"${_scopeId}></div></div></div><div class="flex flex-col w-full group py-4 px-3"${_scopeId}><div class="flex flex-row"${_scopeId}><label for="content" class="${serverRenderer.exports.ssrRenderClass([{ "text-accent": !!errors.content, "text-primary": !!values.content && !errors.content }, "w-fit self-center"])}"${_scopeId}>Message</label>`);
             if (errors.content) {
-              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1r, null, {
+              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1t, null, {
                 default: vue_cjs_prod.withCtx((_, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
                     _push3(`${serverRenderer.exports.ssrInterpolate(errors.content)}`);
@@ -10498,7 +10576,7 @@ const _sfc_main$G = /* @__PURE__ */ vue_cjs_prod.defineComponent({
             _push2(`</div><button type="submit" class="py-3 px-4 bg-primary text-white shadow-md uppercase hover:bg-primary-dark"${_scopeId}>Envoyer</button><button type="reset" class="py-3 px-4 bg-secondary text-white shadow-md uppercase hover:bg-accent"${_scopeId}>R\xE9initialiser</button>`);
           } else {
             return [
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 icon: "ri-mail-line",
                 type: "email",
                 name: "email",
@@ -10507,7 +10585,7 @@ const _sfc_main$G = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 label: "Email",
                 class: "w-full md:w-1/2"
               }, null, 8, ["error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 icon: "ri-phone-line",
                 type: "phoneNumber",
                 name: "phoneNumber",
@@ -10516,7 +10594,7 @@ const _sfc_main$G = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 label: "Num\xE9ro de t\xE9l\xE9phone",
                 class: "w-full md:w-1/2"
               }, null, 8, ["error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 type: "firstName",
                 name: "firstName",
                 error: errors.firstName,
@@ -10524,7 +10602,7 @@ const _sfc_main$G = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 label: "Pr\xE9nom",
                 class: "w-full md:w-1/2"
               }, null, 8, ["error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 type: "lastName",
                 name: "lastName",
                 error: errors.lastName,
@@ -10548,7 +10626,7 @@ const _sfc_main$G = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                     class: [{ "h-1/2 -translate-y-full pl-0": !!values.subject, "text-accent": !!errors.subject, "text-primary": !!values.subject && !errors.subject }, "transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full"]
                   }, [
                     vue_cjs_prod.createTextVNode("Sujet "),
-                    errors.subject ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(_sfc_main$1r, { key: 0 }, {
+                    errors.subject ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(_sfc_main$1t, { key: 0 }, {
                       default: vue_cjs_prod.withCtx(() => [
                         vue_cjs_prod.createTextVNode(vue_cjs_prod.toDisplayString(errors.subject), 1)
                       ]),
@@ -10566,7 +10644,7 @@ const _sfc_main$G = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                     for: "content",
                     class: ["w-fit self-center", { "text-accent": !!errors.content, "text-primary": !!values.content && !errors.content }]
                   }, "Message", 2),
-                  errors.content ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(_sfc_main$1r, { key: 0 }, {
+                  errors.content ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(_sfc_main$1t, { key: 0 }, {
                     default: vue_cjs_prod.withCtx(() => [
                       vue_cjs_prod.createTextVNode(vue_cjs_prod.toDisplayString(errors.content), 1)
                     ]),
@@ -10632,7 +10710,7 @@ const _sfc_main$F = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         _push(`<div class="bg-primary-dark text-white uppercase px-2 py-1 rounded-tl-lg rounded-br-lg mx-1 mb-1 text-xs cursor-pointer">${serverRenderer.exports.ssrInterpolate(tag)}</div>`);
       });
       _push(`<!--]--></div><div class="pt-2 text-primary-dark fill-primary-dark flex uppercase text-xs">`);
-      _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+      _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
         icon: "ri-arrow-right-s-line",
         class: "h-4 w-4"
       }, null, _parent));
@@ -10673,14 +10751,14 @@ const _sfc_main$E = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       const _component_Title = vue_cjs_prod.resolveComponent("Title");
       _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex bg-white flex-auto flex-col" }, _attrs))}>`);
       if (vue_cjs_prod.unref(homePage) !== null && vue_cjs_prod.unref(homePage).mediaNode !== null) {
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1u, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1w, {
           "media-node": vue_cjs_prod.unref(homePage).mediaNode
         }, null, _parent));
       } else {
         _push(`<!---->`);
       }
       if (vue_cjs_prod.unref(homePage)) {
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1w, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1y, {
           page: vue_cjs_prod.unref(homePage),
           class: "md:w-4/5"
         }, null, _parent));
@@ -10820,7 +10898,7 @@ const _sfc_main$D = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         default: vue_cjs_prod.withCtx(({ values, errors }, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`<div class="flex flex-row w-full group py-4 px-3"${_scopeId}>`);
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
               icon: "ri-mail-line",
               class: ["h-8 w-10 group-focus-within:stroke-2", { "fill-accent": !!errors.email, "fill-primary": !!values.email && !errors.email, "fill-gray-500": !values.email }]
             }, null, _parent2, _scopeId));
@@ -10835,7 +10913,7 @@ const _sfc_main$D = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               validateOnInput: true
             }, null, _parent2, _scopeId));
             _push2(`<label for="email" class="${serverRenderer.exports.ssrRenderClass([{ "h-1/2 -translate-y-full pl-0": !!values.email, "text-accent": !!errors.email, "text-primary": !!values.email && !errors.email }, "transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full"])}"${_scopeId}>Email</label><div class="${serverRenderer.exports.ssrRenderClass([{ "border-accent": !!errors.email, "border-primary": !!values.email && !errors.email, "border-gray-500": !values.email }, "absolute bottom-0 -ml-8 w-[calc(100%_+_2rem)] border-b"])}"${_scopeId}></div></div></div><div class="flex flex-row w-full group py-4 px-3"${_scopeId}>`);
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
               icon: "ri-key-fill",
               class: ["h-8 w-10 group-focus-within:stroke-2", { "fill-accent": !!errors.password, "fill-primary": !!values.password && !errors.password, "fill-gray-500": !values.password }]
             }, null, _parent2, _scopeId));
@@ -10853,7 +10931,7 @@ const _sfc_main$D = /* @__PURE__ */ vue_cjs_prod.defineComponent({
           } else {
             return [
               vue_cjs_prod.createVNode("div", { class: "flex flex-row w-full group py-4 px-3" }, [
-                vue_cjs_prod.createVNode(_sfc_main$1v, {
+                vue_cjs_prod.createVNode(_sfc_main$1x, {
                   icon: "ri-mail-line",
                   class: ["h-8 w-10 group-focus-within:stroke-2", { "fill-accent": !!errors.email, "fill-primary": !!values.email && !errors.email, "fill-gray-500": !values.email }]
                 }, null, 8, ["class"]),
@@ -10877,7 +10955,7 @@ const _sfc_main$D = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 ])
               ]),
               vue_cjs_prod.createVNode("div", { class: "flex flex-row w-full group py-4 px-3" }, [
-                vue_cjs_prod.createVNode(_sfc_main$1v, {
+                vue_cjs_prod.createVNode(_sfc_main$1x, {
                   icon: "ri-key-fill",
                   class: ["h-8 w-10 group-focus-within:stroke-2", { "fill-accent": !!errors.password, "fill-primary": !!values.password && !errors.password, "fill-gray-500": !values.password }]
                 }, null, 8, ["class"]),
@@ -10992,7 +11070,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         default: vue_cjs_prod.withCtx(({ values, errors }, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`<h2 class="w-full py-3"${_scopeId}>J&#39;en dis un peu sur moi :</h2>`);
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               icon: "ri-mail-line",
               type: "email",
               name: "email",
@@ -11001,7 +11079,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               label: "Email",
               class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               icon: "ri-phone-line",
               name: "phoneNumber",
               error: errors.phoneNumber,
@@ -11009,28 +11087,28 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               label: "Num\xE9ro de t\xE9l\xE9phone",
               class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               name: "firstName",
               error: errors.firstName,
               value: values.firstName,
               label: "Pr\xE9nom",
               class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               name: "lastName",
               error: errors.lastName,
               value: values.lastName,
               label: "Nom",
               class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               name: "city",
               error: errors.city,
               value: values.city,
               label: "Ville actuelle",
               class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               name: "origin",
               error: errors.origin,
               value: values.origin,
@@ -11042,14 +11120,14 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               _push2(`<div class="flex w-full md:w-1/2 py-2"${_scopeId}><input type="text"${serverRenderer.exports.ssrRenderAttr("value", family.value[i].firstName)} class="w-1/2 border h-8" placeholder="Pr\xE9nom"${_scopeId}><input type="number" min="0" max="99"${serverRenderer.exports.ssrRenderAttr("value", family.value[i].age)} class="w-1/2 border h-8" placeholder="Age"${_scopeId}></div>`);
             });
             _push2(`<!--]--><div class="flex flex-row"${_scopeId}><div class="py-1 px-2 bg-primary text-white shadow-md uppercase hover:bg-primary-dark w-fit cursor-pointer"${_scopeId}>`);
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
               icon: "ri-add-line",
               class: "fill-white h-8 w-8"
             }, null, _parent2, _scopeId));
             _push2(`</div>`);
             if (family.value.length > 1) {
               _push2(`<div class="py-1 px-2 bg-secondary text-white shadow-md uppercase hover:bg-accent w-fit cursor-pointer"${_scopeId}>`);
-              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
                 icon: "ri-subtract-line",
                 class: "fill-white h-8 w-8"
               }, null, _parent2, _scopeId));
@@ -11058,14 +11136,14 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               _push2(`<!---->`);
             }
             _push2(`</div></div>`);
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1s, {
               name: "acceptance",
               error: errors.acceptance,
               label: "En cochant cette case tu acceptes que ces informations soient visibles par les membres de l'association \xAB les Transalpins \xBB ne faisant pas partie du bureau",
               class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
             _push2(`<h2 class="w-full py-3"${_scopeId}>Quelle est ma raison d&#39;\xEAtre ? Quelles sont mes motivations pour rejoindre ce projet ?</h2>`);
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               as: "textarea",
               type: "textarea",
               name: "motivationsFreeThinking",
@@ -11075,7 +11153,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               class: "w-full"
             }, null, _parent2, _scopeId));
             _push2(`<div class="w-full"${_scopeId}><p${_scopeId}> Quelles sont les valeurs essentielles que j&#39;aimerais vivre : les valeurs non n\xE9gociables, c-a-d dont l&#39;absence me ferait perdre son sens au projet et ma motivation \xE0 y participer ? </p></div>`);
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               as: "textarea",
               type: "textarea",
               name: "coreValuesHuman",
@@ -11084,7 +11162,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               label: "Valeurs humaines",
               class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               as: "textarea",
               type: "textarea",
               name: "coreValuesOther",
@@ -11093,7 +11171,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               label: "Valeurs autres",
               class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               as: "textarea",
               type: "textarea",
               name: "affinity",
@@ -11102,7 +11180,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               label: "Qu\u2019est-ce qui m'attire dans le projet des transalpins ?",
               class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               as: "textarea",
               type: "textarea",
               name: "questioning",
@@ -11112,7 +11190,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
             _push2(`<h2 class="w-full py-3"${_scopeId}>Suis-je pr\xEAt.e \xE0 m&#39;investir dans ce projet ?</h2>`);
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               as: "textarea",
               type: "textarea",
               name: "bring",
@@ -11121,7 +11199,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               label: "Que suis-je pr\xEAt.e \xE0 lui apporter ?",
               class: "w-full"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               as: "textarea",
               type: "textarea",
               name: "investment",
@@ -11130,7 +11208,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               label: "En tant qu\u2019habitant.e, suis-je pr\xEAt.e \xE0 investir financi\xE8rement ? Et combien ?",
               class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               as: "textarea",
               type: "textarea",
               name: "rent",
@@ -11140,7 +11218,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
             _push2(`<h2 class="w-full py-3"${_scopeId}>Ma vie au quotidien</h2><div class="w-full"${_scopeId}><p${_scopeId}> Des questions encore plus concr\xE8tes : A quoi ressemblera ma vie quand je vivrai l\xE0 ? </p></div>`);
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               as: "textarea",
               type: "textarea",
               name: "typicalDay",
@@ -11149,7 +11227,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               label: "Je d\xE9cris ma journ\xE9e type",
               class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               as: "textarea",
               type: "textarea",
               name: "dwelling",
@@ -11158,7 +11236,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               label: "Je d\xE9cris mon habitation",
               class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               as: "textarea",
               type: "textarea",
               name: "commonAreas",
@@ -11167,7 +11245,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               label: "Je d\xE9cris les espaces communs",
               class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               as: "textarea",
               type: "textarea",
               name: "relationship",
@@ -11177,7 +11255,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
             _push2(`<h2 class="w-full py-3"${_scopeId}>Mes savoir-faire et savoir-\xEAtre</h2>`);
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               as: "textarea",
               type: "textarea",
               name: "cnvExperience",
@@ -11186,7 +11264,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               label: "Est-ce que je connais la CNV ? Si oui quelle est mon exp\xE9rience ?",
               class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               as: "textarea",
               type: "textarea",
               name: "sharedGovernance",
@@ -11195,7 +11273,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               label: "Est-ce que je connais la gouvernance partag\xE9e ? Si oui, quelle est mon exp\xE9rience ?",
               class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               as: "textarea",
               type: "textarea",
               name: "skills",
@@ -11204,7 +11282,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               label: "Quels sont les savoir-faire/\xEAtre que je peux amener au projet",
               class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               as: "textarea",
               type: "textarea",
               name: "limits",
@@ -11213,7 +11291,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               label: "Quelles sont mes limites ?",
               class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               as: "textarea",
               type: "textarea",
               name: "availability",
@@ -11222,7 +11300,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               label: "Quelles sont mes disponibilit\xE9s durant la p\xE9riode de montage du projet ? Et mes disponibilit\xE9s en semaine ?",
               class: "w-full"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               as: "textarea",
               type: "textarea",
               name: "meet",
@@ -11231,7 +11309,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               label: "Serais-je dispos\xE9.e \xE0 rencontrer des \xE9lus locaux, des banquiers, architectes\u2026 ?",
               class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               as: "textarea",
               type: "textarea",
               name: "skillUp",
@@ -11244,7 +11322,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
           } else {
             return [
               vue_cjs_prod.createVNode("h2", { class: "w-full py-3" }, "J'en dis un peu sur moi :"),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 icon: "ri-mail-line",
                 type: "email",
                 name: "email",
@@ -11253,7 +11331,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 label: "Email",
                 class: "w-full md:w-1/2"
               }, null, 8, ["error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 icon: "ri-phone-line",
                 name: "phoneNumber",
                 error: errors.phoneNumber,
@@ -11261,28 +11339,28 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 label: "Num\xE9ro de t\xE9l\xE9phone",
                 class: "w-full md:w-1/2"
               }, null, 8, ["error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 name: "firstName",
                 error: errors.firstName,
                 value: values.firstName,
                 label: "Pr\xE9nom",
                 class: "w-full md:w-1/2"
               }, null, 8, ["error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 name: "lastName",
                 error: errors.lastName,
                 value: values.lastName,
                 label: "Nom",
                 class: "w-full md:w-1/2"
               }, null, 8, ["error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 name: "city",
                 error: errors.city,
                 value: values.city,
                 label: "Ville actuelle",
                 class: "w-full md:w-1/2"
               }, null, 8, ["error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 name: "origin",
                 error: errors.origin,
                 value: values.origin,
@@ -11320,7 +11398,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                     class: "py-1 px-2 bg-primary text-white shadow-md uppercase hover:bg-primary-dark w-fit cursor-pointer",
                     onClick: addMember
                   }, [
-                    vue_cjs_prod.createVNode(_sfc_main$1v, {
+                    vue_cjs_prod.createVNode(_sfc_main$1x, {
                       icon: "ri-add-line",
                       class: "fill-white h-8 w-8"
                     })
@@ -11330,21 +11408,21 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                     class: "py-1 px-2 bg-secondary text-white shadow-md uppercase hover:bg-accent w-fit cursor-pointer",
                     onClick: removeMember
                   }, [
-                    vue_cjs_prod.createVNode(_sfc_main$1v, {
+                    vue_cjs_prod.createVNode(_sfc_main$1x, {
                       icon: "ri-subtract-line",
                       class: "fill-white h-8 w-8"
                     })
                   ])) : vue_cjs_prod.createCommentVNode("", true)
                 ])
               ]),
-              vue_cjs_prod.createVNode(_sfc_main$1q, {
+              vue_cjs_prod.createVNode(_sfc_main$1s, {
                 name: "acceptance",
                 error: errors.acceptance,
                 label: "En cochant cette case tu acceptes que ces informations soient visibles par les membres de l'association \xAB les Transalpins \xBB ne faisant pas partie du bureau",
                 class: "w-full md:w-1/2"
               }, null, 8, ["error"]),
               vue_cjs_prod.createVNode("h2", { class: "w-full py-3" }, "Quelle est ma raison d'\xEAtre ? Quelles sont mes motivations pour rejoindre ce projet ?"),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 as: "textarea",
                 type: "textarea",
                 name: "motivationsFreeThinking",
@@ -11356,7 +11434,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               vue_cjs_prod.createVNode("div", { class: "w-full" }, [
                 vue_cjs_prod.createVNode("p", null, " Quelles sont les valeurs essentielles que j'aimerais vivre : les valeurs non n\xE9gociables, c-a-d dont l'absence me ferait perdre son sens au projet et ma motivation \xE0 y participer ? ")
               ]),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 as: "textarea",
                 type: "textarea",
                 name: "coreValuesHuman",
@@ -11365,7 +11443,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 label: "Valeurs humaines",
                 class: "w-full md:w-1/2"
               }, null, 8, ["error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 as: "textarea",
                 type: "textarea",
                 name: "coreValuesOther",
@@ -11374,7 +11452,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 label: "Valeurs autres",
                 class: "w-full md:w-1/2"
               }, null, 8, ["error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 as: "textarea",
                 type: "textarea",
                 name: "affinity",
@@ -11383,7 +11461,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 label: "Qu\u2019est-ce qui m'attire dans le projet des transalpins ?",
                 class: "w-full md:w-1/2"
               }, null, 8, ["error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 as: "textarea",
                 type: "textarea",
                 name: "questioning",
@@ -11393,7 +11471,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 class: "w-full md:w-1/2"
               }, null, 8, ["error", "value"]),
               vue_cjs_prod.createVNode("h2", { class: "w-full py-3" }, "Suis-je pr\xEAt.e \xE0 m'investir dans ce projet ?"),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 as: "textarea",
                 type: "textarea",
                 name: "bring",
@@ -11402,7 +11480,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 label: "Que suis-je pr\xEAt.e \xE0 lui apporter ?",
                 class: "w-full"
               }, null, 8, ["error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 as: "textarea",
                 type: "textarea",
                 name: "investment",
@@ -11411,7 +11489,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 label: "En tant qu\u2019habitant.e, suis-je pr\xEAt.e \xE0 investir financi\xE8rement ? Et combien ?",
                 class: "w-full md:w-1/2"
               }, null, 8, ["error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 as: "textarea",
                 type: "textarea",
                 name: "rent",
@@ -11424,7 +11502,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               vue_cjs_prod.createVNode("div", { class: "w-full" }, [
                 vue_cjs_prod.createVNode("p", null, " Des questions encore plus concr\xE8tes : A quoi ressemblera ma vie quand je vivrai l\xE0 ? ")
               ]),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 as: "textarea",
                 type: "textarea",
                 name: "typicalDay",
@@ -11433,7 +11511,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 label: "Je d\xE9cris ma journ\xE9e type",
                 class: "w-full md:w-1/2"
               }, null, 8, ["error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 as: "textarea",
                 type: "textarea",
                 name: "dwelling",
@@ -11442,7 +11520,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 label: "Je d\xE9cris mon habitation",
                 class: "w-full md:w-1/2"
               }, null, 8, ["error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 as: "textarea",
                 type: "textarea",
                 name: "commonAreas",
@@ -11451,7 +11529,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 label: "Je d\xE9cris les espaces communs",
                 class: "w-full md:w-1/2"
               }, null, 8, ["error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 as: "textarea",
                 type: "textarea",
                 name: "relationship",
@@ -11461,7 +11539,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 class: "w-full md:w-1/2"
               }, null, 8, ["error", "value"]),
               vue_cjs_prod.createVNode("h2", { class: "w-full py-3" }, "Mes savoir-faire et savoir-\xEAtre"),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 as: "textarea",
                 type: "textarea",
                 name: "cnvExperience",
@@ -11470,7 +11548,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 label: "Est-ce que je connais la CNV ? Si oui quelle est mon exp\xE9rience ?",
                 class: "w-full md:w-1/2"
               }, null, 8, ["error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 as: "textarea",
                 type: "textarea",
                 name: "sharedGovernance",
@@ -11479,7 +11557,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 label: "Est-ce que je connais la gouvernance partag\xE9e ? Si oui, quelle est mon exp\xE9rience ?",
                 class: "w-full md:w-1/2"
               }, null, 8, ["error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 as: "textarea",
                 type: "textarea",
                 name: "skills",
@@ -11488,7 +11566,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 label: "Quels sont les savoir-faire/\xEAtre que je peux amener au projet",
                 class: "w-full md:w-1/2"
               }, null, 8, ["error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 as: "textarea",
                 type: "textarea",
                 name: "limits",
@@ -11497,7 +11575,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 label: "Quelles sont mes limites ?",
                 class: "w-full md:w-1/2"
               }, null, 8, ["error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 as: "textarea",
                 type: "textarea",
                 name: "availability",
@@ -11506,7 +11584,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 label: "Quelles sont mes disponibilit\xE9s durant la p\xE9riode de montage du projet ? Et mes disponibilit\xE9s en semaine ?",
                 class: "w-full"
               }, null, 8, ["error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 as: "textarea",
                 type: "textarea",
                 name: "meet",
@@ -11515,7 +11593,7 @@ const _sfc_main$B = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 label: "Serais-je dispos\xE9.e \xE0 rencontrer des \xE9lus locaux, des banquiers, architectes\u2026 ?",
                 class: "w-full md:w-1/2"
               }, null, 8, ["error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 as: "textarea",
                 type: "textarea",
                 name: "skillUp",
@@ -11574,7 +11652,7 @@ const _sfc_main$A = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         _: 1
       }, _parent));
       if (vue_cjs_prod.unref(page)) {
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1w, { page: vue_cjs_prod.unref(page) }, null, _parent));
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1y, { page: vue_cjs_prod.unref(page) }, null, _parent));
       } else {
         _push(`<h1 class="px-3">J&#39;ai envie de vous rejoindre !</h1>`);
       }
@@ -12559,14 +12637,14 @@ const _sfc_main$t = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         _: 1
       }, _parent));
       if (vue_cjs_prod.unref(page) !== null && vue_cjs_prod.unref(page).mediaNode !== null) {
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1u, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1w, {
           "media-node": vue_cjs_prod.unref(page).mediaNode
         }, null, _parent));
       } else {
         _push(`<!---->`);
       }
       if (vue_cjs_prod.unref(page)) {
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1w, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1y, {
           page: vue_cjs_prod.unref(page),
           class: "p-3"
         }, null, _parent));
@@ -12725,14 +12803,14 @@ const _sfc_main$q = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       }, {
         default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
               icon: "ri-add-line",
               class: "fill-white w-8 h-8"
             }, null, _parent2, _scopeId));
             _push2(`<div class="pl-2"${_scopeId}>Cr\xE9er un article de blog</div>`);
           } else {
             return [
-              vue_cjs_prod.createVNode(_sfc_main$1v, {
+              vue_cjs_prod.createVNode(_sfc_main$1x, {
                 icon: "ri-add-line",
                 class: "fill-white w-8 h-8"
               }),
@@ -12751,13 +12829,13 @@ const _sfc_main$q = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         }, {
           default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
                 icon: "ri-edit-line",
                 class: "fill-white w-4 h-4"
               }, null, _parent2, _scopeId));
             } else {
               return [
-                vue_cjs_prod.createVNode(_sfc_main$1v, {
+                vue_cjs_prod.createVNode(_sfc_main$1x, {
                   icon: "ri-edit-line",
                   class: "fill-white w-4 h-4"
                 })
@@ -12767,7 +12845,7 @@ const _sfc_main$q = /* @__PURE__ */ vue_cjs_prod.defineComponent({
           _: 2
         }, _parent));
         _push(`</div><div class="bg-accent flex-auto flex items-stretch justify-center"><div class="w-full flex items-center justify-center cursor-pointer">`);
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
           icon: "ri-delete-bin-line",
           class: "fill-white w-4 h-4"
         }, null, _parent));
@@ -12916,14 +12994,14 @@ const _sfc_main$n = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       }, {
         default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
               icon: "ri-add-line",
               class: "fill-white w-8 h-8"
             }, null, _parent2, _scopeId));
             _push2(`<div class="pl-2"${_scopeId}>Cr\xE9er une cat\xE9gorie</div>`);
           } else {
             return [
-              vue_cjs_prod.createVNode(_sfc_main$1v, {
+              vue_cjs_prod.createVNode(_sfc_main$1x, {
                 icon: "ri-add-line",
                 class: "fill-white w-8 h-8"
               }),
@@ -12942,13 +13020,13 @@ const _sfc_main$n = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         }, {
           default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
                 icon: "ri-edit-line",
                 class: "fill-white w-4 h-4"
               }, null, _parent2, _scopeId));
             } else {
               return [
-                vue_cjs_prod.createVNode(_sfc_main$1v, {
+                vue_cjs_prod.createVNode(_sfc_main$1x, {
                   icon: "ri-edit-line",
                   class: "fill-white w-4 h-4"
                 })
@@ -12958,7 +13036,7 @@ const _sfc_main$n = /* @__PURE__ */ vue_cjs_prod.defineComponent({
           _: 2
         }, _parent));
         _push(`</div><div class="bg-secondary hover:bg-accent flex-auto flex items-stretch justify-center"><div class="w-full flex items-center justify-center cursor-pointer">`);
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
           icon: "ri-delete-bin-line",
           class: "fill-white w-4 h-4"
         }, null, _parent));
@@ -13031,13 +13109,13 @@ const _sfc_main$l = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         }, {
           default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
                 icon: "ri-eye-fill",
                 class: "fill-white w-8 h-8"
               }, null, _parent2, _scopeId));
             } else {
               return [
-                vue_cjs_prod.createVNode(_sfc_main$1v, {
+                vue_cjs_prod.createVNode(_sfc_main$1x, {
                   icon: "ri-eye-fill",
                   class: "fill-white w-8 h-8"
                 })
@@ -13139,13 +13217,13 @@ const _sfc_main$i = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         }, {
           default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
                 icon: "ri-eye-fill",
                 class: "fill-white w-8 h-8"
               }, null, _parent2, _scopeId));
             } else {
               return [
-                vue_cjs_prod.createVNode(_sfc_main$1v, {
+                vue_cjs_prod.createVNode(_sfc_main$1x, {
                   icon: "ri-eye-fill",
                   class: "fill-white w-8 h-8"
                 })
@@ -13377,14 +13455,14 @@ const _sfc_main$d = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       }, {
         default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
               icon: "ri-add-line",
               class: "fill-white w-8 h-8"
             }, null, _parent2, _scopeId));
             _push2(`<div class="pl-2"${_scopeId}>Cr\xE9er une page</div>`);
           } else {
             return [
-              vue_cjs_prod.createVNode(_sfc_main$1v, {
+              vue_cjs_prod.createVNode(_sfc_main$1x, {
                 icon: "ri-add-line",
                 class: "fill-white w-8 h-8"
               }),
@@ -13403,13 +13481,13 @@ const _sfc_main$d = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         }, {
           default: vue_cjs_prod.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
                 icon: "ri-edit-line",
                 class: "fill-white w-4 h-4"
               }, null, _parent2, _scopeId));
             } else {
               return [
-                vue_cjs_prod.createVNode(_sfc_main$1v, {
+                vue_cjs_prod.createVNode(_sfc_main$1x, {
                   icon: "ri-edit-line",
                   class: "fill-white w-4 h-4"
                 })
@@ -13419,7 +13497,7 @@ const _sfc_main$d = /* @__PURE__ */ vue_cjs_prod.defineComponent({
           _: 2
         }, _parent));
         _push(`</div><div class="bg-accent flex-auto flex items-stretch justify-center"><div class="w-full flex items-center justify-center cursor-pointer">`);
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
           icon: "ri-delete-bin-line",
           class: "fill-white w-4 h-4"
         }, null, _parent));
@@ -13469,7 +13547,7 @@ const _sfc_main$c = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         _: 1
       }, _parent));
       if (vue_cjs_prod.unref(article) !== null && vue_cjs_prod.unref(article).mediaNode !== null) {
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1u, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1w, {
           "media-node": vue_cjs_prod.unref(article).mediaNode
         }, null, _parent));
       } else {
@@ -13532,7 +13610,7 @@ const _sfc_main$b = /* @__PURE__ */ vue_cjs_prod.defineComponent({
           _push(`<div class="bg-primary-dark text-white uppercase px-2 py-1 rounded-tl-lg rounded-br-lg mx-1 text-xs cursor-pointer">${serverRenderer.exports.ssrInterpolate(tag)}</div>`);
         });
         _push(`<!--]-->`);
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
           icon: "ri-arrow-right-s-line",
           class: "h-4 w-4"
         }, null, _parent));
@@ -13597,7 +13675,7 @@ const _sfc_main$a = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         _: 1
       }, _parent));
       if (vue_cjs_prod.unref(page)) {
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1w, { page: vue_cjs_prod.unref(page) }, null, _parent));
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1y, { page: vue_cjs_prod.unref(page) }, null, _parent));
       } else {
         _push(`<div><p> Pour nous contacter tu peux nous envoyer un email \xE0 <a href="mailto:contact@lestransalpins.org" title="Envoyer un email aux transalpins">contact@lestransalpins.org</a> ou bien remplir le formulaire suivant.</p><p> Dans ce cas tu recevras un email de confirmation ou bien regarde dans tes spams si ce n&#39;est pas le cas. </p></div>`);
       }
@@ -13607,7 +13685,7 @@ const _sfc_main$a = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       }, {
         default: vue_cjs_prod.withCtx(({ values, errors }, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               icon: "ri-mail-line",
               type: "email",
               name: "email",
@@ -13616,7 +13694,7 @@ const _sfc_main$a = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               label: "Email",
               class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               icon: "ri-phone-line",
               type: "phoneNumber",
               name: "phoneNumber",
@@ -13625,7 +13703,7 @@ const _sfc_main$a = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               label: "Num\xE9ro de t\xE9l\xE9phone",
               class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               type: "firstName",
               name: "firstName",
               error: errors.firstName,
@@ -13633,7 +13711,7 @@ const _sfc_main$a = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               label: "Pr\xE9nom",
               class: "w-full md:w-1/2"
             }, null, _parent2, _scopeId));
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               type: "lastName",
               name: "lastName",
               error: errors.lastName,
@@ -13653,7 +13731,7 @@ const _sfc_main$a = /* @__PURE__ */ vue_cjs_prod.defineComponent({
             }, null, _parent2, _scopeId));
             _push2(`<label for="subject" class="${serverRenderer.exports.ssrRenderClass([{ "h-1/2 -translate-y-full pl-0": !!values.subject, "text-accent": !!errors.subject, "text-primary": !!values.subject && !errors.subject }, "transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full"])}"${_scopeId}>Sujet `);
             if (errors.subject) {
-              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1r, null, {
+              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1t, null, {
                 default: vue_cjs_prod.withCtx((_, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
                     _push3(`${serverRenderer.exports.ssrInterpolate(errors.subject)}`);
@@ -13670,7 +13748,7 @@ const _sfc_main$a = /* @__PURE__ */ vue_cjs_prod.defineComponent({
             }
             _push2(`</label><div class="${serverRenderer.exports.ssrRenderClass([{ "border-accent": !!errors.subject, "border-primary": !!values.subject && !errors.subject, "border-gray-500": !values.subject }, "absolute bottom-0 w-full border-b"])}"${_scopeId}></div></div></div><div class="flex flex-col w-full group py-4 px-3"${_scopeId}><div class="flex flex-row"${_scopeId}><label for="content" class="${serverRenderer.exports.ssrRenderClass([{ "text-accent": !!errors.content, "text-primary": !!values.content && !errors.content }, "w-fit self-center"])}"${_scopeId}>Message</label>`);
             if (errors.content) {
-              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1r, null, {
+              _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1t, null, {
                 default: vue_cjs_prod.withCtx((_, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
                     _push3(`${serverRenderer.exports.ssrInterpolate(errors.content)}`);
@@ -13699,7 +13777,7 @@ const _sfc_main$a = /* @__PURE__ */ vue_cjs_prod.defineComponent({
             _push2(`</div><button type="submit" class="py-3 px-4 bg-primary text-white shadow-md uppercase hover:bg-primary-dark"${_scopeId}>Envoyer</button><button type="reset" class="py-3 px-4 bg-secondary text-white shadow-md uppercase hover:bg-accent"${_scopeId}>R\xE9initialiser</button>`);
           } else {
             return [
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 icon: "ri-mail-line",
                 type: "email",
                 name: "email",
@@ -13708,7 +13786,7 @@ const _sfc_main$a = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 label: "Email",
                 class: "w-full md:w-1/2"
               }, null, 8, ["error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 icon: "ri-phone-line",
                 type: "phoneNumber",
                 name: "phoneNumber",
@@ -13717,7 +13795,7 @@ const _sfc_main$a = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 label: "Num\xE9ro de t\xE9l\xE9phone",
                 class: "w-full md:w-1/2"
               }, null, 8, ["error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 type: "firstName",
                 name: "firstName",
                 error: errors.firstName,
@@ -13725,7 +13803,7 @@ const _sfc_main$a = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 label: "Pr\xE9nom",
                 class: "w-full md:w-1/2"
               }, null, 8, ["error", "value"]),
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 type: "lastName",
                 name: "lastName",
                 error: errors.lastName,
@@ -13749,7 +13827,7 @@ const _sfc_main$a = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                     class: [{ "h-1/2 -translate-y-full pl-0": !!values.subject, "text-accent": !!errors.subject, "text-primary": !!values.subject && !errors.subject }, "transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full"]
                   }, [
                     vue_cjs_prod.createTextVNode("Sujet "),
-                    errors.subject ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(_sfc_main$1r, { key: 0 }, {
+                    errors.subject ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(_sfc_main$1t, { key: 0 }, {
                       default: vue_cjs_prod.withCtx(() => [
                         vue_cjs_prod.createTextVNode(vue_cjs_prod.toDisplayString(errors.subject), 1)
                       ]),
@@ -13767,7 +13845,7 @@ const _sfc_main$a = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                     for: "content",
                     class: ["w-fit self-center", { "text-accent": !!errors.content, "text-primary": !!values.content && !errors.content }]
                   }, "Message", 2),
-                  errors.content ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(_sfc_main$1r, { key: 0 }, {
+                  errors.content ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(_sfc_main$1t, { key: 0 }, {
                     default: vue_cjs_prod.withCtx(() => [
                       vue_cjs_prod.createTextVNode(vue_cjs_prod.toDisplayString(errors.content), 1)
                     ]),
@@ -13825,14 +13903,14 @@ const _sfc_main$9 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       const _component_Title = vue_cjs_prod.resolveComponent("Title");
       _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "flex bg-white flex-auto flex-col" }, _attrs))}>`);
       if (vue_cjs_prod.unref(homePage) !== null && vue_cjs_prod.unref(homePage).mediaNode !== null) {
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1u, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1w, {
           "media-node": vue_cjs_prod.unref(homePage).mediaNode
         }, null, _parent));
       } else {
         _push(`<!---->`);
       }
       if (vue_cjs_prod.unref(homePage)) {
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1w, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1y, {
           page: vue_cjs_prod.unref(homePage),
           class: "md:w-4/5"
         }, null, _parent));
@@ -13914,7 +13992,7 @@ const _sfc_main$8 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         default: vue_cjs_prod.withCtx(({ values, errors }, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`<div class="flex flex-row w-full group py-4 px-3"${_scopeId}>`);
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
               icon: "ri-mail-line",
               class: ["h-8 w-10 group-focus-within:stroke-2", { "fill-accent": !!errors.email, "fill-primary": !!values.email && !errors.email, "fill-gray-500": !values.email }]
             }, null, _parent2, _scopeId));
@@ -13929,7 +14007,7 @@ const _sfc_main$8 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               validateOnInput: true
             }, null, _parent2, _scopeId));
             _push2(`<label for="email" class="${serverRenderer.exports.ssrRenderClass([{ "h-1/2 -translate-y-full pl-0": !!values.email, "text-accent": !!errors.email, "text-primary": !!values.email && !errors.email }, "transform transition-all absolute top-0 left-0 h-full flex items-center pl-0 text-sm group-focus-within:text-xs group-focus-within:h-1/2 group-focus-within:-translate-y-full"])}"${_scopeId}>Email</label><div class="${serverRenderer.exports.ssrRenderClass([{ "border-accent": !!errors.email, "border-primary": !!values.email && !errors.email, "border-gray-500": !values.email }, "absolute bottom-0 -ml-8 w-[calc(100%_+_2rem)] border-b"])}"${_scopeId}></div></div></div><div class="flex flex-row w-full group py-4 px-3"${_scopeId}>`);
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
               icon: "ri-key-fill",
               class: ["h-8 w-10 group-focus-within:stroke-2", { "fill-accent": !!errors.password, "fill-primary": !!values.password && !errors.password, "fill-gray-500": !values.password }]
             }, null, _parent2, _scopeId));
@@ -13947,7 +14025,7 @@ const _sfc_main$8 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
           } else {
             return [
               vue_cjs_prod.createVNode("div", { class: "flex flex-row w-full group py-4 px-3" }, [
-                vue_cjs_prod.createVNode(_sfc_main$1v, {
+                vue_cjs_prod.createVNode(_sfc_main$1x, {
                   icon: "ri-mail-line",
                   class: ["h-8 w-10 group-focus-within:stroke-2", { "fill-accent": !!errors.email, "fill-primary": !!values.email && !errors.email, "fill-gray-500": !values.email }]
                 }, null, 8, ["class"]),
@@ -13971,7 +14049,7 @@ const _sfc_main$8 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 ])
               ]),
               vue_cjs_prod.createVNode("div", { class: "flex flex-row w-full group py-4 px-3" }, [
-                vue_cjs_prod.createVNode(_sfc_main$1v, {
+                vue_cjs_prod.createVNode(_sfc_main$1x, {
                   icon: "ri-key-fill",
                   class: ["h-8 w-10 group-focus-within:stroke-2", { "fill-accent": !!errors.password, "fill-primary": !!values.password && !errors.password, "fill-gray-500": !values.password }]
                 }, null, 8, ["class"]),
@@ -14085,7 +14163,7 @@ const _sfc_main$6 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         _: 1
       }, _parent));
       if (vue_cjs_prod.unref(page)) {
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1w, { page: vue_cjs_prod.unref(page) }, null, _parent));
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1y, { page: vue_cjs_prod.unref(page) }, null, _parent));
       } else {
         _push(`<h1 class="px-3">J&#39;ai envie de vous rejoindre !</h1>`);
       }
@@ -14188,7 +14266,7 @@ const _sfc_main$5 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 default: vue_cjs_prod.withCtx((_, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
                     if (item.icon) {
-                      _push3(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+                      _push3(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
                         icon: item.icon,
                         class: "h-3 w-3 inline-flex fill-primary-dark"
                       }, null, _parent3, _scopeId2));
@@ -14198,7 +14276,7 @@ const _sfc_main$5 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                     _push3(`<div class="${serverRenderer.exports.ssrRenderClass([{ "pl-3": item.icon, "pl-6": !item.icon }, "flex-auto"])}"${_scopeId2}>${serverRenderer.exports.ssrInterpolate(item.label)}</div>`);
                   } else {
                     return [
-                      item.icon ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(_sfc_main$1v, {
+                      item.icon ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(_sfc_main$1x, {
                         key: 0,
                         icon: item.icon,
                         class: "h-3 w-3 inline-flex fill-primary-dark"
@@ -14227,7 +14305,7 @@ const _sfc_main$5 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                           if (_push4) {
                             _push4(`<div class="pl-2 text-xs flex-auto"${_scopeId3}>${serverRenderer.exports.ssrInterpolate(subItem.label)}</div>`);
                             if (subItem.icon) {
-                              _push4(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+                              _push4(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
                                 icon: subItem.icon,
                                 class: ["h-3 w-3 inline-flex", { "fill-primary-dark": !open, "fill-primary": open }]
                               }, null, _parent4, _scopeId3));
@@ -14237,7 +14315,7 @@ const _sfc_main$5 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                           } else {
                             return [
                               vue_cjs_prod.createVNode("div", { class: "pl-2 text-xs flex-auto" }, vue_cjs_prod.toDisplayString(subItem.label), 1),
-                              subItem.icon ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(_sfc_main$1v, {
+                              subItem.icon ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(_sfc_main$1x, {
                                 key: 0,
                                 icon: subItem.icon,
                                 class: ["h-3 w-3 inline-flex", { "fill-primary-dark": !open, "fill-primary": open }]
@@ -14259,7 +14337,7 @@ const _sfc_main$5 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                         }, {
                           default: vue_cjs_prod.withCtx(({ active }) => [
                             vue_cjs_prod.createVNode("div", { class: "pl-2 text-xs flex-auto" }, vue_cjs_prod.toDisplayString(subItem.label), 1),
-                            subItem.icon ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(_sfc_main$1v, {
+                            subItem.icon ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(_sfc_main$1x, {
                               key: 0,
                               icon: subItem.icon,
                               class: ["h-3 w-3 inline-flex", { "fill-primary-dark": !open, "fill-primary": open }]
@@ -14280,7 +14358,7 @@ const _sfc_main$5 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                   class: "p-3 grow shrink basis-full text-primary-dark text-left before:absolute before:top-0 tracking-widest text-xs uppercase flex items-center"
                 }, {
                   default: vue_cjs_prod.withCtx(() => [
-                    item.icon ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(_sfc_main$1v, {
+                    item.icon ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(_sfc_main$1x, {
                       key: 0,
                       icon: item.icon,
                       class: "h-3 w-3 inline-flex fill-primary-dark"
@@ -14313,7 +14391,7 @@ const _sfc_main$5 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                           }, {
                             default: vue_cjs_prod.withCtx(({ active }) => [
                               vue_cjs_prod.createVNode("div", { class: "pl-2 text-xs flex-auto" }, vue_cjs_prod.toDisplayString(subItem.label), 1),
-                              subItem.icon ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(_sfc_main$1v, {
+                              subItem.icon ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(_sfc_main$1x, {
                                 key: 0,
                                 icon: subItem.icon,
                                 class: ["h-3 w-3 inline-flex", { "fill-primary-dark": !open, "fill-primary": open }]
@@ -15563,7 +15641,7 @@ const _sfc_main$1 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                   if (_push3) {
                     _push3(`${serverRenderer.exports.ssrInterpolate(menuItem.name)} `);
                     if (menuItem.children.length > 0 && !open) {
-                      _push3(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(_sfc_main$1v), {
+                      _push3(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(_sfc_main$1x), {
                         icon: "ri-arrow-right-s-fill",
                         class: "h-3 w-3 inline-flex fill-primary-dark"
                       }, null, _parent3, _scopeId2));
@@ -15571,7 +15649,7 @@ const _sfc_main$1 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                       _push3(`<!---->`);
                     }
                     if (menuItem.children.length > 0 && open) {
-                      _push3(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(_sfc_main$1v), {
+                      _push3(serverRenderer.exports.ssrRenderComponent(vue_cjs_prod.unref(_sfc_main$1x), {
                         icon: "ri-arrow-down-s-fill",
                         class: "h-3 w-3 inline-flex fill-primary-dark"
                       }, null, _parent3, _scopeId2));
@@ -15581,12 +15659,12 @@ const _sfc_main$1 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                   } else {
                     return [
                       vue_cjs_prod.createTextVNode(vue_cjs_prod.toDisplayString(menuItem.name) + " ", 1),
-                      menuItem.children.length > 0 && !open ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(vue_cjs_prod.unref(_sfc_main$1v), {
+                      menuItem.children.length > 0 && !open ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(vue_cjs_prod.unref(_sfc_main$1x), {
                         key: 0,
                         icon: "ri-arrow-right-s-fill",
                         class: "h-3 w-3 inline-flex fill-primary-dark"
                       })) : vue_cjs_prod.createCommentVNode("", true),
-                      menuItem.children.length > 0 && open ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(vue_cjs_prod.unref(_sfc_main$1v), {
+                      menuItem.children.length > 0 && open ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(vue_cjs_prod.unref(_sfc_main$1x), {
                         key: 1,
                         icon: "ri-arrow-down-s-fill",
                         class: "h-3 w-3 inline-flex fill-primary-dark"
@@ -15649,12 +15727,12 @@ const _sfc_main$1 = /* @__PURE__ */ vue_cjs_prod.defineComponent({
                 }, {
                   default: vue_cjs_prod.withCtx(() => [
                     vue_cjs_prod.createTextVNode(vue_cjs_prod.toDisplayString(menuItem.name) + " ", 1),
-                    menuItem.children.length > 0 && !open ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(vue_cjs_prod.unref(_sfc_main$1v), {
+                    menuItem.children.length > 0 && !open ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(vue_cjs_prod.unref(_sfc_main$1x), {
                       key: 0,
                       icon: "ri-arrow-right-s-fill",
                       class: "h-3 w-3 inline-flex fill-primary-dark"
                     })) : vue_cjs_prod.createCommentVNode("", true),
-                    menuItem.children.length > 0 && open ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(vue_cjs_prod.unref(_sfc_main$1v), {
+                    menuItem.children.length > 0 && open ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(vue_cjs_prod.unref(_sfc_main$1x), {
                       key: 1,
                       icon: "ri-arrow-down-s-fill",
                       class: "h-3 w-3 inline-flex fill-primary-dark"
@@ -15745,7 +15823,7 @@ const _sfc_main = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       }
       _push(`<div class="h-10 inline-flex items-center pt-1 pb-2">`);
       if (!vue_cjs_prod.unref(isLogged)) {
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
           icon: "ri-login-box-line",
           class: "h-5 w-5 z-40 fill-primary-dark mr-1 cursor-pointer"
         }, null, _parent));
@@ -15753,7 +15831,7 @@ const _sfc_main = /* @__PURE__ */ vue_cjs_prod.defineComponent({
         _push(`<!---->`);
       }
       if (vue_cjs_prod.unref(isLogged)) {
-        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+        _push(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
           icon: "ri-logout-box-line",
           class: "h-5 w-5 z-40 fill-primary-dark mr-1 cursor-pointer"
         }, null, _parent));
@@ -15769,7 +15847,7 @@ const _sfc_main = /* @__PURE__ */ vue_cjs_prod.defineComponent({
       }, {
         default: vue_cjs_prod.withCtx(({ values, errors }, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1o, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1q, {
               icon: "ri-mail-line",
               type: "email",
               name: "email",
@@ -15779,14 +15857,14 @@ const _sfc_main = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               class: "w-96 py-4 px-3"
             }, null, _parent2, _scopeId));
             _push2(`<button${serverRenderer.exports.ssrRenderAttr("type", !errors.email && !!values.email ? "submit" : "button")}${_scopeId}>`);
-            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1v, {
+            _push2(serverRenderer.exports.ssrRenderComponent(_sfc_main$1x, {
               icon: "ri-send-plane-fill",
               class: ["h-5 w-5", { "fill-primary hover:fill-primary-dark": !errors.email && !!values.email, "fill-gray-500": !values.email, "fill-accent": !!errors.email }]
             }, null, _parent2, _scopeId));
             _push2(`</button>`);
           } else {
             return [
-              vue_cjs_prod.createVNode(_sfc_main$1o, {
+              vue_cjs_prod.createVNode(_sfc_main$1q, {
                 icon: "ri-mail-line",
                 type: "email",
                 name: "email",
@@ -15798,7 +15876,7 @@ const _sfc_main = /* @__PURE__ */ vue_cjs_prod.defineComponent({
               vue_cjs_prod.createVNode("button", {
                 type: !errors.email && !!values.email ? "submit" : "button"
               }, [
-                vue_cjs_prod.createVNode(_sfc_main$1v, {
+                vue_cjs_prod.createVNode(_sfc_main$1x, {
                   icon: "ri-send-plane-fill",
                   class: ["h-5 w-5", { "fill-primary hover:fill-primary-dark": !errors.email && !!values.email, "fill-gray-500": !values.email, "fill-accent": !!errors.email }]
                 }, null, 8, ["class"])
